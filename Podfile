@@ -7,6 +7,8 @@ target 'KNUTICE' do
 pod 'Alamofire'
 pod 'RxSwift', '6.5.0'
 pod 'RxCocoa', '6.5.0'
+pod 'RxDataSources'
+pod 'SnapKit'
   # Pods for KNUTICE
 
 end
