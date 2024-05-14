@@ -49,5 +49,39 @@ extension Notice {
                    uploadDate: "2024-05-07")
         ]
     }
+    
+    static var scholarshipNoticesSampleData: [Notice] {
+        return [
+            Notice(id: 7,
+                   title: "2024년도 상반기 강화군 대학생 등록금 지원 사업 안내",
+                   department: "장학팀",
+                   uploadDate: "2024-05-14"),
+            Notice(id: 8,
+                   title: "2024년 국가우수장학(이공계) 성적우수유형 및 재학중우수자(2년지원)유형 선발계획 안내",
+                   department: "장학팀",
+                   uploadDate: "2024-05-07"),
+            Notice(id: 9,
+                   title: "2024년 화성시인재육성재단 주거비지원 장학생 선발 안내",
+                   department: "장학팀",
+                   uploadDate: "2024-05-03"),
+        ]
+    }
+    
+    static var eventNoticesSampleData: [Notice] {
+        return [
+            Notice(id: 10,
+                   title: "2024 일상 속 장애이슈 개선활동 청년 단체 모집",
+                   department: "학생과",
+                   uploadDate: "2024-05-14"),
+            Notice(id: 11,
+                   title: "한국저작권보호원 2024「바로 지금 대학생 서포터즈」모집",
+                   department: "학생과",
+                   uploadDate: "2024-05-10"),
+            Notice(id: 12,
+                   title: "‘2024 대한민국 열린 토론대회’ 논제 공모",
+                   department: "학생과",
+                   uploadDate: "2024-05-10")
+        ]
+    }
 }
 #endif

@@ -22,9 +22,13 @@ final class MainViewModel {
     }
     
     func fetchNotices() {
-        notices.accept([SectionOfNotice(header: "학사공지",
-                                       items: Notice.academicNoticesSampleData),
-                        SectionOfNotice(header: "일반소식",
-                                        items: Notice.generalNoticesSampleData)])
+        notices.accept([SectionOfNotice(header: "일반소식",
+                                        items: Notice.generalNoticesSampleData),
+                        SectionOfNotice(header: "학사공지",
+                                        items: Notice.academicNoticesSampleData),
+                        SectionOfNotice(header: "장학안내",
+                                        items: Notice.scholarshipNoticesSampleData),
+                        SectionOfNotice(header: "행사안내",
+                                        items: Notice.eventNoticesSampleData)])
     }
 }
