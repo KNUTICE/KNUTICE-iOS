@@ -47,6 +47,7 @@ extension MainViewController {
 
 //MARK: - UITableView delegate method
 extension MainViewController: UITableViewDelegate {
+    //MARK: - Custom cell header
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerColors: [UIColor] = [.salmon, .lightOrange, .magentaPink, .magenta]
         let headerView = UIView()
@@ -64,6 +65,27 @@ extension MainViewController: UITableViewDelegate {
         headerView.addSubview(button)
         
         return headerView
+    }
+    
+    //MARK: - Custom Footer
+    public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor(red: 234 / 255, green: 234 / 255, blue: 234 / 255, alpha: 1.0)
+        return view
+   }
+    
+    //MARK: - Footer height
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 10
+    }
+    
+    //MARK: - Remove separator from last cell
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: cell.bounds.size.width)
+        } else {
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0) // 기본값으로 설정
+        }
     }
 }
 
