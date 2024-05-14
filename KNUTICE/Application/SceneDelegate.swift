@@ -19,10 +19,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScen = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScen)
         
-        let mainViewModel = MainViewModel()
         let mainViewController = MainViewController()
         mainViewController.bind()
-        self.window?.rootViewController = mainViewController
+        let navigationViewController = UINavigationController(rootViewController: mainViewController)
+        navigationViewController.navigationBar.topItem?.title = "KNUTICE"
+        self.window?.rootViewController = navigationViewController
         self.window?.makeKeyAndVisible()
     }
 

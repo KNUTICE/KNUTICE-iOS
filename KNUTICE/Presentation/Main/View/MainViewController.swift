@@ -12,9 +12,9 @@ import SnapKit
 import SwiftUI
 import RxDataSources
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     private var viewModel: MainViewModel = MainViewModel()
-    private let tableView = UITableView()
+    private let tableView = UITableView(frame: .zero, style: .grouped)
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -22,6 +22,8 @@ class MainViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         tableView.delegate = self
+        tableView.backgroundColor = .white
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal), style: .plain, target: self, action: nil)
         setupAttribute()
         setupLayout()
     }
@@ -51,7 +53,7 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerColors: [UIColor] = [.salmon, .lightOrange, .magentaPink, .magenta]
         let headerView = UIView()
-        let button = UIButton(frame: CGRect(x: 15, y: -10, width: 90, height: 40))
+        let button = UIButton(frame: CGRect(x: 15, y: 12, width: 90, height: 40))
         headerView.addSubview(button)
         button.setTitle(viewModel.notices.value[section].header, for: .normal)
         button.setTitleColor(headerColors[section], for: .normal)
@@ -63,12 +65,18 @@ extension MainViewController: UITableViewDelegate {
         button.semanticContentAttribute = .forceRightToLeft
         button.addTarget(self, action: #selector(headerButtonCallback(_:)), for: .touchUpInside)
         headerView.addSubview(button)
+        headerView.backgroundColor = .white
         
         return headerView
     }
     
+    //MARK: - Section height
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60
+    }
+    
     //MARK: - Custom Footer
-    public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
         view.backgroundColor = UIColor(red: 234 / 255, green: 234 / 255, blue: 234 / 255, alpha: 1.0)
         return view
@@ -84,7 +92,7 @@ extension MainViewController: UITableViewDelegate {
         if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: cell.bounds.size.width)
         } else {
-            cell.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0) // 기본값으로 설정
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
         }
     }
 }
@@ -115,6 +123,6 @@ extension MainViewController {
 //MARK: - Preview
 struct Preview: PreviewProvider {
     static var previews: some View {
-        MainViewController().makePreview()
+        UINavigationController(rootViewController: MainViewController()).makePreview()
     }
 }
