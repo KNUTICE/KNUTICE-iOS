@@ -9,6 +9,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 import SnapKit
+import SwiftUI
 import RxDataSources
 
 class MainViewController: UIViewController {
@@ -66,8 +67,8 @@ extension MainViewController: UITableViewDelegate {
     }
 }
 
+//MARK: - Header Button Callback function
 extension MainViewController {
-    //MARK: - Header Button Callback function
     @objc
     func headerButtonCallback(_ sender: UIButton) {
         print("button tapped")
@@ -89,3 +90,9 @@ extension MainViewController {
     }
 }
 
+//MARK: - Preview
+struct Preview: PreviewProvider {
+    static var previews: some View {
+        MainViewController().makePreview()
+    }
+}
