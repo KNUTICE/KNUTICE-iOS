@@ -51,7 +51,7 @@ extension MainViewController {
 extension MainViewController: UITableViewDelegate {
     //MARK: - Custom cell header
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerColors: [UIColor] = [.salmon, .lightOrange, .magentaPink, .magenta]
+        let headerColors: [UIColor] = [.salmon, .lightOrange, .aquamarine,.midnightOcean]
         let headerView = UIView()
         let button = UIButton(frame: CGRect(x: 15, y: 12, width: 90, height: 40))
         headerView.addSubview(button)
@@ -78,7 +78,7 @@ extension MainViewController: UITableViewDelegate {
     //MARK: - Custom Footer
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 234 / 255, green: 234 / 255, blue: 234 / 255, alpha: 1.0)
+        view.backgroundColor = .footerGray
         return view
    }
     
