@@ -27,26 +27,37 @@ final class MainListCell: UITableViewCell {
     
     private func setupAttribute() {
         //for Title Label
-        titleLabel.font = .systemFont(ofSize: 17)
+//        titleLabel.font = .systemFont(ofSize: 17)
+        titleLabel.font = .preferredFont(forTextStyle: .subheadline)
         titleLabel.textColor = .black
         
         //for Subtitle Label
-        subTitleLabel.font = .systemFont(ofSize: 12)
+        subTitleLabel.font = .preferredFont(forTextStyle: .caption2)
         subTitleLabel.textColor = .darkGray
         
         //for UploadDate Label
-        uploadDateLabel.font = .systemFont(ofSize: 12)
+        uploadDateLabel.font = .preferredFont(forTextStyle: .caption2)
         uploadDateLabel.textColor = .darkGray
     }
     
     private func setupLayout() {
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(subTitleLabel)
-        contentView.addSubview(uploadDateLabel)
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = .mainCellBackground
+        backgroundView.layer.cornerRadius = 10
+        backgroundView.addSubview(titleLabel)
+        backgroundView.addSubview(subTitleLabel)
+        backgroundView.addSubview(uploadDateLabel)
+        contentView.addSubview(backgroundView)
         
-        //constraint
+        backgroundView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(10)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().offset(-10)
+        }
+        
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(contentView.safeAreaLayoutGuide.snp.top).offset(16)
+            make.top.equalToSuperview().offset(16)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
         }

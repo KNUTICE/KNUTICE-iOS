@@ -23,6 +23,8 @@ final class MainViewController: UIViewController {
         
         tableView.delegate = self
         tableView.backgroundColor = .white
+        self.tableView.separatorStyle = .none
+        tableView.sectionHeaderTopPadding = 15    //header padding
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(navigateToSetting(_:)))
         setupAttribute()
         setupLayout()
@@ -54,7 +56,7 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerColors: [UIColor] = [.salmon, .lightOrange, .aquamarine,.midnightOcean]
         let headerView = UIView()
-        let button = UIButton(frame: CGRect(x: 15, y: 12, width: 90, height: 40))
+        let button = UIButton(frame: CGRect(x: 16, y: 5, width: 90, height: 40))
         headerView.addSubview(button)
         button.setTitle(viewModel.notices.value[section].header, for: .normal)
         button.setTitleColor(headerColors[section], for: .normal)
@@ -74,7 +76,7 @@ extension MainViewController: UITableViewDelegate {
     
     //MARK: - Section height
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
+        return 40
     }
     
     //MARK: - Custom Footer
@@ -82,11 +84,11 @@ extension MainViewController: UITableViewDelegate {
         let view = UIView()
         view.backgroundColor = .footerGray
         return view
-   }
+    }
     
     //MARK: - Footer height
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10
+        return 0
     }
     
     //MARK: - Remove separator from last cell
@@ -96,6 +98,11 @@ extension MainViewController: UITableViewDelegate {
         } else {
             cell.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
         }
+    }
+    
+    //MARK: - Remove cell highlighting when touching a cell
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false
     }
 }
 
@@ -151,7 +158,7 @@ extension MainViewController {
 extension MainViewController {
     private func setupAttribute() {
         tableView.register(MainListCell.self, forCellReuseIdentifier: MainListCell.reuseIdentifier)
-        tableView.rowHeight = 80
+        tableView.rowHeight = 95
     }
     
     private func setupLayout() {
