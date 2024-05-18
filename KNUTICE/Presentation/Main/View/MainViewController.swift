@@ -33,9 +33,10 @@ final class MainViewController: UIViewController {
 extension MainViewController {
     func bind() {
         let dataSource = RxTableViewSectionedReloadDataSource<SectionOfNotice>(configureCell: { dataSource, tableView, indexPath, item -> UITableViewCell in
-            let cell = UITableViewCell(style: .subtitle, reuseIdentifier: MainListCell.reuseIdentifier)
-            cell.textLabel?.text = item.title
-            cell.detailTextLabel?.text = "[\(item.department)]  \(item.uploadDate)"
+            let cell = tableView.dequeueReusableCell(withIdentifier: MainListCell.reuseIdentifier, for: indexPath) as! MainListCell
+            cell.titleLabel.text = item.title
+            cell.subTitleLabel.text = "[\(item.department)]"
+            cell.uploadDateLabel.text = item.uploadDate
             
             return cell
         })
