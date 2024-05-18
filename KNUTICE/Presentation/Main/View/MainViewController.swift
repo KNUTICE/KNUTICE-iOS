@@ -23,7 +23,7 @@ final class MainViewController: UIViewController {
         
         tableView.delegate = self
         tableView.backgroundColor = .white
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal), style: .plain, target: self, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(navigateToSetting(_:)))
         setupAttribute()
         setupLayout()
     }
@@ -63,7 +63,8 @@ extension MainViewController: UITableViewDelegate {
         button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         button.tintColor = headerColors[section]
         button.semanticContentAttribute = .forceRightToLeft
-        button.addTarget(self, action: #selector(headerButtonCallback(_:)), for: .touchUpInside)
+        button.tag = section
+        button.addTarget(self, action: #selector(headerButtonTapped(_:)), for: .touchUpInside)
         headerView.addSubview(button)
         headerView.backgroundColor = .white
         
@@ -97,11 +98,51 @@ extension MainViewController: UITableViewDelegate {
     }
 }
 
-//MARK: - Header Button Callback function
+//MARK: - Callback Function
 extension MainViewController {
+    @objc func headerButtonTapped(_ sender: UIButton) {
+        let section = sender.tag
+        switch section {
+        case 0:
+            navigateToGeneralNotice(sender)
+        case 1:
+            navigateToAcademicNotice(sender)
+        case 2:
+            navigateToScholarshipNotice(sender)
+        case 3:
+            navigateToEventNotice(sender)
+        default:
+            break
+        }
+    }
+    
+    //MARK: - General Notice Button Callback Function
+    func navigateToGeneralNotice(_ sender: UIButton) {
+        let viewController = GeneralNoticeViewController()
+        viewController.bind()
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    //MARK: - Academic Notice Button Callback Function
+    func navigateToAcademicNotice(_ sender: UIButton) {
+        
+    }
+    
+    //MARK: - Scholarship Notice Button Callback Function
+    func navigateToScholarshipNotice(_ sender: UIButton) {
+        
+    }
+    
+    //MARK: - Event Notice Button Callback Function
+    func navigateToEventNotice(_ sender: UIButton) {
+        
+    }
+    
+    //MARK: - Toolbar Button Callback Function
     @objc
-    func headerButtonCallback(_ sender: UIButton) {
-        print("button tapped")
+    func navigateToSetting(_ sender: UIButton) {
+        let viewController = SettingViewController()
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
@@ -114,8 +155,31 @@ extension MainViewController {
     
     private func setupLayout() {
         view.addSubview(tableView)
+        //TableView Constraint
         tableView.snp.makeConstraints {
             $0.top.bottom.left.right.equalToSuperview()
+        }
+        
+        let bannerView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        bannerView.backgroundColor = .lightGray
+        bannerView.layer.cornerRadius = 10
+        
+        let bannerContainerView = UIView()
+        bannerContainerView.addSubview(bannerView)
+        bannerView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        }
+        
+        bannerContainerView.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 100)
+        tableView.tableHeaderView = bannerContainerView
+        
+        let label = UILabel()
+        label.text = "광고 자리"
+        label.font = UIFont.systemFont(ofSize: 20)
+        label.tintColor = .black
+        bannerView.addSubview(label)
+        label.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         }
     }
 }
@@ -123,6 +187,10 @@ extension MainViewController {
 //MARK: - Preview
 struct Preview: PreviewProvider {
     static var previews: some View {
-        UINavigationController(rootViewController: MainViewController()).makePreview()
+        let viewController = MainViewController()
+        UINavigationController(rootViewController: viewController).makePreview()
+            .onAppear {
+                viewController.bind()
+            }
     }
 }

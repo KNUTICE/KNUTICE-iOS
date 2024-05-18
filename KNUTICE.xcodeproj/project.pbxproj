@@ -16,7 +16,11 @@
 		5C8256462BE5CE1A0038D4C8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8256452BE5CE1A0038D4C8 /* MainViewController.swift */; };
 		5C82564B2BE5CE1B0038D4C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C82564A2BE5CE1B0038D4C8 /* Assets.xcassets */; };
 		5C82564E2BE5CE1B0038D4C8 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5C82564D2BE5CE1B0038D4C8 /* Base */; };
+		5C9B81072BF451540038EB27 /* GeneralNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B81062BF451540038EB27 /* GeneralNoticeViewController.swift */; };
+		5C9B810B2BF451BC0038EB27 /* GeneralNoticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B810A2BF451BC0038EB27 /* GeneralNoticeViewModel.swift */; };
+		5C9B810E2BF45B5D0038EB27 /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B810D2BF45B5D0038EB27 /* ViewModelProtocol.swift */; };
 		5CD2EFC12BF356FB00066C87 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2EFC02BF356FB00066C87 /* UIViewController+Preview.swift */; };
+		5CD2EFC42BF3A5C800066C87 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2EFC32BF3A5C800066C87 /* SettingViewController.swift */; };
 		A82D0A5E53CA925F7AF83A6F /* Pods_KNUTICE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8D3AA05D90BFFE11CE67D5 /* Pods_KNUTICE.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,7 +38,11 @@
 		5C82564A2BE5CE1B0038D4C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C82564D2BE5CE1B0038D4C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C82564F2BE5CE1B0038D4C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C9B81062BF451540038EB27 /* GeneralNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticeViewController.swift; sourceTree = "<group>"; };
+		5C9B810A2BF451BC0038EB27 /* GeneralNoticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticeViewModel.swift; sourceTree = "<group>"; };
+		5C9B810D2BF45B5D0038EB27 /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
 		5CD2EFC02BF356FB00066C87 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
+		5CD2EFC32BF3A5C800066C87 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		8AC0BDBB0D43D012C76651F6 /* Pods-KNUTICE.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNUTICE.debug.xcconfig"; path = "Target Support Files/Pods-KNUTICE/Pods-KNUTICE.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -53,6 +61,10 @@
 		5C5698892BEFB2BE0085E389 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				5CD2EFBF2BF356D700066C87 /* Utils */,
+				5C9B810C2BF45B4A0038EB27 /* Interface */,
+				5C9B81052BF451210038EB27 /* GeneralNotice */,
+				5CD2EFC22BF3A5A100066C87 /* Setting */,
 				5C82564C2BE5CE1B0038D4C8 /* LaunchScreen.storyboard */,
 				5C56988A2BEFB2ED0085E389 /* Main */,
 			);
@@ -132,7 +144,6 @@
 		5C8256402BE5CE1A0038D4C8 /* KNUTICE */ = {
 			isa = PBXGroup;
 			children = (
-				5CD2EFBF2BF356D700066C87 /* Utils */,
 				5C5698932BEFB59A0085E389 /* Data */,
 				5C56988E2BEFB37D0085E389 /* Application */,
 				5C56988D2BEFB3660085E389 /* Resources */,
@@ -142,12 +153,53 @@
 			path = KNUTICE;
 			sourceTree = "<group>";
 		};
+		5C9B81052BF451210038EB27 /* GeneralNotice */ = {
+			isa = PBXGroup;
+			children = (
+				5C9B81092BF451660038EB27 /* ViewModel */,
+				5C9B81082BF451620038EB27 /* View */,
+			);
+			path = GeneralNotice;
+			sourceTree = "<group>";
+		};
+		5C9B81082BF451620038EB27 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5C9B81062BF451540038EB27 /* GeneralNoticeViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5C9B81092BF451660038EB27 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5C9B810A2BF451BC0038EB27 /* GeneralNoticeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		5C9B810C2BF45B4A0038EB27 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				5C9B810D2BF45B5D0038EB27 /* ViewModelProtocol.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
 		5CD2EFBF2BF356D700066C87 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				5CD2EFC02BF356FB00066C87 /* UIViewController+Preview.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		5CD2EFC22BF3A5A100066C87 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				5CD2EFC32BF3A5C800066C87 /* SettingViewController.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		B7C2DD8F1383D1BE8D2ADDF7 /* Frameworks */ = {
@@ -284,9 +336,13 @@
 				5CD2EFC12BF356FB00066C87 /* UIViewController+Preview.swift in Sources */,
 				5C5698922BEFB4A20085E389 /* MainViewModel.swift in Sources */,
 				5C8256462BE5CE1A0038D4C8 /* MainViewController.swift in Sources */,
+				5C9B810B2BF451BC0038EB27 /* GeneralNoticeViewModel.swift in Sources */,
 				5C8256422BE5CE1A0038D4C8 /* AppDelegate.swift in Sources */,
 				5C5698972BEFB6760085E389 /* Notice.swift in Sources */,
+				5CD2EFC42BF3A5C800066C87 /* SettingViewController.swift in Sources */,
 				5C5698902BEFB3C50085E389 /* MainListCell.swift in Sources */,
+				5C9B810E2BF45B5D0038EB27 /* ViewModelProtocol.swift in Sources */,
+				5C9B81072BF451540038EB27 /* GeneralNoticeViewController.swift in Sources */,
 				5C5698952BEFB5A60085E389 /* SectionOfNotice.swift in Sources */,
 				5C8256442BE5CE1A0038D4C8 /* SceneDelegate.swift in Sources */,
 			);
