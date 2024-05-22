@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C190A442BFD6AA500E0254B /* ServiceInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C190A432BFD6AA500E0254B /* ServiceInfo.plist */; };
+		5C190A462BFD6BDB00E0254B /* Bundle+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A452BFD6BDB00E0254B /* Bundle+URL.swift */; };
+		5C190A4B2BFD87EC00E0254B /* AppDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A4A2BFD87EC00E0254B /* AppDI.swift */; };
 		5C5698902BEFB3C50085E389 /* MainListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C56988F2BEFB3C50085E389 /* MainListCell.swift */; };
 		5C5698922BEFB4A20085E389 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698912BEFB4A20085E389 /* MainViewModel.swift */; };
 		5C5698952BEFB5A60085E389 /* SectionOfNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */; };
@@ -22,6 +25,10 @@
 		5C89DD3A2BFA02F400CCCCCD /* MainViewController+Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD392BFA02F400CCCCCD /* MainViewController+Callbacks.swift */; };
 		5C89DD3C2BFA03D800CCCCCD /* MainViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD3B2BFA03D800CCCCCD /* MainViewController+Layout.swift */; };
 		5C89DD3E2BFA043200CCCCCD /* MainViewController+Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD3D2BFA043200CCCCCD /* MainViewController+Binding.swift */; };
+		5C89DD462BFA0D6800CCCCCD /* MainNoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD452BFA0D6800CCCCCD /* MainNoticeRepository.swift */; };
+		5C89DD492BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD482BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift */; };
+		5C89DD4C2BFA105600CCCCCD /* MainNoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD4B2BFA105600CCCCCD /* MainNoticeDataSource.swift */; };
+		5C89DD502BFA120B00CCCCCD /* MainNoticeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD4F2BFA120B00CCCCCD /* MainNoticeDTO.swift */; };
 		5C9B81072BF451540038EB27 /* GeneralNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B81062BF451540038EB27 /* GeneralNoticeViewController.swift */; };
 		5C9B810B2BF451BC0038EB27 /* GeneralNoticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B810A2BF451BC0038EB27 /* GeneralNoticeViewModel.swift */; };
 		5C9B810E2BF45B5D0038EB27 /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B810D2BF45B5D0038EB27 /* ViewModelProtocol.swift */; };
@@ -33,6 +40,9 @@
 /* Begin PBXFileReference section */
 		026225E47C36048AF5212391 /* Pods-KNUTICE.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNUTICE.release.xcconfig"; path = "Target Support Files/Pods-KNUTICE/Pods-KNUTICE.release.xcconfig"; sourceTree = "<group>"; };
 		4A8D3AA05D90BFFE11CE67D5 /* Pods_KNUTICE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNUTICE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C190A432BFD6AA500E0254B /* ServiceInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ServiceInfo.plist; sourceTree = "<group>"; };
+		5C190A452BFD6BDB00E0254B /* Bundle+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+URL.swift"; sourceTree = "<group>"; };
+		5C190A4A2BFD87EC00E0254B /* AppDI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDI.swift; sourceTree = "<group>"; };
 		5C56988F2BEFB3C50085E389 /* MainListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListCell.swift; sourceTree = "<group>"; };
 		5C5698912BEFB4A20085E389 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOfNotice.swift; sourceTree = "<group>"; };
@@ -50,6 +60,10 @@
 		5C89DD392BFA02F400CCCCCD /* MainViewController+Callbacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+Callbacks.swift"; sourceTree = "<group>"; };
 		5C89DD3B2BFA03D800CCCCCD /* MainViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+Layout.swift"; sourceTree = "<group>"; };
 		5C89DD3D2BFA043200CCCCCD /* MainViewController+Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+Binding.swift"; sourceTree = "<group>"; };
+		5C89DD452BFA0D6800CCCCCD /* MainNoticeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeRepository.swift; sourceTree = "<group>"; };
+		5C89DD482BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeRepositoryImpl.swift; sourceTree = "<group>"; };
+		5C89DD4B2BFA105600CCCCCD /* MainNoticeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeDataSource.swift; sourceTree = "<group>"; };
+		5C89DD4F2BFA120B00CCCCCD /* MainNoticeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeDTO.swift; sourceTree = "<group>"; };
 		5C9B81062BF451540038EB27 /* GeneralNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticeViewController.swift; sourceTree = "<group>"; };
 		5C9B810A2BF451BC0038EB27 /* GeneralNoticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticeViewModel.swift; sourceTree = "<group>"; };
 		5C9B810D2BF45B5D0038EB27 /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -70,6 +84,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C190A4C2BFDD92A00E0254B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5C190A452BFD6BDB00E0254B /* Bundle+URL.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		5C190A4D2BFDDBF500E0254B /* SectionModel */ = {
+			isa = PBXGroup;
+			children = (
+				5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */,
+			);
+			path = SectionModel;
+			sourceTree = "<group>";
+		};
 		5C5698892BEFB2BE0085E389 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -80,8 +110,8 @@
 				5C89DD2D2BF9EBF100CCCCCD /* AcademicNotice */,
 				5C9B81052BF451210038EB27 /* GeneralNotice */,
 				5CD2EFC22BF3A5A100066C87 /* Setting */,
-				5C82564C2BE5CE1B0038D4C8 /* LaunchScreen.storyboard */,
 				5C56988A2BEFB2ED0085E389 /* Main */,
+				5C82564C2BE5CE1B0038D4C8 /* LaunchScreen.storyboard */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -89,6 +119,7 @@
 		5C56988A2BEFB2ED0085E389 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				5C190A4D2BFDDBF500E0254B /* SectionModel */,
 				5C56988C2BEFB2F60085E389 /* ViewModel */,
 				5C56988B2BEFB2F20085E389 /* View */,
 			);
@@ -101,8 +132,8 @@
 				5C8256452BE5CE1A0038D4C8 /* MainViewController.swift */,
 				5C89DD392BFA02F400CCCCCD /* MainViewController+Callbacks.swift */,
 				5C89DD3B2BFA03D800CCCCCD /* MainViewController+Layout.swift */,
-				5C56988F2BEFB3C50085E389 /* MainListCell.swift */,
 				5C89DD3D2BFA043200CCCCCD /* MainViewController+Binding.swift */,
+				5C56988F2BEFB3C50085E389 /* MainListCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -126,6 +157,9 @@
 		5C56988E2BEFB37D0085E389 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				5C82564F2BE5CE1B0038D4C8 /* Info.plist */,
+				5C190A432BFD6AA500E0254B /* ServiceInfo.plist */,
+				5C190A4A2BFD87EC00E0254B /* AppDI.swift */,
 				5C8256412BE5CE1A0038D4C8 /* AppDelegate.swift */,
 				5C8256432BE5CE1A0038D4C8 /* SceneDelegate.swift */,
 			);
@@ -135,8 +169,11 @@
 		5C5698932BEFB59A0085E389 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */,
-				5C5698962BEFB6760085E389 /* Notice.swift */,
+				5C89DD4E2BFA118B00CCCCCD /* DTO */,
+				5C89DD412BFA0CF700CCCCCD /* Entities */,
+				5C89DD4A2BFA104800CCCCCD /* DataSources */,
+				5C89DD442BFA0D3F00CCCCCD /* RepositoryInterfaces */,
+				5C89DD472BFA0EA400CCCCCD /* Repositories */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -162,11 +199,11 @@
 		5C8256402BE5CE1A0038D4C8 /* KNUTICE */ = {
 			isa = PBXGroup;
 			children = (
-				5C5698932BEFB59A0085E389 /* Data */,
+				5C190A4C2BFDD92A00E0254B /* Utils */,
 				5C56988E2BEFB37D0085E389 /* Application */,
 				5C56988D2BEFB3660085E389 /* Resources */,
+				5C5698932BEFB59A0085E389 /* Data */,
 				5C5698892BEFB2BE0085E389 /* Presentation */,
-				5C82564F2BE5CE1B0038D4C8 /* Info.plist */,
 			);
 			path = KNUTICE;
 			sourceTree = "<group>";
@@ -217,6 +254,46 @@
 				5C89DD372BF9ECDA00CCCCCD /* EventNoticeViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		5C89DD412BFA0CF700CCCCCD /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				5C5698962BEFB6760085E389 /* Notice.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		5C89DD442BFA0D3F00CCCCCD /* RepositoryInterfaces */ = {
+			isa = PBXGroup;
+			children = (
+				5C89DD452BFA0D6800CCCCCD /* MainNoticeRepository.swift */,
+			);
+			path = RepositoryInterfaces;
+			sourceTree = "<group>";
+		};
+		5C89DD472BFA0EA400CCCCCD /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				5C89DD482BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		5C89DD4A2BFA104800CCCCCD /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				5C89DD4B2BFA105600CCCCCD /* MainNoticeDataSource.swift */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
+		5C89DD4E2BFA118B00CCCCCD /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				5C89DD4F2BFA120B00CCCCCD /* MainNoticeDTO.swift */,
+			);
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		5C9B81052BF451210038EB27 /* GeneralNotice */ = {
@@ -345,6 +422,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C190A442BFD6AA500E0254B /* ServiceInfo.plist in Resources */,
 				5C82564B2BE5CE1B0038D4C8 /* Assets.xcassets in Resources */,
 				5C82564E2BE5CE1B0038D4C8 /* Base in Resources */,
 			);
@@ -399,17 +477,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C89DD502BFA120B00CCCCCD /* MainNoticeDTO.swift in Sources */,
 				5CD2EFC12BF356FB00066C87 /* UIViewController+Preview.swift in Sources */,
 				5C5698922BEFB4A20085E389 /* MainViewModel.swift in Sources */,
 				5C8256462BE5CE1A0038D4C8 /* MainViewController.swift in Sources */,
 				5C9B810B2BF451BC0038EB27 /* GeneralNoticeViewModel.swift in Sources */,
+				5C89DD4C2BFA105600CCCCCD /* MainNoticeDataSource.swift in Sources */,
 				5C89DD3E2BFA043200CCCCCD /* MainViewController+Binding.swift in Sources */,
+				5C89DD492BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift in Sources */,
 				5C8256422BE5CE1A0038D4C8 /* AppDelegate.swift in Sources */,
 				5C5698972BEFB6760085E389 /* Notice.swift in Sources */,
 				5CD2EFC42BF3A5C800066C87 /* SettingViewController.swift in Sources */,
 				5C89DD342BF9ECB100CCCCCD /* ScholarshipNoticeViewController.swift in Sources */,
+				5C190A4B2BFD87EC00E0254B /* AppDI.swift in Sources */,
 				5C5698902BEFB3C50085E389 /* MainListCell.swift in Sources */,
 				5C9B810E2BF45B5D0038EB27 /* ViewModelProtocol.swift in Sources */,
+				5C89DD462BFA0D6800CCCCCD /* MainNoticeRepository.swift in Sources */,
 				5C9B81072BF451540038EB27 /* GeneralNoticeViewController.swift in Sources */,
 				5C89DD302BF9EC3A00CCCCCD /* AcademicNoticeViewController.swift in Sources */,
 				5C89DD3A2BFA02F400CCCCCD /* MainViewController+Callbacks.swift in Sources */,
@@ -417,6 +500,7 @@
 				5C5698952BEFB5A60085E389 /* SectionOfNotice.swift in Sources */,
 				5C89DD3C2BFA03D800CCCCCD /* MainViewController+Layout.swift in Sources */,
 				5C8256442BE5CE1A0038D4C8 /* SceneDelegate.swift in Sources */,
+				5C190A462BFD6BDB00E0254B /* Bundle+URL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,7 +648,7 @@
 				DEVELOPMENT_TEAM = QHK65XFL8U;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = KNUTICE/Info.plist;
+				INFOPLIST_FILE = KNUTICE/Application/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -600,7 +684,7 @@
 				DEVELOPMENT_TEAM = QHK65XFL8U;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = KNUTICE/Info.plist;
+				INFOPLIST_FILE = KNUTICE/Application/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
