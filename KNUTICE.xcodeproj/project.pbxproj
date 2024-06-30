@@ -10,6 +10,10 @@
 		5C190A442BFD6AA500E0254B /* ServiceInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C190A432BFD6AA500E0254B /* ServiceInfo.plist */; };
 		5C190A462BFD6BDB00E0254B /* Bundle+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A452BFD6BDB00E0254B /* Bundle+URL.swift */; };
 		5C190A4B2BFD87EC00E0254B /* AppDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A4A2BFD87EC00E0254B /* AppDI.swift */; };
+		5C190A4F2BFDF4E100E0254B /* GeneralNoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A4E2BFDF4E100E0254B /* GeneralNoticeRepository.swift */; };
+		5C190A532BFDF5EB00E0254B /* GeneralNoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A522BFDF5EB00E0254B /* GeneralNoticeRepositoryImpl.swift */; };
+		5C190A552BFDF66600E0254B /* GeneralNoticeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A542BFDF66600E0254B /* GeneralNoticeDTO.swift */; };
+		5C190A572BFE023000E0254B /* GeneralNoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A562BFE023000E0254B /* GeneralNoticeDataSource.swift */; };
 		5C5698902BEFB3C50085E389 /* MainListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C56988F2BEFB3C50085E389 /* MainListCell.swift */; };
 		5C5698922BEFB4A20085E389 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698912BEFB4A20085E389 /* MainViewModel.swift */; };
 		5C5698952BEFB5A60085E389 /* SectionOfNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */; };
@@ -43,6 +47,10 @@
 		5C190A432BFD6AA500E0254B /* ServiceInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ServiceInfo.plist; sourceTree = "<group>"; };
 		5C190A452BFD6BDB00E0254B /* Bundle+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+URL.swift"; sourceTree = "<group>"; };
 		5C190A4A2BFD87EC00E0254B /* AppDI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDI.swift; sourceTree = "<group>"; };
+		5C190A4E2BFDF4E100E0254B /* GeneralNoticeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticeRepository.swift; sourceTree = "<group>"; };
+		5C190A522BFDF5EB00E0254B /* GeneralNoticeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticeRepositoryImpl.swift; sourceTree = "<group>"; };
+		5C190A542BFDF66600E0254B /* GeneralNoticeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticeDTO.swift; sourceTree = "<group>"; };
+		5C190A562BFE023000E0254B /* GeneralNoticeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticeDataSource.swift; sourceTree = "<group>"; };
 		5C56988F2BEFB3C50085E389 /* MainListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListCell.swift; sourceTree = "<group>"; };
 		5C5698912BEFB4A20085E389 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOfNotice.swift; sourceTree = "<group>"; };
@@ -268,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				5C89DD452BFA0D6800CCCCCD /* MainNoticeRepository.swift */,
+				5C190A4E2BFDF4E100E0254B /* GeneralNoticeRepository.swift */,
 			);
 			path = RepositoryInterfaces;
 			sourceTree = "<group>";
@@ -276,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				5C89DD482BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift */,
+				5C190A522BFDF5EB00E0254B /* GeneralNoticeRepositoryImpl.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -284,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				5C89DD4B2BFA105600CCCCCD /* MainNoticeDataSource.swift */,
+				5C190A562BFE023000E0254B /* GeneralNoticeDataSource.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -292,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				5C89DD4F2BFA120B00CCCCCD /* MainNoticeDTO.swift */,
+				5C190A542BFDF66600E0254B /* GeneralNoticeDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -488,11 +500,15 @@
 				5C8256422BE5CE1A0038D4C8 /* AppDelegate.swift in Sources */,
 				5C5698972BEFB6760085E389 /* Notice.swift in Sources */,
 				5CD2EFC42BF3A5C800066C87 /* SettingViewController.swift in Sources */,
+				5C190A552BFDF66600E0254B /* GeneralNoticeDTO.swift in Sources */,
+				5C190A4F2BFDF4E100E0254B /* GeneralNoticeRepository.swift in Sources */,
 				5C89DD342BF9ECB100CCCCCD /* ScholarshipNoticeViewController.swift in Sources */,
 				5C190A4B2BFD87EC00E0254B /* AppDI.swift in Sources */,
 				5C5698902BEFB3C50085E389 /* MainListCell.swift in Sources */,
 				5C9B810E2BF45B5D0038EB27 /* ViewModelProtocol.swift in Sources */,
+				5C190A532BFDF5EB00E0254B /* GeneralNoticeRepositoryImpl.swift in Sources */,
 				5C89DD462BFA0D6800CCCCCD /* MainNoticeRepository.swift in Sources */,
+				5C190A572BFE023000E0254B /* GeneralNoticeDataSource.swift in Sources */,
 				5C9B81072BF451540038EB27 /* GeneralNoticeViewController.swift in Sources */,
 				5C89DD302BF9EC3A00CCCCCD /* AcademicNoticeViewController.swift in Sources */,
 				5C89DD3A2BFA02F400CCCCCD /* MainViewController+Callbacks.swift in Sources */,
