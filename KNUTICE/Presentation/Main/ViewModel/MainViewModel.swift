@@ -10,7 +10,7 @@ import RxRelay
 import RxDataSources
 
 final class MainViewModel {
-    var notices = BehaviorRelay<[SectionOfNotice]>(value: [])
+    private(set) var notices = BehaviorRelay<[SectionOfNotice]>(value: [])
     private let repository: MainNoticeRepository
     private let disposeBag = DisposeBag()
     

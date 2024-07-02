@@ -20,5 +20,13 @@ struct AppDI {
         return viewModel
     }
     
+    var generalNoticeViewModel: GeneralNoticeViewModel {
+        let dataSource = GeneralNoticeDataSourceImpl()
+        let repository = GeneralNoticeRepositoryImpl(dataSource: dataSource)
+        let viewModel = GeneralNoticeViewModel(repository: repository)
+        
+        return viewModel
+    }
+    
     private init() {}
 }

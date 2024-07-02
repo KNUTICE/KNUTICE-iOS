@@ -24,7 +24,6 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
                     observer.onCompleted()
                 case .failure(let error):
                     observer.onError(error)
-                    observer.onCompleted()
                 }
             })
             .disposed(by: self.disposeBag)

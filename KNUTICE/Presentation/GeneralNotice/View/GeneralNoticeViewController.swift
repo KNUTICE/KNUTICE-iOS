@@ -12,36 +12,46 @@ import RxSwift
 import RxDataSources
 
 final class GeneralNoticeViewController: UIViewController {
-    private let tableView = UITableView(frame: .zero, style: .plain)
-    private let viewModel = GeneralNoticeViewModel()
-    private let disposeBag = DisposeBag()
+    let tableView = UITableView(frame: .zero, style: .plain)
+    let viewModel = AppDI.shared.generalNoticeViewModel
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        //reuseIndentifier 등록
+        tableView.register(GeneralNoticeCell.self, forCellReuseIdentifier: GeneralNoticeCell.reuseIdentifier)
+        
+        tableView.delegate = self
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .automatic
         navigationItem.title = "일반소식"
+        
         setupLayout()
         setupAttribute()
     }
 }
 
-//MARK: - Binding
-extension GeneralNoticeViewController {
-    func bind() {
-        let dataSource = RxTableViewSectionedReloadDataSource<SectionOfNotice>(configureCell: { dataSource, tableView, indexPath, item -> UITableViewCell in
-            let cell = UITableViewCell(style: .subtitle, reuseIdentifier: MainListCell.reuseIdentifier)
-            cell.textLabel?.text = item.title
-            cell.detailTextLabel?.text = "[\(item.department)]  \(item.uploadDate)"
-            return cell
-        })
-        
-        viewModel.getCellData()
-            .observe(on: MainScheduler.instance)
-            .bind(to: tableView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
+//MARK: - UIViewController delegate methods
+extension GeneralNoticeViewController: UITableViewDelegate {
+    //MARK: - Height for row
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
+    //MARK: - Remove separator from last cell
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: cell.bounds.size.width)
+        } else {
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        }
+    }
+    
+    //MARK: - Remove cell highlighting when touching a cell
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false
     }
 }
 
@@ -62,6 +72,7 @@ extension GeneralNoticeViewController {
 
 //MARK: - Preview
 #Preview {
-    GeneralNoticeViewController().makePreview()
+    GeneralNoticeViewController()
+        .makePreview()
 }
 
