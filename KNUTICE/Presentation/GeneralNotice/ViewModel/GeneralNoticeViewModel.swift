@@ -5,26 +5,31 @@
 //  Created by 이정훈 on 5/15/24.
 //
 
-import Foundation
 import RxCocoa
 import RxSwift
 
 final class GeneralNoticeViewModel {
-    var notices = BehaviorRelay<[SectionOfNotice]>(value: [])
+    private(set) var notices = BehaviorRelay<[Notice]>(value: [])
+    private let repository: GeneralNoticeRepository
+    private let disposeBag = DisposeBag()
     
-    init() {
+    init(repository: GeneralNoticeRepository) {
+        self.repository = repository
+        
         fetchNotices()
     }
 }
 
 extension GeneralNoticeViewModel: ViewModel {
     func fetchNotices() {
-        notices.accept([
-            SectionOfNotice(header: "헤더", items: Notice.generalNoticesSampleData)
-        ])
+        repository.fetchNotices()
+            .subscribe(onNext: { [weak self] notices in
+                self?.notices.accept(notices)
+            })
+            .disposed(by: disposeBag)
     }
     
-    func getCellData() -> Observable<[SectionOfNotice]> {
+    func getCellData() -> Observable<[Notice]> {
         return notices.asObservable()
     }
 }
