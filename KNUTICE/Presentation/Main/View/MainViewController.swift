@@ -53,7 +53,6 @@ extension MainViewController: UITableViewDelegate {
         button.tag = section
         button.addTarget(self, action: #selector(headerButtonTapped(_:)), for: .touchUpInside)
         headerView.addSubview(button)
-        headerView.backgroundColor = .white
         
         return headerView
     }
@@ -94,7 +93,8 @@ extension MainViewController: UITableViewDelegate {
 struct Preview: PreviewProvider {
     static var previews: some View {
         let viewController = MainViewController()
-        UINavigationController(rootViewController: viewController).makePreview()
+        UINavigationController(rootViewController: viewController)
+            .makePreview()
             .onAppear {
                 viewController.bind()
             }
