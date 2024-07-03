@@ -13,7 +13,7 @@ struct SectionOfNotice {
 }
 
 extension SectionOfNotice: SectionModelType {
-    typealias Item = Notice
+    typealias Item = MainNotice
     
     init(original: SectionOfNotice, items: [Item]) {
         self = original

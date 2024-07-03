@@ -1,18 +1,31 @@
 //
-//  GeneralNoticeCell.swift
+//  GeneralNoticeCellWithImage.swift
 //  KNUTICE
 //
-//  Created by 이정훈 on 7/2/24.
+//  Created by 이정훈 on 7/3/24.
 //
 
 import UIKit
-import SnapKit
+import Kingfisher
 
-final class GeneralNoticeCell: UITableViewCell {
-    static let reuseIdentifier = "GeneralNoticeCell"
+final class GeneralNoticeCellWithImage: UITableViewCell {
+    static let reuseIdentifier = "GeneralNoticeCellWithImage"
     let titleLabel = UILabel()
     let subTitleLabel = UILabel()
     let uploadDateLabel = UILabel()
+    let image = UIImageView()
+    var imageURL: String = "" {
+        willSet {
+            let processor = DownsamplingImageProcessor(size: CGSize(width: UIScreen.main.bounds.width - 32, height: UIScreen.main.bounds.width - 32)) |>
+                            CroppingImageProcessor(size: CGSize(width: UIScreen.main.bounds.width - 32, height: UIScreen.main.bounds.width * 0.4), anchor: CGPoint(x: 0, y: 0)) |>
+                            RoundCornerImageProcessor(cornerRadius: 10)
+            
+            image.kf.setImage(
+                with: URL(string: newValue),
+                options: [.processor(processor)]
+            )
+        }
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -40,12 +53,21 @@ final class GeneralNoticeCell: UITableViewCell {
     }
     
     private func setupLayout() {
+        contentView.addSubview(image)
         contentView.addSubview(titleLabel)
         contentView.addSubview(subTitleLabel)
         contentView.addSubview(uploadDateLabel)
         
-        titleLabel.snp.makeConstraints { make in
+        image.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.width.equalTo(UIScreen.main.bounds.width - 32)
+            make.height.equalTo(UIScreen.main.bounds.width * 0.4)
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(image.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
         }
