@@ -20,16 +20,9 @@ final class GeneralNoticeViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        //reuseIndentifier 등록
-        tableView.register(GeneralNoticeCell.self, forCellReuseIdentifier: GeneralNoticeCell.reuseIdentifier)
-        
-        tableView.delegate = self
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.largeTitleDisplayMode = .automatic
-        navigationItem.title = "일반소식"
-        
         setupLayout()
         setupAttribute()
+        setupNavigationBar()
     }
 }
 
@@ -52,21 +45,6 @@ extension GeneralNoticeViewController: UITableViewDelegate {
     //MARK: - Remove cell highlighting when touching a cell
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return false
-    }
-}
-
-//MARK: - Helper
-extension GeneralNoticeViewController {
-    private func setupAttribute() {
-        tableView.register(MainListCell.self, forCellReuseIdentifier: MainListCell.reuseIdentifier)
-        tableView.rowHeight = 80
-    }
-    
-    private func setupLayout() {
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints {
-            $0.top.bottom.left.right.equalToSuperview()
-        }
     }
 }
 

@@ -10,8 +10,20 @@ import UIKit
 //MARK: - Layout
 extension MainViewController {
     func setupAttribute() {
+        tableView.delegate = self
+        tableView.backgroundColor = .white
+        tableView.separatorStyle = .none
+        tableView.sectionHeaderTopPadding = 15    //header padding
         tableView.register(MainListCell.self, forCellReuseIdentifier: MainListCell.reuseIdentifier)
         tableView.rowHeight = 95
+    }
+    
+    func setupNavigationBar() {
+        let titleLabel = UILabel()
+        titleLabel.text = "KNUTICE"
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(navigateToSetting(_:)))
+        navigationItem.titleView = titleLabel
     }
     
     func setupLayout() {
