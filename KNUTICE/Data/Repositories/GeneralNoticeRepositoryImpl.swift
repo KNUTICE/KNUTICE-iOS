@@ -41,7 +41,8 @@ final class GeneralNoticeRepositoryImpl: GeneralNoticeRepository {
                           title: $0.title,
                           contentURL: $0.contentURL,
                           department: $0.departName,
-                          uploadDate: $0.registrationDate)
+                          uploadDate: $0.registrationDate,
+                          imageURL: $0.contentImage)
         }
     }
     

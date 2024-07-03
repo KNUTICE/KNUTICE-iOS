@@ -41,6 +41,7 @@
 		8E0BA6DB2C33BF0E00677A79 /* GeneralNoticeViewController+Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0BA6DA2C33BF0E00677A79 /* GeneralNoticeViewController+Binding.swift */; };
 		8E0BA6DD2C33CA1300677A79 /* GeneralNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0BA6DC2C33CA1300677A79 /* GeneralNoticeCell.swift */; };
 		8ECE2B162C34E01700D7F499 /* GeneralNoticeViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B152C34E01700D7F499 /* GeneralNoticeViewController+Layout.swift */; };
+		8ECE2B182C35045800D7F499 /* MainNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B172C35045800D7F499 /* MainNotice.swift */; };
 		A82D0A5E53CA925F7AF83A6F /* Pods_KNUTICE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8D3AA05D90BFFE11CE67D5 /* Pods_KNUTICE.framework */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,7 @@
 		8E0BA6DA2C33BF0E00677A79 /* GeneralNoticeViewController+Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneralNoticeViewController+Binding.swift"; sourceTree = "<group>"; };
 		8E0BA6DC2C33CA1300677A79 /* GeneralNoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticeCell.swift; sourceTree = "<group>"; };
 		8ECE2B152C34E01700D7F499 /* GeneralNoticeViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneralNoticeViewController+Layout.swift"; sourceTree = "<group>"; };
+		8ECE2B172C35045800D7F499 /* MainNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				5C5698962BEFB6760085E389 /* Notice.swift */,
+				8ECE2B172C35045800D7F499 /* MainNotice.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -328,8 +331,8 @@
 			children = (
 				8E0BA6DC2C33CA1300677A79 /* GeneralNoticeCell.swift */,
 				5C9B81062BF451540038EB27 /* GeneralNoticeViewController.swift */,
-				8E0BA6DA2C33BF0E00677A79 /* GeneralNoticeViewController+Binding.swift */,
 				8ECE2B152C34E01700D7F499 /* GeneralNoticeViewController+Layout.swift */,
+				8E0BA6DA2C33BF0E00677A79 /* GeneralNoticeViewController+Binding.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				5C190A4B2BFD87EC00E0254B /* AppDI.swift in Sources */,
 				5C5698902BEFB3C50085E389 /* MainListCell.swift in Sources */,
 				5C9B810E2BF45B5D0038EB27 /* ViewModelProtocol.swift in Sources */,
+				8ECE2B182C35045800D7F499 /* MainNotice.swift in Sources */,
 				5C190A532BFDF5EB00E0254B /* GeneralNoticeRepositoryImpl.swift in Sources */,
 				5C89DD462BFA0D6800CCCCCD /* MainNoticeRepository.swift in Sources */,
 				5C190A572BFE023000E0254B /* GeneralNoticeDataSource.swift in Sources */,
