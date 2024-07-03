@@ -13,22 +13,17 @@ import SwiftUI
 import RxDataSources
 
 final class MainViewController: UIViewController {
-    var viewModel: MainViewModel = AppDI.shared.mainViewModel
-    var tableView = UITableView(frame: .zero, style: .grouped)
+    let viewModel: MainViewModel = AppDI.shared.mainViewModel
+    let tableView = UITableView(frame: .zero, style: .grouped)
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        tableView.delegate = self
-        tableView.backgroundColor = .white
-        tableView.separatorStyle = .none
-        tableView.sectionHeaderTopPadding = 15    //header padding
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(navigateToSetting(_:)))
-        
-        setupAttribute()
         setupLayout()
+        setupAttribute()
+        setupNavigationBar()
         
         viewModel.fetchNotices()
     }
