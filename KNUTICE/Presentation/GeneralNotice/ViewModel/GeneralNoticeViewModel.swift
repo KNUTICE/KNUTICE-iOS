@@ -9,7 +9,7 @@ import RxCocoa
 import RxSwift
 
 final class GeneralNoticeViewModel {
-    private(set) var notices = BehaviorRelay<[Notice]>(value: [])
+    private let notices = BehaviorRelay<[Notice]>(value: [])
     private let repository: GeneralNoticeRepository
     private let disposeBag = DisposeBag()
     
