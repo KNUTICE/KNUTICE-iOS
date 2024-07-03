@@ -28,11 +28,6 @@ final class GeneralNoticeViewController: UIViewController {
 
 //MARK: - UIViewController delegate methods
 extension GeneralNoticeViewController: UITableViewDelegate {
-    //MARK: - Height for row
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
-    }
-    
     //MARK: - Remove separator from last cell
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {

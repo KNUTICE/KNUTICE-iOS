@@ -5,12 +5,14 @@
 //  Created by 이정훈 on 7/3/24.
 //
 
-import Foundation
+import UIKit
 
 extension GeneralNoticeViewController {
     func setupAttribute() {
         tableView.register(GeneralNoticeCell.self, forCellReuseIdentifier: GeneralNoticeCell.reuseIdentifier)    //reuseIndentifier 등록
-        tableView.rowHeight = 80
+        tableView.register(GeneralNoticeCellWithImage.self, forCellReuseIdentifier: GeneralNoticeCellWithImage.reuseIdentifier)
+        tableView.estimatedRowHeight = 100    //동적 height 적용전 임시 값
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.delegate = self
     }
     
