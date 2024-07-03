@@ -22,7 +22,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let mainViewController = MainViewController()
         mainViewController.bind()
         let navigationViewController = UINavigationController(rootViewController: mainViewController)
-        navigationViewController.navigationBar.topItem?.title = "KNUTICE"
         self.window?.rootViewController = navigationViewController
         self.window?.makeKeyAndVisible()
     }
