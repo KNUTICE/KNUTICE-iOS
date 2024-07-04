@@ -1,14 +1,22 @@
 //
-//  GeneralViewController+Binding.swift
+//  CellDataBindable.swift
 //  KNUTICE
 //
-//  Created by 이정훈 on 7/2/24.
+//  Created by 이정훈 on 7/4/24.
 //
 
-import RxCocoa
+import UIKit
+import RxSwift
 
-//MARK: - Binding
-extension GeneralNoticeViewController {
+protocol CellDataBindable {
+    var viewModel: NoticeViewModel { get }
+    var tableView: UITableView { get }
+    var disposeBag: DisposeBag { get }
+    
+    func bind()
+}
+
+extension CellDataBindable {
     func bind() {
         viewModel.getCellData()
             .bind(to: tableView.rx.items) { tableView, row, item in

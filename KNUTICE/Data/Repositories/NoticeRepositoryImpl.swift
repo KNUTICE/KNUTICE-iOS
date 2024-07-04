@@ -7,17 +7,19 @@
 
 import RxSwift
 
-final class GeneralNoticeRepositoryImpl: GeneralNoticeRepository {
-    private let dataSource: GeneralNoticeDataSource
+final class NoticeRepositoryImpl: NoticeRepository {
+    private let dataSource: NoticeDataSource
     private let disposeBag = DisposeBag()
+    private let remoteURL: String
     
-    init(dataSource: GeneralNoticeDataSource) {
+    init(dataSource: NoticeDataSource, remoteURL: String) {
         self.dataSource = dataSource
+        self.remoteURL = remoteURL
     }
     
     func fetchNotices() -> Observable<[Notice]> {
         let observable = Observable<[Notice]>.create { observer in
-            self.dataSource.fetchNotices()
+            self.dataSource.fetchNotices(from: self.remoteURL)
                 .subscribe(onNext: { [weak self] result in
                     switch result {
                     case .success(let dto):
@@ -33,17 +35,6 @@ final class GeneralNoticeRepositoryImpl: GeneralNoticeRepository {
         }
         
         return observable
-    }
-    
-    private func converToNotice(_ dto: GeneralNoticeDTO) -> [Notice] {
-        return dto.data.map {
-            return Notice(id: $0.nttId,
-                          title: $0.title,
-                          contentURL: $0.contentURL,
-                          department: $0.departName,
-                          uploadDate: $0.registrationDate,
-                          imageURL: $0.contentImage)
-        }
     }
     
 //    func fetchNotices(after number: Int) -> Observable<[Notice]> {
