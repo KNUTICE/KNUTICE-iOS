@@ -10,10 +10,10 @@
 		5C190A442BFD6AA500E0254B /* ServiceInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C190A432BFD6AA500E0254B /* ServiceInfo.plist */; };
 		5C190A462BFD6BDB00E0254B /* Bundle+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A452BFD6BDB00E0254B /* Bundle+URL.swift */; };
 		5C190A4B2BFD87EC00E0254B /* AppDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A4A2BFD87EC00E0254B /* AppDI.swift */; };
-		5C190A4F2BFDF4E100E0254B /* GeneralNoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A4E2BFDF4E100E0254B /* GeneralNoticeRepository.swift */; };
-		5C190A532BFDF5EB00E0254B /* GeneralNoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A522BFDF5EB00E0254B /* GeneralNoticeRepositoryImpl.swift */; };
-		5C190A552BFDF66600E0254B /* GeneralNoticeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A542BFDF66600E0254B /* GeneralNoticeDTO.swift */; };
-		5C190A572BFE023000E0254B /* GeneralNoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A562BFE023000E0254B /* GeneralNoticeDataSource.swift */; };
+		5C190A4F2BFDF4E100E0254B /* NoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A4E2BFDF4E100E0254B /* NoticeRepository.swift */; };
+		5C190A532BFDF5EB00E0254B /* NoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A522BFDF5EB00E0254B /* NoticeRepositoryImpl.swift */; };
+		5C190A552BFDF66600E0254B /* ReponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A542BFDF66600E0254B /* ReponseDTO.swift */; };
+		5C190A572BFE023000E0254B /* NoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A562BFE023000E0254B /* NoticeDataSource.swift */; };
 		5C5698902BEFB3C50085E389 /* MainListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C56988F2BEFB3C50085E389 /* MainListCell.swift */; };
 		5C5698922BEFB4A20085E389 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698912BEFB4A20085E389 /* MainViewModel.swift */; };
 		5C5698952BEFB5A60085E389 /* SectionOfNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */; };
@@ -23,7 +23,6 @@
 		5C8256462BE5CE1A0038D4C8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8256452BE5CE1A0038D4C8 /* MainViewController.swift */; };
 		5C82564B2BE5CE1B0038D4C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C82564A2BE5CE1B0038D4C8 /* Assets.xcassets */; };
 		5C82564E2BE5CE1B0038D4C8 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5C82564D2BE5CE1B0038D4C8 /* Base */; };
-		5C89DD302BF9EC3A00CCCCCD /* AcademicNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD2F2BF9EC3A00CCCCCD /* AcademicNoticeViewController.swift */; };
 		5C89DD342BF9ECB100CCCCCD /* ScholarshipNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD332BF9ECB100CCCCCD /* ScholarshipNoticeViewController.swift */; };
 		5C89DD382BF9ECDA00CCCCCD /* EventNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD372BF9ECDA00CCCCCD /* EventNoticeViewController.swift */; };
 		5C89DD3A2BFA02F400CCCCCD /* MainViewController+Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD392BFA02F400CCCCCD /* MainViewController+Callbacks.swift */; };
@@ -34,15 +33,16 @@
 		5C89DD4C2BFA105600CCCCCD /* MainNoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD4B2BFA105600CCCCCD /* MainNoticeDataSource.swift */; };
 		5C89DD502BFA120B00CCCCCD /* MainNoticeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD4F2BFA120B00CCCCCD /* MainNoticeDTO.swift */; };
 		5C9B81072BF451540038EB27 /* GeneralNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B81062BF451540038EB27 /* GeneralNoticeViewController.swift */; };
-		5C9B810B2BF451BC0038EB27 /* GeneralNoticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B810A2BF451BC0038EB27 /* GeneralNoticeViewModel.swift */; };
+		5C9B810B2BF451BC0038EB27 /* NoticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B810A2BF451BC0038EB27 /* NoticeViewModel.swift */; };
 		5C9B810E2BF45B5D0038EB27 /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B810D2BF45B5D0038EB27 /* ViewModelProtocol.swift */; };
 		5CD2EFC12BF356FB00066C87 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2EFC02BF356FB00066C87 /* UIViewController+Preview.swift */; };
 		5CD2EFC42BF3A5C800066C87 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2EFC32BF3A5C800066C87 /* SettingViewController.swift */; };
 		8E00AF6C2C361F780037EC38 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF6B2C361F780037EC38 /* WebViewController.swift */; };
 		8E00AF712C36233C0037EC38 /* WebViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF702C36233C0037EC38 /* WebViewController+Layout.swift */; };
-		8E0BA6DB2C33BF0E00677A79 /* GeneralNoticeViewController+Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0BA6DA2C33BF0E00677A79 /* GeneralNoticeViewController+Binding.swift */; };
+		8E00AF7B2C3676240037EC38 /* AcademicNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF7A2C3676240037EC38 /* AcademicNoticeViewController.swift */; };
+		8E00AF7F2C367D8A0037EC38 /* CellDataBindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF7E2C367D8A0037EC38 /* CellDataBindable.swift */; };
+		8E00AF822C3681100037EC38 /* TableViewConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF812C3681100037EC38 /* TableViewConfigurable.swift */; };
 		8E0BA6DD2C33CA1300677A79 /* GeneralNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0BA6DC2C33CA1300677A79 /* GeneralNoticeCell.swift */; };
-		8ECE2B162C34E01700D7F499 /* GeneralNoticeViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B152C34E01700D7F499 /* GeneralNoticeViewController+Layout.swift */; };
 		8ECE2B182C35045800D7F499 /* MainNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B172C35045800D7F499 /* MainNotice.swift */; };
 		8ECE2B1A2C3512CE00D7F499 /* GeneralNoticeCellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B192C3512CE00D7F499 /* GeneralNoticeCellWithImage.swift */; };
 		A82D0A5E53CA925F7AF83A6F /* Pods_KNUTICE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8D3AA05D90BFFE11CE67D5 /* Pods_KNUTICE.framework */; };
@@ -54,10 +54,10 @@
 		5C190A432BFD6AA500E0254B /* ServiceInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ServiceInfo.plist; sourceTree = "<group>"; };
 		5C190A452BFD6BDB00E0254B /* Bundle+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+URL.swift"; sourceTree = "<group>"; };
 		5C190A4A2BFD87EC00E0254B /* AppDI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDI.swift; sourceTree = "<group>"; };
-		5C190A4E2BFDF4E100E0254B /* GeneralNoticeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticeRepository.swift; sourceTree = "<group>"; };
-		5C190A522BFDF5EB00E0254B /* GeneralNoticeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticeRepositoryImpl.swift; sourceTree = "<group>"; };
-		5C190A542BFDF66600E0254B /* GeneralNoticeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticeDTO.swift; sourceTree = "<group>"; };
-		5C190A562BFE023000E0254B /* GeneralNoticeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticeDataSource.swift; sourceTree = "<group>"; };
+		5C190A4E2BFDF4E100E0254B /* NoticeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeRepository.swift; sourceTree = "<group>"; };
+		5C190A522BFDF5EB00E0254B /* NoticeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeRepositoryImpl.swift; sourceTree = "<group>"; };
+		5C190A542BFDF66600E0254B /* ReponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReponseDTO.swift; sourceTree = "<group>"; };
+		5C190A562BFE023000E0254B /* NoticeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDataSource.swift; sourceTree = "<group>"; };
 		5C56988F2BEFB3C50085E389 /* MainListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListCell.swift; sourceTree = "<group>"; };
 		5C5698912BEFB4A20085E389 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOfNotice.swift; sourceTree = "<group>"; };
@@ -69,7 +69,6 @@
 		5C82564A2BE5CE1B0038D4C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C82564D2BE5CE1B0038D4C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C82564F2BE5CE1B0038D4C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5C89DD2F2BF9EC3A00CCCCCD /* AcademicNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademicNoticeViewController.swift; sourceTree = "<group>"; };
 		5C89DD332BF9ECB100CCCCCD /* ScholarshipNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipNoticeViewController.swift; sourceTree = "<group>"; };
 		5C89DD372BF9ECDA00CCCCCD /* EventNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventNoticeViewController.swift; sourceTree = "<group>"; };
 		5C89DD392BFA02F400CCCCCD /* MainViewController+Callbacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+Callbacks.swift"; sourceTree = "<group>"; };
@@ -80,16 +79,17 @@
 		5C89DD4B2BFA105600CCCCCD /* MainNoticeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeDataSource.swift; sourceTree = "<group>"; };
 		5C89DD4F2BFA120B00CCCCCD /* MainNoticeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeDTO.swift; sourceTree = "<group>"; };
 		5C9B81062BF451540038EB27 /* GeneralNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticeViewController.swift; sourceTree = "<group>"; };
-		5C9B810A2BF451BC0038EB27 /* GeneralNoticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticeViewModel.swift; sourceTree = "<group>"; };
+		5C9B810A2BF451BC0038EB27 /* NoticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewModel.swift; sourceTree = "<group>"; };
 		5C9B810D2BF45B5D0038EB27 /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
 		5CD2EFC02BF356FB00066C87 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
 		5CD2EFC32BF3A5C800066C87 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		8AC0BDBB0D43D012C76651F6 /* Pods-KNUTICE.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNUTICE.debug.xcconfig"; path = "Target Support Files/Pods-KNUTICE/Pods-KNUTICE.debug.xcconfig"; sourceTree = "<group>"; };
 		8E00AF6B2C361F780037EC38 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		8E00AF702C36233C0037EC38 /* WebViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebViewController+Layout.swift"; sourceTree = "<group>"; };
-		8E0BA6DA2C33BF0E00677A79 /* GeneralNoticeViewController+Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneralNoticeViewController+Binding.swift"; sourceTree = "<group>"; };
+		8E00AF7A2C3676240037EC38 /* AcademicNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademicNoticeViewController.swift; sourceTree = "<group>"; };
+		8E00AF7E2C367D8A0037EC38 /* CellDataBindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDataBindable.swift; sourceTree = "<group>"; };
+		8E00AF812C3681100037EC38 /* TableViewConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewConfigurable.swift; sourceTree = "<group>"; };
 		8E0BA6DC2C33CA1300677A79 /* GeneralNoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticeCell.swift; sourceTree = "<group>"; };
-		8ECE2B152C34E01700D7F499 /* GeneralNoticeViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneralNoticeViewController+Layout.swift"; sourceTree = "<group>"; };
 		8ECE2B172C35045800D7F499 /* MainNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotice.swift; sourceTree = "<group>"; };
 		8ECE2B192C3512CE00D7F499 /* GeneralNoticeCellWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticeCellWithImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,6 +125,8 @@
 		5C5698892BEFB2BE0085E389 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				8E00AF802C3680090037EC38 /* Commons */,
+				8E00AF792C36755B0037EC38 /* ViewModel */,
 				8E00AF6D2C361F7E0037EC38 /* WebView */,
 				5CD2EFBF2BF356D700066C87 /* Utils */,
 				5C9B810C2BF45B4A0038EB27 /* Interface */,
@@ -143,7 +145,6 @@
 			isa = PBXGroup;
 			children = (
 				5C190A4D2BFDDBF500E0254B /* SectionModel */,
-				5C56988C2BEFB2F60085E389 /* ViewModel */,
 				5C56988B2BEFB2F20085E389 /* View */,
 			);
 			path = Main;
@@ -159,14 +160,6 @@
 				5C56988F2BEFB3C50085E389 /* MainListCell.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		5C56988C2BEFB2F60085E389 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				5C5698912BEFB4A20085E389 /* MainViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		5C56988D2BEFB3660085E389 /* Resources */ = {
@@ -242,7 +235,7 @@
 		5C89DD2E2BF9EC0B00CCCCCD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5C89DD2F2BF9EC3A00CCCCCD /* AcademicNoticeViewController.swift */,
+				8E00AF7A2C3676240037EC38 /* AcademicNoticeViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -292,7 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				5C89DD452BFA0D6800CCCCCD /* MainNoticeRepository.swift */,
-				5C190A4E2BFDF4E100E0254B /* GeneralNoticeRepository.swift */,
+				5C190A4E2BFDF4E100E0254B /* NoticeRepository.swift */,
 			);
 			path = RepositoryInterfaces;
 			sourceTree = "<group>";
@@ -301,7 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				5C89DD482BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift */,
-				5C190A522BFDF5EB00E0254B /* GeneralNoticeRepositoryImpl.swift */,
+				5C190A522BFDF5EB00E0254B /* NoticeRepositoryImpl.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -310,7 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				5C89DD4B2BFA105600CCCCCD /* MainNoticeDataSource.swift */,
-				5C190A562BFE023000E0254B /* GeneralNoticeDataSource.swift */,
+				5C190A562BFE023000E0254B /* NoticeDataSource.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -319,7 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				5C89DD4F2BFA120B00CCCCCD /* MainNoticeDTO.swift */,
-				5C190A542BFDF66600E0254B /* GeneralNoticeDTO.swift */,
+				5C190A542BFDF66600E0254B /* ReponseDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -327,7 +320,6 @@
 		5C9B81052BF451210038EB27 /* GeneralNotice */ = {
 			isa = PBXGroup;
 			children = (
-				5C9B81092BF451660038EB27 /* ViewModel */,
 				5C9B81082BF451620038EB27 /* View */,
 			);
 			path = GeneralNotice;
@@ -337,26 +329,16 @@
 			isa = PBXGroup;
 			children = (
 				5C9B81062BF451540038EB27 /* GeneralNoticeViewController.swift */,
-				8E0BA6DC2C33CA1300677A79 /* GeneralNoticeCell.swift */,
-				8ECE2B192C3512CE00D7F499 /* GeneralNoticeCellWithImage.swift */,
-				8ECE2B152C34E01700D7F499 /* GeneralNoticeViewController+Layout.swift */,
-				8E0BA6DA2C33BF0E00677A79 /* GeneralNoticeViewController+Binding.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		5C9B81092BF451660038EB27 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				5C9B810A2BF451BC0038EB27 /* GeneralNoticeViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		5C9B810C2BF45B4A0038EB27 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
 				5C9B810D2BF45B5D0038EB27 /* ViewModelProtocol.swift */,
+				8E00AF7E2C367D8A0037EC38 /* CellDataBindable.swift */,
+				8E00AF812C3681100037EC38 /* TableViewConfigurable.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -384,6 +366,24 @@
 				8E00AF702C36233C0037EC38 /* WebViewController+Layout.swift */,
 			);
 			path = WebView;
+			sourceTree = "<group>";
+		};
+		8E00AF792C36755B0037EC38 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5C9B810A2BF451BC0038EB27 /* NoticeViewModel.swift */,
+				5C5698912BEFB4A20085E389 /* MainViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8E00AF802C3680090037EC38 /* Commons */ = {
+			isa = PBXGroup;
+			children = (
+				8E0BA6DC2C33CA1300677A79 /* GeneralNoticeCell.swift */,
+				8ECE2B192C3512CE00D7F499 /* GeneralNoticeCellWithImage.swift */,
+			);
+			path = Commons;
 			sourceTree = "<group>";
 		};
 		B7C2DD8F1383D1BE8D2ADDF7 /* Frameworks */ = {
@@ -523,7 +523,7 @@
 				5C5698922BEFB4A20085E389 /* MainViewModel.swift in Sources */,
 				5C8256462BE5CE1A0038D4C8 /* MainViewController.swift in Sources */,
 				8ECE2B1A2C3512CE00D7F499 /* GeneralNoticeCellWithImage.swift in Sources */,
-				5C9B810B2BF451BC0038EB27 /* GeneralNoticeViewModel.swift in Sources */,
+				5C9B810B2BF451BC0038EB27 /* NoticeViewModel.swift in Sources */,
 				5C89DD4C2BFA105600CCCCCD /* MainNoticeDataSource.swift in Sources */,
 				5C89DD3E2BFA043200CCCCCD /* MainViewController+Binding.swift in Sources */,
 				5C89DD492BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift in Sources */,
@@ -532,26 +532,26 @@
 				5C5698972BEFB6760085E389 /* Notice.swift in Sources */,
 				8E00AF712C36233C0037EC38 /* WebViewController+Layout.swift in Sources */,
 				5CD2EFC42BF3A5C800066C87 /* SettingViewController.swift in Sources */,
-				5C190A552BFDF66600E0254B /* GeneralNoticeDTO.swift in Sources */,
-				5C190A4F2BFDF4E100E0254B /* GeneralNoticeRepository.swift in Sources */,
+				5C190A552BFDF66600E0254B /* ReponseDTO.swift in Sources */,
+				5C190A4F2BFDF4E100E0254B /* NoticeRepository.swift in Sources */,
 				5C89DD342BF9ECB100CCCCCD /* ScholarshipNoticeViewController.swift in Sources */,
 				5C190A4B2BFD87EC00E0254B /* AppDI.swift in Sources */,
 				5C5698902BEFB3C50085E389 /* MainListCell.swift in Sources */,
 				5C9B810E2BF45B5D0038EB27 /* ViewModelProtocol.swift in Sources */,
 				8ECE2B182C35045800D7F499 /* MainNotice.swift in Sources */,
-				5C190A532BFDF5EB00E0254B /* GeneralNoticeRepositoryImpl.swift in Sources */,
+				5C190A532BFDF5EB00E0254B /* NoticeRepositoryImpl.swift in Sources */,
 				5C89DD462BFA0D6800CCCCCD /* MainNoticeRepository.swift in Sources */,
-				5C190A572BFE023000E0254B /* GeneralNoticeDataSource.swift in Sources */,
+				8E00AF7B2C3676240037EC38 /* AcademicNoticeViewController.swift in Sources */,
+				5C190A572BFE023000E0254B /* NoticeDataSource.swift in Sources */,
 				5C9B81072BF451540038EB27 /* GeneralNoticeViewController.swift in Sources */,
-				8E0BA6DB2C33BF0E00677A79 /* GeneralNoticeViewController+Binding.swift in Sources */,
-				5C89DD302BF9EC3A00CCCCCD /* AcademicNoticeViewController.swift in Sources */,
 				5C89DD3A2BFA02F400CCCCCD /* MainViewController+Callbacks.swift in Sources */,
 				5C89DD382BF9ECDA00CCCCCD /* EventNoticeViewController.swift in Sources */,
 				5C5698952BEFB5A60085E389 /* SectionOfNotice.swift in Sources */,
 				8E00AF6C2C361F780037EC38 /* WebViewController.swift in Sources */,
-				8ECE2B162C34E01700D7F499 /* GeneralNoticeViewController+Layout.swift in Sources */,
+				8E00AF7F2C367D8A0037EC38 /* CellDataBindable.swift in Sources */,
 				5C89DD3C2BFA03D800CCCCCD /* MainViewController+Layout.swift in Sources */,
 				5C8256442BE5CE1A0038D4C8 /* SceneDelegate.swift in Sources */,
+				8E00AF822C3681100037EC38 /* TableViewConfigurable.swift in Sources */,
 				5C190A462BFD6BDB00E0254B /* Bundle+URL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

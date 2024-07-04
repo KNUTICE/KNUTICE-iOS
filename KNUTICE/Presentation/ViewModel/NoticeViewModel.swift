@@ -8,17 +8,17 @@
 import RxCocoa
 import RxSwift
 
-final class GeneralNoticeViewModel {
-    private let notices = BehaviorRelay<[Notice]>(value: [])
-    private let repository: GeneralNoticeRepository
+final class NoticeViewModel {
+    let notices = BehaviorRelay<[Notice]>(value: [])
+    private let repository: NoticeRepository
     private let disposeBag = DisposeBag()
     
-    init(repository: GeneralNoticeRepository) {
+    init(repository: NoticeRepository) {
         self.repository = repository
     }
 }
 
-extension GeneralNoticeViewModel: ViewModel {
+extension NoticeViewModel: ViewModel {
     func fetchNotices() {
         repository.fetchNotices()
             .subscribe(onNext: { [weak self] notices in
@@ -26,13 +26,4 @@ extension GeneralNoticeViewModel: ViewModel {
             })
             .disposed(by: disposeBag)
     }
-    
-    func getCellValue() -> [Notice] {
-        return notices.value
-    }
-    
-    func getCellData() -> Observable<[Notice]> {
-        return notices.asObservable()
-    }
 }
-

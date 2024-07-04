@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - GeneralNoticeDTO
-struct GeneralNoticeDTO: Codable {
+struct ReponseDTO: Codable {
     let statusCode: Int
     let message: String
     let data: [GeneralNoticeData]
