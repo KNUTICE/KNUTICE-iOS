@@ -12,6 +12,8 @@ struct AppDI {
         return AppDI()
     }
     
+    let noticeDataSource = NoticeDataSourceImpl()
+    
     var mainViewModel: MainViewModel {
         let dataSource = MainNoticeDataSourceImpl()
         let repository = MainNoticeRepositoryImpl(dataSource: dataSource)
@@ -20,10 +22,18 @@ struct AppDI {
         return viewModel
     }
     
-    var generalNoticeViewModel: GeneralNoticeViewModel {
-        let dataSource = GeneralNoticeDataSourceImpl()
-        let repository = GeneralNoticeRepositoryImpl(dataSource: dataSource)
-        let viewModel = GeneralNoticeViewModel(repository: repository)
+    var generalNoticeViewModel: NoticeViewModel {
+        let url = Bundle.main.url + "/generalNews"
+        let repository = NoticeRepositoryImpl(dataSource: noticeDataSource, remoteURL: url)
+        let viewModel = NoticeViewModel(repository: repository)
+        
+        return viewModel
+    }
+    
+    var academicNoticewViewModel: NoticeViewModel {
+        let url = Bundle.main.url + "/academicNews"
+        let repository = NoticeRepositoryImpl(dataSource: noticeDataSource, remoteURL: url)
+        let viewModel = NoticeViewModel(repository: repository)
         
         return viewModel
     }

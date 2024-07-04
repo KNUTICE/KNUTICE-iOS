@@ -35,7 +35,8 @@ extension MainViewController {
     
     //MARK: - Academic Notice Button Callback Function
     func navigateToAcademicNotice(_ sender: UIButton) {
-        let viewController = AcademicNoticeViewController()
+        let viewController = AcademicNoticeViewController(viewModel: AppDI.shared.academicNoticewViewModel)
+        viewController.bind()
         navigationController?.pushViewController(viewController, animated: true)
     }
     
