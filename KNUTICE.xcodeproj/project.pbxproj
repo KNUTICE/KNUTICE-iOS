@@ -336,9 +336,9 @@
 		5C9B81082BF451620038EB27 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5C9B81062BF451540038EB27 /* GeneralNoticeViewController.swift */,
 				8E0BA6DC2C33CA1300677A79 /* GeneralNoticeCell.swift */,
 				8ECE2B192C3512CE00D7F499 /* GeneralNoticeCellWithImage.swift */,
-				5C9B81062BF451540038EB27 /* GeneralNoticeViewController.swift */,
 				8ECE2B152C34E01700D7F499 /* GeneralNoticeViewController+Layout.swift */,
 				8E0BA6DA2C33BF0E00677A79 /* GeneralNoticeViewController+Binding.swift */,
 			);

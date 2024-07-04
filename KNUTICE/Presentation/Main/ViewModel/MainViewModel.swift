@@ -19,6 +19,10 @@ final class MainViewModel {
         self.fetchNotices()
     }
     
+    func getCellValue() -> [SectionOfNotice] {
+        return notices.value
+    }
+    
     func getCellData() -> Observable<[SectionOfNotice]> {
         return notices.asObservable()
     }
