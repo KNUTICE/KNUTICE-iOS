@@ -12,8 +12,8 @@ import RxSwift
 import RxDataSources
 
 final class GeneralNoticeViewController: UIViewController {
-    let tableView = UITableView(frame: .zero, style: .plain)
-    let viewModel = AppDI.shared.generalNoticeViewModel
+    let tableView: UITableView = UITableView(frame: .zero, style: .plain)
+    let viewModel: GeneralNoticeViewModel = AppDI.shared.generalNoticeViewModel
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -23,6 +23,8 @@ final class GeneralNoticeViewController: UIViewController {
         setupLayout()
         setupAttribute()
         setupNavigationBar()
+        
+        viewModel.fetchNotices()
     }
 }
 
@@ -37,9 +39,11 @@ extension GeneralNoticeViewController: UITableViewDelegate {
         }
     }
     
-    //MARK: - Remove cell highlighting when touching a cell
-    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return false
+    //MARK: - Cell이 선택 되었을 때 해당 공지사항 웹 페이지로 이동
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let viewController = WebViewController(url: viewModel.getCellValue()[indexPath.row].contentURL)
+        navigationController?.pushViewController(viewController, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)    //선택 된 cell의 하이라이트 제거
     }
 }
 
