@@ -16,6 +16,7 @@ extension MainViewController {
         tableView.sectionHeaderTopPadding = 15    //header padding
         tableView.register(MainListCell.self, forCellReuseIdentifier: MainListCell.reuseIdentifier)
         tableView.rowHeight = 95
+        navigationItem.largeTitleDisplayMode = .never
     }
     
     func setupNavigationBar() {
