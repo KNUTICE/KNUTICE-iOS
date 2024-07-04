@@ -15,8 +15,6 @@ final class GeneralNoticeViewModel {
     
     init(repository: GeneralNoticeRepository) {
         self.repository = repository
-        
-        fetchNotices()
     }
 }
 
@@ -27,6 +25,10 @@ extension GeneralNoticeViewModel: ViewModel {
                 self?.notices.accept(notices)
             })
             .disposed(by: disposeBag)
+    }
+    
+    func getCellValue() -> [Notice] {
+        return notices.value
     }
     
     func getCellData() -> Observable<[Notice]> {
