@@ -60,5 +60,6 @@ extension MainViewController {
     func navigateToSetting(_ sender: UIButton) {
         let viewController = UIHostingController(rootView: SettingView())
         navigationController?.pushViewController(viewController, animated: true)
+        print("clicked")
     }
 }
