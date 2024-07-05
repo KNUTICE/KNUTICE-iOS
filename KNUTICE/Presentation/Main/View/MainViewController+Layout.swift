@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 //MARK: - Layout
 extension MainViewController {
@@ -22,9 +23,13 @@ extension MainViewController {
     func setupNavigationBar() {
         let titleLabel = UILabel()
         titleLabel.text = "KNUTICE"
+        titleLabel.font = UIFont.font(for: .title3, weight: .heavy)
+        let labelItem = UIBarButtonItem(customView: titleLabel)
+        let negativeSpacer = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        negativeSpacer.width = -25
         
+        navigationItem.leftBarButtonItems = [negativeSpacer, labelItem]
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(navigateToSetting(_:)))
-        navigationItem.titleView = titleLabel
     }
     
     func setupLayout() {
