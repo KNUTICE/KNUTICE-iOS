@@ -49,7 +49,8 @@ extension MainViewController {
     
     //MARK: - Event Notice Button Callback Function
     func navigateToEventNotice(_ sender: UIButton) {
-        let viewController = EventNoticeViewController()
+        let viewController = EventNoticeViewController(viewModel: AppDI.shared.eventNoticeViewModel)
+        viewController.bind()
         navigationController?.pushViewController(viewController, animated: true)
     }
     
