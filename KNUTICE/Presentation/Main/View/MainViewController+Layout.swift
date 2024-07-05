@@ -23,13 +23,13 @@ extension MainViewController {
     func setupNavigationBar() {
         let titleLabel = UILabel()
         titleLabel.text = "KNUTICE"
-        titleLabel.font = UIFont.font(for: .title3, weight: .heavy)
+        titleLabel.font = UIFont.font(for: .title2, weight: .heavy)
         let labelItem = UIBarButtonItem(customView: titleLabel)
         let negativeSpacer = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         negativeSpacer.width = -25
         
         navigationItem.leftBarButtonItems = [negativeSpacer, labelItem]
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(navigateToSetting(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill")?.withTintColor(.navigationItemGray, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(navigateToSetting(_:)))
     }
     
     func setupLayout() {
