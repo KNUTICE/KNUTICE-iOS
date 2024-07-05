@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 //MARK: - Callback Function
 extension MainViewController {
@@ -57,7 +58,7 @@ extension MainViewController {
     //MARK: - Toolbar Button Callback Function
     @objc
     func navigateToSetting(_ sender: UIButton) {
-        let viewController = SettingViewController()
+        let viewController = UIHostingController(rootView: SettingView())
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
