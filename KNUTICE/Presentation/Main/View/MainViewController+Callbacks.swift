@@ -42,7 +42,8 @@ extension MainViewController {
     
     //MARK: - Scholarship Notice Button Callback Function
     func navigateToScholarshipNotice(_ sender: UIButton) {
-        let viewController = ScholarshipNoticeViewController()
+        let viewController = ScholarshipNoticeViewController(viewModel: AppDI.shared.scholarshipNoticeViewModel)
+        viewController.bind()
         navigationController?.pushViewController(viewController, animated: true)
     }
     

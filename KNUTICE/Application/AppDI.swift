@@ -38,5 +38,13 @@ struct AppDI {
         return viewModel
     }
     
+    var scholarshipNoticeViewModel: NoticeViewModel {
+        let url = Bundle.main.url + "/scholarshipNews"
+        let repository = NoticeRepositoryImpl(dataSource: noticeDataSource, remoteURL: url)
+        let viewModel = NoticeViewModel(repository: repository)
+        
+        return viewModel
+    }
+    
     private init() {}
 }
