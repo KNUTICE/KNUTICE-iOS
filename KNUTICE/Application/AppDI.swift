@@ -46,5 +46,13 @@ struct AppDI {
         return viewModel
     }
     
+    var eventNoticeViewModel: NoticeViewModel {
+        let url = Bundle.main.url + "/eventNews"
+        let repository = NoticeRepositoryImpl(dataSource: noticeDataSource, remoteURL: url)
+        let viewModel = NoticeViewModel(repository: repository)
+        
+        return viewModel
+    }
+    
     private init() {}
 }
