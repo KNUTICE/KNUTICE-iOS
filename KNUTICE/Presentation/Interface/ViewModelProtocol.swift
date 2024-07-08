@@ -10,12 +10,18 @@ import RxSwift
 
 protocol ViewModel {
     var notices: BehaviorRelay<[Notice]> { get }
+    var isFetching: BehaviorRelay<Bool> { get }
+    
     func fetchNotices()
 }
 
 extension ViewModel {
-    func getCellData() -> Observable<[Notice]> {
+    var noticesObservable: Observable<[Notice]> {
         return notices.asObservable()
+    }
+    
+    var isFetchingObservable: Observable<Bool> {
+        return isFetching.asObservable()
     }
     
     func getNotices() -> [Notice] {

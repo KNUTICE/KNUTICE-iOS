@@ -37,7 +37,23 @@ final class NoticeRepositoryImpl: NoticeRepository {
         return observable
     }
     
-//    func fetchNotices(after number: Int) -> Observable<[Notice]> {
-//        
-//    }
+    func fetchNotices(after number: Int) -> Observable<[Notice]> {
+        let observable = Observable<[Notice]>.create { observer in
+            self.dataSource.fetchNotices(from: self.remoteURL + "?startBoardNumber=\(number)")
+                .subscribe(onNext: { [weak self] result in
+                    switch result {
+                    case .success(let dto):
+                        observer.onNext(self?.converToNotice(dto) ?? [])
+                        observer.onCompleted()
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                })
+                .disposed(by: self.disposeBag)
+            
+            return Disposables.create()
+        }
+        
+        return observable
+    }
 }
