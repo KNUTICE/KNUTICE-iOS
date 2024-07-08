@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class GeneralNoticeCell: UITableViewCell {
+final class DetailedNoticeCell: UITableViewCell {
     static let reuseIdentifier = "GeneralNoticeCell"
     let titleLabel = UILabel()
     let subTitleLabel = UILabel()
