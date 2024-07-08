@@ -39,7 +39,7 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
         
         //일반공지
         sectionOfNotices.append(
-            SectionOfNotice(header: "일반공지",
+            SectionOfNotice(header: "일반소식",
                             items: dto.data.generalNewsTopThreeTitle.map {
                                 MainNotice(id: $0.nttId,
                                        title: $0.title,
