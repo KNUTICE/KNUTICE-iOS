@@ -21,7 +21,7 @@ extension DataBindable {
             .observe(on: MainScheduler.instance)
             .bind(to: tableView.rx.items) { tableView, row, item in
                 if let imageURL = item.imageURL {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: GeneralNoticeCellWithImage.reuseIdentifier, for: IndexPath(row: row, section: 0)) as! GeneralNoticeCellWithImage
+                    let cell = tableView.dequeueReusableCell(withIdentifier: DetailedNoticeCellWithImage.reuseIdentifier, for: IndexPath(row: row, section: 0)) as! DetailedNoticeCellWithImage
                     cell.titleLabel.text = item.title
                     cell.subTitleLabel.text = "[\(item.department)]"
                     cell.uploadDateLabel.text = item.uploadDate
@@ -29,7 +29,7 @@ extension DataBindable {
                     
                     return cell
                 } else {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: GeneralNoticeCell.reuseIdentifier, for: IndexPath(row: row, section: 0)) as! GeneralNoticeCell
+                    let cell = tableView.dequeueReusableCell(withIdentifier: DetailedNoticeCell.reuseIdentifier, for: IndexPath(row: row, section: 0)) as! DetailedNoticeCell
                     cell.titleLabel.text = item.title
                     cell.subTitleLabel.text = "[\(item.department)]"
                     cell.uploadDateLabel.text = item.uploadDate

@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-final class GeneralNoticeCellWithImage: UITableViewCell {
+final class DetailedNoticeCellWithImage: UITableViewCell {
     static let reuseIdentifier = "GeneralNoticeCellWithImage"
     let titleLabel = UILabel()
     let subTitleLabel = UILabel()

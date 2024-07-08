@@ -17,8 +17,8 @@ protocol TableViewConfigurable: UIViewController {
 
 extension TableViewConfigurable {
     func setupAttribute() {
-        tableView.register(GeneralNoticeCell.self, forCellReuseIdentifier: GeneralNoticeCell.reuseIdentifier)    //reuseIndentifier 등록
-        tableView.register(GeneralNoticeCellWithImage.self, forCellReuseIdentifier: GeneralNoticeCellWithImage.reuseIdentifier)
+        tableView.register(DetailedNoticeCell.self, forCellReuseIdentifier: DetailedNoticeCell.reuseIdentifier)    //reuseIndentifier 등록
+        tableView.register(DetailedNoticeCellWithImage.self, forCellReuseIdentifier: DetailedNoticeCellWithImage.reuseIdentifier)
         tableView.estimatedRowHeight = 100    //동적 height 적용전 임시 값
         tableView.rowHeight = UITableView.automaticDimension
     }
