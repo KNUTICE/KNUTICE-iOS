@@ -20,6 +20,7 @@ final class GeneralNoticeCellWithImage: UITableViewCell {
                             CroppingImageProcessor(size: CGSize(width: UIScreen.main.bounds.width - 32, height: UIScreen.main.bounds.width * 0.4), anchor: CGPoint(x: 0, y: 0)) |>
                             RoundCornerImageProcessor(cornerRadius: 10)
             
+            image.kf.indicatorType = .activity
             image.kf.setImage(
                 with: URL(string: newValue),
                 options: [.processor(processor)]
