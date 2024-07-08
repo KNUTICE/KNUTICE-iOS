@@ -9,9 +9,10 @@ import RxCocoa
 import RxSwift
 
 final class NoticeViewModel {
-    let notices = BehaviorRelay<[Notice]>(value: [])
+    let notices: BehaviorRelay = BehaviorRelay<[Notice]>(value: [])
+    let isFetching: BehaviorRelay = BehaviorRelay<Bool>(value: false)
     private let repository: NoticeRepository
-    private let disposeBag = DisposeBag()
+    private let disposeBag: RxSwift.DisposeBag = DisposeBag()
     
     init(repository: NoticeRepository) {
         self.repository = repository
@@ -20,9 +21,39 @@ final class NoticeViewModel {
 
 extension NoticeViewModel: ViewModel {
     func fetchNotices() {
+        isFetching.accept(true)    //네트워크 요청 시작
+        
         repository.fetchNotices()
-            .subscribe(onNext: { [weak self] notices in
-                self?.notices.accept(notices)
+            .subscribe(onNext: { [weak self] responseNotices in
+                self?.notices.accept(responseNotices)
+            }, onCompleted: { [weak self] in
+                self?.isFetching.accept(false)
+                print("Fetching Notices has been completed")
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func fetchNextNotices() {
+        guard let lastNumber = notices.value.last?.boardNumber else {
+            return
+        }
+        
+        isFetching.accept(true)
+        repository.fetchNotices(after: lastNumber)
+            .subscribe(onNext: { [weak self] nextNotices in
+                var temp = self?.notices.value
+                temp? += nextNotices
+                
+                guard let temp else {
+                    return
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self?.isFetching.accept(false)
+                    self?.notices.accept(temp)
+                }
+            }, onCompleted: {
+                print("Fetching Notices has been completed")
             })
             .disposed(by: disposeBag)
     }

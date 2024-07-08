@@ -37,9 +37,10 @@
 		8E00AF6C2C361F780037EC38 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF6B2C361F780037EC38 /* WebViewController.swift */; };
 		8E00AF712C36233C0037EC38 /* WebViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF702C36233C0037EC38 /* WebViewController+Layout.swift */; };
 		8E00AF7B2C3676240037EC38 /* AcademicNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF7A2C3676240037EC38 /* AcademicNoticeViewController.swift */; };
-		8E00AF7F2C367D8A0037EC38 /* CellDataBindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF7E2C367D8A0037EC38 /* CellDataBindable.swift */; };
+		8E00AF7F2C367D8A0037EC38 /* DataBindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF7E2C367D8A0037EC38 /* DataBindable.swift */; };
 		8E00AF822C3681100037EC38 /* TableViewConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF812C3681100037EC38 /* TableViewConfigurable.swift */; };
 		8E0BA6DD2C33CA1300677A79 /* GeneralNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0BA6DC2C33CA1300677A79 /* GeneralNoticeCell.swift */; };
+		8E5D1CF82C38D2E50027E8BD /* Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D1CF72C38D2E50027E8BD /* Scrollable.swift */; };
 		8ECE2B182C35045800D7F499 /* MainNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B172C35045800D7F499 /* MainNotice.swift */; };
 		8ECE2B1A2C3512CE00D7F499 /* GeneralNoticeCellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B192C3512CE00D7F499 /* GeneralNoticeCellWithImage.swift */; };
 		8EFCF8632C376AD0004A53E9 /* ScholarshipNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF8622C376AD0004A53E9 /* ScholarshipNoticeViewController.swift */; };
@@ -85,9 +86,10 @@
 		8E00AF6B2C361F780037EC38 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		8E00AF702C36233C0037EC38 /* WebViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebViewController+Layout.swift"; sourceTree = "<group>"; };
 		8E00AF7A2C3676240037EC38 /* AcademicNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademicNoticeViewController.swift; sourceTree = "<group>"; };
-		8E00AF7E2C367D8A0037EC38 /* CellDataBindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDataBindable.swift; sourceTree = "<group>"; };
+		8E00AF7E2C367D8A0037EC38 /* DataBindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBindable.swift; sourceTree = "<group>"; };
 		8E00AF812C3681100037EC38 /* TableViewConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewConfigurable.swift; sourceTree = "<group>"; };
 		8E0BA6DC2C33CA1300677A79 /* GeneralNoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticeCell.swift; sourceTree = "<group>"; };
+		8E5D1CF72C38D2E50027E8BD /* Scrollable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scrollable.swift; sourceTree = "<group>"; };
 		8ECE2B172C35045800D7F499 /* MainNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotice.swift; sourceTree = "<group>"; };
 		8ECE2B192C3512CE00D7F499 /* GeneralNoticeCellWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticeCellWithImage.swift; sourceTree = "<group>"; };
 		8EFCF8622C376AD0004A53E9 /* ScholarshipNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipNoticeViewController.swift; sourceTree = "<group>"; };
@@ -339,8 +341,9 @@
 			isa = PBXGroup;
 			children = (
 				5C9B810D2BF45B5D0038EB27 /* ViewModelProtocol.swift */,
-				8E00AF7E2C367D8A0037EC38 /* CellDataBindable.swift */,
+				8E00AF7E2C367D8A0037EC38 /* DataBindable.swift */,
 				8E00AF812C3681100037EC38 /* TableViewConfigurable.swift */,
+				8E5D1CF72C38D2E50027E8BD /* Scrollable.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -552,11 +555,12 @@
 				8EFCF8652C377061004A53E9 /* EventNoticeViewController.swift in Sources */,
 				5C5698952BEFB5A60085E389 /* SectionOfNotice.swift in Sources */,
 				8E00AF6C2C361F780037EC38 /* WebViewController.swift in Sources */,
-				8E00AF7F2C367D8A0037EC38 /* CellDataBindable.swift in Sources */,
+				8E00AF7F2C367D8A0037EC38 /* DataBindable.swift in Sources */,
 				5C89DD3C2BFA03D800CCCCCD /* MainViewController+Layout.swift in Sources */,
 				5C8256442BE5CE1A0038D4C8 /* SceneDelegate.swift in Sources */,
 				8E00AF822C3681100037EC38 /* TableViewConfigurable.swift in Sources */,
 				5C190A462BFD6BDB00E0254B /* Bundle+URL.swift in Sources */,
+				8E5D1CF82C38D2E50027E8BD /* Scrollable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

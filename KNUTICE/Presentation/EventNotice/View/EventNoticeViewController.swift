@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-final class EventNoticeViewController: UIViewController, CellDataBindable, TableViewConfigurable {
+final class EventNoticeViewController: UIViewController, DataBindable, TableViewConfigurable, Scrollable {
     let viewModel: NoticeViewModel
     let tableView: UITableView = UITableView(frame: .zero, style: .plain)
     let disposeBag = DisposeBag()
@@ -40,5 +40,17 @@ extension EventNoticeViewController: UITableViewDelegate {
         let viewController = WebViewController(url: viewModel.getNotices()[indexPath.row].contentURL)
         navigationController?.pushViewController(viewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)    //선택 된 cell의 하이라이트 제거
+    }
+    
+    //MARK: - TableView 스크롤 감지
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let threshold = scrollView.contentSize.height - scrollView.frame.size.height - 100
+        
+        if scrollView.contentOffset.y > threshold {
+            guard !(viewModel.isFetching.value) else { return }
+            
+            tableView.tableFooterView = createActivityIndicator()
+            viewModel.fetchNextNotices()
+        }
     }
 }

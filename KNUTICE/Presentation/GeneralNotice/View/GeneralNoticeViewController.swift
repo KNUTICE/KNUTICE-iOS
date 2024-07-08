@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import RxDataSources
 
-final class GeneralNoticeViewController: UIViewController, TableViewConfigurable, CellDataBindable {
+final class GeneralNoticeViewController: UIViewController, TableViewConfigurable, DataBindable, Scrollable {    
     let tableView: UITableView = UITableView(frame: .zero, style: .plain)
     let viewModel: NoticeViewModel = AppDI.shared.generalNoticeViewModel
     let disposeBag = DisposeBag()
@@ -26,26 +26,30 @@ final class GeneralNoticeViewController: UIViewController, TableViewConfigurable
         setupAttribute()
         setupNavigationBar(title: navigationTitle)
         
+        bindFetchingState()
         viewModel.fetchNotices()
     }
 }
 
 //MARK: - UIViewController delegate methods
 extension GeneralNoticeViewController: UITableViewDelegate {
-    //MARK: - Remove separator from last cell
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
-            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: cell.bounds.size.width)
-        } else {
-            cell.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
-        }
-    }
-    
     //MARK: - Cell이 선택 되었을 때 해당 공지사항 웹 페이지로 이동
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let viewController = WebViewController(url: viewModel.getNotices()[indexPath.row].contentURL)
         navigationController?.pushViewController(viewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)    //선택 된 cell의 하이라이트 제거
+    }
+    
+    //MARK: - TableView 스크롤 감지
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let threshold = scrollView.contentSize.height - scrollView.frame.size.height - 100
+        
+        if scrollView.contentOffset.y > threshold {
+            guard !(viewModel.isFetching.value) else { return }
+            
+            tableView.tableFooterView = createActivityIndicator()
+            viewModel.fetchNextNotices()
+        }
     }
 }
 
