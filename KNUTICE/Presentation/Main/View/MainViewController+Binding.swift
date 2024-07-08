@@ -17,6 +17,7 @@ extension MainViewController {
             cell.titleLabel.text = item.title
             cell.subTitleLabel.text = "[\(item.department)]"
             cell.uploadDateLabel.text = item.uploadDate
+            cell.selectionStyle = .none
             
             return cell
         })
