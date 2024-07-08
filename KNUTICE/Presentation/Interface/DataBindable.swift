@@ -1,14 +1,13 @@
 //
-//  CellDataBindable.swift
+//  DataBindable.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 7/4/24.
 //
 
-import UIKit
 import RxSwift
 
-protocol CellDataBindable {
+protocol DataBindable {
     var viewModel: NoticeViewModel { get }
     var tableView: UITableView { get }
     var disposeBag: DisposeBag { get }
@@ -16,9 +15,10 @@ protocol CellDataBindable {
     func bind()
 }
 
-extension CellDataBindable {
+extension DataBindable {
     func bind() {
-        viewModel.getCellData()
+        viewModel.noticesObservable
+            .observe(on: MainScheduler.instance)
             .bind(to: tableView.rx.items) { tableView, row, item in
                 if let imageURL = item.imageURL {
                     let cell = tableView.dequeueReusableCell(withIdentifier: GeneralNoticeCellWithImage.reuseIdentifier, for: IndexPath(row: row, section: 0)) as! GeneralNoticeCellWithImage
