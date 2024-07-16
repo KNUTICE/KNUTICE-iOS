@@ -40,6 +40,7 @@ extension WebViewController: WKNavigationDelegate {
     }
 }
 
+#if DEBUG
 //MARK: - Preview
 struct WebViewControllerPreview: PreviewProvider {
     static var previews: some View {
@@ -47,3 +48,4 @@ struct WebViewControllerPreview: PreviewProvider {
             .makePreview()
     }
 }
+#endif

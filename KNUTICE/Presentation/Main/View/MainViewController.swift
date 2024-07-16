@@ -87,6 +87,7 @@ extension MainViewController: UITableViewDelegate {
     }
 }
 
+#if DEBUG
 //MARK: - Preview
 struct Preview: PreviewProvider {
     static var previews: some View {
@@ -98,3 +99,4 @@ struct Preview: PreviewProvider {
             }
     }
 }
+#endif
