@@ -5,7 +5,7 @@
 //  Created by 이정훈 on 7/4/24.
 //
 
-import Foundation
+import UIKit
 
 extension WebViewController {
     func loadPage(_ url: String) {
@@ -28,5 +28,9 @@ extension WebViewController {
         webView.snp.makeConstraints { make in
             make.top.bottom.left.right.equalToSuperview()
         }
+    }
+    
+    func setupNavigationBarItem() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(openSharePanel))
     }
 }
