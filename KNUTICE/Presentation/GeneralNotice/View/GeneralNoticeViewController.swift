@@ -54,8 +54,9 @@ extension GeneralNoticeViewController: UITableViewDelegate {
 }
 
 //MARK: - Preview
+#if DEBUG
 #Preview {
     GeneralNoticeViewController()
         .makePreview()
 }
-
+#endif
