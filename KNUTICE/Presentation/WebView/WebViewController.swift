@@ -11,7 +11,7 @@ import SwiftUI
 
 final class WebViewController: UIViewController {
     let webView: WKWebView = WKWebView()
-    private let url: String
+    let url: String
     
     init(url: String) {
         self.url = url
@@ -27,6 +27,7 @@ final class WebViewController: UIViewController {
         
         setupLayout()
         setupAttribute()
+        setupNavigationBarItem()
         loadPage(url)
     }
 }
