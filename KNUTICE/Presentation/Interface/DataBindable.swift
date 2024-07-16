@@ -20,7 +20,7 @@ extension DataBindable {
         viewModel.noticesObservable
             .observe(on: MainScheduler.instance)
             .bind(to: tableView.rx.items) { tableView, row, item in
-                if let imageURL = item.imageURL {
+                if let imageURL = item.imageUrl {
                     let cell = tableView.dequeueReusableCell(withIdentifier: DetailedNoticeCellWithImage.reuseIdentifier, for: IndexPath(row: row, section: 0)) as! DetailedNoticeCellWithImage
                     cell.titleLabel.text = item.title
                     cell.subTitleLabel.text = "[\(item.department)]"

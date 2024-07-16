@@ -43,7 +43,7 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
                             items: dto.data.generalNewsTopThreeTitle.map {
                                 MainNotice(id: $0.nttId,
                                        title: $0.title,
-                                       contentURL: $0.contentURL,
+                                       contentUrl: $0.contentUrl,
                                        department: $0.departName,
                                        uploadDate: $0.registrationDate)
                             })
@@ -55,7 +55,7 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
                             items: dto.data.academicNewsTopThreeTitle.map {
                                 MainNotice(id: $0.nttId,
                                        title: $0.title,
-                                       contentURL: $0.contentURL,
+                                       contentUrl: $0.contentUrl,
                                        department: $0.departName,
                                        uploadDate: $0.registrationDate)
                             })
@@ -67,7 +67,7 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
                             items: dto.data.scholarshipNewsTopThreeTitle.map {
                                 MainNotice(id: $0.nttId,
                                        title: $0.title,
-                                       contentURL: $0.contentURL,
+                                       contentUrl: $0.contentUrl,
                                        department: $0.departName,
                                        uploadDate: $0.registrationDate)
                             })
@@ -79,7 +79,7 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
                             items: dto.data.eventNewsTopThreeTitle.map {
                                 MainNotice(id: $0.nttId,
                                        title: $0.title,
-                                       contentURL: $0.contentURL,
+                                       contentUrl: $0.contentUrl,
                                        department: $0.departName,
                                        uploadDate: $0.registrationDate)
                             })

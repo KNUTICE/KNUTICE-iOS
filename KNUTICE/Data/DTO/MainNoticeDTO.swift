@@ -24,6 +24,6 @@ struct NewsTopThreeTitle: Decodable {
     let registrationDate: String
     let nttId: Int
     let title: String
-    let contentURL: String
+    let contentUrl: String
     let departName: String
 }
