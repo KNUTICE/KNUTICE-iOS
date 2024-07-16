@@ -47,6 +47,7 @@
 		8EFCF8652C377061004A53E9 /* EventNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF8642C377061004A53E9 /* EventNoticeViewController.swift */; };
 		8EFCF8672C37742A004A53E9 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF8662C37742A004A53E9 /* SettingView.swift */; };
 		8EFCF86D2C37810B004A53E9 /* UIFont+DynamicFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF86C2C37810B004A53E9 /* UIFont+DynamicFont.swift */; };
+		8EFDAB032C3BC08900352779 /* WebViewController+Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDAB022C3BC08900352779 /* WebViewController+Callbacks.swift */; };
 		A82D0A5E53CA925F7AF83A6F /* Pods_KNUTICE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8D3AA05D90BFFE11CE67D5 /* Pods_KNUTICE.framework */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +97,7 @@
 		8EFCF8642C377061004A53E9 /* EventNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventNoticeViewController.swift; sourceTree = "<group>"; };
 		8EFCF8662C37742A004A53E9 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		8EFCF86C2C37810B004A53E9 /* UIFont+DynamicFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+DynamicFont.swift"; sourceTree = "<group>"; };
+		8EFDAB022C3BC08900352779 /* WebViewController+Callbacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebViewController+Callbacks.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,7 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				5C89DD4E2BFA118B00CCCCCD /* DTO */,
-				5C89DD412BFA0CF700CCCCCD /* Entities */,
+				5C89DD412BFA0CF700CCCCCD /* Model */,
 				5C89DD4A2BFA104800CCCCCD /* DataSources */,
 				5C89DD442BFA0D3F00CCCCCD /* RepositoryInterfaces */,
 				5C89DD472BFA0EA400CCCCCD /* Repositories */,
@@ -276,13 +278,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		5C89DD412BFA0CF700CCCCCD /* Entities */ = {
+		5C89DD412BFA0CF700CCCCCD /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				5C5698962BEFB6760085E389 /* Notice.swift */,
 				8ECE2B172C35045800D7F499 /* MainNotice.swift */,
 			);
-			path = Entities;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		5C89DD442BFA0D3F00CCCCCD /* RepositoryInterfaces */ = {
@@ -370,6 +372,7 @@
 			children = (
 				8E00AF6B2C361F780037EC38 /* WebViewController.swift */,
 				8E00AF702C36233C0037EC38 /* WebViewController+Layout.swift */,
+				8EFDAB022C3BC08900352779 /* WebViewController+Callbacks.swift */,
 			);
 			path = WebView;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				8E00AF712C36233C0037EC38 /* WebViewController+Layout.swift in Sources */,
 				5C190A552BFDF66600E0254B /* ReponseDTO.swift in Sources */,
 				5C190A4F2BFDF4E100E0254B /* NoticeRepository.swift in Sources */,
+				8EFDAB032C3BC08900352779 /* WebViewController+Callbacks.swift in Sources */,
 				5C190A4B2BFD87EC00E0254B /* AppDI.swift in Sources */,
 				5C5698902BEFB3C50085E389 /* MainListCell.swift in Sources */,
 				5C9B810E2BF45B5D0038EB27 /* ViewModelProtocol.swift in Sources */,
