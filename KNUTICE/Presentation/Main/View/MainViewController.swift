@@ -80,7 +80,7 @@ extension MainViewController: UITableViewDelegate {
     
     //MARK: - Cell이 선택 되었을 때 해당 공지사항 웹 페이지로 이동
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let viewController = WebViewController(url: viewModel.getCellValue()[indexPath.section].items[indexPath.row].contentURL)
+        let viewController = WebViewController(url: viewModel.getCellValue()[indexPath.section].items[indexPath.row].contentUrl)
         navigationController?.pushViewController(viewController, animated: true)
         
         tableView.deselectRow(at: indexPath, animated: true)

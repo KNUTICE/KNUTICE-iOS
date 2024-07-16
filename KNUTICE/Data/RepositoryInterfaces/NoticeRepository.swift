@@ -16,12 +16,12 @@ extension NoticeRepository {
     func converToNotice(_ dto: ReponseDTO) -> [Notice] {
         return dto.data.map {
             return Notice(id: $0.nttId,
-                          boardNumber: $0.boardNumber,
+                          boardNumber: $0.contentNumber,
                           title: $0.title,
-                          contentURL: $0.contentURL,
+                          contentUrl: $0.contentUrl,
                           department: $0.departName,
                           uploadDate: $0.registrationDate,
-                          imageURL: $0.contentImage)
+                          imageUrl: $0.contentImage)
         }
     }
 }

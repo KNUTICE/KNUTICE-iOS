@@ -17,8 +17,8 @@ struct ReponseDTO: Codable {
 // MARK: - GeneralNoticeData
 struct GeneralNoticeData: Codable {
     let title: String
-    let nttId, boardNumber: Int
-    let contentURL: String
+    let nttId, contentNumber: Int
+    let contentUrl: String
     let contentImage: String?
     let departName, registrationDate: String
 }
