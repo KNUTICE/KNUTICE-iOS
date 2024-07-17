@@ -14,13 +14,19 @@ struct SettingView: View {
         List {
             Section {
                 HStack {
-                    Text("앱 버전")
-                        .bold()
+                    Text("버전 정보")
                     
                     Spacer()
                     
                     Text("\(appVersion)(alpha)")
                 }
+                .padding(10)
+                
+                NavigationLink(destination: {
+                    OpenSourceLicenseView()
+                }, label: {
+                    Text("오픈소스 라이선스")
+                })
                 .padding(10)
             }
         }
