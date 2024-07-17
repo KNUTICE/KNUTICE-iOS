@@ -17,4 +17,14 @@ extension Bundle {
         
         return url
     }
+    
+    var openSourceURL: String {
+        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
+              let resource = NSDictionary(contentsOfFile: file),
+              let url = resource["OpenSourceLicenseURL"] as? String else {
+            return ""
+        }
+        
+        return url
+    }
 }
