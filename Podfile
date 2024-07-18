@@ -10,6 +10,7 @@ pod 'RxCocoa', '6.5.0'
 pod 'RxDataSources'
 pod 'SnapKit'
 pod 'Kingfisher', '~> 7.0'
+pod 'SkeletonView'
   # Pods for KNUTICE
 
 end

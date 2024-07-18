@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (5.9.1)
   - Differentiator (5.0.0)
+  - Kingfisher (7.12.0)
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
     - RxSwift (= 6.5.0)
@@ -11,34 +12,41 @@ PODS:
   - RxRelay (6.5.0):
     - RxSwift (= 6.5.0)
   - RxSwift (6.5.0)
+  - SkeletonView (1.30.4)
   - SnapKit (5.7.1)
 
 DEPENDENCIES:
   - Alamofire
+  - Kingfisher (~> 7.0)
   - RxCocoa (= 6.5.0)
   - RxDataSources
   - RxSwift (= 6.5.0)
+  - SkeletonView
   - SnapKit
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - Differentiator
+    - Kingfisher
     - RxCocoa
     - RxDataSources
     - RxRelay
     - RxSwift
+    - SkeletonView
     - SnapKit
 
 SPEC CHECKSUMS:
   Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
   Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
+  Kingfisher: 53a10ea35051a436b5fb626ca2dd8f3144d755e9
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  SkeletonView: 5a050f6411e697abd4cda0a8d767013399dccd69
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
 
-PODFILE CHECKSUM: 8fa6f567d4e872de343c61c17c13138a51c85f15
+PODFILE CHECKSUM: b414bbd5ebe158dde50360f93711939bc1070c3e
 
 COCOAPODS: 1.15.2
