@@ -12,7 +12,6 @@ final class MainListCell: UITableViewCell {
     static let reuseIdentifier = "MainListCell"
     let titleLabel = UILabel()
     let subTitleLabel = UILabel()
-    let uploadDateLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -25,19 +24,44 @@ final class MainListCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        titleLabel.hideSkeleton()
+        subTitleLabel.hideSkeleton()
+        isUserInteractionEnabled = true
+    }
+    
+    func configureSkeleton(with item: MainNotice) {
+        DispatchQueue.main.async {
+            self.titleLabel.text = item.title
+            self.subTitleLabel.text = "[\(item.department)]  \(item.uploadDate)"
+            
+            self.titleLabel.isSkeletonable = true
+            self.subTitleLabel.isSkeletonable = true
+            
+            self.titleLabel.showAnimatedSkeleton()
+            self.subTitleLabel.showAnimatedSkeleton()
+            
+            self.isUserInteractionEnabled = false
+        }
+    }
+    
+    func configure(with item: MainNotice) {
+        titleLabel.text = item.title
+        subTitleLabel.text = "[\(item.department)]  \(item.uploadDate)"
+        
+        self.isUserInteractionEnabled = true
+    }
+    
     private func setupAttribute() {
         //for Title Label
-//        titleLabel.font = .systemFont(ofSize: 17)
         titleLabel.font = .preferredFont(forTextStyle: .subheadline)
         titleLabel.textColor = .black
         
         //for Subtitle Label
         subTitleLabel.font = .preferredFont(forTextStyle: .caption2)
         subTitleLabel.textColor = .darkGray
-        
-        //for UploadDate Label
-        uploadDateLabel.font = .preferredFont(forTextStyle: .caption2)
-        uploadDateLabel.textColor = .darkGray
     }
     
     private func setupLayout() {
@@ -46,7 +70,6 @@ final class MainListCell: UITableViewCell {
         backgroundView.layer.cornerRadius = 10
         backgroundView.addSubview(titleLabel)
         backgroundView.addSubview(subTitleLabel)
-        backgroundView.addSubview(uploadDateLabel)
         contentView.addSubview(backgroundView)
         
         backgroundView.snp.makeConstraints { make in
@@ -65,11 +88,7 @@ final class MainListCell: UITableViewCell {
         subTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(16)
-        }
-        
-        uploadDateLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.leading.equalTo(subTitleLabel.snp.trailing).offset(5)
+            make.trailing.equalToSuperview().offset(-16)
         }
     }
 }
