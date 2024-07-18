@@ -42,10 +42,11 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
             SectionOfNotice(header: "일반소식",
                             items: dto.data.generalNewsTopThreeTitle.map {
                                 MainNotice(id: $0.nttId,
-                                       title: $0.title,
-                                       contentUrl: $0.contentUrl,
-                                       department: $0.departName,
-                                       uploadDate: $0.registrationDate)
+                                           presentationType: .actual,
+                                           title: $0.title,
+                                           contentUrl: $0.contentUrl,
+                                           department: $0.departName,
+                                           uploadDate: $0.registrationDate)
                             })
         )
         
@@ -53,11 +54,12 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
         sectionOfNotices.append(
             SectionOfNotice(header: "학사공지",
                             items: dto.data.academicNewsTopThreeTitle.map {
-                                MainNotice(id: $0.nttId,
-                                       title: $0.title,
-                                       contentUrl: $0.contentUrl,
-                                       department: $0.departName,
-                                       uploadDate: $0.registrationDate)
+                                MainNotice(id: $0.nttId, 
+                                           presentationType: .actual,
+                                           title: $0.title,
+                                           contentUrl: $0.contentUrl,
+                                           department: $0.departName,
+                                           uploadDate: $0.registrationDate)
                             })
         )
         
@@ -65,11 +67,12 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
         sectionOfNotices.append(
             SectionOfNotice(header: "장학공지",
                             items: dto.data.scholarshipNewsTopThreeTitle.map {
-                                MainNotice(id: $0.nttId,
-                                       title: $0.title,
-                                       contentUrl: $0.contentUrl,
-                                       department: $0.departName,
-                                       uploadDate: $0.registrationDate)
+                                MainNotice(id: $0.nttId, 
+                                           presentationType: .actual,
+                                           title: $0.title,
+                                           contentUrl: $0.contentUrl,
+                                           department: $0.departName,
+                                           uploadDate: $0.registrationDate)
                             })
         )
         
@@ -77,11 +80,12 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
         sectionOfNotices.append(
             SectionOfNotice(header: "행사안내",
                             items: dto.data.eventNewsTopThreeTitle.map {
-                                MainNotice(id: $0.nttId,
-                                       title: $0.title,
-                                       contentUrl: $0.contentUrl,
-                                       department: $0.departName,
-                                       uploadDate: $0.registrationDate)
+                                MainNotice(id: $0.nttId, 
+                                           presentationType: .actual,
+                                           title: $0.title,
+                                           contentUrl: $0.contentUrl,
+                                           department: $0.departName,
+                                           uploadDate: $0.registrationDate)
                             })
         )
         
