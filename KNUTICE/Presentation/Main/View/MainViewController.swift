@@ -24,7 +24,6 @@ final class MainViewController: UIViewController {
         setupLayout()
         setupAttribute()
         setupNavigationBar()
-        
         viewModel.fetchNotices()
     }
 }
