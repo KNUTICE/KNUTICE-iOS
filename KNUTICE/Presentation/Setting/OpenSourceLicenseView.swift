@@ -16,7 +16,11 @@ struct OpenSourceLicenseView: View {
             if isLoading {
                 ProgressView(value: progress, total: 1.0)
                     .progressViewStyle(LinearProgressViewStyle())
+                    .tint(.blue)
                     .scaleEffect(x: 1, y: 0.5, anchor: .trailing)
+            } else {
+                Color(.white)
+                    .frame(height: 4)
             }
             
             WebView(progress: $progress,
