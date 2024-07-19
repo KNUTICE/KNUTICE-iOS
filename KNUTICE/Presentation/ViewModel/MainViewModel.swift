@@ -33,9 +33,7 @@ final class MainViewModel {
             .subscribe(onNext: { [weak self] result in
                 //해당 스트림은 MainNoticeRepositoryImpl에서 onComplete()를 호출하기 때문에
                 //[weak self]를 굳이 사용하지 않아도 reference count가 증가 되지는 않음.
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    self?.notices.accept(result)
-                }
+                self?.notices.accept(result)
             })
             .disposed(by: disposeBag)
     }
