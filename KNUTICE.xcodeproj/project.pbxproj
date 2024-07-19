@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5C190A442BFD6AA500E0254B /* ServiceInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C190A432BFD6AA500E0254B /* ServiceInfo.plist */; };
 		5C190A462BFD6BDB00E0254B /* Bundle+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A452BFD6BDB00E0254B /* Bundle+URL.swift */; };
-		5C190A4B2BFD87EC00E0254B /* AppDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A4A2BFD87EC00E0254B /* AppDI.swift */; };
 		5C190A4F2BFDF4E100E0254B /* NoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A4E2BFDF4E100E0254B /* NoticeRepository.swift */; };
 		5C190A532BFDF5EB00E0254B /* NoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A522BFDF5EB00E0254B /* NoticeRepositoryImpl.swift */; };
 		5C190A552BFDF66600E0254B /* ReponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A542BFDF66600E0254B /* ReponseDTO.swift */; };
@@ -28,7 +27,6 @@
 		5C89DD3E2BFA043200CCCCCD /* MainViewController+Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD3D2BFA043200CCCCCD /* MainViewController+Binding.swift */; };
 		5C89DD462BFA0D6800CCCCCD /* MainNoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD452BFA0D6800CCCCCD /* MainNoticeRepository.swift */; };
 		5C89DD492BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD482BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift */; };
-		5C89DD4C2BFA105600CCCCCD /* MainNoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD4B2BFA105600CCCCCD /* MainNoticeDataSource.swift */; };
 		5C89DD502BFA120B00CCCCCD /* MainNoticeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD4F2BFA120B00CCCCCD /* MainNoticeDTO.swift */; };
 		5C9B81072BF451540038EB27 /* GeneralNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B81062BF451540038EB27 /* GeneralNoticeViewController.swift */; };
 		5C9B810B2BF451BC0038EB27 /* NoticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B810A2BF451BC0038EB27 /* NoticeViewModel.swift */; };
@@ -45,6 +43,8 @@
 		8EA9ACAB2C46AEC900C9E287 /* OpenSourceLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9ACAA2C46AEC900C9E287 /* OpenSourceLicenseView.swift */; };
 		8ECE2B182C35045800D7F499 /* MainNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B172C35045800D7F499 /* MainNotice.swift */; };
 		8ECE2B1A2C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B192C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift */; };
+		8EF191FB2C4ABEB5004219BE /* AppDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF191FA2C4ABEB5004219BE /* AppDI.swift */; };
+		8EF191FD2C4ABED8004219BE /* MainNoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF191FC2C4ABED8004219BE /* MainNoticeDataSource.swift */; };
 		8EFCF8632C376AD0004A53E9 /* ScholarshipNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF8622C376AD0004A53E9 /* ScholarshipNoticeViewController.swift */; };
 		8EFCF8652C377061004A53E9 /* EventNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF8642C377061004A53E9 /* EventNoticeViewController.swift */; };
 		8EFCF8672C37742A004A53E9 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF8662C37742A004A53E9 /* SettingView.swift */; };
@@ -58,7 +58,6 @@
 		4A8D3AA05D90BFFE11CE67D5 /* Pods_KNUTICE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNUTICE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C190A432BFD6AA500E0254B /* ServiceInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ServiceInfo.plist; sourceTree = "<group>"; };
 		5C190A452BFD6BDB00E0254B /* Bundle+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+URL.swift"; sourceTree = "<group>"; };
-		5C190A4A2BFD87EC00E0254B /* AppDI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDI.swift; sourceTree = "<group>"; };
 		5C190A4E2BFDF4E100E0254B /* NoticeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeRepository.swift; sourceTree = "<group>"; };
 		5C190A522BFDF5EB00E0254B /* NoticeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeRepositoryImpl.swift; sourceTree = "<group>"; };
 		5C190A542BFDF66600E0254B /* ReponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReponseDTO.swift; sourceTree = "<group>"; };
@@ -79,7 +78,6 @@
 		5C89DD3D2BFA043200CCCCCD /* MainViewController+Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+Binding.swift"; sourceTree = "<group>"; };
 		5C89DD452BFA0D6800CCCCCD /* MainNoticeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeRepository.swift; sourceTree = "<group>"; };
 		5C89DD482BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeRepositoryImpl.swift; sourceTree = "<group>"; };
-		5C89DD4B2BFA105600CCCCCD /* MainNoticeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeDataSource.swift; sourceTree = "<group>"; };
 		5C89DD4F2BFA120B00CCCCCD /* MainNoticeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeDTO.swift; sourceTree = "<group>"; };
 		5C9B81062BF451540038EB27 /* GeneralNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticeViewController.swift; sourceTree = "<group>"; };
 		5C9B810A2BF451BC0038EB27 /* NoticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewModel.swift; sourceTree = "<group>"; };
@@ -97,6 +95,8 @@
 		8EA9ACAA2C46AEC900C9E287 /* OpenSourceLicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSourceLicenseView.swift; sourceTree = "<group>"; };
 		8ECE2B172C35045800D7F499 /* MainNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotice.swift; sourceTree = "<group>"; };
 		8ECE2B192C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedNoticeCellWithImage.swift; sourceTree = "<group>"; };
+		8EF191FA2C4ABEB5004219BE /* AppDI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDI.swift; sourceTree = "<group>"; };
+		8EF191FC2C4ABED8004219BE /* MainNoticeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeDataSource.swift; sourceTree = "<group>"; };
 		8EFCF8622C376AD0004A53E9 /* ScholarshipNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipNoticeViewController.swift; sourceTree = "<group>"; };
 		8EFCF8642C377061004A53E9 /* EventNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventNoticeViewController.swift; sourceTree = "<group>"; };
 		8EFCF8662C37742A004A53E9 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -185,9 +185,9 @@
 			children = (
 				5C82564F2BE5CE1B0038D4C8 /* Info.plist */,
 				5C190A432BFD6AA500E0254B /* ServiceInfo.plist */,
-				5C190A4A2BFD87EC00E0254B /* AppDI.swift */,
 				5C8256412BE5CE1A0038D4C8 /* AppDelegate.swift */,
 				5C8256432BE5CE1A0038D4C8 /* SceneDelegate.swift */,
+				8EF191FA2C4ABEB5004219BE /* AppDI.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -312,8 +312,8 @@
 		5C89DD4A2BFA104800CCCCCD /* DataSources */ = {
 			isa = PBXGroup;
 			children = (
-				5C89DD4B2BFA105600CCCCCD /* MainNoticeDataSource.swift */,
 				5C190A562BFE023000E0254B /* NoticeDataSource.swift */,
+				8EF191FC2C4ABED8004219BE /* MainNoticeDataSource.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -541,18 +541,18 @@
 				8ECE2B1A2C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift in Sources */,
 				5C9B810B2BF451BC0038EB27 /* NoticeViewModel.swift in Sources */,
 				8EA9ACAB2C46AEC900C9E287 /* OpenSourceLicenseView.swift in Sources */,
-				5C89DD4C2BFA105600CCCCCD /* MainNoticeDataSource.swift in Sources */,
 				5C89DD3E2BFA043200CCCCCD /* MainViewController+Binding.swift in Sources */,
 				5C89DD492BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift in Sources */,
 				8E0BA6DD2C33CA1300677A79 /* DetailedNoticeCell.swift in Sources */,
+				8EF191FB2C4ABEB5004219BE /* AppDI.swift in Sources */,
 				5C8256422BE5CE1A0038D4C8 /* AppDelegate.swift in Sources */,
 				5C5698972BEFB6760085E389 /* Notice.swift in Sources */,
 				8E00AF712C36233C0037EC38 /* WebViewController+Layout.swift in Sources */,
+				8EF191FD2C4ABED8004219BE /* MainNoticeDataSource.swift in Sources */,
 				5C190A552BFDF66600E0254B /* ReponseDTO.swift in Sources */,
 				8EA9ACA92C46AC3C00C9E287 /* WebView.swift in Sources */,
 				5C190A4F2BFDF4E100E0254B /* NoticeRepository.swift in Sources */,
 				8EFDAB032C3BC08900352779 /* WebViewController+Callbacks.swift in Sources */,
-				5C190A4B2BFD87EC00E0254B /* AppDI.swift in Sources */,
 				5C5698902BEFB3C50085E389 /* MainListCell.swift in Sources */,
 				5C9B810E2BF45B5D0038EB27 /* ViewModelProtocol.swift in Sources */,
 				8ECE2B182C35045800D7F499 /* MainNotice.swift in Sources */,
