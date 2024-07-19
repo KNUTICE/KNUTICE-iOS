@@ -27,6 +27,7 @@ final class GeneralNoticeViewController: UIViewController, TableViewConfigurable
         setupNavigationBar(title: navigationTitle)
         
         bindFetchingState()
+        setActivityIndicator()
         viewModel.fetchNotices()
     }
 }
@@ -50,6 +51,13 @@ extension GeneralNoticeViewController: UITableViewDelegate {
             tableView.tableFooterView = createActivityIndicator()
             viewModel.fetchNextNotices()
         }
+    }
+    
+    func setActivityIndicator() {
+        let spinner = UIActivityIndicatorView(style: .large)
+        
+        spinner.startAnimating()
+        tableView.backgroundView = spinner
     }
 }
 
