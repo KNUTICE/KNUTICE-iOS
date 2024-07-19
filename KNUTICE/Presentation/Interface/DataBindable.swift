@@ -7,12 +7,13 @@
 
 import RxSwift
 
-protocol DataBindable {
+protocol DataBindable: AnyObject {
     var viewModel: NoticeViewModel { get }
     var tableView: UITableView { get }
     var disposeBag: DisposeBag { get }
     
     func bind()
+    func bindFetchingState()
 }
 
 extension DataBindable {
@@ -37,6 +38,17 @@ extension DataBindable {
                     return cell
                 }
             }
+            .disposed(by: disposeBag)
+    }
+    
+    func bindFetchingState() {
+        viewModel.isFetchingObservable
+            .subscribe(onNext: { [weak self] isFetching in
+                if !isFetching {
+                    self?.tableView.backgroundView = nil
+                    self?.tableView.tableFooterView = nil
+                }
+            })
             .disposed(by: disposeBag)
     }
 }
