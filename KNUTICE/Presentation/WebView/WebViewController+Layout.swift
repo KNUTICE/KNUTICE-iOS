@@ -17,16 +17,26 @@ extension WebViewController {
     }
     
     func setupAttribute() {
+        view.backgroundColor = .white
         webView.navigationDelegate = self
         webView.allowsBackForwardNavigationGestures = false
         navigationItem.largeTitleDisplayMode = .never    //navigation inline title
     }
     
-    func setupLayout() {
+    func setupLayout() {        
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(progressView)
         view.addSubview(webView)
         
+        progressView.snp.makeConstraints { make in
+            make.left.top.right.equalTo(self.view.safeAreaLayoutGuide)
+        }
+        
         webView.snp.makeConstraints { make in
-            make.top.bottom.left.right.equalToSuperview()
+            make.top.equalTo(progressView.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
     
