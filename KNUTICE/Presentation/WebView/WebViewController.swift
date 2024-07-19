@@ -8,8 +8,10 @@
 import UIKit
 import WebKit
 import SwiftUI
+import Foundation
 
 final class WebViewController: UIViewController {
+    let progressView = UIProgressView(progressViewStyle: .bar)
     let webView: WKWebView = WKWebView()
     let url: String
     
@@ -25,16 +27,26 @@ final class WebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupLayout()
         setupAttribute()
         setupNavigationBarItem()
+        setupLayout()
         loadPage(url)
     }
 }
 
 extension WebViewController: WKNavigationDelegate {
-    //MARK: - 롱터치 방지
+    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        progressView.progress = Float(Double(webView.estimatedProgress))
+    }
+    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        progressView.progress = 1.0
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.progressView.isHidden = true
+        }
+        
+        //롱터치 방지
         webView.evaluateJavaScript("document.documentElement.style.webkitUserSelect='none'", completionHandler: nil)
         webView.evaluateJavaScript("document.documentElement.style.webkitTouchCallout='none'", completionHandler: nil)
     }
