@@ -30,6 +30,8 @@ final class EventNoticeViewController: UIViewController, DataBindable, TableView
         setupNavigationBar(title: "행사안내")
         setupLayout()
         
+        bindFetchingState()
+        setActivityIndicator()
         viewModel.fetchNotices()
     }
 }
