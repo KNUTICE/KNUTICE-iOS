@@ -35,4 +35,11 @@ extension TableViewConfigurable {
             $0.top.bottom.left.right.equalToSuperview()
         }
     }
+    
+    func setActivityIndicator() {
+        let spinner = UIActivityIndicatorView(style: .large)
+        
+        spinner.startAnimating()
+        tableView.backgroundView = spinner
+    }
 }

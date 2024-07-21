@@ -30,6 +30,8 @@ final class ScholarshipNoticeViewController: UIViewController, DataBindable, Tab
         setupNavigationBar(title: "장학안내")
         setupLayout()
         
+        bindFetchingState()
+        setActivityIndicator()
         viewModel.fetchNotices()
     }
 }

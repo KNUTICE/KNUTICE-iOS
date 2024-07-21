@@ -8,10 +8,50 @@
 import Foundation
 
 extension Bundle {
-    var url: String {
+    var mainNoticeURL: String {
         guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
               let resource = NSDictionary(contentsOfFile: file),
-              let url = resource["API_URL"] as? String else {
+              let url = resource["Main_Notice_URL"] as? String else {
+            return ""
+        }
+        
+        return url
+    }
+    
+    var generalNoticeURL: String {
+        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
+              let resource = NSDictionary(contentsOfFile: file),
+              let url = resource["General_Notice_URL"] as? String else {
+            return ""
+        }
+        
+        return url
+    }
+    
+    var academicNoticeURL: String {
+        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
+              let resource = NSDictionary(contentsOfFile: file),
+              let url = resource["Academic_Notice_URL"] as? String else {
+            return ""
+        }
+        
+        return url
+    }
+    
+    var scholarshipNoticeURL: String {
+        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
+              let resource = NSDictionary(contentsOfFile: file),
+              let url = resource["Scholarship_Notice_URL"] as? String else {
+            return ""
+        }
+        
+        return url
+    }
+    
+    var eventNoticeURL: String {
+        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
+              let resource = NSDictionary(contentsOfFile: file),
+              let url = resource["Event_Notice_URL"] as? String else {
             return ""
         }
         
