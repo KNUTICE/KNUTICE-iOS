@@ -52,13 +52,6 @@ extension GeneralNoticeViewController: UITableViewDelegate {
             viewModel.fetchNextNotices()
         }
     }
-    
-    func setActivityIndicator() {
-        let spinner = UIActivityIndicatorView(style: .large)
-        
-        spinner.startAnimating()
-        tableView.backgroundView = spinner
-    }
 }
 
 //MARK: - Preview
