@@ -33,6 +33,8 @@ final class AcademicNoticeViewController: UIViewController, TableViewConfigurabl
         setupNavigationBar(title: navigationTitle)
         setupLayout()
         
+        bindFetchingState()
+        setActivityIndicator()
         viewModel.fetchNotices()
     }
 }
