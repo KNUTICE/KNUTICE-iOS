@@ -21,6 +21,7 @@ extension TableViewConfigurable {
         tableView.register(DetailedNoticeCellWithImage.self, forCellReuseIdentifier: DetailedNoticeCellWithImage.reuseIdentifier)
         tableView.estimatedRowHeight = 100    //동적 height 적용전 임시 값
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.backgroundColor = .customBackground
     }
     
     func setupNavigationBar(title: String) {
