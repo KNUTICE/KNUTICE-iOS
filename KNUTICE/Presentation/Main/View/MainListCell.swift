@@ -57,11 +57,11 @@ final class MainListCell: UITableViewCell {
     private func setupAttribute() {
         //for Title Label
         titleLabel.font = .preferredFont(forTextStyle: .subheadline)
-        titleLabel.textColor = .black
+        titleLabel.textColor = .accent
         
         //for Subtitle Label
         subTitleLabel.font = .preferredFont(forTextStyle: .caption2)
-        subTitleLabel.textColor = .darkGray
+        subTitleLabel.textColor = .subTitle
     }
     
     private func setupLayout() {
@@ -71,6 +71,7 @@ final class MainListCell: UITableViewCell {
         backgroundView.addSubview(titleLabel)
         backgroundView.addSubview(subTitleLabel)
         contentView.addSubview(backgroundView)
+        contentView.backgroundColor = .customBackground
         
         backgroundView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
