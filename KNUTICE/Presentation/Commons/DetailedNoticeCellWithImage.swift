@@ -42,15 +42,17 @@ final class DetailedNoticeCellWithImage: UITableViewCell {
     private func setupAttribute() {
         //for Title Label
         titleLabel.font = .preferredFont(forTextStyle: .subheadline)
-        titleLabel.textColor = .black
+        titleLabel.textColor = .accent
         
         //for Subtitle Label
         subTitleLabel.font = .preferredFont(forTextStyle: .caption2)
-        subTitleLabel.textColor = .darkGray
+        subTitleLabel.textColor = .subTitle
         
         //for UploadDate Label
         uploadDateLabel.font = .preferredFont(forTextStyle: .caption2)
-        uploadDateLabel.textColor = .darkGray
+        uploadDateLabel.textColor = .subTitle
+        
+        contentView.backgroundColor = .customBackground
     }
     
     private func setupLayout() {
