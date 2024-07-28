@@ -12,7 +12,7 @@ import SwiftUI
 extension MainViewController {
     func setupAttribute() {
         tableView.delegate = self
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .customBackground
         tableView.separatorStyle = .none
         tableView.sectionHeaderTopPadding = 15    //header padding
         tableView.register(MainListCell.self, forCellReuseIdentifier: MainListCell.reuseIdentifier)
@@ -34,6 +34,7 @@ extension MainViewController {
     
     func setupLayout() {
         view.addSubview(tableView)
+        
         //TableView Constraint
         tableView.snp.makeConstraints {
             $0.top.bottom.left.right.equalToSuperview()

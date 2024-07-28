@@ -21,6 +21,7 @@ struct SettingView: View {
                     Text("\(appVersion)(alpha)")
                 }
                 .padding(10)
+                .listRowSeparatorTint(.subTitle)
                 
                 NavigationLink(destination: {
                     OpenSourceLicenseView()
@@ -28,8 +29,11 @@ struct SettingView: View {
                     Text("오픈소스 라이선스")
                 })
                 .padding(10)
+                .listRowSeparatorTint(.subTitle)
             }
+            .listRowBackground(Color.customBackground)
         }
+        .background(.customBackground)
         .listStyle(.plain)
         .navigationTitle("설정")
         .navigationBarTitleDisplayMode(.inline)
