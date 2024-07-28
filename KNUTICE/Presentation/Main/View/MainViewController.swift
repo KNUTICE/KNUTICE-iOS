@@ -32,7 +32,7 @@ final class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate {
     //MARK: - Custom cell header
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerColors: [UIColor] = [.salmon, .lightOrange, .aquamarine,.midnightOcean]
+        let headerColors: [UIColor] = [.salmon, .lightOrange, .lightGreen, .dodgerBlue]
         let headerView = UIView()
         let button = UIButton(frame: CGRect(x: 16, y: 5, width: 90, height: 40))
         headerView.addSubview(button)

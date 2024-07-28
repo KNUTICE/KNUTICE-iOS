@@ -30,6 +30,7 @@ extension WebViewController {
         
         view.addSubview(progressView)
         view.addSubview(webView)
+        view.backgroundColor = .customBackground
         
         progressView.snp.makeConstraints { make in
             make.left.top.right.equalTo(self.view.safeAreaLayoutGuide)
