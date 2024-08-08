@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import RxSwift
 import SkeletonView
 import FirebaseCore
 import FirebaseMessaging
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+    let disposeBag = DisposeBag()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
