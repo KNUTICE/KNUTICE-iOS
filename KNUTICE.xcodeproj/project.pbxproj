@@ -38,6 +38,12 @@
 		8E00AF7F2C367D8A0037EC38 /* DataBindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF7E2C367D8A0037EC38 /* DataBindable.swift */; };
 		8E00AF822C3681100037EC38 /* TableViewConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF812C3681100037EC38 /* TableViewConfigurable.swift */; };
 		8E0BA6DD2C33CA1300677A79 /* DetailedNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0BA6DC2C33CA1300677A79 /* DetailedNoticeCell.swift */; };
+		8E5385742C644AB000AF151B /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385732C644AB000AF151B /* TokenRepository.swift */; };
+		8E5385762C644B4400AF151B /* TokenSaveResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385752C644B4400AF151B /* TokenSaveResponseDTO.swift */; };
+		8E5385782C644C3F00AF151B /* TokenRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385772C644C3F00AF151B /* TokenRepositoryImpl.swift */; };
+		8E53857A2C644D9600AF151B /* TokenDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385792C644D9600AF151B /* TokenDataSource.swift */; };
+		8E54C8482C5E64E90070E689 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E54C8472C5E64E90070E689 /* GoogleService-Info.plist */; };
+		8E54C84A2C5E6F5E0070E689 /* AppDelegate+Messaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E54C8492C5E6F5E0070E689 /* AppDelegate+Messaging.swift */; };
 		8E5D1CF82C38D2E50027E8BD /* Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D1CF72C38D2E50027E8BD /* Scrollable.swift */; };
 		8EA9ACA92C46AC3C00C9E287 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9ACA82C46AC3C00C9E287 /* WebView.swift */; };
 		8EA9ACAB2C46AEC900C9E287 /* OpenSourceLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9ACAA2C46AEC900C9E287 /* OpenSourceLicenseView.swift */; };
@@ -90,6 +96,13 @@
 		8E00AF7E2C367D8A0037EC38 /* DataBindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBindable.swift; sourceTree = "<group>"; };
 		8E00AF812C3681100037EC38 /* TableViewConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewConfigurable.swift; sourceTree = "<group>"; };
 		8E0BA6DC2C33CA1300677A79 /* DetailedNoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedNoticeCell.swift; sourceTree = "<group>"; };
+		8E5385732C644AB000AF151B /* TokenRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepository.swift; sourceTree = "<group>"; };
+		8E5385752C644B4400AF151B /* TokenSaveResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenSaveResponseDTO.swift; sourceTree = "<group>"; };
+		8E5385772C644C3F00AF151B /* TokenRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepositoryImpl.swift; sourceTree = "<group>"; };
+		8E5385792C644D9600AF151B /* TokenDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDataSource.swift; sourceTree = "<group>"; };
+		8E54C8462C5E63940070E689 /* KNUTICE.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KNUTICE.entitlements; sourceTree = "<group>"; };
+		8E54C8472C5E64E90070E689 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8E54C8492C5E6F5E0070E689 /* AppDelegate+Messaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Messaging.swift"; sourceTree = "<group>"; };
 		8E5D1CF72C38D2E50027E8BD /* Scrollable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scrollable.swift; sourceTree = "<group>"; };
 		8EA9ACA82C46AC3C00C9E287 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		8EA9ACAA2C46AEC900C9E287 /* OpenSourceLicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSourceLicenseView.swift; sourceTree = "<group>"; };
@@ -186,6 +199,7 @@
 				5C82564F2BE5CE1B0038D4C8 /* Info.plist */,
 				5C190A432BFD6AA500E0254B /* ServiceInfo.plist */,
 				5C8256412BE5CE1A0038D4C8 /* AppDelegate.swift */,
+				8E54C8492C5E6F5E0070E689 /* AppDelegate+Messaging.swift */,
 				5C8256432BE5CE1A0038D4C8 /* SceneDelegate.swift */,
 				8EF191FA2C4ABEB5004219BE /* AppDI.swift */,
 			);
@@ -225,6 +239,8 @@
 		5C8256402BE5CE1A0038D4C8 /* KNUTICE */ = {
 			isa = PBXGroup;
 			children = (
+				8E54C8472C5E64E90070E689 /* GoogleService-Info.plist */,
+				8E54C8462C5E63940070E689 /* KNUTICE.entitlements */,
 				5C190A4C2BFDD92A00E0254B /* Utils */,
 				5C56988E2BEFB37D0085E389 /* Application */,
 				5C56988D2BEFB3660085E389 /* Resources */,
@@ -296,6 +312,7 @@
 			children = (
 				5C89DD452BFA0D6800CCCCCD /* MainNoticeRepository.swift */,
 				5C190A4E2BFDF4E100E0254B /* NoticeRepository.swift */,
+				8E5385732C644AB000AF151B /* TokenRepository.swift */,
 			);
 			path = RepositoryInterfaces;
 			sourceTree = "<group>";
@@ -305,6 +322,7 @@
 			children = (
 				5C89DD482BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift */,
 				5C190A522BFDF5EB00E0254B /* NoticeRepositoryImpl.swift */,
+				8E5385772C644C3F00AF151B /* TokenRepositoryImpl.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -314,6 +332,7 @@
 			children = (
 				5C190A562BFE023000E0254B /* NoticeDataSource.swift */,
 				8EF191FC2C4ABED8004219BE /* MainNoticeDataSource.swift */,
+				8E5385792C644D9600AF151B /* TokenDataSource.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -323,6 +342,7 @@
 			children = (
 				5C89DD4F2BFA120B00CCCCCD /* MainNoticeDTO.swift */,
 				5C190A542BFDF66600E0254B /* ReponseDTO.swift */,
+				8E5385752C644B4400AF151B /* TokenSaveResponseDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -479,6 +499,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C190A442BFD6AA500E0254B /* ServiceInfo.plist in Resources */,
+				8E54C8482C5E64E90070E689 /* GoogleService-Info.plist in Resources */,
 				5C82564B2BE5CE1B0038D4C8 /* Assets.xcassets in Resources */,
 				5C82564E2BE5CE1B0038D4C8 /* Base in Resources */,
 			);
@@ -536,6 +557,7 @@
 				8EFCF8632C376AD0004A53E9 /* ScholarshipNoticeViewController.swift in Sources */,
 				5C89DD502BFA120B00CCCCCD /* MainNoticeDTO.swift in Sources */,
 				5CD2EFC12BF356FB00066C87 /* UIViewController+Preview.swift in Sources */,
+				8E5385742C644AB000AF151B /* TokenRepository.swift in Sources */,
 				5C5698922BEFB4A20085E389 /* MainViewModel.swift in Sources */,
 				5C8256462BE5CE1A0038D4C8 /* MainViewController.swift in Sources */,
 				8ECE2B1A2C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift in Sources */,
@@ -549,8 +571,10 @@
 				5C5698972BEFB6760085E389 /* Notice.swift in Sources */,
 				8E00AF712C36233C0037EC38 /* WebViewController+Layout.swift in Sources */,
 				8EF191FD2C4ABED8004219BE /* MainNoticeDataSource.swift in Sources */,
+				8E5385762C644B4400AF151B /* TokenSaveResponseDTO.swift in Sources */,
 				5C190A552BFDF66600E0254B /* ReponseDTO.swift in Sources */,
 				8EA9ACA92C46AC3C00C9E287 /* WebView.swift in Sources */,
+				8E54C84A2C5E6F5E0070E689 /* AppDelegate+Messaging.swift in Sources */,
 				5C190A4F2BFDF4E100E0254B /* NoticeRepository.swift in Sources */,
 				8EFDAB032C3BC08900352779 /* WebViewController+Callbacks.swift in Sources */,
 				5C5698902BEFB3C50085E389 /* MainListCell.swift in Sources */,
@@ -561,6 +585,7 @@
 				5C89DD462BFA0D6800CCCCCD /* MainNoticeRepository.swift in Sources */,
 				8E00AF7B2C3676240037EC38 /* AcademicNoticeViewController.swift in Sources */,
 				5C190A572BFE023000E0254B /* NoticeDataSource.swift in Sources */,
+				8E5385782C644C3F00AF151B /* TokenRepositoryImpl.swift in Sources */,
 				5C9B81072BF451540038EB27 /* GeneralNoticeViewController.swift in Sources */,
 				8EFCF8672C37742A004A53E9 /* SettingView.swift in Sources */,
 				5C89DD3A2BFA02F400CCCCCD /* MainViewController+Callbacks.swift in Sources */,
@@ -570,6 +595,7 @@
 				8E00AF7F2C367D8A0037EC38 /* DataBindable.swift in Sources */,
 				5C89DD3C2BFA03D800CCCCCD /* MainViewController+Layout.swift in Sources */,
 				5C8256442BE5CE1A0038D4C8 /* SceneDelegate.swift in Sources */,
+				8E53857A2C644D9600AF151B /* TokenDataSource.swift in Sources */,
 				8E00AF822C3681100037EC38 /* TableViewConfigurable.swift in Sources */,
 				5C190A462BFD6BDB00E0254B /* Bundle+URL.swift in Sources */,
 				8E5D1CF82C38D2E50027E8BD /* Scrollable.swift in Sources */,
@@ -715,6 +741,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = KNUTICE/KNUTICE.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QHK65XFL8U;
@@ -732,7 +759,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 0.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -751,6 +778,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = KNUTICE/KNUTICE.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QHK65XFL8U;
@@ -768,7 +796,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 0.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

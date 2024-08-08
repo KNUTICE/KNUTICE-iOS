@@ -67,4 +67,14 @@ extension Bundle {
         
         return url
     }
+    
+    var tokenURL: String {
+        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
+              let resource = NSDictionary(contentsOfFile: file),
+              let url = resource["Token_URL"] as? String else {
+            return ""
+        }
+        
+        return url
+    }
 }
