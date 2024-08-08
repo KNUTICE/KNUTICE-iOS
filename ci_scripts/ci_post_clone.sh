@@ -23,10 +23,6 @@ cat <<EOF > "/Volumes/workspace/repository/KNUTICE/GoogleService-Info.plist"
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>CLIENT_ID</key>
-    <string>$(CLIENT_ID)</string>
-    <key>REVERSED_CLIENT_ID</key>
-    <string>$(REVERSED_CLIENT_ID)</string>
     <key>API_KEY</key>
     <string>$(API_KEY)</string>
     <key>GCM_SENDER_ID</key>
