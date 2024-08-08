@@ -42,6 +42,7 @@
 		8E5385762C644B4400AF151B /* TokenSaveResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385752C644B4400AF151B /* TokenSaveResponseDTO.swift */; };
 		8E5385782C644C3F00AF151B /* TokenRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385772C644C3F00AF151B /* TokenRepositoryImpl.swift */; };
 		8E53857A2C644D9600AF151B /* TokenDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385792C644D9600AF151B /* TokenDataSource.swift */; };
+		8E53857F2C647EB000AF151B /* ci_post_clone.sh in Resources */ = {isa = PBXBuildFile; fileRef = 8E53857E2C647D9A00AF151B /* ci_post_clone.sh */; };
 		8E54C8482C5E64E90070E689 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E54C8472C5E64E90070E689 /* GoogleService-Info.plist */; };
 		8E54C84A2C5E6F5E0070E689 /* AppDelegate+Messaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E54C8492C5E6F5E0070E689 /* AppDelegate+Messaging.swift */; };
 		8E5D1CF82C38D2E50027E8BD /* Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D1CF72C38D2E50027E8BD /* Scrollable.swift */; };
@@ -100,6 +101,7 @@
 		8E5385752C644B4400AF151B /* TokenSaveResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenSaveResponseDTO.swift; sourceTree = "<group>"; };
 		8E5385772C644C3F00AF151B /* TokenRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepositoryImpl.swift; sourceTree = "<group>"; };
 		8E5385792C644D9600AF151B /* TokenDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDataSource.swift; sourceTree = "<group>"; };
+		8E53857E2C647D9A00AF151B /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 		8E54C8462C5E63940070E689 /* KNUTICE.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KNUTICE.entitlements; sourceTree = "<group>"; };
 		8E54C8472C5E64E90070E689 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8E54C8492C5E6F5E0070E689 /* AppDelegate+Messaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Messaging.swift"; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 			children = (
 				8E54C8472C5E64E90070E689 /* GoogleService-Info.plist */,
 				8E54C8462C5E63940070E689 /* KNUTICE.entitlements */,
+				8E53857D2C647D5A00AF151B /* ci_scripts */,
 				5C190A4C2BFDD92A00E0254B /* Utils */,
 				5C56988E2BEFB37D0085E389 /* Application */,
 				5C56988D2BEFB3660085E389 /* Resources */,
@@ -421,6 +424,14 @@
 			path = Commons;
 			sourceTree = "<group>";
 		};
+		8E53857D2C647D5A00AF151B /* ci_scripts */ = {
+			isa = PBXGroup;
+			children = (
+				8E53857E2C647D9A00AF151B /* ci_post_clone.sh */,
+			);
+			path = ci_scripts;
+			sourceTree = "<group>";
+		};
 		B7C2DD8F1383D1BE8D2ADDF7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -501,6 +512,7 @@
 				5C190A442BFD6AA500E0254B /* ServiceInfo.plist in Resources */,
 				8E54C8482C5E64E90070E689 /* GoogleService-Info.plist in Resources */,
 				5C82564B2BE5CE1B0038D4C8 /* Assets.xcassets in Resources */,
+				8E53857F2C647EB000AF151B /* ci_post_clone.sh in Resources */,
 				5C82564E2BE5CE1B0038D4C8 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -759,7 +771,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 0.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -796,7 +808,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 0.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
