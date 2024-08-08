@@ -4,7 +4,35 @@
 #  KNUTICE
 #
 #  Created by 이정훈 on 8/8/24.
-#  
+#
+
+# ServiceInfo.plist 변수 변경
+echo "환경변수 참조 ServiceInfo.plist 생성"
+
+cat <<EOF > "/Volumes/workspace/repository/KNUTICE/Application/ServiceInfo.plist"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Token_URL</key>
+    <string>${Token_URL}</string>
+    <key>Event_Notice_URL</key>
+    <string>${Event_Notice_URL}</string>
+    <key>Scholarship_Notice_URL</key>
+    <string>${Scholarship_Notice_URL}</string>
+    <key>Academic_Notice_URL</key>
+    <string>${Academic_Notice_URL}</string>
+    <key>General_Notice_URL</key>
+    <string>${General_Notice_URL}</string>
+    <key>Main_Notice_URL</key>
+    <string>${Main_Notice_URL}</string>
+    <key>OpenSourceLicenseURL</key>
+    <string>${OpenSourceLicenseURL}</string>
+</dict>
+</plist>
+EOF
+
+echo "ServiceInfo.plist 생성 완료"
 
 # GoogleService-Info.plist 파일 생성
 echo "환경변수 참조 GoogleService-Info.plist file 생성시작"
