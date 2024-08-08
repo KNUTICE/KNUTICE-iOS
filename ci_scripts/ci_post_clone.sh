@@ -11,7 +11,7 @@ echo "환경변수 참조 GoogleService-Info.plist file 생성시작"
 
 # Boolean 값 변환
 convert_bool() {
-    if [ "$1" == "true" ]; then
+    if [ "$1" = "true" ]; then
         echo "<true/>"
     else
         echo "<false/>"
