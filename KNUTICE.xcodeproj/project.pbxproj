@@ -223,6 +223,7 @@
 		5C8256352BE5CE1A0038D4C8 = {
 			isa = PBXGroup;
 			children = (
+				8E53857D2C647D5A00AF151B /* ci_scripts */,
 				5C8256402BE5CE1A0038D4C8 /* KNUTICE */,
 				5C82563F2BE5CE1A0038D4C8 /* Products */,
 				BC5E021D61A31CFDBABCB914 /* Pods */,
@@ -241,7 +242,6 @@
 		5C8256402BE5CE1A0038D4C8 /* KNUTICE */ = {
 			isa = PBXGroup;
 			children = (
-				8E53857D2C647D5A00AF151B /* ci_scripts */,
 				8E5385852C649E4E00AF151B /* GoogleService-Info.plist */,
 				8E54C8462C5E63940070E689 /* KNUTICE.entitlements */,
 				5C190A4C2BFDD92A00E0254B /* Utils */,
