@@ -58,8 +58,7 @@ extension MainViewController {
     //MARK: - Toolbar Button Callback Function
     @objc
     func navigateToSetting(_ sender: UIButton) {
-        let viewController = UIHostingController(rootView: SettingView())
+        let viewController = UIHostingController(rootView: SettingView(viewModel: AppDI.shared.settingViewModel))
         navigationController?.pushViewController(viewController, animated: true)
-        print("clicked")
     }
 }
