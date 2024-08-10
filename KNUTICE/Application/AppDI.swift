@@ -54,5 +54,9 @@ struct AppDI {
         return viewModel
     }
     
+    var settingViewModel: SettingViewModel {
+        return SettingViewModel()
+    }
+    
     private init() {}
 }
