@@ -54,6 +54,9 @@
 		8EB6D20E2C6713BB004E8AC2 /* View+Fork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6D20D2C6713BB004E8AC2 /* View+Fork.swift */; };
 		8ECE2B182C35045800D7F499 /* MainNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B172C35045800D7F499 /* MainNotice.swift */; };
 		8ECE2B1A2C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B192C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift */; };
+		8ECFAC4E2C684862007EC8C9 /* DownloadWebViewController+Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECFAC4D2C684862007EC8C9 /* DownloadWebViewController+Download.swift */; };
+		8ECFAC502C68AE35007EC8C9 /* DownloadWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECFAC4F2C68AE35007EC8C9 /* DownloadWebViewController.swift */; };
+		8ECFAC542C68AFE1007EC8C9 /* DownloadWebViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECFAC532C68AFE1007EC8C9 /* DownloadWebViewController+Layout.swift */; };
 		8EF191FB2C4ABEB5004219BE /* AppDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF191FA2C4ABEB5004219BE /* AppDI.swift */; };
 		8EF191FD2C4ABED8004219BE /* MainNoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF191FC2C4ABED8004219BE /* MainNoticeDataSource.swift */; };
 		8EFCF8632C376AD0004A53E9 /* ScholarshipNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF8622C376AD0004A53E9 /* ScholarshipNoticeViewController.swift */; };
@@ -143,6 +146,9 @@
 		8EB6D20D2C6713BB004E8AC2 /* View+Fork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Fork.swift"; sourceTree = "<group>"; };
 		8ECE2B172C35045800D7F499 /* MainNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotice.swift; sourceTree = "<group>"; };
 		8ECE2B192C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedNoticeCellWithImage.swift; sourceTree = "<group>"; };
+		8ECFAC4D2C684862007EC8C9 /* DownloadWebViewController+Download.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DownloadWebViewController+Download.swift"; sourceTree = "<group>"; };
+		8ECFAC4F2C68AE35007EC8C9 /* DownloadWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadWebViewController.swift; sourceTree = "<group>"; };
+		8ECFAC532C68AFE1007EC8C9 /* DownloadWebViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DownloadWebViewController+Layout.swift"; sourceTree = "<group>"; };
 		8EF191FA2C4ABEB5004219BE /* AppDI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDI.swift; sourceTree = "<group>"; };
 		8EF191FC2C4ABED8004219BE /* MainNoticeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeDataSource.swift; sourceTree = "<group>"; };
 		8EFCF8622C376AD0004A53E9 /* ScholarshipNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipNoticeViewController.swift; sourceTree = "<group>"; };
@@ -443,6 +449,9 @@
 				8E00AF6B2C361F780037EC38 /* WebViewController.swift */,
 				8E00AF702C36233C0037EC38 /* WebViewController+Layout.swift */,
 				8EFDAB022C3BC08900352779 /* WebViewController+Callbacks.swift */,
+				8ECFAC4F2C68AE35007EC8C9 /* DownloadWebViewController.swift */,
+				8ECFAC532C68AFE1007EC8C9 /* DownloadWebViewController+Layout.swift */,
+				8ECFAC4D2C684862007EC8C9 /* DownloadWebViewController+Download.swift */,
 			);
 			path = WebView;
 			sourceTree = "<group>";
@@ -675,6 +684,7 @@
 				5C9B810B2BF451BC0038EB27 /* NoticeViewModel.swift in Sources */,
 				8EA9ACAB2C46AEC900C9E287 /* OpenSourceLicenseView.swift in Sources */,
 				5C89DD3E2BFA043200CCCCCD /* MainViewController+Binding.swift in Sources */,
+				8ECFAC502C68AE35007EC8C9 /* DownloadWebViewController.swift in Sources */,
 				5C89DD492BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift in Sources */,
 				8EB6D20C2C66FC5B004E8AC2 /* SettingViewModel.swift in Sources */,
 				8E0BA6DD2C33CA1300677A79 /* DetailedNoticeCell.swift in Sources */,
@@ -695,6 +705,7 @@
 				8ECE2B182C35045800D7F499 /* MainNotice.swift in Sources */,
 				8EFCF86D2C37810B004A53E9 /* UIFont+DynamicFont.swift in Sources */,
 				5C190A532BFDF5EB00E0254B /* NoticeRepositoryImpl.swift in Sources */,
+				8ECFAC542C68AFE1007EC8C9 /* DownloadWebViewController+Layout.swift in Sources */,
 				5C89DD462BFA0D6800CCCCCD /* MainNoticeRepository.swift in Sources */,
 				8E00AF7B2C3676240037EC38 /* AcademicNoticeViewController.swift in Sources */,
 				5C190A572BFE023000E0254B /* NoticeDataSource.swift in Sources */,
@@ -703,6 +714,7 @@
 				8EFCF8672C37742A004A53E9 /* SettingView.swift in Sources */,
 				5C89DD3A2BFA02F400CCCCCD /* MainViewController+Callbacks.swift in Sources */,
 				8EFCF8652C377061004A53E9 /* EventNoticeViewController.swift in Sources */,
+				8ECFAC4E2C684862007EC8C9 /* DownloadWebViewController+Download.swift in Sources */,
 				5C5698952BEFB5A60085E389 /* SectionOfNotice.swift in Sources */,
 				8E00AF6C2C361F780037EC38 /* WebViewController.swift in Sources */,
 				8E00AF7F2C367D8A0037EC38 /* DataBindable.swift in Sources */,
