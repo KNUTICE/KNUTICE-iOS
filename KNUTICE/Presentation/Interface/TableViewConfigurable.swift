@@ -25,8 +25,7 @@ extension TableViewConfigurable {
     }
     
     func setupNavigationBar(title: String) {
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = title
     }
     
