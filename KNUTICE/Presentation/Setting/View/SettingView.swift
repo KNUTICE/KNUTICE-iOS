@@ -27,24 +27,28 @@ struct SettingView: View {
         List {
             Section(header: Text("알림")) {
                 VStack(alignment: .leading) {
-                    Toggle("서비스 알림", isOn: Binding(
-                        get: {
-                            self.viewModel.isToggleOn
-                        },
-                        set: { _, _ in })
-                    )
-                    .onTapGesture {
-                        if #available(iOS 16.0, *) {
-                            Task {
-                                if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
-                                    // Ask the system to open that URL.
-                                    await UIApplication.shared.open(url)
+                    HStack {
+                        Text("서비스 알림")
+                        
+                        Toggle("", isOn: Binding(
+                            get: {
+                                self.viewModel.isToggleOn
+                            },
+                            set: { _, _ in })
+                        )
+                        .onTapGesture {
+                            if #available(iOS 16.0, *) {
+                                Task {
+                                    if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
+                                        // Ask the system to open that URL.
+                                        await UIApplication.shared.open(url)
+                                    }
                                 }
-                            }
-                        } else {
-                            Task {
-                                if let appSettings = URL(string: UIApplication.openSettingsURLString) {
-                                    await UIApplication.shared.open(appSettings)
+                            } else {
+                                Task {
+                                    if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                                        await UIApplication.shared.open(appSettings)
+                                    }
                                 }
                             }
                         }
