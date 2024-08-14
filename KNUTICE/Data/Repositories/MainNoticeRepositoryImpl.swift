@@ -9,29 +9,20 @@ import RxSwift
 
 final class MainNoticeRepositoryImpl: MainNoticeRepository {
     private let dataSource: MainNoticeDataSource
-    private let disposeBag = DisposeBag()
     
     init(dataSource: MainNoticeDataSource) {
         self.dataSource = dataSource
     }
     
     func fetchMainNotices() -> Observable<[SectionOfNotice]> {
-        let observable = Observable<[SectionOfNotice]>.create { observer in
-            self.dataSource.fetchMainNotices().subscribe(onNext: { [weak self] result in
-                switch result {
-                case .success(let result):
-                    observer.onNext(self?.convertToNotice(result) ?? [])
-                    observer.onCompleted()
-                case .failure(let error):
-                    observer.onError(error)
+        return dataSource.fetchMainNotices()
+            .map { [weak self] in
+                guard let dto = try? $0.get() else {
+                    return []
                 }
-            })
-            .disposed(by: self.disposeBag)
-            
-            return Disposables.create()
-        }
-        
-        return observable
+                
+                return self?.convertToNotice(dto) ?? []
+            }
     }
     
     private func convertToNotice(_ dto: MainNoticeDTO) -> [SectionOfNotice] {
