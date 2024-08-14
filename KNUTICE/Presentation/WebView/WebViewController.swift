@@ -52,15 +52,9 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
     }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-//        if let aString = URL(string:(navigationAction.request.url?.absoluteString ?? "")) {
-//            UIApplication.shared.open(aString, options:[:]) { _ in }
-//        }
-        
-        guard let urlString = navigationAction.request.url?.absoluteString else {
-            return nil
+        if let aString = URL(string:(navigationAction.request.url?.absoluteString ?? "")) {
+            UIApplication.shared.open(aString, options:[:]) { _ in }
         }
-        
-        self.present(DownloadWebViewController(url: urlString), animated: true)
         
         return nil
     }
