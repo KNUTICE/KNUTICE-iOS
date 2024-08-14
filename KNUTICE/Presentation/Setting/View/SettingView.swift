@@ -36,6 +36,7 @@ struct SettingView: View {
                             },
                             set: { _, _ in })
                         )
+                        .tint(.indigo)
                         .onTapGesture {
                             if #available(iOS 16.0, *) {
                                 Task {
