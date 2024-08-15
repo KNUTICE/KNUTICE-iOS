@@ -56,7 +56,7 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
         
         //장학공지
         sectionOfNotices.append(
-            SectionOfNotice(header: "장학공지",
+            SectionOfNotice(header: "장학안내",
                             items: dto.data.scholarshipNewsTopThreeTitle.map {
                                 MainNotice(id: $0.nttId, 
                                            presentationType: .actual,
