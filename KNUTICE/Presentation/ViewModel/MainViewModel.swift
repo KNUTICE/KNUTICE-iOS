@@ -15,7 +15,6 @@ final class MainViewModel {
     
     init(repository: MainNoticeRepository) {
         self.repository = repository
-        self.fetchNotices()
     }
     
     func getCellValue() -> [SectionOfNotice] {
