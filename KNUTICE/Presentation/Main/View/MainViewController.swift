@@ -25,6 +25,8 @@ final class MainViewController: UIViewController {
         setupLayout()
         setupAttribute()
         setupNavigationBar()
+        recordEntryTime()
+        observeNotification()
         viewModel.fetchNotices()
     }
 }
