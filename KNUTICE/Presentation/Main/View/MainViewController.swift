@@ -15,6 +15,7 @@ import RxDataSources
 final class MainViewController: UIViewController {
     let viewModel: MainViewModel = AppDI.shared.mainViewModel
     let tableView = UITableView(frame: .zero, style: .grouped)
+    let headerColors: [UIColor] = [.salmon, .lightOrange, .lightGreen, .dodgerBlue]
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -24,6 +25,8 @@ final class MainViewController: UIViewController {
         setupLayout()
         setupAttribute()
         setupNavigationBar()
+        recordEntryTime()
+        observeNotification()
         viewModel.fetchNotices()
     }
 }
@@ -32,13 +35,18 @@ final class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate {
     //MARK: - Custom cell header
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerColors: [UIColor] = [.salmon, .lightOrange, .lightGreen, .dodgerBlue]
         let headerView = UIView()
-        let button = UIButton(frame: CGRect(x: 16, y: 5, width: 90, height: 40))
+        let button = UIButton(type: .system)
         headerView.addSubview(button)
+        
+        //Auto Layout
+        button.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(16)
+            make.top.bottom.right.equalToSuperview()
+        }
+        
+        //Attribute
         button.setTitle(viewModel.notices.value[section].header, for: .normal)
-        button.setTitleColor(headerColors[section], for: .normal)
-        button.setTitleColor(.highlight, for: .highlighted)
         button.contentHorizontalAlignment = .left
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
@@ -46,7 +54,6 @@ extension MainViewController: UITableViewDelegate {
         button.semanticContentAttribute = .forceRightToLeft
         button.tag = section
         button.addTarget(self, action: #selector(headerButtonTapped(_:)), for: .touchUpInside)
-        headerView.addSubview(button)
         
         return headerView
     }

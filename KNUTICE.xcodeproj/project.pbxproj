@@ -54,6 +54,7 @@
 		8EB6D20E2C6713BB004E8AC2 /* View+Fork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6D20D2C6713BB004E8AC2 /* View+Fork.swift */; };
 		8ECE2B182C35045800D7F499 /* MainNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B172C35045800D7F499 /* MainNotice.swift */; };
 		8ECE2B1A2C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B192C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift */; };
+		8EDD51A62C6D7D68002101CA /* MainViewController+NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD51A52C6D7D68002101CA /* MainViewController+NotificationCenter.swift */; };
 		8EF191FB2C4ABEB5004219BE /* AppDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF191FA2C4ABEB5004219BE /* AppDI.swift */; };
 		8EF191FD2C4ABED8004219BE /* MainNoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF191FC2C4ABED8004219BE /* MainNoticeDataSource.swift */; };
 		8EFCF8632C376AD0004A53E9 /* ScholarshipNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF8622C376AD0004A53E9 /* ScholarshipNoticeViewController.swift */; };
@@ -143,6 +144,7 @@
 		8EB6D20D2C6713BB004E8AC2 /* View+Fork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Fork.swift"; sourceTree = "<group>"; };
 		8ECE2B172C35045800D7F499 /* MainNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotice.swift; sourceTree = "<group>"; };
 		8ECE2B192C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedNoticeCellWithImage.swift; sourceTree = "<group>"; };
+		8EDD51A52C6D7D68002101CA /* MainViewController+NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+NotificationCenter.swift"; sourceTree = "<group>"; };
 		8EF191FA2C4ABEB5004219BE /* AppDI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDI.swift; sourceTree = "<group>"; };
 		8EF191FC2C4ABED8004219BE /* MainNoticeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeDataSource.swift; sourceTree = "<group>"; };
 		8EFCF8622C376AD0004A53E9 /* ScholarshipNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipNoticeViewController.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				5C89DD392BFA02F400CCCCCD /* MainViewController+Callbacks.swift */,
 				5C89DD3B2BFA03D800CCCCCD /* MainViewController+Layout.swift */,
 				5C89DD3D2BFA043200CCCCCD /* MainViewController+Binding.swift */,
+				8EDD51A52C6D7D68002101CA /* MainViewController+NotificationCenter.swift */,
 				5C56988F2BEFB3C50085E389 /* MainListCell.swift */,
 			);
 			path = View;
@@ -694,6 +697,7 @@
 				5C9B810E2BF45B5D0038EB27 /* ViewModelProtocol.swift in Sources */,
 				8ECE2B182C35045800D7F499 /* MainNotice.swift in Sources */,
 				8EFCF86D2C37810B004A53E9 /* UIFont+DynamicFont.swift in Sources */,
+				8EDD51A62C6D7D68002101CA /* MainViewController+NotificationCenter.swift in Sources */,
 				5C190A532BFDF5EB00E0254B /* NoticeRepositoryImpl.swift in Sources */,
 				5C89DD462BFA0D6800CCCCCD /* MainNoticeRepository.swift in Sources */,
 				8E00AF7B2C3676240037EC38 /* AcademicNoticeViewController.swift in Sources */,
@@ -889,7 +893,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.4;
+				MARKETING_VERSION = 0.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -927,7 +931,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.4;
+				MARKETING_VERSION = 0.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -956,7 +960,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.4.4;
+				MARKETING_VERSION = 0.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -985,7 +989,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.4.4;
+				MARKETING_VERSION = 0.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

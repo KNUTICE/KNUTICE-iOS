@@ -34,7 +34,7 @@ final class WebViewController: UIViewController {
     }
 }
 
-extension WebViewController: WKNavigationDelegate {
+extension WebViewController: WKNavigationDelegate, WKUIDelegate {
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         progressView.progress = Float(Double(webView.estimatedProgress))
     }
@@ -49,6 +49,14 @@ extension WebViewController: WKNavigationDelegate {
         //롱터치 방지
         webView.evaluateJavaScript("document.documentElement.style.webkitUserSelect='none'", completionHandler: nil)
         webView.evaluateJavaScript("document.documentElement.style.webkitTouchCallout='none'", completionHandler: nil)
+    }
+    
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        if let aString = URL(string:(navigationAction.request.url?.absoluteString ?? "")) {
+            UIApplication.shared.open(aString, options:[:]) { _ in }
+        }
+        
+        return nil
     }
 }
 

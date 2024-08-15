@@ -11,11 +11,11 @@ import Foundation
 struct ReponseDTO: Codable {
     let statusCode: Int
     let message: String
-    let data: [GeneralNoticeData]
+    let data: [NoticeData]
 }
 
 // MARK: - GeneralNoticeData
-struct GeneralNoticeData: Codable {
+struct NoticeData: Codable {
     let title: String
     let nttId, contentNumber: Int
     let contentUrl: String
