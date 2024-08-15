@@ -19,7 +19,9 @@ extension WebViewController {
     func setupAttribute() {
         view.backgroundColor = .white
         webView.navigationDelegate = self
+        webView.uiDelegate = self
         webView.allowsBackForwardNavigationGestures = false
+        webView.configuration.defaultWebpagePreferences.allowsContentJavaScript = true
         navigationItem.largeTitleDisplayMode = .never    //navigation inline title
         progressView.progressTintColor = UIColor(red: 0 / 255, green: 132 / 255, blue: 255 / 255, alpha: 1.0)
     }
