@@ -42,7 +42,7 @@ extension MainViewController: UITableViewDelegate {
         //Auto Layout
         button.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(16)
-            make.top.bottom.right.equalToSuperview()
+            make.top.bottom.equalToSuperview()
         }
         
         //Attribute
