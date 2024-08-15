@@ -37,8 +37,6 @@ final class DetailedNoticeCell: UITableViewCell {
         //for UploadDate Label
         uploadDateLabel.font = .preferredFont(forTextStyle: .caption2)
         uploadDateLabel.textColor = .subTitle
-        
-        contentView.backgroundColor = .customBackground
     }
     
     private func setupLayout() {
@@ -63,5 +61,10 @@ final class DetailedNoticeCell: UITableViewCell {
             make.leading.equalTo(subTitleLabel.snp.trailing).offset(5)
             make.bottom.equalToSuperview().offset(-20)
         }
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        contentView.backgroundColor = highlighted ? .cellHighlight : .customBackground
     }
 }

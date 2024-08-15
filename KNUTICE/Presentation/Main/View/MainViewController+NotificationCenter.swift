@@ -11,9 +11,7 @@ import Foundation
 extension MainViewController {
     //MARK: - App이 처음 실행 될 때 시간 기록
     func recordEntryTime() {
-        DispatchQueue.global().async {
-            UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: "entryTime")
-        }
+        UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: "entryTime")
     }
     
     //MARK: - Foreground 진입 감지
