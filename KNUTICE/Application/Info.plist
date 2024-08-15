@@ -2,16 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIFileSharingEnabled</key>
-	<true/>
-	<key>LSSupportsOpeningDocumentsInPlace</key>
-	<true/>
 	<key>FirebaseMessagingAutoInitEnabled</key>
 	<false/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
-		<false/>
+		<true/>
 	</dict>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
@@ -34,5 +30,7 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 </dict>
 </plist>
