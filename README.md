@@ -31,11 +31,15 @@
 
 # 📱 Preview
 <div style="display: flex; justify-content: center; margin-bottom: 10px;">
-<img width="200" alt="스크린샷 2024-08-15 23 51 59" src="https://github.com/user-attachments/assets/3692459c-3d16-4047-b1d4-d9de4e36a03c">
+<img width="190" alt="스크린샷 2024-08-15 23 51 59" src="https://github.com/user-attachments/assets/3692459c-3d16-4047-b1d4-d9de4e36a03c">
 
-<img width="200" alt="스크린샷 2024-08-15 23 52 56" src="https://github.com/user-attachments/assets/b1d1c195-e0a5-4a78-af09-49e41e78f652">
+<img width="190" alt="스크린샷 2024-08-15 23 52 56" src="https://github.com/user-attachments/assets/b1d1c195-e0a5-4a78-af09-49e41e78f652">
 
-<img width="200" alt="스크린샷 2024-08-15 23 53 12" src="https://github.com/user-attachments/assets/66c0f236-1c4d-4e72-97fe-9b288fe5c4fc">
+<img width="190" alt="스크린샷 2024-08-15 23 53 12" src="https://github.com/user-attachments/assets/66c0f236-1c4d-4e72-97fe-9b288fe5c4fc">
+
+<img width="190" alt="스크린샷 2024-08-16 08 50 48" src="https://github.com/user-attachments/assets/2601568f-c308-43e6-8f49-6011c4085b8e">
+
+<img width="190" alt="스크린샷 2024-08-16 09 07 14" src="https://github.com/user-attachments/assets/59b5e4f2-849f-4b7c-ae17-415a58a4b683">
 </div>
 
 <br>
