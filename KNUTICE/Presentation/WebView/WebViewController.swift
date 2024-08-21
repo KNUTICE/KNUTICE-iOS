@@ -49,6 +49,16 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
         //롱터치 방지
         webView.evaluateJavaScript("document.documentElement.style.webkitUserSelect='none'", completionHandler: nil)
         webView.evaluateJavaScript("document.documentElement.style.webkitTouchCallout='none'", completionHandler: nil)
+        
+        //Header와 Footer 숨김
+        webView.evaluateJavaScript("document.getElementById(\"header\").style.display='none';document.getElementById(\"footer\").style.display='none';", completionHandler: { (res, error) -> Void in
+                print("error")
+        })
+        
+        //로딩 완료 후 webView 활성화
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            webView.isHidden = false
+        }
     }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
