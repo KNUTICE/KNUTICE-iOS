@@ -2,7 +2,7 @@
 
 <br>
 
-![Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917](https://github.com/user-attachments/assets/0dd1e613-7ed0-48ce-a875-95124a2aa6a3)
+[![Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917](https://github.com/user-attachments/assets/0dd1e613-7ed0-48ce-a875-95124a2aa6a3)](https://apps.apple.com/app/knutice/id6547855991)
 
 <br>
 
