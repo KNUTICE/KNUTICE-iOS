@@ -23,7 +23,7 @@ final class TokenRepositoryImpl: TokenRepository {
         
         return dataSource.sendPostRequest(to: remoteURL, params: params)
             .map {
-                if let statusCode = try? $0.get().statusCode, statusCode == 200 {
+                if let statusCode = try? $0.get().result.resultCode, statusCode == 200 {
                     return true
                 }
                 
