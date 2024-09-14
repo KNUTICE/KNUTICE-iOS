@@ -15,6 +15,7 @@ import RxDataSources
 final class MainViewController: UIViewController {
     let viewModel: MainViewModel = AppDI.shared.mainViewModel
     let tableView = UITableView(frame: .zero, style: .grouped)
+    let refreshControl = UIRefreshControl()
     let headerColors: [UIColor] = [.salmon, .lightOrange, .lightGreen, .dodgerBlue]
     let disposeBag = DisposeBag()
     
