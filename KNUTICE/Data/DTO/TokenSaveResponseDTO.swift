@@ -7,8 +7,13 @@
 
 import Foundation
 
-struct TokenSaveResponseDTO: Decodable {
-    let statusCode: Int
+// MARK: - TokenSaveResponseDTO
+struct TokenSaveResponseDTO: Codable {
+    let result: RequestResult
+    let body: TokenSaveResponseBody
+}
+
+// MARK: - TokenSaveResponseBody
+struct TokenSaveResponseBody: Codable {
     let message: String
-    let data: String?
 }
