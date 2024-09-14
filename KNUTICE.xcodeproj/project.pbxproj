@@ -11,7 +11,7 @@
 		5C190A462BFD6BDB00E0254B /* Bundle+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A452BFD6BDB00E0254B /* Bundle+URL.swift */; };
 		5C190A4F2BFDF4E100E0254B /* NoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A4E2BFDF4E100E0254B /* NoticeRepository.swift */; };
 		5C190A532BFDF5EB00E0254B /* NoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A522BFDF5EB00E0254B /* NoticeRepositoryImpl.swift */; };
-		5C190A552BFDF66600E0254B /* ReponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A542BFDF66600E0254B /* ReponseDTO.swift */; };
+		5C190A552BFDF66600E0254B /* NoticeReponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A542BFDF66600E0254B /* NoticeReponseDTO.swift */; };
 		5C190A572BFE023000E0254B /* NoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A562BFE023000E0254B /* NoticeDataSource.swift */; };
 		5C5698902BEFB3C50085E389 /* MainListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C56988F2BEFB3C50085E389 /* MainListCell.swift */; };
 		5C5698922BEFB4A20085E389 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698912BEFB4A20085E389 /* MainViewModel.swift */; };
@@ -27,7 +27,7 @@
 		5C89DD3E2BFA043200CCCCCD /* MainViewController+Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD3D2BFA043200CCCCCD /* MainViewController+Binding.swift */; };
 		5C89DD462BFA0D6800CCCCCD /* MainNoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD452BFA0D6800CCCCCD /* MainNoticeRepository.swift */; };
 		5C89DD492BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD482BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift */; };
-		5C89DD502BFA120B00CCCCCD /* MainNoticeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD4F2BFA120B00CCCCCD /* MainNoticeDTO.swift */; };
+		5C89DD502BFA120B00CCCCCD /* MainNoticeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD4F2BFA120B00CCCCCD /* MainNoticeResponseDTO.swift */; };
 		5C9B81072BF451540038EB27 /* GeneralNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B81062BF451540038EB27 /* GeneralNoticeViewController.swift */; };
 		5C9B810B2BF451BC0038EB27 /* NoticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B810A2BF451BC0038EB27 /* NoticeViewModel.swift */; };
 		5C9B810E2BF45B5D0038EB27 /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B810D2BF45B5D0038EB27 /* ViewModelProtocol.swift */; };
@@ -43,9 +43,10 @@
 		8E5385782C644C3F00AF151B /* TokenRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385772C644C3F00AF151B /* TokenRepositoryImpl.swift */; };
 		8E53857A2C644D9600AF151B /* TokenDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385792C644D9600AF151B /* TokenDataSource.swift */; };
 		8E5385872C64A24A00AF151B /* ci_post_clone.sh in Resources */ = {isa = PBXBuildFile; fileRef = 8E53857E2C647D9A00AF151B /* ci_post_clone.sh */; };
-		8E53858B2C64BBA800AF151B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E53858A2C64BBA800AF151B /* GoogleService-Info.plist */; };
 		8E54C84A2C5E6F5E0070E689 /* AppDelegate+Messaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E54C8492C5E6F5E0070E689 /* AppDelegate+Messaging.swift */; };
 		8E5D1CF82C38D2E50027E8BD /* Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D1CF72C38D2E50027E8BD /* Scrollable.swift */; };
+		8E613E9E2C951C8D006FC272 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E613E9D2C951C8D006FC272 /* GoogleService-Info.plist */; };
+		8E613EA02C95214C006FC272 /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E613E9F2C95214C006FC272 /* RequestResult.swift */; };
 		8EA9ACA92C46AC3C00C9E287 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9ACA82C46AC3C00C9E287 /* WebView.swift */; };
 		8EA9ACAB2C46AEC900C9E287 /* OpenSourceLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9ACAA2C46AEC900C9E287 /* OpenSourceLicenseView.swift */; };
 		8EB6D2002C663627004E8AC2 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6D1FF2C663627004E8AC2 /* NotificationService.swift */; };
@@ -96,7 +97,7 @@
 		5C190A452BFD6BDB00E0254B /* Bundle+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+URL.swift"; sourceTree = "<group>"; };
 		5C190A4E2BFDF4E100E0254B /* NoticeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeRepository.swift; sourceTree = "<group>"; };
 		5C190A522BFDF5EB00E0254B /* NoticeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeRepositoryImpl.swift; sourceTree = "<group>"; };
-		5C190A542BFDF66600E0254B /* ReponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReponseDTO.swift; sourceTree = "<group>"; };
+		5C190A542BFDF66600E0254B /* NoticeReponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeReponseDTO.swift; sourceTree = "<group>"; };
 		5C190A562BFE023000E0254B /* NoticeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDataSource.swift; sourceTree = "<group>"; };
 		5C56988F2BEFB3C50085E389 /* MainListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListCell.swift; sourceTree = "<group>"; };
 		5C5698912BEFB4A20085E389 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -114,7 +115,7 @@
 		5C89DD3D2BFA043200CCCCCD /* MainViewController+Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+Binding.swift"; sourceTree = "<group>"; };
 		5C89DD452BFA0D6800CCCCCD /* MainNoticeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeRepository.swift; sourceTree = "<group>"; };
 		5C89DD482BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeRepositoryImpl.swift; sourceTree = "<group>"; };
-		5C89DD4F2BFA120B00CCCCCD /* MainNoticeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeDTO.swift; sourceTree = "<group>"; };
+		5C89DD4F2BFA120B00CCCCCD /* MainNoticeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeResponseDTO.swift; sourceTree = "<group>"; };
 		5C9B81062BF451540038EB27 /* GeneralNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticeViewController.swift; sourceTree = "<group>"; };
 		5C9B810A2BF451BC0038EB27 /* NoticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewModel.swift; sourceTree = "<group>"; };
 		5C9B810D2BF45B5D0038EB27 /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -131,10 +132,11 @@
 		8E5385772C644C3F00AF151B /* TokenRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepositoryImpl.swift; sourceTree = "<group>"; };
 		8E5385792C644D9600AF151B /* TokenDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDataSource.swift; sourceTree = "<group>"; };
 		8E53857E2C647D9A00AF151B /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
-		8E53858A2C64BBA800AF151B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8E54C8462C5E63940070E689 /* KNUTICE.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KNUTICE.entitlements; sourceTree = "<group>"; };
 		8E54C8492C5E6F5E0070E689 /* AppDelegate+Messaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Messaging.swift"; sourceTree = "<group>"; };
 		8E5D1CF72C38D2E50027E8BD /* Scrollable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scrollable.swift; sourceTree = "<group>"; };
+		8E613E9D2C951C8D006FC272 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8E613E9F2C95214C006FC272 /* RequestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestResult.swift; sourceTree = "<group>"; };
 		8EA9ACA82C46AC3C00C9E287 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		8EA9ACAA2C46AEC900C9E287 /* OpenSourceLicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSourceLicenseView.swift; sourceTree = "<group>"; };
 		8EB6D1FD2C663627004E8AC2 /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -287,7 +289,7 @@
 		5C8256402BE5CE1A0038D4C8 /* KNUTICE */ = {
 			isa = PBXGroup;
 			children = (
-				8E53858A2C64BBA800AF151B /* GoogleService-Info.plist */,
+				8E613E9D2C951C8D006FC272 /* GoogleService-Info.plist */,
 				8E54C8462C5E63940070E689 /* KNUTICE.entitlements */,
 				5C190A4C2BFDD92A00E0254B /* Utils */,
 				5C56988E2BEFB37D0085E389 /* Application */,
@@ -388,9 +390,10 @@
 		5C89DD4E2BFA118B00CCCCCD /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				5C89DD4F2BFA120B00CCCCCD /* MainNoticeDTO.swift */,
-				5C190A542BFDF66600E0254B /* ReponseDTO.swift */,
+				5C89DD4F2BFA120B00CCCCCD /* MainNoticeResponseDTO.swift */,
+				5C190A542BFDF66600E0254B /* NoticeReponseDTO.swift */,
 				8E5385752C644B4400AF151B /* TokenSaveResponseDTO.swift */,
+				8E613E9F2C95214C006FC272 /* RequestResult.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -606,7 +609,7 @@
 			files = (
 				5C190A442BFD6AA500E0254B /* ServiceInfo.plist in Resources */,
 				5C82564B2BE5CE1B0038D4C8 /* Assets.xcassets in Resources */,
-				8E53858B2C64BBA800AF151B /* GoogleService-Info.plist in Resources */,
+				8E613E9E2C951C8D006FC272 /* GoogleService-Info.plist in Resources */,
 				8E5385872C64A24A00AF151B /* ci_post_clone.sh in Resources */,
 				5C82564E2BE5CE1B0038D4C8 /* Base in Resources */,
 			);
@@ -669,7 +672,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EFCF8632C376AD0004A53E9 /* ScholarshipNoticeViewController.swift in Sources */,
-				5C89DD502BFA120B00CCCCCD /* MainNoticeDTO.swift in Sources */,
+				5C89DD502BFA120B00CCCCCD /* MainNoticeResponseDTO.swift in Sources */,
 				5CD2EFC12BF356FB00066C87 /* UIViewController+Preview.swift in Sources */,
 				8E5385742C644AB000AF151B /* TokenRepository.swift in Sources */,
 				5C5698922BEFB4A20085E389 /* MainViewModel.swift in Sources */,
@@ -677,6 +680,7 @@
 				8ECE2B1A2C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift in Sources */,
 				5C9B810B2BF451BC0038EB27 /* NoticeViewModel.swift in Sources */,
 				8EA9ACAB2C46AEC900C9E287 /* OpenSourceLicenseView.swift in Sources */,
+				8E613EA02C95214C006FC272 /* RequestResult.swift in Sources */,
 				5C89DD3E2BFA043200CCCCCD /* MainViewController+Binding.swift in Sources */,
 				5C89DD492BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift in Sources */,
 				8EB6D20C2C66FC5B004E8AC2 /* SettingViewModel.swift in Sources */,
@@ -687,7 +691,7 @@
 				8E00AF712C36233C0037EC38 /* WebViewController+Layout.swift in Sources */,
 				8EF191FD2C4ABED8004219BE /* MainNoticeDataSource.swift in Sources */,
 				8E5385762C644B4400AF151B /* TokenSaveResponseDTO.swift in Sources */,
-				5C190A552BFDF66600E0254B /* ReponseDTO.swift in Sources */,
+				5C190A552BFDF66600E0254B /* NoticeReponseDTO.swift in Sources */,
 				8EB6D20E2C6713BB004E8AC2 /* View+Fork.swift in Sources */,
 				8EA9ACA92C46AC3C00C9E287 /* WebView.swift in Sources */,
 				8E54C84A2C5E6F5E0070E689 /* AppDelegate+Messaging.swift in Sources */,
@@ -894,7 +898,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -933,7 +937,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -962,7 +966,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -991,7 +995,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
