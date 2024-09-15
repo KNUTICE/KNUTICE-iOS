@@ -18,8 +18,15 @@ final class TokenRepositoryImpl: TokenRepository {
     func registerToken(token: String) -> Observable<Bool> {
         let remoteURL = Bundle.main.tokenURL
         let params = [
-            "deviceToken": token
-        ]
+            "result": [
+                "resultCode": 0,
+                "resultMessage": "string",
+                "resultDescription": "string"
+            ],
+            "body": [
+                "deviceToken": token
+            ]
+        ] as [String : Any]
         
         return dataSource.sendPostRequest(to: remoteURL, params: params)
             .map {
