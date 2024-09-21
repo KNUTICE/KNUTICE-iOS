@@ -13,11 +13,20 @@ import SwiftUI
 import RxDataSources
 
 final class MainViewController: UIViewController {
-    let viewModel: MainViewModel = AppDI.shared.mainViewModel
+    let viewModel: MainViewModel
     let tableView = UITableView(frame: .zero, style: .grouped)
     let refreshControl = UIRefreshControl()
     let headerColors: [UIColor] = [.salmon, .lightOrange, .lightGreen, .dodgerBlue]
     let disposeBag = DisposeBag()
+    
+    init(viewModel: MainViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,7 +107,8 @@ extension MainViewController: UITableViewDelegate {
 //MARK: - Preview
 struct Preview: PreviewProvider {
     static var previews: some View {
-        let viewController = MainViewController()
+        let viewController = MainViewController(viewModel: AppDI.shared.mainViewModel)
+        
         UINavigationController(rootViewController: viewController)
             .makePreview()
             .onAppear {
