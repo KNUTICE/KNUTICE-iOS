@@ -13,9 +13,18 @@ import RxDataSources
 
 final class GeneralNoticeViewController: UIViewController, TableViewConfigurable, DataBindable, Scrollable {    
     let tableView: UITableView = UITableView(frame: .zero, style: .plain)
-    let viewModel: NoticeViewModel = AppDI.shared.generalNoticeViewModel
+    let viewModel: NoticeViewModel
     let disposeBag = DisposeBag()
     private let navigationTitle: String = "일반소식"
+    
+    init(viewModel: NoticeViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +66,7 @@ extension GeneralNoticeViewController: UITableViewDelegate {
 //MARK: - Preview
 #if DEBUG
 #Preview {
-    GeneralNoticeViewController()
+    GeneralNoticeViewController(viewModel: AppDI.shared.generalNoticeViewModel)
         .makePreview()
 }
 #endif
