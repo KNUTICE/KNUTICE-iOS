@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScen = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScen)
         
-        let mainViewController = MainViewController()
+        let mainViewController = MainViewController(viewModel: AppDI.shared.mainViewModel)
         mainViewController.bind()
         mainViewController.bindRefreshControl()
         let navigationViewController = UINavigationController(rootViewController: mainViewController)
