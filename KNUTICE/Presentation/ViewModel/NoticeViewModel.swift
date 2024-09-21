@@ -48,7 +48,7 @@ extension NoticeViewModel: ViewModel {
                     return
                 }
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self?.isFetching.accept(false)
                     self?.notices.accept(temp)
                 }
