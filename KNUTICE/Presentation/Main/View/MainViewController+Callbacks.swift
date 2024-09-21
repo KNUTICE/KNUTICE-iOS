@@ -29,7 +29,7 @@ extension MainViewController {
     
     //MARK: - General Notice Button Callback Function
     func navigateToGeneralNotice(_ sender: UIButton) {
-        let viewController = GeneralNoticeViewController()
+        let viewController = GeneralNoticeViewController(viewModel: AppDI.shared.generalNoticeViewModel)
         viewController.bind()
         navigationController?.pushViewController(viewController, animated: true)
     }
