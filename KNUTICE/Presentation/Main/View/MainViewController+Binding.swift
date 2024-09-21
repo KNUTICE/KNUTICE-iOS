@@ -14,6 +14,7 @@ extension MainViewController {
         let dataSource = RxTableViewSectionedReloadDataSource<SectionOfNotice>(configureCell: { dataSource, tableView, indexPath, item -> UITableViewCell in            
             let cell = tableView.dequeueReusableCell(withIdentifier: MainListCell.reuseIdentifier, for: indexPath) as! MainListCell
             cell.selectionStyle = .none
+            cell.backgroundColor = .customBackground
             
             if item.presentationType == .skeleton {
                 cell.configureSkeleton(with: item)
