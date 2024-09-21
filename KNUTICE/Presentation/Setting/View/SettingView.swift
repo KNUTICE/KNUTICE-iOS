@@ -69,7 +69,7 @@ struct SettingView: View {
                     
                     Spacer()
                     
-                    Text("\(viewModel.appVersion)")
+                    Text("\(viewModel.appVersion) beta 2")
                 }
                 .padding([.top, .bottom], 10)
                 

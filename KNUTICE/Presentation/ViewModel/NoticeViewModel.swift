@@ -34,7 +34,7 @@ extension NoticeViewModel: ViewModel {
     }
     
     func fetchNextNotices() {
-        guard let lastNumber = notices.value.last?.boardNumber else {
+        guard let lastNumber = notices.value.last?.id else {
             return
         }
         
