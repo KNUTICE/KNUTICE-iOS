@@ -9,15 +9,15 @@ import RxSwift
 import Alamofire
 
 protocol MainNoticeDataSource {
-    func fetchMainNotices() -> Observable<Result<MainNoticeDTO, Error>>
+    func fetchMainNotices() -> Observable<Result<MainNoticeResponseDTO, Error>>
 }
 
 final class MainNoticeDataSourceImpl: MainNoticeDataSource {
-    func fetchMainNotices() -> Observable<Result<MainNoticeDTO, Error>> {
+    func fetchMainNotices() -> Observable<Result<MainNoticeResponseDTO, Error>> {
         let url = Bundle.main.mainNoticeURL
         return Observable.create { observer in
             AF.request(url)
-                .responseDecodable(of: MainNoticeDTO.self) { response in
+                .responseDecodable(of: MainNoticeResponseDTO.self) { response in
                     switch response.result {
                     case .success(let result):    //success
                         observer.onNext(.success(result))

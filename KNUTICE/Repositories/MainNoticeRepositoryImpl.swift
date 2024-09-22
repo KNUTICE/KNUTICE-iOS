@@ -25,58 +25,59 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
             }
     }
     
-    private func convertToNotice(_ dto: MainNoticeDTO) -> [SectionOfNotice] {
+    private func convertToNotice(_ dto: MainNoticeResponseDTO) -> [SectionOfNotice] {
         var sectionOfNotices = [SectionOfNotice]()
         
         //일반공지
         sectionOfNotices.append(
             SectionOfNotice(header: "일반소식",
-                            items: dto.data.generalNewsTopThreeTitle.map {
-                                MainNotice(id: $0.nttId,
+                            items: dto.body.latestThreeGeneralNews.map {
+                                MainNotice(id: $0.nttID,
                                            presentationType: .actual,
                                            title: $0.title,
-                                           contentUrl: $0.contentUrl,
+                                           contentUrl: $0.contentURL,
                                            department: $0.departName,
-                                           uploadDate: $0.registrationDate)
-                            })
+                                           uploadDate: $0.registeredAt)
+                            }
+                           )
         )
         
         //학사공지
         sectionOfNotices.append(
             SectionOfNotice(header: "학사공지",
-                            items: dto.data.academicNewsTopThreeTitle.map {
-                                MainNotice(id: $0.nttId, 
+                            items: dto.body.latestThreeAcademicNews.map {
+                                MainNotice(id: $0.nttID,
                                            presentationType: .actual,
                                            title: $0.title,
-                                           contentUrl: $0.contentUrl,
+                                           contentUrl: $0.contentURL,
                                            department: $0.departName,
-                                           uploadDate: $0.registrationDate)
+                                           uploadDate: $0.registeredAt)
                             })
         )
         
         //장학공지
         sectionOfNotices.append(
             SectionOfNotice(header: "장학안내",
-                            items: dto.data.scholarshipNewsTopThreeTitle.map {
-                                MainNotice(id: $0.nttId, 
+                            items: dto.body.latestThreeScholarshipNews.map {
+                                MainNotice(id: $0.nttID,
                                            presentationType: .actual,
                                            title: $0.title,
-                                           contentUrl: $0.contentUrl,
+                                           contentUrl: $0.contentURL,
                                            department: $0.departName,
-                                           uploadDate: $0.registrationDate)
+                                           uploadDate: $0.registeredAt)
                             })
         )
         
         //행사안내
         sectionOfNotices.append(
             SectionOfNotice(header: "행사안내",
-                            items: dto.data.eventNewsTopThreeTitle.map {
-                                MainNotice(id: $0.nttId, 
+                            items: dto.body.latestThreeEventNews.map {
+                                MainNotice(id: $0.nttID,
                                            presentationType: .actual,
                                            title: $0.title,
-                                           contentUrl: $0.contentUrl,
+                                           contentUrl: $0.contentURL,
                                            department: $0.departName,
-                                           uploadDate: $0.registrationDate)
+                                           uploadDate: $0.registeredAt)
                             })
         )
         

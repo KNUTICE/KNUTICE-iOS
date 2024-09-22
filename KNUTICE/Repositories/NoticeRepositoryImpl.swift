@@ -28,7 +28,7 @@ final class NoticeRepositoryImpl: NoticeRepository {
     }
     
     func fetchNotices(after number: Int) -> Observable<[Notice]> {
-        return dataSource.fetchNotices(from: self.remoteURL + "?startBoardNumber=\(number)")
+        return dataSource.fetchNotices(from: self.remoteURL + "&nttId=\(number)")
             .map { [weak self] in
                 guard let dto = try? $0.get() else {
                     return []
