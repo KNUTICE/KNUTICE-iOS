@@ -14,6 +14,8 @@ cat <<EOF > "/Volumes/workspace/repository/KNUTICE/Application/ServiceInfo.plist
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>Report_URL</key>
+    <string>${Report_URL}</string>
     <key>Token_URL</key>
     <string>${Token_URL}</string>
     <key>Event_Notice_URL</key>
