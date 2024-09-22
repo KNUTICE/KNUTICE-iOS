@@ -91,8 +91,10 @@ struct SettingView: View {
                 Text("오픈소스 라이선스")
                     .padding([.top, .bottom])
                     .background {
-                        NavigationLink("", destination: Text("The detail view"))
-                            .opacity(0)
+                        NavigationLink("") {
+                            OpenSourceLicenseView()
+                        }
+                        .opacity(0)
                     }
             } header: {
                 Text("앱 정보")
