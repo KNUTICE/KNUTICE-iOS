@@ -107,7 +107,7 @@ extension MainViewController: UITableViewDelegate {
 //MARK: - Preview
 struct Preview: PreviewProvider {
     static var previews: some View {
-        let viewController = MainViewController(viewModel: AppDI.shared.mainViewModel)
+        let viewController = MainViewController(viewModel: AppDI.shared.makeMainViewModel())
         
         UINavigationController(rootViewController: viewController)
             .makePreview()
