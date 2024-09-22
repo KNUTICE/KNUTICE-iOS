@@ -117,6 +117,6 @@ struct SettingView: View {
 
 #Preview {
     NavigationView {
-        SettingView(viewModel: AppDI.shared.settingViewModel)
+        SettingView(viewModel: AppDI.shared.makeSettingViewModel())
     }
 }

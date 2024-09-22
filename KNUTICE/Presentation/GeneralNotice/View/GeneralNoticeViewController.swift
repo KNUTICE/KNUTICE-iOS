@@ -66,7 +66,7 @@ extension GeneralNoticeViewController: UITableViewDelegate {
 //MARK: - Preview
 #if DEBUG
 #Preview {
-    GeneralNoticeViewController(viewModel: AppDI.shared.generalNoticeViewModel)
+    GeneralNoticeViewController(viewModel: AppDI.shared.makeGeneralNoticeViewModel())
         .makePreview()
 }
 #endif
