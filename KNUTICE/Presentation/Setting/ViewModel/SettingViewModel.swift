@@ -9,7 +9,7 @@ import Combine
 import Foundation
 import UserNotifications
 
-final class SettingViewModel: ObservableObject {
+final class SettingViewModel: ObservableObject, AppVersionProvidable {
     @Published var isToggleOn: Bool = false
     @Published var appVersion: String = ""
     
@@ -30,9 +30,7 @@ final class SettingViewModel: ObservableObject {
         }
     }
     
-    func getAppVersion() {
-        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            appVersion = version
-        }
+    func getVersion() {
+        appVersion = getAppVersion()
     }
 }
