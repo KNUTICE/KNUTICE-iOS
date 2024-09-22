@@ -59,4 +59,11 @@ struct AppDI {
     }
     
     private init() {}
+    
+    func makeReportViewModel() -> ReportViewModel {
+        //Presentation
+        let viewModel = ReportViewModel()
+        
+        return viewModel
+    }
 }
