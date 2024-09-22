@@ -104,7 +104,7 @@ struct SettingView: View {
         .navigationTitle("설정")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            viewModel.getAppVersion()
+            viewModel.getVersion()
             viewModel.getNotificationSettings()
         }
         .fullScreenCover(isPresented: $isShowingReport) {

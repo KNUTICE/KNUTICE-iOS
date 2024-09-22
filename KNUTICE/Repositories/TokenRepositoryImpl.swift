@@ -6,7 +6,9 @@
 //
 
 import RxSwift
+import Combine
 import Foundation
+import FirebaseMessaging
 
 final class TokenRepositoryImpl: TokenRepository {
     private let dataSource: TokenDataSource
@@ -36,5 +38,18 @@ final class TokenRepositoryImpl: TokenRepository {
                 
                 return false
             }
+    }
+    
+    func getFCMToken() -> AnyPublisher<String, any Error> {
+        return Future { promise in
+            Messaging.messaging().token { token, error in
+                if let error = error {
+                    promise(.failure(error))
+                } else {
+                    promise(.success(token ?? ""))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
     }
 }

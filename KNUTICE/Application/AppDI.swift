@@ -61,8 +61,17 @@ struct AppDI {
     private init() {}
     
     func makeReportViewModel() -> ReportViewModel {
+        //Data
+        let tokenDataSource = TokenDataSourceImpl()
+        let reportDataSource = ReportDataSourceImpl()
+        let tokenRepository = TokenRepositoryImpl(dataSource: tokenDataSource)
+        let reportRepository = ReportRepositoryImpl(dataSource: reportDataSource)
+        
+        //Domain
+        let reportService = ReportServiceImpl(tokenRepository: tokenRepository, reportRepository: reportRepository)
+        
         //Presentation
-        let viewModel = ReportViewModel()
+        let viewModel = ReportViewModel(reportService: reportService)
         
         return viewModel
     }
