@@ -13,14 +13,14 @@ protocol NoticeRepository {
 }
 
 extension NoticeRepository {    
-    func converToNotice(_ dto: ReponseDTO) -> [Notice] {
-        return dto.data.map {
-            return Notice(id: $0.nttId,
+    func converToNotice(_ dto: NoticeReponseDTO) -> [Notice] {
+        return dto.body.map {
+            return Notice(id: $0.nttID,
                           boardNumber: $0.contentNumber,
                           title: $0.title,
-                          contentUrl: $0.contentUrl,
+                          contentUrl: $0.contentURL,
                           department: $0.departName,
-                          uploadDate: $0.registrationDate,
+                          uploadDate: $0.registeredAt,
                           imageUrl: $0.contentImage)
         }
     }
