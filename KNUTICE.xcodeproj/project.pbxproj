@@ -215,7 +215,6 @@
 		5C5698892BEFB2BE0085E389 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				8E3F02272C9FC76600AE89D5 /* New Group */,
 				8E0C3F862C9EC92A005E2A16 /* Report */,
 				8E00AF802C3680090037EC38 /* Commons */,
 				8E00AF792C36755B0037EC38 /* ViewModel */,
@@ -525,13 +524,6 @@
 				8E3F021D2C9FB46100AE89D5 /* ReportService.swift */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		8E3F02272C9FC76600AE89D5 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		8E53857D2C647D5A00AF151B /* ci_scripts */ = {
