@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LightTextView: UIViewRepresentable {
     @Binding var text: String
+    @Binding var isLoading: Bool
     
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
@@ -24,7 +25,13 @@ struct LightTextView: UIViewRepresentable {
         return textView
     }
     
-    func updateUIView(_ uiView: UITextView, context: Context) {}
+    func updateUIView(_ uiView: UITextView, context: Context) {
+        if isLoading {
+            uiView.isEditable = false
+        } else {
+            uiView.isEditable = true
+        }
+    }
     
     func makeCoordinator() -> Coordinator {
         return Coordinator(parent: self)
