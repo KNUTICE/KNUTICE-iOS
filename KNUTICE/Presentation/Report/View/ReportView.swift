@@ -36,7 +36,7 @@ struct ReportView: View {
                     .font(.caption)
                     .padding(.bottom)
                     
-                    LightTextView(text: $viewModel.content)
+                    LightTextView(text: $viewModel.content, isLoading: $viewModel.isLoading)
                         .focused($focused)
                         .frame(height: 400)
                         .cornerRadius(20)
@@ -91,7 +91,10 @@ struct ReportView: View {
             }
             
             if viewModel.isLoading {
-                CustomProgressView()
+                ProgressView()
+                    .controlSize(.large)
+                    .tint(.gray)
+                    .offset(y: -30)
             }
         }
         .alert(isPresented: $viewModel.isShowingAlert) {

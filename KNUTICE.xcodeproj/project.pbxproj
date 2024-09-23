@@ -46,7 +46,6 @@
 		8E3F02242C9FB81C00AE89D5 /* ReportDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02232C9FB81C00AE89D5 /* ReportDataSource.swift */; };
 		8E3F02262C9FB86400AE89D5 /* ReportResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02252C9FB85E00AE89D5 /* ReportResponseDTO.swift */; };
 		8E3F02292C9FC77E00AE89D5 /* AppVersionProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02282C9FC77600AE89D5 /* AppVersionProvidable.swift */; };
-		8E3F022B2C9FCF0000AE89D5 /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F022A2C9FCF0000AE89D5 /* CustomProgressView.swift */; };
 		8E3F022D2CA0023A00AE89D5 /* VIew+TextEditorBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F022C2CA0022D00AE89D5 /* VIew+TextEditorBackground.swift */; };
 		8E5385742C644AB000AF151B /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385732C644AB000AF151B /* TokenRepository.swift */; };
 		8E5385762C644B4400AF151B /* TokenSaveResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385752C644B4400AF151B /* TokenSaveResponseDTO.swift */; };
@@ -146,7 +145,6 @@
 		8E3F02232C9FB81C00AE89D5 /* ReportDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDataSource.swift; sourceTree = "<group>"; };
 		8E3F02252C9FB85E00AE89D5 /* ReportResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportResponseDTO.swift; sourceTree = "<group>"; };
 		8E3F02282C9FC77600AE89D5 /* AppVersionProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionProvidable.swift; sourceTree = "<group>"; };
-		8E3F022A2C9FCF0000AE89D5 /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
 		8E3F022C2CA0022D00AE89D5 /* VIew+TextEditorBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VIew+TextEditorBackground.swift"; sourceTree = "<group>"; };
 		8E5385732C644AB000AF151B /* TokenRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepository.swift; sourceTree = "<group>"; };
 		8E5385752C644B4400AF151B /* TokenSaveResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenSaveResponseDTO.swift; sourceTree = "<group>"; };
@@ -452,7 +450,6 @@
 				8E3F022C2CA0022D00AE89D5 /* VIew+TextEditorBackground.swift */,
 				5CD2EFC02BF356FB00066C87 /* UIViewController+Preview.swift */,
 				8EFCF86C2C37810B004A53E9 /* UIFont+DynamicFont.swift */,
-				8E3F022A2C9FCF0000AE89D5 /* CustomProgressView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -742,7 +739,6 @@
 				8E613EA02C95214C006FC272 /* RequestResult.swift in Sources */,
 				5C89DD3E2BFA043200CCCCCD /* MainViewController+Binding.swift in Sources */,
 				5C89DD492BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift in Sources */,
-				8E3F022B2C9FCF0000AE89D5 /* CustomProgressView.swift in Sources */,
 				8EB6D20C2C66FC5B004E8AC2 /* SettingViewModel.swift in Sources */,
 				8E0BA6DD2C33CA1300677A79 /* DetailedNoticeCell.swift in Sources */,
 				8EF191FB2C4ABEB5004219BE /* AppDI.swift in Sources */,
