@@ -20,7 +20,7 @@ struct ReportView: View {
         navBarAppearance.backgroundColor = .reportBackground
         navBarAppearance.shadowColor = .clear
         UINavigationBar.appearance().standardAppearance = navBarAppearance
-        UITextField.appearance().keyboardAppearance = .light
+        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
     }
     
     var body: some View {
@@ -33,17 +33,12 @@ struct ReportView: View {
                         Text("• 상황을 구체적으로 설명해 주시면 서비스 개선에 도움이 됩니다.")
                     }
                     .foregroundStyle(.gray)
-                    .font(.footnote)
+                    .font(.caption)
                     .padding(.bottom)
                     
-                    TextEditor(text: $viewModel.content)
+                    LightTextView(text: $viewModel.content)
                         .focused($focused)
-                        .accentColor(.black)
-                        .transparentScrolling()
-                        .padding()
-                        .foregroundStyle(.black)
                         .frame(height: 400)
-                        .background(.white)
                         .cornerRadius(20)
                         .overlay {
                             Text("\(viewModel.content.count) / 500")
@@ -55,11 +50,12 @@ struct ReportView: View {
                             
                             if viewModel.content.count == 0 {
                                 Text("최소 5자, 최대 500자까지 입력 가능해요.")
+                                    .font(.footnote)
                                     .padding()
                                     .foregroundStyle(.gray)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .frame(maxHeight: .infinity, alignment: .top)
-                                    .offset(x: 8, y: 8)
+                                    .offset(x: 6, y: 5)
                             }
                         }
                     
