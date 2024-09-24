@@ -29,7 +29,3 @@ end
 target 'KNUTICE' do
   pods
 end
-
-target 'KNUTICEUnitTests' do
-  pods
-end
