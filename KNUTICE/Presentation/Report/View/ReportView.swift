@@ -61,7 +61,7 @@ struct ReportView: View {
                     
                     Button {
                         focused = false
-                        viewModel.report(device: UIDevice.current.name)
+                        viewModel.report(device: UIDevice.current.modelIdnetifier)
                     } label: {
                         Text("제출하기")
                             .bold()
