@@ -10,7 +10,7 @@ import Foundation
 // MARK: - NoticeReponseDTO
 struct NoticeReponseDTO: Codable {
     let result: RequestResult
-    let body: [NoticeReponseBody]
+    let body: [NoticeReponseBody]?
 }
 
 // MARK: - Body

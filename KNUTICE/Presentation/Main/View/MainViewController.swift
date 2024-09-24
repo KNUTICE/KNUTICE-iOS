@@ -46,21 +46,40 @@ extension MainViewController: UITableViewDelegate {
     //MARK: - Custom cell header
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
+        let title = UILabel()
+        let arrowImage = UIImage(systemName: "chevron.right")
         let button = UIButton(type: .system)
+        headerView.addSubview(title)
         headerView.addSubview(button)
         
         //Auto Layout
-        button.snp.makeConstraints { make in
+        title.snp.makeConstraints { make in
             make.leading.equalTo(headerView.safeAreaLayoutGuide).inset(16)
             make.top.bottom.equalToSuperview()
         }
         
-        //Attribute
-        button.setTitle(viewModel.notices.value[section].header, for: .normal)
-        button.contentHorizontalAlignment = .left
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
-        button.tintColor = headerColors[section]
+        button.snp.makeConstraints { make in
+            make.trailing.equalTo(headerView.safeAreaLayoutGuide).inset(16)
+            make.centerY.equalToSuperview()
+        }
+        
+        //Title Attribute
+        title.text = viewModel.notices.value[section].header
+        title.textColor = headerColors[section]
+        title.font = UIFont.boldSystemFont(ofSize: 20)
+        
+        //Arrow Image Attribute
+        let targetSize = CGSize(width: 8, height: 12)
+        let renderer = UIGraphicsImageRenderer(size: targetSize)
+        let resizedImage = renderer.image { context in
+            arrowImage?.draw(in: CGRect(origin: .zero, size: targetSize))
+        }
+        
+        //Button Attribute
+        button.setTitle("더보기", for: .normal)
+        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
+        button.tintColor = .grayButton
+        button.setImage(resizedImage, for: .normal)
         button.semanticContentAttribute = .forceRightToLeft
         button.tag = section
         button.addTarget(self, action: #selector(headerButtonTapped(_:)), for: .touchUpInside)
