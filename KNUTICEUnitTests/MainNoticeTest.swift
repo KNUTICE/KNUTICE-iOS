@@ -1,5 +1,5 @@
 //
-//   Put the code you want to measure the time of here.         }     }  } MainNoticeTest.swift
+//  MainNoticeTest.swift
 //  KNUTICEUnitTests
 //
 //  Created by 이정훈 on 9/24/24.
