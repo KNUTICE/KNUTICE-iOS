@@ -104,11 +104,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-KNUTICEUnitTests.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>PromisesObjC-FBLPromises_Privacy.xcscheme</key>
 		<dict>
 			<key>isShown</key>
