@@ -17,6 +17,6 @@ extension AppVersionProvidable {
             return ""
         }
         
-        return version
+        return version + "beta 3"
     }
 }
