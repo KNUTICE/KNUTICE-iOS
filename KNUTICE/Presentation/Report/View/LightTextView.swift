@@ -11,8 +11,9 @@ struct LightTextView: UIViewRepresentable {
     @Binding var text: String
     @Binding var isLoading: Bool
     
+    private let textView = UITextView()
+    
     func makeUIView(context: Context) -> UITextView {
-        let textView = UITextView()
         textView.backgroundColor = .white
         textView.textColor = .black
         textView.tintColor = .black
@@ -21,6 +22,15 @@ struct LightTextView: UIViewRepresentable {
         textView.keyboardAppearance = .light
         textView.textContainerInset = .init(top: 20, left: 15, bottom: 20, right: 15)
         textView.delegate = context.coordinator
+        
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: context.coordinator, action: #selector(Coordinator.doneButtonTapped))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolbar.setItems([flexSpace, doneButton], animated: false)
+        
+        textView.inputAccessoryView = toolbar
         
         return textView
     }
@@ -46,6 +56,10 @@ struct LightTextView: UIViewRepresentable {
         
         func textViewDidChange(_ textView: UITextView) {
             parent.text = textView.text
+        }
+        
+        @objc func doneButtonTapped() {
+            parent.textView.resignFirstResponder()
         }
     }
 }
