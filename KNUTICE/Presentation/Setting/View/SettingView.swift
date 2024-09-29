@@ -35,25 +35,24 @@ struct SettingView: View {
                             get: {
                                 self.viewModel.isToggleOn
                             },
-                            set: { _, _ in })
+                            set: { _, _ in
+                                if #available(iOS 16.0, *) {
+                                    Task {
+                                        if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
+                                            // Ask the system to open that URL.
+                                            await UIApplication.shared.open(url)
+                                        }
+                                    }
+                                } else {
+                                    Task {
+                                        if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                                            await UIApplication.shared.open(appSettings)
+                                        }
+                                    }
+                                }
+                            })
                         )
                         .tint(.indigo)
-                        .onTapGesture {
-                            if #available(iOS 16.0, *) {
-                                Task {
-                                    if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
-                                        // Ask the system to open that URL.
-                                        await UIApplication.shared.open(url)
-                                    }
-                                }
-                            } else {
-                                Task {
-                                    if let appSettings = URL(string: UIApplication.openSettingsURLString) {
-                                        await UIApplication.shared.open(appSettings)
-                                    }
-                                }
-                            }
-                        }
                     }
                     
                     Text("새로운 공지사항이 등록되면 푸시 알림으로 알려드려요.")
