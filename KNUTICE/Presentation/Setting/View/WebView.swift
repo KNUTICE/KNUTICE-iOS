@@ -26,7 +26,7 @@ struct WebView: UIViewRepresentable {
         
         webView.tintColor = .black
         webView.navigationDelegate = context.coordinator
-        webView.load(URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad))
+        webView.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData))
         
         return webView
     }
