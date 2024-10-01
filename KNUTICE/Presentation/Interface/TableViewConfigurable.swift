@@ -9,6 +9,7 @@ import UIKit
 
 protocol TableViewConfigurable: UIViewController {
     var tableView: UITableView { get }
+    var refreshControl: UIRefreshControl { get }
     
     func setupAttribute()
     func setupNavigationBar(title: String)
@@ -22,6 +23,7 @@ extension TableViewConfigurable {
         tableView.estimatedRowHeight = 100    //동적 height 적용전 임시 값
         tableView.rowHeight = UITableView.automaticDimension
         tableView.backgroundColor = .customBackground
+        tableView.refreshControl = refreshControl
     }
     
     func setupNavigationBar(title: String) {
