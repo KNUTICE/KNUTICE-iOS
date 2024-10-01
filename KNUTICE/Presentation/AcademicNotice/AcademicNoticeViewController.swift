@@ -12,6 +12,7 @@ import RxDataSources
 
 final class AcademicNoticeViewController: UIViewController, TableViewConfigurable, DataBindable, Scrollable {
     let tableView: UITableView = UITableView(frame: .zero, style: .plain)
+    let refreshControl: UIRefreshControl = UIRefreshControl()
     let viewModel: NoticeViewModel
     let disposeBag = DisposeBag()
     private let navigationTitle: String = "학사공지"
@@ -34,6 +35,7 @@ final class AcademicNoticeViewController: UIViewController, TableViewConfigurabl
         setupLayout()
         
         bindFetchingState()
+        bindRefreshingState()
         setActivityIndicator()
         viewModel.fetchNotices()
     }
