@@ -12,6 +12,7 @@ final class NoticeViewModel {
     let notices: BehaviorRelay = BehaviorRelay<[Notice]>(value: [])
     let isFetching: BehaviorRelay = BehaviorRelay<Bool>(value: false)
     let isFinished: BehaviorRelay = BehaviorRelay<Bool>(value: false)
+    let isRefreshing: BehaviorRelay = BehaviorRelay<Bool>(value: false)
     private let repository: NoticeRepository
     private let disposeBag: RxSwift.DisposeBag = DisposeBag()
     
@@ -30,6 +31,19 @@ extension NoticeViewModel: ViewModel {
             }, onCompleted: { [weak self] in
                 self?.isFetching.accept(false)
                 print("Fetching Notices has been completed")
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func refreshNotices() {
+        isRefreshing.accept(true)
+        
+        repository.fetchNotices()
+            .subscribe(onNext: { [weak self] responseNotices in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self?.isRefreshing.accept(false)
+                    self?.notices.accept(responseNotices)
+                }
             })
             .disposed(by: disposeBag)
     }

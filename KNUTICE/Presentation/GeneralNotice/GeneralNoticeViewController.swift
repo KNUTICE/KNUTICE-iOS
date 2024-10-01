@@ -13,6 +13,7 @@ import RxDataSources
 
 final class GeneralNoticeViewController: UIViewController, TableViewConfigurable, DataBindable, Scrollable {    
     let tableView: UITableView = UITableView(frame: .zero, style: .plain)
+    let refreshControl: UIRefreshControl = UIRefreshControl()
     let viewModel: NoticeViewModel
     let disposeBag = DisposeBag()
     private let navigationTitle: String = "일반소식"
@@ -36,6 +37,7 @@ final class GeneralNoticeViewController: UIViewController, TableViewConfigurable
         setupNavigationBar(title: navigationTitle)
         
         bindFetchingState()
+        bindRefreshingState()
         setActivityIndicator()
         viewModel.fetchNotices()
     }

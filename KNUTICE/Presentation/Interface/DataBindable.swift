@@ -10,6 +10,7 @@ import RxSwift
 protocol DataBindable: AnyObject {
     var viewModel: NoticeViewModel { get }
     var tableView: UITableView { get }
+    var refreshControl: UIRefreshControl { get }
     var disposeBag: DisposeBag { get }
     
     func bind()
@@ -52,6 +53,20 @@ extension DataBindable {
                         }
                     }
                 }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func bindRefreshingState() {
+        viewModel.isRefreshing
+            .observe(on: MainScheduler.instance)
+            .bind(to: refreshControl.rx.isRefreshing)
+            .disposed(by: disposeBag)
+        
+        refreshControl.rx.controlEvent(.valueChanged)
+            .observe(on: MainScheduler.instance)
+            .bind(onNext: { [weak self] in
+                self?.viewModel.refreshNotices()
             })
             .disposed(by: disposeBag)
     }

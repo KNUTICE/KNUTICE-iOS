@@ -9,8 +9,9 @@ import UIKit
 import RxSwift
 
 final class ScholarshipNoticeViewController: UIViewController, DataBindable, TableViewConfigurable, Scrollable {
-    var viewModel: NoticeViewModel
-    var tableView: UITableView = UITableView(frame: .zero, style: .plain)
+    let viewModel: NoticeViewModel
+    let tableView: UITableView = UITableView(frame: .zero, style: .plain)
+    let refreshControl: UIRefreshControl = UIRefreshControl()
     var disposeBag = DisposeBag()
     
     init(viewModel: NoticeViewModel) {
@@ -31,6 +32,7 @@ final class ScholarshipNoticeViewController: UIViewController, DataBindable, Tab
         setupLayout()
         
         bindFetchingState()
+        bindRefreshingState()
         setActivityIndicator()
         viewModel.fetchNotices()
     }

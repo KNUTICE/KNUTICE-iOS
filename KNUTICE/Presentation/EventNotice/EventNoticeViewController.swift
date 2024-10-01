@@ -11,6 +11,7 @@ import RxSwift
 final class EventNoticeViewController: UIViewController, DataBindable, TableViewConfigurable, Scrollable {
     let viewModel: NoticeViewModel
     let tableView: UITableView = UITableView(frame: .zero, style: .plain)
+    let refreshControl: UIRefreshControl = UIRefreshControl()
     let disposeBag = DisposeBag()
     
     init(viewModel: NoticeViewModel) {
@@ -31,6 +32,7 @@ final class EventNoticeViewController: UIViewController, DataBindable, TableView
         setupLayout()
         
         bindFetchingState()
+        bindRefreshingState()
         setActivityIndicator()
         viewModel.fetchNotices()
     }
