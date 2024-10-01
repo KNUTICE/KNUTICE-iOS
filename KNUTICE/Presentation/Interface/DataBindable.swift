@@ -49,7 +49,14 @@ extension DataBindable {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         UIView.animate(withDuration: 0.5) {
                             self.tableView.tableFooterView = nil
-                            self.viewModel.notices.accept(self.viewModel.notices.value)
+                        }
+                    }
+                    
+                    if viewModel.isFinished.value {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            UIView.animate(withDuration: 2) {
+                                self.viewModel.notices.accept(self.viewModel.notices.value)
+                            }
                         }
                     }
                 }
