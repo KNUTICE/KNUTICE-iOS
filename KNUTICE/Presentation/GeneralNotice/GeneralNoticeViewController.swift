@@ -1,20 +1,22 @@
 //
-//  AcademicNoticeViewController.swift
+//  GeneralNoticeViewController.swift
 //  KNUTICE
 //
-//  Created by 이정훈 on 7/4/24.
+//  Created by 이정훈 on 5/15/24.
 //
 
 import UIKit
+import SwiftUI
 import RxCocoa
 import RxSwift
 import RxDataSources
 
-final class AcademicNoticeViewController: UIViewController, TableViewConfigurable, DataBindable, Scrollable {
+final class GeneralNoticeViewController: UIViewController, TableViewConfigurable, DataBindable, Scrollable {    
     let tableView: UITableView = UITableView(frame: .zero, style: .plain)
+    let refreshControl: UIRefreshControl = UIRefreshControl()
     let viewModel: NoticeViewModel
     let disposeBag = DisposeBag()
-    private let navigationTitle: String = "학사공지"
+    private let navigationTitle: String = "일반소식"
     
     init(viewModel: NoticeViewModel) {
         self.viewModel = viewModel
@@ -27,19 +29,22 @@ final class AcademicNoticeViewController: UIViewController, TableViewConfigurabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Do any additional setup after loading the view.
         
         tableView.delegate = self
+        setupLayout()
         setupAttribute()
         setupNavigationBar(title: navigationTitle)
-        setupLayout()
         
         bindFetchingState()
+        bindRefreshingState()
         setActivityIndicator()
         viewModel.fetchNotices()
     }
 }
 
-extension AcademicNoticeViewController: UITableViewDelegate {
+//MARK: - UIViewController delegate methods
+extension GeneralNoticeViewController: UITableViewDelegate {
     //MARK: - Cell이 선택 되었을 때 해당 공지사항 웹 페이지로 이동
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let viewController = WebViewController(url: viewModel.getNotices()[indexPath.row].contentUrl)
@@ -52,10 +57,18 @@ extension AcademicNoticeViewController: UITableViewDelegate {
         let threshold = scrollView.contentSize.height - scrollView.frame.size.height - 100
         
         if scrollView.contentOffset.y > threshold {
-            guard !(viewModel.isFetching.value) else { return }
+            guard !(viewModel.isFetching.value) && !viewModel.isFinished.value else { return }
             
             tableView.tableFooterView = createActivityIndicator()
             viewModel.fetchNextNotices()
         }
     }
 }
+
+//MARK: - Preview
+#if DEBUG
+#Preview {
+    GeneralNoticeViewController(viewModel: AppDI.shared.makeGeneralNoticeViewModel())
+        .makePreview()
+}
+#endif
