@@ -350,49 +350,25 @@
 		5C89DD2D2BF9EBF100CCCCCD /* AcademicNotice */ = {
 			isa = PBXGroup;
 			children = (
-				5C89DD2E2BF9EC0B00CCCCCD /* View */,
-			);
-			path = AcademicNotice;
-			sourceTree = "<group>";
-		};
-		5C89DD2E2BF9EC0B00CCCCCD /* View */ = {
-			isa = PBXGroup;
-			children = (
 				8E00AF7A2C3676240037EC38 /* AcademicNoticeViewController.swift */,
 			);
-			path = View;
+			path = AcademicNotice;
 			sourceTree = "<group>";
 		};
 		5C89DD312BF9EC7500CCCCCD /* ScholarshipNotice */ = {
 			isa = PBXGroup;
 			children = (
-				5C89DD322BF9EC9A00CCCCCD /* View */,
-			);
-			path = ScholarshipNotice;
-			sourceTree = "<group>";
-		};
-		5C89DD322BF9EC9A00CCCCCD /* View */ = {
-			isa = PBXGroup;
-			children = (
 				8EFCF8622C376AD0004A53E9 /* ScholarshipNoticeViewController.swift */,
 			);
-			path = View;
+			path = ScholarshipNotice;
 			sourceTree = "<group>";
 		};
 		5C89DD352BF9ECB900CCCCCD /* EventNotice */ = {
 			isa = PBXGroup;
 			children = (
-				5C89DD362BF9ECCD00CCCCCD /* View */,
-			);
-			path = EventNotice;
-			sourceTree = "<group>";
-		};
-		5C89DD362BF9ECCD00CCCCCD /* View */ = {
-			isa = PBXGroup;
-			children = (
 				8EFCF8642C377061004A53E9 /* EventNoticeViewController.swift */,
 			);
-			path = View;
+			path = EventNotice;
 			sourceTree = "<group>";
 		};
 		5C89DD412BFA0CF700CCCCCD /* Model */ = {
@@ -452,17 +428,9 @@
 		5C9B81052BF451210038EB27 /* GeneralNotice */ = {
 			isa = PBXGroup;
 			children = (
-				5C9B81082BF451620038EB27 /* View */,
-			);
-			path = GeneralNotice;
-			sourceTree = "<group>";
-		};
-		5C9B81082BF451620038EB27 /* View */ = {
-			isa = PBXGroup;
-			children = (
 				5C9B81062BF451540038EB27 /* GeneralNoticeViewController.swift */,
 			);
-			path = View;
+			path = GeneralNotice;
 			sourceTree = "<group>";
 		};
 		5C9B810C2BF45B4A0038EB27 /* Interface */ = {
