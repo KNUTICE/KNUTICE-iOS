@@ -1,10 +1,9 @@
 # Uncomment the next line to define a global platform for your project
 platform :ios, '15.0'
 
-target 'KNUTICE' do
-  # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
+use_frameworks!
 
+def pods
   # Alamofire
   pod 'Alamofire'
 
@@ -25,4 +24,8 @@ target 'KNUTICE' do
   # Google Firebase
   pod 'FirebaseAnalytics'
   pod 'FirebaseMessaging'
+end
+
+target 'KNUTICE' do
+  pods
 end

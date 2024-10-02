@@ -10,6 +10,7 @@ import RxRelay
 
 final class MainViewModel {
     private(set) var notices = BehaviorRelay<[SectionOfNotice]>(value: [])
+    private(set) var isLoading = BehaviorRelay<Bool>(value: false)
     private let repository: MainNoticeRepository
     private let disposeBag = DisposeBag()
     
@@ -33,6 +34,19 @@ final class MainViewModel {
                 //해당 스트림은 MainNoticeRepositoryImpl에서 onComplete()를 호출하기 때문에
                 //[weak self]를 굳이 사용하지 않아도 reference count가 증가 되지는 않음.
                 self?.notices.accept(result)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func refreshNotices() {
+        isLoading.accept(true)
+        
+        repository.fetchMainNotices()
+            .subscribe(onNext: { [weak self] result in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self?.notices.accept(result)
+                    self?.isLoading.accept(false)
+                }
             })
             .disposed(by: disposeBag)
     }

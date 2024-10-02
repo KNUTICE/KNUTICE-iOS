@@ -12,9 +12,11 @@ struct AppDI {
         return AppDI()
     }
     
-    let noticeDataSource = NoticeDataSourceImpl()
+    private let noticeDataSource = NoticeDataSourceImpl()
     
-    var mainViewModel: MainViewModel {
+    private init() {}
+    
+    func makeMainViewModel() -> MainViewModel {
         let dataSource = MainNoticeDataSourceImpl()
         let repository = MainNoticeRepositoryImpl(dataSource: dataSource)
         let viewModel = MainViewModel(repository: repository)
@@ -22,7 +24,7 @@ struct AppDI {
         return viewModel
     }
     
-    var generalNoticeViewModel: NoticeViewModel {
+    func makeGeneralNoticeViewModel() -> NoticeViewModel {
         let url = Bundle.main.generalNoticeURL
         let repository = NoticeRepositoryImpl(dataSource: noticeDataSource, remoteURL: url)
         let viewModel = NoticeViewModel(repository: repository)
@@ -30,7 +32,7 @@ struct AppDI {
         return viewModel
     }
     
-    var academicNoticewViewModel: NoticeViewModel {
+    func makeAcademicNoticeViewModel() -> NoticeViewModel {
         let url = Bundle.main.academicNoticeURL
         let repository = NoticeRepositoryImpl(dataSource: noticeDataSource, remoteURL: url)
         let viewModel = NoticeViewModel(repository: repository)
@@ -38,7 +40,7 @@ struct AppDI {
         return viewModel
     }
     
-    var scholarshipNoticeViewModel: NoticeViewModel {
+    func makeScholarshipNoticeViewModel() -> NoticeViewModel {
         let url = Bundle.main.scholarshipNoticeURL
         let repository = NoticeRepositoryImpl(dataSource: noticeDataSource, remoteURL: url)
         let viewModel = NoticeViewModel(repository: repository)
@@ -46,7 +48,7 @@ struct AppDI {
         return viewModel
     }
     
-    var eventNoticeViewModel: NoticeViewModel {
+    func makeEventNoticeViewModel() -> NoticeViewModel {
         let url = Bundle.main.eventNoticeURL
         let repository = NoticeRepositoryImpl(dataSource: noticeDataSource, remoteURL: url)
         let viewModel = NoticeViewModel(repository: repository)
@@ -54,9 +56,23 @@ struct AppDI {
         return viewModel
     }
     
-    var settingViewModel: SettingViewModel {
+    func makeSettingViewModel() -> SettingViewModel {
         return SettingViewModel()
     }
     
-    private init() {}
+    func makeReportViewModel() -> ReportViewModel {
+        //Data
+        let tokenDataSource = TokenDataSourceImpl()
+        let reportDataSource = ReportDataSourceImpl()
+        let tokenRepository = TokenRepositoryImpl(dataSource: tokenDataSource)
+        let reportRepository = ReportRepositoryImpl(dataSource: reportDataSource)
+        
+        //Domain
+        let reportService = ReportServiceImpl(tokenRepository: tokenRepository, reportRepository: reportRepository)
+        
+        //Presentation
+        let viewModel = ReportViewModel(reportService: reportService)
+        
+        return viewModel
+    }
 }
