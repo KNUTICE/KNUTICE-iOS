@@ -10,6 +10,7 @@ import Combine
 
 struct SettingView: View {
     @ObservedObject private var viewModel: SettingViewModel
+    @State private var isShowingReport: Bool = false
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -25,7 +26,7 @@ struct SettingView: View {
     
     var body: some View {
         List {
-            Section(header: Text("알림")) {
+            Section {
                 VStack(alignment: .leading) {
                     HStack {
                         Text("서비스 알림")
@@ -34,36 +35,49 @@ struct SettingView: View {
                             get: {
                                 self.viewModel.isToggleOn
                             },
-                            set: { _, _ in })
+                            set: { _, _ in
+                                if #available(iOS 16.0, *) {
+                                    Task {
+                                        if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
+                                            // Ask the system to open that URL.
+                                            await UIApplication.shared.open(url)
+                                        }
+                                    }
+                                } else {
+                                    Task {
+                                        if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                                            await UIApplication.shared.open(appSettings)
+                                        }
+                                    }
+                                }
+                            })
                         )
                         .tint(.indigo)
-                        .onTapGesture {
-                            if #available(iOS 16.0, *) {
-                                Task {
-                                    if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
-                                        // Ask the system to open that URL.
-                                        await UIApplication.shared.open(url)
-                                    }
-                                }
-                            } else {
-                                Task {
-                                    if let appSettings = URL(string: UIApplication.openSettingsURLString) {
-                                        await UIApplication.shared.open(appSettings)
-                                    }
-                                }
-                            }
-                        }
                     }
                     
                     Text("새로운 공지사항이 등록되면 푸시 알림으로 알려드려요.")
                         .font(.caption2)
                         .foregroundStyle(.gray)
                 }
-                .padding([.top, .bottom], 8)
+                .padding([.top, .bottom])
+            } header: {
+                Text("알림")
             }
             .listRowBackground(Color.customBackground)
             
-            Section(header: Text("앱 정보")) {
+            Section {
+                Button {
+                    isShowingReport.toggle()
+                } label: {
+                    Text("고객센터")
+                }
+                .padding([.top, .bottom])
+            } header: {
+                Text("지원")
+            }
+            .listRowBackground(Color.customBackground)
+            
+            Section {
                 HStack {
                     Text("버전 정보")
                     
@@ -71,14 +85,18 @@ struct SettingView: View {
                     
                     Text("\(viewModel.appVersion)")
                 }
-                .padding([.top, .bottom], 10)
+                .padding([.top, .bottom])
                 
-                NavigationLink(destination: {
-                    OpenSourceLicenseView()
-                }, label: {
-                    Text("오픈소스 라이선스")
-                })
-                .padding([.top, .bottom], 10)
+                Text("오픈소스 라이선스")
+                    .padding([.top, .bottom])
+                    .background {
+                        NavigationLink("") {
+                            OpenSourceLicenseView()
+                        }
+                        .opacity(0)
+                    }
+            } header: {
+                Text("앱 정보")
             }
             .listRowBackground(Color.customBackground)
         }
@@ -87,14 +105,19 @@ struct SettingView: View {
         .navigationTitle("설정")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            viewModel.getAppVersion()
+            viewModel.getVersion()
             viewModel.getNotificationSettings()
+        }
+        .fullScreenCover(isPresented: $isShowingReport) {
+            NavigationView {
+                ReportView(viewModel: AppDI.shared.makeReportViewModel())
+            }
         }
     }
 }
 
 #Preview {
     NavigationView {
-        SettingView(viewModel: AppDI.shared.settingViewModel)
+        SettingView(viewModel: AppDI.shared.makeSettingViewModel())
     }
 }

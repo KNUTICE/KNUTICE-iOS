@@ -13,10 +13,20 @@ import SwiftUI
 import RxDataSources
 
 final class MainViewController: UIViewController {
-    let viewModel: MainViewModel = AppDI.shared.mainViewModel
+    let viewModel: MainViewModel
     let tableView = UITableView(frame: .zero, style: .grouped)
+    let refreshControl = UIRefreshControl()
     let headerColors: [UIColor] = [.salmon, .lightOrange, .lightGreen, .dodgerBlue]
     let disposeBag = DisposeBag()
+    
+    init(viewModel: MainViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,21 +46,40 @@ extension MainViewController: UITableViewDelegate {
     //MARK: - Custom cell header
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
+        let title = UILabel()
+        let arrowImage = UIImage(systemName: "chevron.right")
         let button = UIButton(type: .system)
+        headerView.addSubview(title)
         headerView.addSubview(button)
         
         //Auto Layout
-        button.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(16)
+        title.snp.makeConstraints { make in
+            make.leading.equalTo(headerView.safeAreaLayoutGuide).inset(16)
             make.top.bottom.equalToSuperview()
         }
         
-        //Attribute
-        button.setTitle(viewModel.notices.value[section].header, for: .normal)
-        button.contentHorizontalAlignment = .left
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
-        button.tintColor = headerColors[section]
+        button.snp.makeConstraints { make in
+            make.trailing.equalTo(headerView.safeAreaLayoutGuide).inset(16)
+            make.centerY.equalToSuperview()
+        }
+        
+        //Title Attribute
+        title.text = viewModel.notices.value[section].header
+        title.textColor = headerColors[section]
+        title.font = UIFont.boldSystemFont(ofSize: 20)
+        
+        //Arrow Image Attribute
+        let targetSize = CGSize(width: 8, height: 12)
+        let renderer = UIGraphicsImageRenderer(size: targetSize)
+        let resizedImage = renderer.image { context in
+            arrowImage?.draw(in: CGRect(origin: .zero, size: targetSize))
+        }
+        
+        //Button Attribute
+        button.setTitle("더보기", for: .normal)
+        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
+        button.tintColor = .grayButton
+        button.setImage(resizedImage, for: .normal)
         button.semanticContentAttribute = .forceRightToLeft
         button.tag = section
         button.addTarget(self, action: #selector(headerButtonTapped(_:)), for: .touchUpInside)
@@ -97,7 +126,8 @@ extension MainViewController: UITableViewDelegate {
 //MARK: - Preview
 struct Preview: PreviewProvider {
     static var previews: some View {
-        let viewController = MainViewController()
+        let viewController = MainViewController(viewModel: AppDI.shared.makeMainViewModel())
+        
         UINavigationController(rootViewController: viewController)
             .makePreview()
             .onAppear {
