@@ -29,28 +29,28 @@ extension MainViewController {
     
     //MARK: - General Notice Button Callback Function
     func navigateToGeneralNotice(_ sender: UIButton) {
-        let viewController = GeneralNoticeViewController()
+        let viewController = GeneralNoticeViewController(viewModel: AppDI.shared.makeGeneralNoticeViewModel())
         viewController.bind()
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     //MARK: - Academic Notice Button Callback Function
     func navigateToAcademicNotice(_ sender: UIButton) {
-        let viewController = AcademicNoticeViewController(viewModel: AppDI.shared.academicNoticewViewModel)
+        let viewController = AcademicNoticeViewController(viewModel: AppDI.shared.makeAcademicNoticeViewModel())
         viewController.bind()
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     //MARK: - Scholarship Notice Button Callback Function
     func navigateToScholarshipNotice(_ sender: UIButton) {
-        let viewController = ScholarshipNoticeViewController(viewModel: AppDI.shared.scholarshipNoticeViewModel)
+        let viewController = ScholarshipNoticeViewController(viewModel: AppDI.shared.makeScholarshipNoticeViewModel())
         viewController.bind()
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     //MARK: - Event Notice Button Callback Function
     func navigateToEventNotice(_ sender: UIButton) {
-        let viewController = EventNoticeViewController(viewModel: AppDI.shared.eventNoticeViewModel)
+        let viewController = EventNoticeViewController(viewModel: AppDI.shared.makeEventNoticeViewModel())
         viewController.bind()
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -58,7 +58,7 @@ extension MainViewController {
     //MARK: - Toolbar Button Callback Function
     @objc
     func navigateToSetting(_ sender: UIButton) {
-        let viewController = UIHostingController(rootView: SettingView(viewModel: AppDI.shared.settingViewModel))
+        let viewController = UIHostingController(rootView: SettingView(viewModel: AppDI.shared.makeSettingViewModel()))
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
