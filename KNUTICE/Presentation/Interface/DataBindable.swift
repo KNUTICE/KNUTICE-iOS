@@ -28,6 +28,7 @@ extension DataBindable {
                     cell.subTitleLabel.text = "[\(item.department)]"
                     cell.uploadDateLabel.text = item.uploadDate
                     cell.imageURL = imageURL
+                    cell.backgroundColor = .customBackground
                     
                     return cell
                 } else {
@@ -35,6 +36,7 @@ extension DataBindable {
                     cell.titleLabel.text = item.title
                     cell.subTitleLabel.text = "[\(item.department)]"
                     cell.uploadDateLabel.text = item.uploadDate
+                    cell.backgroundColor = .customBackground
                     
                     return cell
                 }
