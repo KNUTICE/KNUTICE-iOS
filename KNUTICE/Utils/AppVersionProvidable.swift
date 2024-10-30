@@ -17,6 +17,6 @@ extension AppVersionProvidable {
             return ""
         }
         
-        return version + " beta 1"
+        return version + " RC"
     }
 }
