@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8E2050F72CD4F32F00D87C6A"
-               BuildableName = "KNUTICE dev.app"
-               BlueprintName = "KNUTICE dev"
+               BuildableName = "KNUTICE-dev.app"
+               BlueprintName = "KNUTICE-dev"
                ReferencedContainer = "container:KNUTICE.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8E2050F72CD4F32F00D87C6A"
-            BuildableName = "KNUTICE dev.app"
-            BlueprintName = "KNUTICE dev"
+            BuildableName = "KNUTICE-dev.app"
+            BlueprintName = "KNUTICE-dev"
             ReferencedContainer = "container:KNUTICE.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8E2050F72CD4F32F00D87C6A"
-            BuildableName = "KNUTICE dev.app"
-            BlueprintName = "KNUTICE dev"
+            BuildableName = "KNUTICE-dev.app"
+            BlueprintName = "KNUTICE-dev"
             ReferencedContainer = "container:KNUTICE.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
