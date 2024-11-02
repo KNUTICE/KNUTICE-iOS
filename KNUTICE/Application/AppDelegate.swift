@@ -22,19 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         #if DEV
         filePath = Bundle.main.path(forResource: "GoogleService-Info-Dev", ofType: "plist")
-        guard let fileopts = FirebaseOptions(contentsOfFile: filePath!) else {
-            assert(false, "Couldn't load config file")
-        }
-        
-        FirebaseApp.configure(options: fileopts)
         #else
         filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
-        guard let fileopts = FirebaseOptions(contentsOfFile: filePath!) else {
-            assert(false, "Couldn't load config file")
-        }
-        
-        FirebaseApp.configure(options: fileopts)
         #endif
+        
+        if let fileopts = FirebaseOptions(contentsOfFile: filePath!) {
+            FirebaseApp.configure(options: fileopts)
+        }
         
         //UNUserNotificationCenter의 delegate를 AppDelegate class에서 처리하도록 설정
         UNUserNotificationCenter.current().delegate = self
