@@ -127,6 +127,10 @@
 		8E5D1CF82C38D2E50027E8BD /* Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D1CF72C38D2E50027E8BD /* Scrollable.swift */; };
 		8E613EA02C95214C006FC272 /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E613E9F2C95214C006FC272 /* RequestResult.swift */; };
 		8E6175482CA24157002B6021 /* UIDevice+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6175472CA24157002B6021 /* UIDevice+Identifier.swift */; };
+		8EA72DC92CD5CA4800D1B300 /* DeveloperTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA72DC82CD5CA4800D1B300 /* DeveloperTools.swift */; };
+		8EA72DCA2CD5CA4800D1B300 /* DeveloperTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA72DC82CD5CA4800D1B300 /* DeveloperTools.swift */; };
+		8EA72DCC2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA72DCB2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift */; };
+		8EA72DCD2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA72DCB2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift */; };
 		8EA9ACA92C46AC3C00C9E287 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9ACA82C46AC3C00C9E287 /* WebView.swift */; };
 		8EA9ACAB2C46AEC900C9E287 /* OpenSourceLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9ACAA2C46AEC900C9E287 /* OpenSourceLicenseView.swift */; };
 		8EB6D2002C663627004E8AC2 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6D1FF2C663627004E8AC2 /* NotificationService.swift */; };
@@ -257,6 +261,8 @@
 		8E613E9F2C95214C006FC272 /* RequestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestResult.swift; sourceTree = "<group>"; };
 		8E6175472CA24157002B6021 /* UIDevice+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Identifier.swift"; sourceTree = "<group>"; };
 		8E7945E42CA28F6900208662 /* KNUTICEUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KNUTICEUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EA72DC82CD5CA4800D1B300 /* DeveloperTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperTools.swift; sourceTree = "<group>"; };
+		8EA72DCB2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperToolsViewModel.swift; sourceTree = "<group>"; };
 		8EA9ACA82C46AC3C00C9E287 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		8EA9ACAA2C46AEC900C9E287 /* OpenSourceLicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSourceLicenseView.swift; sourceTree = "<group>"; };
 		8EB6D1FD2C663627004E8AC2 /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -340,6 +346,7 @@
 		5C5698892BEFB2BE0085E389 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				8EA72DC52CD5C9B500D1B300 /* Developer Tools */,
 				8E0C3F862C9EC92A005E2A16 /* Report */,
 				8E00AF802C3680090037EC38 /* Commons */,
 				8E00AF792C36755B0037EC38 /* ViewModel */,
@@ -638,6 +645,31 @@
 			children = (
 			);
 			path = KNUTICEUnitTests;
+			sourceTree = "<group>";
+		};
+		8EA72DC52CD5C9B500D1B300 /* Developer Tools */ = {
+			isa = PBXGroup;
+			children = (
+				8EA72DC72CD5C9C000D1B300 /* ViewModel */,
+				8EA72DC62CD5C9BC00D1B300 /* View */,
+			);
+			path = "Developer Tools";
+			sourceTree = "<group>";
+		};
+		8EA72DC62CD5C9BC00D1B300 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8EA72DC82CD5CA4800D1B300 /* DeveloperTools.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8EA72DC72CD5C9C000D1B300 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8EA72DCB2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		8EB6D1FE2C663627004E8AC2 /* NotificationService */ = {
@@ -959,6 +991,7 @@
 				5C190A552BFDF66600E0254B /* NoticeReponseDTO.swift in Sources */,
 				8EB6D20E2C6713BB004E8AC2 /* View+Fork.swift in Sources */,
 				8E3F02292C9FC77E00AE89D5 /* AppVersionProvidable.swift in Sources */,
+				8EA72DCD2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift in Sources */,
 				8EA9ACA92C46AC3C00C9E287 /* WebView.swift in Sources */,
 				8E54C84A2C5E6F5E0070E689 /* AppDelegate+Messaging.swift in Sources */,
 				5C190A4F2BFDF4E100E0254B /* NoticeRepository.swift in Sources */,
@@ -973,6 +1006,7 @@
 				5C190A532BFDF5EB00E0254B /* NoticeRepositoryImpl.swift in Sources */,
 				5C89DD462BFA0D6800CCCCCD /* MainNoticeRepository.swift in Sources */,
 				8E00AF7B2C3676240037EC38 /* AcademicNoticeViewController.swift in Sources */,
+				8EA72DCA2CD5CA4800D1B300 /* DeveloperTools.swift in Sources */,
 				8E3F02222C9FB76800AE89D5 /* ReportRepositoryImpl.swift in Sources */,
 				5C190A572BFE023000E0254B /* NoticeDataSource.swift in Sources */,
 				8E5385782C644C3F00AF151B /* TokenRepositoryImpl.swift in Sources */,
@@ -1026,6 +1060,7 @@
 				8E2051162CD4F32F00D87C6A /* NoticeReponseDTO.swift in Sources */,
 				8E2051172CD4F32F00D87C6A /* View+Fork.swift in Sources */,
 				8E2051182CD4F32F00D87C6A /* AppVersionProvidable.swift in Sources */,
+				8EA72DCC2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift in Sources */,
 				8E2051192CD4F32F00D87C6A /* WebView.swift in Sources */,
 				8E20511A2CD4F32F00D87C6A /* AppDelegate+Messaging.swift in Sources */,
 				8E20511B2CD4F32F00D87C6A /* NoticeRepository.swift in Sources */,
@@ -1040,6 +1075,7 @@
 				8E2051242CD4F32F00D87C6A /* NoticeRepositoryImpl.swift in Sources */,
 				8E2051252CD4F32F00D87C6A /* MainNoticeRepository.swift in Sources */,
 				8E2051262CD4F32F00D87C6A /* AcademicNoticeViewController.swift in Sources */,
+				8EA72DC92CD5CA4800D1B300 /* DeveloperTools.swift in Sources */,
 				8E2051272CD4F32F00D87C6A /* ReportRepositoryImpl.swift in Sources */,
 				8E2051282CD4F32F00D87C6A /* NoticeDataSource.swift in Sources */,
 				8E2051292CD4F32F00D87C6A /* TokenRepositoryImpl.swift in Sources */,

@@ -75,4 +75,12 @@ struct AppDI {
         
         return viewModel
     }
+    
+    func makeDeveloperToolsViewModel() -> DeveloperToolsViewModel {
+        let tokenDataSource = TokenDataSourceImpl()
+        let tokenRepository = TokenRepositoryImpl(dataSource: tokenDataSource)
+        let viewModel = DeveloperToolsViewModel(tokenRepository: tokenRepository)
+        
+        return viewModel
+    }
 }

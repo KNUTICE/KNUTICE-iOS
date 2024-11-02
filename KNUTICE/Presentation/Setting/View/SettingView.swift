@@ -36,18 +36,10 @@ struct SettingView: View {
                                 self.viewModel.isToggleOn
                             },
                             set: { _, _ in
-                                if #available(iOS 16.0, *) {
-                                    Task {
-                                        if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
-                                            // Ask the system to open that URL.
-                                            await UIApplication.shared.open(url)
-                                        }
-                                    }
-                                } else {
-                                    Task {
-                                        if let appSettings = URL(string: UIApplication.openSettingsURLString) {
-                                            await UIApplication.shared.open(appSettings)
-                                        }
+                                Task {
+                                    if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
+                                        // Ask the system to open that URL.
+                                        await UIApplication.shared.open(url)
                                     }
                                 }
                             })
@@ -99,6 +91,21 @@ struct SettingView: View {
                 Text("앱 정보")
             }
             .listRowBackground(Color.customBackground)
+            
+            #if DEV
+            Section {
+                Text("Developer Tools")
+                    .padding([.top, .bottom])
+                    .background {
+                        NavigationLink("") {
+                            DeveloperTools(viewModel: AppDI.shared.makeDeveloperToolsViewModel())
+                        }
+                        .opacity(0)
+                    }
+            } header: {
+                Text("개발")
+            }
+            #endif
         }
         .background(.customBackground)
         .listStyle(.plain)
