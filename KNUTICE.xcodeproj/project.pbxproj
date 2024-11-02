@@ -3,12 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		55C454BF09AACA454EE3AB59 /* Pods_KNUTICE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED56137F2D38EFBD31327DCC /* Pods_KNUTICE.framework */; };
-		5C190A442BFD6AA500E0254B /* ServiceInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C190A432BFD6AA500E0254B /* ServiceInfo.plist */; };
+		22BBFAE23A4B31141886D1FB /* Pods_KNUTICE_dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CCC62FF7D9711F0EC1652BA /* Pods_KNUTICE_dev.framework */; };
+		55C454BF09AACA454EE3AB59 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		5C190A462BFD6BDB00E0254B /* Bundle+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A452BFD6BDB00E0254B /* Bundle+URL.swift */; };
 		5C190A4F2BFDF4E100E0254B /* NoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A4E2BFDF4E100E0254B /* NoticeRepository.swift */; };
 		5C190A532BFDF5EB00E0254B /* NoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A522BFDF5EB00E0254B /* NoticeRepositoryImpl.swift */; };
@@ -42,6 +42,72 @@
 		8E0C3F892C9EC93B005E2A16 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0C3F882C9EC93B005E2A16 /* ReportView.swift */; };
 		8E0C3F8C2C9ECD1B005E2A16 /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0C3F8B2C9ECD1B005E2A16 /* ReportViewModel.swift */; };
 		8E1599A12CA2735E001F75A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C82564C2BE5CE1B0038D4C8 /* LaunchScreen.storyboard */; };
+		8E2050FC2CD4F32F00D87C6A /* ScholarshipNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF8622C376AD0004A53E9 /* ScholarshipNoticeViewController.swift */; };
+		8E2050FD2CD4F32F00D87C6A /* MainNoticeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD4F2BFA120B00CCCCCD /* MainNoticeResponseDTO.swift */; };
+		8E2050FE2CD4F32F00D87C6A /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2EFC02BF356FB00066C87 /* UIViewController+Preview.swift */; };
+		8E2050FF2CD4F32F00D87C6A /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F021D2C9FB46100AE89D5 /* ReportService.swift */; };
+		8E2051002CD4F32F00D87C6A /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385732C644AB000AF151B /* TokenRepository.swift */; };
+		8E2051012CD4F32F00D87C6A /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698912BEFB4A20085E389 /* MainViewModel.swift */; };
+		8E2051022CD4F32F00D87C6A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8256452BE5CE1A0038D4C8 /* MainViewController.swift */; };
+		8E2051032CD4F32F00D87C6A /* DetailedNoticeCellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B192C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift */; };
+		8E2051042CD4F32F00D87C6A /* NoticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B810A2BF451BC0038EB27 /* NoticeViewModel.swift */; };
+		8E2051052CD4F32F00D87C6A /* OpenSourceLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9ACAA2C46AEC900C9E287 /* OpenSourceLicenseView.swift */; };
+		8E2051062CD4F32F00D87C6A /* ReportRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F021F2C9FB6A000AE89D5 /* ReportRepository.swift */; };
+		8E2051072CD4F32F00D87C6A /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E613E9F2C95214C006FC272 /* RequestResult.swift */; };
+		8E2051082CD4F32F00D87C6A /* MainViewController+Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD3D2BFA043200CCCCCD /* MainViewController+Binding.swift */; };
+		8E2051092CD4F32F00D87C6A /* MainNoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD482BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift */; };
+		8E20510A2CD4F32F00D87C6A /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6D20B2C66FC5B004E8AC2 /* SettingViewModel.swift */; };
+		8E20510B2CD4F32F00D87C6A /* DetailedNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0BA6DC2C33CA1300677A79 /* DetailedNoticeCell.swift */; };
+		8E20510C2CD4F32F00D87C6A /* AppDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF191FA2C4ABEB5004219BE /* AppDI.swift */; };
+		8E20510D2CD4F32F00D87C6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8256412BE5CE1A0038D4C8 /* AppDelegate.swift */; };
+		8E20510E2CD4F32F00D87C6A /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698962BEFB6760085E389 /* Notice.swift */; };
+		8E20510F2CD4F32F00D87C6A /* WebViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF702C36233C0037EC38 /* WebViewController+Layout.swift */; };
+		8E2051102CD4F32F00D87C6A /* ReportResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02252C9FB85E00AE89D5 /* ReportResponseDTO.swift */; };
+		8E2051112CD4F32F00D87C6A /* VIew+TextEditorBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F022C2CA0022D00AE89D5 /* VIew+TextEditorBackground.swift */; };
+		8E2051122CD4F32F00D87C6A /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0C3F882C9EC93B005E2A16 /* ReportView.swift */; };
+		8E2051132CD4F32F00D87C6A /* LightTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBBE23F2CA0E3FB00826D5A /* LightTextView.swift */; };
+		8E2051142CD4F32F00D87C6A /* MainNoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF191FC2C4ABED8004219BE /* MainNoticeDataSource.swift */; };
+		8E2051152CD4F32F00D87C6A /* TokenSaveResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385752C644B4400AF151B /* TokenSaveResponseDTO.swift */; };
+		8E2051162CD4F32F00D87C6A /* NoticeReponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A542BFDF66600E0254B /* NoticeReponseDTO.swift */; };
+		8E2051172CD4F32F00D87C6A /* View+Fork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6D20D2C6713BB004E8AC2 /* View+Fork.swift */; };
+		8E2051182CD4F32F00D87C6A /* AppVersionProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02282C9FC77600AE89D5 /* AppVersionProvidable.swift */; };
+		8E2051192CD4F32F00D87C6A /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9ACA82C46AC3C00C9E287 /* WebView.swift */; };
+		8E20511A2CD4F32F00D87C6A /* AppDelegate+Messaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E54C8492C5E6F5E0070E689 /* AppDelegate+Messaging.swift */; };
+		8E20511B2CD4F32F00D87C6A /* NoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A4E2BFDF4E100E0254B /* NoticeRepository.swift */; };
+		8E20511C2CD4F32F00D87C6A /* UIDevice+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6175472CA24157002B6021 /* UIDevice+Identifier.swift */; };
+		8E20511D2CD4F32F00D87C6A /* WebViewController+Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDAB022C3BC08900352779 /* WebViewController+Callbacks.swift */; };
+		8E20511E2CD4F32F00D87C6A /* ReportDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02232C9FB81C00AE89D5 /* ReportDataSource.swift */; };
+		8E20511F2CD4F32F00D87C6A /* MainListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C56988F2BEFB3C50085E389 /* MainListCell.swift */; };
+		8E2051202CD4F32F00D87C6A /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B810D2BF45B5D0038EB27 /* ViewModelProtocol.swift */; };
+		8E2051212CD4F32F00D87C6A /* MainNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B172C35045800D7F499 /* MainNotice.swift */; };
+		8E2051222CD4F32F00D87C6A /* UIFont+DynamicFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF86C2C37810B004A53E9 /* UIFont+DynamicFont.swift */; };
+		8E2051232CD4F32F00D87C6A /* MainViewController+NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD51A52C6D7D68002101CA /* MainViewController+NotificationCenter.swift */; };
+		8E2051242CD4F32F00D87C6A /* NoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A522BFDF5EB00E0254B /* NoticeRepositoryImpl.swift */; };
+		8E2051252CD4F32F00D87C6A /* MainNoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD452BFA0D6800CCCCCD /* MainNoticeRepository.swift */; };
+		8E2051262CD4F32F00D87C6A /* AcademicNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF7A2C3676240037EC38 /* AcademicNoticeViewController.swift */; };
+		8E2051272CD4F32F00D87C6A /* ReportRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02212C9FB75900AE89D5 /* ReportRepositoryImpl.swift */; };
+		8E2051282CD4F32F00D87C6A /* NoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A562BFE023000E0254B /* NoticeDataSource.swift */; };
+		8E2051292CD4F32F00D87C6A /* TokenRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385772C644C3F00AF151B /* TokenRepositoryImpl.swift */; };
+		8E20512A2CD4F32F00D87C6A /* GeneralNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B81062BF451540038EB27 /* GeneralNoticeViewController.swift */; };
+		8E20512B2CD4F32F00D87C6A /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF8662C37742A004A53E9 /* SettingView.swift */; };
+		8E20512C2CD4F32F00D87C6A /* MainViewController+Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD392BFA02F400CCCCCD /* MainViewController+Callbacks.swift */; };
+		8E20512D2CD4F32F00D87C6A /* EventNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF8642C377061004A53E9 /* EventNoticeViewController.swift */; };
+		8E20512E2CD4F32F00D87C6A /* SectionOfNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */; };
+		8E20512F2CD4F32F00D87C6A /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0C3F8B2C9ECD1B005E2A16 /* ReportViewModel.swift */; };
+		8E2051302CD4F32F00D87C6A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF6B2C361F780037EC38 /* WebViewController.swift */; };
+		8E2051312CD4F32F00D87C6A /* DataBindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF7E2C367D8A0037EC38 /* DataBindable.swift */; };
+		8E2051322CD4F32F00D87C6A /* MainViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD3B2BFA03D800CCCCCD /* MainViewController+Layout.swift */; };
+		8E2051332CD4F32F00D87C6A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8256432BE5CE1A0038D4C8 /* SceneDelegate.swift */; };
+		8E2051342CD4F32F00D87C6A /* TokenDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385792C644D9600AF151B /* TokenDataSource.swift */; };
+		8E2051352CD4F32F00D87C6A /* TableViewConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF812C3681100037EC38 /* TableViewConfigurable.swift */; };
+		8E2051362CD4F32F00D87C6A /* Bundle+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A452BFD6BDB00E0254B /* Bundle+URL.swift */; };
+		8E2051372CD4F32F00D87C6A /* Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D1CF72C38D2E50027E8BD /* Scrollable.swift */; };
+		8E20513B2CD4F32F00D87C6A /* ServiceInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C190A432BFD6AA500E0254B /* ServiceInfo.plist */; };
+		8E20513C2CD4F32F00D87C6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C82564A2BE5CE1B0038D4C8 /* Assets.xcassets */; };
+		8E20513E2CD4F32F00D87C6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C82564C2BE5CE1B0038D4C8 /* LaunchScreen.storyboard */; };
+		8E20513F2CD4F32F00D87C6A /* ci_post_clone.sh in Resources */ = {isa = PBXBuildFile; fileRef = 8E53857E2C647D9A00AF151B /* ci_post_clone.sh */; };
+		8E2051402CD4F32F00D87C6A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5C82564D2BE5CE1B0038D4C8 /* Base */; };
+		8E2051422CD4F32F00D87C6A /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8EB6D1FD2C663627004E8AC2 /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8E3F021E2C9FB46100AE89D5 /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F021D2C9FB46100AE89D5 /* ReportService.swift */; };
 		8E3F02202C9FB6A000AE89D5 /* ReportRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F021F2C9FB6A000AE89D5 /* ReportRepository.swift */; };
 		8E3F02222C9FB76800AE89D5 /* ReportRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02212C9FB75900AE89D5 /* ReportRepositoryImpl.swift */; };
@@ -49,6 +115,9 @@
 		8E3F02262C9FB86400AE89D5 /* ReportResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02252C9FB85E00AE89D5 /* ReportResponseDTO.swift */; };
 		8E3F02292C9FC77E00AE89D5 /* AppVersionProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02282C9FC77600AE89D5 /* AppVersionProvidable.swift */; };
 		8E3F022D2CA0023A00AE89D5 /* VIew+TextEditorBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F022C2CA0022D00AE89D5 /* VIew+TextEditorBackground.swift */; };
+		8E4F599D2CD5176E007D43BC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E613E9D2C951C8D006FC272 /* GoogleService-Info.plist */; };
+		8E4F599E2CD517DD007D43BC /* ServiceInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C190A432BFD6AA500E0254B /* ServiceInfo.plist */; };
+		8E4F59A02CD51B99007D43BC /* GoogleService-Info-Dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E20514D2CD50B1100D87C6A /* GoogleService-Info-Dev.plist */; };
 		8E5385742C644AB000AF151B /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385732C644AB000AF151B /* TokenRepository.swift */; };
 		8E5385762C644B4400AF151B /* TokenSaveResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385752C644B4400AF151B /* TokenSaveResponseDTO.swift */; };
 		8E5385782C644C3F00AF151B /* TokenRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385772C644C3F00AF151B /* TokenRepositoryImpl.swift */; };
@@ -56,7 +125,6 @@
 		8E5385872C64A24A00AF151B /* ci_post_clone.sh in Resources */ = {isa = PBXBuildFile; fileRef = 8E53857E2C647D9A00AF151B /* ci_post_clone.sh */; };
 		8E54C84A2C5E6F5E0070E689 /* AppDelegate+Messaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E54C8492C5E6F5E0070E689 /* AppDelegate+Messaging.swift */; };
 		8E5D1CF82C38D2E50027E8BD /* Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D1CF72C38D2E50027E8BD /* Scrollable.swift */; };
-		8E613E9E2C951C8D006FC272 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E613E9D2C951C8D006FC272 /* GoogleService-Info.plist */; };
 		8E613EA02C95214C006FC272 /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E613E9F2C95214C006FC272 /* RequestResult.swift */; };
 		8E6175482CA24157002B6021 /* UIDevice+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6175472CA24157002B6021 /* UIDevice+Identifier.swift */; };
 		8EA9ACA92C46AC3C00C9E287 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9ACA82C46AC3C00C9E287 /* WebView.swift */; };
@@ -79,6 +147,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8E2050F92CD4F32F00D87C6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8EB6D1FC2C663627004E8AC2;
+			remoteInfo = NotificationService;
+		};
 		8E7945E82CA28F6900208662 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
@@ -96,6 +171,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		8E2051412CD4F32F00D87C6A /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8E2051422CD4F32F00D87C6A /* NotificationService.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		8EB6D2082C663627004E8AC2 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -111,6 +197,8 @@
 
 /* Begin PBXFileReference section */
 		1088B3CC0C3ED243F6DE188A /* Pods-KNUTICE.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNUTICE.debug.xcconfig"; path = "Target Support Files/Pods-KNUTICE/Pods-KNUTICE.debug.xcconfig"; sourceTree = "<group>"; };
+		1F6EA9C9AF0F607264F010B6 /* Pods-KNUTICE dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNUTICE dev.release.xcconfig"; path = "Target Support Files/Pods-KNUTICE dev/Pods-KNUTICE dev.release.xcconfig"; sourceTree = "<group>"; };
+		4CCC62FF7D9711F0EC1652BA /* Pods_KNUTICE_dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNUTICE_dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C190A432BFD6AA500E0254B /* ServiceInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ServiceInfo.plist; sourceTree = "<group>"; };
 		5C190A452BFD6BDB00E0254B /* Bundle+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+URL.swift"; sourceTree = "<group>"; };
 		5C190A4E2BFDF4E100E0254B /* NoticeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeRepository.swift; sourceTree = "<group>"; };
@@ -147,6 +235,9 @@
 		8E0BA6DC2C33CA1300677A79 /* DetailedNoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedNoticeCell.swift; sourceTree = "<group>"; };
 		8E0C3F882C9EC93B005E2A16 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		8E0C3F8B2C9ECD1B005E2A16 /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewModel.swift; sourceTree = "<group>"; };
+		8E2051472CD4F32F00D87C6A /* KNUTICE dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KNUTICE dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E2051482CD4F32F00D87C6A /* Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Dev.plist"; path = "/Users/ijeonghun/Desktop/GitHub/iOS/KNUTICE-iOS/KNUTICE/Application/Info-Dev.plist"; sourceTree = "<absolute>"; };
+		8E20514D2CD50B1100D87C6A /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
 		8E3F021D2C9FB46100AE89D5 /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
 		8E3F021F2C9FB6A000AE89D5 /* ReportRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRepository.swift; sourceTree = "<group>"; };
 		8E3F02212C9FB75900AE89D5 /* ReportRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -184,19 +275,23 @@
 		8EFCF8662C37742A004A53E9 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		8EFCF86C2C37810B004A53E9 /* UIFont+DynamicFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+DynamicFont.swift"; sourceTree = "<group>"; };
 		8EFDAB022C3BC08900352779 /* WebViewController+Callbacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebViewController+Callbacks.swift"; sourceTree = "<group>"; };
-		ED56137F2D38EFBD31327DCC /* Pods_KNUTICE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNUTICE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEB2E7774CA740F3A5159B90 /* Pods-KNUTICE dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNUTICE dev.debug.xcconfig"; path = "Target Support Files/Pods-KNUTICE dev/Pods-KNUTICE dev.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		8E7945E52CA28F6900208662 /* KNUTICEUnitTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = KNUTICEUnitTests; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		5C82563B2BE5CE1A0038D4C8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55C454BF09AACA454EE3AB59 /* Pods_KNUTICE.framework in Frameworks */,
+				55C454BF09AACA454EE3AB59 /* (null) in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E2051382CD4F32F00D87C6A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22BBFAE23A4B31141886D1FB /* Pods_KNUTICE_dev.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,7 +315,7 @@
 		46EC8B9A9643A4F44728CD8D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				ED56137F2D38EFBD31327DCC /* Pods_KNUTICE.framework */,
+				4CCC62FF7D9711F0EC1652BA /* Pods_KNUTICE_dev.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -296,6 +391,7 @@
 			isa = PBXGroup;
 			children = (
 				5C82564F2BE5CE1B0038D4C8 /* Info.plist */,
+				8E2051482CD4F32F00D87C6A /* Info-Dev.plist */,
 				5C190A432BFD6AA500E0254B /* ServiceInfo.plist */,
 				5C8256412BE5CE1A0038D4C8 /* AppDelegate.swift */,
 				8E54C8492C5E6F5E0070E689 /* AppDelegate+Messaging.swift */,
@@ -324,6 +420,7 @@
 				5C82563E2BE5CE1A0038D4C8 /* KNUTICE.app */,
 				8EB6D1FD2C663627004E8AC2 /* NotificationService.appex */,
 				8E7945E42CA28F6900208662 /* KNUTICEUnitTests.xctest */,
+				8E2051472CD4F32F00D87C6A /* KNUTICE dev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -332,6 +429,7 @@
 			isa = PBXGroup;
 			children = (
 				8E613E9D2C951C8D006FC272 /* GoogleService-Info.plist */,
+				8E20514D2CD50B1100D87C6A /* GoogleService-Info-Dev.plist */,
 				8E54C8462C5E63940070E689 /* KNUTICE.entitlements */,
 				5C190A4C2BFDD92A00E0254B /* Utils */,
 				5C56988E2BEFB37D0085E389 /* Application */,
@@ -535,6 +633,13 @@
 			path = ci_scripts;
 			sourceTree = "<group>";
 		};
+		8E7945E52CA28F6900208662 /* KNUTICEUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = KNUTICEUnitTests;
+			sourceTree = "<group>";
+		};
 		8EB6D1FE2C663627004E8AC2 /* NotificationService */ = {
 			isa = PBXGroup;
 			children = (
@@ -567,6 +672,8 @@
 			children = (
 				1088B3CC0C3ED243F6DE188A /* Pods-KNUTICE.debug.xcconfig */,
 				8545CA775C9EEDED6069914B /* Pods-KNUTICE.release.xcconfig */,
+				CEB2E7774CA740F3A5159B90 /* Pods-KNUTICE dev.debug.xcconfig */,
+				1F6EA9C9AF0F607264F010B6 /* Pods-KNUTICE dev.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -595,6 +702,27 @@
 			productReference = 5C82563E2BE5CE1A0038D4C8 /* KNUTICE.app */;
 			productType = "com.apple.product-type.application";
 		};
+		8E2050F72CD4F32F00D87C6A /* KNUTICE dev */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E2051442CD4F32F00D87C6A /* Build configuration list for PBXNativeTarget "KNUTICE dev" */;
+			buildPhases = (
+				8E2050FA2CD4F32F00D87C6A /* [CP] Check Pods Manifest.lock */,
+				8E2050FB2CD4F32F00D87C6A /* Sources */,
+				8E2051382CD4F32F00D87C6A /* Frameworks */,
+				8E20513A2CD4F32F00D87C6A /* Resources */,
+				8E2051412CD4F32F00D87C6A /* Embed Foundation Extensions */,
+				8E2051432CD4F32F00D87C6A /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8E2050F82CD4F32F00D87C6A /* PBXTargetDependency */,
+			);
+			name = "KNUTICE dev";
+			productName = KNUTICE;
+			productReference = 8E2051472CD4F32F00D87C6A /* KNUTICE dev.app */;
+			productType = "com.apple.product-type.application";
+		};
 		8E7945E32CA28F6900208662 /* KNUTICEUnitTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E7945EA2CA28F6900208662 /* Build configuration list for PBXNativeTarget "KNUTICEUnitTests" */;
@@ -608,12 +736,7 @@
 			dependencies = (
 				8E7945E92CA28F6900208662 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				8E7945E52CA28F6900208662 /* KNUTICEUnitTests */,
-			);
 			name = KNUTICEUnitTests;
-			packageProductDependencies = (
-			);
 			productName = KNUTICEUnitTests;
 			productReference = 8E7945E42CA28F6900208662 /* KNUTICEUnitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -658,7 +781,7 @@
 				};
 			};
 			buildConfigurationList = 5C8256392BE5CE1A0038D4C8 /* Build configuration list for PBXProject "KNUTICE" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 15.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -671,6 +794,7 @@
 			projectRoot = "";
 			targets = (
 				5C82563D2BE5CE1A0038D4C8 /* KNUTICE */,
+				8E2050F72CD4F32F00D87C6A /* KNUTICE dev */,
 				8EB6D1FC2C663627004E8AC2 /* NotificationService */,
 				8E7945E32CA28F6900208662 /* KNUTICEUnitTests */,
 			);
@@ -682,12 +806,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C190A442BFD6AA500E0254B /* ServiceInfo.plist in Resources */,
+				8E4F599E2CD517DD007D43BC /* ServiceInfo.plist in Resources */,
 				5C82564B2BE5CE1B0038D4C8 /* Assets.xcassets in Resources */,
-				8E613E9E2C951C8D006FC272 /* GoogleService-Info.plist in Resources */,
 				8E1599A12CA2735E001F75A3 /* LaunchScreen.storyboard in Resources */,
+				8E4F599D2CD5176E007D43BC /* GoogleService-Info.plist in Resources */,
 				8E5385872C64A24A00AF151B /* ci_post_clone.sh in Resources */,
 				5C82564E2BE5CE1B0038D4C8 /* Base in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E20513A2CD4F32F00D87C6A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E20513B2CD4F32F00D87C6A /* ServiceInfo.plist in Resources */,
+				8E4F59A02CD51B99007D43BC /* GoogleService-Info-Dev.plist in Resources */,
+				8E20513C2CD4F32F00D87C6A /* Assets.xcassets in Resources */,
+				8E20513E2CD4F32F00D87C6A /* LaunchScreen.storyboard in Resources */,
+				8E20513F2CD4F32F00D87C6A /* ci_post_clone.sh in Resources */,
+				8E2051402CD4F32F00D87C6A /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -723,6 +860,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KNUTICE/Pods-KNUTICE-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8E2050FA2CD4F32F00D87C6A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KNUTICE dev-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8E2051432CD4F32F00D87C6A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KNUTICE dev/Pods-KNUTICE dev-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KNUTICE dev/Pods-KNUTICE dev-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KNUTICE dev/Pods-KNUTICE dev-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E7F7A5E471B0BBB21E35D202 /* [CP] Check Pods Manifest.lock */ = {
@@ -817,6 +993,73 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8E2050FB2CD4F32F00D87C6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E2050FC2CD4F32F00D87C6A /* ScholarshipNoticeViewController.swift in Sources */,
+				8E2050FD2CD4F32F00D87C6A /* MainNoticeResponseDTO.swift in Sources */,
+				8E2050FE2CD4F32F00D87C6A /* UIViewController+Preview.swift in Sources */,
+				8E2050FF2CD4F32F00D87C6A /* ReportService.swift in Sources */,
+				8E2051002CD4F32F00D87C6A /* TokenRepository.swift in Sources */,
+				8E2051012CD4F32F00D87C6A /* MainViewModel.swift in Sources */,
+				8E2051022CD4F32F00D87C6A /* MainViewController.swift in Sources */,
+				8E2051032CD4F32F00D87C6A /* DetailedNoticeCellWithImage.swift in Sources */,
+				8E2051042CD4F32F00D87C6A /* NoticeViewModel.swift in Sources */,
+				8E2051052CD4F32F00D87C6A /* OpenSourceLicenseView.swift in Sources */,
+				8E2051062CD4F32F00D87C6A /* ReportRepository.swift in Sources */,
+				8E2051072CD4F32F00D87C6A /* RequestResult.swift in Sources */,
+				8E2051082CD4F32F00D87C6A /* MainViewController+Binding.swift in Sources */,
+				8E2051092CD4F32F00D87C6A /* MainNoticeRepositoryImpl.swift in Sources */,
+				8E20510A2CD4F32F00D87C6A /* SettingViewModel.swift in Sources */,
+				8E20510B2CD4F32F00D87C6A /* DetailedNoticeCell.swift in Sources */,
+				8E20510C2CD4F32F00D87C6A /* AppDI.swift in Sources */,
+				8E20510D2CD4F32F00D87C6A /* AppDelegate.swift in Sources */,
+				8E20510E2CD4F32F00D87C6A /* Notice.swift in Sources */,
+				8E20510F2CD4F32F00D87C6A /* WebViewController+Layout.swift in Sources */,
+				8E2051102CD4F32F00D87C6A /* ReportResponseDTO.swift in Sources */,
+				8E2051112CD4F32F00D87C6A /* VIew+TextEditorBackground.swift in Sources */,
+				8E2051122CD4F32F00D87C6A /* ReportView.swift in Sources */,
+				8E2051132CD4F32F00D87C6A /* LightTextView.swift in Sources */,
+				8E2051142CD4F32F00D87C6A /* MainNoticeDataSource.swift in Sources */,
+				8E2051152CD4F32F00D87C6A /* TokenSaveResponseDTO.swift in Sources */,
+				8E2051162CD4F32F00D87C6A /* NoticeReponseDTO.swift in Sources */,
+				8E2051172CD4F32F00D87C6A /* View+Fork.swift in Sources */,
+				8E2051182CD4F32F00D87C6A /* AppVersionProvidable.swift in Sources */,
+				8E2051192CD4F32F00D87C6A /* WebView.swift in Sources */,
+				8E20511A2CD4F32F00D87C6A /* AppDelegate+Messaging.swift in Sources */,
+				8E20511B2CD4F32F00D87C6A /* NoticeRepository.swift in Sources */,
+				8E20511C2CD4F32F00D87C6A /* UIDevice+Identifier.swift in Sources */,
+				8E20511D2CD4F32F00D87C6A /* WebViewController+Callbacks.swift in Sources */,
+				8E20511E2CD4F32F00D87C6A /* ReportDataSource.swift in Sources */,
+				8E20511F2CD4F32F00D87C6A /* MainListCell.swift in Sources */,
+				8E2051202CD4F32F00D87C6A /* ViewModelProtocol.swift in Sources */,
+				8E2051212CD4F32F00D87C6A /* MainNotice.swift in Sources */,
+				8E2051222CD4F32F00D87C6A /* UIFont+DynamicFont.swift in Sources */,
+				8E2051232CD4F32F00D87C6A /* MainViewController+NotificationCenter.swift in Sources */,
+				8E2051242CD4F32F00D87C6A /* NoticeRepositoryImpl.swift in Sources */,
+				8E2051252CD4F32F00D87C6A /* MainNoticeRepository.swift in Sources */,
+				8E2051262CD4F32F00D87C6A /* AcademicNoticeViewController.swift in Sources */,
+				8E2051272CD4F32F00D87C6A /* ReportRepositoryImpl.swift in Sources */,
+				8E2051282CD4F32F00D87C6A /* NoticeDataSource.swift in Sources */,
+				8E2051292CD4F32F00D87C6A /* TokenRepositoryImpl.swift in Sources */,
+				8E20512A2CD4F32F00D87C6A /* GeneralNoticeViewController.swift in Sources */,
+				8E20512B2CD4F32F00D87C6A /* SettingView.swift in Sources */,
+				8E20512C2CD4F32F00D87C6A /* MainViewController+Callbacks.swift in Sources */,
+				8E20512D2CD4F32F00D87C6A /* EventNoticeViewController.swift in Sources */,
+				8E20512E2CD4F32F00D87C6A /* SectionOfNotice.swift in Sources */,
+				8E20512F2CD4F32F00D87C6A /* ReportViewModel.swift in Sources */,
+				8E2051302CD4F32F00D87C6A /* WebViewController.swift in Sources */,
+				8E2051312CD4F32F00D87C6A /* DataBindable.swift in Sources */,
+				8E2051322CD4F32F00D87C6A /* MainViewController+Layout.swift in Sources */,
+				8E2051332CD4F32F00D87C6A /* SceneDelegate.swift in Sources */,
+				8E2051342CD4F32F00D87C6A /* TokenDataSource.swift in Sources */,
+				8E2051352CD4F32F00D87C6A /* TableViewConfigurable.swift in Sources */,
+				8E2051362CD4F32F00D87C6A /* Bundle+URL.swift in Sources */,
+				8E2051372CD4F32F00D87C6A /* Scrollable.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8E7945E02CA28F6900208662 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -835,6 +1078,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		8E2050F82CD4F32F00D87C6A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8EB6D1FC2C663627004E8AC2 /* NotificationService */;
+			targetProxy = 8E2050F92CD4F32F00D87C6A /* PBXContainerItemProxy */;
+		};
 		8E7945E92CA28F6900208662 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5C82563D2BE5CE1A0038D4C8 /* KNUTICE */;
@@ -991,6 +1239,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KNUTICE/Application/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = KNUTICE;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -998,12 +1247,12 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1029,6 +1278,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KNUTICE/Application/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = KNUTICE;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1036,14 +1286,98 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		8E2051452CD4F32F00D87C6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CEB2E7774CA740F3A5159B90 /* Pods-KNUTICE dev.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = BetaAppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = KNUTICE/KNUTICE.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QHK65XFL8U;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "KNUTICE/Application/Info-Dev.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "KNUTICE beta";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.2.0;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DDEV";
+				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE.dev;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		8E2051462CD4F32F00D87C6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F6EA9C9AF0F607264F010B6 /* Pods-KNUTICE dev.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = BetaAppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = KNUTICE/KNUTICE.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QHK65XFL8U;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "KNUTICE/Application/Info-Dev.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "KNUTICE beta";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.2.0;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DDEV";
+				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE.dev;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
@@ -1102,13 +1436,13 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NotificationService;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1131,13 +1465,13 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NotificationService;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1167,6 +1501,15 @@
 			buildConfigurations = (
 				5C8256532BE5CE1B0038D4C8 /* Debug */,
 				5C8256542BE5CE1B0038D4C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E2051442CD4F32F00D87C6A /* Build configuration list for PBXNativeTarget "KNUTICE dev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E2051452CD4F32F00D87C6A /* Debug */,
+				8E2051462CD4F32F00D87C6A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
