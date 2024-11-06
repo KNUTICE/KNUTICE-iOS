@@ -7,7 +7,11 @@
 
 import XCTest
 import Foundation
+#if DEV
+@testable import KNUTICE_dev
+#else
 @testable import KNUTICE
+#endif
 
 final class noticeTest: XCTestCase {
     private var noticeDataSource: NoticeDataSource!
