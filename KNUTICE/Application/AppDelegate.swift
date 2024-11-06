@@ -18,8 +18,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        //Firebase 연동
-        FirebaseApp.configure()
+        var filePath: String?
+        
+        #if DEV
+        filePath = Bundle.main.path(forResource: "GoogleService-Info-Dev", ofType: "plist")
+        #else
+        filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
+        #endif
+        
+        if let fileopts = FirebaseOptions(contentsOfFile: filePath!) {
+            FirebaseApp.configure(options: fileopts)
+        }
         
         //UNUserNotificationCenter의 delegate를 AppDelegate class에서 처리하도록 설정
         UNUserNotificationCenter.current().delegate = self
