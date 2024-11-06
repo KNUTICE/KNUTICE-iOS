@@ -7,12 +7,17 @@
 		<key>KNUTICE-dev.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>36</integer>
+			<integer>4</integer>
 		</dict>
 		<key>KNUTICE.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>KNUTICEDevUnitTests.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>38</integer>
 		</dict>
 		<key>KNUTICEUnitTests.xcscheme_^#shared#^_</key>
 		<dict>
@@ -22,7 +27,7 @@
 		<key>NotificationService-dev.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>35</integer>
+			<integer>3</integer>
 		</dict>
 		<key>NotificationService.xcscheme_^#shared#^_</key>
 		<dict>
@@ -53,6 +58,11 @@
 			<true/>
 		</dict>
 		<key>8E7945E32CA28F6900208662</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8EEA5C142CDB88D50015EDDC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
