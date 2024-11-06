@@ -184,6 +184,13 @@
 			remoteGlobalIDString = 8EB6D1FC2C663627004E8AC2;
 			remoteInfo = NotificationService;
 		};
+		8EEA5C0F2CDB83A50015EDDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E2050F72CD4F32F00D87C6A;
+			remoteInfo = "KNUTICE-dev";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -839,6 +846,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				8EEA5C102CDB83A50015EDDC /* PBXTargetDependency */,
 				8E7945E92CA28F6900208662 /* PBXTargetDependency */,
 			);
 			name = KNUTICEUnitTests;
@@ -1267,6 +1275,11 @@
 			isa = PBXTargetDependency;
 			target = 8EB6D1FC2C663627004E8AC2 /* NotificationService */;
 			targetProxy = 8EB6D2022C663627004E8AC2 /* PBXContainerItemProxy */;
+		};
+		8EEA5C102CDB83A50015EDDC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E2050F72CD4F32F00D87C6A /* KNUTICE-dev */;
+			targetProxy = 8EEA5C0F2CDB83A50015EDDC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

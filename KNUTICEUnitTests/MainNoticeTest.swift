@@ -6,7 +6,11 @@
 //
 
 import XCTest
+#if DEV
+@testable import KNUTICE_dev
+#else
 @testable import KNUTICE
+#endif
 
 final class MainNoticeTest: XCTestCase {
     private var mainNoticeDatasource: MainNoticeDataSource!
