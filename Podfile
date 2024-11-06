@@ -33,3 +33,7 @@ end
 target 'KNUTICE-dev' do
   pods
 end
+
+target 'KNUTICEUnitTests' do
+  pods
+end

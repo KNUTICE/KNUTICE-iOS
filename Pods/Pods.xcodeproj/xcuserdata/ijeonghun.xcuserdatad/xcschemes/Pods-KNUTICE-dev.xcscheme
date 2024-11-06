@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F79317892D51F0ABC59AAA870FC99F3A"
+               BlueprintIdentifier = "16D225D55C795EAD44DDDB0CCBE0DC7B"
                BuildableName = "Pods_KNUTICE_dev.framework"
-               BlueprintName = "Pods-KNUTICE dev"
+               BlueprintName = "Pods-KNUTICE-dev"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

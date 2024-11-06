@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -33,6 +33,7 @@
 		5C9B810B2BF451BC0038EB27 /* NoticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B810A2BF451BC0038EB27 /* NoticeViewModel.swift */; };
 		5C9B810E2BF45B5D0038EB27 /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B810D2BF45B5D0038EB27 /* ViewModelProtocol.swift */; };
 		5CD2EFC12BF356FB00066C87 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2EFC02BF356FB00066C87 /* UIViewController+Preview.swift */; };
+		766071C8E00212EB91A2AC8C /* Pods_KNUTICEUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C31D64DBFB242AE0A9A9154 /* Pods_KNUTICEUnitTests.framework */; };
 		8E00AF6C2C361F780037EC38 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF6B2C361F780037EC38 /* WebViewController.swift */; };
 		8E00AF712C36233C0037EC38 /* WebViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF702C36233C0037EC38 /* WebViewController+Layout.swift */; };
 		8E00AF7B2C3676240037EC38 /* AcademicNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF7A2C3676240037EC38 /* AcademicNoticeViewController.swift */; };
@@ -138,6 +139,9 @@
 		8EB6D20C2C66FC5B004E8AC2 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6D20B2C66FC5B004E8AC2 /* SettingViewModel.swift */; };
 		8EB6D20E2C6713BB004E8AC2 /* View+Fork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6D20D2C6713BB004E8AC2 /* View+Fork.swift */; };
 		8EBBE2402CA0E3FC00826D5A /* LightTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBBE23F2CA0E3FB00826D5A /* LightTextView.swift */; };
+		8ECB82D42CDB6A6300420349 /* MainNoticeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECB82D22CDB6A6300420349 /* MainNoticeTest.swift */; };
+		8ECB82D52CDB6A6300420349 /* noticeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECB82D32CDB6A6300420349 /* noticeTest.swift */; };
+		8ECB82DD2CDB6C3D00420349 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECB82DB2CDB6C3D00420349 /* NotificationService.swift */; };
 		8ECE2B182C35045800D7F499 /* MainNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B172C35045800D7F499 /* MainNotice.swift */; };
 		8ECE2B1A2C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B192C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift */; };
 		8EDD51A62C6D7D68002101CA /* MainViewController+NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD51A52C6D7D68002101CA /* MainViewController+NotificationCenter.swift */; };
@@ -148,6 +152,7 @@
 		8EFCF8672C37742A004A53E9 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF8662C37742A004A53E9 /* SettingView.swift */; };
 		8EFCF86D2C37810B004A53E9 /* UIFont+DynamicFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF86C2C37810B004A53E9 /* UIFont+DynamicFont.swift */; };
 		8EFDAB032C3BC08900352779 /* WebViewController+Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDAB022C3BC08900352779 /* WebViewController+Callbacks.swift */; };
+		966013CB613CD8386821DE6B /* Pods_KNUTICE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DB16CBAE7BA0F10D1C04CAF /* Pods_KNUTICE.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -207,8 +212,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		07EF1E4B8875DF419187AE8C /* Pods-KNUTICE-dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNUTICE-dev.debug.xcconfig"; path = "Target Support Files/Pods-KNUTICE-dev/Pods-KNUTICE-dev.debug.xcconfig"; sourceTree = "<group>"; };
 		1088B3CC0C3ED243F6DE188A /* Pods-KNUTICE.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNUTICE.debug.xcconfig"; path = "Target Support Files/Pods-KNUTICE/Pods-KNUTICE.debug.xcconfig"; sourceTree = "<group>"; };
+		1DB16CBAE7BA0F10D1C04CAF /* Pods_KNUTICE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNUTICE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F6EA9C9AF0F607264F010B6 /* Pods-KNUTICE dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNUTICE dev.release.xcconfig"; path = "Target Support Files/Pods-KNUTICE dev/Pods-KNUTICE dev.release.xcconfig"; sourceTree = "<group>"; };
+		3C31D64DBFB242AE0A9A9154 /* Pods_KNUTICEUnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNUTICEUnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CCC62FF7D9711F0EC1652BA /* Pods_KNUTICE_dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNUTICE_dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C190A432BFD6AA500E0254B /* ServiceInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ServiceInfo.plist; sourceTree = "<group>"; };
 		5C190A452BFD6BDB00E0254B /* Bundle+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+URL.swift"; sourceTree = "<group>"; };
@@ -237,6 +245,7 @@
 		5C9B810A2BF451BC0038EB27 /* NoticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewModel.swift; sourceTree = "<group>"; };
 		5C9B810D2BF45B5D0038EB27 /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
 		5CD2EFC02BF356FB00066C87 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
+		6AA8F2803065F4B6023641F6 /* Pods-KNUTICE-dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNUTICE-dev.release.xcconfig"; path = "Target Support Files/Pods-KNUTICE-dev/Pods-KNUTICE-dev.release.xcconfig"; sourceTree = "<group>"; };
 		8545CA775C9EEDED6069914B /* Pods-KNUTICE.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNUTICE.release.xcconfig"; path = "Target Support Files/Pods-KNUTICE/Pods-KNUTICE.release.xcconfig"; sourceTree = "<group>"; };
 		8E00AF6B2C361F780037EC38 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		8E00AF702C36233C0037EC38 /* WebViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebViewController+Layout.swift"; sourceTree = "<group>"; };
@@ -280,6 +289,10 @@
 		8EB6D20B2C66FC5B004E8AC2 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		8EB6D20D2C6713BB004E8AC2 /* View+Fork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Fork.swift"; sourceTree = "<group>"; };
 		8EBBE23F2CA0E3FB00826D5A /* LightTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTextView.swift; sourceTree = "<group>"; };
+		8ECB82D22CDB6A6300420349 /* MainNoticeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeTest.swift; sourceTree = "<group>"; };
+		8ECB82D32CDB6A6300420349 /* noticeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noticeTest.swift; sourceTree = "<group>"; };
+		8ECB82DA2CDB6C3D00420349 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8ECB82DB2CDB6C3D00420349 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		8ECE2B172C35045800D7F499 /* MainNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotice.swift; sourceTree = "<group>"; };
 		8ECE2B192C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedNoticeCellWithImage.swift; sourceTree = "<group>"; };
 		8EDD51A52C6D7D68002101CA /* MainViewController+NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+NotificationCenter.swift"; sourceTree = "<group>"; };
@@ -290,29 +303,10 @@
 		8EFCF8662C37742A004A53E9 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		8EFCF86C2C37810B004A53E9 /* UIFont+DynamicFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+DynamicFont.swift"; sourceTree = "<group>"; };
 		8EFDAB022C3BC08900352779 /* WebViewController+Callbacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebViewController+Callbacks.swift"; sourceTree = "<group>"; };
+		A819AC44309C7ECC57A35CBB /* Pods-KNUTICEUnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNUTICEUnitTests.release.xcconfig"; path = "Target Support Files/Pods-KNUTICEUnitTests/Pods-KNUTICEUnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		CEB2E7774CA740F3A5159B90 /* Pods-KNUTICE dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNUTICE dev.debug.xcconfig"; path = "Target Support Files/Pods-KNUTICE dev/Pods-KNUTICE dev.debug.xcconfig"; sourceTree = "<group>"; };
+		E48F21FDD9D9CF8F2F8AC64A /* Pods-KNUTICEUnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNUTICEUnitTests.debug.xcconfig"; path = "Target Support Files/Pods-KNUTICEUnitTests/Pods-KNUTICEUnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		8E6898332CD61EF1005F0EEA /* Exceptions for "NotificationService-dev" folder in "NotificationService-dev" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 8E68982A2CD61EF1005F0EEA /* NotificationService-dev */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		8E68982C2CD61EF1005F0EEA /* NotificationService-dev */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				8E6898332CD61EF1005F0EEA /* Exceptions for "NotificationService-dev" folder in "NotificationService-dev" target */,
-			);
-			path = "NotificationService-dev";
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		5C82563B2BE5CE1A0038D4C8 /* Frameworks */ = {
@@ -320,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55C454BF09AACA454EE3AB59 /* (null) in Frameworks */,
+				966013CB613CD8386821DE6B /* Pods_KNUTICE.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +337,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				766071C8E00212EB91A2AC8C /* Pods_KNUTICEUnitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +355,8 @@
 			isa = PBXGroup;
 			children = (
 				4CCC62FF7D9711F0EC1652BA /* Pods_KNUTICE_dev.framework */,
+				1DB16CBAE7BA0F10D1C04CAF /* Pods_KNUTICE.framework */,
+				3C31D64DBFB242AE0A9A9154 /* Pods_KNUTICEUnitTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -451,7 +449,7 @@
 				8E53857D2C647D5A00AF151B /* ci_scripts */,
 				5C8256402BE5CE1A0038D4C8 /* KNUTICE */,
 				8EB6D1FE2C663627004E8AC2 /* NotificationService */,
-				8E68982C2CD61EF1005F0EEA /* NotificationService-dev */,
+				8ECB82DC2CDB6C3D00420349 /* NotificationService-dev */,
 				8E7945E52CA28F6900208662 /* KNUTICEUnitTests */,
 				5C82563F2BE5CE1A0038D4C8 /* Products */,
 				BC5E021D61A31CFDBABCB914 /* Pods */,
@@ -682,6 +680,8 @@
 		8E7945E52CA28F6900208662 /* KNUTICEUnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				8ECB82D22CDB6A6300420349 /* MainNoticeTest.swift */,
+				8ECB82D32CDB6A6300420349 /* noticeTest.swift */,
 			);
 			path = KNUTICEUnitTests;
 			sourceTree = "<group>";
@@ -739,6 +739,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		8ECB82DC2CDB6C3D00420349 /* NotificationService-dev */ = {
+			isa = PBXGroup;
+			children = (
+				8ECB82DA2CDB6C3D00420349 /* Info.plist */,
+				8ECB82DB2CDB6C3D00420349 /* NotificationService.swift */,
+			);
+			path = "NotificationService-dev";
+			sourceTree = "<group>";
+		};
 		BC5E021D61A31CFDBABCB914 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -746,6 +755,10 @@
 				8545CA775C9EEDED6069914B /* Pods-KNUTICE.release.xcconfig */,
 				CEB2E7774CA740F3A5159B90 /* Pods-KNUTICE dev.debug.xcconfig */,
 				1F6EA9C9AF0F607264F010B6 /* Pods-KNUTICE dev.release.xcconfig */,
+				07EF1E4B8875DF419187AE8C /* Pods-KNUTICE-dev.debug.xcconfig */,
+				6AA8F2803065F4B6023641F6 /* Pods-KNUTICE-dev.release.xcconfig */,
+				E48F21FDD9D9CF8F2F8AC64A /* Pods-KNUTICEUnitTests.debug.xcconfig */,
+				A819AC44309C7ECC57A35CBB /* Pods-KNUTICEUnitTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -808,12 +821,7 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				8E68982C2CD61EF1005F0EEA /* NotificationService-dev */,
-			);
 			name = "NotificationService-dev";
-			packageProductDependencies = (
-			);
 			productName = "NotificationService-dev";
 			productReference = 8E68982B2CD61EF1005F0EEA /* NotificationService-dev.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -822,9 +830,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E7945EA2CA28F6900208662 /* Build configuration list for PBXNativeTarget "KNUTICEUnitTests" */;
 			buildPhases = (
+				61FB62CCEFDAA7080D4FB889 /* [CP] Check Pods Manifest.lock */,
 				8E7945E02CA28F6900208662 /* Sources */,
 				8E7945E12CA28F6900208662 /* Frameworks */,
 				8E7945E22CA28F6900208662 /* Resources */,
+				6E3DC016A606435DB33E599C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -871,6 +881,7 @@
 					};
 					8E7945E32CA28F6900208662 = {
 						CreatedOnToolsVersion = 16.0;
+						LastSwiftMigration = 1610;
 						TestTargetID = 5C82563D2BE5CE1A0038D4C8;
 					};
 					8EB6D1FC2C663627004E8AC2 = {
@@ -879,6 +890,7 @@
 				};
 			};
 			buildConfigurationList = 5C8256392BE5CE1A0038D4C8 /* Build configuration list for PBXProject "KNUTICE" */;
+			compatibilityVersion = "Xcode 15.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -886,7 +898,6 @@
 				Base,
 			);
 			mainGroup = 5C8256352BE5CE1A0038D4C8;
-			preferredProjectObjectVersion = 77;
 			productRefGroup = 5C82563F2BE5CE1A0038D4C8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -968,6 +979,45 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KNUTICE/Pods-KNUTICE-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		61FB62CCEFDAA7080D4FB889 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KNUTICEUnitTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6E3DC016A606435DB33E599C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KNUTICEUnitTests/Pods-KNUTICEUnitTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KNUTICEUnitTests/Pods-KNUTICEUnitTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KNUTICEUnitTests/Pods-KNUTICEUnitTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8E2050FA2CD4F32F00D87C6A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -983,7 +1033,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-KNUTICE dev-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-KNUTICE-dev-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -996,15 +1046,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KNUTICE dev/Pods-KNUTICE dev-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-KNUTICE-dev/Pods-KNUTICE-dev-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KNUTICE dev/Pods-KNUTICE dev-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-KNUTICE-dev/Pods-KNUTICE-dev-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KNUTICE dev/Pods-KNUTICE dev-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KNUTICE-dev/Pods-KNUTICE-dev-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E7F7A5E471B0BBB21E35D202 /* [CP] Check Pods Manifest.lock */ = {
@@ -1174,6 +1224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8ECB82DD2CDB6C3D00420349 /* NotificationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1181,6 +1232,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8ECB82D42CDB6A6300420349 /* MainNoticeTest.swift in Sources */,
+				8ECB82D52CDB6A6300420349 /* noticeTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1430,7 +1483,7 @@
 		};
 		8E2051452CD4F32F00D87C6A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CEB2E7774CA740F3A5159B90 /* Pods-KNUTICE dev.debug.xcconfig */;
+			baseConfigurationReference = 07EF1E4B8875DF419187AE8C /* Pods-KNUTICE-dev.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = BetaAppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1472,7 +1525,7 @@
 		};
 		8E2051462CD4F32F00D87C6A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F6EA9C9AF0F607264F010B6 /* Pods-KNUTICE dev.release.xcconfig */;
+			baseConfigurationReference = 6AA8F2803065F4B6023641F6 /* Pods-KNUTICE-dev.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = BetaAppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1568,17 +1621,21 @@
 		};
 		8E7945EB2CA28F6900208662 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E48F21FDD9D9CF8F2F8AC64A /* Pods-KNUTICEUnitTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QHK65XFL8U;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jeonghun.KNUTICEUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KNUTICE.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KNUTICE";
@@ -1587,13 +1644,16 @@
 		};
 		8E7945EC2CA28F6900208662 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A819AC44309C7ECC57A35CBB /* Pods-KNUTICEUnitTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QHK65XFL8U;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jeonghun.KNUTICEUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

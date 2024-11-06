@@ -1,5 +1,5 @@
 framework module Pods_KNUTICE_dev {
-  umbrella header "Pods-KNUTICE dev-umbrella.h"
+  umbrella header "Pods-KNUTICE-dev-umbrella.h"
 
   export *
   module * { export * }
