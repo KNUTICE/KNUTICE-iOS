@@ -95,11 +95,11 @@ cat <<EOF > "/Volumes/workspace/repository/KNUTICE/GoogleService-Info-Dev.plist"
     <key>PLIST_VERSION</key>
     <string>${PLIST_VERSION}</string>
     <key>BUNDLE_ID</key>
-    <string>${Dev_BUNDLE_ID}</string>
+    <string>${BUNDLE_ID}</string>
     <key>PROJECT_ID</key>
     <string>${PROJECT_ID}</string>
     <key>STORAGE_BUCKET</key>
-    <string>${Dev_STORAGE_BUCKET}</string>
+    <string>${STORAGE_BUCKET}</string>
     <key>IS_ADS_ENABLED</key>
     `convert_bool ${IS_ADS_ENABLED}`
     <key>IS_ANALYTICS_ENABLED</key>
@@ -111,7 +111,7 @@ cat <<EOF > "/Volumes/workspace/repository/KNUTICE/GoogleService-Info-Dev.plist"
     <key>IS_SIGNIN_ENABLED</key>
     `convert_bool ${IS_SIGNIN_ENABLED}`
     <key>GOOGLE_APP_ID</key>
-    <string>${Dev_GOOGLE_APP_ID}</string>
+    <string>${GOOGLE_APP_ID}</string>
 </dict>
 </plist>
 EOF
