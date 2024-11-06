@@ -1,12 +1,12 @@
 //
 //  MainNoticeTest.swift
-//  KNUTICEUnitTests
+//  KNUTICEDevUnitTests
 //
-//  Created by 이정훈 on 9/24/24.
+//  Created by 이정훈 on 11/6/24.
 //
 
 import XCTest
-@testable import KNUTICE
+@testable import KNUTICE_dev
 
 final class MainNoticeTest: XCTestCase {
     private var mainNoticeDatasource: MainNoticeDataSource!
