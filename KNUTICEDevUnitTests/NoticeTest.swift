@@ -1,13 +1,13 @@
 //
-//  GeneralNoticeTest.swift
-//  KNUTICEUnitTests
+//  NoticeTest.swift
+//  KNUTICEDevUnitTests
 //
-//  Created by 이정훈 on 9/24/24.
+//  Created by 이정훈 on 11/6/24.
 //
 
 import XCTest
 import Foundation
-@testable import KNUTICE
+@testable import KNUTICE_dev
 
 final class noticeTest: XCTestCase {
     private var noticeDataSource: NoticeDataSource!
@@ -90,3 +90,4 @@ final class noticeTest: XCTestCase {
         wait(for: [expectation], timeout: 10)
     }
 }
+
