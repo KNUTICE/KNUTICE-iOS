@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -191,13 +191,6 @@
 			remoteGlobalIDString = 8E2050F72CD4F32F00D87C6A;
 			remoteInfo = "KNUTICE-dev";
 		};
-		8EEA5C192CDB88D50015EDDC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8E2050F72CD4F32F00D87C6A;
-			remoteInfo = "KNUTICE-dev";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -310,7 +303,6 @@
 		8ECE2B172C35045800D7F499 /* MainNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotice.swift; sourceTree = "<group>"; };
 		8ECE2B192C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedNoticeCellWithImage.swift; sourceTree = "<group>"; };
 		8EDD51A52C6D7D68002101CA /* MainViewController+NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+NotificationCenter.swift"; sourceTree = "<group>"; };
-		8EEA5C152CDB88D50015EDDC /* KNUTICEDevUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KNUTICEDevUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EF191FA2C4ABEB5004219BE /* AppDI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDI.swift; sourceTree = "<group>"; };
 		8EF191FC2C4ABED8004219BE /* MainNoticeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeDataSource.swift; sourceTree = "<group>"; };
 		8EFCF8622C376AD0004A53E9 /* ScholarshipNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipNoticeViewController.swift; sourceTree = "<group>"; };
@@ -322,10 +314,6 @@
 		CEB2E7774CA740F3A5159B90 /* Pods-KNUTICE dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNUTICE dev.debug.xcconfig"; path = "Target Support Files/Pods-KNUTICE dev/Pods-KNUTICE dev.debug.xcconfig"; sourceTree = "<group>"; };
 		E48F21FDD9D9CF8F2F8AC64A /* Pods-KNUTICEUnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNUTICEUnitTests.debug.xcconfig"; path = "Target Support Files/Pods-KNUTICEUnitTests/Pods-KNUTICEUnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		8EEA5C162CDB88D50015EDDC /* KNUTICEDevUnitTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = KNUTICEDevUnitTests; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		5C82563B2BE5CE1A0038D4C8 /* Frameworks */ = {
@@ -361,13 +349,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8EB6D1FA2C663627004E8AC2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8EEA5C122CDB88D50015EDDC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -477,7 +458,6 @@
 				8EB6D1FE2C663627004E8AC2 /* NotificationService */,
 				8ECB82DC2CDB6C3D00420349 /* NotificationService-dev */,
 				8E7945E52CA28F6900208662 /* KNUTICEUnitTests */,
-				8EEA5C162CDB88D50015EDDC /* KNUTICEDevUnitTests */,
 				5C82563F2BE5CE1A0038D4C8 /* Products */,
 				BC5E021D61A31CFDBABCB914 /* Pods */,
 				46EC8B9A9643A4F44728CD8D /* Frameworks */,
@@ -492,7 +472,6 @@
 				8E7945E42CA28F6900208662 /* KNUTICEUnitTests.xctest */,
 				8E2051472CD4F32F00D87C6A /* KNUTICE-dev.app */,
 				8E68982B2CD61EF1005F0EEA /* NotificationService-dev.appex */,
-				8EEA5C152CDB88D50015EDDC /* KNUTICEDevUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -892,29 +871,6 @@
 			productReference = 8EB6D1FD2C663627004E8AC2 /* NotificationService.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		8EEA5C142CDB88D50015EDDC /* KNUTICEDevUnitTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8EEA5C1B2CDB88D50015EDDC /* Build configuration list for PBXNativeTarget "KNUTICEDevUnitTests" */;
-			buildPhases = (
-				8EEA5C112CDB88D50015EDDC /* Sources */,
-				8EEA5C122CDB88D50015EDDC /* Frameworks */,
-				8EEA5C132CDB88D50015EDDC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8EEA5C1A2CDB88D50015EDDC /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				8EEA5C162CDB88D50015EDDC /* KNUTICEDevUnitTests */,
-			);
-			name = KNUTICEDevUnitTests;
-			packageProductDependencies = (
-			);
-			productName = KNUTICEDevUnitTests;
-			productReference = 8EEA5C152CDB88D50015EDDC /* KNUTICEDevUnitTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -939,11 +895,6 @@
 					8EB6D1FC2C663627004E8AC2 = {
 						CreatedOnToolsVersion = 15.4;
 					};
-					8EEA5C142CDB88D50015EDDC = {
-						CreatedOnToolsVersion = 16.1;
-						LastSwiftMigration = 1610;
-						TestTargetID = 8E2050F72CD4F32F00D87C6A;
-					};
 				};
 			};
 			buildConfigurationList = 5C8256392BE5CE1A0038D4C8 /* Build configuration list for PBXProject "KNUTICE" */;
@@ -964,7 +915,6 @@
 				8EB6D1FC2C663627004E8AC2 /* NotificationService */,
 				8E68982A2CD61EF1005F0EEA /* NotificationService-dev */,
 				8E7945E32CA28F6900208662 /* KNUTICEUnitTests */,
-				8EEA5C142CDB88D50015EDDC /* KNUTICEDevUnitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1011,13 +961,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8EB6D1FB2C663627004E8AC2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8EEA5C132CDB88D50015EDDC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1310,13 +1253,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8EEA5C112CDB88D50015EDDC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1344,11 +1280,6 @@
 			isa = PBXTargetDependency;
 			target = 8E2050F72CD4F32F00D87C6A /* KNUTICE-dev */;
 			targetProxy = 8EEA5C0F2CDB83A50015EDDC /* PBXContainerItemProxy */;
-		};
-		8EEA5C1A2CDB88D50015EDDC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8E2050F72CD4F32F00D87C6A /* KNUTICE-dev */;
-			targetProxy = 8EEA5C192CDB88D50015EDDC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1804,47 +1735,6 @@
 			};
 			name = Release;
 		};
-		8EEA5C1C2CDB88D50015EDDC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QHK65XFL8U;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jeonghun.KNUTICEDevUnitTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KNUTICE-dev.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KNUTICE-dev";
-			};
-			name = Debug;
-		};
-		8EEA5C1D2CDB88D50015EDDC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QHK65XFL8U;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jeonghun.KNUTICEDevUnitTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KNUTICE-dev.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KNUTICE-dev";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1898,15 +1788,6 @@
 			buildConfigurations = (
 				8EB6D2062C663627004E8AC2 /* Debug */,
 				8EB6D2072C663627004E8AC2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8EEA5C1B2CDB88D50015EDDC /* Build configuration list for PBXNativeTarget "KNUTICEDevUnitTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8EEA5C1C2CDB88D50015EDDC /* Debug */,
-				8EEA5C1D2CDB88D50015EDDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
