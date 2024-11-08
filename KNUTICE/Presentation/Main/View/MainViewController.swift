@@ -92,18 +92,6 @@ extension MainViewController: UITableViewDelegate {
         return 40
     }
     
-    //MARK: - Custom Footer
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = .footerGray
-        return view
-    }
-    
-    //MARK: - Footer height
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
-    }
-    
     //MARK: - Remove separator from last cell
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
