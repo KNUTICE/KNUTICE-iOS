@@ -1,22 +1,18 @@
 //
-//  GeneralNoticeViewController.swift
+//  EventNoticeViewController.swift
 //  KNUTICE
 //
-//  Created by 이정훈 on 5/15/24.
+//  Created by 이정훈 on 7/5/24.
 //
 
 import UIKit
-import SwiftUI
-import RxCocoa
 import RxSwift
-import RxDataSources
 
-final class GeneralNoticeViewController: UIViewController, TableViewConfigurable, DataBindable, Scrollable {    
+final class EventNoticeViewController: UIViewController, DataBindable, TableViewConfigurable, Scrollable {
+    let viewModel: NoticeViewModel
     let tableView: UITableView = UITableView(frame: .zero, style: .plain)
     let refreshControl: UIRefreshControl = UIRefreshControl()
-    let viewModel: NoticeViewModel
     let disposeBag = DisposeBag()
-    private let navigationTitle: String = "일반소식"
     
     init(viewModel: NoticeViewModel) {
         self.viewModel = viewModel
@@ -29,12 +25,11 @@ final class GeneralNoticeViewController: UIViewController, TableViewConfigurable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         tableView.delegate = self
+        setupAttribute(showRefreshControl: true)
+        setupNavigationBar(title: "행사안내")
         setupLayout()
-        setupAttribute()
-        setupNavigationBar(title: navigationTitle)
         
         bindFetchingState()
         bindRefreshingState()
@@ -43,8 +38,7 @@ final class GeneralNoticeViewController: UIViewController, TableViewConfigurable
     }
 }
 
-//MARK: - UIViewController delegate methods
-extension GeneralNoticeViewController: UITableViewDelegate {
+extension EventNoticeViewController: UITableViewDelegate {
     //MARK: - Cell이 선택 되었을 때 해당 공지사항 웹 페이지로 이동
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let viewController = WebViewController(url: viewModel.getNotices()[indexPath.row].contentUrl)
@@ -64,11 +58,3 @@ extension GeneralNoticeViewController: UITableViewDelegate {
         }
     }
 }
-
-//MARK: - Preview
-#if DEBUG
-#Preview {
-    GeneralNoticeViewController(viewModel: AppDI.shared.makeGeneralNoticeViewModel())
-        .makePreview()
-}
-#endif
