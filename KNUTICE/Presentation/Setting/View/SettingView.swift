@@ -105,6 +105,7 @@ struct SettingView: View {
             } header: {
                 Text("개발")
             }
+            .listRowBackground(Color.customBackground)
             #endif
         }
         .background(.customBackground)

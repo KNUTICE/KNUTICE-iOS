@@ -1,18 +1,20 @@
 //
-//  ScholarshipNoticeViewController.swift
+//  AcademicNoticeViewController.swift
 //  KNUTICE
 //
-//  Created by 이정훈 on 7/5/24.
+//  Created by 이정훈 on 7/4/24.
 //
 
 import UIKit
+import RxCocoa
 import RxSwift
 
-final class ScholarshipNoticeViewController: UIViewController, DataBindable, TableViewConfigurable, Scrollable {
-    let viewModel: NoticeViewModel
+final class AcademicNoticeViewController: UIViewController, TableViewConfigurable, DataBindable, Scrollable {
     let tableView: UITableView = UITableView(frame: .zero, style: .plain)
     let refreshControl: UIRefreshControl = UIRefreshControl()
-    var disposeBag = DisposeBag()
+    let viewModel: NoticeViewModel
+    let disposeBag = DisposeBag()
+    private let navigationTitle: String = "학사공지"
     
     init(viewModel: NoticeViewModel) {
         self.viewModel = viewModel
@@ -27,8 +29,8 @@ final class ScholarshipNoticeViewController: UIViewController, DataBindable, Tab
         super.viewDidLoad()
         
         tableView.delegate = self
-        setupAttribute()
-        setupNavigationBar(title: "장학안내")
+        setupAttribute(showRefreshControl: true)
+        setupNavigationBar(title: navigationTitle)
         setupLayout()
         
         bindFetchingState()
@@ -38,7 +40,7 @@ final class ScholarshipNoticeViewController: UIViewController, DataBindable, Tab
     }
 }
 
-extension ScholarshipNoticeViewController: UITableViewDelegate {
+extension AcademicNoticeViewController: UITableViewDelegate {
     //MARK: - Cell이 선택 되었을 때 해당 공지사항 웹 페이지로 이동
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let viewController = WebViewController(url: viewModel.getNotices()[indexPath.row].contentUrl)
