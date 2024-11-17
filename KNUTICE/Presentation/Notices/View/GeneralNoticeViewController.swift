@@ -9,7 +9,6 @@ import UIKit
 import SwiftUI
 import RxCocoa
 import RxSwift
-import RxDataSources
 
 final class GeneralNoticeViewController: UIViewController, TableViewConfigurable, DataBindable, Scrollable {    
     let tableView: UITableView = UITableView(frame: .zero, style: .plain)

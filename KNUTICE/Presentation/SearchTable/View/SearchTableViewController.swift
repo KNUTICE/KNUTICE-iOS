@@ -32,16 +32,16 @@ final class SearchTableViewController: UIViewController, TableViewConfigurable {
         setUpNavigationBar()
         bindWithSearchBar()
         bindWithTableView()
+        tableView.contentInset = UIEdgeInsets(top: -34, left: 0, bottom: 0, right: 0);    //상단 빈 공간 제거
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         searchBar.becomeFirstResponder()    //키보드 자동 활성화
     }
 }
 
 extension SearchTableViewController: UITableViewDelegate {
-    
 }
 
 #if DEBUG
