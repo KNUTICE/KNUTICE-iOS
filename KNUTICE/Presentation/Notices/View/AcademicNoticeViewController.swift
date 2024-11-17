@@ -8,7 +8,6 @@
 import UIKit
 import RxCocoa
 import RxSwift
-import RxDataSources
 
 final class AcademicNoticeViewController: UIViewController, TableViewConfigurable, DataBindable, Scrollable {
     let tableView: UITableView = UITableView(frame: .zero, style: .plain)
