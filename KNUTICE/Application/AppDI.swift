@@ -83,4 +83,12 @@ struct AppDI {
         
         return viewModel
     }
+    
+    func makeSearchTableViewModel() -> SearchTableViewModel {
+        let dataSource = NoticeDataSourceImpl()
+        let repository = SearchRepositoryImpl(dataSource: dataSource)
+        let viewModel = SearchTableViewModel(repository: repository)
+        
+        return viewModel
+    }
 }

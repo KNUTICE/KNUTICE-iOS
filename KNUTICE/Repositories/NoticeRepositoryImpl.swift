@@ -7,7 +7,7 @@
 
 import RxSwift
 
-final class NoticeRepositoryImpl: NoticeRepository {
+final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
     private let dataSource: NoticeDataSource
     private let remoteURL: String
     
@@ -16,25 +16,17 @@ final class NoticeRepositoryImpl: NoticeRepository {
         self.remoteURL = remoteURL
     }
     
-    func fetchNotices() -> Observable<[Notice]> {
+    func fetchNotices() -> Single<[Notice]> {
         return dataSource.fetchNotices(from: remoteURL)
             .map { [weak self] in
-                guard let dto = try? $0.get() else {
-                    return []
-                }
-                
-                return self?.converToNotice(dto) ?? []
+                return self?.converToNotice($0) ?? []
             }
     }
     
-    func fetchNotices(after number: Int) -> Observable<[Notice]> {
+    func fetchNotices(after number: Int) -> Single<[Notice]> {
         return dataSource.fetchNotices(from: self.remoteURL + "&nttId=\(number)")
             .map { [weak self] in
-                guard let dto = try? $0.get() else {
-                    return []
-                }
-                
-                return self?.converToNotice(dto) ?? []
+                return self?.converToNotice($0) ?? []
             }
     }
 }

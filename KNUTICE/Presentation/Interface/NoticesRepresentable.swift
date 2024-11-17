@@ -8,20 +8,13 @@
 import RxCocoa
 import RxSwift
 
-protocol ViewModel {
+protocol NoticesRepresentable {
     var notices: BehaviorRelay<[Notice]> { get }
-    var isFetching: BehaviorRelay<Bool> { get }
-    
-    func fetchNotices()
 }
 
-extension ViewModel {
+extension NoticesRepresentable {
     var noticesObservable: Observable<[Notice]> {
         return notices.asObservable()
-    }
-    
-    var isFetchingObservable: Observable<Bool> {
-        return isFetching.asObservable()
     }
     
     func getNotices() -> [Notice] {
