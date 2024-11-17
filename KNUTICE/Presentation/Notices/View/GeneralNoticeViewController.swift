@@ -10,7 +10,7 @@ import SwiftUI
 import RxCocoa
 import RxSwift
 
-final class GeneralNoticeViewController: UIViewController, TableViewConfigurable, DataBindable, Scrollable {    
+final class GeneralNoticeViewController: UIViewController, TableViewConfigurable, DataBindable, Scrollable {
     let tableView: UITableView = UITableView(frame: .zero, style: .plain)
     let refreshControl: UIRefreshControl = UIRefreshControl()
     let viewModel: NoticeViewModel
