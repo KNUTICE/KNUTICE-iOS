@@ -9,8 +9,8 @@ import RxSwift
 import RxRelay
 import os
 
-final class SearchTableViewModel {
-    let searchedNotices: BehaviorRelay<[Notice]> = .init(value: [])
+final class SearchTableViewModel: NoticesRepresentable {
+    let notices: BehaviorRelay<[Notice]> = .init(value: [])
     let isFetching: BehaviorRelay<Bool> = .init(value: false)
     let keyword: BehaviorRelay<String> = .init(value: "")
     private let repository: SearchRepository
@@ -25,7 +25,7 @@ final class SearchTableViewModel {
         isFetching.accept(true)
         repository.search(keyword: keyword)
             .subscribe(onSuccess: { [weak self] notices in
-                self?.searchedNotices.accept(notices)
+                self?.notices.accept(notices)
                 self?.isFetching.accept(false)
             }, onFailure: { [weak self] error in
                 self?.logger.log("SearchTableViewModel.search: \(error.localizedDescription)")

@@ -42,6 +42,12 @@ final class SearchTableViewController: UIViewController, TableViewConfigurable {
 }
 
 extension SearchTableViewController: UITableViewDelegate {
+    //MARK: - Cell 선택 시 해당 공지사항으로 이동
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let viewController = WebViewController(url: viewModel.getNotices()[indexPath.row].contentUrl)
+        navigationController?.pushViewController(viewController, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 #if DEBUG

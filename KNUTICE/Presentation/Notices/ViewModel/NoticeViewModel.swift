@@ -8,7 +8,7 @@
 import RxCocoa
 import RxSwift
 
-final class NoticeViewModel {
+final class NoticeViewModel: NoticeFetchable {
     let notices: BehaviorRelay = BehaviorRelay<[Notice]>(value: [])
     let isFetching: BehaviorRelay = BehaviorRelay<Bool>(value: false)
     let isFinished: BehaviorRelay = BehaviorRelay<Bool>(value: false)
@@ -21,7 +21,7 @@ final class NoticeViewModel {
     }
 }
 
-extension NoticeViewModel: ViewModel {
+extension NoticeViewModel: NoticesRepresentable {
     func fetchNotices() {
         isFetching.accept(true)    //네트워크 요청 시작
         

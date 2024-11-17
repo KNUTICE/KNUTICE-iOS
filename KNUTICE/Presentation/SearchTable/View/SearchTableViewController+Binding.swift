@@ -21,7 +21,7 @@ extension SearchTableViewController {
     }
     
     func bindWithTableView() {
-        viewModel.searchedNotices
+        viewModel.notices
         .observe(on: MainScheduler.instance)
         .bind(to: tableView.rx.items) { tableView, row, item in
             if let imageURL = item.imageUrl {
