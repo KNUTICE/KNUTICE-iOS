@@ -28,13 +28,13 @@ final class noticeTest: XCTestCase {
         
         //When - 일반 공지 요청 테스트
         let  _ = noticeDataSource.fetchNotices(from: Bundle.main.generalNoticeURL)
-            .subscribe(onNext: {
+            .subscribe {
                 //Then - 성공 여부 확인
                 let result = try? $0.get()
                 
                 XCTAssertEqual(result?.result.resultCode, 200)
                 expectation.fulfill()
-            })
+            }
         
         wait(for: [expectation], timeout: 10)
     }
@@ -45,13 +45,13 @@ final class noticeTest: XCTestCase {
         
         //When - 학사 공지 요청 테스트
         let _ = noticeDataSource.fetchNotices(from: Bundle.main.academicNoticeURL)
-            .subscribe(onNext: {
+            .subscribe {
                 //Then - 성공 여부 확인
                 let result = try? $0.get()
                 
                 XCTAssertEqual(result?.result.resultCode, 200)
                 expectation.fulfill()
-            })
+            }
         
         wait(for: [expectation], timeout: 10)
     }
@@ -62,13 +62,13 @@ final class noticeTest: XCTestCase {
         
         //When - 장학 공지 요청 테스트
         let _ = noticeDataSource.fetchNotices(from: Bundle.main.scholarshipNoticeURL)
-            .subscribe(onNext: {
+            .subscribe {
                 //Then - 성공 여부 확인
                 let result = try? $0.get()
                 
                 XCTAssertEqual(result?.result.resultCode, 200)
                 expectation.fulfill()
-            })
+            }
         
         wait(for: [expectation], timeout: 10)
     }
@@ -79,13 +79,13 @@ final class noticeTest: XCTestCase {
         
         //When - 이벤트 공지 요청 테스트
         let _ = noticeDataSource.fetchNotices(from: Bundle.main.eventNoticeURL)
-            .subscribe(onNext: {
+            .subscribe {
                 //Then - 성공 여부 확인
                 let result = try? $0.get()
                 
                 XCTAssertEqual(result?.result.resultCode, 200)
                 expectation.fulfill()
-            })
+            }
         
         wait(for: [expectation], timeout: 10)
     }
