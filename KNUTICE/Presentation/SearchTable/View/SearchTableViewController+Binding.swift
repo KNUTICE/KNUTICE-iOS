@@ -11,7 +11,7 @@ import RxSwift
 extension SearchTableViewController {
     func bindWithSearchBar() {
         searchBar.searchTextField.rx.text
-            .debounce(.seconds(2), scheduler: MainScheduler.instance)    //2초 동안 debounce
+            .debounce(.milliseconds(500), scheduler: MainScheduler.instance)    //1초 동안 debounce
             .distinctUntilChanged()    //동일한 값의 방출은 무시
             .bind(onNext: { [weak self] keyword in
                 guard let keyword = keyword else { return }
