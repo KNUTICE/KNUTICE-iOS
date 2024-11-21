@@ -14,13 +14,6 @@ struct ReportView: View {
     
     init(viewModel: ReportViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
-        
-        let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor(.black) ]
-        navBarAppearance.backgroundColor = .reportBackground
-        navBarAppearance.shadowColor = .clear
-        UINavigationBar.appearance().standardAppearance = navBarAppearance
-        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
     }
     
     var body: some View {
@@ -78,6 +71,7 @@ struct ReportView: View {
             }
             .navigationTitle("고객센터")
             .navigationBarTitleDisplayMode(.inline)
+            .preferredColorScheme(.light)
             .background(.reportBackground)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
