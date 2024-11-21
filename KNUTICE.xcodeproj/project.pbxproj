@@ -404,14 +404,6 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		5C190A4D2BFDDBF500E0254B /* SectionModel */ = {
-			isa = PBXGroup;
-			children = (
-				5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */,
-			);
-			path = SectionModel;
-			sourceTree = "<group>";
-		};
 		5C5698892BEFB2BE0085E389 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -434,7 +426,6 @@
 			isa = PBXGroup;
 			children = (
 				8EFE52EC2CDC8CF4003A7330 /* ViewModel */,
-				5C190A4D2BFDDBF500E0254B /* SectionModel */,
 				5C56988B2BEFB2F20085E389 /* View */,
 			);
 			path = Main;
@@ -524,6 +515,7 @@
 		5C89DD412BFA0CF700CCCCCD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */,
 				5C5698962BEFB6760085E389 /* Notice.swift */,
 				8ECE2B172C35045800D7F499 /* MainNotice.swift */,
 			);
