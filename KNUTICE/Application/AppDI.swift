@@ -91,4 +91,12 @@ struct AppDI {
         
         return viewModel
     }
+    
+    func makeNotificationListViewModel() -> NotificationListViewModel {
+        let dataSource = NotificationPermissionDataSourceImpl.shared
+        let repository = NotificationRepositoryImpl(dataSource: dataSource)
+        let viewModel = NotificationListViewModel(repository: repository)
+        
+        return viewModel
+    }
 }

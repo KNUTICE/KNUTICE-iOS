@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import CoreData
 import SkeletonView
 import FirebaseCore
 import FirebaseMessaging
@@ -18,6 +19,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        //FCM 세팅
+        setFCM(application)
+        
+        //Notification Permission 세팅
+        if !UserDefaults.standard.bool(forKey: "isInitializedNotificationSettings") {
+            setNotificationPermissions()
+        }
+        
+        sleep(1)
+        return true
+    }
+    
+    private func setFCM(_ application: UIApplication) {
         var filePath: String?
         
         #if DEV
@@ -48,9 +62,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         //FIRMessaging delegate 설정
         Messaging.messaging().delegate = self
-        
-        sleep(1)
-        return true
+    }
+    
+    private func setNotificationPermissions() {
+        do {
+            try NotificationPermissionDataSourceImpl.shared.createDataIfNeeded()
+        } catch {
+            print(error)
+        }
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
