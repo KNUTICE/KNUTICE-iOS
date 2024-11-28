@@ -19,32 +19,32 @@ struct NotificationList: View {
             Section {
                 Toggle(isOn: Binding(get: {
                     viewModel.isGeneralNoticeNotificationAllowed ?? false
-                }, set: { _ in
-                    
+                }, set: {
+                    viewModel.update(key: .generalNotice, value: $0)
                 }), label: {
                     Text("일반공지")
                 })
                 
                 Toggle(isOn: Binding(get: {
                     viewModel.isAcademicNoticeNotificationAllowd ?? false
-                }, set: { _ in
-                    
+                }, set: {
+                    viewModel.update(key: .academicNotice, value: $0)
                 }), label: {
                     Text("학사공지")
                 })
                 
                 Toggle(isOn: Binding(get: {
                     viewModel.isScholarshipNoticeNotificationAllowed ?? false
-                }, set: { _ in
-                    
+                }, set: {
+                    viewModel.update(key: .scholarshipNotice, value: $0)
                 }), label: {
                     Text("장학안내")
                 })
                 
                 Toggle(isOn: Binding(get: {
                     viewModel.isEventNoticeNotificationAllowed ?? false
-                }, set: { _ in
-                    
+                }, set: {
+                    viewModel.update(key: .eventNotice, value: $0)
                 }), label: {
                     Text("행사안내")
                 })

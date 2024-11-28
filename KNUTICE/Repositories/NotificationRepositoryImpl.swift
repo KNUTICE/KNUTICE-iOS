@@ -15,6 +15,10 @@ final class NotificationRepositoryImpl: NotificationRepository {
     }
     
     func getNotificationPermissions() -> AnyPublisher<[String: Bool], any Error> {
-        return dataSource.getData()
+        return dataSource.readData()
+    }
+    
+    func update(key: NotificationKind, value: Bool) -> AnyPublisher<Void, any Error> {
+        return dataSource.updateData(key: key, value: value)
     }
 }
