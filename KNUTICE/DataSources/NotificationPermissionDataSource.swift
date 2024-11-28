@@ -8,19 +8,20 @@
 import Combine
 import CoreData
 
+enum NotificationKind {
+    case generalNotice
+    case academicNotice
+    case scholarshipNotice
+    case eventNotice
+}
+
 protocol NotificationPermissionDataSource {
     func createDataIfNeeded() throws
-    func getData() -> AnyPublisher<[String: Bool], any Error>
+    func readData() -> AnyPublisher<[String: Bool], any Error>
+    func updateData(key: NotificationKind, value: Bool) -> AnyPublisher<Void, any Error>
 }
 
 final class NotificationPermissionDataSourceImpl: NotificationPermissionDataSource {
-    enum NotificationKind {
-        case generalNotice
-        case academicNotice
-        case scholarshipNotice
-        case eventNotice
-    }
-    
     enum DataError: String, Error {
         case noData = "Notification permission data is missing"
     }
@@ -76,7 +77,7 @@ final class NotificationPermissionDataSourceImpl: NotificationPermissionDataSour
         UserDefaults.standard.set(true, forKey: "isInitializedNotificationSettings")
     }
     
-    func getData() -> AnyPublisher<[String: Bool], any Error> {
+    func readData() -> AnyPublisher<[String: Bool], any Error> {
         return Future { promise in
             self.backgroundContext.perform {
                 do {
@@ -95,6 +96,36 @@ final class NotificationPermissionDataSourceImpl: NotificationPermissionDataSour
                 } catch {
                     promise(.failure(error))
                 }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    func updateData(key: NotificationKind, value: Bool) -> AnyPublisher<Void, any Error> {
+        return Future { promise in
+            self.backgroundContext.perform {
+                do {
+                    let request = NotificationPermissions.fetchRequest()
+                    let results = try self.backgroundContext.fetch(request)
+                    
+                    switch key {
+                    case .generalNotice:
+                        results.first?.generalNoticeNotification = value
+                    case .academicNotice:
+                        results.first?.academicNoticeNotification = value
+                    case .scholarshipNotice:
+                        results.first?.scholarshipNoticeNotification = value
+                    case .eventNotice:
+                        results.first?.eventNoticeNotification = value
+                    }
+                    
+                    try self.backgroundContext.save()
+                    
+                    promise(.success(()))
+                } catch {
+                    promise(.failure(error))
+                }
+                
             }
         }
         .eraseToAnyPublisher()
