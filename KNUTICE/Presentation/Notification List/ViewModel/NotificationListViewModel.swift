@@ -39,9 +39,10 @@ final class NotificationListViewModel: ObservableObject {
         repository.getNotificationPermissions()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
+                self?.isLoading = false
+                
                 switch completion {
                 case .finished:
-                    self?.isLoading = false
                     self?.logger.log(level: .debug, "Notification permission request finished.")
                 case .failure(let error):
                     self?.logger.log(level: .error, "NotificationListViewModel: \(error.localizedDescription)")
@@ -51,6 +52,34 @@ final class NotificationListViewModel: ObservableObject {
                 self?.isAcademicNoticeNotificationAllowd = $0["academicNotice"]
                 self?.isScholarshipNoticeNotificationAllowed = $0["scholarshipNotice"]
                 self?.isEventNoticeNotificationAllowed = $0["eventNotice"]
+            })
+            .store(in: &cancellables)
+    }
+    
+    func update(key: NotificationKind, value: Bool) {
+        isLoading = true
+        repository.update(key: key, value: value)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                self?.isLoading = false
+                
+                switch completion {
+                case .finished:
+                    self?.logger.log(level: .debug, "Notification permission update finished.")
+                case .failure(let error):
+                    self?.logger.log(level: .error, "NotificationListViewModel: \(error.localizedDescription)")
+                }
+            }, receiveValue: { [weak self] in
+                switch key {
+                case .generalNotice:
+                    self?.isGeneralNoticeNotificationAllowed? = value
+                case .academicNotice:
+                    self?.isAcademicNoticeNotificationAllowd? = value
+                case .scholarshipNotice:
+                    self?.isScholarshipNoticeNotificationAllowed? = value
+                case .eventNotice:
+                    self?.isEventNoticeNotificationAllowed? = value
+                }
             })
             .store(in: &cancellables)
     }
