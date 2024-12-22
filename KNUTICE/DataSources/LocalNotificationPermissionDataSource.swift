@@ -8,27 +8,27 @@
 import Combine
 import CoreData
 
-enum NotificationKind {
-    case generalNotice
-    case academicNotice
-    case scholarshipNotice
-    case eventNotice
+enum NotificationKind: String {
+    case generalNotice = "GENERAL_NEWS"
+    case academicNotice = "ACADEMIC_NEWS"
+    case scholarshipNotice = "SCHOLARSHIP_NEWS"
+    case eventNotice = "EVENT_NEWS"
 }
 
-protocol NotificationPermissionDataSource {
+protocol LocalNotificationPermissionDataSource {
     func createDataIfNeeded() throws
     func readData() -> AnyPublisher<[String: Bool], any Error>
     func updateData(key: NotificationKind, value: Bool) -> AnyPublisher<Void, any Error>
 }
 
-final class NotificationPermissionDataSourceImpl: NotificationPermissionDataSource {
+final class NotificationPermissionDataSourceImpl: LocalNotificationPermissionDataSource {
     enum DataError: String, Error {
         case noData = "Notification permission data is missing"
     }
     
     private init() {}
     
-    static let shared: NotificationPermissionDataSource = NotificationPermissionDataSourceImpl()
+    static let shared: LocalNotificationPermissionDataSource = NotificationPermissionDataSourceImpl()
     
     lazy var persistentContainer: NSPersistentContainer = {
         /*
