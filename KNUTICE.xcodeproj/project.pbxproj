@@ -179,6 +179,10 @@
 		8EE4B4F22D16E62200EFF10B /* RemoteNotificationPermissionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4F02D16E62200EFF10B /* RemoteNotificationPermissionDataSource.swift */; };
 		8EE4B4F42D16E7CC00EFF10B /* NotificationPermissionUpdateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4F32D16E7CC00EFF10B /* NotificationPermissionUpdateDTO.swift */; };
 		8EE4B4F52D16E7CC00EFF10B /* NotificationPermissionUpdateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4F32D16E7CC00EFF10B /* NotificationPermissionUpdateDTO.swift */; };
+		8EE4B4FA2D17D33600EFF10B /* SearchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4F92D17D33600EFF10B /* SearchTest.swift */; };
+		8EE4B4FB2D17D90E00EFF10B /* NoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A562BFE023000E0254B /* NoticeDataSource.swift */; };
+		8EE4B4FC2D17D93700EFF10B /* NoticeReponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A542BFDF66600E0254B /* NoticeReponseDTO.swift */; };
+		8EE4B4FD2D17D96500EFF10B /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E613E9F2C95214C006FC272 /* RequestResult.swift */; };
 		8EEE1A512CEA19C90011FD87 /* NoticeFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEE1A502CEA19C90011FD87 /* NoticeFetchable.swift */; };
 		8EEE1A522CEA19C90011FD87 /* NoticeFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEE1A502CEA19C90011FD87 /* NoticeFetchable.swift */; };
 		8EF191FB2C4ABEB5004219BE /* AppDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF191FA2C4ABEB5004219BE /* AppDI.swift */; };
@@ -364,6 +368,7 @@
 		8EE4B4ED2D16E5EB00EFF10B /* LocalNotificationPermissionRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationPermissionRepositoryImpl.swift; sourceTree = "<group>"; };
 		8EE4B4F02D16E62200EFF10B /* RemoteNotificationPermissionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationPermissionDataSource.swift; sourceTree = "<group>"; };
 		8EE4B4F32D16E7CC00EFF10B /* NotificationPermissionUpdateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionUpdateDTO.swift; sourceTree = "<group>"; };
+		8EE4B4F92D17D33600EFF10B /* SearchTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTest.swift; sourceTree = "<group>"; };
 		8EEE1A502CEA19C90011FD87 /* NoticeFetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeFetchable.swift; sourceTree = "<group>"; };
 		8EF191FA2C4ABEB5004219BE /* AppDI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDI.swift; sourceTree = "<group>"; };
 		8EF191FC2C4ABED8004219BE /* MainNoticeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeDataSource.swift; sourceTree = "<group>"; };
@@ -754,6 +759,7 @@
 			children = (
 				8ECB82D22CDB6A6300420349 /* MainNoticeTest.swift */,
 				8ECB82D32CDB6A6300420349 /* NoticeTest.swift */,
+				8EE4B4F92D17D33600EFF10B /* SearchTest.swift */,
 			);
 			path = KNUTICEUnitTests;
 			sourceTree = "<group>";
@@ -1413,8 +1419,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EE4B4FD2D17D96500EFF10B /* RequestResult.swift in Sources */,
 				8ECB82D42CDB6A6300420349 /* MainNoticeTest.swift in Sources */,
 				8ECB82D52CDB6A6300420349 /* NoticeTest.swift in Sources */,
+				8EE4B4FB2D17D90E00EFF10B /* NoticeDataSource.swift in Sources */,
+				8EE4B4FC2D17D93700EFF10B /* NoticeReponseDTO.swift in Sources */,
+				8EE4B4FA2D17D33600EFF10B /* SearchTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
