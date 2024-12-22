@@ -1,16 +1,16 @@
 //
-//  NotificationRepositoryImpl.swift
+//  LocalNotificationPermissionRepositoryImpl.swift
 //  KNUTICE
 //
-//  Created by 이정훈 on 11/21/24.
+//  Created by 이정훈 on 12/21/24.
 //
 
 import Combine
 
-final class NotificationRepositoryImpl: NotificationRepository {
-    private let dataSource: NotificationPermissionDataSource
+final class LocalNotificationPermissionRepositoryImpl: LocalNotificationPermissionRepository {    
+    private let dataSource: LocalNotificationPermissionDataSource
     
-    init(dataSource: NotificationPermissionDataSource) {
+    init(dataSource: LocalNotificationPermissionDataSource) {
         self.dataSource = dataSource
     }
     

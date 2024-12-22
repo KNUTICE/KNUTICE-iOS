@@ -93,9 +93,17 @@ struct AppDI {
     }
     
     func makeNotificationListViewModel() -> NotificationListViewModel {
-        let dataSource = NotificationPermissionDataSourceImpl.shared
-        let repository = NotificationRepositoryImpl(dataSource: dataSource)
-        let viewModel = NotificationListViewModel(repository: repository)
+        let localDataSource = NotificationPermissionDataSourceImpl.shared
+        let remoteDataSource = RemoteNotificationPermissionDataSourceImpl()
+        let tokenDataSource = TokenDataSourceImpl()
+        let localRepository = LocalNotificationPermissionRepositoryImpl(dataSource: localDataSource)
+        let remoteRepository = RemoteNotificationPermissionRepositoryImpl(dataSource: remoteDataSource)
+        let tokenRepository = TokenRepositoryImpl(dataSource: tokenDataSource)
+        let notificationService = NotificationPermissionServiceImpl(tokenRepository: tokenRepository,
+                                                                    localRepository: localRepository,
+                                                                    remoteRepository: remoteRepository)
+        let viewModel = NotificationListViewModel(repository: localRepository,
+                                                  notificationService: notificationService)
         
         return viewModel
     }
