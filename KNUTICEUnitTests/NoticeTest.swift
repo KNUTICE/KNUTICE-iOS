@@ -9,7 +9,7 @@ import XCTest
 import Foundation
 @testable import KNUTICE
 
-final class noticeTest: XCTestCase {
+final class NoticeTest: XCTestCase {
     private var noticeDataSource: NoticeDataSource!
 
     override func setUpWithError() throws {

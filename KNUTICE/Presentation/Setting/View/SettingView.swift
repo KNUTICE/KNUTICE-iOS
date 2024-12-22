@@ -11,45 +11,19 @@ import Combine
 struct SettingView: View {
     @ObservedObject private var viewModel: SettingViewModel
     @State private var isShowingReport: Bool = false
-    
-    private var cancellables = Set<AnyCancellable>()
+    @Environment(\.colorScheme) private var colorScheme
     
     init(viewModel: SettingViewModel) {
         _viewModel = ObservedObject(wrappedValue: viewModel)
-        
-        NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
-            .sink { [self] _ in    //escaping 시점에 다른 메모리의 self를 캡쳐 하도록 함.
-                self.viewModel.getNotificationSettings()
-            }
-            .store(in: &cancellables)
     }
     
     var body: some View {
         List {
             Section {
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text("서비스 알림")
-                        
-                        Toggle("", isOn: Binding(
-                            get: {
-                                self.viewModel.isToggleOn
-                            },
-                            set: { _, _ in
-                                Task {
-                                    if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
-                                        // Ask the system to open that URL.
-                                        await UIApplication.shared.open(url)
-                                    }
-                                }
-                            })
-                        )
-                        .tint(.indigo)
-                    }
-                    
-                    Text("새로운 공지사항이 등록되면 푸시 알림으로 알려드려요.")
-                        .font(.caption2)
-                        .foregroundStyle(.gray)
+                NavigationLink {
+                    NotificationList(viewModel: AppDI.shared.makeNotificationListViewModel())
+                } label: {
+                    Text("서비스 알림")
                 }
                 .padding([.top, .bottom])
             } header: {
@@ -61,7 +35,16 @@ struct SettingView: View {
                 Button {
                     isShowingReport.toggle()
                 } label: {
-                    Text("고객센터")
+                    HStack {
+                        Text("고객센터")
+                        
+                        Spacer()
+                        
+                        Image(systemName: "chevron.right")
+                            .foregroundStyle(.chevronGray)
+                            .bold()
+                            .font(.footnote)
+                    }
                 }
                 .padding([.top, .bottom])
             } header: {
@@ -79,14 +62,12 @@ struct SettingView: View {
                 }
                 .padding([.top, .bottom])
                 
-                Text("오픈소스 라이선스")
-                    .padding([.top, .bottom])
-                    .background {
-                        NavigationLink("") {
-                            OpenSourceLicenseView()
-                        }
-                        .opacity(0)
-                    }
+                NavigationLink {
+                    OpenSourceLicenseView()
+                } label: {
+                    Text("오픈소스 라이선스")
+                        .padding([.top, .bottom])
+                }
             } header: {
                 Text("앱 정보")
             }
@@ -94,14 +75,12 @@ struct SettingView: View {
             
             #if DEV
             Section {
-                Text("Developer Tools")
-                    .padding([.top, .bottom])
-                    .background {
-                        NavigationLink("") {
-                            DeveloperTools(viewModel: AppDI.shared.makeDeveloperToolsViewModel())
-                        }
-                        .opacity(0)
-                    }
+                NavigationLink {
+                    DeveloperTools(viewModel: AppDI.shared.makeDeveloperToolsViewModel())
+                } label: {
+                    Text("Developer Tools")
+                        .padding([.top, .bottom])
+                }
             } header: {
                 Text("개발")
             }
