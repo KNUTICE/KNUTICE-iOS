@@ -19,6 +19,26 @@ extension SearchTableViewController {
         let cancelButton = UIBarButtonItem(title: "닫기", style: .plain, target: self, action: #selector(closeView))
         navigationItem.rightBarButtonItem = cancelButton
     }
+    
+    //MARK: - Setup UITableView Background View
+    func setUpBackgroundView() {
+        let backgroundView = UIView()
+        backgroundView.frame = tableView.bounds // tableView 크기에 맞춤
+        
+        let textView = UITextView()
+        textView.text = "검색결과가 없어요 :("
+        textView.isScrollEnabled = false
+        textView.textColor = .gray
+        textView.font = UIFont.preferredFont(forTextStyle: .body)
+        
+        backgroundView.addSubview(textView)
+        
+        textView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
+        tableView.backgroundView = backgroundView
+    }
 }
 
 extension SearchTableViewController {

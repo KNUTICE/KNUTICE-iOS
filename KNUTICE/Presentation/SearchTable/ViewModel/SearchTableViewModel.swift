@@ -9,10 +9,18 @@ import RxSwift
 import RxRelay
 import os
 
-final class SearchTableViewModel: NoticesRepresentable {
-    let notices: BehaviorRelay<[Notice]> = .init(value: [])
+final class SearchTableViewModel: SearchResultRepresentable {
+    let notices: BehaviorRelay<[Notice]?> = .init(value: nil)
     let isFetching: BehaviorRelay<Bool> = .init(value: false)
     let keyword: BehaviorRelay<String> = .init(value: "")
+    
+    var tableData: Observable<[Notice]> {
+        return notices.map {
+            $0 ?? []
+        }
+        .asObservable()
+    }
+    
     private let repository: SearchRepository
     private let disposeBag = DisposeBag()
     private let logger = Logger(subsystem: "KNUTICE", category: "SearchTableViewModel")
@@ -22,6 +30,11 @@ final class SearchTableViewModel: NoticesRepresentable {
     }
     
     func search(_ keyword: String) {
+        guard !keyword.isEmpty else {
+            notices.accept(nil)
+            return
+        }
+        
         isFetching.accept(true)
         repository.search(keyword: keyword)
             .subscribe(onSuccess: { [weak self] notices in
