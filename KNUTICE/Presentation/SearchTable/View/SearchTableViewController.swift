@@ -13,7 +13,7 @@ final class SearchTableViewController: UIViewController, TableViewConfigurable {
     let tableView = UITableView(frame: .zero, style: .grouped)
     let searchBar = UISearchBar()
     let refreshControl = UIRefreshControl()    //protocol 요구사항 구현
-    let viewModel: SearchTableViewModel
+    let viewModel: SearchResultRepresentable
     let disposeBag = DisposeBag()
     
     init(viewModel: SearchTableViewModel) {
@@ -28,10 +28,12 @@ final class SearchTableViewController: UIViewController, TableViewConfigurable {
     override func viewDidLoad() {
         tableView.delegate = self
         setupLayout()
+        setUpBackgroundView()
         setupAttribute(showRefreshControl: false)
         setUpNavigationBar()
         bindWithSearchBar()
         bindWithTableView()
+        bindWithBackgroundView()
         tableView.contentInset = UIEdgeInsets(top: -34, left: 0, bottom: 0, right: 0);    //상단 빈 공간 제거
     }
     
@@ -44,7 +46,11 @@ final class SearchTableViewController: UIViewController, TableViewConfigurable {
 extension SearchTableViewController: UITableViewDelegate {
     //MARK: - Cell 선택 시 해당 공지사항으로 이동
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let viewController = WebViewController(url: viewModel.getNotices()[indexPath.row].contentUrl)
+        guard let contentUrl = viewModel.getNotices()?[indexPath.row].contentUrl else {
+            return
+        }
+        
+        let viewController = WebViewController(url: contentUrl)
         navigationController?.pushViewController(viewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
