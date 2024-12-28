@@ -30,7 +30,10 @@ extension MainViewController {
         negativeSpacer.width = -25
         
         navigationItem.leftBarButtonItems = [negativeSpacer, labelItem]
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill")?.withTintColor(.navigationItemGray, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(navigateToSetting(_:)))
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(navigateToSetting(_:))),
+            UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(navigateToSearch(_:)))
+        ]
     }
     
     func setupLayout() {
@@ -40,27 +43,5 @@ extension MainViewController {
         tableView.snp.makeConstraints {
             $0.top.bottom.left.right.equalToSuperview()
         }
-        
-//        let bannerView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-//        bannerView.backgroundColor = .lightGray
-//        bannerView.layer.cornerRadius = 10
-//        
-//        let bannerContainerView = UIView()
-//        bannerContainerView.addSubview(bannerView)
-//        bannerView.snp.makeConstraints { make in
-//            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16))
-//        }
-//        
-//        bannerContainerView.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 100)
-//        tableView.tableHeaderView = bannerContainerView
-//        
-//        let label = UILabel()
-//        label.text = "광고 자리"
-//        label.font = UIFont.systemFont(ofSize: 20)
-//        label.tintColor = .black
-//        bannerView.addSubview(label)
-//        label.snp.makeConstraints {
-//            $0.edges.equalToSuperview().inset(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-//        }
     }
 }
