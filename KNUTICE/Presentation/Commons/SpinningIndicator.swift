@@ -28,6 +28,7 @@ struct SpinningIndicator: View {
                     degree = 270 + 360
                     spinnerLength = 0
                 }
+                .offset(y: -34)
         }
     }
 }

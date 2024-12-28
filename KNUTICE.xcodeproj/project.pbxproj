@@ -39,6 +39,8 @@
 		8E00AF7B2C3676240037EC38 /* AcademicNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF7A2C3676240037EC38 /* AcademicNoticeViewController.swift */; };
 		8E00AF7F2C367D8A0037EC38 /* DataBindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF7E2C367D8A0037EC38 /* DataBindable.swift */; };
 		8E00AF822C3681100037EC38 /* TableViewConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF812C3681100037EC38 /* TableViewConfigurable.swift */; };
+		8E09E7302D1C2B79003B7FCC /* SearchResultRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E09E72F2D1C2B79003B7FCC /* SearchResultRepresentable.swift */; };
+		8E09E7312D1C2B79003B7FCC /* SearchResultRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E09E72F2D1C2B79003B7FCC /* SearchResultRepresentable.swift */; };
 		8E0BA6DD2C33CA1300677A79 /* DetailedNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0BA6DC2C33CA1300677A79 /* DetailedNoticeCell.swift */; };
 		8E0C3F892C9EC93B005E2A16 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0C3F882C9EC93B005E2A16 /* ReportView.swift */; };
 		8E0C3F8C2C9ECD1B005E2A16 /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0C3F8B2C9ECD1B005E2A16 /* ReportViewModel.swift */; };
@@ -311,6 +313,7 @@
 		8E00AF7A2C3676240037EC38 /* AcademicNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademicNoticeViewController.swift; sourceTree = "<group>"; };
 		8E00AF7E2C367D8A0037EC38 /* DataBindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBindable.swift; sourceTree = "<group>"; };
 		8E00AF812C3681100037EC38 /* TableViewConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewConfigurable.swift; sourceTree = "<group>"; };
+		8E09E72F2D1C2B79003B7FCC /* SearchResultRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultRepresentable.swift; sourceTree = "<group>"; };
 		8E0BA6DC2C33CA1300677A79 /* DetailedNoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedNoticeCell.swift; sourceTree = "<group>"; };
 		8E0C3F882C9EC93B005E2A16 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		8E0C3F8B2C9ECD1B005E2A16 /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewModel.swift; sourceTree = "<group>"; };
@@ -848,6 +851,7 @@
 		8EFE52E52CDC8967003A7330 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				8E09E72F2D1C2B79003B7FCC /* SearchResultRepresentable.swift */,
 				8EFE52F92CDCBA80003A7330 /* SearchTableViewModel.swift */,
 			);
 			path = ViewModel;
@@ -1308,6 +1312,7 @@
 				8EE4B4F22D16E62200EFF10B /* RemoteNotificationPermissionDataSource.swift in Sources */,
 				8EFE53002CDCBD3D003A7330 /* SearchRepositoryImpl.swift in Sources */,
 				8E53857A2C644D9600AF151B /* TokenDataSource.swift in Sources */,
+				8E09E7302D1C2B79003B7FCC /* SearchResultRepresentable.swift in Sources */,
 				8E00AF822C3681100037EC38 /* TableViewConfigurable.swift in Sources */,
 				5C190A462BFD6BDB00E0254B /* Bundle+URL.swift in Sources */,
 				8E5D1CF82C38D2E50027E8BD /* Scrollable.swift in Sources */,
@@ -1398,6 +1403,7 @@
 				8EE4B4F12D16E62200EFF10B /* RemoteNotificationPermissionDataSource.swift in Sources */,
 				8EFE53012CDCBD3D003A7330 /* SearchRepositoryImpl.swift in Sources */,
 				8E2051342CD4F32F00D87C6A /* TokenDataSource.swift in Sources */,
+				8E09E7312D1C2B79003B7FCC /* SearchResultRepresentable.swift in Sources */,
 				8E2051352CD4F32F00D87C6A /* TableViewConfigurable.swift in Sources */,
 				8E2051362CD4F32F00D87C6A /* Bundle+URL.swift in Sources */,
 				8E2051372CD4F32F00D87C6A /* Scrollable.swift in Sources */,
