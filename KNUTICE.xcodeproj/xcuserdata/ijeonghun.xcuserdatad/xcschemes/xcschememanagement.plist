@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>KNUTICE-dev.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>KNUTICE.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,7 +17,12 @@
 		<key>KNUTICEUnitTests.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>33</integer>
+			<integer>2</integer>
+		</dict>
+		<key>NotificationService-dev.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
 		</dict>
 		<key>NotificationService.xcscheme_^#shared#^_</key>
 		<dict>
@@ -27,7 +37,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>8E2050F72CD4F32F00D87C6A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8E68981C2CD61E5A005F0EEA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8E68982A2CD61EF1005F0EEA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>8E7945E32CA28F6900208662</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8EEA5C142CDB88D50015EDDC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
