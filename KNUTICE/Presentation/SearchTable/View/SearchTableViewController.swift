@@ -54,6 +54,12 @@ extension SearchTableViewController: UITableViewDelegate {
         navigationController?.pushViewController(viewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    //MARK: - 스크롤 감지 후 키보드 숨김
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        //드래그 시작 후 한번만 호출
+        searchBar.resignFirstResponder()
+    }
 }
 
 #if DEBUG
