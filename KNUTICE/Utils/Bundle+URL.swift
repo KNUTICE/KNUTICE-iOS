@@ -87,4 +87,24 @@ extension Bundle {
         
         return url
     }
+    
+    var searchURL: String {
+        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
+              let resource = NSDictionary(contentsOfFile: file),
+              let url = resource["Search_URL"] as? String else {
+            return ""
+        }
+        
+        return url
+    }
+    
+    var notificationPermissionURL: String {
+        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
+              let resource = NSDictionary(contentsOfFile: file),
+              let url = resource["Notification_Permission_URL"] as? String else {
+            return ""
+        }
+        
+        return url
+    }
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import CoreData
 import SkeletonView
 import FirebaseCore
 import FirebaseMessaging
@@ -18,8 +19,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        //Firebase 연동
-        FirebaseApp.configure()
+        //FCM 세팅
+        setFCM(application)
+        
+        //Notification Permission 세팅
+        if !UserDefaults.standard.bool(forKey: "isInitializedNotificationSettings") {
+            setNotificationPermissions()
+        }
+        
+        sleep(1)
+        return true
+    }
+    
+    private func setFCM(_ application: UIApplication) {
+        var filePath: String?
+        
+        #if DEV
+        filePath = Bundle.main.path(forResource: "GoogleService-Info-Dev", ofType: "plist")
+        #else
+        filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
+        #endif
+        
+        if let fileopts = FirebaseOptions(contentsOfFile: filePath!) {
+            FirebaseApp.configure(options: fileopts)
+        }
         
         //UNUserNotificationCenter의 delegate를 AppDelegate class에서 처리하도록 설정
         UNUserNotificationCenter.current().delegate = self
@@ -39,9 +62,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         //FIRMessaging delegate 설정
         Messaging.messaging().delegate = self
-        
-        sleep(1)
-        return true
+    }
+    
+    private func setNotificationPermissions() {
+        do {
+            try NotificationPermissionDataSourceImpl.shared.createDataIfNeeded()
+        } catch {
+            print(error)
+        }
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {

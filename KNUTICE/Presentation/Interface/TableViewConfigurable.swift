@@ -11,19 +11,22 @@ protocol TableViewConfigurable: UIViewController {
     var tableView: UITableView { get }
     var refreshControl: UIRefreshControl { get }
     
-    func setupAttribute()
+    func setupAttribute(showRefreshControl: Bool)
     func setupNavigationBar(title: String)
     func setupLayout()
 }
 
 extension TableViewConfigurable {
-    func setupAttribute() {
+    func setupAttribute(showRefreshControl: Bool) {
         tableView.register(DetailedNoticeCell.self, forCellReuseIdentifier: DetailedNoticeCell.reuseIdentifier)    //reuseIndentifier 등록
         tableView.register(DetailedNoticeCellWithImage.self, forCellReuseIdentifier: DetailedNoticeCellWithImage.reuseIdentifier)
         tableView.estimatedRowHeight = 100    //동적 height 적용전 임시 값
         tableView.rowHeight = UITableView.automaticDimension
         tableView.backgroundColor = .customBackground
-        tableView.refreshControl = refreshControl
+        
+        if showRefreshControl {
+            tableView.refreshControl = refreshControl
+        }
     }
     
     func setupNavigationBar(title: String) {

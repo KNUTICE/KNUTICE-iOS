@@ -75,4 +75,36 @@ struct AppDI {
         
         return viewModel
     }
+    
+    func makeDeveloperToolsViewModel() -> DeveloperToolsViewModel {
+        let tokenDataSource = TokenDataSourceImpl()
+        let tokenRepository = TokenRepositoryImpl(dataSource: tokenDataSource)
+        let viewModel = DeveloperToolsViewModel(tokenRepository: tokenRepository)
+        
+        return viewModel
+    }
+    
+    func makeSearchTableViewModel() -> SearchTableViewModel {
+        let dataSource = NoticeDataSourceImpl()
+        let repository = SearchRepositoryImpl(dataSource: dataSource)
+        let viewModel = SearchTableViewModel(repository: repository)
+        
+        return viewModel
+    }
+    
+    func makeNotificationListViewModel() -> NotificationListViewModel {
+        let localDataSource = NotificationPermissionDataSourceImpl.shared
+        let remoteDataSource = RemoteNotificationPermissionDataSourceImpl()
+        let tokenDataSource = TokenDataSourceImpl()
+        let localRepository = LocalNotificationPermissionRepositoryImpl(dataSource: localDataSource)
+        let remoteRepository = RemoteNotificationPermissionRepositoryImpl(dataSource: remoteDataSource)
+        let tokenRepository = TokenRepositoryImpl(dataSource: tokenDataSource)
+        let notificationService = NotificationPermissionServiceImpl(tokenRepository: tokenRepository,
+                                                                    localRepository: localRepository,
+                                                                    remoteRepository: remoteRepository)
+        let viewModel = NotificationListViewModel(repository: localRepository,
+                                                  notificationService: notificationService)
+        
+        return viewModel
+    }
 }

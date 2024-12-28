@@ -8,13 +8,13 @@
 import Foundation
 
 // MARK: - NoticeReponseDTO
-struct NoticeReponseDTO: Codable {
+struct NoticeReponseDTO: Decodable {
     let result: RequestResult
     let body: [NoticeReponseBody]?
 }
 
 // MARK: - Body
-struct NoticeReponseBody: Codable {
+struct NoticeReponseBody: Decodable {
     let nttID, contentNumber: Int
     let title: String
     let contentURL: String
