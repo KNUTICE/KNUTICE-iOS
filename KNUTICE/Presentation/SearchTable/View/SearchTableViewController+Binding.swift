@@ -5,7 +5,6 @@
 //  Created by 이정훈 on 11/8/24.
 //
 
-import RxCocoa
 import RxSwift
 
 extension SearchTableViewController {
@@ -21,29 +20,43 @@ extension SearchTableViewController {
     }
     
     func bindWithTableView() {
-        viewModel.notices
-        .observe(on: MainScheduler.instance)
-        .bind(to: tableView.rx.items) { tableView, row, item in
-            if let imageURL = item.imageUrl {
-                let cell = tableView.dequeueReusableCell(withIdentifier: DetailedNoticeCellWithImage.reuseIdentifier, for: IndexPath(row: row, section: 0)) as! DetailedNoticeCellWithImage
-                cell.titleLabel.text = item.title
-                cell.subTitleLabel.text = "[\(item.department)]"
-                cell.uploadDateLabel.text = item.uploadDate
-                cell.imageURL = imageURL
-                cell.backgroundColor = .customBackground
-                
-                return cell
-            } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: DetailedNoticeCell.reuseIdentifier, for: IndexPath(row: row, section: 0)) as! DetailedNoticeCell
-                cell.titleLabel.text = item.title
-                cell.subTitleLabel.text = "[\(item.department)]"
-                cell.uploadDateLabel.text = item.uploadDate
-                cell.backgroundColor = .customBackground
-                
-                return cell
+        viewModel.tableData
+            .observe(on: MainScheduler.instance)
+            .bind(to: tableView.rx.items) { tableView, row, item in
+                if let imageURL = item.imageUrl {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: DetailedNoticeCellWithImage.reuseIdentifier, for: IndexPath(row: row, section: 0)) as! DetailedNoticeCellWithImage
+                    cell.titleLabel.text = item.title
+                    cell.subTitleLabel.text = "[\(item.department)]"
+                    cell.uploadDateLabel.text = item.uploadDate
+                    cell.imageURL = imageURL
+                    cell.backgroundColor = .customBackground
+                    
+                    return cell
+                } else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: DetailedNoticeCell.reuseIdentifier, for: IndexPath(row: row, section: 0)) as! DetailedNoticeCell
+                    cell.titleLabel.text = item.title
+                    cell.subTitleLabel.text = "[\(item.department)]"
+                    cell.uploadDateLabel.text = item.uploadDate
+                    cell.backgroundColor = .customBackground
+                    
+                    return cell
+                }
             }
-        }
-        .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
+    }
+    
+    func bindWithBackgroundView() {
+        viewModel.notices
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                guard let notices = $0 else {
+                    self?.tableView.backgroundView?.isHidden = true    //notice가 nil인 경우 backgroundView 숨김
+                    return
+                }
+                
+                self?.tableView.backgroundView?.isHidden = !notices.isEmpty ? true : false
+            })
+            .disposed(by: disposeBag)
     }
     
 }
