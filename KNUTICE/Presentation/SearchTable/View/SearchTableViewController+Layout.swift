@@ -29,7 +29,8 @@ extension SearchTableViewController {
         textView.text = "검색결과가 없어요 :("
         textView.isScrollEnabled = false
         textView.textColor = .gray
-        textView.font = UIFont.preferredFont(forTextStyle: .body)
+        textView.font = UIFont.preferredFont(forTextStyle: .title3)
+        textView.backgroundColor = .customBackground
         
         backgroundView.addSubview(textView)
         
