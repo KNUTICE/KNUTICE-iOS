@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-final class RemoteNotificationPermissionRepositoryImpl<T: RemoteNotificationPermissionDataSource>: RemoteNotificationPermissionRepository {
+final class RemoteNotificationPermissionRepositoryImpl<T: RemoteDataSource>: RemoteNotificationPermissionRepository {
     private let dataSource: T
     
     init(dataSource: T) {
@@ -18,7 +18,7 @@ final class RemoteNotificationPermissionRepositoryImpl<T: RemoteNotificationPerm
     func update(params: [String: Any]) -> AnyPublisher<Bool, any Error> {
         let url = Bundle.main.notificationPermissionURL
         
-        return dataSource.sendUpdateRequest(to: url, params: params)
+        return dataSource.sendPostRequest(to: url, params: params, resultType: NotificationPermissionUpdateDTO.self)
             .map {
                 return $0.result.resultCode == 200 ? true : false
             }
