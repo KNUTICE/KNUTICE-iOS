@@ -13,7 +13,6 @@
 		5C190A4F2BFDF4E100E0254B /* NoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A4E2BFDF4E100E0254B /* NoticeRepository.swift */; };
 		5C190A532BFDF5EB00E0254B /* NoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A522BFDF5EB00E0254B /* NoticeRepositoryImpl.swift */; };
 		5C190A552BFDF66600E0254B /* NoticeReponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A542BFDF66600E0254B /* NoticeReponseDTO.swift */; };
-		5C190A572BFE023000E0254B /* NoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A562BFE023000E0254B /* NoticeDataSource.swift */; };
 		5C5698902BEFB3C50085E389 /* MainListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C56988F2BEFB3C50085E389 /* MainListCell.swift */; };
 		5C5698922BEFB4A20085E389 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698912BEFB4A20085E389 /* MainViewModel.swift */; };
 		5C5698952BEFB5A60085E389 /* SectionOfNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */; };
@@ -41,6 +40,8 @@
 		8E00AF822C3681100037EC38 /* TableViewConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF812C3681100037EC38 /* TableViewConfigurable.swift */; };
 		8E09E7302D1C2B79003B7FCC /* SearchResultRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E09E72F2D1C2B79003B7FCC /* SearchResultRepresentable.swift */; };
 		8E09E7312D1C2B79003B7FCC /* SearchResultRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E09E72F2D1C2B79003B7FCC /* SearchResultRepresentable.swift */; };
+		8E0AA23D2D2419740068681C /* RemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0AA23C2D2419740068681C /* RemoteDataSource.swift */; };
+		8E0AA23E2D2419740068681C /* RemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0AA23C2D2419740068681C /* RemoteDataSource.swift */; };
 		8E0BA6DD2C33CA1300677A79 /* DetailedNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0BA6DC2C33CA1300677A79 /* DetailedNoticeCell.swift */; };
 		8E0C3F892C9EC93B005E2A16 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0C3F882C9EC93B005E2A16 /* ReportView.swift */; };
 		8E0C3F8C2C9ECD1B005E2A16 /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0C3F8B2C9ECD1B005E2A16 /* ReportViewModel.swift */; };
@@ -69,7 +70,6 @@
 		8E2051112CD4F32F00D87C6A /* VIew+TextEditorBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F022C2CA0022D00AE89D5 /* VIew+TextEditorBackground.swift */; };
 		8E2051122CD4F32F00D87C6A /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0C3F882C9EC93B005E2A16 /* ReportView.swift */; };
 		8E2051132CD4F32F00D87C6A /* LightTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBBE23F2CA0E3FB00826D5A /* LightTextView.swift */; };
-		8E2051142CD4F32F00D87C6A /* MainNoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF191FC2C4ABED8004219BE /* MainNoticeDataSource.swift */; };
 		8E2051152CD4F32F00D87C6A /* TokenSaveResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385752C644B4400AF151B /* TokenSaveResponseDTO.swift */; };
 		8E2051162CD4F32F00D87C6A /* NoticeReponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A542BFDF66600E0254B /* NoticeReponseDTO.swift */; };
 		8E2051172CD4F32F00D87C6A /* View+Fork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6D20D2C6713BB004E8AC2 /* View+Fork.swift */; };
@@ -79,7 +79,6 @@
 		8E20511B2CD4F32F00D87C6A /* NoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A4E2BFDF4E100E0254B /* NoticeRepository.swift */; };
 		8E20511C2CD4F32F00D87C6A /* UIDevice+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6175472CA24157002B6021 /* UIDevice+Identifier.swift */; };
 		8E20511D2CD4F32F00D87C6A /* WebViewController+Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDAB022C3BC08900352779 /* WebViewController+Callbacks.swift */; };
-		8E20511E2CD4F32F00D87C6A /* ReportDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02232C9FB81C00AE89D5 /* ReportDataSource.swift */; };
 		8E20511F2CD4F32F00D87C6A /* MainListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C56988F2BEFB3C50085E389 /* MainListCell.swift */; };
 		8E2051202CD4F32F00D87C6A /* NoticesRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B810D2BF45B5D0038EB27 /* NoticesRepresentable.swift */; };
 		8E2051212CD4F32F00D87C6A /* MainNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B172C35045800D7F499 /* MainNotice.swift */; };
@@ -89,7 +88,6 @@
 		8E2051252CD4F32F00D87C6A /* MainNoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD452BFA0D6800CCCCCD /* MainNoticeRepository.swift */; };
 		8E2051262CD4F32F00D87C6A /* AcademicNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF7A2C3676240037EC38 /* AcademicNoticeViewController.swift */; };
 		8E2051272CD4F32F00D87C6A /* ReportRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02212C9FB75900AE89D5 /* ReportRepositoryImpl.swift */; };
-		8E2051282CD4F32F00D87C6A /* NoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A562BFE023000E0254B /* NoticeDataSource.swift */; };
 		8E2051292CD4F32F00D87C6A /* TokenRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385772C644C3F00AF151B /* TokenRepositoryImpl.swift */; };
 		8E20512A2CD4F32F00D87C6A /* GeneralNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B81062BF451540038EB27 /* GeneralNoticeViewController.swift */; };
 		8E20512B2CD4F32F00D87C6A /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF8662C37742A004A53E9 /* SettingView.swift */; };
@@ -119,7 +117,6 @@
 		8E3F021E2C9FB46100AE89D5 /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F021D2C9FB46100AE89D5 /* ReportService.swift */; };
 		8E3F02202C9FB6A000AE89D5 /* ReportRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F021F2C9FB6A000AE89D5 /* ReportRepository.swift */; };
 		8E3F02222C9FB76800AE89D5 /* ReportRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02212C9FB75900AE89D5 /* ReportRepositoryImpl.swift */; };
-		8E3F02242C9FB81C00AE89D5 /* ReportDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02232C9FB81C00AE89D5 /* ReportDataSource.swift */; };
 		8E3F02262C9FB86400AE89D5 /* ReportResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02252C9FB85E00AE89D5 /* ReportResponseDTO.swift */; };
 		8E3F02292C9FC77E00AE89D5 /* AppVersionProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02282C9FC77600AE89D5 /* AppVersionProvidable.swift */; };
 		8E3F022D2CA0023A00AE89D5 /* VIew+TextEditorBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F022C2CA0022D00AE89D5 /* VIew+TextEditorBackground.swift */; };
@@ -177,18 +174,14 @@
 		8EE4B4EC2D16E55600EFF10B /* LocalNotificationPermissionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4EA2D16E55600EFF10B /* LocalNotificationPermissionRepository.swift */; };
 		8EE4B4EE2D16E5EB00EFF10B /* LocalNotificationPermissionRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4ED2D16E5EB00EFF10B /* LocalNotificationPermissionRepositoryImpl.swift */; };
 		8EE4B4EF2D16E5EB00EFF10B /* LocalNotificationPermissionRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4ED2D16E5EB00EFF10B /* LocalNotificationPermissionRepositoryImpl.swift */; };
-		8EE4B4F12D16E62200EFF10B /* RemoteNotificationPermissionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4F02D16E62200EFF10B /* RemoteNotificationPermissionDataSource.swift */; };
-		8EE4B4F22D16E62200EFF10B /* RemoteNotificationPermissionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4F02D16E62200EFF10B /* RemoteNotificationPermissionDataSource.swift */; };
 		8EE4B4F42D16E7CC00EFF10B /* NotificationPermissionUpdateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4F32D16E7CC00EFF10B /* NotificationPermissionUpdateDTO.swift */; };
 		8EE4B4F52D16E7CC00EFF10B /* NotificationPermissionUpdateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4F32D16E7CC00EFF10B /* NotificationPermissionUpdateDTO.swift */; };
 		8EE4B4FA2D17D33600EFF10B /* SearchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4F92D17D33600EFF10B /* SearchTest.swift */; };
-		8EE4B4FB2D17D90E00EFF10B /* NoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A562BFE023000E0254B /* NoticeDataSource.swift */; };
 		8EE4B4FC2D17D93700EFF10B /* NoticeReponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A542BFDF66600E0254B /* NoticeReponseDTO.swift */; };
 		8EE4B4FD2D17D96500EFF10B /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E613E9F2C95214C006FC272 /* RequestResult.swift */; };
 		8EEE1A512CEA19C90011FD87 /* NoticeFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEE1A502CEA19C90011FD87 /* NoticeFetchable.swift */; };
 		8EEE1A522CEA19C90011FD87 /* NoticeFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEE1A502CEA19C90011FD87 /* NoticeFetchable.swift */; };
 		8EF191FB2C4ABEB5004219BE /* AppDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF191FA2C4ABEB5004219BE /* AppDI.swift */; };
-		8EF191FD2C4ABED8004219BE /* MainNoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF191FC2C4ABED8004219BE /* MainNoticeDataSource.swift */; };
 		8EFCF8632C376AD0004A53E9 /* ScholarshipNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF8622C376AD0004A53E9 /* ScholarshipNoticeViewController.swift */; };
 		8EFCF8652C377061004A53E9 /* EventNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF8642C377061004A53E9 /* EventNoticeViewController.swift */; };
 		8EFCF8672C37742A004A53E9 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF8662C37742A004A53E9 /* SettingView.swift */; };
@@ -284,7 +277,6 @@
 		5C190A4E2BFDF4E100E0254B /* NoticeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeRepository.swift; sourceTree = "<group>"; };
 		5C190A522BFDF5EB00E0254B /* NoticeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeRepositoryImpl.swift; sourceTree = "<group>"; };
 		5C190A542BFDF66600E0254B /* NoticeReponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeReponseDTO.swift; sourceTree = "<group>"; };
-		5C190A562BFE023000E0254B /* NoticeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDataSource.swift; sourceTree = "<group>"; };
 		5C56988F2BEFB3C50085E389 /* MainListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListCell.swift; sourceTree = "<group>"; };
 		5C5698912BEFB4A20085E389 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOfNotice.swift; sourceTree = "<group>"; };
@@ -314,6 +306,7 @@
 		8E00AF7E2C367D8A0037EC38 /* DataBindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBindable.swift; sourceTree = "<group>"; };
 		8E00AF812C3681100037EC38 /* TableViewConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewConfigurable.swift; sourceTree = "<group>"; };
 		8E09E72F2D1C2B79003B7FCC /* SearchResultRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultRepresentable.swift; sourceTree = "<group>"; };
+		8E0AA23C2D2419740068681C /* RemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataSource.swift; sourceTree = "<group>"; };
 		8E0BA6DC2C33CA1300677A79 /* DetailedNoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedNoticeCell.swift; sourceTree = "<group>"; };
 		8E0C3F882C9EC93B005E2A16 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		8E0C3F8B2C9ECD1B005E2A16 /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewModel.swift; sourceTree = "<group>"; };
@@ -322,7 +315,6 @@
 		8E3F021D2C9FB46100AE89D5 /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
 		8E3F021F2C9FB6A000AE89D5 /* ReportRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRepository.swift; sourceTree = "<group>"; };
 		8E3F02212C9FB75900AE89D5 /* ReportRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRepositoryImpl.swift; sourceTree = "<group>"; };
-		8E3F02232C9FB81C00AE89D5 /* ReportDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDataSource.swift; sourceTree = "<group>"; };
 		8E3F02252C9FB85E00AE89D5 /* ReportResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportResponseDTO.swift; sourceTree = "<group>"; };
 		8E3F02282C9FC77600AE89D5 /* AppVersionProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionProvidable.swift; sourceTree = "<group>"; };
 		8E3F022C2CA0022D00AE89D5 /* VIew+TextEditorBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VIew+TextEditorBackground.swift"; sourceTree = "<group>"; };
@@ -369,12 +361,10 @@
 		8EE4B4E72D16E4DD00EFF10B /* NotificationPermissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionService.swift; sourceTree = "<group>"; };
 		8EE4B4EA2D16E55600EFF10B /* LocalNotificationPermissionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationPermissionRepository.swift; sourceTree = "<group>"; };
 		8EE4B4ED2D16E5EB00EFF10B /* LocalNotificationPermissionRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationPermissionRepositoryImpl.swift; sourceTree = "<group>"; };
-		8EE4B4F02D16E62200EFF10B /* RemoteNotificationPermissionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNotificationPermissionDataSource.swift; sourceTree = "<group>"; };
 		8EE4B4F32D16E7CC00EFF10B /* NotificationPermissionUpdateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionUpdateDTO.swift; sourceTree = "<group>"; };
 		8EE4B4F92D17D33600EFF10B /* SearchTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTest.swift; sourceTree = "<group>"; };
 		8EEE1A502CEA19C90011FD87 /* NoticeFetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeFetchable.swift; sourceTree = "<group>"; };
 		8EF191FA2C4ABEB5004219BE /* AppDI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDI.swift; sourceTree = "<group>"; };
-		8EF191FC2C4ABED8004219BE /* MainNoticeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeDataSource.swift; sourceTree = "<group>"; };
 		8EFCF8622C376AD0004A53E9 /* ScholarshipNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipNoticeViewController.swift; sourceTree = "<group>"; };
 		8EFCF8642C377061004A53E9 /* EventNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventNoticeViewController.swift; sourceTree = "<group>"; };
 		8EFCF8662C37742A004A53E9 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -605,12 +595,9 @@
 		5C89DD4A2BFA104800CCCCCD /* DataSources */ = {
 			isa = PBXGroup;
 			children = (
-				5C190A562BFE023000E0254B /* NoticeDataSource.swift */,
-				8EF191FC2C4ABED8004219BE /* MainNoticeDataSource.swift */,
 				8E5385792C644D9600AF151B /* TokenDataSource.swift */,
-				8E3F02232C9FB81C00AE89D5 /* ReportDataSource.swift */,
 				8E6931662CEF08E00074142B /* LocalNotificationPermissionDataSource.swift */,
-				8EE4B4F02D16E62200EFF10B /* RemoteNotificationPermissionDataSource.swift */,
+				8E0AA23C2D2419740068681C /* RemoteDataSource.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -1269,7 +1256,6 @@
 				8E0C3F892C9EC93B005E2A16 /* ReportView.swift in Sources */,
 				8EBBE2402CA0E3FC00826D5A /* LightTextView.swift in Sources */,
 				8E60EAF82CDDF946003612FB /* SearchTableViewController+Binding.swift in Sources */,
-				8EF191FD2C4ABED8004219BE /* MainNoticeDataSource.swift in Sources */,
 				8E5385762C644B4400AF151B /* TokenSaveResponseDTO.swift in Sources */,
 				5C190A552BFDF66600E0254B /* NoticeReponseDTO.swift in Sources */,
 				8EB6D20E2C6713BB004E8AC2 /* View+Fork.swift in Sources */,
@@ -1280,7 +1266,6 @@
 				5C190A4F2BFDF4E100E0254B /* NoticeRepository.swift in Sources */,
 				8E6175482CA24157002B6021 /* UIDevice+Identifier.swift in Sources */,
 				8EFDAB032C3BC08900352779 /* WebViewController+Callbacks.swift in Sources */,
-				8E3F02242C9FB81C00AE89D5 /* ReportDataSource.swift in Sources */,
 				5C5698902BEFB3C50085E389 /* MainListCell.swift in Sources */,
 				5C9B810E2BF45B5D0038EB27 /* NoticesRepresentable.swift in Sources */,
 				8ECE2B182C35045800D7F499 /* MainNotice.swift in Sources */,
@@ -1293,7 +1278,7 @@
 				8EA72DCA2CD5CA4800D1B300 /* DeveloperTools.swift in Sources */,
 				8EFE53062CDCC30F003A7330 /* NoticeCreatable.swift in Sources */,
 				8E3F02222C9FB76800AE89D5 /* ReportRepositoryImpl.swift in Sources */,
-				5C190A572BFE023000E0254B /* NoticeDataSource.swift in Sources */,
+				8E0AA23D2D2419740068681C /* RemoteDataSource.swift in Sources */,
 				8E5385782C644C3F00AF151B /* TokenRepositoryImpl.swift in Sources */,
 				5C9B81072BF451540038EB27 /* GeneralNoticeViewController.swift in Sources */,
 				8EFCF8672C37742A004A53E9 /* SettingView.swift in Sources */,
@@ -1309,7 +1294,6 @@
 				5C89DD3C2BFA03D800CCCCCD /* MainViewController+Layout.swift in Sources */,
 				8EE4B4E82D16E4DD00EFF10B /* NotificationPermissionService.swift in Sources */,
 				5C8256442BE5CE1A0038D4C8 /* SceneDelegate.swift in Sources */,
-				8EE4B4F22D16E62200EFF10B /* RemoteNotificationPermissionDataSource.swift in Sources */,
 				8EFE53002CDCBD3D003A7330 /* SearchRepositoryImpl.swift in Sources */,
 				8E53857A2C644D9600AF151B /* TokenDataSource.swift in Sources */,
 				8E09E7302D1C2B79003B7FCC /* SearchResultRepresentable.swift in Sources */,
@@ -1360,7 +1344,6 @@
 				8E2051122CD4F32F00D87C6A /* ReportView.swift in Sources */,
 				8E2051132CD4F32F00D87C6A /* LightTextView.swift in Sources */,
 				8E60EAF72CDDF946003612FB /* SearchTableViewController+Binding.swift in Sources */,
-				8E2051142CD4F32F00D87C6A /* MainNoticeDataSource.swift in Sources */,
 				8E2051152CD4F32F00D87C6A /* TokenSaveResponseDTO.swift in Sources */,
 				8E2051162CD4F32F00D87C6A /* NoticeReponseDTO.swift in Sources */,
 				8E2051172CD4F32F00D87C6A /* View+Fork.swift in Sources */,
@@ -1371,7 +1354,6 @@
 				8E20511B2CD4F32F00D87C6A /* NoticeRepository.swift in Sources */,
 				8E20511C2CD4F32F00D87C6A /* UIDevice+Identifier.swift in Sources */,
 				8E20511D2CD4F32F00D87C6A /* WebViewController+Callbacks.swift in Sources */,
-				8E20511E2CD4F32F00D87C6A /* ReportDataSource.swift in Sources */,
 				8E20511F2CD4F32F00D87C6A /* MainListCell.swift in Sources */,
 				8E2051202CD4F32F00D87C6A /* NoticesRepresentable.swift in Sources */,
 				8E2051212CD4F32F00D87C6A /* MainNotice.swift in Sources */,
@@ -1384,7 +1366,7 @@
 				8EA72DC92CD5CA4800D1B300 /* DeveloperTools.swift in Sources */,
 				8EFE53072CDCC30F003A7330 /* NoticeCreatable.swift in Sources */,
 				8E2051272CD4F32F00D87C6A /* ReportRepositoryImpl.swift in Sources */,
-				8E2051282CD4F32F00D87C6A /* NoticeDataSource.swift in Sources */,
+				8E0AA23E2D2419740068681C /* RemoteDataSource.swift in Sources */,
 				8E2051292CD4F32F00D87C6A /* TokenRepositoryImpl.swift in Sources */,
 				8E20512A2CD4F32F00D87C6A /* GeneralNoticeViewController.swift in Sources */,
 				8E20512B2CD4F32F00D87C6A /* SettingView.swift in Sources */,
@@ -1400,7 +1382,6 @@
 				8E2051322CD4F32F00D87C6A /* MainViewController+Layout.swift in Sources */,
 				8EE4B4E92D16E4DD00EFF10B /* NotificationPermissionService.swift in Sources */,
 				8E2051332CD4F32F00D87C6A /* SceneDelegate.swift in Sources */,
-				8EE4B4F12D16E62200EFF10B /* RemoteNotificationPermissionDataSource.swift in Sources */,
 				8EFE53012CDCBD3D003A7330 /* SearchRepositoryImpl.swift in Sources */,
 				8E2051342CD4F32F00D87C6A /* TokenDataSource.swift in Sources */,
 				8E09E7312D1C2B79003B7FCC /* SearchResultRepresentable.swift in Sources */,
@@ -1428,7 +1409,6 @@
 				8EE4B4FD2D17D96500EFF10B /* RequestResult.swift in Sources */,
 				8ECB82D42CDB6A6300420349 /* MainNoticeTest.swift in Sources */,
 				8ECB82D52CDB6A6300420349 /* NoticeTest.swift in Sources */,
-				8EE4B4FB2D17D90E00EFF10B /* NoticeDataSource.swift in Sources */,
 				8EE4B4FC2D17D93700EFF10B /* NoticeReponseDTO.swift in Sources */,
 				8EE4B4FA2D17D33600EFF10B /* SearchTest.swift in Sources */,
 			);

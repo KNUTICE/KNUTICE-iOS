@@ -8,7 +8,7 @@
 import RxSwift
 import Foundation
 
-final class SearchRepositoryImpl<T: NoticeDataSource>: SearchRepository, NoticeCreatable {
+final class SearchRepositoryImpl<T: RemoteDataSource>: SearchRepository, NoticeCreatable {
     private let dataSource: T
     
     init(dataSource: T) {
@@ -18,7 +18,7 @@ final class SearchRepositoryImpl<T: NoticeDataSource>: SearchRepository, NoticeC
     func search(keyword: String) -> Single<[Notice]> {
         let url = Bundle.main.searchURL + "?keyword=\(keyword)"
         
-        return dataSource.fetchNotices(from: url)
+        return dataSource.sendGetRequest(to: url, resultType: NoticeReponseDTO.self)
             .map { [weak self] in
                 return self?.converToNotice($0) ?? []
             }
