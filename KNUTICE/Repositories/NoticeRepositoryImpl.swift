@@ -7,11 +7,11 @@
 
 import RxSwift
 
-final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
-    private let dataSource: NoticeDataSource
+final class NoticeRepositoryImpl<N: NoticeDataSource>: NoticeRepository, NoticeCreatable {
+    private let dataSource: N
     private let remoteURL: String
     
-    init(dataSource: NoticeDataSource, remoteURL: String) {
+    init(dataSource: N, remoteURL: String) {
         self.dataSource = dataSource
         self.remoteURL = remoteURL
     }

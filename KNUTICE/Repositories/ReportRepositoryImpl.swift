@@ -8,10 +8,10 @@
 import Combine
 import Foundation
 
-final class ReportRepositoryImpl: ReportRepository {
-    let dataSource: ReportDataSource
+final class ReportRepositoryImpl<T: ReportDataSource>: ReportRepository {
+    let dataSource: T
     
-    init(dataSource: ReportDataSource) {
+    init(dataSource: T) {
         self.dataSource = dataSource
     }
     

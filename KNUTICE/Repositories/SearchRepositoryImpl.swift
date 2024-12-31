@@ -8,10 +8,10 @@
 import RxSwift
 import Foundation
 
-final class SearchRepositoryImpl: SearchRepository, NoticeCreatable {
-    private let dataSource: NoticeDataSource
+final class SearchRepositoryImpl<T: NoticeDataSource>: SearchRepository, NoticeCreatable {
+    private let dataSource: T
     
-    init(dataSource: NoticeDataSource) {
+    init(dataSource: T) {
         self.dataSource = dataSource
     }
     
