@@ -7,10 +7,10 @@
 
 import RxSwift
 
-final class MainNoticeRepositoryImpl: MainNoticeRepository {
-    private let dataSource: MainNoticeDataSource
+final class MainNoticeRepositoryImpl<T: MainNoticeDataSource>: MainNoticeRepository {
+    private let dataSource: T
     
-    init(dataSource: MainNoticeDataSource) {
+    init(dataSource: T) {
         self.dataSource = dataSource
     }
     

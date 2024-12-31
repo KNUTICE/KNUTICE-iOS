@@ -10,10 +10,10 @@ import Combine
 import Foundation
 import FirebaseMessaging
 
-final class TokenRepositoryImpl: TokenRepository {
-    private let dataSource: TokenDataSource
+final class TokenRepositoryImpl<T: TokenDataSource>: TokenRepository {
+    private let dataSource: T
     
-    init(dataSource: TokenDataSource) {
+    init(dataSource: T) {
         self.dataSource = dataSource
     }
     

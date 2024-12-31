@@ -8,10 +8,10 @@
 import Combine
 import Foundation
 
-final class RemoteNotificationPermissionRepositoryImpl: RemoteNotificationPermissionRepository {
-    private let dataSource: RemoteNotificationPermissionDataSource
+final class RemoteNotificationPermissionRepositoryImpl<T: RemoteNotificationPermissionDataSource>: RemoteNotificationPermissionRepository {
+    private let dataSource: T
     
-    init(dataSource: RemoteNotificationPermissionDataSource) {
+    init(dataSource: T) {
         self.dataSource = dataSource
     }
     
