@@ -12,13 +12,10 @@ struct AppDI {
         return AppDI()
     }
     
-    private let noticeDataSource = NoticeDataSourceImpl()
-    
     private init() {}
     
     func makeMainViewModel() -> MainViewModel {
-        let dataSource = MainNoticeDataSourceImpl()
-        let repository = MainNoticeRepositoryImpl(dataSource: dataSource)
+        let repository = MainNoticeRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
         let viewModel = MainViewModel(repository: repository)
         
         return viewModel
@@ -26,7 +23,7 @@ struct AppDI {
     
     func makeGeneralNoticeViewModel() -> NoticeViewModel {
         let url = Bundle.main.generalNoticeURL
-        let repository = NoticeRepositoryImpl(dataSource: noticeDataSource, remoteURL: url)
+        let repository = NoticeRepositoryImpl(dataSource: RemoteDataSourceImpl.shared, remoteURL: url)
         let viewModel = NoticeViewModel(repository: repository)
         
         return viewModel
@@ -34,7 +31,7 @@ struct AppDI {
     
     func makeAcademicNoticeViewModel() -> NoticeViewModel {
         let url = Bundle.main.academicNoticeURL
-        let repository = NoticeRepositoryImpl(dataSource: noticeDataSource, remoteURL: url)
+        let repository = NoticeRepositoryImpl(dataSource: RemoteDataSourceImpl.shared, remoteURL: url)
         let viewModel = NoticeViewModel(repository: repository)
         
         return viewModel
@@ -42,7 +39,7 @@ struct AppDI {
     
     func makeScholarshipNoticeViewModel() -> NoticeViewModel {
         let url = Bundle.main.scholarshipNoticeURL
-        let repository = NoticeRepositoryImpl(dataSource: noticeDataSource, remoteURL: url)
+        let repository = NoticeRepositoryImpl(dataSource: RemoteDataSourceImpl.shared, remoteURL: url)
         let viewModel = NoticeViewModel(repository: repository)
         
         return viewModel
@@ -50,7 +47,7 @@ struct AppDI {
     
     func makeEventNoticeViewModel() -> NoticeViewModel {
         let url = Bundle.main.eventNoticeURL
-        let repository = NoticeRepositoryImpl(dataSource: noticeDataSource, remoteURL: url)
+        let repository = NoticeRepositoryImpl(dataSource: RemoteDataSourceImpl.shared, remoteURL: url)
         let viewModel = NoticeViewModel(repository: repository)
         
         return viewModel
@@ -63,9 +60,8 @@ struct AppDI {
     func makeReportViewModel() -> ReportViewModel {
         //Data
         let tokenDataSource = TokenDataSourceImpl()
-        let reportDataSource = ReportDataSourceImpl()
         let tokenRepository = TokenRepositoryImpl(dataSource: tokenDataSource)
-        let reportRepository = ReportRepositoryImpl(dataSource: reportDataSource)
+        let reportRepository = ReportRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
         
         //Domain
         let reportService = ReportServiceImpl(tokenRepository: tokenRepository, reportRepository: reportRepository)
@@ -85,8 +81,7 @@ struct AppDI {
     }
     
     func makeSearchTableViewModel() -> SearchTableViewModel {
-        let dataSource = NoticeDataSourceImpl()
-        let repository = SearchRepositoryImpl(dataSource: dataSource)
+        let repository = SearchRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
         let viewModel = SearchTableViewModel(repository: repository)
         
         return viewModel
@@ -94,10 +89,9 @@ struct AppDI {
     
     func makeNotificationListViewModel() -> NotificationListViewModel {
         let localDataSource = NotificationPermissionDataSourceImpl.shared
-        let remoteDataSource = RemoteNotificationPermissionDataSourceImpl()
         let tokenDataSource = TokenDataSourceImpl()
         let localRepository = LocalNotificationPermissionRepositoryImpl(dataSource: localDataSource)
-        let remoteRepository = RemoteNotificationPermissionRepositoryImpl(dataSource: remoteDataSource)
+        let remoteRepository = RemoteNotificationPermissionRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
         let tokenRepository = TokenRepositoryImpl(dataSource: tokenDataSource)
         let notificationService = NotificationPermissionServiceImpl(tokenRepository: tokenRepository,
                                                                     localRepository: localRepository,
