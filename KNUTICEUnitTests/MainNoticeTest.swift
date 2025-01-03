@@ -9,12 +9,12 @@ import XCTest
 @testable import KNUTICE
 
 final class MainNoticeTest: XCTestCase {
-    private var mainNoticeDatasource: MainNoticeDataSource!
+    private var dataSource: RemoteDataSource!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
-        mainNoticeDatasource = MainNoticeDataSourceImpl()
+        dataSource = RemoteDataSourceImpl.shared
     }
 
     override func tearDownWithError() throws {
@@ -24,16 +24,14 @@ final class MainNoticeTest: XCTestCase {
     func test_fetch_mainNotice() throws {
         //Given
         let expectation = XCTestExpectation()
+        let url = Bundle.main.mainNoticeURL
         
-        //When - 메인 공지사항 요청 테스트
-        mainNoticeDatasource.fetchMainNotices()
-            .subscribe(onNext: {
-                //Then
-                let result = try? $0.get()
-                
-                XCTAssertEqual(result?.result.resultCode, 200)
+        //When - 메인 공지사항 요청 테스트        
+        let _ = dataSource.sendGetRequest(to: url, resultType: MainNoticeResponseDTO.self)
+            .subscribe {
+                XCTAssertEqual($0.result.resultCode, 200)
                 expectation.fulfill()
-            })
+            }
         
         wait(for: [expectation], timeout: 10)
     }
