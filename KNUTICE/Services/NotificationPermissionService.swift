@@ -11,18 +11,22 @@ protocol NotificationPermissionService {
     func updatePermission(_ notice: NotificationKind, to value: Bool) -> AnyPublisher<Void, any Error>
 }
 
-final class NotificationPermissionServiceImpl: NotificationPermissionService {
+final class NotificationPermissionServiceImpl<
+    T: TokenRepository,
+    L: LocalNotificationPermissionRepository,
+    R: RemoteNotificationPermissionRepository
+>: NotificationPermissionService {
     enum RemoteServerError: Error {
         case invalidResponse
     }
     
-    private let tokenRepository: TokenRepository
-    private let localRepository: LocalNotificationPermissionRepository
-    private let remoteRepository: RemoteNotificationPermissionRepository
+    private let tokenRepository: T
+    private let localRepository: L
+    private let remoteRepository: R
     
-    init(tokenRepository: TokenRepository,
-         localRepository: LocalNotificationPermissionRepository,
-         remoteRepository: RemoteNotificationPermissionRepository) {
+    init(tokenRepository: T,
+         localRepository: L,
+         remoteRepository: R) {
         self.tokenRepository = tokenRepository
         self.localRepository = localRepository
         self.remoteRepository = remoteRepository

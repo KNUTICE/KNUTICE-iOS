@@ -7,22 +7,19 @@
 
 import RxSwift
 
-final class MainNoticeRepositoryImpl: MainNoticeRepository {
-    private let dataSource: MainNoticeDataSource
+final class MainNoticeRepositoryImpl<T: RemoteDataSource>: MainNoticeRepository {
+    private let dataSource: T
     
-    init(dataSource: MainNoticeDataSource) {
+    init(dataSource: T) {
         self.dataSource = dataSource
     }
     
     func fetchMainNotices() -> Observable<[SectionOfNotice]> {
-        return dataSource.fetchMainNotices()
+        return dataSource.sendGetRequest(to: Bundle.main.mainNoticeURL, resultType: MainNoticeResponseDTO.self)
             .map { [weak self] in
-                guard let dto = try? $0.get() else {
-                    return []
-                }
-                
-                return self?.convertToNotice(dto) ?? []
+                return self?.convertToNotice($0) ?? []
             }
+            .asObservable()
     }
     
     private func convertToNotice(_ dto: MainNoticeResponseDTO) -> [SectionOfNotice] {
