@@ -8,17 +8,17 @@
 import Combine
 import Foundation
 
-final class RemoteNotificationPermissionRepositoryImpl: RemoteNotificationPermissionRepository {
-    private let dataSource: RemoteNotificationPermissionDataSource
+final class RemoteNotificationPermissionRepositoryImpl<T: RemoteDataSource>: RemoteNotificationPermissionRepository {
+    private let dataSource: T
     
-    init(dataSource: RemoteNotificationPermissionDataSource) {
+    init(dataSource: T) {
         self.dataSource = dataSource
     }
     
     func update(params: [String: Any]) -> AnyPublisher<Bool, any Error> {
         let url = Bundle.main.notificationPermissionURL
         
-        return dataSource.sendUpdateRequest(to: url, params: params)
+        return dataSource.sendPostRequest(to: url, params: params, resultType: NotificationPermissionUpdateDTO.self)
             .map {
                 return $0.result.resultCode == 200 ? true : false
             }

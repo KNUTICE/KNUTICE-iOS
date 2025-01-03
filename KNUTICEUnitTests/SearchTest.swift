@@ -9,12 +9,12 @@ import XCTest
 @testable import KNUTICE
 
 final class SearchTest: XCTestCase {
-    private var dataSource: NoticeDataSource!
+    private var dataSource: RemoteDataSource!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
-        dataSource = NoticeDataSourceImpl()
+        dataSource = RemoteDataSourceImpl.shared
     }
 
     override func tearDownWithError() throws {
@@ -29,7 +29,7 @@ final class SearchTest: XCTestCase {
         let url = Bundle.main.searchURL + "?keyword=공지"
         
         //When
-        let _ = dataSource.fetchNotices(from: url)
+        let _ = dataSource.sendGetRequest(to: url, resultType: NoticeReponseDTO.self)
             .subscribe(onSuccess: { dto in
                 XCTAssertEqual(dto.result.resultCode, 200)
                 expectation.fulfill()

@@ -37,6 +37,7 @@ final class GeneralNoticeViewController: UIViewController, TableViewConfigurable
         
         bindFetchingState()
         bindRefreshingState()
+        bindWillDisplayCell()
         setActivityIndicator()
         viewModel.fetchNotices()
     }
@@ -49,18 +50,6 @@ extension GeneralNoticeViewController: UITableViewDelegate {
         let viewController = WebViewController(url: viewModel.getNotices()[indexPath.row].contentUrl)
         navigationController?.pushViewController(viewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)    //선택 된 cell의 하이라이트 제거
-    }
-    
-    //MARK: - TableView 스크롤 감지
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let threshold = scrollView.contentSize.height - scrollView.frame.size.height - 100
-        
-        if scrollView.contentOffset.y > threshold {
-            guard !(viewModel.isFetching.value) && !viewModel.isFinished.value else { return }
-            
-            tableView.tableFooterView = createActivityIndicator()
-            viewModel.fetchNextNotices()
-        }
     }
 }
 
