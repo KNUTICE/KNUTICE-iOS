@@ -11,11 +11,11 @@ protocol ReportService {
     func report(content: String, device: String) -> AnyPublisher<Bool, any Error>
 }
 
-final class ReportServiceImpl: ReportService, AppVersionProvidable {
-    let tokenRepository: TokenRepository
-    let reportRepository: ReportRepository
+final class ReportServiceImpl<T: TokenRepository, R: ReportRepository>: ReportService, AppVersionProvidable {
+    let tokenRepository: T
+    let reportRepository: R
     
-    init(tokenRepository: TokenRepository, reportRepository: ReportRepository) {
+    init(tokenRepository: T, reportRepository: R) {
         self.tokenRepository = tokenRepository
         self.reportRepository = reportRepository
     }
