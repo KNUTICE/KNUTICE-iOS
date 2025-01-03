@@ -10,12 +10,12 @@ import Foundation
 @testable import KNUTICE
 
 final class NoticeTest: XCTestCase {
-    private var noticeDataSource: NoticeDataSource!
+    private var dataSource: RemoteDataSource!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
-        noticeDataSource = NoticeDataSourceImpl()
+        dataSource = RemoteDataSourceImpl.shared
     }
 
     override func tearDownWithError() throws {
@@ -25,14 +25,13 @@ final class NoticeTest: XCTestCase {
     func test_fetch_genernal_notice() {
         //Given
         let expectation = XCTestExpectation(description: "fetch general notices")
+        let url = Bundle.main.generalNoticeURL
         
         //When - 일반 공지 요청 테스트
-        let  _ = noticeDataSource.fetchNotices(from: Bundle.main.generalNoticeURL)
+        let  _ = dataSource.sendGetRequest(to: url, resultType: NoticeReponseDTO.self)
             .subscribe {
                 //Then - 성공 여부 확인
-                let result = try? $0.get()
-                
-                XCTAssertEqual(result?.result.resultCode, 200)
+                XCTAssertEqual($0.result.resultCode, 200)
                 expectation.fulfill()
             }
         
@@ -42,14 +41,13 @@ final class NoticeTest: XCTestCase {
     func test_fetch_academic_notice() {
         //Given
         let expectation = XCTestExpectation(description: "fetch academic notices")
+        let url =  Bundle.main.academicNoticeURL
         
         //When - 학사 공지 요청 테스트
-        let _ = noticeDataSource.fetchNotices(from: Bundle.main.academicNoticeURL)
+        let _ = dataSource.sendGetRequest(to: url, resultType: NoticeReponseDTO.self)
             .subscribe {
                 //Then - 성공 여부 확인
-                let result = try? $0.get()
-                
-                XCTAssertEqual(result?.result.resultCode, 200)
+                XCTAssertEqual($0.result.resultCode, 200)
                 expectation.fulfill()
             }
         
@@ -59,14 +57,13 @@ final class NoticeTest: XCTestCase {
     func test_fetch_scholarship_notice() {
         //Given
         let expectation = XCTestExpectation(description: "fetch scholarship notices")
+        let url = Bundle.main.scholarshipNoticeURL
         
         //When - 장학 공지 요청 테스트
-        let _ = noticeDataSource.fetchNotices(from: Bundle.main.scholarshipNoticeURL)
+        let _ = dataSource.sendGetRequest(to: url, resultType: NoticeReponseDTO.self)
             .subscribe {
                 //Then - 성공 여부 확인
-                let result = try? $0.get()
-                
-                XCTAssertEqual(result?.result.resultCode, 200)
+                XCTAssertEqual($0.result.resultCode, 200)
                 expectation.fulfill()
             }
         
@@ -76,14 +73,13 @@ final class NoticeTest: XCTestCase {
     func test_fetch_event_notice() {
         //Given
         let expectation = XCTestExpectation(description: "fetch event notices")
+        let url = Bundle.main.eventNoticeURL
         
         //When - 이벤트 공지 요청 테스트
-        let _ = noticeDataSource.fetchNotices(from: Bundle.main.eventNoticeURL)
+        let _ = dataSource.sendGetRequest(to: url, resultType: NoticeReponseDTO.self)
             .subscribe {
                 //Then - 성공 여부 확인
-                let result = try? $0.get()
-                
-                XCTAssertEqual(result?.result.resultCode, 200)
+                XCTAssertEqual($0.result.resultCode, 200)
                 expectation.fulfill()
             }
         
