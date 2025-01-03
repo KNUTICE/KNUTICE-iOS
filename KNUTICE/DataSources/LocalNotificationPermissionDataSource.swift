@@ -28,7 +28,7 @@ final class NotificationPermissionDataSourceImpl: LocalNotificationPermissionDat
     
     private init() {}
     
-    static let shared: LocalNotificationPermissionDataSource = NotificationPermissionDataSourceImpl()
+    static let shared = NotificationPermissionDataSourceImpl()
     
     lazy var persistentContainer: NSPersistentContainer = {
         /*

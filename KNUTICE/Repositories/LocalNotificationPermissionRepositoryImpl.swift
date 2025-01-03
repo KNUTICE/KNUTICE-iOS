@@ -7,10 +7,10 @@
 
 import Combine
 
-final class LocalNotificationPermissionRepositoryImpl: LocalNotificationPermissionRepository {    
-    private let dataSource: LocalNotificationPermissionDataSource
+final class LocalNotificationPermissionRepositoryImpl<T: LocalNotificationPermissionDataSource>: LocalNotificationPermissionRepository {
+    private let dataSource: T
     
-    init(dataSource: LocalNotificationPermissionDataSource) {
+    init(dataSource: T) {
         self.dataSource = dataSource
     }
     

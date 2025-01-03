@@ -8,17 +8,17 @@
 import Combine
 import Foundation
 
-final class ReportRepositoryImpl: ReportRepository {
-    let dataSource: ReportDataSource
+final class ReportRepositoryImpl<T: RemoteDataSource>: ReportRepository {
+    let dataSource: T
     
-    init(dataSource: ReportDataSource) {
+    init(dataSource: T) {
         self.dataSource = dataSource
     }
     
     func register(params: [String: Any]) -> AnyPublisher<Bool, any Error> {
         let apiEndPoint = Bundle.main.reportURL
         
-        return dataSource.sendPostRequest(to: apiEndPoint, params: params)
+        return dataSource.sendPostRequest(to: apiEndPoint, params: params, resultType: ReportResponseDTO.self)
             .map {
                 if $0.result.resultCode == 200 {
                     return true
