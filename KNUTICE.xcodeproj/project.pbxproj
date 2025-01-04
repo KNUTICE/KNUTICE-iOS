@@ -66,7 +66,7 @@
 		8E20510D2CD4F32F00D87C6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8256412BE5CE1A0038D4C8 /* AppDelegate.swift */; };
 		8E20510E2CD4F32F00D87C6A /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698962BEFB6760085E389 /* Notice.swift */; };
 		8E20510F2CD4F32F00D87C6A /* WebViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF702C36233C0037EC38 /* WebViewController+Layout.swift */; };
-		8E2051102CD4F32F00D87C6A /* ReportResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02252C9FB85E00AE89D5 /* ReportResponseDTO.swift */; };
+		8E2051102CD4F32F00D87C6A /* PostResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02252C9FB85E00AE89D5 /* PostResponseDTO.swift */; };
 		8E2051112CD4F32F00D87C6A /* VIew+TextEditorBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F022C2CA0022D00AE89D5 /* VIew+TextEditorBackground.swift */; };
 		8E2051122CD4F32F00D87C6A /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0C3F882C9EC93B005E2A16 /* ReportView.swift */; };
 		8E2051132CD4F32F00D87C6A /* LightTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBBE23F2CA0E3FB00826D5A /* LightTextView.swift */; };
@@ -99,7 +99,6 @@
 		8E2051312CD4F32F00D87C6A /* DataBindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF7E2C367D8A0037EC38 /* DataBindable.swift */; };
 		8E2051322CD4F32F00D87C6A /* MainViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD3B2BFA03D800CCCCCD /* MainViewController+Layout.swift */; };
 		8E2051332CD4F32F00D87C6A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8256432BE5CE1A0038D4C8 /* SceneDelegate.swift */; };
-		8E2051342CD4F32F00D87C6A /* TokenDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385792C644D9600AF151B /* TokenDataSource.swift */; };
 		8E2051352CD4F32F00D87C6A /* TableViewConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF812C3681100037EC38 /* TableViewConfigurable.swift */; };
 		8E2051362CD4F32F00D87C6A /* Bundle+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A452BFD6BDB00E0254B /* Bundle+URL.swift */; };
 		8E2051372CD4F32F00D87C6A /* Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D1CF72C38D2E50027E8BD /* Scrollable.swift */; };
@@ -117,7 +116,7 @@
 		8E3F021E2C9FB46100AE89D5 /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F021D2C9FB46100AE89D5 /* ReportService.swift */; };
 		8E3F02202C9FB6A000AE89D5 /* ReportRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F021F2C9FB6A000AE89D5 /* ReportRepository.swift */; };
 		8E3F02222C9FB76800AE89D5 /* ReportRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02212C9FB75900AE89D5 /* ReportRepositoryImpl.swift */; };
-		8E3F02262C9FB86400AE89D5 /* ReportResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02252C9FB85E00AE89D5 /* ReportResponseDTO.swift */; };
+		8E3F02262C9FB86400AE89D5 /* PostResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02252C9FB85E00AE89D5 /* PostResponseDTO.swift */; };
 		8E3F02292C9FC77E00AE89D5 /* AppVersionProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02282C9FC77600AE89D5 /* AppVersionProvidable.swift */; };
 		8E3F022D2CA0023A00AE89D5 /* VIew+TextEditorBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F022C2CA0022D00AE89D5 /* VIew+TextEditorBackground.swift */; };
 		8E4F599D2CD5176E007D43BC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E613E9D2C951C8D006FC272 /* GoogleService-Info.plist */; };
@@ -125,7 +124,6 @@
 		8E5385742C644AB000AF151B /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385732C644AB000AF151B /* TokenRepository.swift */; };
 		8E5385762C644B4400AF151B /* TokenSaveResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385752C644B4400AF151B /* TokenSaveResponseDTO.swift */; };
 		8E5385782C644C3F00AF151B /* TokenRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385772C644C3F00AF151B /* TokenRepositoryImpl.swift */; };
-		8E53857A2C644D9600AF151B /* TokenDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385792C644D9600AF151B /* TokenDataSource.swift */; };
 		8E5385872C64A24A00AF151B /* ci_post_clone.sh in Resources */ = {isa = PBXBuildFile; fileRef = 8E53857E2C647D9A00AF151B /* ci_post_clone.sh */; };
 		8E54C84A2C5E6F5E0070E689 /* AppDelegate+Messaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E54C8492C5E6F5E0070E689 /* AppDelegate+Messaging.swift */; };
 		8E5D1CF82C38D2E50027E8BD /* Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D1CF72C38D2E50027E8BD /* Scrollable.swift */; };
@@ -315,13 +313,12 @@
 		8E3F021D2C9FB46100AE89D5 /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
 		8E3F021F2C9FB6A000AE89D5 /* ReportRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRepository.swift; sourceTree = "<group>"; };
 		8E3F02212C9FB75900AE89D5 /* ReportRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRepositoryImpl.swift; sourceTree = "<group>"; };
-		8E3F02252C9FB85E00AE89D5 /* ReportResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportResponseDTO.swift; sourceTree = "<group>"; };
+		8E3F02252C9FB85E00AE89D5 /* PostResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResponseDTO.swift; sourceTree = "<group>"; };
 		8E3F02282C9FC77600AE89D5 /* AppVersionProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionProvidable.swift; sourceTree = "<group>"; };
 		8E3F022C2CA0022D00AE89D5 /* VIew+TextEditorBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VIew+TextEditorBackground.swift"; sourceTree = "<group>"; };
 		8E5385732C644AB000AF151B /* TokenRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepository.swift; sourceTree = "<group>"; };
 		8E5385752C644B4400AF151B /* TokenSaveResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenSaveResponseDTO.swift; sourceTree = "<group>"; };
 		8E5385772C644C3F00AF151B /* TokenRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepositoryImpl.swift; sourceTree = "<group>"; };
-		8E5385792C644D9600AF151B /* TokenDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDataSource.swift; sourceTree = "<group>"; };
 		8E53857E2C647D9A00AF151B /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 		8E54C8462C5E63940070E689 /* KNUTICE.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KNUTICE.entitlements; sourceTree = "<group>"; };
 		8E54C8492C5E6F5E0070E689 /* AppDelegate+Messaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Messaging.swift"; sourceTree = "<group>"; };
@@ -595,7 +592,6 @@
 		5C89DD4A2BFA104800CCCCCD /* DataSources */ = {
 			isa = PBXGroup;
 			children = (
-				8E5385792C644D9600AF151B /* TokenDataSource.swift */,
 				8E6931662CEF08E00074142B /* LocalNotificationPermissionDataSource.swift */,
 				8E0AA23C2D2419740068681C /* RemoteDataSource.swift */,
 			);
@@ -605,7 +601,7 @@
 		5C89DD4E2BFA118B00CCCCCD /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				8E3F02252C9FB85E00AE89D5 /* ReportResponseDTO.swift */,
+				8E3F02252C9FB85E00AE89D5 /* PostResponseDTO.swift */,
 				5C89DD4F2BFA120B00CCCCCD /* MainNoticeResponseDTO.swift */,
 				5C190A542BFDF66600E0254B /* NoticeReponseDTO.swift */,
 				8E5385752C644B4400AF151B /* TokenSaveResponseDTO.swift */,
@@ -1250,7 +1246,7 @@
 				5C5698972BEFB6760085E389 /* Notice.swift in Sources */,
 				8E69315D2CEEFF950074142B /* RemoteNotificationPermissionRepository.swift in Sources */,
 				8E00AF712C36233C0037EC38 /* WebViewController+Layout.swift in Sources */,
-				8E3F02262C9FB86400AE89D5 /* ReportResponseDTO.swift in Sources */,
+				8E3F02262C9FB86400AE89D5 /* PostResponseDTO.swift in Sources */,
 				8E60EAFA2CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift in Sources */,
 				8E3F022D2CA0023A00AE89D5 /* VIew+TextEditorBackground.swift in Sources */,
 				8E0C3F892C9EC93B005E2A16 /* ReportView.swift in Sources */,
@@ -1295,7 +1291,6 @@
 				8EE4B4E82D16E4DD00EFF10B /* NotificationPermissionService.swift in Sources */,
 				5C8256442BE5CE1A0038D4C8 /* SceneDelegate.swift in Sources */,
 				8EFE53002CDCBD3D003A7330 /* SearchRepositoryImpl.swift in Sources */,
-				8E53857A2C644D9600AF151B /* TokenDataSource.swift in Sources */,
 				8E09E7302D1C2B79003B7FCC /* SearchResultRepresentable.swift in Sources */,
 				8E00AF822C3681100037EC38 /* TableViewConfigurable.swift in Sources */,
 				5C190A462BFD6BDB00E0254B /* Bundle+URL.swift in Sources */,
@@ -1338,7 +1333,7 @@
 				8E20510E2CD4F32F00D87C6A /* Notice.swift in Sources */,
 				8E69315C2CEEFF950074142B /* RemoteNotificationPermissionRepository.swift in Sources */,
 				8E20510F2CD4F32F00D87C6A /* WebViewController+Layout.swift in Sources */,
-				8E2051102CD4F32F00D87C6A /* ReportResponseDTO.swift in Sources */,
+				8E2051102CD4F32F00D87C6A /* PostResponseDTO.swift in Sources */,
 				8E60EAFB2CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift in Sources */,
 				8E2051112CD4F32F00D87C6A /* VIew+TextEditorBackground.swift in Sources */,
 				8E2051122CD4F32F00D87C6A /* ReportView.swift in Sources */,
@@ -1383,7 +1378,6 @@
 				8EE4B4E92D16E4DD00EFF10B /* NotificationPermissionService.swift in Sources */,
 				8E2051332CD4F32F00D87C6A /* SceneDelegate.swift in Sources */,
 				8EFE53012CDCBD3D003A7330 /* SearchRepositoryImpl.swift in Sources */,
-				8E2051342CD4F32F00D87C6A /* TokenDataSource.swift in Sources */,
 				8E09E7312D1C2B79003B7FCC /* SearchResultRepresentable.swift in Sources */,
 				8E2051352CD4F32F00D87C6A /* TableViewConfigurable.swift in Sources */,
 				8E2051362CD4F32F00D87C6A /* Bundle+URL.swift in Sources */,

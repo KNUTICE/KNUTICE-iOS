@@ -15,8 +15,7 @@ extension AppDelegate: MessagingDelegate {
         print("Firebase registration token: \(String(describing: fcmToken))")
         
         if let fcmToken {
-            let dataSource = TokenDataSourceImpl()
-            let repository = TokenRepositoryImpl(dataSource: dataSource)
+            let repository = TokenRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
             
             repository.registerToken(token: fcmToken)
                 .subscribe(
