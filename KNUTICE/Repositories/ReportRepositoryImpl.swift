@@ -18,7 +18,7 @@ final class ReportRepositoryImpl<T: RemoteDataSource>: ReportRepository {
     func register(params: [String: Any]) -> AnyPublisher<Bool, any Error> {
         let apiEndPoint = Bundle.main.reportURL
         
-        return dataSource.sendPostRequest(to: apiEndPoint, params: params, resultType: ReportResponseDTO.self)
+        return dataSource.sendPostRequest(to: apiEndPoint, params: params, resultType: PostResponseDTO.self)
             .map {
                 if $0.result.resultCode == 200 {
                     return true

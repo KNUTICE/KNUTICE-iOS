@@ -10,7 +10,7 @@ import Combine
 import Foundation
 import FirebaseMessaging
 
-final class TokenRepositoryImpl<T: TokenDataSource>: TokenRepository {
+final class TokenRepositoryImpl<T: RemoteDataSource>: TokenRepository {
     private let dataSource: T
     
     init(dataSource: T) {
@@ -30,14 +30,11 @@ final class TokenRepositoryImpl<T: TokenDataSource>: TokenRepository {
             ]
         ] as [String : Any]
         
-        return dataSource.sendPostRequest(to: remoteURL, params: params)
+        return dataSource.sendPostRequest(to: remoteURL, params: params, resultType: TokenSaveResponseDTO.self)
             .map {
-                if let statusCode = try? $0.get().result.resultCode, statusCode == 200 {
-                    return true
-                }
-                
-                return false
+                return $0.result.resultCode == 200 ? true : false
             }
+            .asObservable()
     }
     
     func getFCMToken() -> AnyPublisher<String, any Error> {

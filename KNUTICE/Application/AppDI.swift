@@ -59,8 +59,7 @@ struct AppDI {
     
     func makeReportViewModel() -> ReportViewModel {
         //Data
-        let tokenDataSource = TokenDataSourceImpl()
-        let tokenRepository = TokenRepositoryImpl(dataSource: tokenDataSource)
+        let tokenRepository = TokenRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
         let reportRepository = ReportRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
         
         //Domain
@@ -73,8 +72,7 @@ struct AppDI {
     }
     
     func makeDeveloperToolsViewModel() -> DeveloperToolsViewModel {
-        let tokenDataSource = TokenDataSourceImpl()
-        let tokenRepository = TokenRepositoryImpl(dataSource: tokenDataSource)
+        let tokenRepository = TokenRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
         let viewModel = DeveloperToolsViewModel(tokenRepository: tokenRepository)
         
         return viewModel
@@ -89,10 +87,9 @@ struct AppDI {
     
     func makeNotificationListViewModel() -> NotificationListViewModel {
         let localDataSource = NotificationPermissionDataSourceImpl.shared
-        let tokenDataSource = TokenDataSourceImpl()
         let localRepository = LocalNotificationPermissionRepositoryImpl(dataSource: localDataSource)
         let remoteRepository = RemoteNotificationPermissionRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
-        let tokenRepository = TokenRepositoryImpl(dataSource: tokenDataSource)
+        let tokenRepository = TokenRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
         let notificationService = NotificationPermissionServiceImpl(tokenRepository: tokenRepository,
                                                                     localRepository: localRepository,
                                                                     remoteRepository: remoteRepository)
