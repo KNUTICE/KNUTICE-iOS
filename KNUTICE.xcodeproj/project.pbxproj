@@ -133,6 +133,8 @@
 		8E60EAFB2CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60EAF92CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift */; };
 		8E613EA02C95214C006FC272 /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E613E9F2C95214C006FC272 /* RequestResult.swift */; };
 		8E6175482CA24157002B6021 /* UIDevice+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6175472CA24157002B6021 /* UIDevice+Identifier.swift */; };
+		8E659EBE2D29438500305D56 /* UITabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E659EBD2D29438500305D56 /* UITabBarViewController.swift */; };
+		8E659EBF2D29438500305D56 /* UITabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E659EBD2D29438500305D56 /* UITabBarViewController.swift */; };
 		8E6898322CD61EF1005F0EEA /* NotificationService-dev.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8E68982B2CD61EF1005F0EEA /* NotificationService-dev.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8E6931562CEEFC0F0074142B /* NotificationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931552CEEFC0F0074142B /* NotificationList.swift */; };
 		8E6931572CEEFC0F0074142B /* NotificationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931552CEEFC0F0074142B /* NotificationList.swift */; };
@@ -328,6 +330,7 @@
 		8E613E9D2C951C8D006FC272 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8E613E9F2C95214C006FC272 /* RequestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestResult.swift; sourceTree = "<group>"; };
 		8E6175472CA24157002B6021 /* UIDevice+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Identifier.swift"; sourceTree = "<group>"; };
+		8E659EBD2D29438500305D56 /* UITabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarViewController.swift; sourceTree = "<group>"; };
 		8E68982B2CD61EF1005F0EEA /* NotificationService-dev.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "NotificationService-dev.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E6931552CEEFC0F0074142B /* NotificationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationList.swift; sourceTree = "<group>"; };
 		8E6931582CEEFC2F0074142B /* NotificationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListViewModel.swift; sourceTree = "<group>"; };
@@ -443,6 +446,7 @@
 		5C5698892BEFB2BE0085E389 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				8E659EBB2D29430B00305D56 /* TabBar */,
 				8E6931522CEEFBEF0074142B /* Notification List */,
 				8EFE52E92CDC8CB6003A7330 /* Notices */,
 				8EFE52E32CDC8955003A7330 /* SearchTable */,
@@ -705,6 +709,22 @@
 				8E53857E2C647D9A00AF151B /* ci_post_clone.sh */,
 			);
 			path = ci_scripts;
+			sourceTree = "<group>";
+		};
+		8E659EBB2D29430B00305D56 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				8E659EBC2D29432300305D56 /* View */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		8E659EBC2D29432300305D56 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8E659EBD2D29438500305D56 /* UITabBarViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		8E6931522CEEFBEF0074142B /* Notification List */ = {
@@ -1245,6 +1265,7 @@
 				5C8256422BE5CE1A0038D4C8 /* AppDelegate.swift in Sources */,
 				5C5698972BEFB6760085E389 /* Notice.swift in Sources */,
 				8E69315D2CEEFF950074142B /* RemoteNotificationPermissionRepository.swift in Sources */,
+				8E659EBF2D29438500305D56 /* UITabBarViewController.swift in Sources */,
 				8E00AF712C36233C0037EC38 /* WebViewController+Layout.swift in Sources */,
 				8E3F02262C9FB86400AE89D5 /* PostResponseDTO.swift in Sources */,
 				8E60EAFA2CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift in Sources */,
@@ -1332,6 +1353,7 @@
 				8E20510D2CD4F32F00D87C6A /* AppDelegate.swift in Sources */,
 				8E20510E2CD4F32F00D87C6A /* Notice.swift in Sources */,
 				8E69315C2CEEFF950074142B /* RemoteNotificationPermissionRepository.swift in Sources */,
+				8E659EBE2D29438500305D56 /* UITabBarViewController.swift in Sources */,
 				8E20510F2CD4F32F00D87C6A /* WebViewController+Layout.swift in Sources */,
 				8E2051102CD4F32F00D87C6A /* PostResponseDTO.swift in Sources */,
 				8E60EAFB2CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift in Sources */,
