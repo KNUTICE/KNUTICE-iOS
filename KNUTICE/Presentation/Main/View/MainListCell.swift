@@ -71,7 +71,6 @@ final class MainListCell: UITableViewCell {
         backgroundView.addSubview(titleLabel)
         backgroundView.addSubview(subTitleLabel)
         contentView.addSubview(backgroundView)
-        contentView.backgroundColor = .customBackground
         
         backgroundView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
