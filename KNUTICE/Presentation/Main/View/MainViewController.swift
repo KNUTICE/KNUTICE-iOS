@@ -34,7 +34,8 @@ final class MainViewController: UIViewController {
         
         setupLayout()
         setupAttribute()
-        setupNavigationBar()
+        bind()
+        bindRefreshControl()
         recordEntryTime()
         observeNotification()
         viewModel.fetchNotices()
@@ -89,7 +90,7 @@ extension MainViewController: UITableViewDelegate {
     
     //MARK: - Section height
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 50
     }
     
     //MARK: - Remove separator from last cell
@@ -118,9 +119,6 @@ struct Preview: PreviewProvider {
         
         UINavigationController(rootViewController: viewController)
             .makePreview()
-            .onAppear {
-                viewController.bind()
-            }
     }
 }
 #endif
