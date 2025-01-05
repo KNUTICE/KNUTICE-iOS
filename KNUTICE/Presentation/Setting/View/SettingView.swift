@@ -88,6 +88,7 @@ struct SettingView: View {
             #endif
         }
         .background(.customBackground)
+        .toolbarBackground(.customBackground, for: .navigationBar)
         .listStyle(.plain)
         .navigationTitle("설정")
         .navigationBarTitleDisplayMode(.inline)

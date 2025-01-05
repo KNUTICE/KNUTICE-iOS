@@ -23,6 +23,17 @@ final class ScholarshipNoticeViewController: UIViewController, DataBindable, Tab
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .customBackground
+        appearance.shadowColor = .clear
+        
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
