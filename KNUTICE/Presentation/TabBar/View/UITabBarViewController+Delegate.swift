@@ -13,17 +13,16 @@ extension UITabBarViewController: UITabBarControllerDelegate {
         updateNavigationBar(for: selectedIndex)
     }
     
-    private func updateNavigationBar(for index: Int) {
+    func updateNavigationBar(for index: Int) {
         switch index {
         case 1:
             setupReminderNavigationBar()
-            print()
         default:
             setupMainNavigationBar()
         }
     }
     
-    func setupMainNavigationBar() {
+    private func setupMainNavigationBar() {
         let titleLabel = UILabel()
         titleLabel.text = "KNUTICE"
         titleLabel.font = UIFont.font(for: .title2, weight: .heavy)
@@ -45,7 +44,7 @@ extension UITabBarViewController: UITabBarControllerDelegate {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
-    func setupReminderNavigationBar() {
+    private func setupReminderNavigationBar() {
         let titleLabel = UILabel()
         titleLabel.text = "리마인더"
         titleLabel.font = UIFont.font(for: .title2, weight: .heavy)
