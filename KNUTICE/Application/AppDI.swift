@@ -98,4 +98,10 @@ struct AppDI {
         
         return viewModel
     }
+    
+    func makeReminderListViewModel() -> ReminderListViewModel {
+        let viewModel = ReminderListViewModel()
+        
+        return viewModel
+    }
 }
