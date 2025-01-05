@@ -17,6 +17,7 @@ extension MainViewController {
         tableView.register(MainListCell.self, forCellReuseIdentifier: MainListCell.reuseIdentifier)
         tableView.rowHeight = 95        
         tableView.refreshControl = refreshControl
+        tableView.backgroundColor = .mainBackground
     }
     
     func setupLayout() {

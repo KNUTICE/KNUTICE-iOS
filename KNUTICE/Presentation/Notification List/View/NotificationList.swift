@@ -59,7 +59,7 @@ struct NotificationList: View {
                 .listRowBackground(Color.customBackground)
             }
             .background(.customBackground)
-            .tint(.toggle)
+            .tint(.accent2)
             .listStyle(.plain)
             .navigationTitle("서비스 알림")
             .navigationBarTitleDisplayMode(.inline)
