@@ -37,7 +37,7 @@ extension UITabBarViewController: UITabBarControllerDelegate {
         ]
         
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .mainNavBar
+        appearance.backgroundColor = .mainBackground
         appearance.shadowColor = .clear
         
         navigationController?.navigationBar.standardAppearance = appearance
@@ -58,7 +58,8 @@ extension UITabBarViewController: UITabBarControllerDelegate {
         ]
         
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .blue
+        appearance.backgroundColor = .mainBackground
+        appearance.shadowColor = .clear
         
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
