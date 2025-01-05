@@ -148,6 +148,12 @@
 		8E6931652CEF02780074142B /* Notification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931622CEF02780074142B /* Notification.xcdatamodeld */; };
 		8E6931672CEF08E00074142B /* LocalNotificationPermissionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931662CEF08E00074142B /* LocalNotificationPermissionDataSource.swift */; };
 		8E6931682CEF08E00074142B /* LocalNotificationPermissionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931662CEF08E00074142B /* LocalNotificationPermissionDataSource.swift */; };
+		8E7A4A5E2D2979DB00BD1B7F /* ReminderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A5D2D2979DB00BD1B7F /* ReminderList.swift */; };
+		8E7A4A5F2D2979DB00BD1B7F /* ReminderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A5D2D2979DB00BD1B7F /* ReminderList.swift */; };
+		8E7A4A612D297A4D00BD1B7F /* ReminderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A602D297A4D00BD1B7F /* ReminderViewModel.swift */; };
+		8E7A4A622D297A4D00BD1B7F /* ReminderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A602D297A4D00BD1B7F /* ReminderViewModel.swift */; };
+		8E7A4A642D29800D00BD1B7F /* UITabBarViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A632D29800D00BD1B7F /* UITabBarViewController+Delegate.swift */; };
+		8E7A4A652D29800D00BD1B7F /* UITabBarViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A632D29800D00BD1B7F /* UITabBarViewController+Delegate.swift */; };
 		8EA72DC92CD5CA4800D1B300 /* DeveloperTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA72DC82CD5CA4800D1B300 /* DeveloperTools.swift */; };
 		8EA72DCA2CD5CA4800D1B300 /* DeveloperTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA72DC82CD5CA4800D1B300 /* DeveloperTools.swift */; };
 		8EA72DCC2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA72DCB2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift */; };
@@ -339,6 +345,9 @@
 		8E6931632CEF02780074142B /* Notification.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notification.xcdatamodel; sourceTree = "<group>"; };
 		8E6931662CEF08E00074142B /* LocalNotificationPermissionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationPermissionDataSource.swift; sourceTree = "<group>"; };
 		8E7945E42CA28F6900208662 /* KNUTICEUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KNUTICEUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E7A4A5D2D2979DB00BD1B7F /* ReminderList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderList.swift; sourceTree = "<group>"; };
+		8E7A4A602D297A4D00BD1B7F /* ReminderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewModel.swift; sourceTree = "<group>"; };
+		8E7A4A632D29800D00BD1B7F /* UITabBarViewController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarViewController+Delegate.swift"; sourceTree = "<group>"; };
 		8EA72DC82CD5CA4800D1B300 /* DeveloperTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperTools.swift; sourceTree = "<group>"; };
 		8EA72DCB2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperToolsViewModel.swift; sourceTree = "<group>"; };
 		8EA9ACA82C46AC3C00C9E287 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
@@ -446,6 +455,7 @@
 		5C5698892BEFB2BE0085E389 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				8E7A4A5A2D2978EA00BD1B7F /* Reminder */,
 				8E659EBB2D29430B00305D56 /* TabBar */,
 				8E6931522CEEFBEF0074142B /* Notification List */,
 				8EFE52E92CDC8CB6003A7330 /* Notices */,
@@ -723,6 +733,7 @@
 			isa = PBXGroup;
 			children = (
 				8E659EBD2D29438500305D56 /* UITabBarViewController.swift */,
+				8E7A4A632D29800D00BD1B7F /* UITabBarViewController+Delegate.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -768,6 +779,31 @@
 				8EE4B4F92D17D33600EFF10B /* SearchTest.swift */,
 			);
 			path = KNUTICEUnitTests;
+			sourceTree = "<group>";
+		};
+		8E7A4A5A2D2978EA00BD1B7F /* Reminder */ = {
+			isa = PBXGroup;
+			children = (
+				8E7A4A5C2D29797700BD1B7F /* ViewModel */,
+				8E7A4A5B2D29797200BD1B7F /* View */,
+			);
+			path = Reminder;
+			sourceTree = "<group>";
+		};
+		8E7A4A5B2D29797200BD1B7F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8E7A4A5D2D2979DB00BD1B7F /* ReminderList.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8E7A4A5C2D29797700BD1B7F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8E7A4A602D297A4D00BD1B7F /* ReminderViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		8EA72DC52CD5C9B500D1B300 /* Developer Tools */ = {
@@ -1250,8 +1286,10 @@
 				5C8256462BE5CE1A0038D4C8 /* MainViewController.swift in Sources */,
 				8EFE52FB2CDCBA80003A7330 /* SearchTableViewModel.swift in Sources */,
 				8ECE2B1A2C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift in Sources */,
+				8E7A4A642D29800D00BD1B7F /* UITabBarViewController+Delegate.swift in Sources */,
 				5C9B810B2BF451BC0038EB27 /* NoticeViewModel.swift in Sources */,
 				8EA9ACAB2C46AEC900C9E287 /* OpenSourceLicenseView.swift in Sources */,
+				8E7A4A5E2D2979DB00BD1B7F /* ReminderList.swift in Sources */,
 				8EFE52E72CDC89CF003A7330 /* SearchTableViewController.swift in Sources */,
 				8E3F02202C9FB6A000AE89D5 /* ReportRepository.swift in Sources */,
 				8E613EA02C95214C006FC272 /* RequestResult.swift in Sources */,
@@ -1273,6 +1311,7 @@
 				8E0C3F892C9EC93B005E2A16 /* ReportView.swift in Sources */,
 				8EBBE2402CA0E3FC00826D5A /* LightTextView.swift in Sources */,
 				8E60EAF82CDDF946003612FB /* SearchTableViewController+Binding.swift in Sources */,
+				8E7A4A612D297A4D00BD1B7F /* ReminderViewModel.swift in Sources */,
 				8E5385762C644B4400AF151B /* TokenSaveResponseDTO.swift in Sources */,
 				5C190A552BFDF66600E0254B /* NoticeReponseDTO.swift in Sources */,
 				8EB6D20E2C6713BB004E8AC2 /* View+Fork.swift in Sources */,
@@ -1338,8 +1377,10 @@
 				8E2051022CD4F32F00D87C6A /* MainViewController.swift in Sources */,
 				8EFE52FA2CDCBA80003A7330 /* SearchTableViewModel.swift in Sources */,
 				8E2051032CD4F32F00D87C6A /* DetailedNoticeCellWithImage.swift in Sources */,
+				8E7A4A652D29800D00BD1B7F /* UITabBarViewController+Delegate.swift in Sources */,
 				8E2051042CD4F32F00D87C6A /* NoticeViewModel.swift in Sources */,
 				8E2051052CD4F32F00D87C6A /* OpenSourceLicenseView.swift in Sources */,
+				8E7A4A5F2D2979DB00BD1B7F /* ReminderList.swift in Sources */,
 				8EFE52E82CDC89CF003A7330 /* SearchTableViewController.swift in Sources */,
 				8E2051062CD4F32F00D87C6A /* ReportRepository.swift in Sources */,
 				8E2051072CD4F32F00D87C6A /* RequestResult.swift in Sources */,
@@ -1361,6 +1402,7 @@
 				8E2051122CD4F32F00D87C6A /* ReportView.swift in Sources */,
 				8E2051132CD4F32F00D87C6A /* LightTextView.swift in Sources */,
 				8E60EAF72CDDF946003612FB /* SearchTableViewController+Binding.swift in Sources */,
+				8E7A4A622D297A4D00BD1B7F /* ReminderViewModel.swift in Sources */,
 				8E2051152CD4F32F00D87C6A /* TokenSaveResponseDTO.swift in Sources */,
 				8E2051162CD4F32F00D87C6A /* NoticeReponseDTO.swift in Sources */,
 				8E2051172CD4F32F00D87C6A /* View+Fork.swift in Sources */,
