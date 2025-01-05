@@ -26,6 +26,17 @@ final class UITabBarViewController: UITabBarController {
         setupShadowView()
         self.delegate = self
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .customBackground
+        appearance.shadowColor = .clear
+        
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
 }
 
 extension UITabBarViewController {
