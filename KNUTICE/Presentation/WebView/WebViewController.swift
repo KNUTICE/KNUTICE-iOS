@@ -11,8 +11,9 @@ import SwiftUI
 import Foundation
 
 final class WebViewController: UIViewController {
-    let progressView = UIProgressView(progressViewStyle: .bar)
+    let progressView: UIProgressView = UIProgressView(progressViewStyle: .bar)
     let webView: WKWebView = WKWebView()
+    let reminderSheetBtn: UIButton = UIButton()
     let url: String
     
     init(url: String) {
