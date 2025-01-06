@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 extension WebViewController {
     @objc
@@ -32,11 +33,10 @@ extension WebViewController {
         
     }
     
-    func showCancelAlert() {
-        
-    }
-    
-    func showErrorAlert() {
-        
+    @objc func openReminderForm(_ sender: UIButton) {
+        let viewController = UIHostingController(rootView: ReminderForm())
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.modalPresentationStyle = .popover
+        present(navigationController, animated: true, completion: nil)
     }
 }
