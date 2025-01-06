@@ -115,6 +115,8 @@
 		8E2DA23D2CF33C4000E842A8 /* Notification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931622CEF02780074142B /* Notification.xcdatamodeld */; };
 		8E3B8C422D2B9A97007E9579 /* ReminderForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B8C412D2B9A97007E9579 /* ReminderForm.swift */; };
 		8E3B8C432D2B9A97007E9579 /* ReminderForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B8C412D2B9A97007E9579 /* ReminderForm.swift */; };
+		8E3B8C482D2BBFFD007E9579 /* ReminderFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B8C472D2BBFFD007E9579 /* ReminderFormViewModel.swift */; };
+		8E3B8C492D2BBFFD007E9579 /* ReminderFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B8C472D2BBFFD007E9579 /* ReminderFormViewModel.swift */; };
 		8E3F021E2C9FB46100AE89D5 /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F021D2C9FB46100AE89D5 /* ReportService.swift */; };
 		8E3F02202C9FB6A000AE89D5 /* ReportRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F021F2C9FB6A000AE89D5 /* ReportRepository.swift */; };
 		8E3F02222C9FB76800AE89D5 /* ReportRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02212C9FB75900AE89D5 /* ReportRepositoryImpl.swift */; };
@@ -329,6 +331,7 @@
 		8E2051472CD4F32F00D87C6A /* KNUTICE-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KNUTICE-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E2051482CD4F32F00D87C6A /* Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Dev.plist"; path = "/Users/ijeonghun/Desktop/GitHub/iOS/KNUTICE-iOS/KNUTICE/Application/Info-Dev.plist"; sourceTree = "<absolute>"; };
 		8E3B8C412D2B9A97007E9579 /* ReminderForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderForm.swift; sourceTree = "<group>"; };
+		8E3B8C472D2BBFFD007E9579 /* ReminderFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderFormViewModel.swift; sourceTree = "<group>"; };
 		8E3F021D2C9FB46100AE89D5 /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
 		8E3F021F2C9FB6A000AE89D5 /* ReportRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRepository.swift; sourceTree = "<group>"; };
 		8E3F02212C9FB75900AE89D5 /* ReportRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -472,6 +475,7 @@
 		5C5698892BEFB2BE0085E389 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				8E3B8C442D2BBFDA007E9579 /* ReminderForm */,
 				8E7A4A5A2D2978EA00BD1B7F /* Reminder */,
 				8E659EBB2D29430B00305D56 /* TabBar */,
 				8E6931522CEEFBEF0074142B /* Notification List */,
@@ -722,6 +726,31 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		8E3B8C442D2BBFDA007E9579 /* ReminderForm */ = {
+			isa = PBXGroup;
+			children = (
+				8E3B8C462D2BBFE7007E9579 /* ViewModel */,
+				8E3B8C452D2BBFE4007E9579 /* View */,
+			);
+			path = ReminderForm;
+			sourceTree = "<group>";
+		};
+		8E3B8C452D2BBFE4007E9579 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8E3B8C412D2B9A97007E9579 /* ReminderForm.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8E3B8C462D2BBFE7007E9579 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8E3B8C472D2BBFFD007E9579 /* ReminderFormViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		8E3F021C2C9FB44A00AE89D5 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -813,7 +842,6 @@
 			children = (
 				8E7A4A5D2D2979DB00BD1B7F /* ReminderList.swift */,
 				8E7A4A6C2D2A43A900BD1B7F /* ReminderRow.swift */,
-				8E3B8C412D2B9A97007E9579 /* ReminderForm.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1371,6 +1399,7 @@
 				8EFE52FD2CDCBB89003A7330 /* SearchRepository.swift in Sources */,
 				8EEE1A512CEA19C90011FD87 /* NoticeFetchable.swift in Sources */,
 				8E00AF6C2C361F780037EC38 /* WebViewController.swift in Sources */,
+				8E3B8C492D2BBFFD007E9579 /* ReminderFormViewModel.swift in Sources */,
 				8E00AF7F2C367D8A0037EC38 /* DataBindable.swift in Sources */,
 				5C89DD3C2BFA03D800CCCCCD /* MainViewController+Layout.swift in Sources */,
 				8EE4B4E82D16E4DD00EFF10B /* NotificationPermissionService.swift in Sources */,
@@ -1467,6 +1496,7 @@
 				8EFE52FE2CDCBB89003A7330 /* SearchRepository.swift in Sources */,
 				8EEE1A522CEA19C90011FD87 /* NoticeFetchable.swift in Sources */,
 				8E2051302CD4F32F00D87C6A /* WebViewController.swift in Sources */,
+				8E3B8C482D2BBFFD007E9579 /* ReminderFormViewModel.swift in Sources */,
 				8E2051312CD4F32F00D87C6A /* DataBindable.swift in Sources */,
 				8E2051322CD4F32F00D87C6A /* MainViewController+Layout.swift in Sources */,
 				8EE4B4E92D16E4DD00EFF10B /* NotificationPermissionService.swift in Sources */,

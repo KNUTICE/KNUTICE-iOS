@@ -34,7 +34,11 @@ extension WebViewController {
     }
     
     @objc func openReminderForm(_ sender: UIButton) {
-        let viewController = UIHostingController(rootView: ReminderForm())
+        let viewController = UIHostingController(rootView:
+                                                    ReminderForm(viewModel: AppDI.shared.makeReminderFormViewModel(),
+                                                                 isShowingSheet: .constant(true),
+                                                                 url: self.url) { self.dismiss(animated: true) }
+        )
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.modalPresentationStyle = .popover
         present(navigationController, animated: true, completion: nil)
