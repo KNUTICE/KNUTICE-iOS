@@ -104,4 +104,10 @@ struct AppDI {
         
         return viewModel
     }
+    
+    func makeReminderFormViewModel() -> ReminderFormViewModel {
+        let viewModel = ReminderFormViewModel()
+        
+        return viewModel
+    }
 }

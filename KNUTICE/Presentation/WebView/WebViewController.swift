@@ -18,6 +18,7 @@ final class WebViewController: UIViewController {
     
     init(url: String) {
         self.url = url
+        
         super.init(nibName: nil, bundle: nil)
     }
     
