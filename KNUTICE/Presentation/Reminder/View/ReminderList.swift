@@ -9,49 +9,74 @@ import SwiftUI
 
 struct ReminderList: View {
     @StateObject private var viewModel: ReminderListViewModel
+    @State private var isShowingSheet: Bool = false
     
     init(viewModel: ReminderListViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     
     var body: some View {
-        ScrollView {
-            Section {
-                if !viewModel.uncompletedReminders.isEmpty {
-                    ForEach(0..<viewModel.uncompletedReminders.count, id: \.self) { idx in
-                        NavigationLink {
-                            
-                        } label: {
-                            ReminderRow(reminder: $viewModel.uncompletedReminders[idx])
+        ZStack {
+            ScrollView {
+                Section {
+                    if !viewModel.uncompletedReminders.isEmpty {
+                        ForEach(0..<viewModel.uncompletedReminders.count, id: \.self) { idx in
+                            NavigationLink {
+                                
+                            } label: {
+                                ReminderRow(reminder: $viewModel.uncompletedReminders[idx])
+                            }
                         }
+                    } else {
+                        EmptyReminderSection(content: "완료할 항목이 없어요 :(")
                     }
-                } else {
-                    EmptyReminderSection(content: "완료할 항목이 없어요 :(")
+                } header: {
+                    ReminderSectionHeader(title: "작업", count: viewModel.uncompletedReminders.count)
                 }
-            } header: {
-                ReminderSectionHeader(title: "리마인드", count: viewModel.uncompletedReminders.count)
-            }
                 
-            
-            Section {
-                if !viewModel.completedReminders.isEmpty {
-                    ForEach(0..<viewModel.completedReminders.count, id: \.self) { idx in
-                        NavigationLink {
-                            
-                        } label: {
-                            ReminderRow(reminder: $viewModel.completedReminders[idx])
+                
+                Section {
+                    if !viewModel.completedReminders.isEmpty {
+                        ForEach(0..<viewModel.completedReminders.count, id: \.self) { idx in
+                            NavigationLink {
+                                
+                            } label: {
+                                ReminderRow(reminder: $viewModel.completedReminders[idx])
+                            }
                         }
+                    } else {
+                        EmptyReminderSection(content: "완료된 항목이 없어요 :(")
                     }
-                } else {
-                    EmptyReminderSection(content: "완료된 항목이 없어요 :(")
+                } header: {
+                    ReminderSectionHeader(title: "완료됨", count: viewModel.completedReminders.count)
                 }
-            } header: {
-                ReminderSectionHeader(title: "완료됨", count: viewModel.completedReminders.count)
+                .padding(.top)
             }
-            .padding(.top)
+            .padding()
+            .background(.mainBackground)
+            
+            Circle()
+                .fill(.accent2)
+                .frame(width: 50)
+                .overlay {
+                    Image(systemName: "plus")
+                        .foregroundStyle(.white)
+                }
+                .frame(maxHeight: .infinity, alignment: .bottom)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.bottom, 30)
+                .padding(.trailing, 20)
+                .shadow(radius: 7)
+                .onTapGesture {
+                    isShowingSheet.toggle()
+                }
         }
-        .padding()
-        .background(.mainBackground)
+        .sheet(isPresented: $isShowingSheet) {
+            NavigationStack {
+                ReminderForm(viewModel: AppDI.shared.makeReminderFormViewModel(),
+                             isShowingSheet: $isShowingSheet, url: "") {}
+            }
+        }
     }
 }
 
