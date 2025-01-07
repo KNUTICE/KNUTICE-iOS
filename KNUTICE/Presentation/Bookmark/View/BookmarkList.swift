@@ -1,5 +1,5 @@
 //
-//  ReminderList.swift
+//  BookmarkList.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 1/4/25.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct ReminderList: View {
-    @StateObject private var viewModel: ReminderListViewModel
+struct BookmarkList: View {
+    @StateObject private var viewModel: BookmarkListViewModel
     @State private var isShowingSheet: Bool = false
     
-    init(viewModel: ReminderListViewModel) {
+    init(viewModel: BookmarkListViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     
@@ -24,14 +24,14 @@ struct ReminderList: View {
                             NavigationLink {
                                 
                             } label: {
-                                ReminderRow(reminder: $viewModel.uncompletedReminders[idx])
+                                BookmarkListRow(reminder: $viewModel.uncompletedReminders[idx])
                             }
                         }
                     } else {
-                        EmptyReminderSection(content: "완료할 항목이 없어요 :(")
+                        EmptySectionView(content: "완료할 항목이 없어요 :(")
                     }
                 } header: {
-                    ReminderSectionHeader(title: "작업", count: viewModel.uncompletedReminders.count)
+                    SectionHeader(title: "작업", count: viewModel.uncompletedReminders.count)
                 }
                 
                 
@@ -41,14 +41,14 @@ struct ReminderList: View {
                             NavigationLink {
                                 
                             } label: {
-                                ReminderRow(reminder: $viewModel.completedReminders[idx])
+                                BookmarkListRow(reminder: $viewModel.completedReminders[idx])
                             }
                         }
                     } else {
-                        EmptyReminderSection(content: "완료된 항목이 없어요 :(")
+                        EmptySectionView(content: "완료된 항목이 없어요 :(")
                     }
                 } header: {
-                    ReminderSectionHeader(title: "완료됨", count: viewModel.completedReminders.count)
+                    SectionHeader(title: "완료됨", count: viewModel.completedReminders.count)
                 }
                 .padding(.top)
             }
@@ -71,16 +71,10 @@ struct ReminderList: View {
                     isShowingSheet.toggle()
                 }
         }
-        .sheet(isPresented: $isShowingSheet) {
-            NavigationStack {
-                ReminderForm(viewModel: AppDI.shared.makeReminderFormViewModel(),
-                             isShowingSheet: $isShowingSheet, url: "") {}
-            }
-        }
     }
 }
 
-fileprivate struct ReminderSectionHeader: View {
+fileprivate struct SectionHeader: View {
     let title: String
     let count: Int
     
@@ -95,7 +89,7 @@ fileprivate struct ReminderSectionHeader: View {
     }
 }
 
-fileprivate struct EmptyReminderSection: View {
+fileprivate struct EmptySectionView: View {
     let content: String
     
     var body: some View {
@@ -107,6 +101,6 @@ fileprivate struct EmptyReminderSection: View {
 
 #Preview {
     NavigationStack {
-        ReminderList(viewModel: ReminderListViewModel())
+        BookmarkList(viewModel: BookmarkListViewModel())
     }
 }

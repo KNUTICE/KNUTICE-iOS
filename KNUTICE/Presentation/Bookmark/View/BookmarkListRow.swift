@@ -1,5 +1,5 @@
 //
-//  ReminderRow.swift
+//  BookmarkListRow.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 1/5/25.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ReminderRow: View {
-    @Binding var reminder: Reminder
+struct BookmarkListRow: View {
+    @Binding var reminder: Bookmark
     
     var body: some View {
         HStack(spacing: 15) {
@@ -37,7 +37,7 @@ struct ReminderRow: View {
 }
 
 fileprivate struct ReminderButton: View {
-    @Binding var reminder: Reminder
+    @Binding var reminder: Bookmark
     
     var body: some View {
         Button {
@@ -63,7 +63,7 @@ fileprivate struct ReminderButton: View {
 }
 
 fileprivate struct ReminderSubTitle: View {
-    let reminder: Reminder
+    let reminder: Bookmark
     
     var body: some View {
         HStack(spacing: 5) {
@@ -97,5 +97,5 @@ fileprivate func getNoticeColor(of kind: NoticeKind) -> Color {
 }
 
 #Preview {
-    ReminderRow(reminder: Binding(get: { Reminder.sample }, set: { _ in }))
+    BookmarkListRow(reminder: Binding(get: { Bookmark.sample }, set: { _ in }))
 }

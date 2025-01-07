@@ -113,10 +113,10 @@
 		8E2DA23B2CF33BD500E842A8 /* LocalNotificationPermissionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931662CEF08E00074142B /* LocalNotificationPermissionDataSource.swift */; };
 		8E2DA23C2CF33C4000E842A8 /* Notification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931622CEF02780074142B /* Notification.xcdatamodeld */; };
 		8E2DA23D2CF33C4000E842A8 /* Notification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931622CEF02780074142B /* Notification.xcdatamodeld */; };
-		8E3B8C422D2B9A97007E9579 /* ReminderForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B8C412D2B9A97007E9579 /* ReminderForm.swift */; };
-		8E3B8C432D2B9A97007E9579 /* ReminderForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B8C412D2B9A97007E9579 /* ReminderForm.swift */; };
-		8E3B8C482D2BBFFD007E9579 /* ReminderFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B8C472D2BBFFD007E9579 /* ReminderFormViewModel.swift */; };
-		8E3B8C492D2BBFFD007E9579 /* ReminderFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B8C472D2BBFFD007E9579 /* ReminderFormViewModel.swift */; };
+		8E3B8C422D2B9A97007E9579 /* BookmarkForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B8C412D2B9A97007E9579 /* BookmarkForm.swift */; };
+		8E3B8C432D2B9A97007E9579 /* BookmarkForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B8C412D2B9A97007E9579 /* BookmarkForm.swift */; };
+		8E3B8C482D2BBFFD007E9579 /* BookmarkFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B8C472D2BBFFD007E9579 /* BookmarkFormViewModel.swift */; };
+		8E3B8C492D2BBFFD007E9579 /* BookmarkFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B8C472D2BBFFD007E9579 /* BookmarkFormViewModel.swift */; };
 		8E3F021E2C9FB46100AE89D5 /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F021D2C9FB46100AE89D5 /* ReportService.swift */; };
 		8E3F02202C9FB6A000AE89D5 /* ReportRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F021F2C9FB6A000AE89D5 /* ReportRepository.swift */; };
 		8E3F02222C9FB76800AE89D5 /* ReportRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02212C9FB75900AE89D5 /* ReportRepositoryImpl.swift */; };
@@ -152,16 +152,16 @@
 		8E6931652CEF02780074142B /* Notification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931622CEF02780074142B /* Notification.xcdatamodeld */; };
 		8E6931672CEF08E00074142B /* LocalNotificationPermissionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931662CEF08E00074142B /* LocalNotificationPermissionDataSource.swift */; };
 		8E6931682CEF08E00074142B /* LocalNotificationPermissionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931662CEF08E00074142B /* LocalNotificationPermissionDataSource.swift */; };
-		8E7A4A5E2D2979DB00BD1B7F /* ReminderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A5D2D2979DB00BD1B7F /* ReminderList.swift */; };
-		8E7A4A5F2D2979DB00BD1B7F /* ReminderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A5D2D2979DB00BD1B7F /* ReminderList.swift */; };
-		8E7A4A612D297A4D00BD1B7F /* ReminderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A602D297A4D00BD1B7F /* ReminderListViewModel.swift */; };
-		8E7A4A622D297A4D00BD1B7F /* ReminderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A602D297A4D00BD1B7F /* ReminderListViewModel.swift */; };
+		8E7A4A5E2D2979DB00BD1B7F /* BookmarkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A5D2D2979DB00BD1B7F /* BookmarkList.swift */; };
+		8E7A4A5F2D2979DB00BD1B7F /* BookmarkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A5D2D2979DB00BD1B7F /* BookmarkList.swift */; };
+		8E7A4A612D297A4D00BD1B7F /* BookmarkListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A602D297A4D00BD1B7F /* BookmarkListViewModel.swift */; };
+		8E7A4A622D297A4D00BD1B7F /* BookmarkListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A602D297A4D00BD1B7F /* BookmarkListViewModel.swift */; };
 		8E7A4A642D29800D00BD1B7F /* UITabBarViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A632D29800D00BD1B7F /* UITabBarViewController+Delegate.swift */; };
 		8E7A4A652D29800D00BD1B7F /* UITabBarViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A632D29800D00BD1B7F /* UITabBarViewController+Delegate.swift */; };
-		8E7A4A6A2D2A2CD800BD1B7F /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A692D2A2CD800BD1B7F /* Reminder.swift */; };
-		8E7A4A6B2D2A2CD800BD1B7F /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A692D2A2CD800BD1B7F /* Reminder.swift */; };
-		8E7A4A6D2D2A43A900BD1B7F /* ReminderRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A6C2D2A43A900BD1B7F /* ReminderRow.swift */; };
-		8E7A4A6E2D2A43A900BD1B7F /* ReminderRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A6C2D2A43A900BD1B7F /* ReminderRow.swift */; };
+		8E7A4A6A2D2A2CD800BD1B7F /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A692D2A2CD800BD1B7F /* Bookmark.swift */; };
+		8E7A4A6B2D2A2CD800BD1B7F /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A692D2A2CD800BD1B7F /* Bookmark.swift */; };
+		8E7A4A6D2D2A43A900BD1B7F /* BookmarkListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A6C2D2A43A900BD1B7F /* BookmarkListRow.swift */; };
+		8E7A4A6E2D2A43A900BD1B7F /* BookmarkListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A6C2D2A43A900BD1B7F /* BookmarkListRow.swift */; };
 		8E7A4A702D2A44CE00BD1B7F /* Date+StringFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A6F2D2A44CE00BD1B7F /* Date+StringFormat.swift */; };
 		8E7A4A712D2A44CE00BD1B7F /* Date+StringFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A6F2D2A44CE00BD1B7F /* Date+StringFormat.swift */; };
 		8E7A4A732D2A531B00BD1B7F /* NoticeKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A722D2A531B00BD1B7F /* NoticeKind.swift */; };
@@ -330,8 +330,8 @@
 		8E0C3F8B2C9ECD1B005E2A16 /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewModel.swift; sourceTree = "<group>"; };
 		8E2051472CD4F32F00D87C6A /* KNUTICE-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KNUTICE-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E2051482CD4F32F00D87C6A /* Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Dev.plist"; path = "/Users/ijeonghun/Desktop/GitHub/iOS/KNUTICE-iOS/KNUTICE/Application/Info-Dev.plist"; sourceTree = "<absolute>"; };
-		8E3B8C412D2B9A97007E9579 /* ReminderForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderForm.swift; sourceTree = "<group>"; };
-		8E3B8C472D2BBFFD007E9579 /* ReminderFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderFormViewModel.swift; sourceTree = "<group>"; };
+		8E3B8C412D2B9A97007E9579 /* BookmarkForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkForm.swift; sourceTree = "<group>"; };
+		8E3B8C472D2BBFFD007E9579 /* BookmarkFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkFormViewModel.swift; sourceTree = "<group>"; };
 		8E3F021D2C9FB46100AE89D5 /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
 		8E3F021F2C9FB6A000AE89D5 /* ReportRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRepository.swift; sourceTree = "<group>"; };
 		8E3F02212C9FB75900AE89D5 /* ReportRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -359,11 +359,11 @@
 		8E6931632CEF02780074142B /* Notification.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notification.xcdatamodel; sourceTree = "<group>"; };
 		8E6931662CEF08E00074142B /* LocalNotificationPermissionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationPermissionDataSource.swift; sourceTree = "<group>"; };
 		8E7945E42CA28F6900208662 /* KNUTICEUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KNUTICEUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E7A4A5D2D2979DB00BD1B7F /* ReminderList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderList.swift; sourceTree = "<group>"; };
-		8E7A4A602D297A4D00BD1B7F /* ReminderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListViewModel.swift; sourceTree = "<group>"; };
+		8E7A4A5D2D2979DB00BD1B7F /* BookmarkList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkList.swift; sourceTree = "<group>"; };
+		8E7A4A602D297A4D00BD1B7F /* BookmarkListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkListViewModel.swift; sourceTree = "<group>"; };
 		8E7A4A632D29800D00BD1B7F /* UITabBarViewController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarViewController+Delegate.swift"; sourceTree = "<group>"; };
-		8E7A4A692D2A2CD800BD1B7F /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
-		8E7A4A6C2D2A43A900BD1B7F /* ReminderRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderRow.swift; sourceTree = "<group>"; };
+		8E7A4A692D2A2CD800BD1B7F /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
+		8E7A4A6C2D2A43A900BD1B7F /* BookmarkListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkListRow.swift; sourceTree = "<group>"; };
 		8E7A4A6F2D2A44CE00BD1B7F /* Date+StringFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+StringFormat.swift"; sourceTree = "<group>"; };
 		8E7A4A722D2A531B00BD1B7F /* NoticeKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeKind.swift; sourceTree = "<group>"; };
 		8EA72DC82CD5CA4800D1B300 /* DeveloperTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperTools.swift; sourceTree = "<group>"; };
@@ -475,8 +475,8 @@
 		5C5698892BEFB2BE0085E389 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				8E3B8C442D2BBFDA007E9579 /* ReminderForm */,
-				8E7A4A5A2D2978EA00BD1B7F /* Reminder */,
+				8E3B8C442D2BBFDA007E9579 /* BookmarkForm */,
+				8E7A4A5A2D2978EA00BD1B7F /* Bookmark */,
 				8E659EBB2D29430B00305D56 /* TabBar */,
 				8E6931522CEEFBEF0074142B /* Notification List */,
 				8EFE52E92CDC8CB6003A7330 /* Notices */,
@@ -591,7 +591,7 @@
 				5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */,
 				5C5698962BEFB6760085E389 /* Notice.swift */,
 				8ECE2B172C35045800D7F499 /* MainNotice.swift */,
-				8E7A4A692D2A2CD800BD1B7F /* Reminder.swift */,
+				8E7A4A692D2A2CD800BD1B7F /* Bookmark.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -726,19 +726,19 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		8E3B8C442D2BBFDA007E9579 /* ReminderForm */ = {
+		8E3B8C442D2BBFDA007E9579 /* BookmarkForm */ = {
 			isa = PBXGroup;
 			children = (
 				8E3B8C462D2BBFE7007E9579 /* ViewModel */,
 				8E3B8C452D2BBFE4007E9579 /* View */,
 			);
-			path = ReminderForm;
+			path = BookmarkForm;
 			sourceTree = "<group>";
 		};
 		8E3B8C452D2BBFE4007E9579 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8E3B8C412D2B9A97007E9579 /* ReminderForm.swift */,
+				8E3B8C412D2B9A97007E9579 /* BookmarkForm.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -746,7 +746,7 @@
 		8E3B8C462D2BBFE7007E9579 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				8E3B8C472D2BBFFD007E9579 /* ReminderFormViewModel.swift */,
+				8E3B8C472D2BBFFD007E9579 /* BookmarkFormViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -828,20 +828,20 @@
 			path = KNUTICEUnitTests;
 			sourceTree = "<group>";
 		};
-		8E7A4A5A2D2978EA00BD1B7F /* Reminder */ = {
+		8E7A4A5A2D2978EA00BD1B7F /* Bookmark */ = {
 			isa = PBXGroup;
 			children = (
 				8E7A4A5C2D29797700BD1B7F /* ViewModel */,
 				8E7A4A5B2D29797200BD1B7F /* View */,
 			);
-			path = Reminder;
+			path = Bookmark;
 			sourceTree = "<group>";
 		};
 		8E7A4A5B2D29797200BD1B7F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8E7A4A5D2D2979DB00BD1B7F /* ReminderList.swift */,
-				8E7A4A6C2D2A43A900BD1B7F /* ReminderRow.swift */,
+				8E7A4A5D2D2979DB00BD1B7F /* BookmarkList.swift */,
+				8E7A4A6C2D2A43A900BD1B7F /* BookmarkListRow.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -849,7 +849,7 @@
 		8E7A4A5C2D29797700BD1B7F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				8E7A4A602D297A4D00BD1B7F /* ReminderListViewModel.swift */,
+				8E7A4A602D297A4D00BD1B7F /* BookmarkListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1337,7 +1337,7 @@
 				8E7A4A642D29800D00BD1B7F /* UITabBarViewController+Delegate.swift in Sources */,
 				5C9B810B2BF451BC0038EB27 /* NoticeViewModel.swift in Sources */,
 				8EA9ACAB2C46AEC900C9E287 /* OpenSourceLicenseView.swift in Sources */,
-				8E7A4A5E2D2979DB00BD1B7F /* ReminderList.swift in Sources */,
+				8E7A4A5E2D2979DB00BD1B7F /* BookmarkList.swift in Sources */,
 				8E7A4A702D2A44CE00BD1B7F /* Date+StringFormat.swift in Sources */,
 				8EFE52E72CDC89CF003A7330 /* SearchTableViewController.swift in Sources */,
 				8E3F02202C9FB6A000AE89D5 /* ReportRepository.swift in Sources */,
@@ -1355,14 +1355,14 @@
 				8E659EBF2D29438500305D56 /* UITabBarViewController.swift in Sources */,
 				8E00AF712C36233C0037EC38 /* WebViewController+Layout.swift in Sources */,
 				8E7A4A732D2A531B00BD1B7F /* NoticeKind.swift in Sources */,
-				8E7A4A6B2D2A2CD800BD1B7F /* Reminder.swift in Sources */,
+				8E7A4A6B2D2A2CD800BD1B7F /* Bookmark.swift in Sources */,
 				8E3F02262C9FB86400AE89D5 /* PostResponseDTO.swift in Sources */,
 				8E60EAFA2CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift in Sources */,
 				8E3F022D2CA0023A00AE89D5 /* VIew+TextEditorBackground.swift in Sources */,
 				8E0C3F892C9EC93B005E2A16 /* ReportView.swift in Sources */,
 				8EBBE2402CA0E3FC00826D5A /* LightTextView.swift in Sources */,
 				8E60EAF82CDDF946003612FB /* SearchTableViewController+Binding.swift in Sources */,
-				8E7A4A612D297A4D00BD1B7F /* ReminderListViewModel.swift in Sources */,
+				8E7A4A612D297A4D00BD1B7F /* BookmarkListViewModel.swift in Sources */,
 				8E5385762C644B4400AF151B /* TokenSaveResponseDTO.swift in Sources */,
 				5C190A552BFDF66600E0254B /* NoticeReponseDTO.swift in Sources */,
 				8EB6D20E2C6713BB004E8AC2 /* View+Fork.swift in Sources */,
@@ -1387,19 +1387,19 @@
 				8E3F02222C9FB76800AE89D5 /* ReportRepositoryImpl.swift in Sources */,
 				8E0AA23D2D2419740068681C /* RemoteDataSource.swift in Sources */,
 				8E5385782C644C3F00AF151B /* TokenRepositoryImpl.swift in Sources */,
-				8E3B8C432D2B9A97007E9579 /* ReminderForm.swift in Sources */,
+				8E3B8C432D2B9A97007E9579 /* BookmarkForm.swift in Sources */,
 				5C9B81072BF451540038EB27 /* GeneralNoticeViewController.swift in Sources */,
 				8EFCF8672C37742A004A53E9 /* SettingView.swift in Sources */,
 				8EE4B4E62D16CE1E00EFF10B /* SpinningIndicator.swift in Sources */,
 				5C89DD3A2BFA02F400CCCCCD /* MainViewController+Callbacks.swift in Sources */,
 				8EFCF8652C377061004A53E9 /* EventNoticeViewController.swift in Sources */,
 				5C5698952BEFB5A60085E389 /* SectionOfNotice.swift in Sources */,
-				8E7A4A6D2D2A43A900BD1B7F /* ReminderRow.swift in Sources */,
+				8E7A4A6D2D2A43A900BD1B7F /* BookmarkListRow.swift in Sources */,
 				8E0C3F8C2C9ECD1B005E2A16 /* ReportViewModel.swift in Sources */,
 				8EFE52FD2CDCBB89003A7330 /* SearchRepository.swift in Sources */,
 				8EEE1A512CEA19C90011FD87 /* NoticeFetchable.swift in Sources */,
 				8E00AF6C2C361F780037EC38 /* WebViewController.swift in Sources */,
-				8E3B8C492D2BBFFD007E9579 /* ReminderFormViewModel.swift in Sources */,
+				8E3B8C492D2BBFFD007E9579 /* BookmarkFormViewModel.swift in Sources */,
 				8E00AF7F2C367D8A0037EC38 /* DataBindable.swift in Sources */,
 				5C89DD3C2BFA03D800CCCCCD /* MainViewController+Layout.swift in Sources */,
 				8EE4B4E82D16E4DD00EFF10B /* NotificationPermissionService.swift in Sources */,
@@ -1434,7 +1434,7 @@
 				8E7A4A652D29800D00BD1B7F /* UITabBarViewController+Delegate.swift in Sources */,
 				8E2051042CD4F32F00D87C6A /* NoticeViewModel.swift in Sources */,
 				8E2051052CD4F32F00D87C6A /* OpenSourceLicenseView.swift in Sources */,
-				8E7A4A5F2D2979DB00BD1B7F /* ReminderList.swift in Sources */,
+				8E7A4A5F2D2979DB00BD1B7F /* BookmarkList.swift in Sources */,
 				8E7A4A712D2A44CE00BD1B7F /* Date+StringFormat.swift in Sources */,
 				8EFE52E82CDC89CF003A7330 /* SearchTableViewController.swift in Sources */,
 				8E2051062CD4F32F00D87C6A /* ReportRepository.swift in Sources */,
@@ -1452,14 +1452,14 @@
 				8E659EBE2D29438500305D56 /* UITabBarViewController.swift in Sources */,
 				8E20510F2CD4F32F00D87C6A /* WebViewController+Layout.swift in Sources */,
 				8E7A4A742D2A531B00BD1B7F /* NoticeKind.swift in Sources */,
-				8E7A4A6A2D2A2CD800BD1B7F /* Reminder.swift in Sources */,
+				8E7A4A6A2D2A2CD800BD1B7F /* Bookmark.swift in Sources */,
 				8E2051102CD4F32F00D87C6A /* PostResponseDTO.swift in Sources */,
 				8E60EAFB2CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift in Sources */,
 				8E2051112CD4F32F00D87C6A /* VIew+TextEditorBackground.swift in Sources */,
 				8E2051122CD4F32F00D87C6A /* ReportView.swift in Sources */,
 				8E2051132CD4F32F00D87C6A /* LightTextView.swift in Sources */,
 				8E60EAF72CDDF946003612FB /* SearchTableViewController+Binding.swift in Sources */,
-				8E7A4A622D297A4D00BD1B7F /* ReminderListViewModel.swift in Sources */,
+				8E7A4A622D297A4D00BD1B7F /* BookmarkListViewModel.swift in Sources */,
 				8E2051152CD4F32F00D87C6A /* TokenSaveResponseDTO.swift in Sources */,
 				8E2051162CD4F32F00D87C6A /* NoticeReponseDTO.swift in Sources */,
 				8E2051172CD4F32F00D87C6A /* View+Fork.swift in Sources */,
@@ -1484,19 +1484,19 @@
 				8E2051272CD4F32F00D87C6A /* ReportRepositoryImpl.swift in Sources */,
 				8E0AA23E2D2419740068681C /* RemoteDataSource.swift in Sources */,
 				8E2051292CD4F32F00D87C6A /* TokenRepositoryImpl.swift in Sources */,
-				8E3B8C422D2B9A97007E9579 /* ReminderForm.swift in Sources */,
+				8E3B8C422D2B9A97007E9579 /* BookmarkForm.swift in Sources */,
 				8E20512A2CD4F32F00D87C6A /* GeneralNoticeViewController.swift in Sources */,
 				8E20512B2CD4F32F00D87C6A /* SettingView.swift in Sources */,
 				8EE4B4E52D16CE1E00EFF10B /* SpinningIndicator.swift in Sources */,
 				8E20512C2CD4F32F00D87C6A /* MainViewController+Callbacks.swift in Sources */,
 				8E20512D2CD4F32F00D87C6A /* EventNoticeViewController.swift in Sources */,
 				8E20512E2CD4F32F00D87C6A /* SectionOfNotice.swift in Sources */,
-				8E7A4A6E2D2A43A900BD1B7F /* ReminderRow.swift in Sources */,
+				8E7A4A6E2D2A43A900BD1B7F /* BookmarkListRow.swift in Sources */,
 				8E20512F2CD4F32F00D87C6A /* ReportViewModel.swift in Sources */,
 				8EFE52FE2CDCBB89003A7330 /* SearchRepository.swift in Sources */,
 				8EEE1A522CEA19C90011FD87 /* NoticeFetchable.swift in Sources */,
 				8E2051302CD4F32F00D87C6A /* WebViewController.swift in Sources */,
-				8E3B8C482D2BBFFD007E9579 /* ReminderFormViewModel.swift in Sources */,
+				8E3B8C482D2BBFFD007E9579 /* BookmarkFormViewModel.swift in Sources */,
 				8E2051312CD4F32F00D87C6A /* DataBindable.swift in Sources */,
 				8E2051322CD4F32F00D87C6A /* MainViewController+Layout.swift in Sources */,
 				8EE4B4E92D16E4DD00EFF10B /* NotificationPermissionService.swift in Sources */,
