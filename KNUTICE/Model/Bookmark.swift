@@ -1,5 +1,5 @@
 //
-//  Reminder.swift
+//  Bookmark.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 1/5/25.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Reminder: Identifiable {
+struct Bookmark: Identifiable {
     let id: UUID
     var title: String
     var content: String
@@ -19,9 +19,9 @@ struct Reminder: Identifiable {
 }
 
 #if DEBUG
-extension Reminder {
-    static var sample: Reminder {
-        Reminder(
+extension Bookmark {
+    static var sample: Bookmark {
+        Bookmark(
             id: UUID(),
             title: "2025년 1학기 장학금 신청",
             content: "내용없음",

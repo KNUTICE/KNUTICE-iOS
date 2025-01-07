@@ -11,7 +11,7 @@ import SwiftUI
 extension WebViewController {
     @objc
     func openSharePanel() {
-        let shareText = self.url
+        let shareText = self.notice.contentUrl
         let shareObject = [shareText]
         let activityViewController = UIActivityViewController(activityItems : shareObject, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
@@ -35,9 +35,8 @@ extension WebViewController {
     
     @objc func openReminderForm(_ sender: UIButton) {
         let viewController = UIHostingController(rootView:
-                                                    ReminderForm(viewModel: AppDI.shared.makeReminderFormViewModel(),
-                                                                 isShowingSheet: .constant(true),
-                                                                 url: self.url) { self.dismiss(animated: true) }
+                                                    BookmarkForm(viewModel: AppDI.shared.makeReminderFormViewModel(),
+                                                                 notice: self.notice) { self.dismiss(animated: true) }
         )
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.modalPresentationStyle = .popover

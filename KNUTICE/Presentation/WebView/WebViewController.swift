@@ -14,10 +14,10 @@ final class WebViewController: UIViewController {
     let progressView: UIProgressView = UIProgressView(progressViewStyle: .bar)
     let webView: WKWebView = WKWebView()
     let reminderSheetBtn: UIButton = UIButton()
-    let url: String
+    let notice: Notice
     
-    init(url: String) {
-        self.url = url
+    init(notice: Notice) {
+        self.notice = notice
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -32,7 +32,7 @@ final class WebViewController: UIViewController {
         setupAttribute()
         setupNavigationBarItem()
         setupLayout()
-        loadPage(url)
+        loadPage(notice.contentUrl)
     }
 }
 
@@ -76,7 +76,7 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 //MARK: - Preview
 struct WebViewControllerPreview: PreviewProvider {
     static var previews: some View {
-        WebViewController(url: "https://www.ut.ac.kr/")
+        WebViewController(notice: Notice.generalNoticesSampleData.first!)
             .makePreview()
     }
 }

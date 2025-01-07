@@ -99,14 +99,14 @@ struct AppDI {
         return viewModel
     }
     
-    func makeReminderListViewModel() -> ReminderListViewModel {
-        let viewModel = ReminderListViewModel()
+    func makeReminderListViewModel() -> BookmarkListViewModel {
+        let viewModel = BookmarkListViewModel()
         
         return viewModel
     }
     
-    func makeReminderFormViewModel() -> ReminderFormViewModel {
-        let viewModel = ReminderFormViewModel()
+    func makeReminderFormViewModel() -> BookmarkFormViewModel {
+        let viewModel = BookmarkFormViewModel()
         
         return viewModel
     }
