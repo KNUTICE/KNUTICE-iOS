@@ -1,5 +1,5 @@
 //
-//  ReminderForm.swift
+//  BookmarkForm.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 1/6/25.
@@ -7,58 +7,48 @@
 
 import SwiftUI
 
-struct ReminderForm: View {
-    @StateObject private var viewModel: ReminderFormViewModel
-    @Binding private var isShowingSheet: Bool
+struct BookmarkForm: View {
+    @StateObject private var viewModel: BookmarkFormViewModel
     
-    private let url: String
+    private let notice: Notice
     private let dismissAction: () -> Void
     
-    init(viewModel: ReminderFormViewModel,
-         isShowingSheet: Binding<Bool>,
-         url: String,
+    init(viewModel: BookmarkFormViewModel,
+         notice: Notice,
          dismissAction: @escaping () -> Void) {
         _viewModel = StateObject(wrappedValue: viewModel)
-        _isShowingSheet = isShowingSheet
-        self.url = url
+        self.notice = notice
         self.dismissAction = dismissAction
     }
     
     var body: some View {
         ScrollView {
-            VStack(spacing: -5) {
-                SectionHeader(title: "제목")
-                
-                StrokedTextField(text: $viewModel.title)
-            }
+            NoticeView(notice: notice)
+            
+            Rectangle()
+                .fill(.mainBackground)
+                .frame(height: 8)
             
             VStack(spacing: -5) {
-                SectionHeader(title: "날짜")
-                
-                StrokedDatePicker(date: $viewModel.date)
-            }
-            
-            VStack(spacing: -5) {
-                SectionHeader(title: "미리알림")
+                SectionHeader(title: "알림 반복")
                 
                 StrokedAdvanceNoticePicker(isAlarmOn: $viewModel.isAlarmOn,
-                                           reminderTimeOffset: $viewModel.reminderTimeOffset)
+                                           alarmDate: $viewModel.alarmDate)
             }
             
             VStack(spacing: -5) {
                 SectionHeader(title: "메모")
                 
-                StrokedDescriptionTextField(description: $viewModel.content)
+                StrokedDescriptionTextField(description: $viewModel.description)
             }
         }
         .animation(.easeInOut, value: viewModel.isAlarmOn)
-        .navigationTitle("새로운 작업")
+        .navigationTitle("북마크")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
                     dismissAction()
-                    isShowingSheet.toggle()
                 } label: {
                     Text("취소")
                         .accentColor(.accent2)
@@ -70,8 +60,8 @@ struct ReminderForm: View {
                     
                 } label: {
                     Text("저장")
+                        .accentColor(.accent2)
                 }
-                .disabled(true)
             }
         }
     }
@@ -92,50 +82,41 @@ fileprivate struct SectionHeader: View {
     }
 }
 
-fileprivate struct StrokedTextField: View {
-    @Binding var text: String
+fileprivate struct NoticeView: View {
+    let notice: Notice
     
     var body: some View {
-        TextField("제목입력", text: $text)
-            .font(.subheadline)
+        VStack {
+            HStack {
+                Rectangle()
+                    .frame(width: 5)
+                
+                VStack(alignment: .leading, spacing: 5) {
+                    Text(notice.title)
+                        .font(.subheadline)
+                    
+                    HStack {
+                        Text("[\(notice.department)]")
+                        
+                        Text(notice.uploadDate)
+                    }
+                    .font(.caption2)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
             .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(.gray, lineWidth: 0.4)
-            )
-            .padding([.leading, .bottom, .trailing])
-    }
-}
-
-fileprivate struct StrokedDatePicker: View {
-    @Binding var date: Date
-    
-    var body: some View {
-        DatePicker(
-            "마감 날짜 선택",
-            selection: $date,
-            displayedComponents: [.date, .hourAndMinute]
-        )
-        .font(.subheadline)
-        .accentColor(.accent2)
-        .padding()
-        .overlay {
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(.gray, lineWidth: 0.4)
         }
-        .padding([.leading, .bottom, .trailing])
-        
     }
 }
 
 fileprivate struct StrokedAdvanceNoticePicker: View {
     @Binding var isAlarmOn: Bool
-    @Binding var reminderTimeOffset: ReminderTimeOffset
+    @Binding var alarmDate: Date
     
     var body: some View {
         VStack(spacing: 0) {
             Toggle(isOn: $isAlarmOn) {
-                Text("마감 전 미리알림")
+                Text("다시 알림 받기")
             }
             .tint(.accent2)
             .font(.subheadline)
@@ -145,12 +126,14 @@ fileprivate struct StrokedAdvanceNoticePicker: View {
                 Divider()
                     .padding([.leading, .trailing])
                 
-                Picker("", selection: $reminderTimeOffset) {
-                    ForEach(ReminderTimeOffset.allCases, id: \.self) {
-                        Text($0.rawValue)
-                    }
-                }
-                .pickerStyle(.wheel)
+                DatePicker(
+                    "알림 시간",
+                    selection: $alarmDate,
+                    displayedComponents: [.date, .hourAndMinute]
+                )
+                .font(.subheadline)
+                .accentColor(.accent2)
+                .padding()
             }
         }
         .overlay {
@@ -180,9 +163,8 @@ fileprivate struct StrokedDescriptionTextField: View {
 
 #Preview {
     NavigationStack {
-        ReminderForm(viewModel: AppDI.shared.makeReminderFormViewModel(),
-                     isShowingSheet: .constant(true),
-                     url: "",
+        BookmarkForm(viewModel: AppDI.shared.makeReminderFormViewModel(),
+                     notice: Notice.generalNoticesSampleData.first!,
                      dismissAction: {})
     }
 }
