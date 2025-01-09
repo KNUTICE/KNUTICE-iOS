@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct BookmarkListRow: View {
-    @Binding var bookmark: Bookmark
+    let bookmark: Bookmark
     
     var body: some View {
         HStack(spacing: 15) {
-            VStack(alignment: .leading, spacing: 7) {
+            VStack(alignment: .leading, spacing: 10) {
                 Text(bookmark.notice.title)
                     .font(.subheadline)
                     .lineLimit(1)
@@ -28,6 +28,7 @@ struct BookmarkListRow: View {
                     .frame(width: 13, height: 25)
                 
                 Triangle()
+                    .offset(y: 1)
             }
             .offset(y: -29)
         }
@@ -59,24 +60,11 @@ fileprivate struct BookmarkSubTitle: View {
             
             Text(bookmark.alarmDate?.shortDate ?? "없음")
         }
-        .font(.footnote)
+        .font(.caption2)
         .foregroundStyle(.gray)
     }
 }
 
-fileprivate func getNoticeColor(of kind: NoticeKind) -> Color {
-    switch kind {
-    case .generalNotice:
-        return .salmon
-    case .academicNotice:
-        return .lightOrange
-    case .scholarshipNotice:
-        return .lightGreen
-    case .eventNotice:
-        return .dodgerBlue
-    }
-}
-
 #Preview {
-    BookmarkListRow(bookmark: Binding(get: { Bookmark.sample }, set: { _ in }))
+    BookmarkListRow(bookmark: Bookmark.sample)
 }

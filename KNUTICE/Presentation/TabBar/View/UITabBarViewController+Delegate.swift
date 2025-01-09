@@ -46,7 +46,7 @@ extension UITabBarViewController: UITabBarControllerDelegate {
     
     private func setupReminderNavigationBar() {
         let titleLabel = UILabel()
-        titleLabel.text = "리마인더"
+        titleLabel.text = "북마크"
         titleLabel.font = UIFont.font(for: .title2, weight: .heavy)
         let labelItem = UIBarButtonItem(customView: titleLabel)
         let negativeSpacer = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
