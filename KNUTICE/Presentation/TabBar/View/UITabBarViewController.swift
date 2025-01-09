@@ -47,8 +47,9 @@ extension UITabBarViewController {
         mainViewController.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
         mainViewController.tabBarItem.title = "홈"
         
-        reminderViewController.tabBarItem.image = UIImage(systemName: "list.bullet")
-        reminderViewController.tabBarItem.title = "리마인더"
+        reminderViewController.tabBarItem.image = UIImage(systemName: "bookmark")
+        reminderViewController.tabBarItem.selectedImage = UIImage(systemName: "bookmark.fill")
+        reminderViewController.tabBarItem.title = "북마크"
         
         tabBar.backgroundColor = .tabBar
         tabBar.layer.cornerRadius = 15

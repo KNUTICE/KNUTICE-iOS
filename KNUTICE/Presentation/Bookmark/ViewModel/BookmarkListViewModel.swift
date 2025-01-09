@@ -8,8 +8,7 @@
 import Combine
 
 final class BookmarkListViewModel: ObservableObject {
-    @Published var uncompletedReminders: [Bookmark] = []
-    @Published var completedReminders: [Bookmark] = []
+    @Published var bookmarkList: [Bookmark] = [Bookmark.sample]
     
     
 }
