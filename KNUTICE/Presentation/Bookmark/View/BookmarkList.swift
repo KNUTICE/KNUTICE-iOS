@@ -24,7 +24,7 @@ struct BookmarkList: View {
                             NavigationLink {
                                 
                             } label: {
-                                BookmarkListRow(reminder: $viewModel.uncompletedReminders[idx])
+                                BookmarkListRow(bookmark: $viewModel.uncompletedReminders[idx])
                             }
                         }
                     } else {
@@ -41,7 +41,7 @@ struct BookmarkList: View {
                             NavigationLink {
                                 
                             } label: {
-                                BookmarkListRow(reminder: $viewModel.completedReminders[idx])
+                                BookmarkListRow(bookmark: $viewModel.completedReminders[idx])
                             }
                         }
                     } else {
