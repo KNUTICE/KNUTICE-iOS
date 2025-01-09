@@ -8,27 +8,28 @@
 import SwiftUI
 
 struct BookmarkListRow: View {
-    @Binding var reminder: Bookmark
+    @Binding var bookmark: Bookmark
     
     var body: some View {
         HStack(spacing: 15) {
-            ReminderButton(reminder: $reminder)
-            
             VStack(alignment: .leading, spacing: 7) {
-                Text(reminder.title)
-                    .strikethrough(reminder.isCompleted)
+                Text(bookmark.notice.title)
+                    .font(.subheadline)
+                    .lineLimit(1)
                 
-                ReminderSubTitle(reminder: reminder)
+                BookmarkSubTitle(bookmark: bookmark)
             }
             
             Spacer()
             
-            if let noticeKind = reminder.noticeKind {
+            ZStack {
                 Rectangle()
-                    .foregroundStyle(getNoticeColor(of: noticeKind))
+                    .foregroundStyle(.red)
                     .frame(width: 13, height: 25)
-                    .offset(y: -28)
+                
+                Triangle()
             }
+            .offset(y: -29)
         }
         .padding()
         .background(.mainCellBackground)
@@ -36,50 +37,30 @@ struct BookmarkListRow: View {
     }
 }
 
-fileprivate struct ReminderButton: View {
-    @Binding var reminder: Bookmark
-    
+fileprivate struct Triangle: View {
     var body: some View {
-        Button {
-            reminder.isCompleted.toggle()
-            //Local Database 수정
-        } label: {
-            if reminder.isCompleted {
-                Circle()
-                    .foregroundStyle(.accent2)
-                    .frame(width: 25, height: 25)
-                    .overlay {
-                        Image(systemName: "checkmark")
-                            .foregroundStyle(.white)
-                    }
-            } else {
-                Circle()
-                    .stroke(.gray, lineWidth: 2)
-                    .frame(width: 25, height: 25)
-                    .foregroundStyle(.white)
-            }
+        Path { path in
+            path.move(to: CGPoint(x: 0, y: 25))
+            path.addLine(to: CGPoint(x: 13, y: 25))
+            path.addLine(to: CGPoint(x: 6.5, y: 19))
         }
+        .foregroundStyle(.mainCellBackground)
+        .frame(width: 13, height: 25)
     }
 }
 
-fileprivate struct ReminderSubTitle: View {
-    let reminder: Bookmark
+
+fileprivate struct BookmarkSubTitle: View {
+    let bookmark: Bookmark
     
     var body: some View {
         HStack(spacing: 5) {
-            Image(systemName: "calendar")
-                .foregroundStyle(.accent2)
+            Image(systemName: "alarm")
             
-            Text(reminder.date.shortDate)
-                .foregroundStyle(.accent2)
-            
-            if reminder.isAlarmOn {
-                Image(systemName: "alarm")
-                    .foregroundStyle(.gray)
-                    .padding(.leading, 5)
-            }
+            Text(bookmark.alarmDate?.shortDate ?? "없음")
         }
         .font(.footnote)
+        .foregroundStyle(.gray)
     }
 }
 
@@ -97,5 +78,5 @@ fileprivate func getNoticeColor(of kind: NoticeKind) -> Color {
 }
 
 #Preview {
-    BookmarkListRow(reminder: Binding(get: { Bookmark.sample }, set: { _ in }))
+    BookmarkListRow(bookmark: Binding(get: { Bookmark.sample }, set: { _ in }))
 }
