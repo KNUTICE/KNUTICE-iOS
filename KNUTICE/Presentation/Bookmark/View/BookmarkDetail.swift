@@ -26,7 +26,7 @@ struct BookmarkDetail: View {
             Divider()
                 .padding([.leading, .trailing])
             
-            UserMemoDetail(userMemo: bookmark.details)
+            UserMemoDetail(userMemo: bookmark.memo)
                 .padding()
             
             Divider()

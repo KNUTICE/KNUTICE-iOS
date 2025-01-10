@@ -2,7 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24C101" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="BookmarkEntity" representedClassName="BookmarkEntity" syncable="YES" codeGenerationType="class">
         <attribute name="alarmDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="details" attributeType="String"/>
+        <attribute name="memo" attributeType="String"/>
         <relationship name="bookmarkedNotice" maxCount="1" deletionRule="Cascade" destinationEntity="NoticeEntity" inverseName="associatedBookmark" inverseEntity="NoticeEntity"/>
     </entity>
     <entity name="NoticeEntity" representedClassName="NoticeEntity" syncable="YES" codeGenerationType="class">
