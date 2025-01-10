@@ -11,6 +11,7 @@ import CoreData
 protocol LocalBookmarkDataSource {
     func save(_ bookmark: Bookmark) -> AnyPublisher<Void, any Error>
     func read() -> AnyPublisher<[BookmarkDTO], any Error>
+    func isDuplication(id: Int) -> AnyPublisher<Bool, any Error>
 }
 
 final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
@@ -48,7 +49,6 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
         noticeEntity.imageUrl = bookmark.notice.imageUrl
         
         bookmarkEntity.bookmarkedNotice = noticeEntity
-//        noticeEntity.associatedBookmark = bookmarkEntity
         
         return Future { promise in
             self.backgroundContext.perform {
@@ -80,5 +80,25 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
             }
         }
         .eraseToAnyPublisher()
+    }
+    
+    func isDuplication(id: Int) -> AnyPublisher<Bool, any Error> {
+        return read()
+            .flatMap { dto -> AnyPublisher<Bool, any Error> in
+                let duplicationCount = dto.filter { $0.notice?.id == Int64(id) }.count
+                
+                if duplicationCount > 0 {
+                    //중복 id가 존재하는 경우
+                    return Just(true)
+                        .setFailureType(to: Error.self)
+                        .eraseToAnyPublisher()
+                }
+                
+                //중복 id가 존재하지 않는 경우
+                return Just(false)
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
     }
 }
