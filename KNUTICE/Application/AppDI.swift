@@ -99,14 +99,19 @@ struct AppDI {
         return viewModel
     }
     
-    func makeReminderListViewModel() -> BookmarkListViewModel {
-        let viewModel = BookmarkListViewModel()
+    @MainActor
+    func makeBookmarkListViewModel() -> BookmarkListViewModel {
+        let dataSource = LocalBookmarkDataSourceImpl.shared
+        let repository = BookmarkRepositoryImpl(dataSource: dataSource)
+        let viewModel = BookmarkListViewModel(repository: repository)
         
         return viewModel
     }
     
-    func makeReminderFormViewModel() -> BookmarkFormViewModel {
-        let viewModel = BookmarkFormViewModel()
+    func makeBookmarkFormViewModel() -> BookmarkFormViewModel {
+        let dataSource = LocalBookmarkDataSourceImpl.shared
+        let repository = BookmarkRepositoryImpl(dataSource: dataSource)
+        let viewModel = BookmarkFormViewModel(repository: repository)
         
         return viewModel
     }
