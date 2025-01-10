@@ -14,4 +14,11 @@ extension Date {
         
         return dateFormatter.string(from: self)
     }
+    
+    var dateTime: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy년 MM월 dd일 hh:mm"
+        
+        return dateFormatter.string(from: self)
+    }
 }
