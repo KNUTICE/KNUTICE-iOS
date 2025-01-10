@@ -22,47 +22,62 @@ struct BookmarkForm: View {
     }
     
     var body: some View {
-        ScrollView {
-            NoticeView(notice: notice)
-            
-            Rectangle()
-                .fill(.mainBackground)
-                .frame(height: 8)
-            
-            VStack(spacing: -5) {
-                SectionHeader(title: "알림 반복")
+        ZStack {
+            ScrollView {
+                NoticeView(notice: notice)
                 
-                StrokedAdvanceNoticePicker(isAlarmOn: $viewModel.isAlarmOn,
-                                           alarmDate: $viewModel.alarmDate)
+                Rectangle()
+                    .fill(.mainBackground)
+                    .frame(height: 8)
+                
+                VStack(spacing: -5) {
+                    SectionHeader(title: "알림 반복")
+                    
+                    StrokedAdvanceNoticePicker(isAlarmOn: $viewModel.isAlarmOn,
+                                               alarmDate: $viewModel.alarmDate)
+                }
+                
+                VStack(spacing: -5) {
+                    SectionHeader(title: "메모")
+                    
+                    StrokedDescriptionTextField(description: $viewModel.details)
+                }
+            }
+            .animation(.easeInOut, value: viewModel.isAlarmOn)
+            .navigationTitle("북마크")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        dismissAction()
+                    } label: {
+                        Text("취소")
+                            .accentColor(.accent2)
+                    }
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        viewModel.save(with: notice)
+                    } label: {
+                        Text("저장")
+                            .accentColor(.accent2)
+                    }
+                }
             }
             
-            VStack(spacing: -5) {
-                SectionHeader(title: "메모")
-                
-                StrokedDescriptionTextField(description: $viewModel.description)
+            if viewModel.isLoading {
+                SpinningIndicator()
             }
         }
-        .animation(.easeInOut, value: viewModel.isAlarmOn)
-        .navigationTitle("북마크")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    dismissAction()
-                } label: {
-                    Text("취소")
-                        .accentColor(.accent2)
-                }
+        .alert("알림", isPresented: $viewModel.isShowingAlert) {
+            Button {
+                dismissAction()
+            } label: {
+                Text("확인")
             }
-            
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    viewModel.save(with: notice)
-                } label: {
-                    Text("저장")
-                        .accentColor(.accent2)
-                }
-            }
+        } message: {
+            Text(viewModel.alertMessage)
         }
     }
 }

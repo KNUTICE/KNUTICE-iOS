@@ -13,31 +13,47 @@ final class BookmarkFormViewModel: ObservableObject {
     @Published var title: String = ""
     @Published var alarmDate: Date = Date()
     @Published var isAlarmOn: Bool = false
-    @Published var description: String = ""
+    @Published var details: String = ""
+    @Published var isShowingAlert: Bool = false
+    @Published var isLoading: Bool = false
     
     private let repository: BookmarkRepository
     private var cancellables = Set<AnyCancellable>()
     private let logger = Logger()
+    private(set) var alertMessage: String = ""
     
     init(repository: BookmarkRepository) {
         self.repository = repository
     }
     
     func save(with notice: Notice) {
-        let bookmark = Bookmark(notice: notice, details: description, alarmDate: isAlarmOn ? alarmDate : nil)
+        let bookmark = Bookmark(notice: notice, details: details, alarmDate: isAlarmOn ? alarmDate : nil)
         
+        isLoading = true
         repository.save(bookmark: bookmark)
+            .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                 case .finished:
                     self?.logger.info("BookmarkFormViewModel: Successfully saved bookmark")
                 case .failure(let error):
-                    self?.logger.error("BookmarkFormViewModel error: \(error.localizedDescription)")
+                    self?.handleSaveFailure(with: error)
                 }
                 
-            }, receiveValue: {
-                
+                self?.isLoading = false
+                self?.isShowingAlert = true
+            }, receiveValue: { [weak self] in
+                self?.alertMessage = "북마크 저장이 완료 되었어요."
             })
             .store(in: &cancellables)
+    }
+    
+    private func handleSaveFailure(with error: Error) {
+        if let error = error as? BookmarkRepositoryImpl.ExistingBookmarkError {
+            alertMessage = error.rawValue
+        } else {
+            logger.error("BookmarkFormViewModel error: \(error.localizedDescription)")
+            alertMessage = "북마크 저장에 실패했어요."
+        }
     }
 }
