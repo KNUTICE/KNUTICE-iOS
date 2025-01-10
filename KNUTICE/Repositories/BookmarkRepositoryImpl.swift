@@ -9,6 +9,10 @@ import Combine
 import Foundation
 
 final class BookmarkRepositoryImpl: BookmarkRepository {
+    enum ExistingBookmarkError: String, Error {
+        case alreadyExist = "이미 존재하는 북마크에요."
+    }
+    
     private let dataSource: LocalBookmarkDataSource
     
     init(dataSource: LocalBookmarkDataSource) {
@@ -16,7 +20,16 @@ final class BookmarkRepositoryImpl: BookmarkRepository {
     }
     
     func save(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
-        return dataSource.save(bookmark)
+        return dataSource.isDuplication(id: bookmark.notice.id)
+            .flatMap { isExist -> AnyPublisher<Void, any Error> in
+                guard !isExist else {
+                    return Fail(error: ExistingBookmarkError.alreadyExist)
+                        .eraseToAnyPublisher()
+                }
+                
+                return self.dataSource.save(bookmark)
+            }
+            .eraseToAnyPublisher()
     }
     
     func read(delay: Int) -> AnyPublisher<[Bookmark], any Error> {

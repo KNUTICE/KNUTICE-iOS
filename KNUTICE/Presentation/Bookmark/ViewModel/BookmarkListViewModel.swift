@@ -10,7 +10,7 @@ import os
 
 @MainActor
 final class BookmarkListViewModel: ObservableObject {
-    @Published var bookmarkList: [Bookmark]? = nil
+    @Published private(set) var bookmarkList: [Bookmark]? = nil
     
     private let repository: BookmarkRepository
     private var cancellables = Set<AnyCancellable>()
