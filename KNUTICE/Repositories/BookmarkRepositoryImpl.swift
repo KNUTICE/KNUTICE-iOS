@@ -55,7 +55,7 @@ final class BookmarkRepositoryImpl: BookmarkRepository {
                                        department: noticeEntity.department ?? "",
                                        uploadDate: noticeEntity.uploadDate ?? "",
                                        imageUrl: noticeEntity.imageUrl),
-                        details: dto.details ?? "",
+                        memo: dto.details ?? "",
                         alarmDate: dto.alarmDate)
     }
 }
