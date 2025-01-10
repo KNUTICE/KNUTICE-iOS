@@ -13,7 +13,7 @@ final class BookmarkFormViewModel: ObservableObject {
     @Published var title: String = ""
     @Published var alarmDate: Date = Date()
     @Published var isAlarmOn: Bool = false
-    @Published var details: String = ""
+    @Published var memo: String = ""
     @Published var isShowingAlert: Bool = false
     @Published var isLoading: Bool = false
     
@@ -27,7 +27,7 @@ final class BookmarkFormViewModel: ObservableObject {
     }
     
     func save(with notice: Notice) {
-        let bookmark = Bookmark(notice: notice, details: details, alarmDate: isAlarmOn ? alarmDate : nil)
+        let bookmark = Bookmark(notice: notice, memo: memo, alarmDate: isAlarmOn ? alarmDate : nil)
         
         isLoading = true
         repository.save(bookmark: bookmark)

@@ -38,7 +38,7 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
         let bookmarkEntity = BookmarkEntity(context: backgroundContext)
         let noticeEntity = NoticeEntity(context: backgroundContext)
         
-        bookmarkEntity.details = bookmark.details
+        bookmarkEntity.memo = bookmark.memo
         bookmarkEntity.alarmDate = bookmark.alarmDate
         
         noticeEntity.id = Int64(bookmark.notice.id)
@@ -72,7 +72,7 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
                 do {
                     let bookmarkEntities = try self.backgroundContext.fetch(fetchRequest)
                     promise(.success(bookmarkEntities.map {
-                        BookmarkDTO(notice: $0.bookmarkedNotice, details: $0.details, alarmDate: $0.alarmDate)
+                        BookmarkDTO(notice: $0.bookmarkedNotice, details: $0.memo, alarmDate: $0.alarmDate)
                     }))
                 } catch {
                     promise(.failure(error))

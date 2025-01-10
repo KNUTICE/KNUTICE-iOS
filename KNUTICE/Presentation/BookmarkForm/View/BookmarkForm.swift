@@ -40,7 +40,7 @@ struct BookmarkForm: View {
                 VStack(spacing: -5) {
                     SectionHeader(title: "메모")
                     
-                    StrokedDescriptionTextField(description: $viewModel.details)
+                    StrokedDescriptionTextField(description: $viewModel.memo)
                 }
             }
             .animation(.easeInOut, value: viewModel.isAlarmOn)
