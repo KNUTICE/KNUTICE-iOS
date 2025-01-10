@@ -35,7 +35,7 @@ extension WebViewController {
     
     @objc func openReminderForm(_ sender: UIButton) {
         let viewController = UIHostingController(rootView:
-                                                    BookmarkForm(viewModel: AppDI.shared.makeReminderFormViewModel(),
+                                                    BookmarkForm(viewModel: AppDI.shared.makeBookmarkFormViewModel(),
                                                                  notice: self.notice) { self.dismiss(animated: true) }
         )
         let navigationController = UINavigationController(rootViewController: viewController)

@@ -57,7 +57,7 @@ struct BookmarkForm: View {
             
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    
+                    viewModel.save(with: notice)
                 } label: {
                     Text("저장")
                         .accentColor(.accent2)
@@ -163,7 +163,7 @@ fileprivate struct StrokedDescriptionTextField: View {
 
 #Preview {
     NavigationStack {
-        BookmarkForm(viewModel: AppDI.shared.makeReminderFormViewModel(),
+        BookmarkForm(viewModel: AppDI.shared.makeBookmarkFormViewModel(),
                      notice: Notice.generalNoticesSampleData.first!,
                      dismissAction: {})
     }
