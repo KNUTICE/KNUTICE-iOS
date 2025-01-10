@@ -16,27 +16,39 @@ struct BookmarkList: View {
     }
     
     var body: some View {
-        List {
-            ForEach(viewModel.bookmarkList) { bookmark in
-                ZStack {
-                    NavigationLink {
+        if let bookmarkList = viewModel.bookmarkList {
+            List {
+                ForEach(bookmarkList, id: \.self.notice.id) { bookmark in
+                    ZStack {
+                        NavigationLink {
+                            
+                        } label: {
+                            EmptyView()
+                        }
                         
-                    } label: {
-                        EmptyView()
+                        BookmarkListRow(bookmark: bookmark)
                     }
-                    
-                    BookmarkListRow(bookmark: bookmark)
+                    .listRowBackground(Color.mainBackground)
+                    .listRowSeparator(.hidden)
                 }
-                .listRowBackground(Color.mainBackground)
-                .listRowSeparator(.hidden)
             }
-        }
-        .listStyle(.plain)
-        .background(.mainBackground)
-        .overlay {
-            if viewModel.bookmarkList.isEmpty {
-                EmptySectionView(content: "북마크가 존재하지 않아요 :(")
+            .listStyle(.plain)
+            .refreshable {
+                await viewModel.fetchBookmarks(delay: 1)
             }
+            .background(.mainBackground)
+            .overlay {
+                if bookmarkList.isEmpty {
+                    EmptySectionView(content: "북마크가 존재하지 않아요 :(")
+                }
+            }
+        } else {
+            SpinningIndicator()
+                .task {
+                    if viewModel.bookmarkList == nil {
+                        await viewModel.fetchBookmarks(delay: 0)
+                    }
+                }
         }
     }
 }
@@ -53,6 +65,6 @@ fileprivate struct EmptySectionView: View {
 
 #Preview {
     NavigationStack {
-        BookmarkList(viewModel: BookmarkListViewModel())
+        BookmarkList(viewModel: AppDI.shared.makeBookmarkListViewModel())
     }
 }

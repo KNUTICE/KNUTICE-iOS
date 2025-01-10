@@ -7,23 +7,19 @@
 
 import Foundation
 
-struct Bookmark: Identifiable {
-    let id: UUID
-    var description: String
-    var alarmDate: Date?
-    var noticeKind: NoticeKind?
+struct Bookmark {
     let notice: Notice
+    var details: String
+    var alarmDate: Date?
 }
 
 #if DEBUG
 extension Bookmark {
     static var sample: Bookmark {
         Bookmark(
-            id: UUID(),
-            description: "내용없음",
-            alarmDate: Date(),
-            noticeKind: .generalNotice,
-            notice: Notice.generalNoticesSampleData.first!
+            notice: Notice.generalNoticesSampleData.first!,
+            details: "내용없음",
+            alarmDate: Date()
         )
     }
 }

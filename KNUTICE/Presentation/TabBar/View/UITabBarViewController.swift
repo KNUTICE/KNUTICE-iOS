@@ -11,7 +11,7 @@ import SwiftUI
 final class UITabBarViewController: UITabBarController {
     private let mainViewController = MainViewController(viewModel: AppDI.shared.makeMainViewModel())
     private let reminderViewController = UIHostingController(
-        rootView: BookmarkList(viewModel: AppDI.shared.makeReminderListViewModel())
+        rootView: BookmarkList(viewModel: AppDI.shared.makeBookmarkListViewModel())
     )
     
     override func viewWillAppear(_ animated: Bool) {
