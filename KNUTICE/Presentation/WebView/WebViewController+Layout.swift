@@ -31,18 +31,20 @@ extension WebViewController {
         progressView.progressTintColor = .accent2
         
         //reminderSheetBtn
-        let plusImage = UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate)
-        reminderSheetBtn.setImage(plusImage, for: .normal)
-        reminderSheetBtn.setImage(plusImage, for: .highlighted)
-        reminderSheetBtn.tintColor = .white
-        reminderSheetBtn.backgroundColor = .accent2
-        reminderSheetBtn.layer.cornerRadius = 25
-        reminderSheetBtn.layer.masksToBounds = false
-        reminderSheetBtn.layer.shadowColor = UIColor.black.cgColor
-        reminderSheetBtn.layer.shadowOpacity = 0.3
-        reminderSheetBtn.layer.shadowRadius = 7
-        reminderSheetBtn.layer.shadowOffset = CGSize(width: 0, height: 0)
-        reminderSheetBtn.addTarget(self, action: #selector(openReminderForm(_:)), for: .touchUpInside)
+        if isBookmarkBtnVisible {
+            let plusImage = UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate)
+            reminderSheetBtn.setImage(plusImage, for: .normal)
+            reminderSheetBtn.setImage(plusImage, for: .highlighted)
+            reminderSheetBtn.tintColor = .white
+            reminderSheetBtn.backgroundColor = .accent2
+            reminderSheetBtn.layer.cornerRadius = 25
+            reminderSheetBtn.layer.masksToBounds = false
+            reminderSheetBtn.layer.shadowColor = UIColor.black.cgColor
+            reminderSheetBtn.layer.shadowOpacity = 0.3
+            reminderSheetBtn.layer.shadowRadius = 7
+            reminderSheetBtn.layer.shadowOffset = CGSize(width: 0, height: 0)
+            reminderSheetBtn.addTarget(self, action: #selector(openReminderForm(_:)), for: .touchUpInside)
+        }
     }
     
     func setupLayout() {
