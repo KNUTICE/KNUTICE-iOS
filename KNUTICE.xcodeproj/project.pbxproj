@@ -175,6 +175,8 @@
 		8EB6D20C2C66FC5B004E8AC2 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6D20B2C66FC5B004E8AC2 /* SettingViewModel.swift */; };
 		8EB6D20E2C6713BB004E8AC2 /* View+Fork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6D20D2C6713BB004E8AC2 /* View+Fork.swift */; };
 		8EBBE2402CA0E3FC00826D5A /* LightTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBBE23F2CA0E3FB00826D5A /* LightTextView.swift */; };
+		8EC141212D33E4E8001FD93C /* NoticeWebVCWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC141202D33E4E8001FD93C /* NoticeWebVCWrapper.swift */; };
+		8EC141222D33E4E8001FD93C /* NoticeWebVCWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC141202D33E4E8001FD93C /* NoticeWebVCWrapper.swift */; };
 		8EC65D612CDB7656001F4FFA /* GoogleService-Info-Dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8EC65D602CDB7656001F4FFA /* GoogleService-Info-Dev.plist */; };
 		8EC6B88C2D309529002B45C7 /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698962BEFB6760085E389 /* Notice.swift */; };
 		8EC6B88D2D309529002B45C7 /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698962BEFB6760085E389 /* Notice.swift */; };
@@ -388,6 +390,7 @@
 		8EB6D20B2C66FC5B004E8AC2 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		8EB6D20D2C6713BB004E8AC2 /* View+Fork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Fork.swift"; sourceTree = "<group>"; };
 		8EBBE23F2CA0E3FB00826D5A /* LightTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTextView.swift; sourceTree = "<group>"; };
+		8EC141202D33E4E8001FD93C /* NoticeWebVCWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeWebVCWrapper.swift; sourceTree = "<group>"; };
 		8EC65D602CDB7656001F4FFA /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
 		8EC6B88F2D30971A002B45C7 /* Bookmark.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bookmark.xcdatamodel; sourceTree = "<group>"; };
 		8EC6B8942D309EA9002B45C7 /* LocalBookmarkDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalBookmarkDataSource.swift; sourceTree = "<group>"; };
@@ -866,6 +869,7 @@
 				8E7A4A5D2D2979DB00BD1B7F /* BookmarkList.swift */,
 				8E7A4A6C2D2A43A900BD1B7F /* BookmarkListRow.swift */,
 				8EC6B8A32D3107FC002B45C7 /* BookmarkDetail.swift */,
+				8EC141202D33E4E8001FD93C /* NoticeWebVCWrapper.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1358,6 +1362,7 @@
 				5C8256462BE5CE1A0038D4C8 /* MainViewController.swift in Sources */,
 				8EFE52FB2CDCBA80003A7330 /* SearchTableViewModel.swift in Sources */,
 				8ECE2B1A2C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift in Sources */,
+				8EC141212D33E4E8001FD93C /* NoticeWebVCWrapper.swift in Sources */,
 				8E7A4A642D29800D00BD1B7F /* UITabBarViewController+Delegate.swift in Sources */,
 				5C9B810B2BF451BC0038EB27 /* NoticeViewModel.swift in Sources */,
 				8EA9ACAB2C46AEC900C9E287 /* OpenSourceLicenseView.swift in Sources */,
@@ -1461,6 +1466,7 @@
 				8E2051022CD4F32F00D87C6A /* MainViewController.swift in Sources */,
 				8EFE52FA2CDCBA80003A7330 /* SearchTableViewModel.swift in Sources */,
 				8E2051032CD4F32F00D87C6A /* DetailedNoticeCellWithImage.swift in Sources */,
+				8EC141222D33E4E8001FD93C /* NoticeWebVCWrapper.swift in Sources */,
 				8E7A4A652D29800D00BD1B7F /* UITabBarViewController+Delegate.swift in Sources */,
 				8E2051042CD4F32F00D87C6A /* NoticeViewModel.swift in Sources */,
 				8E2051052CD4F32F00D87C6A /* OpenSourceLicenseView.swift in Sources */,
