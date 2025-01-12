@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct BookmarkDetail: View {
-    @Environment(\.colorScheme) var colorScheme
-    
     let bookmark: Bookmark
     
     var body: some View {
@@ -33,7 +31,9 @@ struct BookmarkDetail: View {
                 .padding([.leading, .trailing])
             
             NavigationLink {
-                
+                NoticeWebVCWrapper(notice: bookmark.notice)
+                    .edgesIgnoringSafeArea(.bottom)
+                    
             } label: {
                 Text("공지사항 이동")
                     .padding([.top, .bottom])
