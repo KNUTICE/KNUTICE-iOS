@@ -15,9 +15,11 @@ final class WebViewController: UIViewController {
     let webView: WKWebView = WKWebView()
     let reminderSheetBtn: UIButton = UIButton()
     let notice: Notice
+    let isBookmarkBtnVisible: Bool
     
-    init(notice: Notice) {
+    init(notice: Notice, isBookmarkBtnVisible: Bool) {
         self.notice = notice
+        self.isBookmarkBtnVisible = isBookmarkBtnVisible
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -54,7 +56,9 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
         
         //Header와 Footer 숨김
         webView.evaluateJavaScript("document.getElementById(\"header\").style.display='none';document.getElementById(\"footer\").style.display='none';", completionHandler: { (res, error) -> Void in
-                print("error")
+            if let error {
+                print("WebViewController error: \(error.localizedDescription)")
+            }
         })
         
         //로딩 완료 후 webView 활성화
@@ -76,7 +80,8 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 //MARK: - Preview
 struct WebViewControllerPreview: PreviewProvider {
     static var previews: some View {
-        WebViewController(notice: Notice.generalNoticesSampleData.first!)
+        WebViewController(notice: Notice.generalNoticesSampleData.first!,
+                          isBookmarkBtnVisible: true)
             .makePreview()
     }
 }

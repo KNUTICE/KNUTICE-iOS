@@ -15,8 +15,12 @@ struct NoticeWebVCWrapper: UIViewControllerRepresentable {
     }
     
     func makeUIViewController(context: Context) -> some UIViewController {
-        return WebViewController(notice: notice)
+        return WebViewController(notice: notice, isBookmarkBtnVisible: false)
     }
     
     func updateUIViewController(_ uiViewController: some UIViewController, context: Context) {}
+}
+
+#Preview {
+    NoticeWebVCWrapper(notice: Notice.generalNoticesSampleData[0])
 }
