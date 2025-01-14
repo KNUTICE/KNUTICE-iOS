@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Foundation
 import os
 
 @MainActor
@@ -18,6 +19,7 @@ final class BookmarkListViewModel: ObservableObject {
     
     init(repository: BookmarkRepository) {
         self.repository = repository
+        bindingRefreshNotification()
     }
     
     func fetchBookmarks(delay: Int) async {
@@ -28,5 +30,16 @@ final class BookmarkListViewModel: ObservableObject {
         } catch {
             logger.error("BookmarkListViewModel.fetchBookmark() error: \(error.localizedDescription)")
         }
+    }
+    
+    func bindingRefreshNotification() {
+        NotificationCenter.default.publisher(for: .bookmarkListRefresh)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                Task {
+                    await self?.fetchBookmarks(delay: 0)
+                }
+            }
+            .store(in: &cancellables)
     }
 }

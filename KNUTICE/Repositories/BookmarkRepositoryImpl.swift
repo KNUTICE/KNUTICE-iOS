@@ -33,7 +33,7 @@ final class BookmarkRepositoryImpl: BookmarkRepository {
     }
     
     func read(delay: Int) -> AnyPublisher<[Bookmark], any Error> {
-        return dataSource.read()
+        return dataSource.readDTO()
             .map {
                 $0.compactMap { dto in
                     self.getBookMark(from: dto)
@@ -57,5 +57,9 @@ final class BookmarkRepositoryImpl: BookmarkRepository {
                                        imageUrl: noticeEntity.imageUrl),
                         memo: dto.details ?? "",
                         alarmDate: dto.alarmDate)
+    }
+    
+    func delete(by id: Int) -> AnyPublisher<Void, any Error> {
+        return dataSource.delete(id: id)
     }
 }
