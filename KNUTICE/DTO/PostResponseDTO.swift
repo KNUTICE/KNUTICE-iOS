@@ -1,5 +1,5 @@
 //
-//  ReportResponseDTO.swift
+//  PostResponseDTO.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 9/22/24.
@@ -8,12 +8,12 @@
 import Foundation
 
 //MARK: - ReportResponseDTO
-struct ReportResponseDTO: Decodable {
+struct PostResponseDTO: Decodable {
     let result: RequestResult
-    let body: ReportResponseBody
+    let body: PostResponseBody
 }
 
 // MARK: - ReportResponseBody
-struct ReportResponseBody: Decodable {
+struct PostResponseBody: Decodable {
     let message: String
 }
