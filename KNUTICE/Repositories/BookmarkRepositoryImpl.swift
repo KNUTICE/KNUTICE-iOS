@@ -62,4 +62,8 @@ final class BookmarkRepositoryImpl: BookmarkRepository {
     func delete(by id: Int) -> AnyPublisher<Void, any Error> {
         return dataSource.delete(id: id)
     }
+    
+    func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
+        return dataSource.update(bookmark: bookmark)
+    }
 }
