@@ -59,8 +59,7 @@ struct AppDI {
     
     func makeReportViewModel() -> ReportViewModel {
         //Data
-        let tokenDataSource = TokenDataSourceImpl()
-        let tokenRepository = TokenRepositoryImpl(dataSource: tokenDataSource)
+        let tokenRepository = TokenRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
         let reportRepository = ReportRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
         
         //Domain
@@ -73,8 +72,7 @@ struct AppDI {
     }
     
     func makeDeveloperToolsViewModel() -> DeveloperToolsViewModel {
-        let tokenDataSource = TokenDataSourceImpl()
-        let tokenRepository = TokenRepositoryImpl(dataSource: tokenDataSource)
+        let tokenRepository = TokenRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
         let viewModel = DeveloperToolsViewModel(tokenRepository: tokenRepository)
         
         return viewModel
@@ -89,15 +87,47 @@ struct AppDI {
     
     func makeNotificationListViewModel() -> NotificationListViewModel {
         let localDataSource = NotificationPermissionDataSourceImpl.shared
-        let tokenDataSource = TokenDataSourceImpl()
         let localRepository = LocalNotificationPermissionRepositoryImpl(dataSource: localDataSource)
         let remoteRepository = RemoteNotificationPermissionRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
-        let tokenRepository = TokenRepositoryImpl(dataSource: tokenDataSource)
+        let tokenRepository = TokenRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
         let notificationService = NotificationPermissionServiceImpl(tokenRepository: tokenRepository,
                                                                     localRepository: localRepository,
                                                                     remoteRepository: remoteRepository)
         let viewModel = NotificationListViewModel(repository: localRepository,
                                                   notificationService: notificationService)
+        
+        return viewModel
+    }
+    
+    @MainActor
+    func makeBookmarkListViewModel() -> BookmarkListViewModel {
+        let dataSource = LocalBookmarkDataSourceImpl.shared
+        let repository = BookmarkRepositoryImpl(dataSource: dataSource)
+        let viewModel = BookmarkListViewModel(repository: repository)
+        
+        return viewModel
+    }
+    
+    func makeBookmarkFormViewModel() -> BookmarkFormViewModel {
+        let dataSource = LocalBookmarkDataSourceImpl.shared
+        let repository = BookmarkRepositoryImpl(dataSource: dataSource)
+        let viewModel = BookmarkFormViewModel(repository: repository)
+        
+        return viewModel
+    }
+    
+    func makeBookmarkDetailViewModel() -> BookmarkDetailViewModel {
+        let dataSource = LocalBookmarkDataSourceImpl.shared
+        let repository = BookmarkRepositoryImpl(dataSource: dataSource)
+        let viewModel = BookmarkDetailViewModel(repository: repository)
+        
+        return viewModel
+    }
+    
+    func makeBookmarkEditFormViewModel(from bookmark: Bookmark) -> BookmarkEditFormViewModel {
+        let dataSource = LocalBookmarkDataSourceImpl.shared
+        let repository = BookmarkRepositoryImpl(dataSource: dataSource)
+        let viewModel = BookmarkEditFormViewModel(bookmark: bookmark, repository: repository)
         
         return viewModel
     }
