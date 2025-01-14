@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct BookmarkForm: View {
-    @StateObject private var viewModel: BookmarkFormViewModel
+struct BookmarkForm<T: BookmarkFormHandler>: View {
+    @StateObject private var viewModel: T
     
     private let notice: Notice
     private let dismissAction: () -> Void
     
-    init(viewModel: BookmarkFormViewModel,
+    init(viewModel: T,
          notice: Notice,
          dismissAction: @escaping () -> Void) {
         _viewModel = StateObject(wrappedValue: viewModel)
