@@ -65,6 +65,8 @@ fileprivate struct BookmarkSubTitle: View {
     }
 }
 
+#if DEBUG
 #Preview {
     BookmarkListRow(bookmark: Bookmark.sample)
 }
+#endif
