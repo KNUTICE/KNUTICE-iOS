@@ -9,7 +9,7 @@ import Combine
 import Foundation
 import os
 
-final class BookmarkFormViewModel: BookmarkManager, ObservableObject, BookmarkListRefreshable {
+final class BookmarkFormViewModel: BookmarkManager, BookmarkFormHandler {
     @Published var title: String = ""
     @Published var alarmDate: Date = Date()
     @Published var isAlarmOn: Bool = false
@@ -17,9 +17,9 @@ final class BookmarkFormViewModel: BookmarkManager, ObservableObject, BookmarkLi
     @Published var isShowingAlert: Bool = false
     @Published var isLoading: Bool = false
     
-    private var cancellables = Set<AnyCancellable>()
-    private let logger = Logger()
-    private(set) var alertMessage: String = ""
+    private var cancellables: Set<AnyCancellable> = []
+    private let logger: Logger = Logger()
+    var alertMessage: String = ""
     
     override init(repository: BookmarkRepository) {
         super.init(repository: repository)

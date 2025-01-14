@@ -21,8 +21,7 @@ struct BookmarkList: View {
                 ForEach(bookmarkList, id: \.self.notice.id) { bookmark in
                     ZStack {
                         NavigationLink {
-                            BookmarkDetail(viewModel: AppDI.shared.makeBookmarkDetailViewModel(),
-                                           bookmark: bookmark)
+                            BookmarkDetailSwitchView(bookmark: bookmark)
                         } label: {
                             EmptyView()
                         }
