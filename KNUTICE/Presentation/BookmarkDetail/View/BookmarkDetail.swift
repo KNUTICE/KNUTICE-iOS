@@ -10,12 +10,16 @@ import SwiftUI
 struct BookmarkDetail: View {
     @StateObject private var viewModel: BookmarkDetailViewModel
     @Environment(\.dismiss) private var dismiss
+    @Binding private var selectedMode: BookmarkDetailSwitchView.BookmarkViewMode
     
     private let bookmark: Bookmark
     
-    init(viewModel: BookmarkDetailViewModel, bookmark: Bookmark) {
+    init(viewModel: BookmarkDetailViewModel,
+         bookmark: Bookmark,
+         selectedMode: Binding<BookmarkDetailSwitchView.BookmarkViewMode>) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.bookmark = bookmark
+        _selectedMode = selectedMode
     }
     
     var body: some View {
@@ -59,7 +63,9 @@ struct BookmarkDetail: View {
                     Menu {
                         Section {
                             Button {
-                                
+                                withAnimation(.easeInOut) {
+                                    selectedMode = .editView
+                                }
                             } label: {
                                 Text("수정")
                             }
@@ -155,6 +161,7 @@ fileprivate struct UserMemoDetail: View {
 #Preview {
     NavigationStack {
         BookmarkDetail(viewModel: AppDI.shared.makeBookmarkDetailViewModel(),
-                       bookmark: Bookmark.sample)
+                       bookmark: Bookmark.sample,
+                       selectedMode: .constant(.detailView))
     }
 }
