@@ -11,12 +11,16 @@ import SwiftUI
 import Foundation
 
 final class WebViewController: UIViewController {
-    let progressView = UIProgressView(progressViewStyle: .bar)
+    let progressView: UIProgressView = UIProgressView(progressViewStyle: .bar)
     let webView: WKWebView = WKWebView()
-    let url: String
+    let reminderSheetBtn: UIButton = UIButton()
+    let notice: Notice
+    let isBookmarkBtnVisible: Bool
     
-    init(url: String) {
-        self.url = url
+    init(notice: Notice, isBookmarkBtnVisible: Bool) {
+        self.notice = notice
+        self.isBookmarkBtnVisible = isBookmarkBtnVisible
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -30,7 +34,7 @@ final class WebViewController: UIViewController {
         setupAttribute()
         setupNavigationBarItem()
         setupLayout()
-        loadPage(url)
+        loadPage(notice.contentUrl)
     }
 }
 
@@ -52,7 +56,9 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
         
         //Header와 Footer 숨김
         webView.evaluateJavaScript("document.getElementById(\"header\").style.display='none';document.getElementById(\"footer\").style.display='none';", completionHandler: { (res, error) -> Void in
-                print("error")
+            if let error {
+                print("WebViewController error: \(error.localizedDescription)")
+            }
         })
         
         //로딩 완료 후 webView 활성화
@@ -74,7 +80,8 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 //MARK: - Preview
 struct WebViewControllerPreview: PreviewProvider {
     static var previews: some View {
-        WebViewController(url: "https://www.ut.ac.kr/")
+        WebViewController(notice: Notice.generalNoticesSampleData.first!,
+                          isBookmarkBtnVisible: true)
             .makePreview()
     }
 }
