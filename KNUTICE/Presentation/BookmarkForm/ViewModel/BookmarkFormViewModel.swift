@@ -9,7 +9,7 @@ import Combine
 import Foundation
 import os
 
-final class BookmarkFormViewModel: ObservableObject {
+final class BookmarkFormViewModel: ObservableObject, BookmarkListRefreshable {
     @Published var title: String = ""
     @Published var alarmDate: Date = Date()
     @Published var isAlarmOn: Bool = false
