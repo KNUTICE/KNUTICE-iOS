@@ -10,8 +10,9 @@ import CoreData
 
 protocol LocalBookmarkDataSource {
     func save(_ bookmark: Bookmark) -> AnyPublisher<Void, any Error>
-    func read() -> AnyPublisher<[BookmarkDTO], any Error>
+    func readDTO() -> AnyPublisher<[BookmarkDTO], any Error>
     func isDuplication(id: Int) -> AnyPublisher<Bool, any Error>
+    func delete(id: Int) -> AnyPublisher<Void, any Error>
 }
 
 final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
@@ -50,10 +51,10 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
         
         bookmarkEntity.bookmarkedNotice = noticeEntity
         
-        return Future { promise in
-            self.backgroundContext.perform {
+        return Future { [weak self] promise in
+            self?.backgroundContext.perform {
                 do {
-                    try self.backgroundContext.save()
+                    try self?.backgroundContext.save()
                     promise(.success(()))
                 } catch {
                     promise(.failure(error))
@@ -63,17 +64,24 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
         .eraseToAnyPublisher()
     }
     
-    func read() -> AnyPublisher<[BookmarkDTO], any Error> {
-        return Future { promise in
-            self.backgroundContext.perform {
+    func readDTO() -> AnyPublisher<[BookmarkDTO], any Error> {
+        return readEntities()
+            .map { entities in
+                entities.map {
+                    BookmarkDTO(notice: $0.bookmarkedNotice, details: $0.memo, alarmDate: $0.alarmDate)
+                }
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    private func readEntities() -> AnyPublisher<[BookmarkEntity], any Error> {
+        return Future { [weak self] promise in
+            self?.backgroundContext.perform {
                 let fetchRequest = NSFetchRequest<BookmarkEntity>(entityName: "BookmarkEntity")
-                fetchRequest.relationshipKeyPathsForPrefetching = ["bookmaredNotice"]
                 
                 do {
-                    let bookmarkEntities = try self.backgroundContext.fetch(fetchRequest)
-                    promise(.success(bookmarkEntities.map {
-                        BookmarkDTO(notice: $0.bookmarkedNotice, details: $0.memo, alarmDate: $0.alarmDate)
-                    }))
+                    let bookmarkEntities = try self?.backgroundContext.fetch(fetchRequest)
+                    promise(.success(bookmarkEntities ?? []))
                 } catch {
                     promise(.failure(error))
                 }
@@ -83,7 +91,7 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
     }
     
     func isDuplication(id: Int) -> AnyPublisher<Bool, any Error> {
-        return read()
+        return readDTO()
             .flatMap { dto -> AnyPublisher<Bool, any Error> in
                 let duplicationCount = dto.filter { $0.notice?.id == Int64(id) }.count
                 
@@ -98,6 +106,31 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
                 return Just(false)
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func delete(id: Int) -> AnyPublisher<Void, any Error> {
+        return readEntities()
+            .flatMap { entities -> AnyPublisher<Void, any Error> in
+                return Future { [weak self] promise in
+                    self?.backgroundContext.perform {
+                        do {
+                            //일치하는 id 필터링 후 삭제
+                            let filteredEntities = entities.filter { $0.bookmarkedNotice?.id == Int64(id) }
+                            filteredEntities.forEach {
+                                self?.backgroundContext.delete($0)
+                            }
+                            
+                            //영구 저장소에 반영
+                            try self?.backgroundContext.save()
+                            promise(.success(()))
+                        } catch {
+                            promise(.failure(error))
+                        }
+                    }
+                }
+                .eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
     }

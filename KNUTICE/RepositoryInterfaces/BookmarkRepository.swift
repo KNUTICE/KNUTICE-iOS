@@ -10,4 +10,5 @@ import Combine
 protocol BookmarkRepository {
     func save(bookmark: Bookmark) -> AnyPublisher<Void, any Error>
     func read(delay: Int) -> AnyPublisher<[Bookmark], any Error>
+    func delete(by id: Int) -> AnyPublisher<Void, any Error>
 }
