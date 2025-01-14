@@ -21,6 +21,8 @@ struct NoticeWebVCWrapper: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: some UIViewController, context: Context) {}
 }
 
+#if DEBUG
 #Preview {
     NoticeWebVCWrapper(notice: Notice.generalNoticesSampleData[0])
 }
+#endif
