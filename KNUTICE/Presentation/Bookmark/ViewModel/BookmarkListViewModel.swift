@@ -10,16 +10,15 @@ import Foundation
 import os
 
 @MainActor
-final class BookmarkListViewModel: ObservableObject {
+final class BookmarkListViewModel: BookmarkManager, ObservableObject {
     @Published private(set) var bookmarkList: [Bookmark]? = nil
     
-    private let repository: BookmarkRepository
+    private(set) var isBindingWithNotification: Bool = false
     private var cancellables = Set<AnyCancellable>()
     private let logger = Logger()
     
-    init(repository: BookmarkRepository) {
-        self.repository = repository
-        bindingRefreshNotification()
+    override init(repository: BookmarkRepository) {
+        super.init(repository: repository)
     }
     
     func fetchBookmarks(delay: Int) async {
@@ -33,6 +32,7 @@ final class BookmarkListViewModel: ObservableObject {
     }
     
     func bindingRefreshNotification() {
+        isBindingWithNotification = true
         NotificationCenter.default.publisher(for: .bookmarkListRefresh)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in

@@ -43,6 +43,11 @@ struct BookmarkList: View {
                     EmptySectionView(content: "북마크가 존재하지 않아요 :(")
                 }
             }
+            .onAppear {
+                if !viewModel.isBindingWithNotification {
+                    viewModel.bindingRefreshNotification()
+                }
+            }
         } else {
             SpinningIndicator()
                 .task {

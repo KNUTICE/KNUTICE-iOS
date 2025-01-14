@@ -9,17 +9,16 @@ import Combine
 import Foundation
 import os
 
-final class BookmarkDetailViewModel: ObservableObject, BookmarkListRefreshable {
+final class BookmarkDetailViewModel: BookmarkManager, ObservableObject, BookmarkListRefreshable {
     @Published private(set) var isLoading: Bool = false
     @Published var isShowingAlert: Bool = false
     
-    private let repository: BookmarkRepository
     private(set) var alertMessage: String?
     private var cancellables: Set<AnyCancellable> = []
     private let logger: Logger = Logger()
     
-    init(repository: BookmarkRepository) {
-        self.repository = repository
+    override init(repository: BookmarkRepository) {
+        super.init(repository: repository)
     }
     
     func delete(by id: Int) {
