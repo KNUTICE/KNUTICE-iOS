@@ -177,6 +177,7 @@ fileprivate struct StrokedDescriptionTextField: View {
     }
 }
 
+#if DEBUG
 #Preview {
     NavigationStack {
         BookmarkForm(viewModel: AppDI.shared.makeBookmarkFormViewModel(),
@@ -184,3 +185,4 @@ fileprivate struct StrokedDescriptionTextField: View {
                      dismissAction: {})
     }
 }
+#endif
