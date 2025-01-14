@@ -9,7 +9,7 @@ import Combine
 import Foundation
 import os
 
-final class BookmarkDetailViewModel: ObservableObject {
+final class BookmarkDetailViewModel: ObservableObject, BookmarkListRefreshable {
     @Published private(set) var isLoading: Bool = false
     @Published var isShowingAlert: Bool = false
     
@@ -42,12 +42,5 @@ final class BookmarkDetailViewModel: ObservableObject {
                 
             })
             .store(in: &cancellables)
-    }
-    
-    func sendRefreshNotification() {
-        NotificationCenter.default.post(
-            name: .bookmarkListRefresh,
-            object: nil
-        )
     }
 }
