@@ -135,6 +135,8 @@
 		8E5E8BE22D3605090078C007 /* NotificationName+BookmarkListRegresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5E8BE02D3605090078C007 /* NotificationName+BookmarkListRegresh.swift */; };
 		8E5E8BE42D36190E0078C007 /* BookmarkListRefreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5E8BE32D36190E0078C007 /* BookmarkListRefreshable.swift */; };
 		8E5E8BE52D36190E0078C007 /* BookmarkListRefreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5E8BE32D36190E0078C007 /* BookmarkListRefreshable.swift */; };
+		8E5E8BE72D361F510078C007 /* BookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5E8BE62D361F510078C007 /* BookmarkManager.swift */; };
+		8E5E8BE82D361F510078C007 /* BookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5E8BE62D361F510078C007 /* BookmarkManager.swift */; };
 		8E60EAF72CDDF946003612FB /* SearchTableViewController+Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60EAF62CDDF946003612FB /* SearchTableViewController+Binding.swift */; };
 		8E60EAF82CDDF946003612FB /* SearchTableViewController+Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60EAF62CDDF946003612FB /* SearchTableViewController+Binding.swift */; };
 		8E60EAFA2CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60EAF92CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift */; };
@@ -368,6 +370,7 @@
 		8E5E8BDD2D35F03A0078C007 /* BookmarkDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkDetailViewModel.swift; sourceTree = "<group>"; };
 		8E5E8BE02D3605090078C007 /* NotificationName+BookmarkListRegresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+BookmarkListRegresh.swift"; sourceTree = "<group>"; };
 		8E5E8BE32D36190E0078C007 /* BookmarkListRefreshable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkListRefreshable.swift; sourceTree = "<group>"; };
+		8E5E8BE62D361F510078C007 /* BookmarkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkManager.swift; sourceTree = "<group>"; };
 		8E60EAF62CDDF946003612FB /* SearchTableViewController+Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchTableViewController+Binding.swift"; sourceTree = "<group>"; };
 		8E60EAF92CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchTableViewController+UISearchBarDelegate.swift"; sourceTree = "<group>"; };
 		8E613E9D2C951C8D006FC272 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -733,6 +736,7 @@
 				8EB6D20D2C6713BB004E8AC2 /* View+Fork.swift */,
 				8EE4B4E42D16CE1E00EFF10B /* SpinningIndicator.swift */,
 				8E5E8BE32D36190E0078C007 /* BookmarkListRefreshable.swift */,
+				8E5E8BE62D361F510078C007 /* BookmarkManager.swift */,
 			);
 			path = Commons;
 			sourceTree = "<group>";
@@ -1425,6 +1429,7 @@
 				8E7A4A6B2D2A2CD800BD1B7F /* Bookmark.swift in Sources */,
 				8E3F02262C9FB86400AE89D5 /* PostResponseDTO.swift in Sources */,
 				8E60EAFA2CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift in Sources */,
+				8E5E8BE72D361F510078C007 /* BookmarkManager.swift in Sources */,
 				8E3F022D2CA0023A00AE89D5 /* VIew+TextEditorBackground.swift in Sources */,
 				8E0C3F892C9EC93B005E2A16 /* ReportView.swift in Sources */,
 				8EBBE2402CA0E3FC00826D5A /* LightTextView.swift in Sources */,
@@ -1532,6 +1537,7 @@
 				8E7A4A6A2D2A2CD800BD1B7F /* Bookmark.swift in Sources */,
 				8E2051102CD4F32F00D87C6A /* PostResponseDTO.swift in Sources */,
 				8E60EAFB2CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift in Sources */,
+				8E5E8BE82D361F510078C007 /* BookmarkManager.swift in Sources */,
 				8E2051112CD4F32F00D87C6A /* VIew+TextEditorBackground.swift in Sources */,
 				8E2051122CD4F32F00D87C6A /* ReportView.swift in Sources */,
 				8E2051132CD4F32F00D87C6A /* LightTextView.swift in Sources */,
