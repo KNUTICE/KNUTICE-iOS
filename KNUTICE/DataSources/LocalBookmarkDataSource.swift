@@ -13,6 +13,7 @@ protocol LocalBookmarkDataSource {
     func readDTO() -> AnyPublisher<[BookmarkDTO], any Error>
     func isDuplication(id: Int) -> AnyPublisher<Bool, any Error>
     func delete(id: Int) -> AnyPublisher<Void, any Error>
+    func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error>
 }
 
 final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
@@ -123,6 +124,30 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
                             }
                             
                             //영구 저장소에 반영
+                            try self?.backgroundContext.save()
+                            promise(.success(()))
+                        } catch {
+                            promise(.failure(error))
+                        }
+                    }
+                }
+                .eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
+        return readEntities()
+            .flatMap { entities -> AnyPublisher<Void, any Error> in
+                return Future { [weak self] promise in
+                    self?.backgroundContext.perform {
+                        do {
+                            let filteredEntities = entities.filter { $0.bookmarkedNotice?.id == Int64(bookmark.notice.id) }
+                            filteredEntities.forEach {
+                                $0.memo = bookmark.memo
+                                $0.alarmDate = bookmark.alarmDate
+                            }
+                            
                             try self?.backgroundContext.save()
                             promise(.success(()))
                         } catch {

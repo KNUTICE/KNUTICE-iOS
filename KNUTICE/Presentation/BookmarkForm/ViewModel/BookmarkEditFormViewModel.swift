@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import os
 
 final class BookmarkEditFormViewModel: BookmarkManager, BookmarkFormHandler {
     @Published var title: String
@@ -17,6 +18,8 @@ final class BookmarkEditFormViewModel: BookmarkManager, BookmarkFormHandler {
     @Published var isLoading: Bool = false
     
     var alertMessage: String = ""
+    private var cancellables: Set<AnyCancellable> = []
+    private let logger: Logger = Logger()
     
     init(bookmark: Bookmark, repository: BookmarkRepository) {
         self.title = bookmark.notice.title
@@ -27,6 +30,29 @@ final class BookmarkEditFormViewModel: BookmarkManager, BookmarkFormHandler {
     }
     
     func save(with notice: Notice) {
-        //TODO: 업데이트 로직
+        isLoading = true
+        repository.update(bookmark: getBookmark(notice: notice))
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                switch completion {
+                case .finished:
+                    self?.logger.log(level: .debug, "BookmarkEditFormViewModel.save(with:) Successfully saved Bookmark")
+                    self?.alertMessage = "저장을 완료했어요."
+                case .failure(let error):
+                    self?.alertMessage = "저장을 실패했어요."
+                }
+                
+                self?.isLoading = false
+                self?.isShowingAlert = true
+            }, receiveValue: {
+                
+            })
+            .store(in: &cancellables)
+    }
+    
+    private func getBookmark(notice: Notice) -> Bookmark {
+        Bookmark(notice: notice,
+                 memo: memo,
+                 alarmDate: isAlarmOn ? alarmDate : nil)
     }
 }
