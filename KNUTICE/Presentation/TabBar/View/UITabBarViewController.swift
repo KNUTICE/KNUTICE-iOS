@@ -81,7 +81,7 @@ extension UITabBarViewController {
         view.bringSubviewToFront(tabBar)
         shadowView.snp.makeConstraints { make in
             make.width.equalTo(tabBar.snp.width)
-            make.height.equalTo(tabBar.snp.height)
+            make.height.equalTo(tabBar.snp.height).offset(-1)
             make.centerX.equalTo(tabBar.snp.centerX)
             make.bottom.equalTo(tabBar.snp.bottom)
         }
@@ -93,6 +93,7 @@ struct UITabBarViewControllerPreview: PreviewProvider {
     static var previews: some View {
         UINavigationController(rootViewController: UITabBarViewController())
             .makePreview()
+            .edgesIgnoringSafeArea(.all)
     }
 }
 #endif
