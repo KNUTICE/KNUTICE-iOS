@@ -65,6 +65,7 @@ struct BookmarkForm<T: BookmarkFormHandler>: View {
                     }
                 }
             }
+            .background(.customBackground)
             
             if viewModel.isLoading {
                 SpinningIndicator()
@@ -117,6 +118,7 @@ fileprivate struct NoticeView: View {
                         Text(notice.uploadDate)
                     }
                     .font(.caption2)
+                    .foregroundStyle(.gray)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
