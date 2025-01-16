@@ -48,7 +48,7 @@ extension WebViewController {
     }
     
     func setupLayout() {
-        view.backgroundColor = .customBackground
+        view.backgroundColor = .detailViewBackground
         
         //progressView
         view.addSubview(progressView)

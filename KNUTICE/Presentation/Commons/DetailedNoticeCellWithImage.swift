@@ -86,6 +86,6 @@ final class DetailedNoticeCellWithImage: UITableViewCell {
     
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
-        contentView.backgroundColor = highlighted ? .cellHighlight : .customBackground
+        contentView.backgroundColor = highlighted ? .cellHighlight : .detailViewBackground
     }
 }
