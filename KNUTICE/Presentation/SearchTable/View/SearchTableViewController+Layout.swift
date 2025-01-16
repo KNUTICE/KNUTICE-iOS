@@ -30,7 +30,7 @@ extension SearchTableViewController {
         textView.isScrollEnabled = false
         textView.textColor = .gray
         textView.font = UIFont.preferredFont(forTextStyle: .title3)
-        textView.backgroundColor = .customBackground
+        textView.backgroundColor = .detailViewBackground
         
         backgroundView.addSubview(textView)
         

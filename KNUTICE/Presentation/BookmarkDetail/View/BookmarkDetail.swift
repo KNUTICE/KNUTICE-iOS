@@ -57,7 +57,7 @@ struct BookmarkDetail: View {
                 .padding([.leading, .trailing])
                 .padding(.top, 50)
             }
-            .background(.customBackground)
+            .background(.detailViewBackground)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Menu {

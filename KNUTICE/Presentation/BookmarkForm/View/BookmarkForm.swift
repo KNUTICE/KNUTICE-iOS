@@ -65,7 +65,7 @@ struct BookmarkForm<T: BookmarkFormHandler>: View {
                     }
                 }
             }
-            .background(.customBackground)
+            .background(.detailViewBackground)
             
             if viewModel.isLoading {
                 SpinningIndicator()
