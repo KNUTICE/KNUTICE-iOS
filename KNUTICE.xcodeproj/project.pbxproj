@@ -168,8 +168,6 @@
 		8E7A4A5F2D2979DB00BD1B7F /* BookmarkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A5D2D2979DB00BD1B7F /* BookmarkList.swift */; };
 		8E7A4A612D297A4D00BD1B7F /* BookmarkListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A602D297A4D00BD1B7F /* BookmarkListViewModel.swift */; };
 		8E7A4A622D297A4D00BD1B7F /* BookmarkListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A602D297A4D00BD1B7F /* BookmarkListViewModel.swift */; };
-		8E7A4A642D29800D00BD1B7F /* UITabBarViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A632D29800D00BD1B7F /* UITabBarViewController+Delegate.swift */; };
-		8E7A4A652D29800D00BD1B7F /* UITabBarViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A632D29800D00BD1B7F /* UITabBarViewController+Delegate.swift */; };
 		8E7A4A6A2D2A2CD800BD1B7F /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A692D2A2CD800BD1B7F /* Bookmark.swift */; };
 		8E7A4A6B2D2A2CD800BD1B7F /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A692D2A2CD800BD1B7F /* Bookmark.swift */; };
 		8E7A4A6D2D2A43A900BD1B7F /* BookmarkListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A6C2D2A43A900BD1B7F /* BookmarkListRow.swift */; };
@@ -396,7 +394,6 @@
 		8E7945E42CA28F6900208662 /* KNUTICEUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KNUTICEUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E7A4A5D2D2979DB00BD1B7F /* BookmarkList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkList.swift; sourceTree = "<group>"; };
 		8E7A4A602D297A4D00BD1B7F /* BookmarkListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkListViewModel.swift; sourceTree = "<group>"; };
-		8E7A4A632D29800D00BD1B7F /* UITabBarViewController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarViewController+Delegate.swift"; sourceTree = "<group>"; };
 		8E7A4A692D2A2CD800BD1B7F /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		8E7A4A6C2D2A43A900BD1B7F /* BookmarkListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkListRow.swift; sourceTree = "<group>"; };
 		8E7A4A6F2D2A44CE00BD1B7F /* Date+StringFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+StringFormat.swift"; sourceTree = "<group>"; };
@@ -520,7 +517,7 @@
 			children = (
 				8E5E8BDA2D35F01C0078C007 /* BookmarkDetail */,
 				8E3B8C442D2BBFDA007E9579 /* BookmarkForm */,
-				8E7A4A5A2D2978EA00BD1B7F /* Bookmark */,
+				8E7A4A5A2D2978EA00BD1B7F /* BookmarkList */,
 				8E659EBB2D29430B00305D56 /* TabBar */,
 				8E6931522CEEFBEF0074142B /* Notification List */,
 				8EFE52E92CDC8CB6003A7330 /* Notices */,
@@ -858,7 +855,6 @@
 			isa = PBXGroup;
 			children = (
 				8E659EBD2D29438500305D56 /* UITabBarViewController.swift */,
-				8E7A4A632D29800D00BD1B7F /* UITabBarViewController+Delegate.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -907,13 +903,13 @@
 			path = KNUTICEUnitTests;
 			sourceTree = "<group>";
 		};
-		8E7A4A5A2D2978EA00BD1B7F /* Bookmark */ = {
+		8E7A4A5A2D2978EA00BD1B7F /* BookmarkList */ = {
 			isa = PBXGroup;
 			children = (
 				8E7A4A5C2D29797700BD1B7F /* ViewModel */,
 				8E7A4A5B2D29797200BD1B7F /* View */,
 			);
-			path = Bookmark;
+			path = BookmarkList;
 			sourceTree = "<group>";
 		};
 		8E7A4A5B2D29797200BD1B7F /* View */ = {
@@ -1416,7 +1412,6 @@
 				8EFE52FB2CDCBA80003A7330 /* SearchTableViewModel.swift in Sources */,
 				8ECE2B1A2C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift in Sources */,
 				8EC141212D33E4E8001FD93C /* NoticeWebVCWrapper.swift in Sources */,
-				8E7A4A642D29800D00BD1B7F /* UITabBarViewController+Delegate.swift in Sources */,
 				5C9B810B2BF451BC0038EB27 /* NoticeViewModel.swift in Sources */,
 				8EA9ACAB2C46AEC900C9E287 /* OpenSourceLicenseView.swift in Sources */,
 				8E7A4A5E2D2979DB00BD1B7F /* BookmarkList.swift in Sources */,
@@ -1527,7 +1522,6 @@
 				8EFE52FA2CDCBA80003A7330 /* SearchTableViewModel.swift in Sources */,
 				8E2051032CD4F32F00D87C6A /* DetailedNoticeCellWithImage.swift in Sources */,
 				8EC141222D33E4E8001FD93C /* NoticeWebVCWrapper.swift in Sources */,
-				8E7A4A652D29800D00BD1B7F /* UITabBarViewController+Delegate.swift in Sources */,
 				8E2051042CD4F32F00D87C6A /* NoticeViewModel.swift in Sources */,
 				8E2051052CD4F32F00D87C6A /* OpenSourceLicenseView.swift in Sources */,
 				8E7A4A5F2D2979DB00BD1B7F /* BookmarkList.swift in Sources */,
