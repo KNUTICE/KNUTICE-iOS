@@ -29,7 +29,7 @@ struct SettingView: View {
             } header: {
                 Text("알림")
             }
-            .listRowBackground(Color.customBackground)
+            .listRowBackground(Color.detailViewBackground)
             
             Section {
                 Button {
@@ -50,7 +50,7 @@ struct SettingView: View {
             } header: {
                 Text("지원")
             }
-            .listRowBackground(Color.customBackground)
+            .listRowBackground(Color.detailViewBackground)
             
             Section {
                 HStack {
@@ -71,7 +71,7 @@ struct SettingView: View {
             } header: {
                 Text("앱 정보")
             }
-            .listRowBackground(Color.customBackground)
+            .listRowBackground(Color.detailViewBackground)
             
             #if DEV
             Section {
@@ -84,11 +84,10 @@ struct SettingView: View {
             } header: {
                 Text("개발")
             }
-            .listRowBackground(Color.customBackground)
+            .listRowBackground(Color.detailViewBackground)
             #endif
         }
-        .background(.customBackground)
-//        .toolbarBackground(.customBackground, for: .navigationBar)
+        .background(.detailViewBackground)
         .listStyle(.plain)
         .navigationTitle("설정")
         .navigationBarTitleDisplayMode(.inline)

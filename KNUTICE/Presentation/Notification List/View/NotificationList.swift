@@ -56,9 +56,9 @@ struct NotificationList: View {
                 }
                 .padding([.top, .bottom])
                 .listSectionSeparator(.hidden, edges: .bottom)
-                .listRowBackground(Color.customBackground)
+                .listRowBackground(Color.detailViewBackground)
             }
-            .background(.customBackground)
+            .background(.detailViewBackground)
             .tint(.accent2)
             .listStyle(.plain)
             .navigationTitle("서비스 알림")
