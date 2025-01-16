@@ -97,6 +97,7 @@ struct BookmarkDetail: View {
                                 }
                             }
                         }
+                        .background(.detailViewBackground)
                 }
             }
             
