@@ -15,6 +15,10 @@ import RxDataSources
 final class MainViewController: UIViewController {
     let viewModel: MainViewModel
     let tableView = UITableView(frame: .zero, style: .grouped)
+    let navigationBar = UIView(frame: .zero)
+    let titleLabel = UILabel()
+    let settingBtn = UIButton()
+    let searchBtn = UIButton()
     let refreshControl = UIRefreshControl()
     let headerColors: [UIColor] = [.salmon, .lightOrange, .lightGreen, .dodgerBlue]
     let disposeBag = DisposeBag()
@@ -120,6 +124,7 @@ struct Preview: PreviewProvider {
         
         UINavigationController(rootViewController: viewController)
             .makePreview()
+            .edgesIgnoringSafeArea(.all)
     }
 }
 #endif
