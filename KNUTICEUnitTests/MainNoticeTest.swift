@@ -6,22 +6,27 @@
 //
 
 import XCTest
+import Combine
 @testable import KNUTICE
 
 final class MainNoticeTest: XCTestCase {
     private var dataSource: RemoteDataSource!
+    private var cancellables: Set<AnyCancellable>!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
         dataSource = RemoteDataSourceImpl.shared
+        cancellables = []
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        
+        dataSource = nil
     }
     
-    func test_fetch_mainNotice() throws {
+    func test_fetch_mainNotice() {
         //Given
         let expectation = XCTestExpectation()
         let url = Bundle.main.mainNoticeURL
@@ -32,6 +37,25 @@ final class MainNoticeTest: XCTestCase {
                 XCTAssertEqual($0.result.resultCode, 200)
                 expectation.fulfill()
             }
+        
+        wait(for: [expectation], timeout: 10)
+    }
+    
+    func test_fetch_mainNotice_withCombine() {
+        //Given
+        let expectation = XCTestExpectation()
+        let url = Bundle.main.mainNoticeURL
+        
+        //When - 메인 공지사항 요청 테스트
+        dataSource.sendGetRequest(to: url, resultType: MainNoticeResponseDTO.self)
+            .sink(receiveCompletion: { _ in
+                
+            }, receiveValue: {
+                //Then
+                XCTAssertEqual($0.result.resultCode, 200)
+                expectation.fulfill()
+            })
+            .store(in: &cancellables)
         
         wait(for: [expectation], timeout: 10)
     }
