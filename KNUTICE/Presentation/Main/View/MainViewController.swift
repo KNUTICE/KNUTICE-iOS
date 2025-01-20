@@ -15,6 +15,10 @@ import RxDataSources
 final class MainViewController: UIViewController {
     let viewModel: MainViewModel
     let tableView = UITableView(frame: .zero, style: .grouped)
+    let navigationBar = UIView(frame: .zero)
+    let titleLabel = UILabel()
+    let settingBtn = UIButton()
+    let searchBtn = UIButton()
     let refreshControl = UIRefreshControl()
     let headerColors: [UIColor] = [.salmon, .lightOrange, .lightGreen, .dodgerBlue]
     let disposeBag = DisposeBag()
@@ -55,12 +59,12 @@ extension MainViewController: UITableViewDelegate {
         
         //Auto Layout
         title.snp.makeConstraints { make in
-            make.leading.equalTo(headerView.safeAreaLayoutGuide).inset(16)
+            make.leading.equalTo(headerView.safeAreaLayoutGuide).inset(20)
             make.top.bottom.equalToSuperview()
         }
         
         button.snp.makeConstraints { make in
-            make.trailing.equalTo(headerView.safeAreaLayoutGuide).inset(16)
+            make.trailing.equalTo(headerView.safeAreaLayoutGuide).inset(20)
             make.centerY.equalToSuperview()
         }
         
@@ -120,6 +124,7 @@ struct Preview: PreviewProvider {
         
         UINavigationController(rootViewController: viewController)
             .makePreview()
+            .edgesIgnoringSafeArea(.all)
     }
 }
 #endif

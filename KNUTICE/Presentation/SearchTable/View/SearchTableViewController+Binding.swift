@@ -29,7 +29,7 @@ extension SearchTableViewController {
                     cell.subTitleLabel.text = "[\(item.department)]"
                     cell.uploadDateLabel.text = item.uploadDate
                     cell.imageURL = imageURL
-                    cell.backgroundColor = .customBackground
+                    cell.backgroundColor = .detailViewBackground
                     
                     return cell
                 } else {
@@ -37,7 +37,7 @@ extension SearchTableViewController {
                     cell.titleLabel.text = item.title
                     cell.subTitleLabel.text = "[\(item.department)]"
                     cell.uploadDateLabel.text = item.uploadDate
-                    cell.backgroundColor = .customBackground
+                    cell.backgroundColor = .detailViewBackground
                     
                     return cell
                 }

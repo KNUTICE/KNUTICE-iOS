@@ -17,6 +17,9 @@ protocol RemoteDataSource {
                                        params: Parameters,
                                        resultType: T.Type) -> Single<T>
     
+    func sendGetRequest<T: Decodable>(to url: String,
+                                       resultType: T.Type) -> AnyPublisher<T, any Error>
+    
     func sendPostRequest<T: Decodable>(to url: String,
                                        params: Parameters,
                                        resultType: T.Type) -> AnyPublisher<T, any Error>
@@ -63,6 +66,17 @@ final class RemoteDataSourceImpl: RemoteDataSource {
             
             return Disposables.create()
         }
+    }
+    
+    func sendGetRequest<T: Decodable>(to url: String,
+                                      resultType: T.Type) -> AnyPublisher<T, any Error> {
+        return AF.request(url)
+            .publishDecodable(type: T.self)
+            .value()
+            .mapError {
+                $0 as Error
+            }
+            .eraseToAnyPublisher()
     }
     
     func sendPostRequest<T: Decodable>(to url: String,

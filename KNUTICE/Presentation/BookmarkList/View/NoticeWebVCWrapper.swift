@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct NoticeWebVCWrapper: UIViewControllerRepresentable {
-    private let notice: Notice
+    private let viewController: UIViewController
     
     init(notice: Notice) {
-        self.notice = notice
+        self.viewController = WebViewController(notice: notice, isBookmarkBtnVisible: false)
     }
     
     func makeUIViewController(context: Context) -> some UIViewController {
-        return WebViewController(notice: notice, isBookmarkBtnVisible: false)
+        return viewController
     }
     
     func updateUIViewController(_ uiViewController: some UIViewController, context: Context) {}
