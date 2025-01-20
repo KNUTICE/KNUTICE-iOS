@@ -9,21 +9,22 @@ import Combine
 import Foundation
 import os
 
-final class BookmarkDetailViewModel: BookmarkManager, ObservableObject, BookmarkListRefreshable {
+final class BookmarkDetailViewModel: ObservableObject, BookmarkListRefreshable {
     @Published private(set) var isLoading: Bool = false
     @Published var isShowingAlert: Bool = false
     
+    private let bookmarkService: BookmarkService
     private(set) var alertMessage: String?
     private var cancellables: Set<AnyCancellable> = []
     private let logger: Logger = Logger()
     
-    override init(repository: BookmarkRepository) {
-        super.init(repository: repository)
+    init(bookmarkService: BookmarkService) {
+        self.bookmarkService = bookmarkService
     }
     
-    func delete(by id: Int) {
+    func delete(bookmark: Bookmark) {
         isLoading = true
-        repository.delete(by: id)
+        bookmarkService.delete(bookmark: bookmark)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {

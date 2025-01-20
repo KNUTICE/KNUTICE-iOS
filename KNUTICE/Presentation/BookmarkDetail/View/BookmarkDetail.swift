@@ -73,7 +73,7 @@ struct BookmarkDetail: View {
                         
                         Section {
                             Button(role: .destructive) {
-                                viewModel.delete(by: bookmark.notice.id)
+                                viewModel.delete(bookmark: bookmark)
                             } label: {
                                 Text("삭제")
                                     .foregroundStyle(.red)
