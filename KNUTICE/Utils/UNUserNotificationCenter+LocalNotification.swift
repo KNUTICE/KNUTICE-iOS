@@ -86,4 +86,9 @@ extension UNUserNotificationCenter {
         
         return content
     }
+    
+    func removeNotificationRequest(with identifier: String) {
+        let identifiers: [String] = [identifier]
+        self.removePendingNotificationRequests(withIdentifiers: identifiers)
+    }
 }
