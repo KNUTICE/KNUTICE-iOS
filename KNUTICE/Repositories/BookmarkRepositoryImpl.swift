@@ -6,6 +6,7 @@
 //
 
 import Combine
+import UserNotifications
 import Foundation
 
 final class BookmarkRepositoryImpl: BookmarkRepository {
@@ -60,6 +61,7 @@ final class BookmarkRepositoryImpl: BookmarkRepository {
     }
     
     func delete(by id: Int) -> AnyPublisher<Void, any Error> {
+        UNUserNotificationCenter.current().removeNotificationRequest(with: .init(id))
         return dataSource.delete(id: id)
     }
     
