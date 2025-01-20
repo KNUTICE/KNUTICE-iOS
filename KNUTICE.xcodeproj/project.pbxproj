@@ -45,6 +45,10 @@
 		8E0BA6DD2C33CA1300677A79 /* DetailedNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0BA6DC2C33CA1300677A79 /* DetailedNoticeCell.swift */; };
 		8E0C3F892C9EC93B005E2A16 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0C3F882C9EC93B005E2A16 /* ReportView.swift */; };
 		8E0C3F8C2C9ECD1B005E2A16 /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0C3F8B2C9ECD1B005E2A16 /* ReportViewModel.swift */; };
+		8E0CDED32D3B4CA5000F8DEF /* BookmarkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0CDED22D3B4CA5000F8DEF /* BookmarkService.swift */; };
+		8E0CDED42D3B4CA5000F8DEF /* BookmarkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0CDED22D3B4CA5000F8DEF /* BookmarkService.swift */; };
+		8E0CDED62D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0CDED52D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift */; };
+		8E0CDED72D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0CDED52D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift */; };
 		8E1599A12CA2735E001F75A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C82564C2BE5CE1B0038D4C8 /* LaunchScreen.storyboard */; };
 		8E2050FC2CD4F32F00D87C6A /* ScholarshipNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF8622C376AD0004A53E9 /* ScholarshipNoticeViewController.swift */; };
 		8E2050FD2CD4F32F00D87C6A /* MainNoticeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD4F2BFA120B00CCCCCD /* MainNoticeResponseDTO.swift */; };
@@ -354,6 +358,8 @@
 		8E0BA6DC2C33CA1300677A79 /* DetailedNoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedNoticeCell.swift; sourceTree = "<group>"; };
 		8E0C3F882C9EC93B005E2A16 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		8E0C3F8B2C9ECD1B005E2A16 /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewModel.swift; sourceTree = "<group>"; };
+		8E0CDED22D3B4CA5000F8DEF /* BookmarkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkService.swift; sourceTree = "<group>"; };
+		8E0CDED52D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNUserNotificationCenter+LocalNotification.swift"; sourceTree = "<group>"; };
 		8E2051472CD4F32F00D87C6A /* KNUTICE-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KNUTICE-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E2051482CD4F32F00D87C6A /* Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Dev.plist"; path = "/Users/ijeonghun/Desktop/GitHub/iOS/KNUTICE-iOS/KNUTICE/Application/Info-Dev.plist"; sourceTree = "<absolute>"; };
 		8E3B8C412D2B9A97007E9579 /* BookmarkForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkForm.swift; sourceTree = "<group>"; };
@@ -508,6 +514,7 @@
 				8E7A4A6F2D2A44CE00BD1B7F /* Date+StringFormat.swift */,
 				8E7A4A722D2A531B00BD1B7F /* NoticeKind.swift */,
 				8E5E8BE02D3605090078C007 /* NotificationName+BookmarkListRegresh.swift */,
+				8E0CDED52D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -805,6 +812,7 @@
 			children = (
 				8E3F021D2C9FB46100AE89D5 /* ReportService.swift */,
 				8EE4B4E72D16E4DD00EFF10B /* NotificationPermissionService.swift */,
+				8E0CDED22D3B4CA5000F8DEF /* BookmarkService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1426,6 +1434,7 @@
 				5C89DD492BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift in Sources */,
 				8E5E8BE22D3605090078C007 /* NotificationName+BookmarkListRegresh.swift in Sources */,
 				8EB6D20C2C66FC5B004E8AC2 /* SettingViewModel.swift in Sources */,
+				8E0CDED42D3B4CA5000F8DEF /* BookmarkService.swift in Sources */,
 				8E0BA6DD2C33CA1300677A79 /* DetailedNoticeCell.swift in Sources */,
 				8EF191FB2C4ABEB5004219BE /* AppDI.swift in Sources */,
 				5C8256422BE5CE1A0038D4C8 /* AppDelegate.swift in Sources */,
@@ -1458,6 +1467,7 @@
 				8EC6B8A52D3107FC002B45C7 /* BookmarkDetail.swift in Sources */,
 				8EFDAB032C3BC08900352779 /* WebViewController+Callbacks.swift in Sources */,
 				5C5698902BEFB3C50085E389 /* MainListCell.swift in Sources */,
+				8E0CDED62D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift in Sources */,
 				5C9B810E2BF45B5D0038EB27 /* NoticesRepresentable.swift in Sources */,
 				8EC6B8982D30B25F002B45C7 /* BookmarkRepository.swift in Sources */,
 				8EC6B89F2D30BAA3002B45C7 /* BookmarkRepositoryImpl.swift in Sources */,
@@ -1536,6 +1546,7 @@
 				8E2051092CD4F32F00D87C6A /* MainNoticeRepositoryImpl.swift in Sources */,
 				8E5E8BE12D3605090078C007 /* NotificationName+BookmarkListRegresh.swift in Sources */,
 				8E20510A2CD4F32F00D87C6A /* SettingViewModel.swift in Sources */,
+				8E0CDED32D3B4CA5000F8DEF /* BookmarkService.swift in Sources */,
 				8E20510B2CD4F32F00D87C6A /* DetailedNoticeCell.swift in Sources */,
 				8E20510C2CD4F32F00D87C6A /* AppDI.swift in Sources */,
 				8E20510D2CD4F32F00D87C6A /* AppDelegate.swift in Sources */,
@@ -1568,6 +1579,7 @@
 				8EC6B8A42D3107FC002B45C7 /* BookmarkDetail.swift in Sources */,
 				8E20511D2CD4F32F00D87C6A /* WebViewController+Callbacks.swift in Sources */,
 				8E20511F2CD4F32F00D87C6A /* MainListCell.swift in Sources */,
+				8E0CDED72D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift in Sources */,
 				8E2051202CD4F32F00D87C6A /* NoticesRepresentable.swift in Sources */,
 				8EC6B8992D30B25F002B45C7 /* BookmarkRepository.swift in Sources */,
 				8EC6B89E2D30BAA3002B45C7 /* BookmarkRepositoryImpl.swift in Sources */,

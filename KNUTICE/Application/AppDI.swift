@@ -111,7 +111,8 @@ struct AppDI {
     func makeBookmarkFormViewModel() -> BookmarkFormViewModel {
         let dataSource = LocalBookmarkDataSourceImpl.shared
         let repository = BookmarkRepositoryImpl(dataSource: dataSource)
-        let viewModel = BookmarkFormViewModel(repository: repository)
+        let service = BookmarkServiceImpl(repository: repository)
+        let viewModel = BookmarkFormViewModel(service: service)
         
         return viewModel
     }
