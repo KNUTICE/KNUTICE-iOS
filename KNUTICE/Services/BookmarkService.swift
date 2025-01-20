@@ -11,6 +11,7 @@ import UserNotifications
 protocol BookmarkService {
     func save(bookmark: Bookmark) -> AnyPublisher<Void, any Error>
     func delete(bookmark: Bookmark) -> AnyPublisher<Void, any Error>
+    func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error>
 }
 
 final class BookmarkServiceImpl: BookmarkService {
@@ -40,6 +41,21 @@ final class BookmarkServiceImpl: BookmarkService {
                 .eraseToAnyPublisher()
         } else {
             return repository.delete(by: bookmark.notice.id)
+        }
+    }
+    
+    func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
+        if let _ = bookmark.alarmDate {
+            return UNUserNotificationCenter.current().registerLocalNotification(for: bookmark)
+                .flatMap { _ -> AnyPublisher<Void, any Error> in
+                    UNUserNotificationCenter.current().updateNotificationRequestsBadge()
+                }
+                .flatMap {
+                    self.repository.update(bookmark: bookmark)
+                }
+                .eraseToAnyPublisher()
+        } else {
+            return repository.update(bookmark: bookmark)
         }
     }
 }
