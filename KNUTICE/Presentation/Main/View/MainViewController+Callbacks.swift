@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 //MARK: - Callback Function
 extension MainViewController {
@@ -52,5 +53,19 @@ extension MainViewController {
         let viewController = EventNoticeViewController(viewModel: AppDI.shared.makeEventNoticeViewModel())
         viewController.bind()
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    //MARK: - Setting Button Action
+    @objc func navigateToSetting(_ sender: UIButton) {
+        let viewController = UIHostingController(rootView: SettingView(viewModel: AppDI.shared.makeSettingViewModel()))
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    //MARK: - Search Button Action
+    @objc func navigateToSearch(_ sender: UIButton) {
+        let viewController = SearchTableViewController(viewModel: AppDI.shared.makeSearchTableViewModel())
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
     }
 }

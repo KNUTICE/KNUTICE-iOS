@@ -10,6 +10,7 @@ import SwiftUI
 struct BookmarkDetail: View {
     @StateObject private var viewModel: BookmarkDetailViewModel
     @Environment(\.dismiss) private var dismiss
+    @State private var isShowingWebView: Bool = false
     @Binding private var selectedMode: BookmarkDetailSwitchView.BookmarkViewMode
     
     private let bookmark: Bookmark
@@ -43,9 +44,8 @@ struct BookmarkDetail: View {
                 Divider()
                     .padding([.leading, .trailing])
                 
-                NavigationLink {
-                    NoticeWebVCWrapper(notice: bookmark.notice)
-                        .edgesIgnoringSafeArea(.bottom)
+                Button {
+                    isShowingWebView = true
                 } label: {
                     Text("공지사항 이동")
                         .padding([.top, .bottom])
@@ -57,7 +57,7 @@ struct BookmarkDetail: View {
                 .padding([.leading, .trailing])
                 .padding(.top, 50)
             }
-            .background(.customBackground)
+            .background(.detailViewBackground)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Menu {
@@ -73,7 +73,7 @@ struct BookmarkDetail: View {
                         
                         Section {
                             Button(role: .destructive) {
-                                viewModel.delete(by: bookmark.notice.id)
+                                viewModel.delete(bookmark: bookmark)
                             } label: {
                                 Text("삭제")
                                     .foregroundStyle(.red)
@@ -82,6 +82,22 @@ struct BookmarkDetail: View {
                     } label: {
                         Text("편집")
                     }
+                }
+            }
+            .fullScreenCover(isPresented: $isShowingWebView) {
+                NavigationStack {
+                    NoticeWebVCWrapper(notice: bookmark.notice)
+                        .edgesIgnoringSafeArea(.bottom)
+                        .toolbar {
+                            ToolbarItem(placement: .topBarLeading) {
+                                Button {
+                                    isShowingWebView = false
+                                } label: {
+                                    Image(systemName: "xmark")
+                                }
+                            }
+                        }
+                        .background(.detailViewBackground)
                 }
             }
             

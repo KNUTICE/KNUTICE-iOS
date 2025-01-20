@@ -34,6 +34,8 @@ struct BookmarkDetailSwitchView: View {
                 .navigationBarBackButtonHidden(true)
             }
         }
+        .navigationTitle("")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
