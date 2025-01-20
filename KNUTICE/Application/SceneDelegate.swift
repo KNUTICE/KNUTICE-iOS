@@ -39,7 +39,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //전달된 모든 알림 데이터 삭제
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         //남아 있는 Notification Request Badge Count 재설정
-        UNUserNotificationCenter.current().resetPendingNotificationRequests()
+        UNUserNotificationCenter.current().updatePendingNotificationRequestsBadge()
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
