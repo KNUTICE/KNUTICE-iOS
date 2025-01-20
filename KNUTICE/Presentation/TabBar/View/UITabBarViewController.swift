@@ -16,8 +16,7 @@ final class UITabBarViewController: UITabBarController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        updateNavigationBar(for: selectedIndex)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     override func viewDidLoad() {
@@ -26,18 +25,11 @@ final class UITabBarViewController: UITabBarController {
         setViewControllers([mainViewController, reminderViewController], animated: true)
         setupTabBar()
         setupShadowView()
-        self.delegate = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .customBackground
-        appearance.shadowColor = .clear
-        
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
 }
 
@@ -81,7 +73,7 @@ extension UITabBarViewController {
         view.bringSubviewToFront(tabBar)
         shadowView.snp.makeConstraints { make in
             make.width.equalTo(tabBar.snp.width)
-            make.height.equalTo(tabBar.snp.height)
+            make.height.equalTo(tabBar.snp.height).offset(-1)
             make.centerX.equalTo(tabBar.snp.centerX)
             make.bottom.equalTo(tabBar.snp.bottom)
         }
@@ -93,6 +85,7 @@ struct UITabBarViewControllerPreview: PreviewProvider {
     static var previews: some View {
         UINavigationController(rootViewController: UITabBarViewController())
             .makePreview()
+            .edgesIgnoringSafeArea(.all)
     }
 }
 #endif
