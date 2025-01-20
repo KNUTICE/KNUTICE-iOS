@@ -9,7 +9,7 @@ import Combine
 import Foundation
 import os
 
-final class BookmarkEditFormViewModel: BookmarkManager, BookmarkFormHandler {
+final class BookmarkEditFormViewModel: ObservableObject, BookmarkFormHandler {
     @Published var title: String
     @Published var alarmDate: Date
     @Published var isAlarmOn: Bool
@@ -17,21 +17,22 @@ final class BookmarkEditFormViewModel: BookmarkManager, BookmarkFormHandler {
     @Published var isShowingAlert: Bool = false
     @Published var isLoading: Bool = false
     
+    private let bookmarkService: BookmarkService
     var alertMessage: String = ""
     private var cancellables: Set<AnyCancellable> = []
     private let logger: Logger = Logger()
     
-    init(bookmark: Bookmark, repository: BookmarkRepository) {
+    init(bookmark: Bookmark, bookmarkService: BookmarkService) {
         self.title = bookmark.notice.title
         self.alarmDate = bookmark.alarmDate ?? Date()
         self.isAlarmOn = bookmark.alarmDate == nil ? false : true
         self.memo = bookmark.memo
-        super.init(repository: repository)
+        self.bookmarkService = bookmarkService
     }
     
     func save(with notice: Notice) {
         isLoading = true
-        repository.update(bookmark: getBookmark(notice: notice))
+        bookmarkService.update(bookmark: getBookmark(notice: notice))
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
@@ -39,6 +40,7 @@ final class BookmarkEditFormViewModel: BookmarkManager, BookmarkFormHandler {
                     self?.logger.log(level: .debug, "BookmarkEditFormViewModel.save(with:) Successfully saved Bookmark")
                     self?.alertMessage = "저장을 완료했어요."
                 case .failure(let error):
+                    self?.logger.log(level: .error, "BookmarkEditFormViewModel.save(with:) Failed to save Bookmark: \(error.localizedDescription)")
                     self?.alertMessage = "저장을 실패했어요."
                 }
                 

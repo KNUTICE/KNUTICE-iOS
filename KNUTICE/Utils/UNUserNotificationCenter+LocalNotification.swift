@@ -75,7 +75,6 @@ extension UNUserNotificationCenter {
                     self.add($0) { error in
                         if let error = error {
                             promise(.failure(error))
-                            return
                         }
                     }
                 }
@@ -97,7 +96,6 @@ extension UNUserNotificationCenter {
                     self.add($0) { error in
                         if let error = error {
                             promise(.failure(error))
-                            return
                         }
                     }
                 }
