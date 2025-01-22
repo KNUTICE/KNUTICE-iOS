@@ -7,12 +7,24 @@
 
 import UIKit
 import SwiftUI
+import RxSwift
 
 final class UITabBarViewController: UITabBarController {
     private let mainViewController = MainViewController(viewModel: AppDI.shared.makeMainViewModel())
     private let reminderViewController = UIHostingController(
         rootView: BookmarkList(viewModel: AppDI.shared.makeBookmarkListViewModel())
     )
+    let viewModel: TabBarViewModel
+    let disposeBag: DisposeBag = .init()
+    
+    init(viewModel: TabBarViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -23,8 +35,11 @@ final class UITabBarViewController: UITabBarController {
         super.viewDidLoad()
         
         setViewControllers([mainViewController, reminderViewController], animated: true)
-        setupTabBar()
         setupShadowView()
+        setupTabBar()
+        binding()
+        
+        viewModel.fetchMainPopupContent()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -83,7 +98,7 @@ extension UITabBarViewController {
 #if DEBUG
 struct UITabBarViewControllerPreview: PreviewProvider {
     static var previews: some View {
-        UINavigationController(rootViewController: UITabBarViewController())
+        UINavigationController(rootViewController: UITabBarViewController(viewModel: AppDI.shared.makeTabBarViewModel()))
             .makePreview()
             .edgesIgnoringSafeArea(.all)
     }
