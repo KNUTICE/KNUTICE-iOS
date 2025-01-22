@@ -134,4 +134,12 @@ struct AppDI {
         
         return viewModel
     }
+    
+    func makeTabBarViewModel() -> TabBarViewModel {
+        let dataSource = RemoteDataSourceImpl.shared
+        let repository = MainPopupContentRepositoryImpl(dataSource: dataSource)
+        let viewModel = TabBarViewModel(repsotiroy: repository)
+        
+        return viewModel
+    }
 }
