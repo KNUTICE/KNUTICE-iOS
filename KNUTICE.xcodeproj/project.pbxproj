@@ -899,8 +899,8 @@
 			isa = PBXGroup;
 			children = (
 				8E659EBD2D29438500305D56 /* UITabBarViewController.swift */,
-				8EB3F92E2D3E192F00DD47B3 /* BottomModal.swift */,
 				8E5C1AD72D407F000092BF88 /* UITabBarViewController+Binding.swift */,
+				8EB3F92E2D3E192F00DD47B3 /* BottomModal.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

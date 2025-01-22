@@ -84,7 +84,7 @@ final class BottomModal: UIView {
         contentView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
-            make.bottom.equalToSuperview().offset(-32)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-16)
             make.height.equalTo(UIScreen.main.bounds.size.height * 0.4)
         }
         
