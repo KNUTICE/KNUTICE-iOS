@@ -63,7 +63,7 @@ struct SettingView: View {
                 .padding([.top, .bottom])
                 
                 NavigationLink {
-                    OpenSourceLicenseView()
+                    ContentWebView(navigationTitle: "오픈소스 라이선스", contentURL: Bundle.main.openSourceURL)
                 } label: {
                     Text("오픈소스 라이선스")
                         .padding([.top, .bottom])

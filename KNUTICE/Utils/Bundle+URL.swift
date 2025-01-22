@@ -107,4 +107,14 @@ extension Bundle {
         
         return url
     }
+    
+    var mainPopupContentURL: String {
+        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
+              let resource = NSDictionary(contentsOfFile: file),
+              let url = resource["Main_Popup_URL"] as? String else {
+            return ""
+        }
+        
+        return url
+    }
 }
