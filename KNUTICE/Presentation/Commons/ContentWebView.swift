@@ -1,5 +1,5 @@
 //
-//  OpenSourceLicenseView.swift
+//  ContentWebView.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 7/16/24.
@@ -7,9 +7,12 @@
 
 import SwiftUI
 
-struct OpenSourceLicenseView: View {
+struct ContentWebView: View {
     @State private var isLoading: Bool = false
     @State private var progress: Double = 0.0
+    
+    let navigationTitle: String
+    let contentURL: String
     
     var body: some View {
         VStack(spacing: 0) {
@@ -25,9 +28,9 @@ struct OpenSourceLicenseView: View {
             
             WebView(progress: $progress,
                     isLoading: $isLoading,
-                    url: Bundle.main.openSourceURL)
+                    url: contentURL)
         }
-        .navigationTitle("오픈소스 라이선스")
+        .navigationTitle(navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -35,7 +38,7 @@ struct OpenSourceLicenseView: View {
 #if DEBUG
 #Preview {
     NavigationView {
-        OpenSourceLicenseView()
+        ContentWebView(navigationTitle: "오픈소스 라이선스", contentURL: Bundle.main.openSourceURL)
     }
 }
 #endif
