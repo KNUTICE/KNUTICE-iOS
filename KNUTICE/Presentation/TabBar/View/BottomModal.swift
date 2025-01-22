@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 final class BottomModal: UIView {
     private let contentView: UIView = {
@@ -45,6 +46,7 @@ final class BottomModal: UIView {
         config.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
         config.cornerStyle = .capsule
         let button = UIButton(configuration: config)
+        button.addTarget(self, action: #selector(redirectBtnAction(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -123,5 +125,24 @@ final class BottomModal: UIView {
     
     @objc func closeBtnAction(_ sender: UIButton) {
         makeHidden()
+    }
+    
+    @objc func redirectBtnAction(_ sender: UIButton) {
+        func getViewController() -> UIViewController? {
+            var responder: UIResponder? = self
+            
+            while responder != nil {
+                responder = responder?.next
+                if let viewController = responder as? UIViewController {
+                    return viewController
+                }
+            }
+            
+            return nil
+        }
+        
+        let viewController = UIHostingController(rootView: ContentWebView(navigationTitle: "", contentURL: content.contentURL))
+        getViewController()?.navigationController?.pushViewController(viewController, animated: true)
+        makeHidden()    //navigation 이동 전 View 삭제
     }
 }
