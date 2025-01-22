@@ -18,7 +18,7 @@ extension AppVersionProvidable {
         }
         
         #if DEV
-        return version + " beta 2"
+        return version + " beta 3"
         #else
         return version
         #endif
