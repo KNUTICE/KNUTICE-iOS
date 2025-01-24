@@ -34,6 +34,8 @@ cat <<EOF > "/Volumes/workspace/repository/KNUTICE/Application/ServiceInfo.plist
     <string>${Search_URL}</string>
     <key>Notification_Permission_URL</key>
     <string>${Notification_Permission_URL}</string>
+    <key>Main_Popup_URL</key>
+    <string>${Main_Popup_URL}</string>
 </dict>
 </plist>
 EOF
