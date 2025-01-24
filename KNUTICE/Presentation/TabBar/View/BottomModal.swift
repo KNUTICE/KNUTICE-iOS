@@ -18,11 +18,23 @@ final class BottomModal: UIView {
     private let closeBtn: UIButton = {
         var config = UIButton.Configuration.plain()
         var titleContainer = AttributeContainer()
-        titleContainer.font = UIFont.systemFont(ofSize: 17)
+        titleContainer.font = UIFont.systemFont(ofSize: 15)
         config.attributedTitle = AttributedString("닫기", attributes: titleContainer)
         config.baseForegroundColor = .white
         let button = UIButton(configuration: config)
         button.addTarget(self, action: #selector(closeBtnAction(_:)), for: .touchUpInside)
+        return button
+    }()
+    private let dontShowForTodayBtn: UIButton = {
+        var config = UIButton.Configuration.plain()
+        var titleContainer = AttributeContainer()
+        titleContainer.font = UIFont.systemFont(ofSize: 15)
+        config.attributedTitle = AttributedString("오늘 하루 보지 않기", attributes: titleContainer)
+        config.image = UIImage(systemName: "checkmark")
+        config.imagePadding = 5
+        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 10)
+        config.baseForegroundColor = .white
+        let button = UIButton(configuration: config)
         return button
     }()
     private let titleLabel: UILabel = {
@@ -70,12 +82,13 @@ final class BottomModal: UIView {
         contentLabel.text = content.content
     }
     
-    func setLayout() {
+    func setupLayout() {
         addSubview(contentView)
         addSubview(closeBtn)
         addSubview(titleLabel)
         addSubview(contentLabel)
         addSubview(redirectBtn)
+        addSubview(dontShowForTodayBtn)
         
         self.snp.makeConstraints { make in
             make.leading.trailing.bottom.top.equalToSuperview()
@@ -92,6 +105,12 @@ final class BottomModal: UIView {
         //closeBtn
         closeBtn.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalTo(contentView.snp.top).offset(-5)
+        }
+        
+        //dontShowForTodayBtn
+        dontShowForTodayBtn.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16)
             make.bottom.equalTo(contentView.snp.top).offset(-5)
         }
         
