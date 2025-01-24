@@ -32,7 +32,8 @@ struct BookmarkListRow: View {
             }
             .offset(y: -29)
         }
-        .padding()
+        .padding([.top, .bottom])
+        .padding([.leading, .trailing], 16)
         .background(.mainCellBackground)
         .cornerRadius(10)
     }
