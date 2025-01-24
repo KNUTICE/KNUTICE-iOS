@@ -17,7 +17,7 @@ extension UITabBarViewController {
                         UIView.transition(with: self.view, duration: 0.3, options: .transitionCrossDissolve) {
                             let bottomModal = BottomModal(content: popupContent)
                             self.view.addSubview(bottomModal)
-                            bottomModal.setLayout()
+                            bottomModal.setupLayout()
                         }
                     }
                 }
