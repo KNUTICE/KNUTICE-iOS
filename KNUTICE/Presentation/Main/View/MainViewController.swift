@@ -59,12 +59,12 @@ extension MainViewController: UITableViewDelegate {
         
         //Auto Layout
         title.snp.makeConstraints { make in
-            make.leading.equalTo(headerView.safeAreaLayoutGuide).inset(20)
+            make.leading.equalTo(headerView.safeAreaLayoutGuide).inset(16)
             make.top.bottom.equalToSuperview()
         }
         
         button.snp.makeConstraints { make in
-            make.trailing.equalTo(headerView.safeAreaLayoutGuide).inset(20)
+            make.trailing.equalTo(headerView.safeAreaLayoutGuide).inset(16)
             make.centerY.equalToSuperview()
         }
         
