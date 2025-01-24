@@ -17,7 +17,9 @@ final class BottomModal: UIView {
     }()
     private let closeBtn: UIButton = {
         var config = UIButton.Configuration.plain()
-        config.title = "닫기"
+        var titleContainer = AttributeContainer()
+        titleContainer.font = UIFont.systemFont(ofSize: 17)
+        config.attributedTitle = AttributedString("닫기", attributes: titleContainer)
         config.baseForegroundColor = .white
         let button = UIButton(configuration: config)
         button.addTarget(self, action: #selector(closeBtnAction(_:)), for: .touchUpInside)
@@ -25,23 +27,22 @@ final class BottomModal: UIView {
     }()
     private let titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        let preferredFont = UIFont.preferredFont(forTextStyle: .title2)
-        let boldFont = preferredFont.fontDescriptor.withSymbolicTraits(.traitBold)
-        if let boldFont = boldFont {
-            label.font = UIFont(descriptor: boldFont, size: 0)
-        }
+        label.font = .boldSystemFont(ofSize: 22)
+        label.textColor = .black
         return label
     }()
     private let contentLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.font = .systemFont(ofSize: 15)
         label.textColor = .gray
         label.numberOfLines = 0    //멀티 라인으로 표시
         return label
     }()
     private let redirectBtn: UIButton = {
         var config = UIButton.Configuration.filled()
-        config.title = "자세히 보기"
+        var titleContainer = AttributeContainer()
+        titleContainer.font = UIFont.systemFont(ofSize: 17)
+        config.attributedTitle = AttributedString("자세히 보기", attributes: titleContainer)
         config.baseBackgroundColor = .accent2
         config.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
         config.cornerStyle = .capsule
@@ -57,7 +58,7 @@ final class BottomModal: UIView {
         super.init(frame: .zero)
         
         self.setAttribute()
-        self.backgroundColor = .black.withAlphaComponent(0.5)
+        self.backgroundColor = .black.withAlphaComponent(0.7)
     }
     
     required init(coder: NSCoder) {
@@ -85,7 +86,7 @@ final class BottomModal: UIView {
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-16)
-            make.height.equalTo(UIScreen.main.bounds.size.height * 0.4)
+            make.height.equalTo(UIScreen.main.bounds.size.width * 0.8)
         }
         
         //closeBtn
