@@ -81,7 +81,7 @@ fileprivate struct BookmarkListNavBar: View {
             .offset(x: -1.5)
         }
         .frame(height: 44)
-        .padding([.leading, .trailing], 20)
+        .padding([.leading, .trailing], 16)
         .background(.mainBackground)
     }
 }

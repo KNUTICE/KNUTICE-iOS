@@ -77,12 +77,12 @@ extension MainViewController {
         //titleLabel
         titleLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.left.equalTo(navigationBar.snp.left).offset(20)
+            make.left.equalTo(navigationBar.snp.left).offset(16)
         }
         
         //settingBtn
         settingBtn.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-20)
+            make.right.equalToSuperview().offset(-16)
             make.centerY.equalTo(titleLabel.snp.centerY)
         }
         
