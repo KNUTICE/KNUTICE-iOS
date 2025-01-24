@@ -204,6 +204,7 @@
 		8EB6D2042C663627004E8AC2 /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8EB6D1FD2C663627004E8AC2 /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8EB6D20C2C66FC5B004E8AC2 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6D20B2C66FC5B004E8AC2 /* SettingViewModel.swift */; };
 		8EB6D20E2C6713BB004E8AC2 /* View+Fork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6D20D2C6713BB004E8AC2 /* View+Fork.swift */; };
+		8EB7677C2D434E2C0086AB60 /* MainPopupTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7677B2D434E2C0086AB60 /* MainPopupTest.swift */; };
 		8EBBE2402CA0E3FC00826D5A /* LightTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBBE23F2CA0E3FB00826D5A /* LightTextView.swift */; };
 		8EC141212D33E4E8001FD93C /* NoticeWebVCWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC141202D33E4E8001FD93C /* NoticeWebVCWrapper.swift */; };
 		8EC141222D33E4E8001FD93C /* NoticeWebVCWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC141202D33E4E8001FD93C /* NoticeWebVCWrapper.swift */; };
@@ -434,6 +435,7 @@
 		8EB6D2012C663627004E8AC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8EB6D20B2C66FC5B004E8AC2 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		8EB6D20D2C6713BB004E8AC2 /* View+Fork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Fork.swift"; sourceTree = "<group>"; };
+		8EB7677B2D434E2C0086AB60 /* MainPopupTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPopupTest.swift; sourceTree = "<group>"; };
 		8EBBE23F2CA0E3FB00826D5A /* LightTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTextView.swift; sourceTree = "<group>"; };
 		8EC141202D33E4E8001FD93C /* NoticeWebVCWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeWebVCWrapper.swift; sourceTree = "<group>"; };
 		8EC65D602CDB7656001F4FFA /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
@@ -945,6 +947,7 @@
 				8ECB82D22CDB6A6300420349 /* MainNoticeTest.swift */,
 				8ECB82D32CDB6A6300420349 /* NoticeTest.swift */,
 				8EE4B4F92D17D33600EFF10B /* SearchTest.swift */,
+				8EB7677B2D434E2C0086AB60 /* MainPopupTest.swift */,
 			);
 			path = KNUTICEUnitTests;
 			sourceTree = "<group>";
@@ -1689,6 +1692,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EE4B4FD2D17D96500EFF10B /* RequestResult.swift in Sources */,
+				8EB7677C2D434E2C0086AB60 /* MainPopupTest.swift in Sources */,
 				8ECB82D42CDB6A6300420349 /* MainNoticeTest.swift in Sources */,
 				8ECB82D52CDB6A6300420349 /* NoticeTest.swift in Sources */,
 				8EE4B4FC2D17D93700EFF10B /* NoticeReponseDTO.swift in Sources */,
