@@ -21,18 +21,23 @@ struct BookmarkList: View {
                 BookmarkListNavBar()
                 
                 List {
-                    ForEach(bookmarkList, id: \.self.notice.id) { bookmark in
-                        ZStack {
-                            NavigationLink {
-                                BookmarkDetailSwitchView(bookmark: bookmark)
-                            } label: {
-                                EmptyView()
+                    Section {
+                        ForEach(bookmarkList, id: \.self.notice.id) { bookmark in
+                            ZStack {
+                                NavigationLink {
+                                    BookmarkDetailSwitchView(bookmark: bookmark)
+                                } label: {
+                                    EmptyView()
+                                }
+                                
+                                BookmarkListRow(bookmark: bookmark)
                             }
-                            
-                            BookmarkListRow(bookmark: bookmark)
+                            .listRowBackground(Color.mainBackground)
+                            .listRowSeparator(.hidden)
                         }
-                        .listRowBackground(Color.mainBackground)
-                        .listRowSeparator(.hidden)
+                    } header: {
+                        Text("개수(\(bookmarkList.count))")
+                            .bold()
                     }
                 }
                 .listStyle(.plain)
