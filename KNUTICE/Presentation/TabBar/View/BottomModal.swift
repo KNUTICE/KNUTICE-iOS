@@ -35,6 +35,7 @@ final class BottomModal: UIView {
         config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 10)
         config.baseForegroundColor = .white
         let button = UIButton(configuration: config)
+        button.addTarget(self, action: #selector(dontShowBtnAction(_:)), for: .touchUpInside)
         return button
     }()
     private let titleLabel: UILabel = {
@@ -143,11 +144,11 @@ final class BottomModal: UIView {
         self.titleLabel.removeFromSuperview()
     }
     
-    @objc func closeBtnAction(_ sender: UIButton) {
+    @objc private func closeBtnAction(_ sender: UIButton) {
         makeHidden()
     }
     
-    @objc func redirectBtnAction(_ sender: UIButton) {
+    @objc private func redirectBtnAction(_ sender: UIButton) {
         func getViewController() -> UIViewController? {
             var responder: UIResponder? = self
             
@@ -164,5 +165,11 @@ final class BottomModal: UIView {
         let viewController = UIHostingController(rootView: ContentWebView(navigationTitle: "", contentURL: content.contentURL))
         getViewController()?.navigationController?.pushViewController(viewController, animated: true)
         makeHidden()    //navigation 이동 전 View 삭제
+    }
+    
+    @objc private func dontShowBtnAction(_ sender: UIButton) {
+        guard let endOfToday = Date.endOfToday else { return }
+        UserDefaults.standard.set(endOfToday.timeIntervalSince1970, forKey: "noShowPopupDate")
+        makeHidden()
     }
 }
