@@ -42,13 +42,12 @@ extension NoticeViewModel: NoticesRepresentable {
         isRefreshing.accept(true)
         
         repository.fetchNotices()
+            .delay(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe { [weak self] in
                 switch $0 {
                 case .success(let notices):
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        self?.isRefreshing.accept(false)
-                        self?.notices.accept(notices)
-                    }
+                    self?.isRefreshing.accept(false)
+                    self?.notices.accept(notices)
                 case .failure(let error):
                     print("refreshNotices error: \(error)")
                 }
@@ -63,6 +62,7 @@ extension NoticeViewModel: NoticesRepresentable {
         
         isFetching.accept(true)
         repository.fetchNotices(after: lastNumber)
+            .delay(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe { [weak self] in
                 switch $0 {
                 case .success(let nextNotices):
@@ -73,13 +73,11 @@ extension NoticeViewModel: NoticesRepresentable {
                         return
                     }
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        self?.isFetching.accept(false)
-                        self?.notices.accept(temp)
-                        
-                        if nextNotices.isEmpty {
-                            self?.isFinished.accept(true)
-                        }
+                    self?.isFetching.accept(false)
+                    self?.notices.accept(temp)
+                    
+                    if nextNotices.isEmpty {
+                        self?.isFinished.accept(true)
                     }
                 case .failure(let error):
                     print("fetchNextNotices error: \(error)")
