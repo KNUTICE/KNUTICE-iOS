@@ -59,7 +59,7 @@ fileprivate struct BookmarkSubTitle: View {
         HStack(spacing: 5) {
             Image(systemName: "alarm")
             
-            Text(bookmark.alarmDate?.shortDate ?? "없음")
+            Text(bookmark.alarmDate?.dateTime ?? "없음")
         }
         .font(.caption2)
         .foregroundStyle(.gray)
