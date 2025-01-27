@@ -80,7 +80,12 @@ final class BottomModal: UIView {
     
     private func setAttribute() {
         titleLabel.text = content.title
-        contentLabel.text = content.content
+        
+        let attributedText = NSMutableAttributedString(string: content.content)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 8
+        attributedText.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedText.length))
+        contentLabel.attributedText = attributedText
     }
     
     func setupLayout() {
