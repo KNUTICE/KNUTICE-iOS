@@ -39,7 +39,9 @@ final class UITabBarViewController: UITabBarController {
         setupTabBar()
         binding()
         
-        viewModel.fetchMainPopupContent()
+        if UserDefaults.standard.double(forKey: "noShowPopupDate") < Date().timeIntervalSince1970 {
+            viewModel.fetchMainPopupContent()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -32,7 +32,8 @@ struct BookmarkListRow: View {
             }
             .offset(y: -29)
         }
-        .padding()
+        .padding([.top, .bottom])
+        .padding([.leading, .trailing], 16)
         .background(.mainCellBackground)
         .cornerRadius(10)
     }
@@ -58,7 +59,7 @@ fileprivate struct BookmarkSubTitle: View {
         HStack(spacing: 5) {
             Image(systemName: "alarm")
             
-            Text(bookmark.alarmDate?.shortDate ?? "없음")
+            Text(bookmark.alarmDate?.dateTime ?? "없음")
         }
         .font(.caption2)
         .foregroundStyle(.gray)
