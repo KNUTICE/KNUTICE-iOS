@@ -43,11 +43,10 @@ final class MainViewModel {
         isLoading.accept(true)
         
         repository.fetchMainNotices()
+            .delay(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] result in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self?.notices.accept(result)
-                    self?.isLoading.accept(false)
-                }
+                self?.notices.accept(result)
+                self?.isLoading.accept(false)
             })
             .disposed(by: disposeBag)
     }
