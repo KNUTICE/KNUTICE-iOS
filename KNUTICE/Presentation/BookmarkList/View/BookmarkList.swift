@@ -9,7 +9,6 @@ import SwiftUI
 
 struct BookmarkList: View {
     @StateObject private var viewModel: BookmarkListViewModel
-    @State private var isShowingSheet: Bool = false
     
     init(viewModel: BookmarkListViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -21,23 +20,29 @@ struct BookmarkList: View {
                 BookmarkListNavBar()
                 
                 List {
-                    Section {
-                        ForEach(bookmarkList, id: \.self.notice.id) { bookmark in
-                            ZStack {
-                                NavigationLink {
-                                    BookmarkDetailSwitchView(bookmark: bookmark)
-                                } label: {
-                                    EmptyView()
-                                }
-                                
-                                BookmarkListRow(bookmark: bookmark)
-                            }
-                            .listRowBackground(Color.mainBackground)
-                            .listRowSeparator(.hidden)
-                        }
-                    } header: {
+                    if !bookmarkList.isEmpty {
                         Text("개수(\(bookmarkList.count))")
+                            .frame(height: 3)
+                            .font(.subheadline)
                             .bold()
+                            .foregroundStyle(.gray)
+                            .listRowSeparator(.hidden)
+                            .listRowBackground(Color.mainBackground)
+                            .offset(y: 10)
+                    }
+                    
+                    ForEach(bookmarkList, id: \.self.notice.id) { bookmark in
+                        ZStack {
+                            NavigationLink {
+                                BookmarkDetailSwitchView(bookmark: bookmark)
+                            } label: {
+                                EmptyView()
+                            }
+                            
+                            BookmarkListRow(bookmark: bookmark)
+                        }
+                        .listRowBackground(Color.mainBackground)
+                        .listRowSeparator(.hidden)
                     }
                 }
                 .listStyle(.plain)
