@@ -19,8 +19,7 @@ struct BookmarkListRow: View {
                 
                 BookmarkSubTitle(bookmark: bookmark)
             }
-            
-            Spacer()
+            .frame(maxWidth: .infinity, alignment: .leading)
             
             ZStack {
                 Rectangle()
