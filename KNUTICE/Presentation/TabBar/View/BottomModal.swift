@@ -17,31 +17,45 @@ final class BottomModal: UIView {
     }()
     private let closeBtn: UIButton = {
         var config = UIButton.Configuration.plain()
-        config.title = "닫기"
+        var titleContainer = AttributeContainer()
+        titleContainer.font = UIFont.systemFont(ofSize: 15)
+        config.attributedTitle = AttributedString("닫기", attributes: titleContainer)
         config.baseForegroundColor = .white
         let button = UIButton(configuration: config)
         button.addTarget(self, action: #selector(closeBtnAction(_:)), for: .touchUpInside)
         return button
     }()
+    private let dontShowForTodayBtn: UIButton = {
+        var config = UIButton.Configuration.plain()
+        var titleContainer = AttributeContainer()
+        titleContainer.font = UIFont.systemFont(ofSize: 15)
+        config.attributedTitle = AttributedString("오늘 하루 보지 않기", attributes: titleContainer)
+        config.image = UIImage(systemName: "checkmark")
+        config.imagePadding = 5
+        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 10)
+        config.baseForegroundColor = .white
+        let button = UIButton(configuration: config)
+        button.addTarget(self, action: #selector(dontShowBtnAction(_:)), for: .touchUpInside)
+        return button
+    }()
     private let titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        let preferredFont = UIFont.preferredFont(forTextStyle: .title2)
-        let boldFont = preferredFont.fontDescriptor.withSymbolicTraits(.traitBold)
-        if let boldFont = boldFont {
-            label.font = UIFont(descriptor: boldFont, size: 0)
-        }
+        label.font = .boldSystemFont(ofSize: 22)
+        label.textColor = .black
         return label
     }()
     private let contentLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.font = .systemFont(ofSize: 15)
         label.textColor = .gray
         label.numberOfLines = 0    //멀티 라인으로 표시
         return label
     }()
     private let redirectBtn: UIButton = {
         var config = UIButton.Configuration.filled()
-        config.title = "자세히 보기"
+        var titleContainer = AttributeContainer()
+        titleContainer.font = UIFont.systemFont(ofSize: 17)
+        config.attributedTitle = AttributedString("자세히 보기", attributes: titleContainer)
         config.baseBackgroundColor = .accent2
         config.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
         config.cornerStyle = .capsule
@@ -57,7 +71,7 @@ final class BottomModal: UIView {
         super.init(frame: .zero)
         
         self.setAttribute()
-        self.backgroundColor = .black.withAlphaComponent(0.5)
+        self.backgroundColor = .black.withAlphaComponent(0.7)
     }
     
     required init(coder: NSCoder) {
@@ -66,15 +80,21 @@ final class BottomModal: UIView {
     
     private func setAttribute() {
         titleLabel.text = content.title
-        contentLabel.text = content.content
+        
+        let attributedText = NSMutableAttributedString(string: content.content)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 8
+        attributedText.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedText.length))
+        contentLabel.attributedText = attributedText
     }
     
-    func setLayout() {
+    func setupLayout() {
         addSubview(contentView)
         addSubview(closeBtn)
         addSubview(titleLabel)
         addSubview(contentLabel)
         addSubview(redirectBtn)
+        addSubview(dontShowForTodayBtn)
         
         self.snp.makeConstraints { make in
             make.leading.trailing.bottom.top.equalToSuperview()
@@ -85,12 +105,18 @@ final class BottomModal: UIView {
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-16)
-            make.height.equalTo(UIScreen.main.bounds.size.height * 0.4)
+            make.height.equalTo(UIScreen.main.bounds.size.width * 0.8)
         }
         
         //closeBtn
         closeBtn.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalTo(contentView.snp.top).offset(-5)
+        }
+        
+        //dontShowForTodayBtn
+        dontShowForTodayBtn.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16)
             make.bottom.equalTo(contentView.snp.top).offset(-5)
         }
         
@@ -123,11 +149,11 @@ final class BottomModal: UIView {
         self.titleLabel.removeFromSuperview()
     }
     
-    @objc func closeBtnAction(_ sender: UIButton) {
+    @objc private func closeBtnAction(_ sender: UIButton) {
         makeHidden()
     }
     
-    @objc func redirectBtnAction(_ sender: UIButton) {
+    @objc private func redirectBtnAction(_ sender: UIButton) {
         func getViewController() -> UIViewController? {
             var responder: UIResponder? = self
             
@@ -144,5 +170,11 @@ final class BottomModal: UIView {
         let viewController = UIHostingController(rootView: ContentWebView(navigationTitle: "", contentURL: content.contentURL))
         getViewController()?.navigationController?.pushViewController(viewController, animated: true)
         makeHidden()    //navigation 이동 전 View 삭제
+    }
+    
+    @objc private func dontShowBtnAction(_ sender: UIButton) {
+        guard let endOfToday = Date.endOfToday else { return }
+        UserDefaults.standard.set(endOfToday.timeIntervalSince1970, forKey: "noShowPopupDate")
+        makeHidden()
     }
 }

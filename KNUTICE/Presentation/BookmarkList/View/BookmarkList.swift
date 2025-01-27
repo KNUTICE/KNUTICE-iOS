@@ -9,7 +9,6 @@ import SwiftUI
 
 struct BookmarkList: View {
     @StateObject private var viewModel: BookmarkListViewModel
-    @State private var isShowingSheet: Bool = false
     
     init(viewModel: BookmarkListViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -21,6 +20,17 @@ struct BookmarkList: View {
                 BookmarkListNavBar()
                 
                 List {
+                    if !bookmarkList.isEmpty {
+                        Text("개수(\(bookmarkList.count))")
+                            .frame(height: 3)
+                            .font(.subheadline)
+                            .bold()
+                            .foregroundStyle(.gray)
+                            .listRowSeparator(.hidden)
+                            .listRowBackground(Color.mainBackground)
+                            .offset(y: 10)
+                    }
+                    
                     ForEach(bookmarkList, id: \.self.notice.id) { bookmark in
                         ZStack {
                             NavigationLink {
@@ -81,7 +91,7 @@ fileprivate struct BookmarkListNavBar: View {
             .offset(x: -1.5)
         }
         .frame(height: 44)
-        .padding([.leading, .trailing], 20)
+        .padding([.leading, .trailing], 16)
         .background(.mainBackground)
     }
 }
