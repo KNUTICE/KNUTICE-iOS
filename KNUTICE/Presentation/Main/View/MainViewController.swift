@@ -42,7 +42,7 @@ final class MainViewController: UIViewController {
         bindRefreshControl()
         recordEntryTime()
         observeNotification()
-        viewModel.fetchNotices()
+        viewModel.fetchNoticesWithCombine()
     }
 }
 
