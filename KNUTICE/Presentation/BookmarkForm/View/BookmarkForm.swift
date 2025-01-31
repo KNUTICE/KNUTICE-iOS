@@ -40,7 +40,7 @@ struct BookmarkForm<T: BookmarkFormHandler>: View {
                 VStack(spacing: -5) {
                     SectionHeader(title: "메모")
                     
-                    StrokedDescriptionTextField(description: $viewModel.memo)
+                    BorderedDescriptionTextField(description: $viewModel.memo)
                 }
             }
             .animation(.easeInOut, value: viewModel.isAlarmOn)
@@ -162,12 +162,12 @@ fileprivate struct StrokedAdvanceNoticePicker: View {
     }
 }
 
-fileprivate struct StrokedDescriptionTextField: View {
+fileprivate struct BorderedDescriptionTextField: View {
     @Binding var description: String
     
     var body: some View {
-        TextField("Description", text: $description, axis: .vertical)
-            .lineLimit(5...10)
+        TextField("중요한 메모는 여기에 작성하세요.", text: $description, axis: .vertical)
+            .lineLimit(10...10)
             .font(.subheadline)
             .accentColor(.accentColor)
             .padding()
