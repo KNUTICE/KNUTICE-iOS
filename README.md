@@ -1,55 +1,52 @@
-<img src="https://github.com/user-attachments/assets/f1bc12e8-f218-4d58-a7bf-5e8d4c24327b" width="100">
-
-<br>
-
+![Image](https://github.com/user-attachments/assets/47e8d9fa-103c-4444-b41b-bc702be9eaaf)
 [![Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917](https://github.com/user-attachments/assets/0dd1e613-7ed0-48ce-a875-95124a2aa6a3)](https://apps.apple.com/app/knutice/id6547855991)
 
 <br>
 
-# 🔔 KNUTICE
-- 우리 학교 공지사항 알리미
+# 💁‍♂️ Service Introduction
+- 새로운 공지사항을 앱 푸시 알림으로 전달하여 학생들이 학교 공지사항을 놓치지 않도록 도와주는 서비스
 
 <br>
 
-# 💁 Service introduce
-- 학교 홈페이지에 공지사항이 새로 등록되면 사용자 앱의 푸시 알림으로 전달하여 학생들이 학교 공지사항을 놓치지 않도록 도와주는 서비스
-
-<br>
-
-# 🙋 Part
+# 🙋‍♂️ Part
 - KNUTICE iOS 어플리케이션 기획, 설계, 개발, 디자인
 
 
 <br>
 
 # ⚒️ Tech Stack
-- `Swift`, `iOS`, `UIKit`, `MVVM`, `RxSwift`, `RxCocoa`, `RxDataSources`, `Alamofire`, `SnapKit`, `Kingfisher`, `SkeletonView`, `FCM`, `Xcode Cloud`
+- `Swift`, `iOS`, `UIKit`, `SwiftUI`, `MVVM`, `RxSwift`, `RxCocoa`, `RxDataSources`, `Combine`, `Alamofire`, `CoreData`, `SnapKit`, `FCM`, `Xcode Cloud`, `XCTest`
 
 <br>
 
 # ⚙️ Architecture
 - MVVM
-<img width="1261" alt="스크린샷 2024-08-15 23 50 06" src="https://github.com/user-attachments/assets/46346879-2547-49ee-be62-8a7fcbf7725f">
+![Image](https://github.com/user-attachments/assets/ea9c50fc-db36-4c11-b3f9-6fcb05e487ac)
+
+<br>
+
+# 🧐 What I learned
+- 프로젝트 기획부터 개발, 실제 앱스토어 배포에 이르기까지 서비스 런칭과 운영 전 과정을 직접 주도적으로 경험할 수 있었음
+- Rx 라이브러리를 이용한 MVVM 구현 방법에 대해 알게 되었음
+- Storyboard 없이 코드 베이스로 UI를 구성하는 방법에 대해 알게 되었음
+- CoreData를 활용한 데이터 CRUD 방법을 알게 되었음
+- Xcode Cloud를 이용한 CI/CD 도입으로 반복적으로 배포에 소요되는 작업을 자동화하여 배포 시간을 단축할 수 있었음
 
 <br>
 
 # 📱 Preview
 <div style="display: flex; justify-content: center; margin-bottom: 10px;">
-<img width="190" alt="스크린샷 2024-08-15 23 51 59" src="https://github.com/user-attachments/assets/3692459c-3d16-4047-b1d4-d9de4e36a03c">
+    <img src="https://github.com/user-attachments/assets/e3a5ecbb-e8ab-4358-aa58-0d8e9b84a8d8" style="width: 30%; margin-right: 10px"/>
 
-<img width="190" alt="스크린샷 2024-08-15 23 52 56" src="https://github.com/user-attachments/assets/b1d1c195-e0a5-4a78-af09-49e41e78f652">
+   <img src="https://github.com/user-attachments/assets/7a7c9442-626f-4150-9bb2-8abd40cb0ebc" style="width: 30%; margin-right: 10px">
 
-<img width="190" alt="스크린샷 2024-08-15 23 53 12" src="https://github.com/user-attachments/assets/66c0f236-1c4d-4e72-97fe-9b288fe5c4fc">
-
-<img width="190" alt="스크린샷 2024-08-16 08 50 48" src="https://github.com/user-attachments/assets/2601568f-c308-43e6-8f49-6011c4085b8e">
-
-<img width="190" alt="스크린샷 2024-08-16 09 07 14" src="https://github.com/user-attachments/assets/59b5e4f2-849f-4b7c-ae17-415a58a4b683">
+   <img src="https://github.com/user-attachments/assets/896bcfc7-882a-46d0-a405-edd7d395cbb2" style="width: 30%"/>
 </div>
 
-<br>
+<div style="display: flex; justify-content: center; margin-bottom: 10px;">
+    <img src="https://github.com/user-attachments/assets/c016b3be-2627-4642-bcd2-ca7b85b179b3" style="width: 30%; margin-right: 10px"/>
 
-# 🧐 What I learned
-- Rx 라이브러리를 이용한 MVVM 구현 방법에 대해 알게 되었음
-- Storyboard 없이 코드 베이스로 UI를 구성하는 방법에 대해 알게 되었음
-- UIKit 프로젝트에서 SwiftUI View를 생성하는 방법을 알게 되었음
-- Xcode Cloud를 이용한 CI/CD 환경 구축 및 자동 배포에 대해 알게 되었음
+   <img src="https://github.com/user-attachments/assets/a0fe15b2-fb0c-4b80-b284-5241838c51a4" style="width: 30%; margin-right: 10px">
+
+   <img src="https://github.com/user-attachments/assets/d86a1022-23ef-4d30-9702-5bab4d8fbd59" style="width: 30%"/>
+</div>
