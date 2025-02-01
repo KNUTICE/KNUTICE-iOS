@@ -6,6 +6,7 @@
 //
 
 import RxSwift
+import Combine
 
 final class MainNoticeRepositoryImpl<T: RemoteDataSource>: MainNoticeRepository {
     private let dataSource: T
@@ -14,12 +15,23 @@ final class MainNoticeRepositoryImpl<T: RemoteDataSource>: MainNoticeRepository 
         self.dataSource = dataSource
     }
     
+    ///GET 요청 함수 with RxSwift
+    @available(*, deprecated)
     func fetchMainNotices() -> Observable<[SectionOfNotice]> {
         return dataSource.sendGetRequest(to: Bundle.main.mainNoticeURL, resultType: MainNoticeResponseDTO.self)
             .map { [weak self] in
                 return self?.convertToNotice($0) ?? []
             }
             .asObservable()
+    }
+    
+    ///GET 요청 함수 with Combine
+    func fetch() -> AnyPublisher<[SectionOfNotice], any Error> {
+        return dataSource.sendGetRequest(to: Bundle.main.mainNoticeURL, resultType: MainNoticeResponseDTO.self)
+            .map { [weak self] in
+                self?.convertToNotice($0) ?? []
+            }
+            .eraseToAnyPublisher()
     }
     
     private func convertToNotice(_ dto: MainNoticeResponseDTO) -> [SectionOfNotice] {
@@ -35,8 +47,7 @@ final class MainNoticeRepositoryImpl<T: RemoteDataSource>: MainNoticeRepository 
                                            contentUrl: $0.contentURL,
                                            department: $0.departName,
                                            uploadDate: $0.registeredAt)
-                            }
-                           )
+                            })
         )
         
         //학사공지

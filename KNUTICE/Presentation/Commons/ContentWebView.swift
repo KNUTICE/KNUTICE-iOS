@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentWebView: View {
     @State private var isLoading: Bool = false
     @State private var progress: Double = 0.0
+    @Environment(\.colorScheme) var colorScheme
     
     let navigationTitle: String
     let contentURL: String
@@ -22,7 +23,7 @@ struct ContentWebView: View {
                     .tint(.blue)
                     .scaleEffect(x: 1, y: 0.5, anchor: .trailing)
             } else {
-                Color(.white)
+                Color(colorScheme == .dark ? .black : .white)
                     .frame(height: 4)
             }
             
