@@ -11,12 +11,14 @@ import Combine
 
 final class SearchTest: XCTestCase {
     private var dataSource: RemoteDataSource!
+    private var viewModel: SearchTableViewModel!
     private var cancellables: Set<AnyCancellable>!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
         dataSource = RemoteDataSourceImpl.shared
+        viewModel = AppDI.shared.makeSearchTableViewModel()
         cancellables = []
     }
 
@@ -24,9 +26,11 @@ final class SearchTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         
         dataSource = nil
+        viewModel = nil
+        cancellables = nil
     }
     
-    func test_withRx() {
+    func testNetworkRequestWithRx() {
         //Given
         let expectation = XCTestExpectation(description: "network request test")
         let url = Bundle.main.searchURL + "?keyword=공지"
@@ -42,7 +46,7 @@ final class SearchTest: XCTestCase {
         wait(for: [expectation], timeout: 10)
     }
     
-    func test_withCombine() {
+    func testNetworkRequestWithCombine() {
         //Given
         let expectation = XCTestExpectation(description: "network request test")
         let url = Bundle.main.searchURL + "?keyword=공지"
@@ -63,13 +67,34 @@ final class SearchTest: XCTestCase {
     
     func testRxPerformance() {
         self.measure {
-            test_withRx()
+            testNetworkRequestWithRx()
         }
     }
     
     func testCombinePerformance() {
         self.measure {
-            test_withCombine()
+            testNetworkRequestWithCombine()
         }
+    }
+    
+    func testViewModel() {
+        //Given
+        let expectation = XCTestExpectation(description: "ViewModel Test")
+        let _ = viewModel.notices
+            .skip(1)
+            .subscribe {
+                //Then
+                if let element = $0.element, let notices = element {
+                    XCTAssertTrue(!notices.isEmpty)
+                } else {
+                    XCTFail("Expected element and notices to be non-nil, but got nil.")
+                }
+                expectation.fulfill()
+            }
+        
+        //When
+        viewModel.search("공지")
+        
+        wait(for: [expectation], timeout: 10)
     }
 }

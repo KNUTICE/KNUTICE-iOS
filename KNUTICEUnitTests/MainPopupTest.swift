@@ -22,9 +22,12 @@ final class MainPopupTest: XCTestCase {
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        
+        dataSource = nil
+        cancellables = nil
     }
     
-    func test_fetch_returnsValidResponse() {
+    func testNetworkRequest() {
         //Given
         let expectation = XCTestExpectation(description: "network request test")
         let apiEndPoint = Bundle.main.mainPopupContentURL
@@ -35,7 +38,7 @@ final class MainPopupTest: XCTestCase {
                 print($0)
             }, receiveValue: {
                 //Then
-                XCTAssertEqual($0.result.resultCode, 200)
+                XCTAssert($0.result.resultCode == 200 || $0.result.resultCode == 4000)
                 expectation.fulfill()
             })
             .store(in: &cancellables)

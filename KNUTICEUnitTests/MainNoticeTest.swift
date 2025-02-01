@@ -11,12 +11,14 @@ import Combine
 
 final class MainNoticeTest: XCTestCase {
     private var dataSource: RemoteDataSource!
+    private var viewModel: MainViewModel!
     private var cancellables: Set<AnyCancellable>!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
         dataSource = RemoteDataSourceImpl.shared
+        viewModel = AppDI.shared.makeMainViewModel()
         cancellables = []
     }
 
@@ -58,6 +60,52 @@ final class MainNoticeTest: XCTestCase {
             .store(in: &cancellables)
         
         wait(for: [expectation], timeout: 10)
+    }
+    
+    func testViewModelWiithRxSwift() {
+        //Given
+        let expectation = XCTestExpectation()
+        let _ = viewModel.notices
+            .skip(2)
+            .subscribe(onNext: {
+                //Then
+                XCTAssertFalse($0.isEmpty)
+                expectation.fulfill()
+            })
+        
+        //When
+        viewModel.fetchNotices()
+        
+        wait(for: [expectation], timeout: 10)
+    }
+    
+    func testViewModelWithCombine() {
+        //Given
+        let expectation = XCTestExpectation()
+        let _ = viewModel.notices
+            .skip(2)
+            .subscribe(onNext: {
+                //Then
+                XCTAssertFalse($0.isEmpty)
+                expectation.fulfill()
+            })
+        
+        //When
+        viewModel.fetchNoticesWithCombine()
+        
+        wait(for: [expectation], timeout: 10)
+    }
+    
+    func testViewModelPerformanceWithRxSwift() {
+        self.measure {
+            testViewModelWiithRxSwift()
+        }
+    }
+    
+    func testViewModelPerformanceWithCombine() {
+        self.measure {
+            testViewModelWithCombine()
+        }
     }
 }
 
