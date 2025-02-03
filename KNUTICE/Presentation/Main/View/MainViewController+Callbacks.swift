@@ -28,37 +28,37 @@ extension MainViewController {
     
     //MARK: - General Notice Button Callback Function
     func navigateToGeneralNotice(_ sender: UIButton) {
-        let viewController = NoticeTableViewController(viewModel: AppDI.shared.makeGeneralNoticeViewModel(), navigationTitle: "일반공지")
+        let viewController = NoticeTableViewController(viewModel: AppDI.shared.createGeneralNoticeTableViewModel(), navigationTitle: "일반공지")
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     //MARK: - Academic Notice Button Callback Function
     func navigateToAcademicNotice(_ sender: UIButton) {
-        let viewController = NoticeTableViewController(viewModel: AppDI.shared.makeAcademicNoticeViewModel(), navigationTitle: "학사공지")
+        let viewController = NoticeTableViewController(viewModel: AppDI.shared.createAcademicNoticeTableViewModel(), navigationTitle: "학사공지")
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     //MARK: - Scholarship Notice Button Callback Function
     func navigateToScholarshipNotice(_ sender: UIButton) {
-        let viewController = NoticeTableViewController(viewModel: AppDI.shared.makeScholarshipNoticeViewModel(), navigationTitle: "장학안내")
+        let viewController = NoticeTableViewController(viewModel: AppDI.shared.createScholarshipNoticeTableViewModel(), navigationTitle: "장학안내")
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     //MARK: - Event Notice Button Callback Function
     func navigateToEventNotice(_ sender: UIButton) {
-        let viewController = NoticeTableViewController(viewModel: AppDI.shared.makeEventNoticeViewModel(), navigationTitle: "행사안내")
+        let viewController = NoticeTableViewController(viewModel: AppDI.shared.createEventNoticeTableViewModel(), navigationTitle: "행사안내")
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     //MARK: - Setting Button Action
     @objc func navigateToSetting(_ sender: UIButton) {
-        let viewController = UIHostingController(rootView: SettingView(viewModel: AppDI.shared.makeSettingViewModel()))
+        let viewController = UIHostingController(rootView: SettingView(viewModel: AppDI.shared.createSettingViewModel()))
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     //MARK: - Search Button Action
     @objc func navigateToSearch(_ sender: UIButton) {
-        let viewController = SearchTableViewController(viewModel: AppDI.shared.makeSearchTableViewModel())
+        let viewController = SearchTableViewController(viewModel: AppDI.shared.createSearchTableViewModel())
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)

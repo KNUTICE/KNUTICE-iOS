@@ -54,6 +54,6 @@ struct DeveloperTools: View {
 
 #Preview {
     NavigationStack {
-        DeveloperTools(viewModel: AppDI.shared.makeDeveloperToolsViewModel())
+        DeveloperTools(viewModel: AppDI.shared.createDeveloperToolsViewModel())
     }
 }
