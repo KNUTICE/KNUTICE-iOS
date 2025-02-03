@@ -222,7 +222,7 @@
 		8EC6B8A42D3107FC002B45C7 /* BookmarkDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC6B8A32D3107FC002B45C7 /* BookmarkDetail.swift */; };
 		8EC6B8A52D3107FC002B45C7 /* BookmarkDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC6B8A32D3107FC002B45C7 /* BookmarkDetail.swift */; };
 		8ECB82D42CDB6A6300420349 /* MainNoticeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECB82D22CDB6A6300420349 /* MainNoticeTest.swift */; };
-		8ECB82D52CDB6A6300420349 /* NoticeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECB82D32CDB6A6300420349 /* NoticeTest.swift */; };
+		8ECB82D52CDB6A6300420349 /* NoticeTableTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECB82D32CDB6A6300420349 /* NoticeTableTest.swift */; };
 		8ECB82DD2CDB6C3D00420349 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECB82DB2CDB6C3D00420349 /* NotificationService.swift */; };
 		8ECE2B182C35045800D7F499 /* MainNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B172C35045800D7F499 /* MainNotice.swift */; };
 		8ECE2B1A2C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B192C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift */; };
@@ -442,7 +442,7 @@
 		8EC6B89D2D30BAA3002B45C7 /* BookmarkRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkRepositoryImpl.swift; sourceTree = "<group>"; };
 		8EC6B8A32D3107FC002B45C7 /* BookmarkDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkDetail.swift; sourceTree = "<group>"; };
 		8ECB82D22CDB6A6300420349 /* MainNoticeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeTest.swift; sourceTree = "<group>"; };
-		8ECB82D32CDB6A6300420349 /* NoticeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTest.swift; sourceTree = "<group>"; };
+		8ECB82D32CDB6A6300420349 /* NoticeTableTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTableTest.swift; sourceTree = "<group>"; };
 		8ECB82DA2CDB6C3D00420349 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8ECB82DB2CDB6C3D00420349 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		8ECE2B172C35045800D7F499 /* MainNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotice.swift; sourceTree = "<group>"; };
@@ -940,7 +940,7 @@
 			isa = PBXGroup;
 			children = (
 				8ECB82D22CDB6A6300420349 /* MainNoticeTest.swift */,
-				8ECB82D32CDB6A6300420349 /* NoticeTest.swift */,
+				8ECB82D32CDB6A6300420349 /* NoticeTableTest.swift */,
 				8EE4B4F92D17D33600EFF10B /* SearchTest.swift */,
 				8EB7677B2D434E2C0086AB60 /* MainPopupTest.swift */,
 			);
@@ -1682,7 +1682,7 @@
 				8EE4B4FD2D17D96500EFF10B /* RequestResult.swift in Sources */,
 				8EB7677C2D434E2C0086AB60 /* MainPopupTest.swift in Sources */,
 				8ECB82D42CDB6A6300420349 /* MainNoticeTest.swift in Sources */,
-				8ECB82D52CDB6A6300420349 /* NoticeTest.swift in Sources */,
+				8ECB82D52CDB6A6300420349 /* NoticeTableTest.swift in Sources */,
 				8EE4B4FC2D17D93700EFF10B /* NoticeReponseDTO.swift in Sources */,
 				8EE4B4FA2D17D33600EFF10B /* SearchTest.swift in Sources */,
 			);
