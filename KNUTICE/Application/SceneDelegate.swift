@@ -38,8 +38,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         //전달된 모든 알림 데이터 삭제
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-        //남아 있는 Notification Request Badge Count 재설정
-        UNUserNotificationCenter.current().updatePendingNotificationRequestsBadge()
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -56,6 +54,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+        
+        //남아 있는 Notification Request Badge Count 재설정
+        //앱 실행 중 알림이 발생하는 경우를 대비하기 위해 앱이 Background 상태로 진입 했을 때 Badge Count 재설정
+        UNUserNotificationCenter.current().updatePendingNotificationRequestsBadge()
     }
 
 
