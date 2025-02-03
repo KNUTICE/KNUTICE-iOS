@@ -545,7 +545,7 @@
 				8E7A4A5A2D2978EA00BD1B7F /* BookmarkList */,
 				8E659EBB2D29430B00305D56 /* TabBar */,
 				8E6931522CEEFBEF0074142B /* NotificationList */,
-				8EFE52E92CDC8CB6003A7330 /* Notices */,
+				8EFE52E92CDC8CB6003A7330 /* NoticeTable */,
 				8EFE52E32CDC8955003A7330 /* SearchTable */,
 				8EA72DC52CD5C9B500D1B300 /* Developer Tools */,
 				8E0C3F862C9EC92A005E2A16 /* Report */,
@@ -1062,13 +1062,13 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		8EFE52E92CDC8CB6003A7330 /* Notices */ = {
+		8EFE52E92CDC8CB6003A7330 /* NoticeTable */ = {
 			isa = PBXGroup;
 			children = (
 				8EFE52EB2CDC8CE9003A7330 /* ViewModel */,
 				8EFE52EA2CDC8CD1003A7330 /* View */,
 			);
-			path = Notices;
+			path = NoticeTable;
 			sourceTree = "<group>";
 		};
 		8EFE52EA2CDC8CD1003A7330 /* View */ = {
