@@ -80,7 +80,7 @@ final class NoticeTableTest: XCTestCase {
     
     func testScholarshipNoticeTableViewModel() {
         //Given
-        let expectation = XCTestExpectation(description: "fetch academic notices")
+        let expectation = XCTestExpectation(description: "fetch scholarship notices")
         let _ = sholarshipNoticeTableViewModel.notices
             .skip(1)
             .subscribe {
@@ -101,7 +101,7 @@ final class NoticeTableTest: XCTestCase {
     
     func testEventNoticeTableViewModel() {
         //Given
-        let expectation = XCTestExpectation(description: "fetch academic notices")
+        let expectation = XCTestExpectation(description: "fetch event notices")
         let _ = eventNoticeTableViewModel.notices
             .skip(1)
             .subscribe {
