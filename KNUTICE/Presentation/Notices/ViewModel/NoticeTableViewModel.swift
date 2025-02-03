@@ -55,7 +55,7 @@ extension NoticeTableViewModel: NoticesRepresentable {
                 case .finished:
                     self?.logger.info("Successfully fetched Notices")
                 case .failure(let error):
-                    self?.logger.error("NoticeViewModel.fetchNotices() error: \(error.localizedDescription)")
+                    self?.logger.error("NoticeViewModel.refreshNotices() error: \(error.localizedDescription)")
                 }
                 
                 self?.isRefreshing.accept(false)
