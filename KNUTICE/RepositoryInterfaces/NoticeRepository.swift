@@ -6,8 +6,13 @@
 //
 
 import RxSwift
+import Combine
 
 protocol NoticeRepository {
+    @available(*, deprecated)
     func fetchNotices() -> Single<[Notice]>
+    @available(*, deprecated)
     func fetchNotices(after number: Int) -> Single<[Notice]>
+    func fetchNotices() -> AnyPublisher<[Notice], any Error>
+    func fetchNotices(after number: Int) -> AnyPublisher<[Notice], any Error>
 }

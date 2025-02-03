@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import SwiftUI
 
 extension WebViewController {
     @objc
     func openSharePanel() {
-        let shareText = self.url
+        let shareText = self.notice.contentUrl
         let shareObject = [shareText]
         let activityViewController = UIActivityViewController(activityItems : shareObject, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
@@ -32,11 +33,13 @@ extension WebViewController {
         
     }
     
-    func showCancelAlert() {
-        
-    }
-    
-    func showErrorAlert() {
-        
+    @objc func openReminderForm(_ sender: UIButton) {
+        let viewController = UIHostingController(rootView:
+                                                    BookmarkForm(viewModel: AppDI.shared.createBookmarkFormViewModel(),
+                                                                 notice: self.notice) { self.dismiss(animated: true) }
+        )
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.modalPresentationStyle = .popover
+        present(navigationController, animated: true, completion: nil)
     }
 }

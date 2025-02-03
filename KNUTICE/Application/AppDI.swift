@@ -14,53 +14,52 @@ struct AppDI {
     
     private init() {}
     
-    func makeMainViewModel() -> MainViewModel {
+    func createMainViewModel() -> MainViewModel {
         let repository = MainNoticeRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
         let viewModel = MainViewModel(repository: repository)
         
         return viewModel
     }
     
-    func makeGeneralNoticeViewModel() -> NoticeViewModel {
+    func createGeneralNoticeTableViewModel() -> NoticeTableViewModel {
         let url = Bundle.main.generalNoticeURL
         let repository = NoticeRepositoryImpl(dataSource: RemoteDataSourceImpl.shared, remoteURL: url)
-        let viewModel = NoticeViewModel(repository: repository)
+        let viewModel = NoticeTableViewModel(repository: repository)
         
         return viewModel
     }
     
-    func makeAcademicNoticeViewModel() -> NoticeViewModel {
+    func createAcademicNoticeTableViewModel() -> NoticeTableViewModel {
         let url = Bundle.main.academicNoticeURL
         let repository = NoticeRepositoryImpl(dataSource: RemoteDataSourceImpl.shared, remoteURL: url)
-        let viewModel = NoticeViewModel(repository: repository)
+        let viewModel = NoticeTableViewModel(repository: repository)
         
         return viewModel
     }
     
-    func makeScholarshipNoticeViewModel() -> NoticeViewModel {
+    func createScholarshipNoticeTableViewModel() -> NoticeTableViewModel {
         let url = Bundle.main.scholarshipNoticeURL
         let repository = NoticeRepositoryImpl(dataSource: RemoteDataSourceImpl.shared, remoteURL: url)
-        let viewModel = NoticeViewModel(repository: repository)
+        let viewModel = NoticeTableViewModel(repository: repository)
         
         return viewModel
     }
     
-    func makeEventNoticeViewModel() -> NoticeViewModel {
+    func createEventNoticeTableViewModel() -> NoticeTableViewModel {
         let url = Bundle.main.eventNoticeURL
         let repository = NoticeRepositoryImpl(dataSource: RemoteDataSourceImpl.shared, remoteURL: url)
-        let viewModel = NoticeViewModel(repository: repository)
+        let viewModel = NoticeTableViewModel(repository: repository)
         
         return viewModel
     }
     
-    func makeSettingViewModel() -> SettingViewModel {
+    func createSettingViewModel() -> SettingViewModel {
         return SettingViewModel()
     }
     
-    func makeReportViewModel() -> ReportViewModel {
+    func createReportViewModel() -> ReportViewModel {
         //Data
-        let tokenDataSource = TokenDataSourceImpl()
-        let tokenRepository = TokenRepositoryImpl(dataSource: tokenDataSource)
+        let tokenRepository = TokenRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
         let reportRepository = ReportRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
         
         //Domain
@@ -72,32 +71,74 @@ struct AppDI {
         return viewModel
     }
     
-    func makeDeveloperToolsViewModel() -> DeveloperToolsViewModel {
-        let tokenDataSource = TokenDataSourceImpl()
-        let tokenRepository = TokenRepositoryImpl(dataSource: tokenDataSource)
+    func createDeveloperToolsViewModel() -> DeveloperToolsViewModel {
+        let tokenRepository = TokenRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
         let viewModel = DeveloperToolsViewModel(tokenRepository: tokenRepository)
         
         return viewModel
     }
     
-    func makeSearchTableViewModel() -> SearchTableViewModel {
+    func createSearchTableViewModel() -> SearchTableViewModel {
         let repository = SearchRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
         let viewModel = SearchTableViewModel(repository: repository)
         
         return viewModel
     }
     
-    func makeNotificationListViewModel() -> NotificationListViewModel {
+    func createNotificationListViewModel() -> NotificationListViewModel {
         let localDataSource = NotificationPermissionDataSourceImpl.shared
-        let tokenDataSource = TokenDataSourceImpl()
         let localRepository = LocalNotificationPermissionRepositoryImpl(dataSource: localDataSource)
         let remoteRepository = RemoteNotificationPermissionRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
-        let tokenRepository = TokenRepositoryImpl(dataSource: tokenDataSource)
+        let tokenRepository = TokenRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
         let notificationService = NotificationPermissionServiceImpl(tokenRepository: tokenRepository,
                                                                     localRepository: localRepository,
                                                                     remoteRepository: remoteRepository)
         let viewModel = NotificationListViewModel(repository: localRepository,
                                                   notificationService: notificationService)
+        
+        return viewModel
+    }
+    
+    @MainActor
+    func createBookmarkListViewModel() -> BookmarkListViewModel {
+        let dataSource = LocalBookmarkDataSourceImpl.shared
+        let repository = BookmarkRepositoryImpl(dataSource: dataSource)
+        let viewModel = BookmarkListViewModel(repository: repository)
+        
+        return viewModel
+    }
+    
+    func createBookmarkFormViewModel() -> BookmarkFormViewModel {
+        let dataSource = LocalBookmarkDataSourceImpl.shared
+        let repository = BookmarkRepositoryImpl(dataSource: dataSource)
+        let service = BookmarkServiceImpl(repository: repository)
+        let viewModel = BookmarkFormViewModel(service: service)
+        
+        return viewModel
+    }
+    
+    func createBookmarkDetailViewModel() -> BookmarkDetailViewModel {
+        let dataSource = LocalBookmarkDataSourceImpl.shared
+        let repository = BookmarkRepositoryImpl(dataSource: dataSource)
+        let service = BookmarkServiceImpl(repository: repository)
+        let viewModel = BookmarkDetailViewModel(bookmarkService: service)
+        
+        return viewModel
+    }
+    
+    func createBookmarkEditFormViewModel(from bookmark: Bookmark) -> BookmarkEditFormViewModel {
+        let dataSource = LocalBookmarkDataSourceImpl.shared
+        let repository = BookmarkRepositoryImpl(dataSource: dataSource)
+        let service = BookmarkServiceImpl(repository: repository)
+        let viewModel = BookmarkEditFormViewModel(bookmark: bookmark, bookmarkService: service)
+        
+        return viewModel
+    }
+    
+    func createTabBarViewModel() -> TabBarViewModel {
+        let dataSource = RemoteDataSourceImpl.shared
+        let repository = MainPopupContentRepositoryImpl(dataSource: dataSource)
+        let viewModel = TabBarViewModel(repsotiroy: repository)
         
         return viewModel
     }
