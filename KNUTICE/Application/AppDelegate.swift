@@ -27,10 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             setNotificationPermissions()
         }
         
-//        //알림 배지 카운트 0으로 초기화
-//        UserDefaults.standard.set(0, forKey: "badgeCount")
-//        UNUserNotificationCenter.current().setBadgeCount(0)
-        
         sleep(1)
         return true
     }

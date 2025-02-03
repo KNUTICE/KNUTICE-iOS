@@ -29,9 +29,7 @@ extension MainViewController {
             .observe(on: MainScheduler.instance)
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
-    }
-    
-    func bindRefreshControl() {
+        
         //ViewModel의 isLoading의 값이 변경 되었을 때 refreshControl의 isRegreshing의 값 변경되도록 바인딩
         viewModel.isLoading
             .bind(to: refreshControl.rx.isRefreshing)

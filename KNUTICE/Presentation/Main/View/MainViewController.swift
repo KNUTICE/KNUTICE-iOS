@@ -6,21 +6,71 @@
 //
 
 import UIKit
-import RxCocoa
 import RxSwift
-import SnapKit
 import SwiftUI
-import RxDataSources
 
 final class MainViewController: UIViewController {
-    let viewModel: MainViewModel
-    let tableView = UITableView(frame: .zero, style: .grouped)
+    let tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none
+        tableView.sectionHeaderTopPadding = 15    //header padding
+        tableView.register(MainListCell.self, forCellReuseIdentifier: MainListCell.reuseIdentifier)
+        tableView.rowHeight = 95
+        tableView.backgroundColor = .mainBackground
+        
+        return tableView
+    }()
     let navigationBar = UIView(frame: .zero)
-    let titleLabel = UILabel()
-    let settingBtn = UIButton()
-    let searchBtn = UIButton()
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "KNUTICE"
+        label.font = UIFont.font(for: .title2, weight: .heavy)
+        
+        return label
+    }()
+    let settingBtn: UIButton = {
+        let targetSize = CGSize(width: 25, height: 24)
+        let renderer = UIGraphicsImageRenderer(size: targetSize)
+        let gearImage = UIImage(systemName: "gearshape")
+        let selectedGearImage = UIImage(systemName: "gearshape")?.withTintColor(.lightGray)
+        let resizedGearImage = renderer.image { _ in
+            gearImage?.draw(in: CGRect(origin: .zero, size: targetSize))
+        }.withTintColor(.navigationButton)
+        let resizedSelectedGearImage = renderer.image { _ in
+            selectedGearImage?.draw(in: CGRect(origin: .zero, size: targetSize))
+        }
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(resizedGearImage, for: .normal)
+        button.setImage(resizedSelectedGearImage, for: .highlighted)
+        button.addTarget(self, action: #selector(navigateToSetting(_:)), for: .touchUpInside)
+        
+        return button
+    }()
+    let searchBtn: UIButton = {
+        let targetSize = CGSize(width: 25, height: 24)
+        let renderer = UIGraphicsImageRenderer(size: targetSize)
+        let magnifyingglassImage = UIImage(systemName: "magnifyingglass")
+        let selectedMagnifyingglassImage = UIImage(systemName: "magnifyingglass")?.withTintColor(.lightGray)
+        let resizedMagnifyingglassImage = renderer.image { _ in
+            magnifyingglassImage?.draw(in: CGRect(origin: .zero, size: targetSize))
+        }.withTintColor(.navigationButton)
+        let resizedSelectedMagnifyingglassImage = renderer.image { _ in
+            selectedMagnifyingglassImage?.draw(in: CGRect(origin: .zero, size: targetSize))
+        }
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(resizedMagnifyingglassImage, for: .normal)
+        button.setImage(resizedSelectedMagnifyingglassImage, for: .highlighted)
+        button.addTarget(self, action: #selector(navigateToSearch(_:)), for: .touchUpInside)
+        
+        return button
+    }()
     let refreshControl = UIRefreshControl()
     let headerColors: [UIColor] = [.salmon, .lightOrange, .lightGreen, .dodgerBlue]
+    let viewModel: MainViewModel
     let disposeBag = DisposeBag()
     
     init(viewModel: MainViewModel) {
@@ -36,12 +86,15 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        tableView.delegate = self
+        tableView.refreshControl = refreshControl
+        view.backgroundColor = .mainBackground
         setupLayout()
-        setupAttribute()
         bind()
-        bindRefreshControl()
         recordEntryTime()
         observeNotification()
+        
+        //API Call
         viewModel.fetchNoticesWithCombine()
     }
 }
@@ -50,46 +103,7 @@ final class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate {
     //MARK: - Custom cell header
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        let title = UILabel()
-        let arrowImage = UIImage(systemName: "chevron.right")
-        let button = UIButton(type: .system)
-        headerView.addSubview(title)
-        headerView.addSubview(button)
-        
-        //Auto Layout
-        title.snp.makeConstraints { make in
-            make.leading.equalTo(headerView.safeAreaLayoutGuide).inset(16)
-            make.top.bottom.equalToSuperview()
-        }
-        
-        button.snp.makeConstraints { make in
-            make.trailing.equalTo(headerView.safeAreaLayoutGuide).inset(16)
-            make.centerY.equalToSuperview()
-        }
-        
-        //Title Attribute
-        title.text = viewModel.notices.value[section].header
-        title.textColor = headerColors[section]
-        title.font = UIFont.boldSystemFont(ofSize: 20)
-        
-        //Arrow Image Attribute
-        let targetSize = CGSize(width: 8, height: 12)
-        let renderer = UIGraphicsImageRenderer(size: targetSize)
-        let resizedImage = renderer.image { context in
-            arrowImage?.draw(in: CGRect(origin: .zero, size: targetSize))
-        }
-        
-        //Button Attribute
-        button.setTitle("더보기", for: .normal)
-        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
-        button.tintColor = .grayButton
-        button.setImage(resizedImage, for: .normal)
-        button.semanticContentAttribute = .forceRightToLeft
-        button.tag = section
-        button.addTarget(self, action: #selector(headerButtonTapped(_:)), for: .touchUpInside)
-        
-        return headerView
+        return makeSectionHeader(for: section)
     }
     
     //MARK: - Section height
@@ -120,9 +134,7 @@ extension MainViewController: UITableViewDelegate {
 //MARK: - Preview
 struct Preview: PreviewProvider {
     static var previews: some View {
-        let viewController = MainViewController(viewModel: AppDI.shared.makeMainViewModel())
-        
-        UINavigationController(rootViewController: viewController)
+        MainViewController(viewModel: AppDI.shared.createMainViewModel())
             .makePreview()
             .edgesIgnoringSafeArea(.all)
     }

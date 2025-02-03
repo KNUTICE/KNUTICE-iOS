@@ -18,7 +18,7 @@ final class SearchTest: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
         dataSource = RemoteDataSourceImpl.shared
-        viewModel = AppDI.shared.makeSearchTableViewModel()
+        viewModel = AppDI.shared.createSearchTableViewModel()
         cancellables = []
     }
 

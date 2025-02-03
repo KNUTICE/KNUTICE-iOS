@@ -21,11 +21,11 @@ struct BookmarkDetailSwitchView: View {
     var body: some View {
         Group {
             if selectedMode == .detailView {
-                BookmarkDetail(viewModel: AppDI.shared.makeBookmarkDetailViewModel(),
+                BookmarkDetail(viewModel: AppDI.shared.createBookmarkDetailViewModel(),
                                bookmark: bookmark,
                                selectedMode: $selectedMode)
             } else {
-                BookmarkForm(viewModel: AppDI.shared.makeBookmarkEditFormViewModel(from: bookmark),
+                BookmarkForm(viewModel: AppDI.shared.createBookmarkEditFormViewModel(from: bookmark),
                              notice: bookmark.notice) {
                     withAnimation(.easeInOut) {
                         selectedMode = .detailView
