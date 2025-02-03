@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol DataBindable: AnyObject {
-    var viewModel: NoticeViewModel { get }
+    var viewModel: NoticeTableViewModel { get }
     var tableView: UITableView { get }
     var refreshControl: UIRefreshControl { get }
     var disposeBag: DisposeBag { get }

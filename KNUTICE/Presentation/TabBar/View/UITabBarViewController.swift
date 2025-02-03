@@ -10,9 +10,9 @@ import SwiftUI
 import RxSwift
 
 final class UITabBarViewController: UITabBarController {
-    private let mainViewController = MainViewController(viewModel: AppDI.shared.makeMainViewModel())
+    private let mainViewController = MainViewController(viewModel: AppDI.shared.createMainViewModel())
     private let reminderViewController = UIHostingController(
-        rootView: BookmarkList(viewModel: AppDI.shared.makeBookmarkListViewModel())
+        rootView: BookmarkList(viewModel: AppDI.shared.createBookmarkListViewModel())
     )
     let viewModel: TabBarViewModel
     let disposeBag: DisposeBag = .init()
@@ -100,7 +100,7 @@ extension UITabBarViewController {
 #if DEBUG
 struct UITabBarViewControllerPreview: PreviewProvider {
     static var previews: some View {
-        UINavigationController(rootViewController: UITabBarViewController(viewModel: AppDI.shared.makeTabBarViewModel()))
+        UINavigationController(rootViewController: UITabBarViewController(viewModel: AppDI.shared.createTabBarViewModel()))
             .makePreview()
             .edgesIgnoringSafeArea(.all)
     }

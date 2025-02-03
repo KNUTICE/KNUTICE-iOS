@@ -177,7 +177,7 @@ fileprivate struct UserMemoDetail: View {
 #if DEBUG
 #Preview {
     NavigationStack {
-        BookmarkDetail(viewModel: AppDI.shared.makeBookmarkDetailViewModel(),
+        BookmarkDetail(viewModel: AppDI.shared.createBookmarkDetailViewModel(),
                        bookmark: Bookmark.sample,
                        selectedMode: .constant(.detailView))
     }

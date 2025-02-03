@@ -21,7 +21,7 @@ struct SettingView: View {
         List {
             Section {
                 NavigationLink {
-                    NotificationList(viewModel: AppDI.shared.makeNotificationListViewModel())
+                    NotificationList(viewModel: AppDI.shared.createNotificationListViewModel())
                 } label: {
                     Text("서비스 알림")
                 }
@@ -76,7 +76,7 @@ struct SettingView: View {
             #if DEV
             Section {
                 NavigationLink {
-                    DeveloperTools(viewModel: AppDI.shared.makeDeveloperToolsViewModel())
+                    DeveloperTools(viewModel: AppDI.shared.createDeveloperToolsViewModel())
                 } label: {
                     Text("Developer Tools")
                         .padding([.top, .bottom])
@@ -97,7 +97,7 @@ struct SettingView: View {
         }
         .fullScreenCover(isPresented: $isShowingReport) {
             NavigationView {
-                ReportView(viewModel: AppDI.shared.makeReportViewModel())
+                ReportView(viewModel: AppDI.shared.createReportViewModel())
             }
         }
     }
@@ -105,6 +105,6 @@ struct SettingView: View {
 
 #Preview {
     NavigationView {
-        SettingView(viewModel: AppDI.shared.makeSettingViewModel())
+        SettingView(viewModel: AppDI.shared.createSettingViewModel())
     }
 }
