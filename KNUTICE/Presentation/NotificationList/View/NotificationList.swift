@@ -78,6 +78,6 @@ struct NotificationList: View {
 
 #Preview {
     NavigationStack {
-        NotificationList(viewModel: AppDI.shared.makeNotificationListViewModel())
+        NotificationList(viewModel: AppDI.shared.createNotificationListViewModel())
     }
 }

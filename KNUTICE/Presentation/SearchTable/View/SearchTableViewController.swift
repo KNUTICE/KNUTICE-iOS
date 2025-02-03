@@ -66,7 +66,7 @@ extension SearchTableViewController: UITableViewDelegate {
 #if DEBUG
 struct SearchTableViewControllerPreview: PreviewProvider {
     static var previews: some View {
-        UINavigationController(rootViewController: SearchTableViewController(viewModel: AppDI.shared.makeSearchTableViewModel()))
+        UINavigationController(rootViewController: SearchTableViewController(viewModel: AppDI.shared.createSearchTableViewModel()))
             .makePreview()
     }
 }

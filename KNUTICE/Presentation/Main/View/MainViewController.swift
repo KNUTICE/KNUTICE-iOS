@@ -134,7 +134,7 @@ extension MainViewController: UITableViewDelegate {
 //MARK: - Preview
 struct Preview: PreviewProvider {
     static var previews: some View {
-        MainViewController(viewModel: AppDI.shared.makeMainViewModel())
+        MainViewController(viewModel: AppDI.shared.createMainViewModel())
             .makePreview()
             .edgesIgnoringSafeArea(.all)
     }
