@@ -18,7 +18,7 @@ final class MainNoticeTest: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
         dataSource = RemoteDataSourceImpl.shared
-        viewModel = AppDI.shared.makeMainViewModel()
+        viewModel = AppDI.shared.createMainViewModel()
         cancellables = []
     }
 
