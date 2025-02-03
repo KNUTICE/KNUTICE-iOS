@@ -7,12 +7,17 @@
 
 import RxSwift
 import RxRelay
+import Combine
+import os
 
 final class MainViewModel {
     private(set) var notices = BehaviorRelay<[SectionOfNotice]>(value: [])
     private(set) var isLoading = BehaviorRelay<Bool>(value: false)
     private let repository: MainNoticeRepository
     private let disposeBag = DisposeBag()
+    private var cancellables: Set<AnyCancellable> = []
+    private let logger: Logger = Logger()
+    
     
     init(repository: MainNoticeRepository) {
         self.repository = repository
@@ -26,6 +31,8 @@ final class MainViewModel {
         return notices.asObservable()
     }
     
+    ///Fetch Notices with RxSwift
+    @available(*, deprecated, message: "Combine 함수 대체 사용")
     func fetchNotices() {
         notices.accept(dummy)
         
@@ -39,17 +46,59 @@ final class MainViewModel {
             .disposed(by: disposeBag)
     }
     
+    ///Fetch Notices with Combine
+    func fetchNoticesWithCombine() {
+        notices.accept(dummy)
+        
+        repository.fetch()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                switch completion {
+                case .finished:
+                    self?.logger.debug("Successfully fetched main notice")
+                case .failure(let error):
+                    self?.logger.debug("MainViewModel.fetchNoticesWithCombine() error : \(error.localizedDescription)")
+                }
+            }, receiveValue: { [weak self] in
+                self?.notices.accept($0)
+            })
+            .store(in: &cancellables)
+    }
+    
+    //Refresh Notices with RxSwift
+    @available(*, deprecated, message: "Combine 함수 대체 사용")
     func refreshNotices() {
         isLoading.accept(true)
         
         repository.fetchMainNotices()
+            .delay(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] result in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self?.notices.accept(result)
-                    self?.isLoading.accept(false)
-                }
+                self?.notices.accept(result)
+                self?.isLoading.accept(false)
             })
             .disposed(by: disposeBag)
+    }
+    
+    ///Refresh Notices with Combine
+    func refreshNoticesWithCombine() {
+        isLoading.accept(true)
+        
+        repository.fetch()
+            .delay(for: 0.5, scheduler: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                self?.isLoading.accept(false)
+                
+                switch completion {
+                case .finished:
+                    self?.logger.debug("Successfully refreshed main notice")
+                case .failure(let error):
+                    self?.logger.error("MainViewModel.refreshNoticesWithCombine error : \(error.localizedDescription)")
+                }
+            }, receiveValue: { [weak self] in
+                self?.notices.accept($0)
+            })
+            .store(in: &cancellables)
+            
     }
     
     private var dummy: [SectionOfNotice] {

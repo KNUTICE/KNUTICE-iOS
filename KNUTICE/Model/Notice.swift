@@ -9,7 +9,7 @@ import Foundation
 
 struct Notice {
     let id: Int    //nttId
-    let boardNumber: Int
+    let boardNumber: Int?
     let title: String    //제목
     let contentUrl: String    //화면 전환 시 이동할 사이트 URL
     let department: String    //부서

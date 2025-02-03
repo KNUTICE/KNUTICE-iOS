@@ -50,11 +50,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         //알림 권한 설정 및 알림 허용 권한 요청
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(
-          options: authOptions,
-          completionHandler: { _, _ in
-              //백그라운드 스레드에서 동작
-              //UI 관련 Task는 메인 스레드에서 동작하도록 해야함
-          }
+            options: authOptions,
+            completionHandler: { _, _ in
+                //백그라운드 스레드에서 동작
+                //UI 관련 Task는 메인 스레드에서 동작하도록 해야함
+            }
         )
 
         //앱을 APNs를 통해 알림을 받도록 설정
@@ -96,6 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     //Background 알림 설정
+    //알림을 클릭했을 때 호출
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
          completionHandler()
     }
