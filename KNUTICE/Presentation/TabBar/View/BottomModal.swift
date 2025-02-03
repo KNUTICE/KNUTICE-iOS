@@ -72,6 +72,7 @@ final class BottomModal: UIView {
         
         self.setAttribute()
         self.backgroundColor = .black.withAlphaComponent(0.7)
+        self.alpha = 0
     }
     
     required init(coder: NSCoder) {
@@ -143,10 +144,16 @@ final class BottomModal: UIView {
     }
     
     private func makeHidden() {
-        self.removeFromSuperview()
-        self.contentView.removeFromSuperview()
-        self.closeBtn.removeFromSuperview()
-        self.titleLabel.removeFromSuperview()
+        UIView.animate(withDuration: 0.5) {
+            self.alpha = 0
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.removeFromSuperview()
+            self.contentView.removeFromSuperview()
+            self.closeBtn.removeFromSuperview()
+            self.titleLabel.removeFromSuperview()
+        }
     }
     
     @objc private func closeBtnAction(_ sender: UIButton) {
