@@ -15,10 +15,11 @@ extension UITabBarViewController {
             .delay(.seconds(1), scheduler: MainScheduler.instance)
             .subscribe { [weak self] in
                 if let element = $0.element, let popupContent = element, let self = self {
-                    UIView.transition(with: self.view, duration: 0.3, options: .transitionCrossDissolve) {
-                        let bottomModal = BottomModal(content: popupContent)
-                        self.view.addSubview(bottomModal)
-                        bottomModal.setupLayout()
+                    let bottomModal = BottomModal(content: popupContent)
+                    self.view.addSubview(bottomModal)
+                    bottomModal.setupLayout()
+                    UIView.animate(withDuration: 0.5) {
+                        bottomModal.alpha = 1
                     }
                 }
             }
