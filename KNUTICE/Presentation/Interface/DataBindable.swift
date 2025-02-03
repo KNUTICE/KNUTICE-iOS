@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol DataBindable: AnyObject {
-    var viewModel: NoticeViewModel { get }
+    var viewModel: NoticeTableViewModel { get }
     var tableView: UITableView { get }
     var refreshControl: UIRefreshControl { get }
     var disposeBag: DisposeBag { get }
@@ -28,7 +28,7 @@ extension DataBindable {
                     cell.subTitleLabel.text = "[\(item.department)]"
                     cell.uploadDateLabel.text = item.uploadDate
                     cell.imageURL = imageURL
-                    cell.backgroundColor = .customBackground
+                    cell.backgroundColor = .detailViewBackground
                     
                     return cell
                 } else {
@@ -36,7 +36,7 @@ extension DataBindable {
                     cell.titleLabel.text = item.title
                     cell.subTitleLabel.text = "[\(item.department)]"
                     cell.uploadDateLabel.text = item.uploadDate
-                    cell.backgroundColor = .customBackground
+                    cell.backgroundColor = .detailViewBackground
                     
                     return cell
                 }

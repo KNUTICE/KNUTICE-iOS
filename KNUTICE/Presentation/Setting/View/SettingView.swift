@@ -21,7 +21,7 @@ struct SettingView: View {
         List {
             Section {
                 NavigationLink {
-                    NotificationList(viewModel: AppDI.shared.makeNotificationListViewModel())
+                    NotificationList(viewModel: AppDI.shared.createNotificationListViewModel())
                 } label: {
                     Text("서비스 알림")
                 }
@@ -29,7 +29,7 @@ struct SettingView: View {
             } header: {
                 Text("알림")
             }
-            .listRowBackground(Color.customBackground)
+            .listRowBackground(Color.detailViewBackground)
             
             Section {
                 Button {
@@ -50,7 +50,7 @@ struct SettingView: View {
             } header: {
                 Text("지원")
             }
-            .listRowBackground(Color.customBackground)
+            .listRowBackground(Color.detailViewBackground)
             
             Section {
                 HStack {
@@ -63,7 +63,7 @@ struct SettingView: View {
                 .padding([.top, .bottom])
                 
                 NavigationLink {
-                    OpenSourceLicenseView()
+                    ContentWebView(navigationTitle: "오픈소스 라이선스", contentURL: Bundle.main.openSourceURL)
                 } label: {
                     Text("오픈소스 라이선스")
                         .padding([.top, .bottom])
@@ -71,12 +71,12 @@ struct SettingView: View {
             } header: {
                 Text("앱 정보")
             }
-            .listRowBackground(Color.customBackground)
+            .listRowBackground(Color.detailViewBackground)
             
             #if DEV
             Section {
                 NavigationLink {
-                    DeveloperTools(viewModel: AppDI.shared.makeDeveloperToolsViewModel())
+                    DeveloperTools(viewModel: AppDI.shared.createDeveloperToolsViewModel())
                 } label: {
                     Text("Developer Tools")
                         .padding([.top, .bottom])
@@ -84,10 +84,10 @@ struct SettingView: View {
             } header: {
                 Text("개발")
             }
-            .listRowBackground(Color.customBackground)
+            .listRowBackground(Color.detailViewBackground)
             #endif
         }
-        .background(.customBackground)
+        .background(.detailViewBackground)
         .listStyle(.plain)
         .navigationTitle("설정")
         .navigationBarTitleDisplayMode(.inline)
@@ -97,7 +97,7 @@ struct SettingView: View {
         }
         .fullScreenCover(isPresented: $isShowingReport) {
             NavigationView {
-                ReportView(viewModel: AppDI.shared.makeReportViewModel())
+                ReportView(viewModel: AppDI.shared.createReportViewModel())
             }
         }
     }
@@ -105,6 +105,6 @@ struct SettingView: View {
 
 #Preview {
     NavigationView {
-        SettingView(viewModel: AppDI.shared.makeSettingViewModel())
+        SettingView(viewModel: AppDI.shared.createSettingViewModel())
     }
 }

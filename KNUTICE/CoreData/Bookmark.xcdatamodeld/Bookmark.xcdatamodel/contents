@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24C101" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="BookmarkEntity" representedClassName="BookmarkEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="alarmDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="memo" attributeType="String"/>
+        <relationship name="bookmarkedNotice" maxCount="1" deletionRule="Cascade" destinationEntity="NoticeEntity" inverseName="associatedBookmark" inverseEntity="NoticeEntity"/>
+    </entity>
+    <entity name="NoticeEntity" representedClassName="NoticeEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="contentUrl" attributeType="String"/>
+        <attribute name="department" attributeType="String"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="imageUrl" optional="YES" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
+        <attribute name="uploadDate" attributeType="String"/>
+        <relationship name="associatedBookmark" maxCount="1" deletionRule="Cascade" destinationEntity="BookmarkEntity" inverseName="bookmarkedNotice" inverseEntity="BookmarkEntity"/>
+    </entity>
+</model>
