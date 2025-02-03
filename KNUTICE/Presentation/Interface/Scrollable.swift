@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 
 protocol Scrollable: AnyObject {
-    var viewModel: NoticeViewModel { get }
+    var viewModel: NoticeTableViewModel { get }
     var tableView: UITableView { get }
     var disposeBag: DisposeBag { get }
     
