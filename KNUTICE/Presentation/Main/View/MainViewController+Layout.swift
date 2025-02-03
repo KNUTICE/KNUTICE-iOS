@@ -10,56 +10,6 @@ import SwiftUI
 
 //MARK: - Layout
 extension MainViewController {
-    func setupAttribute() {
-        //tableView
-        tableView.delegate = self
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.separatorStyle = .none
-        tableView.sectionHeaderTopPadding = 15    //header padding
-        tableView.register(MainListCell.self, forCellReuseIdentifier: MainListCell.reuseIdentifier)
-        tableView.rowHeight = 95        
-        tableView.refreshControl = refreshControl
-        tableView.backgroundColor = .mainBackground
-        
-        //Title
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = "KNUTICE"
-        titleLabel.font = UIFont.font(for: .title2, weight: .heavy)
-        
-        //button
-        let targetSize = CGSize(width: 25, height: 24)
-        let renderer = UIGraphicsImageRenderer(size: targetSize)
-        let gearImage = UIImage(systemName: "gearshape")
-        let selectedGearImage = UIImage(systemName: "gearshape")?.withTintColor(.lightGray)
-        let resizedGearImage = renderer.image { _ in
-            gearImage?.draw(in: CGRect(origin: .zero, size: targetSize))
-        }.withTintColor(.navigationButton)
-        let resizedSelectedGearImage = renderer.image { _ in
-            selectedGearImage?.draw(in: CGRect(origin: .zero, size: targetSize))
-        }
-        let magnifyingglassImage = UIImage(systemName: "magnifyingglass")
-        let selectedMagnifyingglassImage = UIImage(systemName: "magnifyingglass")?.withTintColor(.lightGray)
-        let resizedMagnifyingglassImage = renderer.image { _ in
-            magnifyingglassImage?.draw(in: CGRect(origin: .zero, size: targetSize))
-        }.withTintColor(.navigationButton)
-        let resizedSelectedMagnifyingglassImage = renderer.image { _ in
-            selectedMagnifyingglassImage?.draw(in: CGRect(origin: .zero, size: targetSize))
-        }
-        
-        settingBtn.translatesAutoresizingMaskIntoConstraints = false
-        settingBtn.setImage(resizedGearImage, for: .normal)
-        settingBtn.setImage(resizedSelectedGearImage, for: .highlighted)
-        settingBtn.addTarget(self, action: #selector(navigateToSetting(_:)), for: .touchUpInside)
-        
-        searchBtn.translatesAutoresizingMaskIntoConstraints = false
-        searchBtn.setImage(resizedMagnifyingglassImage, for: .normal)
-        searchBtn.setImage(resizedSelectedMagnifyingglassImage, for: .highlighted)
-        searchBtn.addTarget(self, action: #selector(navigateToSearch(_:)), for: .touchUpInside)
-        
-        //view
-        view.backgroundColor = .mainBackground
-    }
-    
     func setupLayout() {
         navigationBar.addSubview(titleLabel)
         navigationBar.addSubview(settingBtn)
@@ -96,5 +46,52 @@ extension MainViewController {
             make.top.equalTo(navigationBar.snp.bottom)
             make.bottom.left.right.equalToSuperview()
         }
+    }
+    
+    func makeSectionHeader(for section: Int) -> UIView {
+        let headerView = UIView()
+        let title: UILabel = {
+            let label = UILabel()
+            label.text = viewModel.notices.value[section].header
+            label.textColor = headerColors[section]
+            label.font = UIFont.boldSystemFont(ofSize: 20)
+            
+            return label
+        }()
+        let button: UIButton = {
+            let arrowImage = UIImage(systemName: "chevron.right")
+            let targetSize = CGSize(width: 8, height: 12)
+            let renderer = UIGraphicsImageRenderer(size: targetSize)
+            let resizedImage = renderer.image { context in
+                arrowImage?.draw(in: CGRect(origin: .zero, size: targetSize))
+            }
+            
+            let button = UIButton(type: .system)
+            button.setTitle("더보기", for: .normal)
+            button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
+            button.tintColor = .grayButton
+            button.setImage(resizedImage, for: .normal)
+            button.semanticContentAttribute = .forceRightToLeft
+            button.tag = section
+            button.addTarget(self, action: #selector(headerButtonTapped(_:)), for: .touchUpInside)
+            
+            return button
+        }()
+        
+        headerView.addSubview(title)
+        headerView.addSubview(button)
+        
+        //Auto Layout
+        title.snp.makeConstraints { make in
+            make.leading.equalTo(headerView.safeAreaLayoutGuide).inset(16)
+            make.top.bottom.equalToSuperview()
+        }
+        
+        button.snp.makeConstraints { make in
+            make.trailing.equalTo(headerView.safeAreaLayoutGuide).inset(16)
+            make.centerY.equalToSuperview()
+        }
+        
+        return headerView
     }
 }

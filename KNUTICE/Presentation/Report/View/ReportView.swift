@@ -110,6 +110,6 @@ struct ReportView: View {
 
 #Preview {
     NavigationView {
-        ReportView(viewModel: AppDI.shared.makeReportViewModel())
+        ReportView(viewModel: AppDI.shared.createReportViewModel())
     }
 }
