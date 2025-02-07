@@ -13,13 +13,6 @@ struct AppDI {
     }
     
     private init() {}
-
-    func createDeveloperToolsViewModel() -> DeveloperToolsViewModel {
-        let tokenRepository = TokenRepositoryImpl()
-        let viewModel = DeveloperToolsViewModel(tokenRepository: tokenRepository)
-        
-        return viewModel
-    }
     
     func createSearchTableViewModel() -> SearchTableViewModel {
         let repository = SearchRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
