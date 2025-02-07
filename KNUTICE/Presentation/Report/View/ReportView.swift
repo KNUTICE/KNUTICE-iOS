@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Factory
 
 struct ReportView: View {
     @StateObject private var viewModel: ReportViewModel
@@ -110,6 +111,6 @@ struct ReportView: View {
 
 #Preview {
     NavigationView {
-        ReportView(viewModel: AppDI.shared.createReportViewModel())
+        ReportView(viewModel: Container.shared.reportViewModel())
     }
 }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import Factory
 
 struct SettingView: View {
     @ObservedObject private var viewModel: SettingViewModel
@@ -97,7 +98,7 @@ struct SettingView: View {
         }
         .fullScreenCover(isPresented: $isShowingReport) {
             NavigationView {
-                ReportView(viewModel: AppDI.shared.createReportViewModel())
+                ReportView(viewModel: Container.shared.reportViewModel())
             }
         }
     }
