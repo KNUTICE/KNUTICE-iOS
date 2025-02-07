@@ -8,6 +8,7 @@
 import RxRelay
 import RxSwift
 import Combine
+import Factory
 import os
 
 final class NoticeTableViewModel: NoticeFetchable {
