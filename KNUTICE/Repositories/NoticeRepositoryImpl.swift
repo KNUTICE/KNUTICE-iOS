@@ -7,13 +7,13 @@
 
 import RxSwift
 import Combine
+import Factory
 
-final class NoticeRepositoryImpl<T: RemoteDataSource>: NoticeRepository, NoticeCreatable {
-    private let dataSource: T
+final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
+    @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
     private let remoteURL: String
     
-    init(dataSource: T, remoteURL: String) {
-        self.dataSource = dataSource
+    init(remoteURL: String) {
         self.remoteURL = remoteURL
     }
     
