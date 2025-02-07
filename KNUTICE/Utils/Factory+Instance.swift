@@ -47,6 +47,25 @@ extension Container {
         }
     }
     
+    var tokenRepository: Factory<TokenRepository> {
+        Factory(self) {
+            TokenRepositoryImpl()
+        }
+    }
+    
+    var reportRepository: Factory<ReportRepository> {
+        Factory(self) {
+            ReportRepositoryImpl()
+        }
+    }
+    
+    //MARK: - Service
+    var reportService: Factory<ReportService> {
+        Factory(self) {
+            ReportServiceImpl()
+        }
+    }
+    
     //MARK: - ViewModel
     var mainViewModel: Factory<MainViewModel> {
         Factory(self) {
@@ -75,6 +94,12 @@ extension Container {
     var eventNoticeTableViewModel: Factory<NoticeTableViewModel> {
         Factory(self) {
             NoticeTableViewModel(repository: self.eventNoticeRepository())
+        }
+    }
+    
+    var reportViewModel: Factory<ReportViewModel> {
+        Factory(self) {
+            ReportViewModel()
         }
     }
 }
