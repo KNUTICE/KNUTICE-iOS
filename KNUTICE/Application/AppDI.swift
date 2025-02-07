@@ -14,10 +14,6 @@ struct AppDI {
     
     private init() {}
 
-    func createSettingViewModel() -> SettingViewModel {
-        return SettingViewModel()
-    }
-    
     func createDeveloperToolsViewModel() -> DeveloperToolsViewModel {
         let tokenRepository = TokenRepositoryImpl()
         let viewModel = DeveloperToolsViewModel(tokenRepository: tokenRepository)
