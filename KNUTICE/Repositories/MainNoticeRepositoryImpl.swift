@@ -7,13 +7,10 @@
 
 import RxSwift
 import Combine
+import Factory
 
-final class MainNoticeRepositoryImpl<T: RemoteDataSource>: MainNoticeRepository {
-    private let dataSource: T
-    
-    init(dataSource: T) {
-        self.dataSource = dataSource
-    }
+final class MainNoticeRepositoryImpl: MainNoticeRepository {
+    @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
     
     ///GET 요청 함수 with RxSwift
     @available(*, deprecated)
