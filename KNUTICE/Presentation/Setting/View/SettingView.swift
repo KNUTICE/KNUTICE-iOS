@@ -77,7 +77,7 @@ struct SettingView: View {
             #if DEV
             Section {
                 NavigationLink {
-                    DeveloperTools(viewModel: AppDI.shared.createDeveloperToolsViewModel())
+                    DeveloperTools(viewModel: DeveloperToolsViewModel())
                 } label: {
                     Text("Developer Tools")
                         .padding([.top, .bottom])
