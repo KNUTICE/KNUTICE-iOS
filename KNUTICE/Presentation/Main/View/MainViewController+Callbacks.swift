@@ -53,7 +53,7 @@ extension MainViewController {
     
     //MARK: - Setting Button Action
     @objc func navigateToSetting(_ sender: UIButton) {
-        let viewController = UIHostingController(rootView: SettingView(viewModel: AppDI.shared.createSettingViewModel()))
+        let viewController = UIHostingController(rootView: SettingView(viewModel: SettingViewModel()))
         navigationController?.pushViewController(viewController, animated: true)
     }
     
