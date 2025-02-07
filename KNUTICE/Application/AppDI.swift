@@ -13,14 +13,6 @@ struct AppDI {
     }
     
     private init() {}
-    
-    func createMainViewModel() -> MainViewModel {
-        let repository = MainNoticeRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
-        let viewModel = MainViewModel(repository: repository)
-        
-        return viewModel
-    }
-    
     func createGeneralNoticeTableViewModel() -> NoticeTableViewModel {
         let url = Bundle.main.generalNoticeURL
         let repository = NoticeRepositoryImpl(dataSource: RemoteDataSourceImpl.shared, remoteURL: url)
