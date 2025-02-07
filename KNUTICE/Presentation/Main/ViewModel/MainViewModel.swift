@@ -8,20 +8,16 @@
 import RxSwift
 import RxRelay
 import Combine
+import Factory
 import os
 
 final class MainViewModel {
     private(set) var notices = BehaviorRelay<[SectionOfNotice]>(value: [])
     private(set) var isLoading = BehaviorRelay<Bool>(value: false)
-    private let repository: MainNoticeRepository
+    @Injected(\.mainNoticeRepository) private var repository: MainNoticeRepository
     private let disposeBag = DisposeBag()
     private var cancellables: Set<AnyCancellable> = []
     private let logger: Logger = Logger()
-    
-    
-    init(repository: MainNoticeRepository) {
-        self.repository = repository
-    }
     
     func getCellValue() -> [SectionOfNotice] {
         return notices.value
