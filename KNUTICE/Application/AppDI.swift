@@ -13,38 +13,7 @@ struct AppDI {
     }
     
     private init() {}
-    func createGeneralNoticeTableViewModel() -> NoticeTableViewModel {
-        let url = Bundle.main.generalNoticeURL
-        let repository = NoticeRepositoryImpl(dataSource: RemoteDataSourceImpl.shared, remoteURL: url)
-        let viewModel = NoticeTableViewModel(repository: repository)
-        
-        return viewModel
-    }
-    
-    func createAcademicNoticeTableViewModel() -> NoticeTableViewModel {
-        let url = Bundle.main.academicNoticeURL
-        let repository = NoticeRepositoryImpl(dataSource: RemoteDataSourceImpl.shared, remoteURL: url)
-        let viewModel = NoticeTableViewModel(repository: repository)
-        
-        return viewModel
-    }
-    
-    func createScholarshipNoticeTableViewModel() -> NoticeTableViewModel {
-        let url = Bundle.main.scholarshipNoticeURL
-        let repository = NoticeRepositoryImpl(dataSource: RemoteDataSourceImpl.shared, remoteURL: url)
-        let viewModel = NoticeTableViewModel(repository: repository)
-        
-        return viewModel
-    }
-    
-    func createEventNoticeTableViewModel() -> NoticeTableViewModel {
-        let url = Bundle.main.eventNoticeURL
-        let repository = NoticeRepositoryImpl(dataSource: RemoteDataSourceImpl.shared, remoteURL: url)
-        let viewModel = NoticeTableViewModel(repository: repository)
-        
-        return viewModel
-    }
-    
+
     func createSettingViewModel() -> SettingViewModel {
         return SettingViewModel()
     }

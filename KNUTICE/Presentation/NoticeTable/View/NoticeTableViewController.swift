@@ -8,6 +8,7 @@
 import UIKit
 import SwiftUI
 import RxSwift
+import Factory
 
 final class NoticeTableViewController: UIViewController, TableViewConfigurable, DataBindable, Scrollable {
     let tableView: UITableView = UITableView(frame: .zero, style: .plain)
@@ -60,7 +61,7 @@ extension NoticeTableViewController: UITableViewDelegate {
 //MARK: - Preview
 #if DEBUG
 #Preview {
-    NoticeTableViewController(viewModel: AppDI.shared.createGeneralNoticeTableViewModel(), navigationTitle: "일반공지")
+    NoticeTableViewController(viewModel: Container.shared.generalNoticeTableViewModel(), navigationTitle: "일반공지")
         .makePreview()
 }
 #endif
