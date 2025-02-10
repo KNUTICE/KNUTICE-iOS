@@ -59,6 +59,12 @@ extension Container {
         }
     }
     
+    var searchRepository: Factory<SearchRepository> {
+        Factory(self) {
+            SearchRepositoryImpl()
+        }
+    }
+    
     //MARK: - Service
     var reportService: Factory<ReportService> {
         Factory(self) {

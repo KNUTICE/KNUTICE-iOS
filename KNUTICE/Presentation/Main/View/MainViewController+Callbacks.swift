@@ -59,7 +59,7 @@ extension MainViewController {
     
     //MARK: - Search Button Action
     @objc func navigateToSearch(_ sender: UIButton) {
-        let viewController = SearchTableViewController(viewModel: AppDI.shared.createSearchTableViewModel())
+        let viewController = SearchTableViewController(viewModel: SearchTableViewModel())
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)
