@@ -6,14 +6,11 @@
 //
 
 import Combine
+import Factory
 import Foundation
 
-final class RemoteNotificationPermissionRepositoryImpl<T: RemoteDataSource>: RemoteNotificationPermissionRepository {
-    private let dataSource: T
-    
-    init(dataSource: T) {
-        self.dataSource = dataSource
-    }
+final class RemoteNotificationRepositoryImpl: RemoteNotificationRepository {
+    @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
     
     func update(params: [String: Any]) -> AnyPublisher<Bool, any Error> {
         let url = Bundle.main.notificationPermissionURL

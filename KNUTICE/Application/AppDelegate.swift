@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     private func setNotificationPermissions() {
         do {
-            try NotificationPermissionDataSourceImpl.shared.createDataIfNeeded()
+            try LocalNotificationDataSourceImpl.shared.createDataIfNeeded()
         } catch {
             print(error)
         }

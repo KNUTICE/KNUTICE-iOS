@@ -22,7 +22,7 @@ struct SettingView: View {
         List {
             Section {
                 NavigationLink {
-                    NotificationList(viewModel: AppDI.shared.createNotificationListViewModel())
+                    NotificationList(viewModel: NotificationListViewModel())
                 } label: {
                     Text("서비스 알림")
                 }
