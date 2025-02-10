@@ -108,6 +108,6 @@ fileprivate struct EmptySectionView: View {
 
 #Preview {
     NavigationStack {
-        BookmarkList(viewModel: AppDI.shared.createBookmarkListViewModel())
+        BookmarkList(viewModel: BookmarkListViewModel())
     }
 }

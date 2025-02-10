@@ -17,10 +17,6 @@ final class BookmarkListViewModel: BookmarkManager, ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private let logger = Logger()
     
-    override init(repository: BookmarkRepository) {
-        super.init(repository: repository)
-    }
-    
     func fetchBookmarks(delay: Int) async {
         do {
             for try await bookmarkList in repository.read(delay: delay).values {

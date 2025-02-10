@@ -22,6 +22,12 @@ extension Container {
         }
     }
     
+    var localBookmarkDataSource: Factory<LocalBookmarkDataSource> {
+        Factory(self) {
+            LocalBookmarkDataSourceImpl.shared
+        }
+    }
+    
     //MARK: - Repositroy
     var mainNoticeRepository: Factory<MainNoticeRepository> {
         Factory(self) {
@@ -80,6 +86,12 @@ extension Container {
     var remoteNotificationRepository: Factory<RemoteNotificationRepository> {
         Factory(self) {
             RemoteNotificationRepositoryImpl()
+        }
+    }
+    
+    var bookmarkRepository: Factory<BookmarkRepository> {
+        Factory(self) {
+            BookmarkRepositoryImpl()
         }
     }
     

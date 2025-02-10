@@ -7,6 +7,7 @@
 
 import Combine
 import UserNotifications
+import Factory
 import Foundation
 
 final class BookmarkRepositoryImpl: BookmarkRepository {
@@ -14,11 +15,7 @@ final class BookmarkRepositoryImpl: BookmarkRepository {
         case alreadyExist = "이미 존재하는 북마크에요."
     }
     
-    private let dataSource: LocalBookmarkDataSource
-    
-    init(dataSource: LocalBookmarkDataSource) {
-        self.dataSource = dataSource
-    }
+    @Injected(\.localBookmarkDataSource) private var dataSource: LocalBookmarkDataSource
     
     func save(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
         return dataSource.isDuplication(id: bookmark.notice.id)
