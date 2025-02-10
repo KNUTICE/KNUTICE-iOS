@@ -14,20 +14,6 @@ struct AppDI {
     
     private init() {}
     
-    func createNotificationListViewModel() -> NotificationListViewModel {
-        let localDataSource = NotificationPermissionDataSourceImpl.shared
-        let localRepository = LocalNotificationPermissionRepositoryImpl(dataSource: localDataSource)
-        let remoteRepository = RemoteNotificationPermissionRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
-        let tokenRepository = TokenRepositoryImpl()
-        let notificationService = NotificationPermissionServiceImpl(tokenRepository: tokenRepository,
-                                                                    localRepository: localRepository,
-                                                                    remoteRepository: remoteRepository)
-        let viewModel = NotificationListViewModel(repository: localRepository,
-                                                  notificationService: notificationService)
-        
-        return viewModel
-    }
-    
     @MainActor
     func createBookmarkListViewModel() -> BookmarkListViewModel {
         let dataSource = LocalBookmarkDataSourceImpl.shared

@@ -1,36 +1,25 @@
 //
-//  NotificationPermissionService.swift
+//  NotificationService.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 12/21/24.
 //
 
 import Combine
+import Factory
 
-protocol NotificationPermissionService {
+protocol NotificationService {
     func updatePermission(_ notice: NotificationKind, to value: Bool) -> AnyPublisher<Void, any Error>
 }
 
-final class NotificationPermissionServiceImpl<
-    T: TokenRepository,
-    L: LocalNotificationPermissionRepository,
-    R: RemoteNotificationPermissionRepository
->: NotificationPermissionService {
+final class NotificationServiceImpl: NotificationService {
     enum RemoteServerError: Error {
         case invalidResponse
     }
     
-    private let tokenRepository: T
-    private let localRepository: L
-    private let remoteRepository: R
-    
-    init(tokenRepository: T,
-         localRepository: L,
-         remoteRepository: R) {
-        self.tokenRepository = tokenRepository
-        self.localRepository = localRepository
-        self.remoteRepository = remoteRepository
-    }
+    @Injected(\.tokenRepository) private var tokenRepository: TokenRepository
+    @Injected(\.localNotificationRepository) private var localRepository: LocalNotificationRepository
+    @Injected(\.remoteNotificationRepository) private var remoteRepository: RemoteNotificationRepository
     
     func updatePermission(_ notice: NotificationKind, to value: Bool) -> AnyPublisher<Void, any Error> {
         return tokenRepository.getFCMToken()
