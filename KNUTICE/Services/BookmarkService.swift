@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Factory
 import UserNotifications
 
 protocol BookmarkService {
@@ -15,11 +16,7 @@ protocol BookmarkService {
 }
 
 final class BookmarkServiceImpl: BookmarkService {
-    private let repository: BookmarkRepository
-    
-    init(repository: BookmarkRepository) {
-        self.repository = repository
-    }
+    @Injected(\.bookmarkRepository) private var repository: BookmarkRepository
     
     func save(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
         return UNUserNotificationCenter.current().registerLocalNotification(for: bookmark)

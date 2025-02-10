@@ -25,7 +25,7 @@ struct BookmarkDetailSwitchView: View {
                                bookmark: bookmark,
                                selectedMode: $selectedMode)
             } else {
-                BookmarkForm(viewModel: AppDI.shared.createBookmarkEditFormViewModel(from: bookmark),
+                BookmarkForm(viewModel: BookmarkEditFormViewModel(bookmark: bookmark),
                              notice: bookmark.notice) {
                     withAnimation(.easeInOut) {
                         selectedMode = .detailView
