@@ -108,6 +108,12 @@ extension Container {
         }
     }
     
+    var bookmarkService: Factory<BookmarkService> {
+        Factory(self) {
+            BookmarkServiceImpl()
+        }
+    }
+    
     //MARK: - ViewModel
     var mainViewModel: Factory<MainViewModel> {
         Factory(self) {

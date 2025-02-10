@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Factory
 import Foundation
 import os
 
@@ -17,17 +18,16 @@ final class BookmarkEditFormViewModel: ObservableObject, BookmarkFormHandler {
     @Published var isShowingAlert: Bool = false
     @Published var isLoading: Bool = false
     
-    private let bookmarkService: BookmarkService
+    @Injected(\.bookmarkService) private var bookmarkService: BookmarkService
     var alertMessage: String = ""
     private var cancellables: Set<AnyCancellable> = []
     private let logger: Logger = Logger()
     
-    init(bookmark: Bookmark, bookmarkService: BookmarkService) {
+    init(bookmark: Bookmark) {
         self.title = bookmark.notice.title
         self.alarmDate = bookmark.alarmDate ?? Date()
         self.isAlarmOn = bookmark.alarmDate == nil ? false : true
         self.memo = bookmark.memo
-        self.bookmarkService = bookmarkService
     }
     
     func save(with notice: Notice) {
