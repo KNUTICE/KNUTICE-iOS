@@ -1,5 +1,5 @@
 //
-//  NotificationPermissionDataSource.swift
+//  LocalNotificationDataSource.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 11/21/24.
@@ -15,20 +15,20 @@ enum NotificationKind: String {
     case eventNotice = "EVENT_NEWS"
 }
 
-protocol LocalNotificationPermissionDataSource {
+protocol LocalNotificationDataSource {
     func createDataIfNeeded() throws
     func readData() -> AnyPublisher<[String: Bool], any Error>
     func updateData(key: NotificationKind, value: Bool) -> AnyPublisher<Void, any Error>
 }
 
-final class NotificationPermissionDataSourceImpl: LocalNotificationPermissionDataSource {
+final class LocalNotificationDataSourceImpl: LocalNotificationDataSource {
     enum DataError: String, Error {
         case noData = "Notification permission data is missing"
     }
     
     private init() {}
     
-    static let shared = NotificationPermissionDataSourceImpl()
+    static let shared = LocalNotificationDataSourceImpl()
     
     lazy var persistentContainer: NSPersistentContainer = {
         /*

@@ -6,13 +6,10 @@
 //
 
 import Combine
+import Factory
 
-final class LocalNotificationPermissionRepositoryImpl<T: LocalNotificationPermissionDataSource>: LocalNotificationPermissionRepository {
-    private let dataSource: T
-    
-    init(dataSource: T) {
-        self.dataSource = dataSource
-    }
+final class LocalNotificationRepositoryImpl: LocalNotificationRepository {
+    @Injected(\.localNotificationDataSource) private var dataSource: LocalNotificationDataSource
     
     func getNotificationPermissions() -> AnyPublisher<[String: Bool], any Error> {
         return dataSource.readData()

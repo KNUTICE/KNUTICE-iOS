@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Factory
 import os
 
 final class NotificationListViewModel: ObservableObject {
@@ -15,8 +16,8 @@ final class NotificationListViewModel: ObservableObject {
     @Published var isEventNoticeNotificationAllowed: Bool?
     @Published var isLoading: Bool = false
     
-    private let repository: LocalNotificationPermissionRepository
-    private let notificationService: NotificationPermissionService
+    @Injected(\.localNotificationRepository) private var repository: LocalNotificationRepository
+    @Injected(\.notificationService) private var notificationService: NotificationService
     private let logger = Logger()
     private var cancellables = Set<AnyCancellable>()
     
@@ -29,12 +30,6 @@ final class NotificationListViewModel: ObservableObject {
         ]
         
         return data.allSatisfy { $0 == true }
-    }
-    
-    init(repository: LocalNotificationPermissionRepository,
-         notificationService: NotificationPermissionService) {
-        self.repository = repository
-        self.notificationService = notificationService
     }
     
     func getNotificationPermissions() {
