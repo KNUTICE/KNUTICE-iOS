@@ -14,18 +14,8 @@ struct AppDI {
     
     private init() {}
     
-    @MainActor
-    func createBookmarkListViewModel() -> BookmarkListViewModel {
-        let dataSource = LocalBookmarkDataSourceImpl.shared
-        let repository = BookmarkRepositoryImpl(dataSource: dataSource)
-        let viewModel = BookmarkListViewModel(repository: repository)
-        
-        return viewModel
-    }
-    
     func createBookmarkFormViewModel() -> BookmarkFormViewModel {
-        let dataSource = LocalBookmarkDataSourceImpl.shared
-        let repository = BookmarkRepositoryImpl(dataSource: dataSource)
+        let repository = BookmarkRepositoryImpl()
         let service = BookmarkServiceImpl(repository: repository)
         let viewModel = BookmarkFormViewModel(service: service)
         
@@ -34,7 +24,7 @@ struct AppDI {
     
     func createBookmarkDetailViewModel() -> BookmarkDetailViewModel {
         let dataSource = LocalBookmarkDataSourceImpl.shared
-        let repository = BookmarkRepositoryImpl(dataSource: dataSource)
+        let repository = BookmarkRepositoryImpl()
         let service = BookmarkServiceImpl(repository: repository)
         let viewModel = BookmarkDetailViewModel(bookmarkService: service)
         
@@ -43,7 +33,7 @@ struct AppDI {
     
     func createBookmarkEditFormViewModel(from bookmark: Bookmark) -> BookmarkEditFormViewModel {
         let dataSource = LocalBookmarkDataSourceImpl.shared
-        let repository = BookmarkRepositoryImpl(dataSource: dataSource)
+        let repository = BookmarkRepositoryImpl()
         let service = BookmarkServiceImpl(repository: repository)
         let viewModel = BookmarkEditFormViewModel(bookmark: bookmark, bookmarkService: service)
         

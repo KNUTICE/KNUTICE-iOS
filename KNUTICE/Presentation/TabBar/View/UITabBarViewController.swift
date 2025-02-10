@@ -12,7 +12,7 @@ import RxSwift
 final class UITabBarViewController: UITabBarController {
     private let mainViewController = MainViewController()
     private let reminderViewController = UIHostingController(
-        rootView: BookmarkList(viewModel: AppDI.shared.createBookmarkListViewModel())
+        rootView: BookmarkList(viewModel: BookmarkListViewModel())
     )
     let viewModel: TabBarViewModel
     let disposeBag: DisposeBag = .init()
