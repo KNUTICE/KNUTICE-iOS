@@ -14,13 +14,6 @@ struct AppDI {
     
     private init() {}
     
-    func createSearchTableViewModel() -> SearchTableViewModel {
-        let repository = SearchRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
-        let viewModel = SearchTableViewModel(repository: repository)
-        
-        return viewModel
-    }
-    
     func createNotificationListViewModel() -> NotificationListViewModel {
         let localDataSource = NotificationPermissionDataSourceImpl.shared
         let localRepository = LocalNotificationPermissionRepositoryImpl(dataSource: localDataSource)
