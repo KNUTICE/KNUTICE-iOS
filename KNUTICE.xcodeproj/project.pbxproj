@@ -64,7 +64,6 @@
 		8E2051092CD4F32F00D87C6A /* MainNoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD482BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift */; };
 		8E20510A2CD4F32F00D87C6A /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6D20B2C66FC5B004E8AC2 /* SettingViewModel.swift */; };
 		8E20510B2CD4F32F00D87C6A /* DetailedNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0BA6DC2C33CA1300677A79 /* DetailedNoticeCell.swift */; };
-		8E20510C2CD4F32F00D87C6A /* AppDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF191FA2C4ABEB5004219BE /* AppDI.swift */; };
 		8E20510D2CD4F32F00D87C6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8256412BE5CE1A0038D4C8 /* AppDelegate.swift */; };
 		8E20510E2CD4F32F00D87C6A /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698962BEFB6760085E389 /* Notice.swift */; };
 		8E20510F2CD4F32F00D87C6A /* WebViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF702C36233C0037EC38 /* WebViewController+Layout.swift */; };
@@ -244,7 +243,6 @@
 		8EE4B4FD2D17D96500EFF10B /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E613E9F2C95214C006FC272 /* RequestResult.swift */; };
 		8EEE1A512CEA19C90011FD87 /* NoticeFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEE1A502CEA19C90011FD87 /* NoticeFetchable.swift */; };
 		8EEE1A522CEA19C90011FD87 /* NoticeFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEE1A502CEA19C90011FD87 /* NoticeFetchable.swift */; };
-		8EF191FB2C4ABEB5004219BE /* AppDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF191FA2C4ABEB5004219BE /* AppDI.swift */; };
 		8EFCF8672C37742A004A53E9 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF8662C37742A004A53E9 /* SettingView.swift */; };
 		8EFCF86D2C37810B004A53E9 /* UIFont+DynamicFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF86C2C37810B004A53E9 /* UIFont+DynamicFont.swift */; };
 		8EFDAB032C3BC08900352779 /* WebViewController+Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDAB022C3BC08900352779 /* WebViewController+Callbacks.swift */; };
@@ -458,7 +456,6 @@
 		8EE4B4F32D16E7CC00EFF10B /* NotificationPermissionUpdateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionUpdateDTO.swift; sourceTree = "<group>"; };
 		8EE4B4F92D17D33600EFF10B /* SearchTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTest.swift; sourceTree = "<group>"; };
 		8EEE1A502CEA19C90011FD87 /* NoticeFetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeFetchable.swift; sourceTree = "<group>"; };
-		8EF191FA2C4ABEB5004219BE /* AppDI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDI.swift; sourceTree = "<group>"; };
 		8EFCF8662C37742A004A53E9 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		8EFCF86C2C37810B004A53E9 /* UIFont+DynamicFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+DynamicFont.swift"; sourceTree = "<group>"; };
 		8EFDAB022C3BC08900352779 /* WebViewController+Callbacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebViewController+Callbacks.swift"; sourceTree = "<group>"; };
@@ -603,7 +600,6 @@
 				5C8256412BE5CE1A0038D4C8 /* AppDelegate.swift */,
 				8E54C8492C5E6F5E0070E689 /* AppDelegate+Messaging.swift */,
 				5C8256432BE5CE1A0038D4C8 /* SceneDelegate.swift */,
-				8EF191FA2C4ABEB5004219BE /* AppDI.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -1474,7 +1470,6 @@
 				8EB6D20C2C66FC5B004E8AC2 /* SettingViewModel.swift in Sources */,
 				8E0CDED42D3B4CA5000F8DEF /* BookmarkService.swift in Sources */,
 				8E0BA6DD2C33CA1300677A79 /* DetailedNoticeCell.swift in Sources */,
-				8EF191FB2C4ABEB5004219BE /* AppDI.swift in Sources */,
 				8E5C1AC92D4074D50092BF88 /* TabBarViewModel.swift in Sources */,
 				5C8256422BE5CE1A0038D4C8 /* AppDelegate.swift in Sources */,
 				5C5698972BEFB6760085E389 /* Notice.swift in Sources */,
@@ -1592,7 +1587,6 @@
 				8E20510A2CD4F32F00D87C6A /* SettingViewModel.swift in Sources */,
 				8E0CDED32D3B4CA5000F8DEF /* BookmarkService.swift in Sources */,
 				8E20510B2CD4F32F00D87C6A /* DetailedNoticeCell.swift in Sources */,
-				8E20510C2CD4F32F00D87C6A /* AppDI.swift in Sources */,
 				8E5C1ACA2D4074D50092BF88 /* TabBarViewModel.swift in Sources */,
 				8E20510D2CD4F32F00D87C6A /* AppDelegate.swift in Sources */,
 				8E20510E2CD4F32F00D87C6A /* Notice.swift in Sources */,
