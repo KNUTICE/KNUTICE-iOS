@@ -23,7 +23,7 @@ final class TokenRepositoryImpl: TokenRepository {
                 "resultDescription": "string"
             ],
             "body": [
-                "deviceToken": token
+                "fcmToken": token
             ]
         ] as [String : Any]
         
