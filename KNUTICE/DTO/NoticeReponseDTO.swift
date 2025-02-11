@@ -19,12 +19,12 @@ struct NoticeReponseBody: Decodable {
     let title: String
     let contentURL: String
     let contentImage: String?
-    let departName, registeredAt: String
+    let departmentName, registeredAt, noticeName: String
 
     enum CodingKeys: String, CodingKey {
         case nttID = "nttId"
         case contentNumber, title
         case contentURL = "contentUrl"
-        case contentImage, departName, registeredAt
+        case contentImage, departmentName, registeredAt, noticeName
     }
 }
