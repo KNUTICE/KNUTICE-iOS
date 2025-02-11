@@ -42,7 +42,7 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
                                            presentationType: .actual,
                                            title: $0.title,
                                            contentUrl: $0.contentURL,
-                                           department: $0.departName,
+                                           department: $0.departmentName,
                                            uploadDate: $0.registeredAt)
                             })
         )
@@ -55,7 +55,7 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
                                            presentationType: .actual,
                                            title: $0.title,
                                            contentUrl: $0.contentURL,
-                                           department: $0.departName,
+                                           department: $0.departmentName,
                                            uploadDate: $0.registeredAt)
                             })
         )
@@ -68,7 +68,7 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
                                            presentationType: .actual,
                                            title: $0.title,
                                            contentUrl: $0.contentURL,
-                                           department: $0.departName,
+                                           department: $0.departmentName,
                                            uploadDate: $0.registeredAt)
                             })
         )
@@ -81,7 +81,7 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
                                            presentationType: .actual,
                                            title: $0.title,
                                            contentUrl: $0.contentURL,
-                                           department: $0.departName,
+                                           department: $0.departmentName,
                                            uploadDate: $0.registeredAt)
                             })
         )
