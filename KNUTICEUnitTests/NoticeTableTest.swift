@@ -7,22 +7,23 @@
 
 import XCTest
 import Combine
+import Factory
 @testable import KNUTICE
 
 final class NoticeTableTest: XCTestCase {
     private var generalNoticeTableViewModel: NoticeTableViewModel!
     private var academicNoticeTableViewModel: NoticeTableViewModel!
-    private var sholarshipNoticeTableViewModel: NoticeTableViewModel!
+    private var scholarshipNoticeTableViewModel: NoticeTableViewModel!
     private var eventNoticeTableViewModel: NoticeTableViewModel!
     private var cancellables: Set<AnyCancellable>!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
-        generalNoticeTableViewModel = AppDI.shared.createGeneralNoticeTableViewModel()
-        academicNoticeTableViewModel = AppDI.shared.createAcademicNoticeTableViewModel()
-        sholarshipNoticeTableViewModel = AppDI.shared.createScholarshipNoticeTableViewModel()
-        eventNoticeTableViewModel = AppDI.shared.createEventNoticeTableViewModel()
+        generalNoticeTableViewModel = Container.shared.generalNoticeTableViewModel()
+        academicNoticeTableViewModel = Container.shared.academicNoticeTableViewModel()
+        scholarshipNoticeTableViewModel = Container.shared.scholarshipNoticeTableViewModel()
+        eventNoticeTableViewModel = Container.shared.eventNoticeTableViewModel()
         cancellables = []
     }
 
@@ -31,7 +32,7 @@ final class NoticeTableTest: XCTestCase {
         
         generalNoticeTableViewModel = nil
         academicNoticeTableViewModel = nil
-        sholarshipNoticeTableViewModel = nil
+        scholarshipNoticeTableViewModel = nil
         eventNoticeTableViewModel = nil
         cancellables = nil
     }
@@ -81,7 +82,7 @@ final class NoticeTableTest: XCTestCase {
     func testScholarshipNoticeTableViewModel() {
         //Given
         let expectation = XCTestExpectation(description: "fetch scholarship notices")
-        let _ = sholarshipNoticeTableViewModel.notices
+        let _ = scholarshipNoticeTableViewModel.notices
             .skip(1)
             .subscribe {
                 //Then
@@ -94,7 +95,7 @@ final class NoticeTableTest: XCTestCase {
             }
         
         //When
-        sholarshipNoticeTableViewModel.fetchNotices()
+        scholarshipNoticeTableViewModel.fetchNotices()
         
         wait(for: [expectation], timeout: 10)
     }
