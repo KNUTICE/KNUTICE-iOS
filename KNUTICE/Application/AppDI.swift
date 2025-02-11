@@ -14,13 +14,6 @@ struct AppDI {
     
     private init() {}
     
-    func createBookmarkDetailViewModel() -> BookmarkDetailViewModel {
-        let service = BookmarkServiceImpl()
-        let viewModel = BookmarkDetailViewModel(bookmarkService: service)
-        
-        return viewModel
-    }
-    
     func createTabBarViewModel() -> TabBarViewModel {
         let dataSource = RemoteDataSourceImpl.shared
         let repository = MainPopupContentRepositoryImpl(dataSource: dataSource)
