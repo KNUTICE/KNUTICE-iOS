@@ -9,10 +9,5 @@ import Foundation
 // MARK: - NotificationPermissionUpdateDTO
 struct NotificationPermissionUpdateDTO: Decodable {
     let result: RequestResult
-    let body: NotificationPermissionUpdateBody?
-}
-
-// MARK: - Body
-struct NotificationPermissionUpdateBody: Decodable {
-    let message: String
+    let body: Bool?
 }

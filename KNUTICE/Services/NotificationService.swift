@@ -45,7 +45,7 @@ final class NotificationServiceImpl: NotificationService {
                 "resultDescription": "string"
               ],
               "body": [
-                  "deviceToken": token,
+                  "fcmToken": token,
                   "noticeName" : noticeName,
                   "isSubscribed" : isSubscribed
               ]
