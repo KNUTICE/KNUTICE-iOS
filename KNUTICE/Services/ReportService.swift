@@ -26,7 +26,7 @@ final class ReportServiceImpl: ReportService, AppVersionProvidable {
                         "resultDescription": "string"
                     ],
                     "body": [
-                        "token": token,
+                        "fcmToken": token,
                         "content": content,
                         "clientType": "APP",
                         "deviceName": device,
