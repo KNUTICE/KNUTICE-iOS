@@ -95,6 +95,12 @@ extension Container {
         }
     }
     
+    var mainPopupContentRepository: Factory<MainPopupContentRepository> {
+        Factory(self) {
+            MainPopupContentRepositoryImpl()
+        }
+    }
+    
     //MARK: - Service
     var reportService: Factory<ReportService> {
         Factory(self) {
