@@ -10,10 +10,5 @@ import Foundation
 //MARK: - ReportResponseDTO
 struct PostResponseDTO: Decodable {
     let result: RequestResult
-    let body: PostResponseBody
-}
-
-// MARK: - ReportResponseBody
-struct PostResponseBody: Decodable {
-    let message: String
+    let body: Bool?
 }

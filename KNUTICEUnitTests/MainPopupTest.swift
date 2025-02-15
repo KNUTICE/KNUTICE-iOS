@@ -7,6 +7,7 @@
 
 import XCTest
 import Combine
+import Factory
 @testable import KNUTICE
 
 final class MainPopupTest: XCTestCase {
@@ -16,7 +17,7 @@ final class MainPopupTest: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
-        dataSource = RemoteDataSourceImpl.shared
+        dataSource = Container.shared.remoteDataSource()
         cancellables = []
     }
 

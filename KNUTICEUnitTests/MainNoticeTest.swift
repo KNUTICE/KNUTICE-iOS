@@ -7,6 +7,7 @@
 
 import XCTest
 import Combine
+import Factory
 @testable import KNUTICE
 
 final class MainNoticeTest: XCTestCase {
@@ -17,8 +18,8 @@ final class MainNoticeTest: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
-        dataSource = RemoteDataSourceImpl.shared
-        viewModel = AppDI.shared.createMainViewModel()
+        dataSource = Container.shared.remoteDataSource()
+        viewModel = Container.shared.mainViewModel()
         cancellables = []
     }
 

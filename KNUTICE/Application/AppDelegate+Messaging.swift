@@ -6,6 +6,7 @@
 //
 
 import FirebaseMessaging
+import Factory
 
 extension AppDelegate: MessagingDelegate {
     //FCM token 관련
@@ -15,7 +16,7 @@ extension AppDelegate: MessagingDelegate {
         print("Firebase registration token: \(String(describing: fcmToken))")
         
         if let fcmToken {
-            let repository = TokenRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
+            let repository = Container.shared.tokenRepository()
             
             repository.registerToken(token: fcmToken)
                 .subscribe(
