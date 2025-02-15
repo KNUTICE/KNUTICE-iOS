@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import Factory
 
 final class ReportViewModel: ObservableObject {
     enum AlertType {
@@ -21,12 +22,8 @@ final class ReportViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     
     var alertType: AlertType = .none
-    private let reportService: ReportService
+    @Injected(\.reportService) private var reportService: ReportService
     private var cancellables = Set<AnyCancellable>()
-    
-    init(reportService: ReportService) {
-        self.reportService = reportService
-    }
     
     func report(device: String) {
         guard 500 >= content.count else {

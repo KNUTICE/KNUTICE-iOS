@@ -7,13 +7,10 @@
 
 import RxSwift
 import Combine
+import Factory
 
-final class MainNoticeRepositoryImpl<T: RemoteDataSource>: MainNoticeRepository {
-    private let dataSource: T
-    
-    init(dataSource: T) {
-        self.dataSource = dataSource
-    }
+final class MainNoticeRepositoryImpl: MainNoticeRepository {
+    @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
     
     ///GET 요청 함수 with RxSwift
     @available(*, deprecated)
@@ -45,7 +42,7 @@ final class MainNoticeRepositoryImpl<T: RemoteDataSource>: MainNoticeRepository 
                                            presentationType: .actual,
                                            title: $0.title,
                                            contentUrl: $0.contentURL,
-                                           department: $0.departName,
+                                           department: $0.departmentName,
                                            uploadDate: $0.registeredAt)
                             })
         )
@@ -58,7 +55,7 @@ final class MainNoticeRepositoryImpl<T: RemoteDataSource>: MainNoticeRepository 
                                            presentationType: .actual,
                                            title: $0.title,
                                            contentUrl: $0.contentURL,
-                                           department: $0.departName,
+                                           department: $0.departmentName,
                                            uploadDate: $0.registeredAt)
                             })
         )
@@ -71,7 +68,7 @@ final class MainNoticeRepositoryImpl<T: RemoteDataSource>: MainNoticeRepository 
                                            presentationType: .actual,
                                            title: $0.title,
                                            contentUrl: $0.contentURL,
-                                           department: $0.departName,
+                                           department: $0.departmentName,
                                            uploadDate: $0.registeredAt)
                             })
         )
@@ -84,7 +81,7 @@ final class MainNoticeRepositoryImpl<T: RemoteDataSource>: MainNoticeRepository 
                                            presentationType: .actual,
                                            title: $0.title,
                                            contentUrl: $0.contentURL,
-                                           department: $0.departName,
+                                           department: $0.departmentName,
                                            uploadDate: $0.registeredAt)
                             })
         )

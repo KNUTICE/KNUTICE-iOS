@@ -9,13 +9,10 @@ import RxSwift
 import Combine
 import Foundation
 import FirebaseMessaging
+import Factory
 
-final class TokenRepositoryImpl<T: RemoteDataSource>: TokenRepository {
-    private let dataSource: T
-    
-    init(dataSource: T) {
-        self.dataSource = dataSource
-    }
+final class TokenRepositoryImpl: TokenRepository {
+    @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
     
     func registerToken(token: String) -> Observable<Bool> {
         let remoteURL = Bundle.main.tokenURL
@@ -26,7 +23,7 @@ final class TokenRepositoryImpl<T: RemoteDataSource>: TokenRepository {
                 "resultDescription": "string"
             ],
             "body": [
-                "deviceToken": token
+                "fcmToken": token
             ]
         ] as [String : Any]
         

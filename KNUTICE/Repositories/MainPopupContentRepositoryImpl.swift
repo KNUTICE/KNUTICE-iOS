@@ -6,14 +6,11 @@
 //
 
 import Combine
+import Factory
 import Foundation
 
-final class MainPopupContentRepositoryImpl<T: RemoteDataSource>: MainPopupContentRepository {
-    private let dataSource: T
-    
-    init(dataSource: T) {
-        self.dataSource = dataSource
-    }
+final class MainPopupContentRepositoryImpl: MainPopupContentRepository {
+    @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
     
     func fetchMainPopupContent() -> AnyPublisher<MainPopupContent?, any Error> {
         let apiEndPoint = Bundle.main.mainPopupContentURL

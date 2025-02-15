@@ -5,20 +5,17 @@
 //  Created by 이정훈 on 1/22/25.
 //
 
-import RxRelay
 import Combine
+import Factory
+import RxRelay
 import os
 
 final class TabBarViewModel {
     let mainPopupContent: BehaviorRelay<MainPopupContent?> = .init(value: nil)
     
-    private let repsotiroy: MainPopupContentRepository
+    @Injected(\.mainPopupContentRepository) private var repsotiroy: MainPopupContentRepository
     private var cancellables: Set<AnyCancellable> = []
     private let logger: Logger = Logger()
-    
-    init(repsotiroy: MainPopupContentRepository) {
-        self.repsotiroy = repsotiroy
-    }
     
     func fetchMainPopupContent() {
         repsotiroy.fetchMainPopupContent()
