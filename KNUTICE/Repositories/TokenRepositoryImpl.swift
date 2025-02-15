@@ -27,7 +27,7 @@ final class TokenRepositoryImpl: TokenRepository {
             ]
         ] as [String : Any]
         
-        return dataSource.sendPostRequest(to: remoteURL, params: params, resultType: TokenSaveResponseDTO.self)
+        return dataSource.sendPostRequest(to: remoteURL, params: params, resultType: PostResponseDTO.self)
             .map {
                 return $0.result.resultCode == 200 ? true : false
             }
