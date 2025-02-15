@@ -24,6 +24,9 @@ def pods
   # Google Firebase
   pod 'FirebaseAnalytics'
   pod 'FirebaseMessaging'
+
+  # Factory
+  pod 'Factory'
 end
 
 target 'KNUTICE' do

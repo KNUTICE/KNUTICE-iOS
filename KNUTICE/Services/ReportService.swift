@@ -6,19 +6,15 @@
 //
 
 import Combine
+import Factory
 
 protocol ReportService {
     func report(content: String, device: String) -> AnyPublisher<Bool, any Error>
 }
 
-final class ReportServiceImpl<T: TokenRepository, R: ReportRepository>: ReportService, AppVersionProvidable {
-    let tokenRepository: T
-    let reportRepository: R
-    
-    init(tokenRepository: T, reportRepository: R) {
-        self.tokenRepository = tokenRepository
-        self.reportRepository = reportRepository
-    }
+final class ReportServiceImpl: ReportService, AppVersionProvidable {
+    @Injected(\.tokenRepository) private var tokenRepository: TokenRepository
+    @Injected(\.reportRepository) private var reportRepository: ReportRepository
     
     func report(content: String, device: String) -> AnyPublisher<Bool, any Error> {
         return tokenRepository.getFCMToken()
@@ -30,7 +26,7 @@ final class ReportServiceImpl<T: TokenRepository, R: ReportRepository>: ReportSe
                         "resultDescription": "string"
                     ],
                     "body": [
-                        "token": token,
+                        "fcmToken": token,
                         "content": content,
                         "clientType": "APP",
                         "deviceName": device,

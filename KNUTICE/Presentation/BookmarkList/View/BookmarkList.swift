@@ -82,7 +82,7 @@ fileprivate struct BookmarkListNavBar: View {
             Spacer()
             
             NavigationLink {
-                SettingView(viewModel: AppDI.shared.createSettingViewModel())
+                SettingView(viewModel: SettingViewModel())
             } label: {
                 Image(systemName: "gearshape")
                     .resizable()
@@ -108,6 +108,6 @@ fileprivate struct EmptySectionView: View {
 
 #Preview {
     NavigationStack {
-        BookmarkList(viewModel: AppDI.shared.createBookmarkListViewModel())
+        BookmarkList(viewModel: BookmarkListViewModel())
     }
 }

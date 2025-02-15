@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Factory
 import Foundation
 import os
 
@@ -13,14 +14,10 @@ final class BookmarkDetailViewModel: ObservableObject, BookmarkListRefreshable {
     @Published private(set) var isLoading: Bool = false
     @Published var isShowingAlert: Bool = false
     
-    private let bookmarkService: BookmarkService
+    @Injected(\.bookmarkService) private var bookmarkService: BookmarkService
     private(set) var alertMessage: String?
     private var cancellables: Set<AnyCancellable> = []
     private let logger: Logger = Logger()
-    
-    init(bookmarkService: BookmarkService) {
-        self.bookmarkService = bookmarkService
-    }
     
     func delete(bookmark: Bookmark) {
         isLoading = true

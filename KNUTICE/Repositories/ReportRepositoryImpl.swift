@@ -7,13 +7,10 @@
 
 import Combine
 import Foundation
+import Factory
 
-final class ReportRepositoryImpl<T: RemoteDataSource>: ReportRepository {
-    let dataSource: T
-    
-    init(dataSource: T) {
-        self.dataSource = dataSource
-    }
+final class ReportRepositoryImpl: ReportRepository {
+    @Injected(\.remoteDataSource) var dataSource: RemoteDataSource
     
     func register(params: [String: Any]) -> AnyPublisher<Bool, any Error> {
         let apiEndPoint = Bundle.main.reportURL

@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import SwiftUI
+import Factory
 
 final class MainViewController: UIViewController {
     let tableView: UITableView = {
@@ -70,17 +71,8 @@ final class MainViewController: UIViewController {
     }()
     let refreshControl = UIRefreshControl()
     let headerColors: [UIColor] = [.salmon, .lightOrange, .lightGreen, .dodgerBlue]
-    let viewModel: MainViewModel
+    @Injected(\.mainViewModel) var viewModel: MainViewModel
     let disposeBag = DisposeBag()
-    
-    init(viewModel: MainViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,7 +126,7 @@ extension MainViewController: UITableViewDelegate {
 //MARK: - Preview
 struct Preview: PreviewProvider {
     static var previews: some View {
-        MainViewController(viewModel: AppDI.shared.createMainViewModel())
+        MainViewController()
             .makePreview()
             .edgesIgnoringSafeArea(.all)
     }

@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Factory
 import Foundation
 import os
 
@@ -17,14 +18,10 @@ final class BookmarkFormViewModel: ObservableObject, BookmarkFormHandler {
     @Published var isShowingAlert: Bool = false
     @Published var isLoading: Bool = false
     
-    private let service: BookmarkService
+    @Injected(\.bookmarkService) private var service: BookmarkService
     private var cancellables: Set<AnyCancellable> = []
     private let logger: Logger = Logger()
     var alertMessage: String = ""
-    
-    init(service: BookmarkService) {
-        self.service = service
-    }
     
     func save(with notice: Notice) {
         let bookmark = Bookmark(notice: notice, memo: memo, alarmDate: isAlarmOn ? alarmDate : nil)

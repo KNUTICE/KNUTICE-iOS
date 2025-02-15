@@ -8,12 +8,7 @@
 import Foundation
 
 // MARK: - TokenSaveResponseDTO
-struct TokenSaveResponseDTO: Codable {
+struct TokenSaveResponseDTO: Decodable {
     let result: RequestResult
-    let body: TokenSaveResponseBody
-}
-
-// MARK: - TokenSaveResponseBody
-struct TokenSaveResponseBody: Codable {
-    let message: String
+    let body: Bool?
 }
