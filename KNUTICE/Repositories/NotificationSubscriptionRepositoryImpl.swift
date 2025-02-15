@@ -16,7 +16,7 @@ final class NotificationSubscriptionRepositoryImpl: NotificationSubscriptionRepo
     func updateToServer(params: [String: Any]) -> AnyPublisher<Bool, any Error> {
         let url = Bundle.main.notificationPermissionURL
         
-        return remoteDataSource.sendPostRequest(to: url, params: params, resultType: NotificationPermissionUpdateDTO.self)
+        return remoteDataSource.sendPostRequest(to: url, params: params, resultType: PostResponseDTO.self)
             .map {
                 return $0.result.resultCode == 200 ? true : false
             }
