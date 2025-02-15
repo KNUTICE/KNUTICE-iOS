@@ -1,5 +1,5 @@
 //
-//  LocalNotificationDataSource.swift
+//  LocalNotificationSubscriptionDataSource.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 11/21/24.
@@ -8,20 +8,13 @@
 import Combine
 import CoreData
 
-enum NotificationKind: String {
-    case generalNotice = "GENERAL_NEWS"
-    case academicNotice = "ACADEMIC_NEWS"
-    case scholarshipNotice = "SCHOLARSHIP_NEWS"
-    case eventNotice = "EVENT_NEWS"
-}
-
-protocol LocalNotificationDataSource {
+protocol LocalNotificationSubscriptionDataSource {
     func createDataIfNeeded() throws
     func readData() -> AnyPublisher<[String: Bool], any Error>
-    func updateData(key: NotificationKind, value: Bool) -> AnyPublisher<Void, any Error>
+    func updateData(key: NoticeCategory, value: Bool) -> AnyPublisher<Void, any Error>
 }
 
-final class LocalNotificationDataSourceImpl: LocalNotificationDataSource {
+final class LocalNotificationDataSourceImpl: LocalNotificationSubscriptionDataSource {
     enum DataError: String, Error {
         case noData = "Notification permission data is missing"
     }
@@ -101,7 +94,7 @@ final class LocalNotificationDataSourceImpl: LocalNotificationDataSource {
         .eraseToAnyPublisher()
     }
     
-    func updateData(key: NotificationKind, value: Bool) -> AnyPublisher<Void, any Error> {
+    func updateData(key: NoticeCategory, value: Bool) -> AnyPublisher<Void, any Error> {
         return Future { promise in
             self.backgroundContext.perform {
                 do {
