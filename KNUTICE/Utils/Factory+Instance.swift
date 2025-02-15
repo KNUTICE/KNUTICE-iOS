@@ -16,7 +16,7 @@ extension Container {
         }
     }
     
-    var localNotificationDataSource: Factory<LocalNotificationDataSource> {
+    var localNotificationDataSource: Factory<LocalNotificationSubscriptionDataSource> {
         Factory(self) {
             LocalNotificationDataSourceImpl.shared
         }
@@ -77,15 +77,9 @@ extension Container {
         }
     }
     
-    var localNotificationRepository: Factory<LocalNotificationRepository> {
+    var notificationRepository: Factory<NotificationSubscriptionRepository> {
         Factory(self) {
-            LocalNotificationRepositoryImpl()
-        }
-    }
-    
-    var remoteNotificationRepository: Factory<RemoteNotificationRepository> {
-        Factory(self) {
-            RemoteNotificationRepositoryImpl()
+            NotificationSubscriptionRepositoryImpl()
         }
     }
     
@@ -108,9 +102,9 @@ extension Container {
         }
     }
     
-    var notificationService: Factory<NotificationService> {
+    var notificationService: Factory<NotificationSubscriptionService> {
         Factory(self) {
-            NotificationServiceImpl()
+            NotificationSubscriptionServiceImpl()
         }
     }
     
