@@ -1,5 +1,5 @@
 //
-//  NotificationService.swift
+//  NotificationSubscriptionService.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 12/21/24.
@@ -8,31 +8,30 @@
 import Combine
 import Factory
 
-protocol NotificationService {
-    func updatePermission(_ notice: NotificationKind, to value: Bool) -> AnyPublisher<Void, any Error>
+protocol NotificationSubscriptionService {
+    func updatePermission(_ notice: NoticeCategory, to value: Bool) -> AnyPublisher<Void, any Error>
 }
 
-final class NotificationServiceImpl: NotificationService {
+final class NotificationSubscriptionServiceImpl: NotificationSubscriptionService {
     enum RemoteServerError: Error {
         case invalidResponse
     }
     
     @Injected(\.tokenRepository) private var tokenRepository: TokenRepository
-    @Injected(\.localNotificationRepository) private var localRepository: LocalNotificationRepository
-    @Injected(\.remoteNotificationRepository) private var remoteRepository: RemoteNotificationRepository
+    @Injected(\.notificationRepository) private var repository: NotificationSubscriptionRepository
     
-    func updatePermission(_ notice: NotificationKind, to value: Bool) -> AnyPublisher<Void, any Error> {
+    func updatePermission(_ notice: NoticeCategory, to value: Bool) -> AnyPublisher<Void, any Error> {
         return tokenRepository.getFCMToken()
             .flatMap { token -> AnyPublisher<Bool, any Error> in
                 let params: [String: Any] = self.makeParams(token: token, noticeName: notice.rawValue, isSubscribed: value)
-                return self.remoteRepository.update(params: params)
+                return self.repository.updateToServer(params: params)
             }
             .flatMap { result -> AnyPublisher<Void, any Error> in
                 guard result else {
                     return Fail(error: RemoteServerError.invalidResponse).eraseToAnyPublisher()
                 }
                 
-                return self.localRepository.update(key: notice, value: value)
+                return self.repository.updateToLocal(key: notice, value: value)
             }
             .eraseToAnyPublisher()
     }

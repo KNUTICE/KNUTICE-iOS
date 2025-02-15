@@ -16,8 +16,8 @@ final class NotificationListViewModel: ObservableObject {
     @Published var isEventNoticeNotificationAllowed: Bool?
     @Published var isLoading: Bool = false
     
-    @Injected(\.localNotificationRepository) private var repository: LocalNotificationRepository
-    @Injected(\.notificationService) private var notificationService: NotificationService
+    @Injected(\.notificationRepository) private var repository: NotificationSubscriptionRepository
+    @Injected(\.notificationService) private var notificationService: NotificationSubscriptionService
     private let logger = Logger()
     private var cancellables = Set<AnyCancellable>()
     
@@ -54,7 +54,7 @@ final class NotificationListViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    func update(key: NotificationKind, value: Bool) {
+    func update(key: NoticeCategory, value: Bool) {
         isLoading = true
         notificationService.updatePermission(key, to: value)
             .receive(on: DispatchQueue.main)
