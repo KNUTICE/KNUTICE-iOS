@@ -17,7 +17,7 @@ final class SearchRepositoryImpl: SearchRepository, NoticeCreatable {
         
         return dataSource.sendGetRequest(to: url, resultType: NoticeReponseDTO.self)
             .map { [weak self] in
-                return self?.converToNotice($0) ?? []
+                return self?.createNotice($0) ?? []
             }
     }
 }
