@@ -43,7 +43,8 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
                                            title: $0.title,
                                            contentUrl: $0.contentURL,
                                            department: $0.departmentName,
-                                           uploadDate: $0.registeredAt)
+                                           uploadDate: $0.registeredAt,
+                                           noticeCategory: NoticeCategory(rawValue: $0.noticeName))
                             })
         )
         
@@ -56,7 +57,8 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
                                            title: $0.title,
                                            contentUrl: $0.contentURL,
                                            department: $0.departmentName,
-                                           uploadDate: $0.registeredAt)
+                                           uploadDate: $0.registeredAt,
+                                           noticeCategory: NoticeCategory(rawValue: $0.noticeName))
                             })
         )
         
@@ -69,7 +71,8 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
                                            title: $0.title,
                                            contentUrl: $0.contentURL,
                                            department: $0.departmentName,
-                                           uploadDate: $0.registeredAt)
+                                           uploadDate: $0.registeredAt,
+                                           noticeCategory: NoticeCategory(rawValue: $0.noticeName))
                             })
         )
         
@@ -82,7 +85,8 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
                                            title: $0.title,
                                            contentUrl: $0.contentURL,
                                            department: $0.departmentName,
-                                           uploadDate: $0.registeredAt)
+                                           uploadDate: $0.registeredAt,
+                                           noticeCategory: NoticeCategory(rawValue: $0.noticeName))
                             })
         )
         

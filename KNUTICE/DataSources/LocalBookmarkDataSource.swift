@@ -49,6 +49,7 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
         noticeEntity.uploadDate = bookmark.notice.uploadDate
         noticeEntity.contentUrl = bookmark.notice.contentUrl
         noticeEntity.imageUrl = bookmark.notice.imageUrl
+        noticeEntity.category = bookmark.notice.noticeCategory?.rawValue
         
         bookmarkEntity.bookmarkedNotice = noticeEntity
         
