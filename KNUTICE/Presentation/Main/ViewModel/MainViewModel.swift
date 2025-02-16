@@ -105,7 +105,8 @@ final class MainViewModel {
                                                                title: "temp",
                                                                contentUrl: "temp",
                                                                department: "temp",
-                                                               uploadDate: "temp"), count: 3)),
+                                                               uploadDate: "temp",
+                                                               noticeCategory: .generalNotice), count: 3)),
                     
             SectionOfNotice(header: "학사공지",
                             items: Array(repeating: MainNotice(id: UUID().hashValue,
@@ -113,7 +114,8 @@ final class MainViewModel {
                                                                title: "temp",
                                                                contentUrl: "temp",
                                                                department: "temp",
-                                                               uploadDate: "temp"), count: 3)),
+                                                               uploadDate: "temp",
+                                                               noticeCategory: .academicNotice), count: 3)),
             
             SectionOfNotice(header: "장학공지",
                             items: Array(repeating: MainNotice(id: UUID().hashValue,
@@ -121,7 +123,8 @@ final class MainViewModel {
                                                                title: "temp",
                                                                contentUrl: "temp",
                                                                department: "temp",
-                                                               uploadDate: "temp"), count: 3)),
+                                                               uploadDate: "temp",
+                                                               noticeCategory: .scholarshipNotice), count: 3)),
                     
             SectionOfNotice(header: "행사안내",
                             items: Array(repeating: MainNotice(id: UUID().hashValue,
@@ -129,7 +132,8 @@ final class MainViewModel {
                                                                title: "temp",
                                                                contentUrl: "temp",
                                                                department: "temp",
-                                                               uploadDate: "temp"), count: 3))
+                                                               uploadDate: "temp",
+                                                               noticeCategory: .eventNotice), count: 3))
         ]
     }
 }

@@ -34,27 +34,32 @@ final class BookmarkRepositoryImpl: BookmarkRepository {
         return dataSource.readDTO()
             .map {
                 $0.compactMap { dto in
-                    self.getBookMark(from: dto)
+                    self.createBookMark(from: dto)
                 }
             }
             .delay(for: DispatchQueue.SchedulerTimeType.Stride(integerLiteral: delay), scheduler: DispatchQueue.global())
             .eraseToAnyPublisher()
     }
     
-    private func getBookMark(from dto: BookmarkDTO) -> Bookmark? {
+    private func createBookMark(from dto: BookmarkDTO) -> Bookmark? {
         guard let noticeEntity = dto.notice else {
             return nil
         }
         
-        return Bookmark(notice: Notice(id: Int(noticeEntity.id),
-                                       boardNumber: nil,
-                                       title: noticeEntity.title ?? "",
-                                       contentUrl: noticeEntity.contentUrl ?? "",
-                                       department: noticeEntity.department ?? "",
-                                       uploadDate: noticeEntity.uploadDate ?? "",
-                                       imageUrl: noticeEntity.imageUrl),
-                        memo: dto.details ?? "",
-                        alarmDate: dto.alarmDate)
+        return Bookmark(
+            notice: Notice(
+                id: Int(noticeEntity.id),
+                boardNumber: nil,
+                title: noticeEntity.title ?? "",
+                contentUrl: noticeEntity.contentUrl ?? "",
+                department: noticeEntity.department ?? "",
+                uploadDate: noticeEntity.uploadDate ?? "",
+                imageUrl: noticeEntity.imageUrl,
+                noticeCategory: NoticeCategory(rawValue: noticeEntity.category ?? "")
+            ),
+            memo: dto.details ?? "",
+            alarmDate: dto.alarmDate
+        )
     }
     
     func delete(by id: Int) -> AnyPublisher<Void, any Error> {
