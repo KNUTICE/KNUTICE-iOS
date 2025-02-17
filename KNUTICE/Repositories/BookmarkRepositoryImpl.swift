@@ -49,7 +49,6 @@ final class BookmarkRepositoryImpl: BookmarkRepository {
         return Bookmark(
             notice: Notice(
                 id: Int(noticeEntity.id),
-                boardNumber: nil,
                 title: noticeEntity.title ?? "",
                 contentUrl: noticeEntity.contentUrl ?? "",
                 department: noticeEntity.department ?? "",
