@@ -24,7 +24,6 @@ struct MainNotice {
     func toNoticeModel() -> Notice {
         return Notice(
             id: id,
-            boardNumber: nil,
             title: title,
             contentUrl: contentUrl,
             department: department,
