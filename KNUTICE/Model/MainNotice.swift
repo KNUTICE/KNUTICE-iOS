@@ -13,22 +13,6 @@ struct MainNotice {
         case actual
     }
     
-    let id: Int    //nttId
     let presentationType: PresentationType
-    let title: String    //제목
-    let contentUrl: String    //화면 전환 시 이동할 사이트 URL
-    let department: String    //부서
-    let uploadDate: String    //등록 날짜
-    let noticeCategory: NoticeCategory?
-    
-    func toNoticeModel() -> Notice {
-        return Notice(
-            id: id,
-            title: title,
-            contentUrl: contentUrl,
-            department: department,
-            uploadDate: uploadDate,
-            imageUrl: nil,
-            noticeCategory: noticeCategory)
-    }
+    let notice: Notice
 }
