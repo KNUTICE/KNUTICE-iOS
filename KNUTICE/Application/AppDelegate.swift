@@ -22,11 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         //FCM 세팅
         setFCM(application)
         
-        //Notification Permission 세팅
-        if !UserDefaults.standard.bool(forKey: "isInitializedNotificationSettings") {
-            setNotificationPermissions()
-        }
-        
         sleep(1)
         return true
     }
@@ -62,14 +57,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         //FIRMessaging delegate 설정
         Messaging.messaging().delegate = self
-    }
-    
-    private func setNotificationPermissions() {
-        do {
-            try LocalNotificationDataSourceImpl.shared.createDataIfNeeded()
-        } catch {
-            print(error)
-        }
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
