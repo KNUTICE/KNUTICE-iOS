@@ -7,8 +7,9 @@
 
 import Combine
 
-protocol NotificationSubscriptionRepository {    
+protocol NotificationSubscriptionRepository {
+    func createLocalSubscription() -> AnyPublisher<Void, any Error>
     func updateToServer(params: [String: Any]) -> AnyPublisher<Bool, any Error>
     func updateToLocal(key: NoticeCategory, value: Bool) -> AnyPublisher<Void, any Error>
-    func getNotificationPermissions() -> AnyPublisher<[String: Bool], any Error>
+    func fetchNotificationPermissions() -> AnyPublisher<[String: Bool], any Error>
 }

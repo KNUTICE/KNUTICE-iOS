@@ -22,7 +22,7 @@ struct SettingView: View {
         List {
             Section {
                 NavigationLink {
-                    NotificationList(viewModel: NotificationListViewModel())
+                    NotificationSubscriptionList(viewModel: NotificationSubscriptionListViewModel())
                 } label: {
                     Text("서비스 알림")
                 }

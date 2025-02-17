@@ -1,5 +1,5 @@
 //
-//  NotificationList.swift
+//  NotificationSubscriptionList.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 11/21/24.
@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct NotificationList: View {
-    @StateObject private var viewModel: NotificationListViewModel
+struct NotificationSubscriptionList: View {
+    @StateObject private var viewModel: NotificationSubscriptionListViewModel
     
-    init(viewModel: NotificationListViewModel) {
+    init(viewModel: NotificationSubscriptionListViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     
@@ -19,7 +19,7 @@ struct NotificationList: View {
             List {
                 Section {
                     Toggle(isOn: Binding(get: {
-                        viewModel.isGeneralNoticeNotificationAllowed ?? false
+                        viewModel.isGeneralNoticeNotificationSubscribed ?? false
                     }, set: {
                         viewModel.update(key: .generalNotice, value: $0)
                     }), label: {
@@ -27,7 +27,7 @@ struct NotificationList: View {
                     })
                     
                     Toggle(isOn: Binding(get: {
-                        viewModel.isAcademicNoticeNotificationAllowd ?? false
+                        viewModel.isAcademicNoticeNotificationSubscribed ?? false
                     }, set: {
                         viewModel.update(key: .academicNotice, value: $0)
                     }), label: {
@@ -35,7 +35,7 @@ struct NotificationList: View {
                     })
                     
                     Toggle(isOn: Binding(get: {
-                        viewModel.isScholarshipNoticeNotificationAllowed ?? false
+                        viewModel.isScholarshipNoticeNotificationSubscribed ?? false
                     }, set: {
                         viewModel.update(key: .scholarshipNotice, value: $0)
                     }), label: {
@@ -43,7 +43,7 @@ struct NotificationList: View {
                     })
                     
                     Toggle(isOn: Binding(get: {
-                        viewModel.isEventNoticeNotificationAllowed ?? false
+                        viewModel.isEventNoticeNotificationSubscribed ?? false
                     }, set: {
                         viewModel.update(key: .eventNotice, value: $0)
                     }), label: {
@@ -64,8 +64,10 @@ struct NotificationList: View {
             .navigationTitle("서비스 알림")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
-                if !viewModel.isAllDataLoaded {
-                    viewModel.getNotificationPermissions()
+                if !UserDefaults.standard.bool(forKey: "isInitializedNotificationSettings") {
+                    viewModel.initializeAndFetchNotificationSubscriptions()
+                } else if !viewModel.isAllDataLoaded {
+                    viewModel.fetchNotificationSubscriptions()
                 }
             }
             
@@ -78,6 +80,6 @@ struct NotificationList: View {
 
 #Preview {
     NavigationStack {
-        NotificationList(viewModel: NotificationListViewModel())
+        NotificationSubscriptionList(viewModel: NotificationSubscriptionListViewModel())
     }
 }
