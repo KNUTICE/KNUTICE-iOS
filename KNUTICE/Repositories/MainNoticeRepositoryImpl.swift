@@ -17,7 +17,7 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
     func fetchMainNotices() -> Observable<[SectionOfNotice]> {
         return dataSource.sendGetRequest(to: Bundle.main.mainNoticeURL, resultType: MainNoticeResponseDTO.self)
             .map { [weak self] in
-                return self?.convertToNotice($0) ?? []
+                return self?.createScectionOfNotice($0) ?? []
             }
             .asObservable()
     }
@@ -26,25 +26,20 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
     func fetch() -> AnyPublisher<[SectionOfNotice], any Error> {
         return dataSource.sendGetRequest(to: Bundle.main.mainNoticeURL, resultType: MainNoticeResponseDTO.self)
             .map { [weak self] in
-                self?.convertToNotice($0) ?? []
+                self?.createScectionOfNotice($0) ?? []
             }
             .eraseToAnyPublisher()
     }
     
-    private func convertToNotice(_ dto: MainNoticeResponseDTO) -> [SectionOfNotice] {
+    private func createScectionOfNotice(_ dto: MainNoticeResponseDTO) -> [SectionOfNotice] {
         var sectionOfNotices = [SectionOfNotice]()
         
         //일반공지
         sectionOfNotices.append(
             SectionOfNotice(header: "일반소식",
                             items: dto.body.latestThreeGeneralNews.map {
-                                MainNotice(id: $0.nttID,
-                                           presentationType: .actual,
-                                           title: $0.title,
-                                           contentUrl: $0.contentURL,
-                                           department: $0.departmentName,
-                                           uploadDate: $0.registeredAt,
-                                           noticeCategory: NoticeCategory(rawValue: $0.noticeName))
+                                MainNotice(presentationType: .actual,
+                                           notice: createNotice($0))
                             })
         )
         
@@ -52,13 +47,8 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
         sectionOfNotices.append(
             SectionOfNotice(header: "학사공지",
                             items: dto.body.latestThreeAcademicNews.map {
-                                MainNotice(id: $0.nttID,
-                                           presentationType: .actual,
-                                           title: $0.title,
-                                           contentUrl: $0.contentURL,
-                                           department: $0.departmentName,
-                                           uploadDate: $0.registeredAt,
-                                           noticeCategory: NoticeCategory(rawValue: $0.noticeName))
+                                MainNotice(presentationType: .actual,
+                                           notice: createNotice($0))
                             })
         )
         
@@ -66,13 +56,8 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
         sectionOfNotices.append(
             SectionOfNotice(header: "장학안내",
                             items: dto.body.latestThreeScholarshipNews.map {
-                                MainNotice(id: $0.nttID,
-                                           presentationType: .actual,
-                                           title: $0.title,
-                                           contentUrl: $0.contentURL,
-                                           department: $0.departmentName,
-                                           uploadDate: $0.registeredAt,
-                                           noticeCategory: NoticeCategory(rawValue: $0.noticeName))
+                                MainNotice(presentationType: .actual,
+                                           notice: createNotice($0))
                             })
         )
         
@@ -80,16 +65,23 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
         sectionOfNotices.append(
             SectionOfNotice(header: "행사안내",
                             items: dto.body.latestThreeEventNews.map {
-                                MainNotice(id: $0.nttID,
-                                           presentationType: .actual,
-                                           title: $0.title,
-                                           contentUrl: $0.contentURL,
-                                           department: $0.departmentName,
-                                           uploadDate: $0.registeredAt,
-                                           noticeCategory: NoticeCategory(rawValue: $0.noticeName))
+                                MainNotice(presentationType: .actual,
+                                           notice: createNotice($0))
                             })
         )
         
         return sectionOfNotices
+    }
+    
+    private func createNotice(_ body: NoticeReponseBody) -> Notice {
+        Notice(
+            id: body.nttID,
+            title: body.title,
+            contentUrl: body.contentURL,
+            department: body.departmentName,
+            uploadDate: body.registeredAt,
+            imageUrl: body.contentImage,
+            noticeCategory: NoticeCategory(rawValue: body.noticeName)
+        )
     }
 }
