@@ -165,10 +165,10 @@
 		8E659EBE2D29438500305D56 /* UITabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E659EBD2D29438500305D56 /* UITabBarViewController.swift */; };
 		8E659EBF2D29438500305D56 /* UITabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E659EBD2D29438500305D56 /* UITabBarViewController.swift */; };
 		8E6898322CD61EF1005F0EEA /* NotificationService-dev.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8E68982B2CD61EF1005F0EEA /* NotificationService-dev.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		8E6931562CEEFC0F0074142B /* NotificationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931552CEEFC0F0074142B /* NotificationList.swift */; };
-		8E6931572CEEFC0F0074142B /* NotificationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931552CEEFC0F0074142B /* NotificationList.swift */; };
-		8E6931592CEEFC2F0074142B /* NotificationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931582CEEFC2F0074142B /* NotificationListViewModel.swift */; };
-		8E69315A2CEEFC2F0074142B /* NotificationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931582CEEFC2F0074142B /* NotificationListViewModel.swift */; };
+		8E6931562CEEFC0F0074142B /* NotificationSubscriptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931552CEEFC0F0074142B /* NotificationSubscriptionList.swift */; };
+		8E6931572CEEFC0F0074142B /* NotificationSubscriptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931552CEEFC0F0074142B /* NotificationSubscriptionList.swift */; };
+		8E6931592CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931582CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift */; };
+		8E69315A2CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931582CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift */; };
 		8E69315C2CEEFF950074142B /* NotificationSubscriptionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69315B2CEEFF950074142B /* NotificationSubscriptionRepository.swift */; };
 		8E69315D2CEEFF950074142B /* NotificationSubscriptionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69315B2CEEFF950074142B /* NotificationSubscriptionRepository.swift */; };
 		8E69315F2CEF00600074142B /* NotificationSubscriptionRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69315E2CEF00600074142B /* NotificationSubscriptionRepositoryImpl.swift */; };
@@ -403,8 +403,8 @@
 		8E6175472CA24157002B6021 /* UIDevice+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Identifier.swift"; sourceTree = "<group>"; };
 		8E659EBD2D29438500305D56 /* UITabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarViewController.swift; sourceTree = "<group>"; };
 		8E68982B2CD61EF1005F0EEA /* NotificationService-dev.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "NotificationService-dev.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E6931552CEEFC0F0074142B /* NotificationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationList.swift; sourceTree = "<group>"; };
-		8E6931582CEEFC2F0074142B /* NotificationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListViewModel.swift; sourceTree = "<group>"; };
+		8E6931552CEEFC0F0074142B /* NotificationSubscriptionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSubscriptionList.swift; sourceTree = "<group>"; };
+		8E6931582CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSubscriptionListViewModel.swift; sourceTree = "<group>"; };
 		8E69315B2CEEFF950074142B /* NotificationSubscriptionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSubscriptionRepository.swift; sourceTree = "<group>"; };
 		8E69315E2CEF00600074142B /* NotificationSubscriptionRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSubscriptionRepositoryImpl.swift; sourceTree = "<group>"; };
 		8E6931632CEF02780074142B /* Notification.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notification.xcdatamodel; sourceTree = "<group>"; };
@@ -534,11 +534,12 @@
 		5C5698892BEFB2BE0085E389 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				5C82564C2BE5CE1B0038D4C8 /* LaunchScreen.storyboard */,
 				8E5E8BDA2D35F01C0078C007 /* BookmarkDetail */,
 				8E3B8C442D2BBFDA007E9579 /* BookmarkForm */,
 				8E7A4A5A2D2978EA00BD1B7F /* BookmarkList */,
 				8E659EBB2D29430B00305D56 /* TabBar */,
-				8E6931522CEEFBEF0074142B /* NotificationList */,
+				8E6931522CEEFBEF0074142B /* NotificationSubscriptionList */,
 				8EFE52E92CDC8CB6003A7330 /* NoticeTable */,
 				8EFE52E32CDC8955003A7330 /* SearchTable */,
 				8EA72DC52CD5C9B500D1B300 /* Developer Tools */,
@@ -549,7 +550,6 @@
 				5C9B810C2BF45B4A0038EB27 /* Interface */,
 				5CD2EFC22BF3A5A100066C87 /* Setting */,
 				5C56988A2BEFB2ED0085E389 /* Main */,
-				5C82564C2BE5CE1B0038D4C8 /* LaunchScreen.storyboard */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -892,19 +892,19 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		8E6931522CEEFBEF0074142B /* NotificationList */ = {
+		8E6931522CEEFBEF0074142B /* NotificationSubscriptionList */ = {
 			isa = PBXGroup;
 			children = (
 				8E6931542CEEFBFD0074142B /* ViewModel */,
 				8E6931532CEEFBF90074142B /* View */,
 			);
-			path = NotificationList;
+			path = NotificationSubscriptionList;
 			sourceTree = "<group>";
 		};
 		8E6931532CEEFBF90074142B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8E6931552CEEFC0F0074142B /* NotificationList.swift */,
+				8E6931552CEEFC0F0074142B /* NotificationSubscriptionList.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -912,7 +912,7 @@
 		8E6931542CEEFBFD0074142B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				8E6931582CEEFC2F0074142B /* NotificationListViewModel.swift */,
+				8E6931582CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1430,10 +1430,10 @@
 				5CD2EFC12BF356FB00066C87 /* UIViewController+Preview.swift in Sources */,
 				8E3F021E2C9FB46100AE89D5 /* ReportService.swift in Sources */,
 				8E5E8BF12D36309A0078C007 /* BookmarkDetailSwitchView.swift in Sources */,
-				8E6931572CEEFC0F0074142B /* NotificationList.swift in Sources */,
+				8E6931572CEEFC0F0074142B /* NotificationSubscriptionList.swift in Sources */,
 				8EFE52F22CDC9331003A7330 /* SearchTableViewController+Layout.swift in Sources */,
 				8E5385742C644AB000AF151B /* TokenRepository.swift in Sources */,
-				8E69315A2CEEFC2F0074142B /* NotificationListViewModel.swift in Sources */,
+				8E69315A2CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift in Sources */,
 				5C5698922BEFB4A20085E389 /* MainViewModel.swift in Sources */,
 				5C8256462BE5CE1A0038D4C8 /* MainViewController.swift in Sources */,
 				8E5C1AD52D40773F0092BF88 /* MainPopupContentRepositoryImpl.swift in Sources */,
@@ -1544,10 +1544,10 @@
 				8E2050FE2CD4F32F00D87C6A /* UIViewController+Preview.swift in Sources */,
 				8E2050FF2CD4F32F00D87C6A /* ReportService.swift in Sources */,
 				8E5E8BF02D36309A0078C007 /* BookmarkDetailSwitchView.swift in Sources */,
-				8E6931562CEEFC0F0074142B /* NotificationList.swift in Sources */,
+				8E6931562CEEFC0F0074142B /* NotificationSubscriptionList.swift in Sources */,
 				8EFE52F12CDC9331003A7330 /* SearchTableViewController+Layout.swift in Sources */,
 				8E2051002CD4F32F00D87C6A /* TokenRepository.swift in Sources */,
-				8E6931592CEEFC2F0074142B /* NotificationListViewModel.swift in Sources */,
+				8E6931592CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift in Sources */,
 				8E2051012CD4F32F00D87C6A /* MainViewModel.swift in Sources */,
 				8E2051022CD4F32F00D87C6A /* MainViewController.swift in Sources */,
 				8E5C1AD62D40773F0092BF88 /* MainPopupContentRepositoryImpl.swift in Sources */,
