@@ -43,6 +43,25 @@ final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
             }
             .eraseToAnyPublisher()
     }
+    
+    func fetchNotices(by nttIds: [Int]) -> AnyPublisher<[Notice], any Error> {
+        let params: [String: Any] = [
+            "result": [
+                "resultCode": 0,
+                "resultMessage": "string",
+                "resultDescription": "string"
+            ],
+            "body": [
+                "nttIdList": nttIds
+            ]
+        ]
+        
+        return dataSource.sendPostRequest(to: Bundle.main.noticeSyncURL, params: params, resultType: NoticeReponseDTO.self)
+            .map { [weak self] in
+                self?.createNotice($0) ?? []
+            }
+            .eraseToAnyPublisher()
+    }
 }
 
 fileprivate extension NoticeCategory {

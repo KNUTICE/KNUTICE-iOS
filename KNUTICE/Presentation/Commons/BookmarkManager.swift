@@ -10,4 +10,5 @@ import Foundation
 
 class BookmarkManager {
     @Injected(\.bookmarkRepository) var repository: BookmarkRepository
+    @Injected(\.bookmarkService) var service: BookmarkService
 }
