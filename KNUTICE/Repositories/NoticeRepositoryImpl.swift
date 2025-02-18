@@ -21,7 +21,7 @@ final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
     func fetchNotices() -> Single<[Notice]> {
         return dataSource.sendGetRequest(to: remoteURL, resultType: NoticeReponseDTO.self)
             .map { [weak self] in
-                return self?.converToNotice($0) ?? []
+                return self?.createNotice($0) ?? []
             }
     }
     
@@ -29,14 +29,14 @@ final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
     func fetchNotices(after number: Int) -> Single<[Notice]> {
         return dataSource.sendGetRequest(to: self.remoteURL + "&nttId=\(number)", resultType: NoticeReponseDTO.self)
             .map { [weak self] in
-                return self?.converToNotice($0) ?? []
+                return self?.createNotice($0) ?? []
             }
     }
     
     func fetchNotices() -> AnyPublisher<[Notice], any Error> {
         return dataSource.sendGetRequest(to: remoteURL, resultType: NoticeReponseDTO.self)
             .map { [weak self] in
-                self?.converToNotice($0) ?? []
+                self?.createNotice($0) ?? []
             }
             .eraseToAnyPublisher()
     }
@@ -44,7 +44,7 @@ final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
     func fetchNotices(after number: Int) -> AnyPublisher<[Notice], any Error> {
         return dataSource.sendGetRequest(to: remoteURL + "&nttId=\(number)", resultType: NoticeReponseDTO.self)
             .map { [weak self] in
-                self?.converToNotice($0) ?? []
+                self?.createNotice($0) ?? []
             }
             .eraseToAnyPublisher()
     }

@@ -13,10 +13,14 @@ final class NotificationSubscriptionRepositoryImpl: NotificationSubscriptionRepo
     @Injected(\.remoteDataSource) private var remoteDataSource: RemoteDataSource
     @Injected(\.localNotificationDataSource) private var localDatasource: LocalNotificationSubscriptionDataSource
     
+    func createLocalSubscription() -> AnyPublisher<Void, any Error> {
+        return localDatasource.createData()
+    }
+    
     func updateToServer(params: [String: Any]) -> AnyPublisher<Bool, any Error> {
         let url = Bundle.main.notificationPermissionURL
         
-        return remoteDataSource.sendPostRequest(to: url, params: params, resultType: NotificationPermissionUpdateDTO.self)
+        return remoteDataSource.sendPostRequest(to: url, params: params, resultType: PostResponseDTO.self)
             .map {
                 return $0.result.resultCode == 200 ? true : false
             }
@@ -27,7 +31,7 @@ final class NotificationSubscriptionRepositoryImpl: NotificationSubscriptionRepo
         return localDatasource.updateData(key: key, value: value)
     }
     
-    func getNotificationPermissions() -> AnyPublisher<[String: Bool], any Error> {
+    func fetchNotificationPermissions() -> AnyPublisher<[String: Bool], any Error> {
         return localDatasource.readData()
     }
 }

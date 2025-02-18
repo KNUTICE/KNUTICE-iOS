@@ -19,6 +19,32 @@ final class MainViewModel {
     private var cancellables: Set<AnyCancellable> = []
     private let logger: Logger = Logger()
     
+    private var dummyNotice: Notice {
+        Notice(id: UUID().hashValue,
+               title: "temp",
+               contentUrl: "temp",
+               department: "temp",
+               uploadDate: "temp",
+               imageUrl: nil,
+               noticeCategory: nil)
+    }
+    
+    private var dummyData: [SectionOfNotice] {
+        return [
+            SectionOfNotice(header: "일반소식",
+                            items: Array(repeating: MainNotice(presentationType: .skeleton, notice: dummyNotice), count: 3)),
+                    
+            SectionOfNotice(header: "학사공지",
+                            items: Array(repeating: MainNotice(presentationType: .skeleton, notice: dummyNotice), count: 3)),
+            
+            SectionOfNotice(header: "장학공지",
+                            items: Array(repeating: MainNotice(presentationType: .skeleton, notice: dummyNotice), count: 3)),
+                    
+            SectionOfNotice(header: "행사안내",
+                            items: Array(repeating: MainNotice(presentationType: .skeleton, notice: dummyNotice), count: 3))
+        ]
+    }
+    
     func getCellValue() -> [SectionOfNotice] {
         return notices.value
     }
@@ -30,7 +56,7 @@ final class MainViewModel {
     ///Fetch Notices with RxSwift
     @available(*, deprecated, message: "Combine 함수 대체 사용")
     func fetchNotices() {
-        notices.accept(dummy)
+        notices.accept(dummyData)
         
         repository.fetchMainNotices()
             .observe(on: MainScheduler.instance)
@@ -44,7 +70,7 @@ final class MainViewModel {
     
     ///Fetch Notices with Combine
     func fetchNoticesWithCombine() {
-        notices.accept(dummy)
+        notices.accept(dummyData)
         
         repository.fetch()
             .receive(on: DispatchQueue.main)
@@ -95,41 +121,5 @@ final class MainViewModel {
             })
             .store(in: &cancellables)
             
-    }
-    
-    private var dummy: [SectionOfNotice] {
-        return [
-            SectionOfNotice(header: "일반소식",
-                            items: Array(repeating: MainNotice(id: UUID().hashValue,
-                                                               presentationType: .skeleton,
-                                                               title: "temp",
-                                                               contentUrl: "temp",
-                                                               department: "temp",
-                                                               uploadDate: "temp"), count: 3)),
-                    
-            SectionOfNotice(header: "학사공지",
-                            items: Array(repeating: MainNotice(id: UUID().hashValue,
-                                                               presentationType: .skeleton,
-                                                               title: "temp",
-                                                               contentUrl: "temp",
-                                                               department: "temp",
-                                                               uploadDate: "temp"), count: 3)),
-            
-            SectionOfNotice(header: "장학공지",
-                            items: Array(repeating: MainNotice(id: UUID().hashValue,
-                                                               presentationType: .skeleton,
-                                                               title: "temp",
-                                                               contentUrl: "temp",
-                                                               department: "temp",
-                                                               uploadDate: "temp"), count: 3)),
-                    
-            SectionOfNotice(header: "행사안내",
-                            items: Array(repeating: MainNotice(id: UUID().hashValue,
-                                                               presentationType: .skeleton,
-                                                               title: "temp",
-                                                               contentUrl: "temp",
-                                                               department: "temp",
-                                                               uploadDate: "temp"), count: 3))
-        ]
     }
 }
