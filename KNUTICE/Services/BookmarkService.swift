@@ -20,7 +20,7 @@ final class BookmarkServiceImpl: BookmarkService {
     @Injected(\.bookmarkRepository) private var bookmarkRepository: BookmarkRepository
     @Injected(\.noticeRepository) private var noticeRepository: NoticeRepository
     
-    func read(delay: Int) -> AnyPublisher<[Bookmark], any Error> {
+    func read(delay: Int = 0) -> AnyPublisher<[Bookmark], any Error> {
         return bookmarkRepository.read(delay: delay)
     }
     
@@ -79,10 +79,17 @@ final class BookmarkServiceImpl: BookmarkService {
     
     /// CoreData에서 저장되어 있는 Notice 데이터를 서버 DB와 동기화 후 Bookmark 배열을 반환하는 함수
     func syncBookmarksWithNotice() -> AnyPublisher<[Bookmark], any Error> {
-        return read(delay: 0)
+        return read()
             .flatMap { [weak self] bookmarks -> AnyPublisher<([Bookmark], [Notice]), any Error> in
                 guard let self else {
                     return Fail(error: NSError(domain: "SelfDeallocated", code: -1))
+                        .eraseToAnyPublisher()
+                }
+                
+                guard !bookmarks.isEmpty else {
+                    //bookmark가 없는 경우 빈 배열 전달
+                    return Just(([], []))
+                        .setFailureType(to: Error.self)
                         .eraseToAnyPublisher()
                 }
                 
@@ -100,6 +107,13 @@ final class BookmarkServiceImpl: BookmarkService {
             .flatMap { [weak self] (bookmarks, notices) -> AnyPublisher<([Void], [Bookmark]), any Error> in
                 guard let self else {
                     return Fail(error: NSError(domain: "SelfDeallocated", code: -1))
+                        .eraseToAnyPublisher()
+                }
+                
+                guard !bookmarks.isEmpty && !notices.isEmpty else {
+                    //bookmarks와 notices가 없는 경우 빈 배열 전달
+                    return Just(([], []))
+                        .setFailureType(to: Error.self)
                         .eraseToAnyPublisher()
                 }
                 
