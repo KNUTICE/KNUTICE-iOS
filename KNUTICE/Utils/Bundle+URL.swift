@@ -117,4 +117,14 @@ extension Bundle {
         
         return url
     }
+    
+    var noticeSyncURL: String {
+        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
+              let resource = NSDictionary(contentsOfFile: file),
+              let url = resource["Notice_Sync_URL"] as? String else {
+            return ""
+        }
+        
+        return url
+    }
 }
