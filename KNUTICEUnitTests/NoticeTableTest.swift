@@ -20,10 +20,10 @@ final class NoticeTableTest: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
-        generalNoticeTableViewModel = Container.shared.generalNoticeTableViewModel()
-        academicNoticeTableViewModel = Container.shared.academicNoticeTableViewModel()
-        scholarshipNoticeTableViewModel = Container.shared.scholarshipNoticeTableViewModel()
-        eventNoticeTableViewModel = Container.shared.eventNoticeTableViewModel()
+        generalNoticeTableViewModel = NoticeTableViewModel(category: .generalNotice)
+        academicNoticeTableViewModel = NoticeTableViewModel(category: .academicNotice)
+        scholarshipNoticeTableViewModel = NoticeTableViewModel(category: .scholarshipNotice)
+        eventNoticeTableViewModel = NoticeTableViewModel(category: .eventNotice)
         cancellables = []
     }
 
