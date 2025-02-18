@@ -34,8 +34,8 @@ final class MainListCell: UITableViewCell {
     
     func configureSkeleton(with item: MainNotice) {
         DispatchQueue.main.async {
-            self.titleLabel.text = item.title
-            self.subTitleLabel.text = "[\(item.department)]  \(item.uploadDate)"
+            self.titleLabel.text = item.notice.title
+            self.subTitleLabel.text = "[\(item.notice.department)]  \(item.notice.uploadDate)"
             
             self.titleLabel.isSkeletonable = true
             self.subTitleLabel.isSkeletonable = true
@@ -48,8 +48,8 @@ final class MainListCell: UITableViewCell {
     }
     
     func configure(with item: MainNotice) {
-        titleLabel.text = item.title
-        subTitleLabel.text = "[\(item.department)]  \(item.uploadDate)"
+        titleLabel.text = item.notice.title
+        subTitleLabel.text = "[\(item.notice.department)]  \(item.notice.uploadDate)"
         
         self.isUserInteractionEnabled = true
     }

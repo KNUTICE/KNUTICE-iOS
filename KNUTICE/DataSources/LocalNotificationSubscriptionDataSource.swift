@@ -10,6 +10,7 @@ import CoreData
 
 protocol LocalNotificationSubscriptionDataSource {
     func createDataIfNeeded() throws
+    func createData() -> AnyPublisher<Void, any Error>
     func readData() -> AnyPublisher<[String: Bool], any Error>
     func updateData(key: NoticeCategory, value: Bool) -> AnyPublisher<Void, any Error>
 }
@@ -59,6 +60,7 @@ final class LocalNotificationDataSourceImpl: LocalNotificationSubscriptionDataSo
         persistentContainer.viewContext
     }()
     
+    @available(*, deprecated, message: "Use createData() instead")
     func createDataIfNeeded() throws {
         let notificationPermissions = NotificationPermissions(context: mainContext)
         notificationPermissions.generalNoticeNotification = true
@@ -68,6 +70,25 @@ final class LocalNotificationDataSourceImpl: LocalNotificationSubscriptionDataSo
         
         try mainContext.save()
         UserDefaults.standard.set(true, forKey: "isInitializedNotificationSettings")
+    }
+    
+    func createData() -> AnyPublisher<Void, any Error> {
+        return Future { promise in
+            do {
+                let notificationPermissions = NotificationPermissions(context: self.backgroundContext)
+                notificationPermissions.generalNoticeNotification = true
+                notificationPermissions.academicNoticeNotification = true
+                notificationPermissions.scholarshipNoticeNotification = true
+                notificationPermissions.eventNoticeNotification = true
+                
+                try self.backgroundContext.save()
+                UserDefaults.standard.set(true, forKey: "isInitializedNotificationSettings")
+                promise(.success(()))
+            } catch {
+                promise(.failure(error))
+            }
+        }
+        .eraseToAnyPublisher()
     }
     
     func readData() -> AnyPublisher<[String: Bool], any Error> {

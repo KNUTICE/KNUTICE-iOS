@@ -75,7 +75,6 @@
 		8E2051112CD4F32F00D87C6A /* VIew+TextEditorBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F022C2CA0022D00AE89D5 /* VIew+TextEditorBackground.swift */; };
 		8E2051122CD4F32F00D87C6A /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0C3F882C9EC93B005E2A16 /* ReportView.swift */; };
 		8E2051132CD4F32F00D87C6A /* LightTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBBE23F2CA0E3FB00826D5A /* LightTextView.swift */; };
-		8E2051152CD4F32F00D87C6A /* TokenSaveResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385752C644B4400AF151B /* TokenSaveResponseDTO.swift */; };
 		8E2051162CD4F32F00D87C6A /* NoticeReponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A542BFDF66600E0254B /* NoticeReponseDTO.swift */; };
 		8E2051172CD4F32F00D87C6A /* View+Fork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6D20D2C6713BB004E8AC2 /* View+Fork.swift */; };
 		8E2051182CD4F32F00D87C6A /* AppVersionProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02282C9FC77600AE89D5 /* AppVersionProvidable.swift */; };
@@ -112,8 +111,6 @@
 		8E2051402CD4F32F00D87C6A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5C82564D2BE5CE1B0038D4C8 /* Base */; };
 		8E2DA2382CF33BCC00E842A8 /* NotificationSubscriptionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69315B2CEEFF950074142B /* NotificationSubscriptionRepository.swift */; };
 		8E2DA2392CF33BCC00E842A8 /* NotificationSubscriptionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69315B2CEEFF950074142B /* NotificationSubscriptionRepository.swift */; };
-		8E2DA23C2CF33C4000E842A8 /* Notification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931622CEF02780074142B /* Notification.xcdatamodeld */; };
-		8E2DA23D2CF33C4000E842A8 /* Notification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931622CEF02780074142B /* Notification.xcdatamodeld */; };
 		8E3B8C422D2B9A97007E9579 /* BookmarkForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B8C412D2B9A97007E9579 /* BookmarkForm.swift */; };
 		8E3B8C432D2B9A97007E9579 /* BookmarkForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B8C412D2B9A97007E9579 /* BookmarkForm.swift */; };
 		8E3B8C482D2BBFFD007E9579 /* BookmarkFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B8C472D2BBFFD007E9579 /* BookmarkFormViewModel.swift */; };
@@ -127,7 +124,6 @@
 		8E4F599D2CD5176E007D43BC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E613E9D2C951C8D006FC272 /* GoogleService-Info.plist */; };
 		8E4F599E2CD517DD007D43BC /* ServiceInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C190A432BFD6AA500E0254B /* ServiceInfo.plist */; };
 		8E5385742C644AB000AF151B /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385732C644AB000AF151B /* TokenRepository.swift */; };
-		8E5385762C644B4400AF151B /* TokenSaveResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385752C644B4400AF151B /* TokenSaveResponseDTO.swift */; };
 		8E5385782C644C3F00AF151B /* TokenRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385772C644C3F00AF151B /* TokenRepositoryImpl.swift */; };
 		8E5385872C64A24A00AF151B /* ci_post_clone.sh in Resources */ = {isa = PBXBuildFile; fileRef = 8E53857E2C647D9A00AF151B /* ci_post_clone.sh */; };
 		8E54C84A2C5E6F5E0070E689 /* AppDelegate+Messaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E54C8492C5E6F5E0070E689 /* AppDelegate+Messaging.swift */; };
@@ -167,10 +163,10 @@
 		8E659EBE2D29438500305D56 /* UITabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E659EBD2D29438500305D56 /* UITabBarViewController.swift */; };
 		8E659EBF2D29438500305D56 /* UITabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E659EBD2D29438500305D56 /* UITabBarViewController.swift */; };
 		8E6898322CD61EF1005F0EEA /* NotificationService-dev.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8E68982B2CD61EF1005F0EEA /* NotificationService-dev.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		8E6931562CEEFC0F0074142B /* NotificationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931552CEEFC0F0074142B /* NotificationList.swift */; };
-		8E6931572CEEFC0F0074142B /* NotificationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931552CEEFC0F0074142B /* NotificationList.swift */; };
-		8E6931592CEEFC2F0074142B /* NotificationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931582CEEFC2F0074142B /* NotificationListViewModel.swift */; };
-		8E69315A2CEEFC2F0074142B /* NotificationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931582CEEFC2F0074142B /* NotificationListViewModel.swift */; };
+		8E6931562CEEFC0F0074142B /* NotificationSubscriptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931552CEEFC0F0074142B /* NotificationSubscriptionList.swift */; };
+		8E6931572CEEFC0F0074142B /* NotificationSubscriptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931552CEEFC0F0074142B /* NotificationSubscriptionList.swift */; };
+		8E6931592CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931582CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift */; };
+		8E69315A2CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931582CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift */; };
 		8E69315C2CEEFF950074142B /* NotificationSubscriptionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69315B2CEEFF950074142B /* NotificationSubscriptionRepository.swift */; };
 		8E69315D2CEEFF950074142B /* NotificationSubscriptionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69315B2CEEFF950074142B /* NotificationSubscriptionRepository.swift */; };
 		8E69315F2CEF00600074142B /* NotificationSubscriptionRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69315E2CEF00600074142B /* NotificationSubscriptionRepositoryImpl.swift */; };
@@ -236,8 +232,6 @@
 		8EE4B4E62D16CE1E00EFF10B /* SpinningIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4E42D16CE1E00EFF10B /* SpinningIndicator.swift */; };
 		8EE4B4E82D16E4DD00EFF10B /* NotificationSubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4E72D16E4DD00EFF10B /* NotificationSubscriptionService.swift */; };
 		8EE4B4E92D16E4DD00EFF10B /* NotificationSubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4E72D16E4DD00EFF10B /* NotificationSubscriptionService.swift */; };
-		8EE4B4F42D16E7CC00EFF10B /* NotificationPermissionUpdateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4F32D16E7CC00EFF10B /* NotificationPermissionUpdateDTO.swift */; };
-		8EE4B4F52D16E7CC00EFF10B /* NotificationPermissionUpdateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4F32D16E7CC00EFF10B /* NotificationPermissionUpdateDTO.swift */; };
 		8EE4B4FA2D17D33600EFF10B /* SearchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4F92D17D33600EFF10B /* SearchTest.swift */; };
 		8EE4B4FC2D17D93700EFF10B /* NoticeReponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A542BFDF66600E0254B /* NoticeReponseDTO.swift */; };
 		8EE4B4FD2D17D96500EFF10B /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E613E9F2C95214C006FC272 /* RequestResult.swift */; };
@@ -382,7 +376,6 @@
 		8E3F02282C9FC77600AE89D5 /* AppVersionProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionProvidable.swift; sourceTree = "<group>"; };
 		8E3F022C2CA0022D00AE89D5 /* VIew+TextEditorBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VIew+TextEditorBackground.swift"; sourceTree = "<group>"; };
 		8E5385732C644AB000AF151B /* TokenRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepository.swift; sourceTree = "<group>"; };
-		8E5385752C644B4400AF151B /* TokenSaveResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenSaveResponseDTO.swift; sourceTree = "<group>"; };
 		8E5385772C644C3F00AF151B /* TokenRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepositoryImpl.swift; sourceTree = "<group>"; };
 		8E53857E2C647D9A00AF151B /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 		8E54C8462C5E63940070E689 /* KNUTICE.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KNUTICE.entitlements; sourceTree = "<group>"; };
@@ -408,8 +401,8 @@
 		8E6175472CA24157002B6021 /* UIDevice+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Identifier.swift"; sourceTree = "<group>"; };
 		8E659EBD2D29438500305D56 /* UITabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarViewController.swift; sourceTree = "<group>"; };
 		8E68982B2CD61EF1005F0EEA /* NotificationService-dev.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "NotificationService-dev.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E6931552CEEFC0F0074142B /* NotificationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationList.swift; sourceTree = "<group>"; };
-		8E6931582CEEFC2F0074142B /* NotificationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListViewModel.swift; sourceTree = "<group>"; };
+		8E6931552CEEFC0F0074142B /* NotificationSubscriptionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSubscriptionList.swift; sourceTree = "<group>"; };
+		8E6931582CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSubscriptionListViewModel.swift; sourceTree = "<group>"; };
 		8E69315B2CEEFF950074142B /* NotificationSubscriptionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSubscriptionRepository.swift; sourceTree = "<group>"; };
 		8E69315E2CEF00600074142B /* NotificationSubscriptionRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSubscriptionRepositoryImpl.swift; sourceTree = "<group>"; };
 		8E6931632CEF02780074142B /* Notification.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notification.xcdatamodel; sourceTree = "<group>"; };
@@ -452,7 +445,6 @@
 		8EDD51A52C6D7D68002101CA /* MainViewController+NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+NotificationCenter.swift"; sourceTree = "<group>"; };
 		8EE4B4E42D16CE1E00EFF10B /* SpinningIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinningIndicator.swift; sourceTree = "<group>"; };
 		8EE4B4E72D16E4DD00EFF10B /* NotificationSubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSubscriptionService.swift; sourceTree = "<group>"; };
-		8EE4B4F32D16E7CC00EFF10B /* NotificationPermissionUpdateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionUpdateDTO.swift; sourceTree = "<group>"; };
 		8EE4B4F92D17D33600EFF10B /* SearchTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTest.swift; sourceTree = "<group>"; };
 		8EEE1A502CEA19C90011FD87 /* NoticeFetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeFetchable.swift; sourceTree = "<group>"; };
 		8EFCF8662C37742A004A53E9 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -540,11 +532,12 @@
 		5C5698892BEFB2BE0085E389 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				5C82564C2BE5CE1B0038D4C8 /* LaunchScreen.storyboard */,
 				8E5E8BDA2D35F01C0078C007 /* BookmarkDetail */,
 				8E3B8C442D2BBFDA007E9579 /* BookmarkForm */,
 				8E7A4A5A2D2978EA00BD1B7F /* BookmarkList */,
 				8E659EBB2D29430B00305D56 /* TabBar */,
-				8E6931522CEEFBEF0074142B /* NotificationList */,
+				8E6931522CEEFBEF0074142B /* NotificationSubscriptionList */,
 				8EFE52E92CDC8CB6003A7330 /* NoticeTable */,
 				8EFE52E32CDC8955003A7330 /* SearchTable */,
 				8EA72DC52CD5C9B500D1B300 /* Developer Tools */,
@@ -555,7 +548,6 @@
 				5C9B810C2BF45B4A0038EB27 /* Interface */,
 				5CD2EFC22BF3A5A100066C87 /* Setting */,
 				5C56988A2BEFB2ED0085E389 /* Main */,
-				5C82564C2BE5CE1B0038D4C8 /* LaunchScreen.storyboard */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -710,9 +702,7 @@
 				8E3F02252C9FB85E00AE89D5 /* PostResponseDTO.swift */,
 				5C89DD4F2BFA120B00CCCCCD /* MainNoticeResponseDTO.swift */,
 				5C190A542BFDF66600E0254B /* NoticeReponseDTO.swift */,
-				8E5385752C644B4400AF151B /* TokenSaveResponseDTO.swift */,
 				8E613E9F2C95214C006FC272 /* RequestResult.swift */,
-				8EE4B4F32D16E7CC00EFF10B /* NotificationPermissionUpdateDTO.swift */,
 				8EC6B89A2D30B307002B45C7 /* BookmarkDTO.swift */,
 				8E5C1ACE2D40768B0092BF88 /* MainPopupContentDTO.swift */,
 			);
@@ -900,19 +890,19 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		8E6931522CEEFBEF0074142B /* NotificationList */ = {
+		8E6931522CEEFBEF0074142B /* NotificationSubscriptionList */ = {
 			isa = PBXGroup;
 			children = (
 				8E6931542CEEFBFD0074142B /* ViewModel */,
 				8E6931532CEEFBF90074142B /* View */,
 			);
-			path = NotificationList;
+			path = NotificationSubscriptionList;
 			sourceTree = "<group>";
 		};
 		8E6931532CEEFBF90074142B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8E6931552CEEFC0F0074142B /* NotificationList.swift */,
+				8E6931552CEEFC0F0074142B /* NotificationSubscriptionList.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -920,7 +910,7 @@
 		8E6931542CEEFBFD0074142B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				8E6931582CEEFC2F0074142B /* NotificationListViewModel.swift */,
+				8E6931582CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1436,13 +1426,12 @@
 				8EB3F92F2D3E192F00DD47B3 /* BottomModal.swift in Sources */,
 				5C89DD502BFA120B00CCCCCD /* MainNoticeResponseDTO.swift in Sources */,
 				5CD2EFC12BF356FB00066C87 /* UIViewController+Preview.swift in Sources */,
-				8EE4B4F52D16E7CC00EFF10B /* NotificationPermissionUpdateDTO.swift in Sources */,
 				8E3F021E2C9FB46100AE89D5 /* ReportService.swift in Sources */,
 				8E5E8BF12D36309A0078C007 /* BookmarkDetailSwitchView.swift in Sources */,
-				8E6931572CEEFC0F0074142B /* NotificationList.swift in Sources */,
+				8E6931572CEEFC0F0074142B /* NotificationSubscriptionList.swift in Sources */,
 				8EFE52F22CDC9331003A7330 /* SearchTableViewController+Layout.swift in Sources */,
 				8E5385742C644AB000AF151B /* TokenRepository.swift in Sources */,
-				8E69315A2CEEFC2F0074142B /* NotificationListViewModel.swift in Sources */,
+				8E69315A2CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift in Sources */,
 				5C5698922BEFB4A20085E389 /* MainViewModel.swift in Sources */,
 				5C8256462BE5CE1A0038D4C8 /* MainViewController.swift in Sources */,
 				8E5C1AD52D40773F0092BF88 /* MainPopupContentRepositoryImpl.swift in Sources */,
@@ -1485,7 +1474,6 @@
 				8E60EAF82CDDF946003612FB /* SearchTableViewController+Binding.swift in Sources */,
 				8E7A4A612D297A4D00BD1B7F /* BookmarkListViewModel.swift in Sources */,
 				8EC6B8962D309EA9002B45C7 /* LocalBookmarkDataSource.swift in Sources */,
-				8E5385762C644B4400AF151B /* TokenSaveResponseDTO.swift in Sources */,
 				5C190A552BFDF66600E0254B /* NoticeReponseDTO.swift in Sources */,
 				8EB6D20E2C6713BB004E8AC2 /* View+Fork.swift in Sources */,
 				8E3F02292C9FC77E00AE89D5 /* AppVersionProvidable.swift in Sources */,
@@ -1552,13 +1540,12 @@
 				8EB3F9302D3E192F00DD47B3 /* BottomModal.swift in Sources */,
 				8E2050FD2CD4F32F00D87C6A /* MainNoticeResponseDTO.swift in Sources */,
 				8E2050FE2CD4F32F00D87C6A /* UIViewController+Preview.swift in Sources */,
-				8EE4B4F42D16E7CC00EFF10B /* NotificationPermissionUpdateDTO.swift in Sources */,
 				8E2050FF2CD4F32F00D87C6A /* ReportService.swift in Sources */,
 				8E5E8BF02D36309A0078C007 /* BookmarkDetailSwitchView.swift in Sources */,
-				8E6931562CEEFC0F0074142B /* NotificationList.swift in Sources */,
+				8E6931562CEEFC0F0074142B /* NotificationSubscriptionList.swift in Sources */,
 				8EFE52F12CDC9331003A7330 /* SearchTableViewController+Layout.swift in Sources */,
 				8E2051002CD4F32F00D87C6A /* TokenRepository.swift in Sources */,
-				8E6931592CEEFC2F0074142B /* NotificationListViewModel.swift in Sources */,
+				8E6931592CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift in Sources */,
 				8E2051012CD4F32F00D87C6A /* MainViewModel.swift in Sources */,
 				8E2051022CD4F32F00D87C6A /* MainViewController.swift in Sources */,
 				8E5C1AD62D40773F0092BF88 /* MainPopupContentRepositoryImpl.swift in Sources */,
@@ -1601,7 +1588,6 @@
 				8E60EAF72CDDF946003612FB /* SearchTableViewController+Binding.swift in Sources */,
 				8E7A4A622D297A4D00BD1B7F /* BookmarkListViewModel.swift in Sources */,
 				8EC6B8952D309EA9002B45C7 /* LocalBookmarkDataSource.swift in Sources */,
-				8E2051152CD4F32F00D87C6A /* TokenSaveResponseDTO.swift in Sources */,
 				8E2051162CD4F32F00D87C6A /* NoticeReponseDTO.swift in Sources */,
 				8E2051172CD4F32F00D87C6A /* View+Fork.swift in Sources */,
 				8E2051182CD4F32F00D87C6A /* AppVersionProvidable.swift in Sources */,
@@ -1668,7 +1654,6 @@
 				8EC6B88D2D309529002B45C7 /* Notice.swift in Sources */,
 				8E2DA2392CF33BCC00E842A8 /* NotificationSubscriptionRepository.swift in Sources */,
 				8ECB82DD2CDB6C3D00420349 /* NotificationService.swift in Sources */,
-				8E2DA23D2CF33C4000E842A8 /* Notification.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1693,7 +1678,6 @@
 				8EC6B88C2D309529002B45C7 /* Notice.swift in Sources */,
 				8E2DA2382CF33BCC00E842A8 /* NotificationSubscriptionRepository.swift in Sources */,
 				8EB6D2002C663627004E8AC2 /* NotificationService.swift in Sources */,
-				8E2DA23C2CF33C4000E842A8 /* Notification.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

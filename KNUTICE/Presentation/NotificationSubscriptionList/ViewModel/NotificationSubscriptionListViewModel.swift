@@ -1,5 +1,5 @@
 //
-//  NotificationListViewModel.swift
+//  NotificationSubscriptionListViewModel.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 11/21/24.
@@ -9,11 +9,11 @@ import Combine
 import Factory
 import os
 
-final class NotificationListViewModel: ObservableObject {
-    @Published var isGeneralNoticeNotificationAllowed: Bool?
-    @Published var isAcademicNoticeNotificationAllowd: Bool?
-    @Published var isScholarshipNoticeNotificationAllowed: Bool?
-    @Published var isEventNoticeNotificationAllowed: Bool?
+final class NotificationSubscriptionListViewModel: ObservableObject {
+    @Published var isGeneralNoticeNotificationSubscribed: Bool?
+    @Published var isAcademicNoticeNotificationSubscribed: Bool?
+    @Published var isScholarshipNoticeNotificationSubscribed: Bool?
+    @Published var isEventNoticeNotificationSubscribed: Bool?
     @Published var isLoading: Bool = false
     
     @Injected(\.notificationRepository) private var repository: NotificationSubscriptionRepository
@@ -23,18 +23,35 @@ final class NotificationListViewModel: ObservableObject {
     
     var isAllDataLoaded: Bool {
         let data = [
-            isGeneralNoticeNotificationAllowed,
-            isAcademicNoticeNotificationAllowd,
-            isScholarshipNoticeNotificationAllowed,
-            isEventNoticeNotificationAllowed
+            isGeneralNoticeNotificationSubscribed,
+            isAcademicNoticeNotificationSubscribed,
+            isScholarshipNoticeNotificationSubscribed,
+            isEventNoticeNotificationSubscribed
         ]
         
-        return data.allSatisfy { $0 == true }
+        return data.allSatisfy { $0 != nil }
     }
     
-    func getNotificationPermissions() {
+    func initializeAndFetchNotificationSubscriptions() {
         isLoading = true
-        repository.getNotificationPermissions()
+        repository.createLocalSubscription()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                switch completion {
+                case .finished:
+                    self?.logger.info("Successfully created initial subscription data")
+                case .failure(let error):
+                    self?.logger.error("NotificationSubscriptionListViewModel.initializeData() error : \(error.localizedDescription)")
+                }
+            }, receiveValue: { [weak self] in
+                self?.fetchNotificationSubscriptions()
+            })
+            .store(in: &cancellables)
+    }
+    
+    func fetchNotificationSubscriptions() {
+        isLoading = true
+        repository.fetchNotificationPermissions()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 self?.isLoading = false
@@ -46,10 +63,10 @@ final class NotificationListViewModel: ObservableObject {
                     self?.logger.log(level: .error, "NotificationListViewModel: \(error.localizedDescription)")
                 }
             }, receiveValue: { [weak self] in
-                self?.isGeneralNoticeNotificationAllowed = $0["generalNotice"]
-                self?.isAcademicNoticeNotificationAllowd = $0["academicNotice"]
-                self?.isScholarshipNoticeNotificationAllowed = $0["scholarshipNotice"]
-                self?.isEventNoticeNotificationAllowed = $0["eventNotice"]
+                self?.isGeneralNoticeNotificationSubscribed = $0["generalNotice"]
+                self?.isAcademicNoticeNotificationSubscribed = $0["academicNotice"]
+                self?.isScholarshipNoticeNotificationSubscribed = $0["scholarshipNotice"]
+                self?.isEventNoticeNotificationSubscribed = $0["eventNotice"]
             })
             .store(in: &cancellables)
     }
@@ -70,13 +87,13 @@ final class NotificationListViewModel: ObservableObject {
             }, receiveValue: { [weak self] in
                 switch key {
                 case .generalNotice:
-                    self?.isGeneralNoticeNotificationAllowed? = value
+                    self?.isGeneralNoticeNotificationSubscribed? = value
                 case .academicNotice:
-                    self?.isAcademicNoticeNotificationAllowd? = value
+                    self?.isAcademicNoticeNotificationSubscribed? = value
                 case .scholarshipNotice:
-                    self?.isScholarshipNoticeNotificationAllowed? = value
+                    self?.isScholarshipNoticeNotificationSubscribed? = value
                 case .eventNotice:
-                    self?.isEventNoticeNotificationAllowed? = value
+                    self?.isEventNoticeNotificationSubscribed? = value
                 }
             })
             .store(in: &cancellables)
