@@ -17,6 +17,11 @@ protocol BookmarkService {
 
 final class BookmarkServiceImpl: BookmarkService {
     @Injected(\.bookmarkRepository) private var repository: BookmarkRepository
+//    @Injected()
+    
+    func read(delay: Int) -> AnyPublisher<[Bookmark], any Error> {
+        return repository.read(delay: delay)
+    }
     
     func save(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
         return UNUserNotificationCenter.current().registerLocalNotification(for: bookmark)
@@ -55,4 +60,5 @@ final class BookmarkServiceImpl: BookmarkService {
             return repository.update(bookmark: bookmark)
         }
     }
+    
 }
