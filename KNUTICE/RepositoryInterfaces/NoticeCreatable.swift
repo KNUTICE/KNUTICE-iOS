@@ -7,18 +7,20 @@
 
 import Foundation
 
-protocol NoticeCreatable {}
+protocol NoticeCreatable {
+    func createNotice(_ dto: NoticeReponseDTO) -> [Notice]?
+}
 
 extension NoticeCreatable {
-    func converToNotice(_ dto: NoticeReponseDTO) -> [Notice]? {
+    func createNotice(_ dto: NoticeReponseDTO) -> [Notice]? {
         return dto.body?.map {
             return Notice(id: $0.nttID,
-                          boardNumber: $0.contentNumber,
                           title: $0.title,
                           contentUrl: $0.contentURL,
                           department: $0.departmentName,
                           uploadDate: $0.registeredAt,
-                          imageUrl: $0.contentImage)
+                          imageUrl: $0.contentImage,
+                          noticeCategory: NoticeCategory(rawValue: $0.noticeName))
         }
     }
 }
