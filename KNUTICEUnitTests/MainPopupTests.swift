@@ -10,7 +10,7 @@ import Combine
 import Factory
 @testable import KNUTICE
 
-final class MainPopupTest: XCTestCase {
+final class MainPopupTests: XCTestCase {
     private var dataSource: RemoteDataSource!
     private var cancellables: Set<AnyCancellable>!
 
