@@ -10,7 +10,7 @@ import Combine
 import Factory
 @testable import KNUTICE
 
-final class NoticeTableTest: XCTestCase {
+final class NoticeTableTests: XCTestCase {
     private var generalNoticeTableViewModel: NoticeTableViewModel!
     private var academicNoticeTableViewModel: NoticeTableViewModel!
     private var scholarshipNoticeTableViewModel: NoticeTableViewModel!
