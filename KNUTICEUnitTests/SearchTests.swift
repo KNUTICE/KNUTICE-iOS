@@ -10,7 +10,7 @@ import Combine
 import Factory
 @testable import KNUTICE
 
-final class SearchTest: XCTestCase {
+final class SearchTests: XCTestCase {
     private var dataSource: RemoteDataSource!
     private var viewModel: SearchTableViewModel!
     private var cancellables: Set<AnyCancellable>!
