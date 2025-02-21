@@ -46,8 +46,8 @@ final class BookmarkFormViewModel: ObservableObject, BookmarkFormHandler {
     }
     
     private func handleSaveFailure(with error: Error) {
-        if let error = error as? BookmarkRepositoryImpl.ExistingBookmarkError {
-            alertMessage = error.rawValue
+        if let error = error as? ExistingBookmarkError, case .alreadyExist(let message) = error {
+            alertMessage = message
         } else {
             logger.error("BookmarkFormViewModel error: \(error.localizedDescription)")
             alertMessage = "북마크 저장에 실패했어요."
