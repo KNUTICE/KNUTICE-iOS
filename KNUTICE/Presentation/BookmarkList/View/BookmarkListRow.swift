@@ -12,6 +12,11 @@ struct BookmarkListRow: View {
     
     var body: some View {
         HStack(spacing: 15) {
+            if let category = bookmark.notice.noticeCategory {
+                category.color
+                    .frame(width: 8)
+            }
+            
             VStack(alignment: .leading, spacing: 10) {
                 Text(bookmark.notice.title)
                     .font(.subheadline)
@@ -20,24 +25,15 @@ struct BookmarkListRow: View {
                 BookmarkSubTitle(bookmark: bookmark)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            
-            ZStack {
-                Rectangle()
-                    .foregroundStyle(.red)
-                    .frame(width: 13, height: 25)
-                
-                Triangle()
-                    .offset(y: 1)
-            }
-            .offset(y: -29)
+            .padding([.top, .bottom, .trailing])
         }
-        .padding([.top, .bottom])
-        .padding([.leading, .trailing], 16)
+        .fixedSize(horizontal: false, vertical: true)
         .background(.mainCellBackground)
         .cornerRadius(10)
     }
 }
 
+@available(*, deprecated)
 fileprivate struct Triangle: View {
     var body: some View {
         Path { path in
@@ -62,6 +58,21 @@ fileprivate struct BookmarkSubTitle: View {
         }
         .font(.caption2)
         .foregroundStyle(.gray)
+    }
+}
+
+fileprivate extension NoticeCategory {
+    var color: Color {
+        switch self {
+        case .generalNotice:
+            return .salmon
+        case .academicNotice:
+            return .lightOrange
+        case .scholarshipNotice:
+            return .lightGreen
+        case .eventNotice:
+            return .dodgerBlue
+        }
     }
 }
 
