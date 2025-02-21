@@ -228,6 +228,8 @@
 		8ECB82DD2CDB6C3D00420349 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECB82DB2CDB6C3D00420349 /* NotificationService.swift */; };
 		8ECE2B182C35045800D7F499 /* MainNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B172C35045800D7F499 /* MainNotice.swift */; };
 		8ECE2B1A2C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B192C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift */; };
+		8EDAFD422D6818D000834E00 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDAFD412D6818D000834E00 /* Errors.swift */; };
+		8EDAFD432D6818D000834E00 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDAFD412D6818D000834E00 /* Errors.swift */; };
 		8EDD51A62C6D7D68002101CA /* MainViewController+NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD51A52C6D7D68002101CA /* MainViewController+NotificationCenter.swift */; };
 		8EE4B4E52D16CE1E00EFF10B /* SpinningIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4E42D16CE1E00EFF10B /* SpinningIndicator.swift */; };
 		8EE4B4E62D16CE1E00EFF10B /* SpinningIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4E42D16CE1E00EFF10B /* SpinningIndicator.swift */; };
@@ -444,6 +446,7 @@
 		8ECB82DB2CDB6C3D00420349 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		8ECE2B172C35045800D7F499 /* MainNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotice.swift; sourceTree = "<group>"; };
 		8ECE2B192C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedNoticeCellWithImage.swift; sourceTree = "<group>"; };
+		8EDAFD412D6818D000834E00 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		8EDD51A52C6D7D68002101CA /* MainViewController+NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+NotificationCenter.swift"; sourceTree = "<group>"; };
 		8EE4B4E42D16CE1E00EFF10B /* SpinningIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinningIndicator.swift; sourceTree = "<group>"; };
 		8EE4B4E72D16E4DD00EFF10B /* NotificationSubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSubscriptionService.swift; sourceTree = "<group>"; };
@@ -527,6 +530,7 @@
 				8E0CDED52D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift */,
 				8EB767802D439DE90086AB60 /* Date+EndOfToday.swift */,
 				8EADB8F92D558F7300489086 /* Factory+Instance.swift */,
+				8EDAFD412D6818D000834E00 /* Errors.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1513,6 +1517,7 @@
 				8EE4B4E62D16CE1E00EFF10B /* SpinningIndicator.swift in Sources */,
 				5C89DD3A2BFA02F400CCCCCD /* MainViewController+Callbacks.swift in Sources */,
 				5C5698952BEFB5A60085E389 /* SectionOfNotice.swift in Sources */,
+				8EDAFD432D6818D000834E00 /* Errors.swift in Sources */,
 				8E7A4A6D2D2A43A900BD1B7F /* BookmarkListRow.swift in Sources */,
 				8E5C1AD92D407F000092BF88 /* UITabBarViewController+Binding.swift in Sources */,
 				8E0C3F8C2C9ECD1B005E2A16 /* ReportViewModel.swift in Sources */,
@@ -1627,6 +1632,7 @@
 				8EE4B4E52D16CE1E00EFF10B /* SpinningIndicator.swift in Sources */,
 				8E20512C2CD4F32F00D87C6A /* MainViewController+Callbacks.swift in Sources */,
 				8E20512E2CD4F32F00D87C6A /* SectionOfNotice.swift in Sources */,
+				8EDAFD422D6818D000834E00 /* Errors.swift in Sources */,
 				8E7A4A6E2D2A43A900BD1B7F /* BookmarkListRow.swift in Sources */,
 				8E5C1AD82D407F000092BF88 /* UITabBarViewController+Binding.swift in Sources */,
 				8E20512F2CD4F32F00D87C6A /* ReportViewModel.swift in Sources */,
