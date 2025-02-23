@@ -13,22 +13,24 @@ protocol NotificationSubscriptionService {
 }
 
 final class NotificationSubscriptionServiceImpl: NotificationSubscriptionService {
-    enum RemoteServerError: Error {
-        case invalidResponse
-    }
-    
     @Injected(\.tokenRepository) private var tokenRepository: TokenRepository
     @Injected(\.notificationRepository) private var repository: NotificationSubscriptionRepository
     
     func updatePermission(_ notice: NoticeCategory, to value: Bool) -> AnyPublisher<Void, any Error> {
         return tokenRepository.getFCMToken()
-            .flatMap { token -> AnyPublisher<Bool, any Error> in
-                let params: [String: Any] = self.makeParams(token: token, noticeName: notice.rawValue, isSubscribed: value)
+            .flatMap { [weak self] token -> AnyPublisher<Bool, any Error> in
+                guard let self else {
+                    return Fail(error: NSError(domain: "SelfDeallocated", code: -1))
+                        .eraseToAnyPublisher()
+                }
+                
+                let params: [String: Any] = self.createParams(token: token, noticeName: notice.rawValue, isSubscribed: value)
                 return self.repository.updateToServer(params: params)
             }
-            .flatMap { result -> AnyPublisher<Void, any Error> in
-                guard result else {
-                    return Fail(error: RemoteServerError.invalidResponse).eraseToAnyPublisher()
+            .flatMap { [weak self] result -> AnyPublisher<Void, any Error> in
+                guard let self else {
+                    return Fail(error: NSError(domain: "SelfDeallocated", code: -1))
+                        .eraseToAnyPublisher()
                 }
                 
                 return self.repository.updateToLocal(key: notice, value: value)
@@ -36,7 +38,7 @@ final class NotificationSubscriptionServiceImpl: NotificationSubscriptionService
             .eraseToAnyPublisher()
     }
     
-    private func makeParams(token: String, noticeName: String, isSubscribed: Bool) -> [String: Any] {
+    private func createParams(token: String, noticeName: String, isSubscribed: Bool) -> [String: Any] {
         let params = [
             "result": [
                 "resultCode": 0,
