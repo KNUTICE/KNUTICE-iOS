@@ -96,14 +96,10 @@ struct ReportView: View {
             switch viewModel.alertType {
             case .success:
                 Alert(title: Text("알림"),
-                      message: Text("제출 완료"),
+                      message: Text("제출을 완료했어요."),
                       dismissButton: .default(Text("확인"), action: { dismiss() }))
-            case .failure:
-                Alert(title: Text("알림"), message: Text("전송 실패"))
-            case .textOverFlow:
-                Alert(title: Text("알림"), message: Text("본문은 500자 이내로 가능합니다."))
-            case .none:
-                Alert(title: Text("알림"), message: Text("알 수 없는 오류"))
+            default:
+                Alert(title: Text("알림"), message: Text(viewModel.alertMessage))
             }
         }
     }
