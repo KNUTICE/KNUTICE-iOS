@@ -121,6 +121,17 @@
 		8E3F02262C9FB86400AE89D5 /* PostResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02252C9FB85E00AE89D5 /* PostResponseDTO.swift */; };
 		8E3F02292C9FC77E00AE89D5 /* AppVersionProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02282C9FC77600AE89D5 /* AppVersionProvidable.swift */; };
 		8E3F022D2CA0023A00AE89D5 /* VIew+TextEditorBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F022C2CA0022D00AE89D5 /* VIew+TextEditorBackground.swift */; };
+		8E3FC00D2D6BF4D70078EFBB /* GeneralNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E3FC00C2D6BF4D70078EFBB /* GeneralNotices.json */; };
+		8E3FC0132D6BF5640078EFBB /* AcademicNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E3FC0122D6BF5640078EFBB /* AcademicNotices.json */; };
+		8E3FC0192D6BF5980078EFBB /* ScholarshipNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E3FC0182D6BF5980078EFBB /* ScholarshipNotices.json */; };
+		8E3FC01D2D6BF5CA0078EFBB /* EventNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E3FC01C2D6BF5CA0078EFBB /* EventNotices.json */; };
+		8E3FC01F2D6BF8660078EFBB /* GeneralNoticesMockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3FC01E2D6BF8660078EFBB /* GeneralNoticesMockURLProtocol.swift */; };
+		8E3FC0212D6BFC310078EFBB /* GeneralNoticesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3FC0202D6BFC310078EFBB /* GeneralNoticesTest.swift */; };
+		8E3FC0242D6C05060078EFBB /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3FC0232D6C05060078EFBB /* MockURLProtocol.swift */; };
+		8E3FC0252D6C10E30078EFBB /* GeneralNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E3FC00C2D6BF4D70078EFBB /* GeneralNotices.json */; };
+		8E3FC0272D6C11270078EFBB /* AcademicNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E3FC0122D6BF5640078EFBB /* AcademicNotices.json */; };
+		8E3FC0282D6C112B0078EFBB /* ScholarshipNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E3FC0182D6BF5980078EFBB /* ScholarshipNotices.json */; };
+		8E3FC0292D6C112E0078EFBB /* EventNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E3FC01C2D6BF5CA0078EFBB /* EventNotices.json */; };
 		8E4F599D2CD5176E007D43BC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E613E9D2C951C8D006FC272 /* GoogleService-Info.plist */; };
 		8E4F599E2CD517DD007D43BC /* ServiceInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C190A432BFD6AA500E0254B /* ServiceInfo.plist */; };
 		8E5385742C644AB000AF151B /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385732C644AB000AF151B /* TokenRepository.swift */; };
@@ -142,8 +153,8 @@
 		8E5D1CF82C38D2E50027E8BD /* Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D1CF72C38D2E50027E8BD /* Scrollable.swift */; };
 		8E5E8BDE2D35F03A0078C007 /* BookmarkDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5E8BDD2D35F03A0078C007 /* BookmarkDetailViewModel.swift */; };
 		8E5E8BDF2D35F03A0078C007 /* BookmarkDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5E8BDD2D35F03A0078C007 /* BookmarkDetailViewModel.swift */; };
-		8E5E8BE12D3605090078C007 /* NotificationName+BookmarkListRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5E8BE02D3605090078C007 /* NotificationName+BookmarkListRefresh.swift */; };
-		8E5E8BE22D3605090078C007 /* NotificationName+BookmarkListRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5E8BE02D3605090078C007 /* NotificationName+BookmarkListRefresh.swift */; };
+		8E5E8BE12D3605090078C007 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5E8BE02D3605090078C007 /* NotificationName.swift */; };
+		8E5E8BE22D3605090078C007 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5E8BE02D3605090078C007 /* NotificationName.swift */; };
 		8E5E8BE42D36190E0078C007 /* BookmarkListRefreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5E8BE32D36190E0078C007 /* BookmarkListRefreshable.swift */; };
 		8E5E8BE52D36190E0078C007 /* BookmarkListRefreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5E8BE32D36190E0078C007 /* BookmarkListRefreshable.swift */; };
 		8E5E8BE72D361F510078C007 /* BookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5E8BE62D361F510078C007 /* BookmarkManager.swift */; };
@@ -378,6 +389,13 @@
 		8E3F02252C9FB85E00AE89D5 /* PostResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResponseDTO.swift; sourceTree = "<group>"; };
 		8E3F02282C9FC77600AE89D5 /* AppVersionProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionProvidable.swift; sourceTree = "<group>"; };
 		8E3F022C2CA0022D00AE89D5 /* VIew+TextEditorBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VIew+TextEditorBackground.swift"; sourceTree = "<group>"; };
+		8E3FC00C2D6BF4D70078EFBB /* GeneralNotices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GeneralNotices.json; sourceTree = "<group>"; };
+		8E3FC0122D6BF5640078EFBB /* AcademicNotices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AcademicNotices.json; sourceTree = "<group>"; };
+		8E3FC0182D6BF5980078EFBB /* ScholarshipNotices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ScholarshipNotices.json; sourceTree = "<group>"; };
+		8E3FC01C2D6BF5CA0078EFBB /* EventNotices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EventNotices.json; sourceTree = "<group>"; };
+		8E3FC01E2D6BF8660078EFBB /* GeneralNoticesMockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticesMockURLProtocol.swift; sourceTree = "<group>"; };
+		8E3FC0202D6BFC310078EFBB /* GeneralNoticesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNoticesTest.swift; sourceTree = "<group>"; };
+		8E3FC0232D6C05060078EFBB /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		8E5385732C644AB000AF151B /* TokenRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepository.swift; sourceTree = "<group>"; };
 		8E5385772C644C3F00AF151B /* TokenRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepositoryImpl.swift; sourceTree = "<group>"; };
 		8E53857E2C647D9A00AF151B /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
@@ -391,7 +409,7 @@
 		8E5C1AD72D407F000092BF88 /* UITabBarViewController+Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarViewController+Binding.swift"; sourceTree = "<group>"; };
 		8E5D1CF72C38D2E50027E8BD /* Scrollable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scrollable.swift; sourceTree = "<group>"; };
 		8E5E8BDD2D35F03A0078C007 /* BookmarkDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkDetailViewModel.swift; sourceTree = "<group>"; };
-		8E5E8BE02D3605090078C007 /* NotificationName+BookmarkListRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+BookmarkListRefresh.swift"; sourceTree = "<group>"; };
+		8E5E8BE02D3605090078C007 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		8E5E8BE32D36190E0078C007 /* BookmarkListRefreshable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkListRefreshable.swift; sourceTree = "<group>"; };
 		8E5E8BE62D361F510078C007 /* BookmarkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkManager.swift; sourceTree = "<group>"; };
 		8E5E8BE92D3623720078C007 /* BookmarkFormHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkFormHandler.swift; sourceTree = "<group>"; };
@@ -526,7 +544,7 @@
 				8E3F02282C9FC77600AE89D5 /* AppVersionProvidable.swift */,
 				8E7A4A6F2D2A44CE00BD1B7F /* Date+StringFormat.swift */,
 				8E7A4A722D2A531B00BD1B7F /* NoticeKind.swift */,
-				8E5E8BE02D3605090078C007 /* NotificationName+BookmarkListRefresh.swift */,
+				8E5E8BE02D3605090078C007 /* NotificationName.swift */,
 				8E0CDED52D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift */,
 				8EB767802D439DE90086AB60 /* Date+EndOfToday.swift */,
 				8EADB8F92D558F7300489086 /* Factory+Instance.swift */,
@@ -835,6 +853,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		8E3FC0222D6C04F30078EFBB /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8E3FC0232D6C05060078EFBB /* MockURLProtocol.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		8E53857D2C647D5A00AF151B /* ci_scripts */ = {
 			isa = PBXGroup;
 			children = (
@@ -930,11 +956,34 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		8E6B34DF2D6BF25A00130BED /* NoticesTests */ = {
+			isa = PBXGroup;
+			children = (
+				8ECB82D32CDB6A6300420349 /* NoticeTableTests.swift */,
+				8E3FC01E2D6BF8660078EFBB /* GeneralNoticesMockURLProtocol.swift */,
+				8E3FC0202D6BFC310078EFBB /* GeneralNoticesTest.swift */,
+			);
+			path = NoticesTests;
+			sourceTree = "<group>";
+		};
+		8E6B34E02D6BF29B00130BED /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				8E3FC00C2D6BF4D70078EFBB /* GeneralNotices.json */,
+				8E3FC0122D6BF5640078EFBB /* AcademicNotices.json */,
+				8E3FC0182D6BF5980078EFBB /* ScholarshipNotices.json */,
+				8E3FC01C2D6BF5CA0078EFBB /* EventNotices.json */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
 		8E7945E52CA28F6900208662 /* KNUTICEUnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				8E3FC0222D6C04F30078EFBB /* Utils */,
+				8E6B34E02D6BF29B00130BED /* JSON */,
+				8E6B34DF2D6BF25A00130BED /* NoticesTests */,
 				8ECB82D22CDB6A6300420349 /* MainNoticeTests.swift */,
-				8ECB82D32CDB6A6300420349 /* NoticeTableTests.swift */,
 				8EE4B4F92D17D33600EFF10B /* SearchTests.swift */,
 				8EB7677B2D434E2C0086AB60 /* MainPopupTests.swift */,
 				8EC2A65F2D65542900DCB765 /* NoticeRepositoryTests.swift */,
@@ -1259,12 +1308,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E3FC0272D6C11270078EFBB /* AcademicNotices.json in Resources */,
 				8E4F599E2CD517DD007D43BC /* ServiceInfo.plist in Resources */,
+				8E3FC0292D6C112E0078EFBB /* EventNotices.json in Resources */,
 				5C82564B2BE5CE1B0038D4C8 /* Assets.xcassets in Resources */,
 				8E1599A12CA2735E001F75A3 /* LaunchScreen.storyboard in Resources */,
+				8E3FC0252D6C10E30078EFBB /* GeneralNotices.json in Resources */,
 				8E4F599D2CD5176E007D43BC /* GoogleService-Info.plist in Resources */,
 				8E5385872C64A24A00AF151B /* ci_post_clone.sh in Resources */,
 				5C82564E2BE5CE1B0038D4C8 /* Base in Resources */,
+				8E3FC0282D6C112B0078EFBB /* ScholarshipNotices.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1292,6 +1345,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E3FC01D2D6BF5CA0078EFBB /* EventNotices.json in Resources */,
+				8E3FC0132D6BF5640078EFBB /* AcademicNotices.json in Resources */,
+				8E3FC00D2D6BF4D70078EFBB /* GeneralNotices.json in Resources */,
+				8E3FC0192D6BF5980078EFBB /* ScholarshipNotices.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1458,7 +1515,7 @@
 				5C89DD3E2BFA043200CCCCCD /* MainViewController+Binding.swift in Sources */,
 				8EC6B89B2D30B307002B45C7 /* BookmarkDTO.swift in Sources */,
 				5C89DD492BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift in Sources */,
-				8E5E8BE22D3605090078C007 /* NotificationName+BookmarkListRefresh.swift in Sources */,
+				8E5E8BE22D3605090078C007 /* NotificationName.swift in Sources */,
 				8EB6D20C2C66FC5B004E8AC2 /* SettingViewModel.swift in Sources */,
 				8E0CDED42D3B4CA5000F8DEF /* BookmarkService.swift in Sources */,
 				8E0BA6DD2C33CA1300677A79 /* DetailedNoticeCell.swift in Sources */,
@@ -1573,7 +1630,7 @@
 				8E2051082CD4F32F00D87C6A /* MainViewController+Binding.swift in Sources */,
 				8EC6B89C2D30B307002B45C7 /* BookmarkDTO.swift in Sources */,
 				8E2051092CD4F32F00D87C6A /* MainNoticeRepositoryImpl.swift in Sources */,
-				8E5E8BE12D3605090078C007 /* NotificationName+BookmarkListRefresh.swift in Sources */,
+				8E5E8BE12D3605090078C007 /* NotificationName.swift in Sources */,
 				8E20510A2CD4F32F00D87C6A /* SettingViewModel.swift in Sources */,
 				8E0CDED32D3B4CA5000F8DEF /* BookmarkService.swift in Sources */,
 				8E20510B2CD4F32F00D87C6A /* DetailedNoticeCell.swift in Sources */,
@@ -1670,12 +1727,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E3FC01F2D6BF8660078EFBB /* GeneralNoticesMockURLProtocol.swift in Sources */,
 				8EE4B4FD2D17D96500EFF10B /* RequestResult.swift in Sources */,
 				8EB7677C2D434E2C0086AB60 /* MainPopupTests.swift in Sources */,
 				8ECB82D42CDB6A6300420349 /* MainNoticeTests.swift in Sources */,
 				8ECB82D52CDB6A6300420349 /* NoticeTableTests.swift in Sources */,
 				8EC2A6602D65542900DCB765 /* NoticeRepositoryTests.swift in Sources */,
 				8EE4B4FC2D17D93700EFF10B /* NoticeReponseDTO.swift in Sources */,
+				8E3FC0242D6C05060078EFBB /* MockURLProtocol.swift in Sources */,
+				8E3FC0212D6BFC310078EFBB /* GeneralNoticesTest.swift in Sources */,
 				8EE4B4FA2D17D33600EFF10B /* SearchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1793,6 +1853,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -1851,6 +1912,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
