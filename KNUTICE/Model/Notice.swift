@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Notice {
+struct Notice: Codable {
     let id: Int    //nttId
     let title: String    //제목
     let contentUrl: String    //화면 전환 시 이동할 사이트 URL
