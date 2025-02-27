@@ -12,7 +12,7 @@ extension Container {
     //MARK: - RemoteDataSource
     var remoteDataSource: Factory<RemoteDataSource> {
         Factory(self) {
-            RemoteDataSourceImpl.shared
+            RemoteDataSourceImpl()
         }
     }
     
