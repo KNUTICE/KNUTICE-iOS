@@ -2,6 +2,11 @@ PODS:
   - Alamofire (5.9.1)
   - Differentiator (5.0.0)
   - Factory (2.4.3)
+  - Firebase/CoreOnly (11.0.0):
+    - FirebaseCore (= 11.0.0)
+  - Firebase/Messaging (11.0.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 11.0.0)
   - FirebaseAnalytics (11.0.0):
     - FirebaseAnalytics/AdIdSupport (= 11.0.0)
     - FirebaseCore (~> 11.0)
@@ -113,6 +118,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Factory
+  - Firebase/Messaging
   - FirebaseAnalytics
   - FirebaseMessaging
   - Kingfisher (~> 7.0)
@@ -127,6 +133,7 @@ SPEC REPOS:
     - Alamofire
     - Differentiator
     - Factory
+    - Firebase
     - FirebaseAnalytics
     - FirebaseCore
     - FirebaseCoreInternal
@@ -149,6 +156,7 @@ SPEC CHECKSUMS:
   Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
   Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
   Factory: 9d20d8cb56fc44b341d6dad1cf67dc93e9ae7788
+  Firebase: 9f574c08c2396885b5e7e100ed4293d956218af9
   FirebaseAnalytics: 27eb78b97880ea4a004839b9bac0b58880f5a92a
   FirebaseCore: 3cf438f431f18c12cdf2aaf64434648b63f7e383
   FirebaseCoreInternal: cac45dbc4824e152fe93cdd5dd46bd503c3fdffb
@@ -167,6 +175,6 @@ SPEC CHECKSUMS:
   SkeletonView: 5a050f6411e697abd4cda0a8d767013399dccd69
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
 
-PODFILE CHECKSUM: 7e236616f4e94114159850d5cbbd6155c7d201f5
+PODFILE CHECKSUM: 1f863f8d4893d62bf1ebb7057f4f4f7032de58d8
 
 COCOAPODS: 1.15.2
