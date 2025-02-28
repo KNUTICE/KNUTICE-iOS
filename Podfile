@@ -40,3 +40,11 @@ end
 target 'KNUTICEUnitTests' do
   pods
 end
+
+target 'NotificationService' do
+  pod 'Firebase/Messaging'
+end
+
+target 'NotificationService-dev' do
+  pod 'Firebase/Messaging'
+end

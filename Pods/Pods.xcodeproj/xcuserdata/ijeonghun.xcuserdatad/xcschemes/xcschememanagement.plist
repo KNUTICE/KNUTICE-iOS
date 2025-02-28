@@ -29,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Firebase.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FirebaseAnalytics.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -89,12 +94,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>GoogleUtilities-GoogleUtilities_Privacy.xcscheme</key>
+		<key>GoogleUtilities-54d832b6-GoogleUtilities_Privacy.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>GoogleUtilities.xcscheme</key>
+		<key>GoogleUtilities-54d832b6.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GoogleUtilities-7cacef58-GoogleUtilities_Privacy.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GoogleUtilities-7cacef58.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -120,6 +135,16 @@
 			<false/>
 		</dict>
 		<key>Pods-KNUTICEUnitTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-NotificationService-dev.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-NotificationService.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
