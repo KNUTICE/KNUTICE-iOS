@@ -55,6 +55,7 @@
 		8E0CDED62D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0CDED52D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift */; };
 		8E0CDED72D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0CDED52D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift */; };
 		8E1599A12CA2735E001F75A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C82564C2BE5CE1B0038D4C8 /* LaunchScreen.storyboard */; };
+		8E1C653E2D74AA390003AB94 /* AcademicNoticesMockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C653D2D74AA390003AB94 /* AcademicNoticesMockURLProtocol.swift */; };
 		8E2050FD2CD4F32F00D87C6A /* MainNoticeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD4F2BFA120B00CCCCCD /* MainNoticeResponseDTO.swift */; };
 		8E2050FE2CD4F32F00D87C6A /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2EFC02BF356FB00066C87 /* UIViewController+Preview.swift */; };
 		8E2050FF2CD4F32F00D87C6A /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F021D2C9FB46100AE89D5 /* ReportService.swift */; };
@@ -386,6 +387,7 @@
 		8E0C3F8B2C9ECD1B005E2A16 /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewModel.swift; sourceTree = "<group>"; };
 		8E0CDED22D3B4CA5000F8DEF /* BookmarkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkService.swift; sourceTree = "<group>"; };
 		8E0CDED52D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNUserNotificationCenter+LocalNotification.swift"; sourceTree = "<group>"; };
+		8E1C653D2D74AA390003AB94 /* AcademicNoticesMockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademicNoticesMockURLProtocol.swift; sourceTree = "<group>"; };
 		8E2051472CD4F32F00D87C6A /* KNUTICE-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KNUTICE-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E2051482CD4F32F00D87C6A /* Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Dev.plist"; path = "/Users/ijeonghun/Desktop/GitHub/iOS/KNUTICE-iOS/KNUTICE/Application/Info-Dev.plist"; sourceTree = "<absolute>"; };
 		8E3B8C412D2B9A97007E9579 /* BookmarkForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkForm.swift; sourceTree = "<group>"; };
@@ -974,6 +976,7 @@
 				8ECB82D32CDB6A6300420349 /* NoticeTableTests.swift */,
 				8E3FC01E2D6BF8660078EFBB /* GeneralNoticesMockURLProtocol.swift */,
 				8E3FC0202D6BFC310078EFBB /* GeneralNoticesTest.swift */,
+				8E1C653D2D74AA390003AB94 /* AcademicNoticesMockURLProtocol.swift */,
 			);
 			path = NoticesTests;
 			sourceTree = "<group>";
@@ -1793,6 +1796,7 @@
 				8EE4B4FD2D17D96500EFF10B /* RequestResult.swift in Sources */,
 				8EB7677C2D434E2C0086AB60 /* MainPopupTests.swift in Sources */,
 				8ECB82D42CDB6A6300420349 /* MainNoticeTests.swift in Sources */,
+				8E1C653E2D74AA390003AB94 /* AcademicNoticesMockURLProtocol.swift in Sources */,
 				8ECB82D52CDB6A6300420349 /* NoticeTableTests.swift in Sources */,
 				8EC2A6602D65542900DCB765 /* NoticeRepositoryTests.swift in Sources */,
 				8EE4B4FC2D17D93700EFF10B /* NoticeReponseDTO.swift in Sources */,
