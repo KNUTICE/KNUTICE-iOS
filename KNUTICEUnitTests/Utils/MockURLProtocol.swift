@@ -30,7 +30,26 @@ class MockURLProtocol: URLProtocol {
         return false
     }
     
+    override func startLoading() {
+        guard let mockData = createMockData() else {
+            return
+        }
+        
+        //요청에 대한 응답 객체를 생성했음을 알림
+        client?.urlProtocol(self, didReceive: HTTPURLResponse(), cacheStoragePolicy: .notAllowed)
+        //Mock Data를 정상적으로 로드했음을 알림
+        client?.urlProtocol(self, didLoad: mockData)
+        //네트워크 요청이 완료되었음을 알림
+        client?.urlProtocolDidFinishLoading(self)
+        activeTask = session.dataTask(with: request.urlRequest!)
+        activeTask?.cancel()
+    }
+    
     override func stopLoading() {
         activeTask?.cancel()
+    }
+    
+    func createMockData() -> Data? {
+        return nil
     }
 }
