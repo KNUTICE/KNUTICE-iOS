@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8BBC58047DF007CC3AE5B35BD759B671"
-               BuildableName = "GoogleUtilities.framework"
-               BlueprintName = "GoogleUtilities-54d832b6"
+               BlueprintIdentifier = "5FF1A58DEEC5DB749FCD6C120B97CC82"
+               BuildableName = "GoogleUtilities_Privacy.bundle"
+               BlueprintName = "GoogleUtilities-GoogleUtilities_Privacy"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

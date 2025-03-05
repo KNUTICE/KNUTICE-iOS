@@ -22,6 +22,7 @@ def pods
   pod 'SkeletonView'
 
   # Google Firebase
+  pod 'GoogleUtilities'
   pod 'FirebaseAnalytics'
   pod 'FirebaseMessaging'
 
@@ -42,9 +43,11 @@ target 'KNUTICEUnitTests' do
 end
 
 target 'NotificationService' do
+  pod 'GoogleUtilities'
   pod 'Firebase/Messaging'
 end
 
 target 'NotificationService-dev' do
+  pod 'GoogleUtilities'
   pod 'Firebase/Messaging'
 end

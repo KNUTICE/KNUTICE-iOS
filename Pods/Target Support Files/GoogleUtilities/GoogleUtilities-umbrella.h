@@ -29,6 +29,7 @@
 #import "GULNetworkMessageCode.h"
 #import "GULNetworkURLSession.h"
 #import "GULReachabilityChecker.h"
+#import "GULSwizzler+Unswizzle.h"
 #import "GULUserDefaults.h"
 
 FOUNDATION_EXPORT double GoogleUtilitiesVersionNumber;

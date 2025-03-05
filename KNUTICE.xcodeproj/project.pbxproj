@@ -285,13 +285,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8E2050F92CD4F32F00D87C6A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8EB6D1FC2C663627004E8AC2;
-			remoteInfo = NotificationService;
-		};
 		8E6898302CD61EF1005F0EEA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
@@ -1273,7 +1266,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				8E2050F82CD4F32F00D87C6A /* PBXTargetDependency */,
 				8E6898312CD61EF1005F0EEA /* PBXTargetDependency */,
 			);
 			name = "KNUTICE-dev";
@@ -1894,11 +1886,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8E2050F82CD4F32F00D87C6A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8EB6D1FC2C663627004E8AC2 /* NotificationService */;
-			targetProxy = 8E2050F92CD4F32F00D87C6A /* PBXContainerItemProxy */;
-		};
 		8E6898312CD61EF1005F0EEA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8E68982A2CD61EF1005F0EEA /* NotificationService-dev */;
