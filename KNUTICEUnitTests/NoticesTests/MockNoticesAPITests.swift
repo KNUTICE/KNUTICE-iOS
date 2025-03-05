@@ -11,7 +11,7 @@ import Factory
 import XCTest
 @testable import KNUTICE
 
-final class NoticesAPIMockTests: XCTestCase {
+final class MockNoticesAPITests: XCTestCase {
     private var dataSource: RemoteDataSource!
     private var configuration: URLSessionConfiguration!
     private var cancellables: Set<AnyCancellable>!
@@ -32,7 +32,7 @@ final class NoticesAPIMockTests: XCTestCase {
     func test_FetchGeneralNotices_ReturnNoticesDTO() {
         //Given
         let expectation = XCTestExpectation(description: "fetch general notices")
-        configuration.protocolClasses = [GeneralNoticesMockURLProtocol.self]
+        configuration.protocolClasses = [MockGeneralNoticesURLProtocol.self]
         let session = Session(configuration: configuration)
         Container.shared.remoteDataSource.register {
             RemoteDataSourceImpl(session: session)
@@ -57,7 +57,7 @@ final class NoticesAPIMockTests: XCTestCase {
     func testFetchAcademicNotices_ReturnNoticesDTO() {
         //Given
         let expectation = XCTestExpectation(description: "fetch academic notices")
-        configuration.protocolClasses = [AcademicNoticesMockURLProtocol.self]
+        configuration.protocolClasses = [MockAcademicNoticesURLProtocol.self]
         let session = Session(configuration: configuration)
         Container.shared.remoteDataSource.register {
             RemoteDataSourceImpl(session: session)
@@ -81,7 +81,7 @@ final class NoticesAPIMockTests: XCTestCase {
     func testFetchScholarshipNotices_ReturnNoticesDTO() {
         //Given
         let expectation = XCTestExpectation(description: "fetch scholarship notices")
-        configuration.protocolClasses = [ScholarshipNoticesMockURLProtocol.self]
+        configuration.protocolClasses = [MockScholarshipNoticesURLProtocol.self]
         let session = Session(configuration: configuration)
         Container.shared.remoteDataSource.register {
             RemoteDataSourceImpl(session: session)
@@ -104,7 +104,7 @@ final class NoticesAPIMockTests: XCTestCase {
     
     func test_FetchEventNotices_ReturnNoticesDTO() {
         let expectation = XCTestExpectation(description: "fetch event notices")
-        configuration.protocolClasses = [EventNoticesMockURLProtocol.self]
+        configuration.protocolClasses = [MockEventNoticesURLProtocol.self]
         let session = Session(configuration: configuration)
         Container.shared.remoteDataSource.register {
             RemoteDataSourceImpl(session: session)

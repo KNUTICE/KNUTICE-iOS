@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class AcademicNoticesMockURLProtocol: MockURLProtocol {
+final class MockAcademicNoticesURLProtocol: MockURLProtocol {
     override func createMockData() -> Data? {
         let fileName = "AcademicNotices"
         guard let fileURL = Bundle.main.url(forResource: fileName, withExtension: "json") else {

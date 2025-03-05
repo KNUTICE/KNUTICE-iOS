@@ -11,7 +11,7 @@ import Combine
 import XCTest
 @testable import KNUTICE
 
-final class ReportMockTest: XCTestCase {
+final class MockReportTest: XCTestCase {
     private var viewModel: ReportViewModel!
     private var cancellables: Set<AnyCancellable>!
 
