@@ -11,7 +11,7 @@ import RxSwift
 import XCTest
 @testable import KNUTICE
 
-final class NoticesTableViewModelMockTest: XCTestCase {
+final class MockNoticesTableViewModelTests: XCTestCase {
     private var viewModel: NoticeTableViewModel!
     private var configuration: URLSessionConfiguration!
     private var disposeBag: DisposeBag!
@@ -32,7 +32,7 @@ final class NoticesTableViewModelMockTest: XCTestCase {
     func testFetchGeneralNotices_ReturnNotices() {
         //Given
         let expectation = XCTestExpectation(description: "fetch general notices")
-        configuration.protocolClasses = [GeneralNoticesMockURLProtocol.self]
+        configuration.protocolClasses = [MockGeneralNoticesURLProtocol.self]
         let session = Session(configuration: configuration)
         Container.shared.remoteDataSource.register {
             RemoteDataSourceImpl(session: session)
@@ -57,7 +57,7 @@ final class NoticesTableViewModelMockTest: XCTestCase {
     func testFetchAcademicNotices_ReturnNotices() {
         //Given
         let expectation = XCTestExpectation(description: "fetch academic notices")
-        configuration.protocolClasses = [AcademicNoticesMockURLProtocol.self]
+        configuration.protocolClasses = [MockAcademicNoticesURLProtocol.self]
         let session = Session(configuration: configuration)
         Container.shared.remoteDataSource.register {
             RemoteDataSourceImpl(session: session)
@@ -80,7 +80,7 @@ final class NoticesTableViewModelMockTest: XCTestCase {
     func testFetchScholarshipNotices_ReturnNotices() {
         //Given
         let expectation = XCTestExpectation(description: "fetch academic notices")
-        configuration.protocolClasses = [ScholarshipNoticesMockURLProtocol.self]
+        configuration.protocolClasses = [MockScholarshipNoticesURLProtocol.self]
         let session = Session(configuration: configuration)
         Container.shared.remoteDataSource.register {
             RemoteDataSourceImpl(session: session)
@@ -103,7 +103,7 @@ final class NoticesTableViewModelMockTest: XCTestCase {
     func testFetchEventNotices_ReturnNotices() {
         //Given
         let expectation = XCTestExpectation(description: "fetch academic notices")
-        configuration.protocolClasses = [EventNoticesMockURLProtocol.self]
+        configuration.protocolClasses = [MockEventNoticesURLProtocol.self]
         let session = Session(configuration: configuration)
         Container.shared.remoteDataSource.register {
             RemoteDataSourceImpl(session: session)

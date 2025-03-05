@@ -1,15 +1,15 @@
 //
-//  EventNoticesMockURLProtocol.swift
+//  GeneralNoticesMockURLProtocol.swift
 //  KNUTICEUnitTests
 //
-//  Created by 이정훈 on 3/3/25.
+//  Created by 이정훈 on 2/24/25.
 //
 
 import Foundation
 
-final class EventNoticesMockURLProtocol: MockURLProtocol {
+final class MockGeneralNoticesURLProtocol: MockURLProtocol {
     override func createMockData() -> Data? {
-        let fileName: String = "EventNotices"
+        let fileName = "GeneralNotices"
         guard let fileURL = Bundle.main.url(forResource: fileName, withExtension: "json") else {
             return nil
         }
