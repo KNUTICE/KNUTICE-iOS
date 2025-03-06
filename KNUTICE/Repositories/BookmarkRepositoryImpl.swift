@@ -11,17 +11,13 @@ import Factory
 import Foundation
 
 final class BookmarkRepositoryImpl: BookmarkRepository {
-    enum ExistingBookmarkError: String, Error {
-        case alreadyExist = "이미 존재하는 북마크에요."
-    }
-    
     @Injected(\.localBookmarkDataSource) private var dataSource: LocalBookmarkDataSource
     
     func save(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
         return dataSource.isDuplication(id: bookmark.notice.id)
             .flatMap { isExist -> AnyPublisher<Void, any Error> in
                 guard !isExist else {
-                    return Fail(error: ExistingBookmarkError.alreadyExist)
+                    return Fail(error: ExistingBookmarkError.alreadyExist(message: "이미 존재하는 북마크에요."))
                         .eraseToAnyPublisher()
                 }
                 

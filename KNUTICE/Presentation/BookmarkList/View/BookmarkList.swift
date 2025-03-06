@@ -65,7 +65,7 @@ struct BookmarkList: View {
             SpinningIndicator()
                 .task {
                     if viewModel.bookmarkList == nil {
-                        await viewModel.fetchBookmarks(delay: 0)
+                        await viewModel.fetchBookmarks()
                     }
                 }
         }
