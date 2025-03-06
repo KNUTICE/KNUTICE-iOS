@@ -9,4 +9,5 @@ import Foundation
 
 extension Notification.Name {
     static let bookmarkListRefresh = Notification.Name("bookmarkListRefresh")
+    static let pushNotice = Notification.Name("PushNotice")
 }

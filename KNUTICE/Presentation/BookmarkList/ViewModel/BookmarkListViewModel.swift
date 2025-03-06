@@ -17,10 +17,17 @@ final class BookmarkListViewModel: BookmarkManager, ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private let logger = Logger()
     
-    func fetchBookmarks(delay: Int) async {
+    func fetchBookmarks(delay: Int = 0) async {
         do {
-            for try await bookmarkList in repository.read(delay: delay).values {
-                self.bookmarkList = bookmarkList
+            if !UserDefaults.standard.bool(forKey: "isBookmarkSyncedAfter1_4_0") {
+                for try await bookmarkList in service.syncBookmarksWithNotice().values {
+                    self.bookmarkList = bookmarkList
+                }
+                UserDefaults.standard.set(true, forKey: "isBookmarkSyncedAfter1_4_0")
+            } else {
+                for try await bookmarkList in repository.read(delay: delay).values {
+                    self.bookmarkList = bookmarkList
+                }
             }
         } catch {
             logger.error("BookmarkListViewModel.fetchBookmark() error: \(error.localizedDescription)")
@@ -33,7 +40,7 @@ final class BookmarkListViewModel: BookmarkManager, ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 Task {
-                    await self?.fetchBookmarks(delay: 0)
+                    await self?.fetchBookmarks()
                 }
             }
             .store(in: &cancellables)

@@ -15,11 +15,13 @@ final class NotificationSubscriptionListViewModel: ObservableObject {
     @Published var isScholarshipNoticeNotificationSubscribed: Bool?
     @Published var isEventNoticeNotificationSubscribed: Bool?
     @Published var isLoading: Bool = false
+    @Published var isShowingAlert: Bool = false
     
     @Injected(\.notificationRepository) private var repository: NotificationSubscriptionRepository
     @Injected(\.notificationService) private var notificationService: NotificationSubscriptionService
     private let logger = Logger()
     private var cancellables = Set<AnyCancellable>()
+    private(set) var alertMessage: String = ""
     
     var isAllDataLoaded: Bool {
         let data = [
@@ -83,6 +85,7 @@ final class NotificationSubscriptionListViewModel: ObservableObject {
                     self?.logger.log(level: .debug, "Notification permission update finished.")
                 case .failure(let error):
                     self?.logger.log(level: .error, "NotificationListViewModel: \(error.localizedDescription)")
+                    self?.handleError(with: error)
                 }
             }, receiveValue: { [weak self] in
                 switch key {
@@ -97,5 +100,14 @@ final class NotificationSubscriptionListViewModel: ObservableObject {
                 }
             })
             .store(in: &cancellables)
+    }
+    
+    private func handleError(with error: Error) {
+        if let error = error as? RemoteServerError, case .invalidResponse(let message) = error {
+            alertMessage = message
+        } else {
+            alertMessage = "잠시 후 다시 시도해주세요.\n지속적으로 발생할 경우 고객센터로 문의해주세요."
+        }
+        isShowingAlert = true
     }
 }

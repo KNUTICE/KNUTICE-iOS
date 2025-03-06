@@ -5,7 +5,6 @@
 //  Created by 이정훈 on 1/22/25.
 //
 
-import UIKit
 import RxSwift
 
 extension UITabBarViewController {
@@ -23,6 +22,18 @@ extension UITabBarViewController {
                     }
                 }
             }
+            .disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx
+            .notification(.pushNotice)
+            .subscribe(onNext: { [weak self] notification in
+                guard let notice = notification.object as? Notice else {
+                    return
+                }
+                self?.navigationController?.popToRootViewController(animated: true)
+                self?.navigationController?.pushViewController(WebViewController(notice: notice, isBookmarkBtnVisible: true), animated: true)
+                UserDefaults.standard.set(nil, forKey: "pushNotice")
+            })
             .disposed(by: disposeBag)
     }
 }

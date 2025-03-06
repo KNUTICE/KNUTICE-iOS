@@ -19,25 +19,23 @@ class NotificationService: UNNotificationServiceExtension {
         if let bestAttemptContent = bestAttemptContent {
             // Modify the notification content here...
             
-            if let payload = bestAttemptContent.userInfo["aps"] as? [String: Any],
-               let alert = payload["alert"] as? [String: Any],
-               let imageURLString = alert["launch-image"] as? String {
-                
-                do {
-                    try saveFile(id: "notification_image.jpeg", imageURLString: imageURLString) { fileURL in
-                        do {
-                            print(fileURL.absoluteString)
-                            let attachment = try UNNotificationAttachment(identifier: "", url: fileURL, options: nil)
-                            bestAttemptContent.attachments = [attachment]
-                            contentHandler(bestAttemptContent)
-                        } catch {
-                            print(error)
-                        }
+            guard let imageData = request.content.userInfo["fcm_options"] as? [String: Any],
+                  let imageURLStr = imageData["image"] as? String else {
+                contentHandler(bestAttemptContent)
+                return
+            }
+            
+            do {
+                try saveFile(id: "notification_image.jpeg", imageURLString: imageURLStr) { fileURL in
+                    do {
+                        let attachment = try UNNotificationAttachment(identifier: "", url: fileURL, options: nil)
+                        bestAttemptContent.attachments = [attachment]
+                        contentHandler(bestAttemptContent)
+                    } catch {
+                        contentHandler(bestAttemptContent)
                     }
-                } catch {
-                    print(error)
                 }
-            } else {
+            } catch {
                 contentHandler(bestAttemptContent)
             }
         }

@@ -21,8 +21,15 @@ final class NotificationSubscriptionRepositoryImpl: NotificationSubscriptionRepo
         let url = Bundle.main.notificationPermissionURL
         
         return remoteDataSource.sendPostRequest(to: url, params: params, resultType: PostResponseDTO.self)
-            .map {
-                return $0.result.resultCode == 200 ? true : false
+            .flatMap { dto -> AnyPublisher<Bool, any Error> in
+                guard dto.result.resultCode == 200 else {
+                    return Fail(error: RemoteServerError.invalidResponse(message: dto.result.resultMessage))
+                        .eraseToAnyPublisher()
+                }
+                
+                return Just(true)
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
     }
