@@ -18,7 +18,7 @@ protocol RemoteDataSource {
                                        resultType: T.Type) -> Single<T>
     
     func sendGetRequest<T: Decodable>(to url: String,
-                                       resultType: T.Type) -> AnyPublisher<T, any Error>
+                                      resultType: T.Type) -> AnyPublisher<T, any Error>
     
     func sendPostRequest<T: Decodable>(to url: String,
                                        params: Parameters,
@@ -26,14 +26,16 @@ protocol RemoteDataSource {
 }
 
 final class RemoteDataSourceImpl: RemoteDataSource {
-    private init() {}
+    private let session: Session
     
-    static let shared = RemoteDataSourceImpl()
+    init(session: Session = Session.default) {
+        self.session = session
+    }
     
     func sendGetRequest<T: Decodable>(to url: String,
                                       resultType: T.Type) -> Single<T> {
         return Single.create { observer in
-            AF.request(url)
+            self.session.request(url)
                 .responseDecodable(of: resultType.self) { response in
                     switch response.result {
                     case .success(let dto):
@@ -51,7 +53,7 @@ final class RemoteDataSourceImpl: RemoteDataSource {
                                        params: Parameters,
                                        resultType: T.Type) -> Single<T> {
         return Single.create { observer in
-            AF.request(url,
+            self.session.request(url,
                        method: .post,
                        parameters: params,
                        encoding: JSONEncoding.default)
@@ -70,7 +72,7 @@ final class RemoteDataSourceImpl: RemoteDataSource {
     
     func sendGetRequest<T: Decodable>(to url: String,
                                       resultType: T.Type) -> AnyPublisher<T, any Error> {
-        return AF.request(url)
+        return session.request(url)
             .publishDecodable(type: T.self)
             .value()
             .mapError {
@@ -82,7 +84,7 @@ final class RemoteDataSourceImpl: RemoteDataSource {
     func sendPostRequest<T: Decodable>(to url: String,
                                        params: Parameters,
                                        resultType: T.Type) -> AnyPublisher<T, any Error> {
-        return AF.request(url,
+        return session.request(url,
                           method: .post,
                           parameters: params,
                           encoding: JSONEncoding.default)

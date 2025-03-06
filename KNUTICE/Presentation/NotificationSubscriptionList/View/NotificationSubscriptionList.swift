@@ -70,6 +70,11 @@ struct NotificationSubscriptionList: View {
                     viewModel.fetchNotificationSubscriptions()
                 }
             }
+            .alert("알림 상태를 변경할 수 없어요.", isPresented: $viewModel.isShowingAlert) {
+                Button("확인") {}
+            } message: {
+                Text(viewModel.alertMessage)
+            }
             
             if viewModel.isLoading {
                 SpinningIndicator()
