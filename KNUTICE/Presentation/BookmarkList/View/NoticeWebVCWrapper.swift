@@ -11,7 +11,7 @@ struct NoticeWebVCWrapper: UIViewControllerRepresentable {
     private let viewController: UIViewController
     
     init(notice: Notice) {
-        self.viewController = WebViewController(notice: notice, isBookmarkBtnVisible: false)
+        self.viewController = WebViewController(notice: notice)
     }
     
     func makeUIViewController(context: Context) -> some UIViewController {
