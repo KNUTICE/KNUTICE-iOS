@@ -14,23 +14,21 @@ import FirebaseMessaging
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-    let disposeBag = DisposeBag()
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         //FCM 세팅
         setFCM(application)
         
-        sleep(1)
         return true
     }
     
     private func setFCM(_ application: UIApplication) {
         #if DEV
-        var filePath = Bundle.main.path(forResource: "GoogleService-Info-Dev", ofType: "plist")
+        let filePath = Bundle.main.path(forResource: "GoogleService-Info-Dev", ofType: "plist")
         #else
-        var filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
+        let filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
         #endif
         
         if let fileopts = FirebaseOptions(contentsOfFile: filePath!) {
