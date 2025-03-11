@@ -31,7 +31,7 @@ final class MainViewController: UIViewController {
         
         return label
     }()
-    let settingBtn: UIButton = {
+    lazy var settingBtn: UIButton = {
         let targetSize = CGSize(width: 25, height: 24)
         let renderer = UIGraphicsImageRenderer(size: targetSize)
         let gearImage = UIImage(systemName: "gearshape")
@@ -50,7 +50,7 @@ final class MainViewController: UIViewController {
         
         return button
     }()
-    let searchBtn: UIButton = {
+    lazy var searchBtn: UIButton = {
         let targetSize = CGSize(width: 25, height: 24)
         let renderer = UIGraphicsImageRenderer(size: targetSize)
         let magnifyingglassImage = UIImage(systemName: "magnifyingglass")

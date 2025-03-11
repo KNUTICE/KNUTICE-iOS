@@ -15,7 +15,7 @@ final class BottomModal: UIView {
         view.layer.cornerRadius = 20
         return view
     }()
-    private let closeBtn: UIButton = {
+    private lazy var closeBtn: UIButton = {
         var config = UIButton.Configuration.plain()
         var titleContainer = AttributeContainer()
         titleContainer.font = UIFont.systemFont(ofSize: 15)
@@ -25,7 +25,7 @@ final class BottomModal: UIView {
         button.addTarget(self, action: #selector(closeBtnAction(_:)), for: .touchUpInside)
         return button
     }()
-    private let dontShowForTodayBtn: UIButton = {
+    private lazy var dontShowForTodayBtn: UIButton = {
         var config = UIButton.Configuration.plain()
         var titleContainer = AttributeContainer()
         titleContainer.font = UIFont.systemFont(ofSize: 15)
@@ -51,7 +51,7 @@ final class BottomModal: UIView {
         label.numberOfLines = 0    //멀티 라인으로 표시
         return label
     }()
-    private let redirectBtn: UIButton = {
+    private lazy var redirectBtn: UIButton = {
         var config = UIButton.Configuration.filled()
         var titleContainer = AttributeContainer()
         titleContainer.font = UIFont.systemFont(ofSize: 17)
