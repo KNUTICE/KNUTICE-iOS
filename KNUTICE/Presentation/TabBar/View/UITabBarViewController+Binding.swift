@@ -31,7 +31,7 @@ extension UITabBarViewController {
                     return
                 }
                 self?.navigationController?.popToRootViewController(animated: true)
-                self?.navigationController?.pushViewController(WebViewController(notice: notice, isBookmarkBtnVisible: true), animated: true)
+                self?.navigationController?.pushViewController(WebViewController(notice: notice), animated: true)
                 UserDefaults.standard.set(nil, forKey: "pushNotice")
             })
             .disposed(by: disposeBag)
