@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_3" orientation="portrait" appearance="dark"/>
+    <device id="retina6_3" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
@@ -26,7 +26,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KNUTICE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zV4-vm-Ue1">
-                                <rect key="frame" x="10" y="750" width="382" height="30"/>
+                                <rect key="frame" x="10" y="784" width="382" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <color key="textColor" systemColor="systemGrayColor"/>
                                 <nil key="highlightedColor"/>
@@ -39,7 +39,7 @@
                             <constraint firstItem="yAY-3C-HZA" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="VJD-qj-JJB"/>
                             <constraint firstItem="zV4-vm-Ue1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="n4y-mS-Nhd"/>
                             <constraint firstItem="zV4-vm-Ue1" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="pxt-DI-G5f"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zV4-vm-Ue1" secondAttribute="bottom" constant="60" id="u1q-aW-48R"/>
+                            <constraint firstAttribute="bottom" secondItem="zV4-vm-Ue1" secondAttribute="bottom" constant="60" id="u1q-aW-48R"/>
                         </constraints>
                     </view>
                 </viewController>
