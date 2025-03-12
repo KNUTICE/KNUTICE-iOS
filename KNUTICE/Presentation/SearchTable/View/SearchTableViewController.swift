@@ -50,8 +50,7 @@ extension SearchTableViewController: UITableViewDelegate {
             return
         }
         
-        let viewController = WebViewController(notice: notice,
-                                               isBookmarkBtnVisible: true)
+        let viewController = WebViewController(notice: notice)
         navigationController?.pushViewController(viewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
