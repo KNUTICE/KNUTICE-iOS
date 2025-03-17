@@ -11,7 +11,7 @@ import SwiftUI
 import Factory
 
 final class MainViewController: UIViewController {
-    let tableView: UITableView = {
+    lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
@@ -19,6 +19,8 @@ final class MainViewController: UIViewController {
         tableView.register(MainListCell.self, forCellReuseIdentifier: MainListCell.reuseIdentifier)
         tableView.rowHeight = 95
         tableView.backgroundColor = .mainBackground
+        tableView.delegate = self
+        tableView.refreshControl = refreshControl
         
         return tableView
     }()
@@ -70,7 +72,6 @@ final class MainViewController: UIViewController {
         return button
     }()
     let refreshControl = UIRefreshControl()
-    let headerColors: [UIColor] = [.salmon, .lightOrange, .lightGreen, .dodgerBlue]
     @Injected(\.mainViewModel) var viewModel: MainViewModel
     let disposeBag = DisposeBag()
     
@@ -78,8 +79,6 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        tableView.delegate = self
-        tableView.refreshControl = refreshControl
         view.backgroundColor = .mainBackground
         setupLayout()
         bind()
