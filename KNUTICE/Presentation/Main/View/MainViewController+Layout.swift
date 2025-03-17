@@ -20,24 +20,25 @@ extension MainViewController {
         //navigationBar
         navigationBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
-            make.left.right.equalToSuperview()
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing)
             make.height.equalTo(44)
         }
         
         //titleLabel
         titleLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.left.equalTo(navigationBar.snp.left).offset(16)
+            make.leading.equalTo(navigationBar.snp.leading).offset(16)
         }
         
         //settingBtn
         settingBtn.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-16)
+            make.trailing.equalToSuperview().offset(-16)
             make.centerY.equalTo(titleLabel.snp.centerY)
         }
         
         searchBtn.snp.makeConstraints { make in
-            make.right.equalTo(settingBtn.snp.left).offset(-25)
+            make.trailing.equalTo(settingBtn.snp.leading).offset(-25)
             make.centerY.equalTo(titleLabel.snp.centerY)
         }
         
@@ -49,6 +50,7 @@ extension MainViewController {
     }
     
     func makeSectionHeader(for section: Int) -> UIView {
+        let headerColors: [UIColor] = [.salmon, .lightOrange, .lightGreen, .dodgerBlue]
         let headerView = UIView()
         let title: UILabel = {
             let label = UILabel()
