@@ -9,7 +9,7 @@ import UIKit
 import SwiftUI
 
 //MARK: - Layout
-extension MainViewController {
+extension MainTableViewController {
     func setupLayout() {
         navigationBar.addSubview(titleLabel)
         navigationBar.addSubview(settingBtn)

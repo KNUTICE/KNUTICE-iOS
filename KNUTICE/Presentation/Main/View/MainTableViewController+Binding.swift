@@ -1,5 +1,5 @@
 //
-//  MainViewController+Binding.swift
+//  MainTableViewController+Binding.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 5/19/24.
@@ -9,10 +9,10 @@ import RxSwift
 import RxDataSources
 
 //MARK: - Binding
-extension MainViewController {
+extension MainTableViewController {
     func bind() {
         let dataSource = RxTableViewSectionedReloadDataSource<SectionOfNotice>(configureCell: { dataSource, tableView, indexPath, item -> UITableViewCell in            
-            let cell = tableView.dequeueReusableCell(withIdentifier: MainListCell.reuseIdentifier, for: indexPath) as! MainListCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.reuseIdentifier, for: indexPath) as! MainTableViewCell
             cell.selectionStyle = .none
             cell.backgroundColor = .clear
             

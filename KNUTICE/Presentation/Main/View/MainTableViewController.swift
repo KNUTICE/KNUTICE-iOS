@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  MainTableViewController.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 5/4/24.
@@ -10,14 +10,15 @@ import RxSwift
 import SwiftUI
 import Factory
 
-final class MainViewController: UIViewController {
+final class MainTableViewController: UIViewController {
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
         tableView.sectionHeaderTopPadding = 15    //header padding
-        tableView.register(MainListCell.self, forCellReuseIdentifier: MainListCell.reuseIdentifier)
-        tableView.rowHeight = 95
+        tableView.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.reuseIdentifier)
+        tableView.estimatedRowHeight = 100    //cell height가 설정되기 전 임시 크기
+        tableView.rowHeight = UITableView.automaticDimension    //동적 Height 설정
         tableView.backgroundColor = .mainBackground
         tableView.delegate = self
         tableView.refreshControl = refreshControl
@@ -91,7 +92,7 @@ final class MainViewController: UIViewController {
 }
 
 //MARK: - UITableView delegate method
-extension MainViewController: UITableViewDelegate {
+extension MainTableViewController: UITableViewDelegate {
     //MARK: - Custom cell header
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return makeSectionHeader(for: section)
@@ -124,7 +125,7 @@ extension MainViewController: UITableViewDelegate {
 //MARK: - Preview
 struct Preview: PreviewProvider {
     static var previews: some View {
-        MainViewController()
+        MainTableViewController()
             .makePreview()
             .edgesIgnoringSafeArea(.all)
     }
