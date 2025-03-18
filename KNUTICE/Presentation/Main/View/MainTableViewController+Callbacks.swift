@@ -1,5 +1,5 @@
 //
-//  MainViewController+Callbacks.swift
+//  MainTableViewController+Callbacks.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 5/19/24.
@@ -10,7 +10,7 @@ import SwiftUI
 import Factory
 
 //MARK: - Callback Function
-extension MainViewController {
+extension MainTableViewController {
     @objc func headerButtonTapped(_ sender: UIButton) {
         let section = sender.tag
         switch section {
