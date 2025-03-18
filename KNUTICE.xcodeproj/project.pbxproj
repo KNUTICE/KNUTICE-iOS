@@ -36,7 +36,6 @@
 		5CD2EFC12BF356FB00066C87 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2EFC02BF356FB00066C87 /* UIViewController+Preview.swift */; };
 		766071C8E00212EB91A2AC8C /* Pods_KNUTICEUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C31D64DBFB242AE0A9A9154 /* Pods_KNUTICEUnitTests.framework */; };
 		8E00AF6C2C361F780037EC38 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF6B2C361F780037EC38 /* WebViewController.swift */; };
-		8E00AF712C36233C0037EC38 /* WebViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF702C36233C0037EC38 /* WebViewController+Layout.swift */; };
 		8E00AF7F2C367D8A0037EC38 /* DataBindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF7E2C367D8A0037EC38 /* DataBindable.swift */; };
 		8E00AF822C3681100037EC38 /* TableViewConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF812C3681100037EC38 /* TableViewConfigurable.swift */; };
 		8E02F80E2D601E64000FE803 /* NoticeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02F80D2D601E64000FE803 /* NoticeCategory.swift */; };
@@ -89,7 +88,6 @@
 		8E20510B2CD4F32F00D87C6A /* DetailedNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0BA6DC2C33CA1300677A79 /* DetailedNoticeCell.swift */; };
 		8E20510D2CD4F32F00D87C6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8256412BE5CE1A0038D4C8 /* AppDelegate.swift */; };
 		8E20510E2CD4F32F00D87C6A /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698962BEFB6760085E389 /* Notice.swift */; };
-		8E20510F2CD4F32F00D87C6A /* WebViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF702C36233C0037EC38 /* WebViewController+Layout.swift */; };
 		8E2051102CD4F32F00D87C6A /* PostResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02252C9FB85E00AE89D5 /* PostResponseDTO.swift */; };
 		8E2051112CD4F32F00D87C6A /* VIew+TextEditorBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F022C2CA0022D00AE89D5 /* VIew+TextEditorBackground.swift */; };
 		8E2051122CD4F32F00D87C6A /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0C3F882C9EC93B005E2A16 /* ReportView.swift */; };
@@ -390,7 +388,6 @@
 		8545CA775C9EEDED6069914B /* Pods-KNUTICE.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNUTICE.release.xcconfig"; path = "Target Support Files/Pods-KNUTICE/Pods-KNUTICE.release.xcconfig"; sourceTree = "<group>"; };
 		8D37A91E815FCD1A495067D5 /* Pods-NotificationService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationService.debug.xcconfig"; path = "Target Support Files/Pods-NotificationService/Pods-NotificationService.debug.xcconfig"; sourceTree = "<group>"; };
 		8E00AF6B2C361F780037EC38 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		8E00AF702C36233C0037EC38 /* WebViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebViewController+Layout.swift"; sourceTree = "<group>"; };
 		8E00AF7E2C367D8A0037EC38 /* DataBindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBindable.swift; sourceTree = "<group>"; };
 		8E00AF812C3681100037EC38 /* TableViewConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewConfigurable.swift; sourceTree = "<group>"; };
 		8E02F80D2D601E64000FE803 /* NoticeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCategory.swift; sourceTree = "<group>"; };
@@ -812,7 +809,6 @@
 			isa = PBXGroup;
 			children = (
 				8E00AF6B2C361F780037EC38 /* WebViewController.swift */,
-				8E00AF702C36233C0037EC38 /* WebViewController+Layout.swift */,
 				8EFDAB022C3BC08900352779 /* WebViewController+Callbacks.swift */,
 			);
 			path = WebView;
@@ -1711,7 +1707,6 @@
 				5C5698972BEFB6760085E389 /* Notice.swift in Sources */,
 				8E69315D2CEEFF950074142B /* NotificationSubscriptionRepository.swift in Sources */,
 				8E659EBF2D29438500305D56 /* UITabBarViewController.swift in Sources */,
-				8E00AF712C36233C0037EC38 /* WebViewController+Layout.swift in Sources */,
 				8E7A4A732D2A531B00BD1B7F /* NoticeKind.swift in Sources */,
 				8E7A4A6B2D2A2CD800BD1B7F /* Bookmark.swift in Sources */,
 				8E3F02262C9FB86400AE89D5 /* PostResponseDTO.swift in Sources */,
@@ -1830,7 +1825,6 @@
 				8E20510E2CD4F32F00D87C6A /* Notice.swift in Sources */,
 				8E69315C2CEEFF950074142B /* NotificationSubscriptionRepository.swift in Sources */,
 				8E659EBE2D29438500305D56 /* UITabBarViewController.swift in Sources */,
-				8E20510F2CD4F32F00D87C6A /* WebViewController+Layout.swift in Sources */,
 				8E7A4A742D2A531B00BD1B7F /* NoticeKind.swift in Sources */,
 				8E7A4A6A2D2A2CD800BD1B7F /* Bookmark.swift in Sources */,
 				8E2051102CD4F32F00D87C6A /* PostResponseDTO.swift in Sources */,
