@@ -14,6 +14,7 @@ final class WebViewController: UIViewController {
     let progressView: UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .bar)
         progressView.progressTintColor = .accent2
+        progressView.translatesAutoresizingMaskIntoConstraints = false
         
         return progressView
     }()
@@ -24,6 +25,7 @@ final class WebViewController: UIViewController {
         webView.allowsBackForwardNavigationGestures = false
         webView.configuration.defaultWebpagePreferences.allowsContentJavaScript = true
         webView.isHidden = true
+        webView.translatesAutoresizingMaskIntoConstraints = false
         
         return webView
     }()
@@ -41,6 +43,7 @@ final class WebViewController: UIViewController {
         button.layer.shadowRadius = 7
         button.layer.shadowOffset = CGSize(width: 0, height: 0)
         button.addTarget(self, action: #selector(openReminderForm(_:)), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }()
@@ -66,9 +69,18 @@ final class WebViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.largeTitleDisplayMode = .never    //navigation inline title
-        setupNavigationBarItem()
+        view.backgroundColor = .detailViewBackground
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(openSharePanel))
         setupLayout()
         loadPage(notice.contentUrl)
+    }
+    
+    private func loadPage(_ url: String) {
+        guard let url = URL(string: url) else {
+            return
+        }
+        
+        webView.load(URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad))
     }
 }
 
@@ -105,6 +117,66 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
         }
         
         return nil
+    }
+}
+
+extension WebViewController {
+    func setupLayout() {
+        //progressView
+        view.addSubview(progressView)
+        progressView.snp.makeConstraints { make in
+            make.left.top.right.equalTo(self.view.safeAreaLayoutGuide)
+        }
+        
+        //webView
+        view.addSubview(webView)
+        webView.snp.makeConstraints { make in
+            make.top.equalTo(progressView.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        //reminderSheetBtn
+        view.addSubview(reminderSheetBtn)
+        reminderSheetBtn.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-50)
+            make.trailing.equalToSuperview().offset(-20)
+            make.width.height.equalTo(50)
+        }
+    }
+}
+
+extension WebViewController {
+    @objc func openSharePanel() {
+        let shareText = self.notice.contentUrl
+        let shareObject = [shareText]
+        let activityViewController = UIActivityViewController(activityItems : shareObject, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        activityViewController.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, arrayReturnedItems: [Any]?, error: Error?) in
+            if completed {
+                self.showCompleAlert()
+            } else {
+                
+            }
+        }
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+    
+    private func showCompleAlert() {
+        let alert = UIAlertController(title: "알림", message: "공유를 완료했어요.", preferredStyle: .actionSheet)
+        let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(okButton)
+        present(alert, animated: true, completion: nil)
+        
+    }
+    
+    @objc func openReminderForm(_ sender: UIButton) {
+        let bookmarkForm = BookmarkForm(viewModel: BookmarkFormViewModel(), notice: self.notice) {
+            self.dismiss(animated: true)
+        }
+        let viewController = UIHostingController(rootView: bookmarkForm)
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.modalPresentationStyle = .popover
+        present(navigationController, animated: true, completion: nil)
     }
 }
 

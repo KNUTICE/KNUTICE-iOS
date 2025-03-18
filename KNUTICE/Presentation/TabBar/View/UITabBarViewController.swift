@@ -10,7 +10,7 @@ import SwiftUI
 import RxSwift
 
 final class UITabBarViewController: UITabBarController {
-    private let mainViewController = MainViewController()
+    private let mainViewController = MainTableViewController()
     private let reminderViewController = UIHostingController(
         rootView: BookmarkList(viewModel: BookmarkListViewModel())
     )
