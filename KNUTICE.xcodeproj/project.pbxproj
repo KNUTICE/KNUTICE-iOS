@@ -99,7 +99,6 @@
 		8E20511A2CD4F32F00D87C6A /* AppDelegate+Messaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E54C8492C5E6F5E0070E689 /* AppDelegate+Messaging.swift */; };
 		8E20511B2CD4F32F00D87C6A /* NoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A4E2BFDF4E100E0254B /* NoticeRepository.swift */; };
 		8E20511C2CD4F32F00D87C6A /* UIDevice+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6175472CA24157002B6021 /* UIDevice+Identifier.swift */; };
-		8E20511D2CD4F32F00D87C6A /* WebViewController+Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDAB022C3BC08900352779 /* WebViewController+Callbacks.swift */; };
 		8E20511F2CD4F32F00D87C6A /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C56988F2BEFB3C50085E389 /* MainTableViewCell.swift */; };
 		8E2051202CD4F32F00D87C6A /* NoticesRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B810D2BF45B5D0038EB27 /* NoticesRepresentable.swift */; };
 		8E2051212CD4F32F00D87C6A /* MainNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B172C35045800D7F499 /* MainNotice.swift */; };
@@ -275,7 +274,6 @@
 		8EEE1A522CEA19C90011FD87 /* NoticeFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEE1A502CEA19C90011FD87 /* NoticeFetchable.swift */; };
 		8EFCF8672C37742A004A53E9 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF8662C37742A004A53E9 /* SettingView.swift */; };
 		8EFCF86D2C37810B004A53E9 /* UIFont+DynamicFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF86C2C37810B004A53E9 /* UIFont+DynamicFont.swift */; };
-		8EFDAB032C3BC08900352779 /* WebViewController+Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDAB022C3BC08900352779 /* WebViewController+Callbacks.swift */; };
 		8EFE52E72CDC89CF003A7330 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFE52E62CDC89CF003A7330 /* SearchTableViewController.swift */; };
 		8EFE52E82CDC89CF003A7330 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFE52E62CDC89CF003A7330 /* SearchTableViewController.swift */; };
 		8EFE52F12CDC9331003A7330 /* SearchTableViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFE52F02CDC9331003A7330 /* SearchTableViewController+Layout.swift */; };
@@ -505,7 +503,6 @@
 		8EEE1A502CEA19C90011FD87 /* NoticeFetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeFetchable.swift; sourceTree = "<group>"; };
 		8EFCF8662C37742A004A53E9 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		8EFCF86C2C37810B004A53E9 /* UIFont+DynamicFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+DynamicFont.swift"; sourceTree = "<group>"; };
-		8EFDAB022C3BC08900352779 /* WebViewController+Callbacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebViewController+Callbacks.swift"; sourceTree = "<group>"; };
 		8EFE52E62CDC89CF003A7330 /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		8EFE52F02CDC9331003A7330 /* SearchTableViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchTableViewController+Layout.swift"; sourceTree = "<group>"; };
 		8EFE52F92CDCBA80003A7330 /* SearchTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewModel.swift; sourceTree = "<group>"; };
@@ -809,7 +806,6 @@
 			isa = PBXGroup;
 			children = (
 				8E00AF6B2C361F780037EC38 /* WebViewController.swift */,
-				8EFDAB022C3BC08900352779 /* WebViewController+Callbacks.swift */,
 			);
 			path = WebView;
 			sourceTree = "<group>";
@@ -1730,7 +1726,6 @@
 				8EC6B8912D30971A002B45C7 /* Bookmark.xcdatamodeld in Sources */,
 				8E6175482CA24157002B6021 /* UIDevice+Identifier.swift in Sources */,
 				8EC6B8A52D3107FC002B45C7 /* BookmarkDetail.swift in Sources */,
-				8EFDAB032C3BC08900352779 /* WebViewController+Callbacks.swift in Sources */,
 				5C5698902BEFB3C50085E389 /* MainTableViewCell.swift in Sources */,
 				8E0CDED62D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift in Sources */,
 				5C9B810E2BF45B5D0038EB27 /* NoticesRepresentable.swift in Sources */,
@@ -1848,7 +1843,6 @@
 				8EC6B8922D30971A002B45C7 /* Bookmark.xcdatamodeld in Sources */,
 				8E20511C2CD4F32F00D87C6A /* UIDevice+Identifier.swift in Sources */,
 				8EC6B8A42D3107FC002B45C7 /* BookmarkDetail.swift in Sources */,
-				8E20511D2CD4F32F00D87C6A /* WebViewController+Callbacks.swift in Sources */,
 				8E20511F2CD4F32F00D87C6A /* MainTableViewCell.swift in Sources */,
 				8E0CDED72D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift in Sources */,
 				8E2051202CD4F32F00D87C6A /* NoticesRepresentable.swift in Sources */,
