@@ -15,18 +15,18 @@
 		5C190A4F2BFDF4E100E0254B /* NoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A4E2BFDF4E100E0254B /* NoticeRepository.swift */; };
 		5C190A532BFDF5EB00E0254B /* NoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A522BFDF5EB00E0254B /* NoticeRepositoryImpl.swift */; };
 		5C190A552BFDF66600E0254B /* NoticeReponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A542BFDF66600E0254B /* NoticeReponseDTO.swift */; };
-		5C5698902BEFB3C50085E389 /* MainListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C56988F2BEFB3C50085E389 /* MainListCell.swift */; };
+		5C5698902BEFB3C50085E389 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C56988F2BEFB3C50085E389 /* MainTableViewCell.swift */; };
 		5C5698922BEFB4A20085E389 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698912BEFB4A20085E389 /* MainViewModel.swift */; };
 		5C5698952BEFB5A60085E389 /* SectionOfNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */; };
 		5C5698972BEFB6760085E389 /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698962BEFB6760085E389 /* Notice.swift */; };
 		5C8256422BE5CE1A0038D4C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8256412BE5CE1A0038D4C8 /* AppDelegate.swift */; };
 		5C8256442BE5CE1A0038D4C8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8256432BE5CE1A0038D4C8 /* SceneDelegate.swift */; };
-		5C8256462BE5CE1A0038D4C8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8256452BE5CE1A0038D4C8 /* MainViewController.swift */; };
+		5C8256462BE5CE1A0038D4C8 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8256452BE5CE1A0038D4C8 /* MainTableViewController.swift */; };
 		5C82564B2BE5CE1B0038D4C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C82564A2BE5CE1B0038D4C8 /* Assets.xcassets */; };
 		5C82564E2BE5CE1B0038D4C8 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5C82564D2BE5CE1B0038D4C8 /* Base */; };
-		5C89DD3A2BFA02F400CCCCCD /* MainViewController+Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD392BFA02F400CCCCCD /* MainViewController+Callbacks.swift */; };
-		5C89DD3C2BFA03D800CCCCCD /* MainViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD3B2BFA03D800CCCCCD /* MainViewController+Layout.swift */; };
-		5C89DD3E2BFA043200CCCCCD /* MainViewController+Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD3D2BFA043200CCCCCD /* MainViewController+Binding.swift */; };
+		5C89DD3A2BFA02F400CCCCCD /* MainTableViewController+Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD392BFA02F400CCCCCD /* MainTableViewController+Callbacks.swift */; };
+		5C89DD3C2BFA03D800CCCCCD /* MainTableViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD3B2BFA03D800CCCCCD /* MainTableViewController+Layout.swift */; };
+		5C89DD3E2BFA043200CCCCCD /* MainTableViewController+Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD3D2BFA043200CCCCCD /* MainTableViewController+Binding.swift */; };
 		5C89DD462BFA0D6800CCCCCD /* MainNoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD452BFA0D6800CCCCCD /* MainNoticeRepository.swift */; };
 		5C89DD492BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD482BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift */; };
 		5C89DD502BFA120B00CCCCCD /* MainNoticeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD4F2BFA120B00CCCCCD /* MainNoticeResponseDTO.swift */; };
@@ -77,13 +77,13 @@
 		8E2050FF2CD4F32F00D87C6A /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F021D2C9FB46100AE89D5 /* ReportService.swift */; };
 		8E2051002CD4F32F00D87C6A /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385732C644AB000AF151B /* TokenRepository.swift */; };
 		8E2051012CD4F32F00D87C6A /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698912BEFB4A20085E389 /* MainViewModel.swift */; };
-		8E2051022CD4F32F00D87C6A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8256452BE5CE1A0038D4C8 /* MainViewController.swift */; };
+		8E2051022CD4F32F00D87C6A /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8256452BE5CE1A0038D4C8 /* MainTableViewController.swift */; };
 		8E2051032CD4F32F00D87C6A /* DetailedNoticeCellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B192C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift */; };
 		8E2051042CD4F32F00D87C6A /* NoticeTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B810A2BF451BC0038EB27 /* NoticeTableViewModel.swift */; };
 		8E2051052CD4F32F00D87C6A /* ContentWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9ACAA2C46AEC900C9E287 /* ContentWebView.swift */; };
 		8E2051062CD4F32F00D87C6A /* ReportRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F021F2C9FB6A000AE89D5 /* ReportRepository.swift */; };
 		8E2051072CD4F32F00D87C6A /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E613E9F2C95214C006FC272 /* RequestResult.swift */; };
-		8E2051082CD4F32F00D87C6A /* MainViewController+Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD3D2BFA043200CCCCCD /* MainViewController+Binding.swift */; };
+		8E2051082CD4F32F00D87C6A /* MainTableViewController+Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD3D2BFA043200CCCCCD /* MainTableViewController+Binding.swift */; };
 		8E2051092CD4F32F00D87C6A /* MainNoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD482BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift */; };
 		8E20510A2CD4F32F00D87C6A /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6D20B2C66FC5B004E8AC2 /* SettingViewModel.swift */; };
 		8E20510B2CD4F32F00D87C6A /* DetailedNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0BA6DC2C33CA1300677A79 /* DetailedNoticeCell.swift */; };
@@ -102,23 +102,23 @@
 		8E20511B2CD4F32F00D87C6A /* NoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A4E2BFDF4E100E0254B /* NoticeRepository.swift */; };
 		8E20511C2CD4F32F00D87C6A /* UIDevice+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6175472CA24157002B6021 /* UIDevice+Identifier.swift */; };
 		8E20511D2CD4F32F00D87C6A /* WebViewController+Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDAB022C3BC08900352779 /* WebViewController+Callbacks.swift */; };
-		8E20511F2CD4F32F00D87C6A /* MainListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C56988F2BEFB3C50085E389 /* MainListCell.swift */; };
+		8E20511F2CD4F32F00D87C6A /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C56988F2BEFB3C50085E389 /* MainTableViewCell.swift */; };
 		8E2051202CD4F32F00D87C6A /* NoticesRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B810D2BF45B5D0038EB27 /* NoticesRepresentable.swift */; };
 		8E2051212CD4F32F00D87C6A /* MainNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B172C35045800D7F499 /* MainNotice.swift */; };
 		8E2051222CD4F32F00D87C6A /* UIFont+DynamicFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF86C2C37810B004A53E9 /* UIFont+DynamicFont.swift */; };
-		8E2051232CD4F32F00D87C6A /* MainViewController+NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD51A52C6D7D68002101CA /* MainViewController+NotificationCenter.swift */; };
+		8E2051232CD4F32F00D87C6A /* MainTableViewController+NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD51A52C6D7D68002101CA /* MainTableViewController+NotificationCenter.swift */; };
 		8E2051242CD4F32F00D87C6A /* NoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A522BFDF5EB00E0254B /* NoticeRepositoryImpl.swift */; };
 		8E2051252CD4F32F00D87C6A /* MainNoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD452BFA0D6800CCCCCD /* MainNoticeRepository.swift */; };
 		8E2051272CD4F32F00D87C6A /* ReportRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02212C9FB75900AE89D5 /* ReportRepositoryImpl.swift */; };
 		8E2051292CD4F32F00D87C6A /* TokenRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385772C644C3F00AF151B /* TokenRepositoryImpl.swift */; };
 		8E20512A2CD4F32F00D87C6A /* NoticeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B81062BF451540038EB27 /* NoticeTableViewController.swift */; };
 		8E20512B2CD4F32F00D87C6A /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF8662C37742A004A53E9 /* SettingView.swift */; };
-		8E20512C2CD4F32F00D87C6A /* MainViewController+Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD392BFA02F400CCCCCD /* MainViewController+Callbacks.swift */; };
+		8E20512C2CD4F32F00D87C6A /* MainTableViewController+Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD392BFA02F400CCCCCD /* MainTableViewController+Callbacks.swift */; };
 		8E20512E2CD4F32F00D87C6A /* SectionOfNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */; };
 		8E20512F2CD4F32F00D87C6A /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0C3F8B2C9ECD1B005E2A16 /* ReportViewModel.swift */; };
 		8E2051302CD4F32F00D87C6A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF6B2C361F780037EC38 /* WebViewController.swift */; };
 		8E2051312CD4F32F00D87C6A /* DataBindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF7E2C367D8A0037EC38 /* DataBindable.swift */; };
-		8E2051322CD4F32F00D87C6A /* MainViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD3B2BFA03D800CCCCCD /* MainViewController+Layout.swift */; };
+		8E2051322CD4F32F00D87C6A /* MainTableViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD3B2BFA03D800CCCCCD /* MainTableViewController+Layout.swift */; };
 		8E2051332CD4F32F00D87C6A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8256432BE5CE1A0038D4C8 /* SceneDelegate.swift */; };
 		8E2051352CD4F32F00D87C6A /* TableViewConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF812C3681100037EC38 /* TableViewConfigurable.swift */; };
 		8E2051362CD4F32F00D87C6A /* Bundle+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A452BFD6BDB00E0254B /* Bundle+URL.swift */; };
@@ -266,7 +266,7 @@
 		8ECE2B1A2C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B192C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift */; };
 		8EDAFD422D6818D000834E00 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDAFD412D6818D000834E00 /* Errors.swift */; };
 		8EDAFD432D6818D000834E00 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDAFD412D6818D000834E00 /* Errors.swift */; };
-		8EDD51A62C6D7D68002101CA /* MainViewController+NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD51A52C6D7D68002101CA /* MainViewController+NotificationCenter.swift */; };
+		8EDD51A62C6D7D68002101CA /* MainTableViewController+NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD51A52C6D7D68002101CA /* MainTableViewController+NotificationCenter.swift */; };
 		8EE4B4E52D16CE1E00EFF10B /* SpinningIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4E42D16CE1E00EFF10B /* SpinningIndicator.swift */; };
 		8EE4B4E62D16CE1E00EFF10B /* SpinningIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4E42D16CE1E00EFF10B /* SpinningIndicator.swift */; };
 		8EE4B4E82D16E4DD00EFF10B /* NotificationSubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4E72D16E4DD00EFF10B /* NotificationSubscriptionService.swift */; };
@@ -365,20 +365,20 @@
 		5C190A4E2BFDF4E100E0254B /* NoticeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeRepository.swift; sourceTree = "<group>"; };
 		5C190A522BFDF5EB00E0254B /* NoticeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeRepositoryImpl.swift; sourceTree = "<group>"; };
 		5C190A542BFDF66600E0254B /* NoticeReponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeReponseDTO.swift; sourceTree = "<group>"; };
-		5C56988F2BEFB3C50085E389 /* MainListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListCell.swift; sourceTree = "<group>"; };
+		5C56988F2BEFB3C50085E389 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		5C5698912BEFB4A20085E389 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOfNotice.swift; sourceTree = "<group>"; };
 		5C5698962BEFB6760085E389 /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		5C82563E2BE5CE1A0038D4C8 /* KNUTICE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KNUTICE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C8256412BE5CE1A0038D4C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C8256432BE5CE1A0038D4C8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5C8256452BE5CE1A0038D4C8 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		5C8256452BE5CE1A0038D4C8 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		5C82564A2BE5CE1B0038D4C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C82564D2BE5CE1B0038D4C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C82564F2BE5CE1B0038D4C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5C89DD392BFA02F400CCCCCD /* MainViewController+Callbacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+Callbacks.swift"; sourceTree = "<group>"; };
-		5C89DD3B2BFA03D800CCCCCD /* MainViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+Layout.swift"; sourceTree = "<group>"; };
-		5C89DD3D2BFA043200CCCCCD /* MainViewController+Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+Binding.swift"; sourceTree = "<group>"; };
+		5C89DD392BFA02F400CCCCCD /* MainTableViewController+Callbacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainTableViewController+Callbacks.swift"; sourceTree = "<group>"; };
+		5C89DD3B2BFA03D800CCCCCD /* MainTableViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainTableViewController+Layout.swift"; sourceTree = "<group>"; };
+		5C89DD3D2BFA043200CCCCCD /* MainTableViewController+Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainTableViewController+Binding.swift"; sourceTree = "<group>"; };
 		5C89DD452BFA0D6800CCCCCD /* MainNoticeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeRepository.swift; sourceTree = "<group>"; };
 		5C89DD482BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeRepositoryImpl.swift; sourceTree = "<group>"; };
 		5C89DD4F2BFA120B00CCCCCD /* MainNoticeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeResponseDTO.swift; sourceTree = "<group>"; };
@@ -502,7 +502,7 @@
 		8ECE2B172C35045800D7F499 /* MainNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotice.swift; sourceTree = "<group>"; };
 		8ECE2B192C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedNoticeCellWithImage.swift; sourceTree = "<group>"; };
 		8EDAFD412D6818D000834E00 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		8EDD51A52C6D7D68002101CA /* MainViewController+NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+NotificationCenter.swift"; sourceTree = "<group>"; };
+		8EDD51A52C6D7D68002101CA /* MainTableViewController+NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainTableViewController+NotificationCenter.swift"; sourceTree = "<group>"; };
 		8EE4B4E42D16CE1E00EFF10B /* SpinningIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinningIndicator.swift; sourceTree = "<group>"; };
 		8EE4B4E72D16E4DD00EFF10B /* NotificationSubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSubscriptionService.swift; sourceTree = "<group>"; };
 		8EEE1A502CEA19C90011FD87 /* NoticeFetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeFetchable.swift; sourceTree = "<group>"; };
@@ -631,12 +631,12 @@
 		5C56988B2BEFB2F20085E389 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5C8256452BE5CE1A0038D4C8 /* MainViewController.swift */,
-				5C89DD392BFA02F400CCCCCD /* MainViewController+Callbacks.swift */,
-				5C89DD3B2BFA03D800CCCCCD /* MainViewController+Layout.swift */,
-				5C89DD3D2BFA043200CCCCCD /* MainViewController+Binding.swift */,
-				8EDD51A52C6D7D68002101CA /* MainViewController+NotificationCenter.swift */,
-				5C56988F2BEFB3C50085E389 /* MainListCell.swift */,
+				5C8256452BE5CE1A0038D4C8 /* MainTableViewController.swift */,
+				5C89DD392BFA02F400CCCCCD /* MainTableViewController+Callbacks.swift */,
+				5C89DD3B2BFA03D800CCCCCD /* MainTableViewController+Layout.swift */,
+				5C89DD3D2BFA043200CCCCCD /* MainTableViewController+Binding.swift */,
+				8EDD51A52C6D7D68002101CA /* MainTableViewController+NotificationCenter.swift */,
+				5C56988F2BEFB3C50085E389 /* MainTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1681,7 +1681,7 @@
 				8E5385742C644AB000AF151B /* TokenRepository.swift in Sources */,
 				8E69315A2CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift in Sources */,
 				5C5698922BEFB4A20085E389 /* MainViewModel.swift in Sources */,
-				5C8256462BE5CE1A0038D4C8 /* MainViewController.swift in Sources */,
+				5C8256462BE5CE1A0038D4C8 /* MainTableViewController.swift in Sources */,
 				8E5C1AD52D40773F0092BF88 /* MainPopupContentRepositoryImpl.swift in Sources */,
 				8EFE52FB2CDCBA80003A7330 /* SearchTableViewModel.swift in Sources */,
 				8ECE2B1A2C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift in Sources */,
@@ -1699,7 +1699,7 @@
 				8E6931602CEF00600074142B /* NotificationSubscriptionRepositoryImpl.swift in Sources */,
 				8E3DEA9E2D7FC71500A5B435 /* ParentViewController.swift in Sources */,
 				8E3DEAA42D7FE95000A5B435 /* ParentViewController+Binding.swift in Sources */,
-				5C89DD3E2BFA043200CCCCCD /* MainViewController+Binding.swift in Sources */,
+				5C89DD3E2BFA043200CCCCCD /* MainTableViewController+Binding.swift in Sources */,
 				8EC6B89B2D30B307002B45C7 /* BookmarkDTO.swift in Sources */,
 				5C89DD492BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift in Sources */,
 				8E5E8BE22D3605090078C007 /* NotificationName.swift in Sources */,
@@ -1736,7 +1736,7 @@
 				8E6175482CA24157002B6021 /* UIDevice+Identifier.swift in Sources */,
 				8EC6B8A52D3107FC002B45C7 /* BookmarkDetail.swift in Sources */,
 				8EFDAB032C3BC08900352779 /* WebViewController+Callbacks.swift in Sources */,
-				5C5698902BEFB3C50085E389 /* MainListCell.swift in Sources */,
+				5C5698902BEFB3C50085E389 /* MainTableViewCell.swift in Sources */,
 				8E0CDED62D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift in Sources */,
 				5C9B810E2BF45B5D0038EB27 /* NoticesRepresentable.swift in Sources */,
 				8EC6B8982D30B25F002B45C7 /* BookmarkRepository.swift in Sources */,
@@ -1744,7 +1744,7 @@
 				8ECE2B182C35045800D7F499 /* MainNotice.swift in Sources */,
 				8E6931682CEF08E00074142B /* LocalNotificationSubscriptionDataSource.swift in Sources */,
 				8EFCF86D2C37810B004A53E9 /* UIFont+DynamicFont.swift in Sources */,
-				8EDD51A62C6D7D68002101CA /* MainViewController+NotificationCenter.swift in Sources */,
+				8EDD51A62C6D7D68002101CA /* MainTableViewController+NotificationCenter.swift in Sources */,
 				5C190A532BFDF5EB00E0254B /* NoticeRepositoryImpl.swift in Sources */,
 				5C89DD462BFA0D6800CCCCCD /* MainNoticeRepository.swift in Sources */,
 				8E5E8BED2D362AD70078C007 /* BookmarkEditFormViewModel.swift in Sources */,
@@ -1760,7 +1760,7 @@
 				8E5E8BDF2D35F03A0078C007 /* BookmarkDetailViewModel.swift in Sources */,
 				8EFCF8672C37742A004A53E9 /* SettingView.swift in Sources */,
 				8EE4B4E62D16CE1E00EFF10B /* SpinningIndicator.swift in Sources */,
-				5C89DD3A2BFA02F400CCCCCD /* MainViewController+Callbacks.swift in Sources */,
+				5C89DD3A2BFA02F400CCCCCD /* MainTableViewController+Callbacks.swift in Sources */,
 				5C5698952BEFB5A60085E389 /* SectionOfNotice.swift in Sources */,
 				8EDAFD432D6818D000834E00 /* Errors.swift in Sources */,
 				8E7A4A6D2D2A43A900BD1B7F /* BookmarkListRow.swift in Sources */,
@@ -1773,7 +1773,7 @@
 				8E5C1ACF2D40768B0092BF88 /* MainPopupContentDTO.swift in Sources */,
 				8E3B8C492D2BBFFD007E9579 /* BookmarkFormViewModel.swift in Sources */,
 				8E00AF7F2C367D8A0037EC38 /* DataBindable.swift in Sources */,
-				5C89DD3C2BFA03D800CCCCCD /* MainViewController+Layout.swift in Sources */,
+				5C89DD3C2BFA03D800CCCCCD /* MainTableViewController+Layout.swift in Sources */,
 				8EE4B4E82D16E4DD00EFF10B /* NotificationSubscriptionService.swift in Sources */,
 				5C8256442BE5CE1A0038D4C8 /* SceneDelegate.swift in Sources */,
 				8EFE53002CDCBD3D003A7330 /* SearchRepositoryImpl.swift in Sources */,
@@ -1800,7 +1800,7 @@
 				8E2051002CD4F32F00D87C6A /* TokenRepository.swift in Sources */,
 				8E6931592CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift in Sources */,
 				8E2051012CD4F32F00D87C6A /* MainViewModel.swift in Sources */,
-				8E2051022CD4F32F00D87C6A /* MainViewController.swift in Sources */,
+				8E2051022CD4F32F00D87C6A /* MainTableViewController.swift in Sources */,
 				8E5C1AD62D40773F0092BF88 /* MainPopupContentRepositoryImpl.swift in Sources */,
 				8EFE52FA2CDCBA80003A7330 /* SearchTableViewModel.swift in Sources */,
 				8E2051032CD4F32F00D87C6A /* DetailedNoticeCellWithImage.swift in Sources */,
@@ -1818,7 +1818,7 @@
 				8E69315F2CEF00600074142B /* NotificationSubscriptionRepositoryImpl.swift in Sources */,
 				8E3DEA9F2D7FC71500A5B435 /* ParentViewController.swift in Sources */,
 				8E3DEAA52D7FE95000A5B435 /* ParentViewController+Binding.swift in Sources */,
-				8E2051082CD4F32F00D87C6A /* MainViewController+Binding.swift in Sources */,
+				8E2051082CD4F32F00D87C6A /* MainTableViewController+Binding.swift in Sources */,
 				8EC6B89C2D30B307002B45C7 /* BookmarkDTO.swift in Sources */,
 				8E2051092CD4F32F00D87C6A /* MainNoticeRepositoryImpl.swift in Sources */,
 				8E5E8BE12D3605090078C007 /* NotificationName.swift in Sources */,
@@ -1855,7 +1855,7 @@
 				8E20511C2CD4F32F00D87C6A /* UIDevice+Identifier.swift in Sources */,
 				8EC6B8A42D3107FC002B45C7 /* BookmarkDetail.swift in Sources */,
 				8E20511D2CD4F32F00D87C6A /* WebViewController+Callbacks.swift in Sources */,
-				8E20511F2CD4F32F00D87C6A /* MainListCell.swift in Sources */,
+				8E20511F2CD4F32F00D87C6A /* MainTableViewCell.swift in Sources */,
 				8E0CDED72D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift in Sources */,
 				8E2051202CD4F32F00D87C6A /* NoticesRepresentable.swift in Sources */,
 				8EC6B8992D30B25F002B45C7 /* BookmarkRepository.swift in Sources */,
@@ -1863,7 +1863,7 @@
 				8E2051212CD4F32F00D87C6A /* MainNotice.swift in Sources */,
 				8E6931672CEF08E00074142B /* LocalNotificationSubscriptionDataSource.swift in Sources */,
 				8E2051222CD4F32F00D87C6A /* UIFont+DynamicFont.swift in Sources */,
-				8E2051232CD4F32F00D87C6A /* MainViewController+NotificationCenter.swift in Sources */,
+				8E2051232CD4F32F00D87C6A /* MainTableViewController+NotificationCenter.swift in Sources */,
 				8E2051242CD4F32F00D87C6A /* NoticeRepositoryImpl.swift in Sources */,
 				8E2051252CD4F32F00D87C6A /* MainNoticeRepository.swift in Sources */,
 				8E5E8BEE2D362AD70078C007 /* BookmarkEditFormViewModel.swift in Sources */,
@@ -1879,7 +1879,7 @@
 				8E5E8BDE2D35F03A0078C007 /* BookmarkDetailViewModel.swift in Sources */,
 				8E20512B2CD4F32F00D87C6A /* SettingView.swift in Sources */,
 				8EE4B4E52D16CE1E00EFF10B /* SpinningIndicator.swift in Sources */,
-				8E20512C2CD4F32F00D87C6A /* MainViewController+Callbacks.swift in Sources */,
+				8E20512C2CD4F32F00D87C6A /* MainTableViewController+Callbacks.swift in Sources */,
 				8E20512E2CD4F32F00D87C6A /* SectionOfNotice.swift in Sources */,
 				8EDAFD422D6818D000834E00 /* Errors.swift in Sources */,
 				8E7A4A6E2D2A43A900BD1B7F /* BookmarkListRow.swift in Sources */,
@@ -1892,7 +1892,7 @@
 				8E5C1AD02D40768B0092BF88 /* MainPopupContentDTO.swift in Sources */,
 				8E3B8C482D2BBFFD007E9579 /* BookmarkFormViewModel.swift in Sources */,
 				8E2051312CD4F32F00D87C6A /* DataBindable.swift in Sources */,
-				8E2051322CD4F32F00D87C6A /* MainViewController+Layout.swift in Sources */,
+				8E2051322CD4F32F00D87C6A /* MainTableViewController+Layout.swift in Sources */,
 				8EE4B4E92D16E4DD00EFF10B /* NotificationSubscriptionService.swift in Sources */,
 				8E2051332CD4F32F00D87C6A /* SceneDelegate.swift in Sources */,
 				8EFE53012CDCBD3D003A7330 /* SearchRepositoryImpl.swift in Sources */,

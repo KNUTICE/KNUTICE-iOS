@@ -1,5 +1,5 @@
 //
-//  MainViewController+NotificationCenter.swift
+//  MainTableViewController+NotificationCenter.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 8/15/24.
@@ -8,7 +8,7 @@
 import RxSwift
 import Foundation
 
-extension MainViewController {
+extension MainTableViewController {
     //MARK: - App이 처음 실행 될 때 시간 기록
     func recordEntryTime() {
         UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: "entryTime")
