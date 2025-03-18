@@ -30,7 +30,7 @@ final class MainTableViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "KNUTICE"
-        label.font = UIFont.font(for: .title2, weight: .heavy)
+        label.font = UIFont.systemFont(ofSize: 22, weight: .heavy)
         
         return label
     }()

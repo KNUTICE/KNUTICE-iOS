@@ -56,7 +56,7 @@ extension MainTableViewController {
             let label = UILabel()
             label.text = viewModel.notices.value[section].header
             label.textColor = headerColors[section]
-            label.font = UIFont.boldSystemFont(ofSize: 20)
+            label.font = UIFont.font(for: .title3, weight: .bold)
             
             return label
         }()
