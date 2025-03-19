@@ -37,7 +37,8 @@ final class UITabBarViewController: UITabBarController {
         setViewControllers([mainViewController, reminderViewController], animated: true)
         setupShadowView()
         setupTabBar()
-        binding()
+        bind()
+        openPushNoticeIfExists()
         
         if UserDefaults.standard.double(forKey: "noShowPopupDate") < Date().timeIntervalSince1970 {
             viewModel.fetchMainPopupContent()
@@ -96,6 +97,47 @@ extension UITabBarViewController {
         }
     }
 }
+
+extension UITabBarViewController {
+    func openPushNoticeIfExists() {
+        let decoder = JSONDecoder()
+        if let encodedData = UserDefaults.standard.data(forKey: "pushNotice"),
+           let notice = try? decoder.decode(Notice.self, from: encodedData) {
+            DispatchQueue.main.async {
+                self.navigationController?.popToRootViewController(animated: true)
+                self.navigationController?.pushViewController(WebViewController(notice: notice), animated: true)
+                UserDefaults.standard.set(nil, forKey: "pushNotice")
+            }
+        }
+    }
+}
+
+extension UITabBarViewController {
+    func bind() {
+        viewModel
+            .mainPopupContent
+            .delay(.seconds(1), scheduler: MainScheduler.instance)
+            .subscribe { [weak self] in
+                if let element = $0.element, let popupContent = element, let self = self {
+                    let bottomModal = BottomModal(content: popupContent)
+                    self.view.addSubview(bottomModal)
+                    bottomModal.setupLayout()
+                    UIView.animate(withDuration: 0.5) {
+                        bottomModal.alpha = 1
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx
+            .notification(UIApplication.willEnterForegroundNotification)
+            .subscribe(onNext: { [weak self] _ in
+                self?.openPushNoticeIfExists()
+            })
+            .disposed(by: disposeBag)
+    }
+}
+
 
 #if DEBUG
 struct UITabBarViewControllerPreview: PreviewProvider {
