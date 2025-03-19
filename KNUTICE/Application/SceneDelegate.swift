@@ -36,14 +36,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         //전달된 모든 알림 데이터 삭제
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-        
-        //푸시 알림으로 전달된 Notice 객체가 있는지 확인
-        if let encodedData = UserDefaults.standard.data(forKey: "pushNotice") {
-            let decoder = JSONDecoder()
-            if let notice = try? decoder.decode(Notice.self, from: encodedData) {
-                NotificationCenter.default.post(name: .pushNotice, object: notice)
-            }
-        }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
