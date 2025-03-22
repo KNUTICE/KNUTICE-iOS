@@ -17,6 +17,7 @@ final class MainTableViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.sectionHeaderTopPadding = 15    //header padding
         tableView.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.reuseIdentifier)
+        tableView.register(MainTableViewSkeletonCell.self, forCellReuseIdentifier: MainTableViewSkeletonCell.reuseIdentifier)
         tableView.estimatedRowHeight = 100    //cell height가 설정되기 전 임시 크기
         tableView.rowHeight = UITableView.automaticDimension    //동적 Height 설정
         tableView.backgroundColor = .mainBackground

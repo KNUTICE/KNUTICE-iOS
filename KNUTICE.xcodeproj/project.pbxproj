@@ -38,6 +38,8 @@
 		8E00AF6C2C361F780037EC38 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF6B2C361F780037EC38 /* WebViewController.swift */; };
 		8E00AF7F2C367D8A0037EC38 /* DataBindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF7E2C367D8A0037EC38 /* DataBindable.swift */; };
 		8E00AF822C3681100037EC38 /* TableViewConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF812C3681100037EC38 /* TableViewConfigurable.swift */; };
+		8E022B7D2D8EDB4F00FA9E25 /* MainTableViewSkeletonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E022B7C2D8EDB4F00FA9E25 /* MainTableViewSkeletonCell.swift */; };
+		8E022B7E2D8EDB4F00FA9E25 /* MainTableViewSkeletonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E022B7C2D8EDB4F00FA9E25 /* MainTableViewSkeletonCell.swift */; };
 		8E02F80E2D601E64000FE803 /* NoticeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02F80D2D601E64000FE803 /* NoticeCategory.swift */; };
 		8E02F80F2D601E64000FE803 /* NoticeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02F80D2D601E64000FE803 /* NoticeCategory.swift */; };
 		8E02F8102D60208E000FE803 /* NoticeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02F80D2D601E64000FE803 /* NoticeCategory.swift */; };
@@ -386,6 +388,7 @@
 		8E00AF6B2C361F780037EC38 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		8E00AF7E2C367D8A0037EC38 /* DataBindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBindable.swift; sourceTree = "<group>"; };
 		8E00AF812C3681100037EC38 /* TableViewConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewConfigurable.swift; sourceTree = "<group>"; };
+		8E022B7C2D8EDB4F00FA9E25 /* MainTableViewSkeletonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewSkeletonCell.swift; sourceTree = "<group>"; };
 		8E02F80D2D601E64000FE803 /* NoticeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCategory.swift; sourceTree = "<group>"; };
 		8E09E72F2D1C2B79003B7FCC /* SearchResultRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultRepresentable.swift; sourceTree = "<group>"; };
 		8E0AA23C2D2419740068681C /* RemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataSource.swift; sourceTree = "<group>"; };
@@ -628,6 +631,7 @@
 				5C89DD3D2BFA043200CCCCCD /* MainTableViewController+Binding.swift */,
 				8EDD51A52C6D7D68002101CA /* MainTableViewController+NotificationCenter.swift */,
 				5C56988F2BEFB3C50085E389 /* MainTableViewCell.swift */,
+				8E022B7C2D8EDB4F00FA9E25 /* MainTableViewSkeletonCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1733,6 +1737,7 @@
 				8EDD51A62C6D7D68002101CA /* MainTableViewController+NotificationCenter.swift in Sources */,
 				5C190A532BFDF5EB00E0254B /* NoticeRepositoryImpl.swift in Sources */,
 				5C89DD462BFA0D6800CCCCCD /* MainNoticeRepository.swift in Sources */,
+				8E022B7D2D8EDB4F00FA9E25 /* MainTableViewSkeletonCell.swift in Sources */,
 				8E5E8BED2D362AD70078C007 /* BookmarkEditFormViewModel.swift in Sources */,
 				8EA72DCA2CD5CA4800D1B300 /* DeveloperTools.swift in Sources */,
 				8EFE53062CDCC30F003A7330 /* NoticeCreatable.swift in Sources */,
@@ -1849,6 +1854,7 @@
 				8E2051232CD4F32F00D87C6A /* MainTableViewController+NotificationCenter.swift in Sources */,
 				8E2051242CD4F32F00D87C6A /* NoticeRepositoryImpl.swift in Sources */,
 				8E2051252CD4F32F00D87C6A /* MainNoticeRepository.swift in Sources */,
+				8E022B7E2D8EDB4F00FA9E25 /* MainTableViewSkeletonCell.swift in Sources */,
 				8E5E8BEE2D362AD70078C007 /* BookmarkEditFormViewModel.swift in Sources */,
 				8EA72DC92CD5CA4800D1B300 /* DeveloperTools.swift in Sources */,
 				8EFE53072CDCC30F003A7330 /* NoticeCreatable.swift in Sources */,
