@@ -25,13 +25,13 @@ extension MainTableViewController {
             }
         })
         
-        viewModel.getCellData()
+        viewModel.noticesObservable
             .observe(on: MainScheduler.instance)
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
         //ViewModel의 isLoading의 값이 변경 되었을 때 refreshControl의 isRegreshing의 값 변경되도록 바인딩
-        viewModel.isLoading
+        viewModel.isLoadingObservable
             .bind(to: refreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)
         
