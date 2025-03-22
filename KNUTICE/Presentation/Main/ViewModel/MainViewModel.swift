@@ -21,10 +21,10 @@ final class MainViewModel {
     
     private var dummyNotice: Notice {
         Notice(id: UUID().hashValue,
-               title: "temp",
-               contentUrl: "temp",
-               department: "temp",
-               uploadDate: "temp",
+               title: " ",
+               contentUrl: " ",
+               department: " ",
+               uploadDate: " ",
                imageUrl: nil,
                noticeCategory: nil)
     }

@@ -11,18 +11,18 @@ import RxDataSources
 //MARK: - Binding
 extension MainTableViewController {
     func bind() {
-        let dataSource = RxTableViewSectionedReloadDataSource<SectionOfNotice>(configureCell: { dataSource, tableView, indexPath, item -> UITableViewCell in            
-            let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.reuseIdentifier, for: indexPath) as! MainTableViewCell
-            cell.selectionStyle = .none
-            cell.backgroundColor = .clear
-            
-            if item.presentationType == .skeleton {
-                cell.configureSkeleton(with: item)
-            } else {
+        let dataSource = RxTableViewSectionedReloadDataSource<SectionOfNotice>(configureCell: { dataSource, tableView, indexPath, item -> UITableViewCell in
+            if item.presentationType == .actual {
+                let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.reuseIdentifier, for: indexPath) as! MainTableViewCell
                 cell.configure(with: item)
+                
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewSkeletonCell.reuseIdentifier, for: indexPath) as! MainTableViewSkeletonCell
+                cell.configure(with: item)
+                
+                return cell
             }
-            
-            return cell
         })
         
         viewModel.getCellData()
