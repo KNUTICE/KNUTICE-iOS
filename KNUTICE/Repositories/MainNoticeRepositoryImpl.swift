@@ -84,4 +84,34 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
             noticeCategory: NoticeCategory(rawValue: body.noticeName)
         )
     }
+    
+    func fetchTempData() -> AnyPublisher<[SectionOfNotice], any Error> {
+        let notices =  [
+            SectionOfNotice(header: "일반소식",
+                            items: Array(repeating: MainNotice(presentationType: .skeleton, notice: createTempNotice()), count: 3)),
+                    
+            SectionOfNotice(header: "학사공지",
+                            items: Array(repeating: MainNotice(presentationType: .skeleton, notice: createTempNotice()), count: 3)),
+            
+            SectionOfNotice(header: "장학공지",
+                            items: Array(repeating: MainNotice(presentationType: .skeleton, notice: createTempNotice()), count: 3)),
+                    
+            SectionOfNotice(header: "행사안내",
+                            items: Array(repeating: MainNotice(presentationType: .skeleton, notice: createTempNotice()), count: 3))
+        ]
+        
+        return Just(notices)
+            .setFailureType(to: Error.self)
+            .eraseToAnyPublisher()
+    }
+    
+    private func createTempNotice() -> Notice {
+        Notice(id: UUID().hashValue,
+               title: " ",
+               contentUrl: " ",
+               department: " ",
+               uploadDate: " ",
+               imageUrl: nil,
+               noticeCategory: nil)
+    }
 }
