@@ -16,7 +16,7 @@
 		5C190A532BFDF5EB00E0254B /* NoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A522BFDF5EB00E0254B /* NoticeRepositoryImpl.swift */; };
 		5C190A552BFDF66600E0254B /* NoticeReponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A542BFDF66600E0254B /* NoticeReponseDTO.swift */; };
 		5C5698902BEFB3C50085E389 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C56988F2BEFB3C50085E389 /* MainTableViewCell.swift */; };
-		5C5698922BEFB4A20085E389 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698912BEFB4A20085E389 /* MainViewModel.swift */; };
+		5C5698922BEFB4A20085E389 /* MainTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698912BEFB4A20085E389 /* MainTableViewModel.swift */; };
 		5C5698952BEFB5A60085E389 /* SectionOfNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */; };
 		5C5698972BEFB6760085E389 /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698962BEFB6760085E389 /* Notice.swift */; };
 		5C8256422BE5CE1A0038D4C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8256412BE5CE1A0038D4C8 /* AppDelegate.swift */; };
@@ -77,7 +77,7 @@
 		8E2050FE2CD4F32F00D87C6A /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2EFC02BF356FB00066C87 /* UIViewController+Preview.swift */; };
 		8E2050FF2CD4F32F00D87C6A /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F021D2C9FB46100AE89D5 /* ReportService.swift */; };
 		8E2051002CD4F32F00D87C6A /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385732C644AB000AF151B /* TokenRepository.swift */; };
-		8E2051012CD4F32F00D87C6A /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698912BEFB4A20085E389 /* MainViewModel.swift */; };
+		8E2051012CD4F32F00D87C6A /* MainTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698912BEFB4A20085E389 /* MainTableViewModel.swift */; };
 		8E2051022CD4F32F00D87C6A /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8256452BE5CE1A0038D4C8 /* MainTableViewController.swift */; };
 		8E2051032CD4F32F00D87C6A /* DetailedNoticeCellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B192C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift */; };
 		8E2051042CD4F32F00D87C6A /* NoticeTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B810A2BF451BC0038EB27 /* NoticeTableViewModel.swift */; };
@@ -362,7 +362,7 @@
 		5C190A522BFDF5EB00E0254B /* NoticeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeRepositoryImpl.swift; sourceTree = "<group>"; };
 		5C190A542BFDF66600E0254B /* NoticeReponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeReponseDTO.swift; sourceTree = "<group>"; };
 		5C56988F2BEFB3C50085E389 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
-		5C5698912BEFB4A20085E389 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		5C5698912BEFB4A20085E389 /* MainTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewModel.swift; sourceTree = "<group>"; };
 		5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOfNotice.swift; sourceTree = "<group>"; };
 		5C5698962BEFB6760085E389 /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		5C82563E2BE5CE1A0038D4C8 /* KNUTICE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KNUTICE.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1253,7 +1253,7 @@
 		8EFE52EC2CDC8CF4003A7330 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				5C5698912BEFB4A20085E389 /* MainViewModel.swift */,
+				5C5698912BEFB4A20085E389 /* MainTableViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1672,7 +1672,7 @@
 				8EFE52F22CDC9331003A7330 /* SearchTableViewController+Layout.swift in Sources */,
 				8E5385742C644AB000AF151B /* TokenRepository.swift in Sources */,
 				8E69315A2CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift in Sources */,
-				5C5698922BEFB4A20085E389 /* MainViewModel.swift in Sources */,
+				5C5698922BEFB4A20085E389 /* MainTableViewModel.swift in Sources */,
 				5C8256462BE5CE1A0038D4C8 /* MainTableViewController.swift in Sources */,
 				8E5C1AD52D40773F0092BF88 /* MainPopupContentRepositoryImpl.swift in Sources */,
 				8EFE52FB2CDCBA80003A7330 /* SearchTableViewModel.swift in Sources */,
@@ -1789,7 +1789,7 @@
 				8EFE52F12CDC9331003A7330 /* SearchTableViewController+Layout.swift in Sources */,
 				8E2051002CD4F32F00D87C6A /* TokenRepository.swift in Sources */,
 				8E6931592CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift in Sources */,
-				8E2051012CD4F32F00D87C6A /* MainViewModel.swift in Sources */,
+				8E2051012CD4F32F00D87C6A /* MainTableViewModel.swift in Sources */,
 				8E2051022CD4F32F00D87C6A /* MainTableViewController.swift in Sources */,
 				8E5C1AD62D40773F0092BF88 /* MainPopupContentRepositoryImpl.swift in Sources */,
 				8EFE52FA2CDCBA80003A7330 /* SearchTableViewModel.swift in Sources */,

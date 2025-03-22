@@ -1,5 +1,5 @@
 //
-//  MainViewModel.swift
+//  MainTableViewModel.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 5/11/24.
@@ -11,7 +11,7 @@ import Combine
 import Factory
 import os
 
-final class MainViewModel {
+final class MainTableViewModel {
     private let notices = BehaviorRelay<[SectionOfNotice]>(value: [])
     var noticesObservable: Observable<[SectionOfNotice]> {
         return notices.asObservable()

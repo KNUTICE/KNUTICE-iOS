@@ -97,9 +97,9 @@ extension Container {
     }
     
     //MARK: - ViewModel
-    var mainViewModel: Factory<MainViewModel> {
+    var mainViewModel: Factory<MainTableViewModel> {
         Factory(self) {
-            MainViewModel()
+            MainTableViewModel()
         }
     }
     
