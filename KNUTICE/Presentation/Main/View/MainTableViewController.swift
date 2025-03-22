@@ -74,7 +74,7 @@ final class MainTableViewController: UIViewController {
         return button
     }()
     let refreshControl = UIRefreshControl()
-    @Injected(\.mainViewModel) var viewModel: MainViewModel
+    @Injected(\.mainViewModel) var viewModel: MainTableViewModel
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
