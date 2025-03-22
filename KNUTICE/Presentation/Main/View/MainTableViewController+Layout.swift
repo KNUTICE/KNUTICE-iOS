@@ -54,7 +54,7 @@ extension MainTableViewController {
         let headerView = UIView()
         let title: UILabel = {
             let label = UILabel()
-            label.text = viewModel.getCellValue()[section].header
+            label.text = viewModel.cellValues[section].header
             label.textColor = headerColors[section]
             label.font = UIFont.font(for: .title3, weight: .bold)
             
