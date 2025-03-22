@@ -16,6 +16,9 @@ final class MainTableViewModel {
     var noticesObservable: Observable<[SectionOfNotice]> {
         return notices.asObservable()
     }
+    var cellValues: [SectionOfNotice] {
+        return notices.value
+    }
     private let isLoading = BehaviorRelay<Bool>(value: false)
     var isLoadingObservable: Observable<Bool> {
         return isLoading.asObservable()
@@ -24,10 +27,6 @@ final class MainTableViewModel {
     private let disposeBag = DisposeBag()
     private var cancellables: Set<AnyCancellable> = []
     private let logger: Logger = Logger()
-    
-    func getCellValue() -> [SectionOfNotice] {
-        return notices.value
-    }
     
     ///Fetch Notices with RxSwift
     @available(*, deprecated, message: "Combine 함수 대체 사용")
