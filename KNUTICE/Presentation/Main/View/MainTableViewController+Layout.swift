@@ -49,7 +49,7 @@ extension MainTableViewController {
         }
     }
     
-    func makeSectionHeader(for section: Int) -> UIView {
+    func createSectionHeader(for section: Int) -> UIView {
         let headerColors: [UIColor] = [.salmon, .lightOrange, .lightGreen, .dodgerBlue]
         let headerView = UIView()
         let title: UILabel = {
