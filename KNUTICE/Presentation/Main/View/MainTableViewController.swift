@@ -96,7 +96,7 @@ final class MainTableViewController: UIViewController {
 extension MainTableViewController: UITableViewDelegate {
     //MARK: - Custom cell header
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return makeSectionHeader(for: section)
+        return createSectionHeader(for: section)
     }
     
     //MARK: - Section height
@@ -115,7 +115,7 @@ extension MainTableViewController: UITableViewDelegate {
     
     //MARK: - Cell이 선택 되었을 때 해당 공지사항 웹 페이지로 이동
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let viewController = WebViewController(notice: viewModel.getCellValue()[indexPath.section].items[indexPath.row].notice)
+        let viewController = WebViewController(notice: viewModel.cellValues[indexPath.section].items[indexPath.row].notice)
         navigationController?.pushViewController(viewController, animated: true)
         
         tableView.deselectRow(at: indexPath, animated: true)
