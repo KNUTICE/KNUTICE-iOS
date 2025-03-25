@@ -38,7 +38,7 @@ final class UITabBarViewController: UITabBarController {
         setupShadowView()
         setupTabBar()
         bind()
-        openPushNoticeIfExists()
+        viewModel.fetchPushNoticeIfExists()
         
         if UserDefaults.standard.double(forKey: "noShowPopupDate") < Date().timeIntervalSince1970 {
             viewModel.fetchMainPopupContent()
@@ -99,26 +99,11 @@ extension UITabBarViewController {
 }
 
 extension UITabBarViewController {
-    func openPushNoticeIfExists() {
-        let decoder = JSONDecoder()
-        if let encodedData = UserDefaults.standard.data(forKey: "pushNotice"),
-           let notice = try? decoder.decode(Notice.self, from: encodedData) {
-            DispatchQueue.main.async {
-                self.navigationController?.popToRootViewController(animated: true)
-                self.navigationController?.pushViewController(WebViewController(notice: notice), animated: true)
-                UserDefaults.standard.set(nil, forKey: "pushNotice")
-            }
-        }
-    }
-}
-
-extension UITabBarViewController {
     func bind() {
-        viewModel
-            .mainPopupContent
+        viewModel.mainPopupContent
             .delay(.seconds(1), scheduler: MainScheduler.instance)
-            .subscribe { [weak self] in
-                if let element = $0.element, let popupContent = element, let self = self {
+            .bind(onNext: { [weak self] in
+                if let popupContent = $0, let self = self {
                     let bottomModal = BottomModal(content: popupContent)
                     self.view.addSubview(bottomModal)
                     bottomModal.setupLayout()
@@ -126,14 +111,25 @@ extension UITabBarViewController {
                         bottomModal.alpha = 1
                     }
                 }
-            }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.pushNotice
+            .bind(onNext: { [weak self] pushNotice in
+                guard let pushNotice else { return }
+                
+                DispatchQueue.main.async {
+                    self?.navigationController?.popToRootViewController(animated: true)
+                    self?.navigationController?.pushViewController(WebViewController(notice: pushNotice), animated: true)
+                }
+            })
             .disposed(by: disposeBag)
         
         NotificationCenter.default.rx
             .notification(UIApplication.willEnterForegroundNotification)
-            .subscribe(onNext: { [weak self] _ in
-                self?.openPushNoticeIfExists()
-            })
+            .bind { [weak self] _ in
+                self?.viewModel.fetchPushNoticeIfExists()
+            }
             .disposed(by: disposeBag)
     }
 }
