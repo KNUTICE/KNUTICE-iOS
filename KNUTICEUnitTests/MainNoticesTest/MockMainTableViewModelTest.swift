@@ -11,8 +11,8 @@ import RxSwift
 import XCTest
 @testable import KNUTICE
 
-final class MockMainNoticesViewModelTest: XCTestCase {
-    private var viewModel: MainViewModel!
+final class MockMainTableViewModelTest: XCTestCase {
+    private var viewModel: MainTableViewModel!
     private var disposeBag: DisposeBag!
 
     override func setUpWithError() throws {
@@ -36,7 +36,7 @@ final class MockMainNoticesViewModelTest: XCTestCase {
     func testFetchTopThreeNotices_ReturnNotices() {
         //Given
         let expectation = expectation(description: "fetch top three notices")
-        viewModel.notices
+        viewModel.noticesObservable
             .skip(2)
             .subscribe(onNext: {
                 //Then
