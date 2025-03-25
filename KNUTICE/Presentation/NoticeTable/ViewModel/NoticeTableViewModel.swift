@@ -8,6 +8,7 @@
 import RxRelay
 import RxSwift
 import Combine
+import Factory
 import os
 
 final class NoticeTableViewModel: NoticeFetchable {
@@ -15,12 +16,13 @@ final class NoticeTableViewModel: NoticeFetchable {
     let isFetching: BehaviorRelay = BehaviorRelay<Bool>(value: false)
     let isFinished: BehaviorRelay = BehaviorRelay<Bool>(value: false)
     let isRefreshing: BehaviorRelay = BehaviorRelay<Bool>(value: false)
-    private let repository: NoticeRepository
+    @Injected(\.noticeRepository) private var repository: NoticeRepository
+    private var category: NoticeCategory
     private var cancellables: Set<AnyCancellable> = []
     private var logger: Logger = Logger()
     
-    init(repository: NoticeRepository) {
-        self.repository = repository
+    init(category: NoticeCategory) {
+        self.category = category
     }
 }
 
@@ -28,7 +30,7 @@ extension NoticeTableViewModel: NoticesRepresentable {
     func fetchNotices() {
         isFetching.accept(true)    //네트워크 요청 시작
         
-        repository.fetchNotices()
+        repository.fetchNotices(for: category)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
@@ -48,7 +50,7 @@ extension NoticeTableViewModel: NoticesRepresentable {
     func refreshNotices() {
         isRefreshing.accept(true)
         
-        repository.fetchNotices()
+        repository.fetchNotices(for: category)
             .delay(for: .seconds(0.5), scheduler: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
@@ -71,7 +73,7 @@ extension NoticeTableViewModel: NoticesRepresentable {
         }
         
         isFetching.accept(true)
-        repository.fetchNotices(after: lastNumber)
+        repository.fetchNotices(for: category, after: lastNumber)
             .delay(for: .seconds(0.5), scheduler: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {

@@ -6,18 +6,15 @@
 //
 
 import Combine
+import Factory
 import os
 
 final class DeveloperToolsViewModel: ObservableObject {
     @Published var fcmToken: String?
     
-    private let tokenRepository: TokenRepository
+    @Injected(\.tokenRepository) private var tokenRepository: TokenRepository
     private var cancellables: Set<AnyCancellable> = []
     private let logger = Logger(subsystem: "KNUTICE.DeveloperTools", category: "FCMToken")
-    
-    init(tokenRepository: TokenRepository) {
-        self.tokenRepository = tokenRepository
-    }
     
     func fetchFCMToken() {
         tokenRepository.getFCMToken()
