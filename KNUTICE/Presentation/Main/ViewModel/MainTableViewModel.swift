@@ -1,5 +1,5 @@
 //
-//  MainViewModel.swift
+//  MainTableViewModel.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 5/11/24.
@@ -11,53 +11,26 @@ import Combine
 import Factory
 import os
 
-final class MainViewModel {
-    private(set) var notices = BehaviorRelay<[SectionOfNotice]>(value: [])
-    private(set) var isLoading = BehaviorRelay<Bool>(value: false)
+final class MainTableViewModel {
+    private let notices = BehaviorRelay<[SectionOfNotice]>(value: [])
+    var noticesObservable: Observable<[SectionOfNotice]> {
+        return notices.asObservable()
+    }
+    var cellValues: [SectionOfNotice] {
+        return notices.value
+    }
+    private let isLoading = BehaviorRelay<Bool>(value: false)
+    var isLoadingObservable: Observable<Bool> {
+        return isLoading.asObservable()
+    }
     @Injected(\.mainNoticeRepository) private var repository: MainNoticeRepository
     private let disposeBag = DisposeBag()
     private var cancellables: Set<AnyCancellable> = []
     private let logger: Logger = Logger()
     
-    private var dummyNotice: Notice {
-        Notice(id: UUID().hashValue,
-               title: "temp",
-               contentUrl: "temp",
-               department: "temp",
-               uploadDate: "temp",
-               imageUrl: nil,
-               noticeCategory: nil)
-    }
-    
-    private var dummyData: [SectionOfNotice] {
-        return [
-            SectionOfNotice(header: "일반소식",
-                            items: Array(repeating: MainNotice(presentationType: .skeleton, notice: dummyNotice), count: 3)),
-                    
-            SectionOfNotice(header: "학사공지",
-                            items: Array(repeating: MainNotice(presentationType: .skeleton, notice: dummyNotice), count: 3)),
-            
-            SectionOfNotice(header: "장학공지",
-                            items: Array(repeating: MainNotice(presentationType: .skeleton, notice: dummyNotice), count: 3)),
-                    
-            SectionOfNotice(header: "행사안내",
-                            items: Array(repeating: MainNotice(presentationType: .skeleton, notice: dummyNotice), count: 3))
-        ]
-    }
-    
-    func getCellValue() -> [SectionOfNotice] {
-        return notices.value
-    }
-    
-    func getCellData() -> Observable<[SectionOfNotice]> {
-        return notices.asObservable()
-    }
-    
     ///Fetch Notices with RxSwift
     @available(*, deprecated, message: "Combine 함수 대체 사용")
     func fetchNotices() {
-        notices.accept(dummyData)
-        
         repository.fetchMainNotices()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] result in
@@ -70,9 +43,8 @@ final class MainViewModel {
     
     ///Fetch Notices with Combine
     func fetchNoticesWithCombine() {
-        notices.accept(dummyData)
-        
         repository.fetch()
+            .merge(with: repository.fetchTempData())
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
@@ -120,6 +92,5 @@ final class MainViewModel {
                 self?.notices.accept($0)
             })
             .store(in: &cancellables)
-            
     }
 }

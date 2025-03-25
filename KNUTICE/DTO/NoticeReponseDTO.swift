@@ -13,6 +13,11 @@ struct NoticeReponseDTO: Decodable {
     let body: [NoticeReponseBody]?
 }
 
+struct SingleNoticeResponseDTO: Decodable {
+    let result: RequestResult
+    let body: NoticeReponseBody?
+}
+
 // MARK: - Body
 struct NoticeReponseBody: Decodable {
     let nttID: Int

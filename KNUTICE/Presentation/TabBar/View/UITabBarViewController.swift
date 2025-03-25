@@ -37,7 +37,8 @@ final class UITabBarViewController: UITabBarController {
         setViewControllers([mainViewController, reminderViewController], animated: true)
         setupShadowView()
         setupTabBar()
-        binding()
+        bind()
+        viewModel.fetchPushNoticeIfExists()
         
         if UserDefaults.standard.double(forKey: "noShowPopupDate") < Date().timeIntervalSince1970 {
             viewModel.fetchMainPopupContent()
@@ -96,6 +97,43 @@ extension UITabBarViewController {
         }
     }
 }
+
+extension UITabBarViewController {
+    func bind() {
+        viewModel.mainPopupContent
+            .delay(.seconds(1), scheduler: MainScheduler.instance)
+            .bind(onNext: { [weak self] in
+                if let popupContent = $0, let self = self {
+                    let bottomModal = BottomModal(content: popupContent)
+                    self.view.addSubview(bottomModal)
+                    bottomModal.setupLayout()
+                    UIView.animate(withDuration: 0.5) {
+                        bottomModal.alpha = 1
+                    }
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.pushNotice
+            .bind(onNext: { [weak self] pushNotice in
+                guard let pushNotice else { return }
+                
+                DispatchQueue.main.async {
+                    self?.navigationController?.popToRootViewController(animated: true)
+                    self?.navigationController?.pushViewController(WebViewController(notice: pushNotice), animated: true)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx
+            .notification(UIApplication.willEnterForegroundNotification)
+            .bind { [weak self] _ in
+                self?.viewModel.fetchPushNoticeIfExists()
+            }
+            .disposed(by: disposeBag)
+    }
+}
+
 
 #if DEBUG
 struct UITabBarViewControllerPreview: PreviewProvider {
