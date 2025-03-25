@@ -18,7 +18,7 @@ extension AppVersionProvidable {
         }
         
         #if DEV
-        return version + " RC"
+        return version + " RC2"
         #else
         return version
         #endif

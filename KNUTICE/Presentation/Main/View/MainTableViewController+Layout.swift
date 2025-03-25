@@ -49,12 +49,12 @@ extension MainTableViewController {
         }
     }
     
-    func makeSectionHeader(for section: Int) -> UIView {
+    func createSectionHeader(for section: Int) -> UIView {
         let headerColors: [UIColor] = [.salmon, .lightOrange, .lightGreen, .dodgerBlue]
         let headerView = UIView()
         let title: UILabel = {
             let label = UILabel()
-            label.text = viewModel.notices.value[section].header
+            label.text = viewModel.cellValues[section].header
             label.textColor = headerColors[section]
             label.font = UIFont.font(for: .title3, weight: .bold)
             
