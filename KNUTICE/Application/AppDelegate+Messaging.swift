@@ -14,20 +14,12 @@ extension AppDelegate: MessagingDelegate {
         
         print("Firebase registration token: \(String(describing: fcmToken))")
         
-        if let fcmToken {
-            let repository = TokenRepositoryImpl(dataSource: RemoteDataSourceImpl.shared)
-            
-            repository.registerToken(token: fcmToken)
-                .subscribe(
-                    onNext: {
-                        if $0 {
-                            print("Successfully to save FCM Token")
-                        } else {
-                            print("Failed to save FCM Token")
-                        }
-                    }
-                )
-                .disposed(by: disposeBag)
-        }
+        guard let fcmToken else { return }
+        let dataDic: [String: String] = ["token": fcmToken]
+        NotificationCenter.default.post(
+            name: Notification.Name.fcmToken,
+            object: nil,
+            userInfo: dataDic
+        )
     }
 }

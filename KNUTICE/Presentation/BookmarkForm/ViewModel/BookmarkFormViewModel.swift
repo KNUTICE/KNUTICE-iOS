@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Factory
 import Foundation
 import os
 
@@ -17,14 +18,10 @@ final class BookmarkFormViewModel: ObservableObject, BookmarkFormHandler {
     @Published var isShowingAlert: Bool = false
     @Published var isLoading: Bool = false
     
-    private let service: BookmarkService
+    @Injected(\.bookmarkService) private var service: BookmarkService
     private var cancellables: Set<AnyCancellable> = []
     private let logger: Logger = Logger()
     var alertMessage: String = ""
-    
-    init(service: BookmarkService) {
-        self.service = service
-    }
     
     func save(with notice: Notice) {
         let bookmark = Bookmark(notice: notice, memo: memo, alarmDate: isAlarmOn ? alarmDate : nil)
@@ -49,8 +46,8 @@ final class BookmarkFormViewModel: ObservableObject, BookmarkFormHandler {
     }
     
     private func handleSaveFailure(with error: Error) {
-        if let error = error as? BookmarkRepositoryImpl.ExistingBookmarkError {
-            alertMessage = error.rawValue
+        if let error = error as? ExistingBookmarkError, case .alreadyExist(let message) = error {
+            alertMessage = message
         } else {
             logger.error("BookmarkFormViewModel error: \(error.localizedDescription)")
             alertMessage = "북마크 저장에 실패했어요."

@@ -13,18 +13,23 @@ struct NoticeReponseDTO: Decodable {
     let body: [NoticeReponseBody]?
 }
 
+struct SingleNoticeResponseDTO: Decodable {
+    let result: RequestResult
+    let body: NoticeReponseBody?
+}
+
 // MARK: - Body
 struct NoticeReponseBody: Decodable {
-    let nttID, contentNumber: Int
+    let nttID: Int
     let title: String
     let contentURL: String
     let contentImage: String?
-    let departName, registeredAt: String
+    let departmentName, registeredAt, noticeName: String
 
     enum CodingKeys: String, CodingKey {
         case nttID = "nttId"
-        case contentNumber, title
+        case title
         case contentURL = "contentUrl"
-        case contentImage, departName, registeredAt
+        case contentImage, departmentName, registeredAt, noticeName
     }
 }

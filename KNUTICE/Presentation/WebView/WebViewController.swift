@@ -11,15 +11,46 @@ import SwiftUI
 import Foundation
 
 final class WebViewController: UIViewController {
-    let progressView: UIProgressView = UIProgressView(progressViewStyle: .bar)
-    let webView: WKWebView = WKWebView()
-    let reminderSheetBtn: UIButton = UIButton()
+    let progressView: UIProgressView = {
+        let progressView = UIProgressView(progressViewStyle: .bar)
+        progressView.progressTintColor = .accent2
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return progressView
+    }()
+    lazy var webView: WKWebView = {
+        let webView = WKWebView()
+        webView.navigationDelegate = self
+        webView.uiDelegate = self
+        webView.allowsBackForwardNavigationGestures = false
+        webView.configuration.defaultWebpagePreferences.allowsContentJavaScript = true
+        webView.isHidden = true
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return webView
+    }()
+    lazy var reminderSheetBtn: UIButton = {
+        let button = UIButton()
+        let plusImage = UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate)
+        button.setImage(plusImage, for: .normal)
+        button.setImage(plusImage, for: .highlighted)
+        button.tintColor = .white
+        button.backgroundColor = .accent2
+        button.layer.cornerRadius = 25
+        button.layer.masksToBounds = false
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowRadius = 7
+        button.layer.shadowOffset = CGSize(width: 0, height: 0)
+        button.addTarget(self, action: #selector(openReminderForm(_:)), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
     let notice: Notice
-    let isBookmarkBtnVisible: Bool
     
-    init(notice: Notice, isBookmarkBtnVisible: Bool) {
+    init(notice: Notice) {
         self.notice = notice
-        self.isBookmarkBtnVisible = isBookmarkBtnVisible
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -37,10 +68,19 @@ final class WebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupAttribute()
-        setupNavigationBarItem()
+        navigationItem.largeTitleDisplayMode = .never    //navigation inline title
+        view.backgroundColor = .detailViewBackground
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(openSharePanel))
         setupLayout()
         loadPage(notice.contentUrl)
+    }
+    
+    private func loadPage(_ url: String) {
+        guard let url = URL(string: url) else {
+            return
+        }
+        
+        webView.load(URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad))
     }
 }
 
@@ -68,9 +108,7 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
         })
         
         //로딩 완료 후 webView 활성화
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            webView.isHidden = false
-        }
+        webView.isHidden = false
     }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
@@ -82,12 +120,71 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
     }
 }
 
+extension WebViewController {
+    func setupLayout() {
+        //progressView
+        view.addSubview(progressView)
+        progressView.snp.makeConstraints { make in
+            make.left.top.right.equalTo(self.view.safeAreaLayoutGuide)
+        }
+        
+        //webView
+        view.addSubview(webView)
+        webView.snp.makeConstraints { make in
+            make.top.equalTo(progressView.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        //reminderSheetBtn
+        view.addSubview(reminderSheetBtn)
+        reminderSheetBtn.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-50)
+            make.trailing.equalToSuperview().offset(-20)
+            make.width.height.equalTo(50)
+        }
+    }
+}
+
+extension WebViewController {
+    @objc func openSharePanel() {
+        let shareText = self.notice.contentUrl
+        let shareObject = [shareText]
+        let activityViewController = UIActivityViewController(activityItems : shareObject, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        activityViewController.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, arrayReturnedItems: [Any]?, error: Error?) in
+            if completed {
+                self.showCompleAlert()
+            } else {
+                
+            }
+        }
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+    
+    private func showCompleAlert() {
+        let alert = UIAlertController(title: "알림", message: "공유를 완료했어요.", preferredStyle: .actionSheet)
+        let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(okButton)
+        present(alert, animated: true, completion: nil)
+        
+    }
+    
+    @objc func openReminderForm(_ sender: UIButton) {
+        let bookmarkForm = BookmarkForm(viewModel: BookmarkFormViewModel(), notice: self.notice) {
+            self.dismiss(animated: true)
+        }
+        let viewController = UIHostingController(rootView: bookmarkForm)
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.modalPresentationStyle = .popover
+        present(navigationController, animated: true, completion: nil)
+    }
+}
+
 #if DEBUG
 //MARK: - Preview
 struct WebViewControllerPreview: PreviewProvider {
     static var previews: some View {
-        WebViewController(notice: Notice.generalNoticesSampleData.first!,
-                          isBookmarkBtnVisible: true)
+        WebViewController(notice: Notice.generalNoticesSampleData.first!)
             .makePreview()
     }
 }

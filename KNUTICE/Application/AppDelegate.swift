@@ -14,30 +14,21 @@ import FirebaseMessaging
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-    let disposeBag = DisposeBag()
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         //FCM 세팅
         setFCM(application)
         
-        //Notification Permission 세팅
-        if !UserDefaults.standard.bool(forKey: "isInitializedNotificationSettings") {
-            setNotificationPermissions()
-        }
-        
-        sleep(1)
         return true
     }
     
     private func setFCM(_ application: UIApplication) {
-        var filePath: String?
-        
         #if DEV
-        filePath = Bundle.main.path(forResource: "GoogleService-Info-Dev", ofType: "plist")
+        let filePath = Bundle.main.path(forResource: "GoogleService-Info-Dev", ofType: "plist")
         #else
-        filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
+        let filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
         #endif
         
         if let fileopts = FirebaseOptions(contentsOfFile: filePath!) {
@@ -62,14 +53,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         //FIRMessaging delegate 설정
         Messaging.messaging().delegate = self
-    }
-    
-    private func setNotificationPermissions() {
-        do {
-            try NotificationPermissionDataSourceImpl.shared.createDataIfNeeded()
-        } catch {
-            print(error)
-        }
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -98,6 +81,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     //Background 알림 설정
     //알림을 클릭했을 때 호출
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-         completionHandler()
+        set(userInfo: response.notification.request.content.userInfo)
+        completionHandler()
+    }
+    
+    private func set(userInfo: [AnyHashable : Any]) {
+        UserDefaults.standard.set(userInfo, forKey: UserDefaultsKeys.pushNotice.rawValue)
     }
 }

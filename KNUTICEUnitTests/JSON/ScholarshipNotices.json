@@ -1,0 +1,189 @@
+{
+  "result": {
+    "resultCode": 200,
+    "resultMessage": "성공",
+    "resultDescription": "성공"
+  },
+  "body": [
+    {
+      "nttId": 1077489,
+      "title": "2025학년도 1학기 교내근로장학 학생 신청기간 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1077489",
+      "contentImage": null,
+      "departmentName": "학생과",
+      "registeredAt": "2025-02-21",
+      "noticeName": "SCHOLARSHIP_NEWS"
+    },
+    {
+      "nttId": 1077466,
+      "title": "2025년도 다문화·탈북학생 멘토링 장학금 학생 신청 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1077466",
+      "contentImage": null,
+      "departmentName": "학생과",
+      "registeredAt": "2025-02-21",
+      "noticeName": "SCHOLARSHIP_NEWS"
+    },
+    {
+      "nttId": 1077377,
+      "title": "2025년 1학기 통영시 대학생 등록금 전액 지원사업 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1077377",
+      "contentImage": null,
+      "departmentName": "장학팀",
+      "registeredAt": "2025-02-19",
+      "noticeName": "SCHOLARSHIP_NEWS"
+    },
+    {
+      "nttId": 1077319,
+      "title": "2025년 KT디지털인재장학생 신청 안내(KT그룹 희망나눔재단)",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1077319",
+      "contentImage": null,
+      "departmentName": "장학팀",
+      "registeredAt": "2025-02-17",
+      "noticeName": "SCHOLARSHIP_NEWS"
+    },
+    {
+      "nttId": 1077188,
+      "title": "[글로컬대학30사업] 글로컬 미래인재 장학금 신청 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1077188",
+      "contentImage": null,
+      "departmentName": "장학팀",
+      "registeredAt": "2025-02-12",
+      "noticeName": "SCHOLARSHIP_NEWS"
+    },
+    {
+      "nttId": 1077101,
+      "title": "2024학년도 동계계절학기 OCU컨소시엄 장학금 신청 안내(2024-동계계절학기 수강대상)",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1077101",
+      "contentImage": null,
+      "departmentName": "장학팀",
+      "registeredAt": "2025-02-10",
+      "noticeName": "SCHOLARSHIP_NEWS"
+    },
+    {
+      "nttId": 1077016,
+      "title": "2025학년도 1학기 보훈(가족)장학 신청 안내(6.25전몰군경자녀)",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1077016",
+      "contentImage": null,
+      "departmentName": "장학팀",
+      "registeredAt": "2025-02-06",
+      "noticeName": "SCHOLARSHIP_NEWS"
+    },
+    {
+      "nttId": 1076947,
+      "title": "★2025년도 1학기 국가근로장학금 근로장학생 희망근로지 신청 기간 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1076947",
+      "contentImage": null,
+      "departmentName": "학생과",
+      "registeredAt": "2025-02-04",
+      "noticeName": "SCHOLARSHIP_NEWS"
+    },
+    {
+      "nttId": 1076871,
+      "title": "주거안정장학금 신청 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1076871",
+      "contentImage": null,
+      "departmentName": "학생과'",
+      "registeredAt": "2025-01-31",
+      "noticeName": "SCHOLARSHIP_NEWS"
+    },
+    {
+      "nttId": 1076816,
+      "title": "2025년 1학기 국가장학금 2차 신청 일정 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1076816",
+      "contentImage": null,
+      "departmentName": "장학팀",
+      "registeredAt": "2025-01-24",
+      "noticeName": "SCHOLARSHIP_NEWS"
+    },
+    {
+      "nttId": 1076476,
+      "title": "2025년도 1학기 학자금대출 일정 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1076476",
+      "contentImage": null,
+      "departmentName": "학생과",
+      "registeredAt": "2025-01-08",
+      "noticeName": "SCHOLARSHIP_NEWS"
+    },
+    {
+      "nttId": 1076473,
+      "title": "2025년 1학기 농촌출신대학생 학자금대출 시행 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1076473",
+      "contentImage": null,
+      "departmentName": "학생과",
+      "registeredAt": "2025-01-08",
+      "noticeName": "SCHOLARSHIP_NEWS"
+    },
+    {
+      "nttId": 1076455,
+      "title": "2025학년도 1학기 국가장학금 심사 관련 계절학기(동계) 성적 반영 신청 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1076455",
+      "contentImage": null,
+      "departmentName": "장학팀",
+      "registeredAt": "2025-01-08",
+      "noticeName": "SCHOLARSHIP_NEWS"
+    },
+    {
+      "nttId": 1076276,
+      "title": "2024학년도 2학기 마일리지 장학금 신청 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1076276",
+      "contentImage": null,
+      "departmentName": "장학팀",
+      "registeredAt": "2025-01-02",
+      "noticeName": "SCHOLARSHIP_NEWS"
+    },
+    {
+      "nttId": 1076104,
+      "title": "2025년 1학기 푸른등대 기부장학금 신규 장학생 선발 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1076104",
+      "contentImage": null,
+      "departmentName": "장학팀",
+      "registeredAt": "2024-12-27",
+      "noticeName": "SCHOLARSHIP_NEWS"
+    },
+    {
+      "nttId": 1076081,
+      "title": "2025학년도 1학기 교내장학금 사전감면 신청 안내(재학생 및 신편입생 대상)",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1076081",
+      "contentImage": null,
+      "departmentName": "장학팀",
+      "registeredAt": "2024-12-27",
+      "noticeName": "SCHOLARSHIP_NEWS"
+    },
+    {
+      "nttId": 1075958,
+      "title": "제29회 (재)부산진구장학회 일반장학생 선발 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1075958",
+      "contentImage": null,
+      "departmentName": "장학팀",
+      "registeredAt": "2024-12-23",
+      "noticeName": "SCHOLARSHIP_NEWS"
+    },
+    {
+      "nttId": 1075881,
+      "title": "2025년 1학기 농림축산식품부 청년창업농장학생 선발 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1075881",
+      "contentImage": null,
+      "departmentName": "장학팀",
+      "registeredAt": "2024-12-19",
+      "noticeName": "SCHOLARSHIP_NEWS"
+    },
+    {
+      "nttId": 1075673,
+      "title": "2025년 1학기 국가장학금 1차 신청 일정 안내(추가사항)",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1075673",
+      "contentImage": null,
+      "departmentName": "장학팀",
+      "registeredAt": "2024-12-16",
+      "noticeName": "SCHOLARSHIP_NEWS"
+    },
+    {
+      "nttId": 1075601,
+      "title": "★2024년도 동계방학 집중근로 국가근로장학생 선발 및 사전교육 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1075601",
+      "contentImage": null,
+      "departmentName": "학생과",
+      "registeredAt": "2024-12-12",
+      "noticeName": "SCHOLARSHIP_NEWS"
+    }
+  ]
+}

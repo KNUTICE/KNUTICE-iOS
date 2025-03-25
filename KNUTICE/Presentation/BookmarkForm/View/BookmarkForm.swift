@@ -182,7 +182,7 @@ fileprivate struct BorderedDescriptionTextField: View {
 #if DEBUG
 #Preview {
     NavigationStack {
-        BookmarkForm(viewModel: AppDI.shared.createBookmarkFormViewModel(),
+        BookmarkForm(viewModel: BookmarkFormViewModel(),
                      notice: Notice.generalNoticesSampleData.first!,
                      dismissAction: {})
     }

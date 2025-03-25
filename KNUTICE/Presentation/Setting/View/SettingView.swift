@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import Factory
 
 struct SettingView: View {
     @ObservedObject private var viewModel: SettingViewModel
@@ -21,7 +22,7 @@ struct SettingView: View {
         List {
             Section {
                 NavigationLink {
-                    NotificationList(viewModel: AppDI.shared.createNotificationListViewModel())
+                    NotificationSubscriptionList(viewModel: NotificationSubscriptionListViewModel())
                 } label: {
                     Text("서비스 알림")
                 }
@@ -76,7 +77,7 @@ struct SettingView: View {
             #if DEV
             Section {
                 NavigationLink {
-                    DeveloperTools(viewModel: AppDI.shared.createDeveloperToolsViewModel())
+                    DeveloperTools(viewModel: DeveloperToolsViewModel())
                 } label: {
                     Text("Developer Tools")
                         .padding([.top, .bottom])
@@ -97,7 +98,7 @@ struct SettingView: View {
         }
         .fullScreenCover(isPresented: $isShowingReport) {
             NavigationView {
-                ReportView(viewModel: AppDI.shared.createReportViewModel())
+                ReportView(viewModel: Container.shared.reportViewModel())
             }
         }
     }
@@ -105,6 +106,6 @@ struct SettingView: View {
 
 #Preview {
     NavigationView {
-        SettingView(viewModel: AppDI.shared.createSettingViewModel())
+        SettingView(viewModel: SettingViewModel())
     }
 }

@@ -50,8 +50,7 @@ extension SearchTableViewController: UITableViewDelegate {
             return
         }
         
-        let viewController = WebViewController(notice: notice,
-                                               isBookmarkBtnVisible: true)
+        let viewController = WebViewController(notice: notice)
         navigationController?.pushViewController(viewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -66,7 +65,7 @@ extension SearchTableViewController: UITableViewDelegate {
 #if DEBUG
 struct SearchTableViewControllerPreview: PreviewProvider {
     static var previews: some View {
-        UINavigationController(rootViewController: SearchTableViewController(viewModel: AppDI.shared.createSearchTableViewModel()))
+        UINavigationController(rootViewController: SearchTableViewController(viewModel: SearchTableViewModel()))
             .makePreview()
     }
 }

@@ -7,24 +7,24 @@
 
 import Combine
 import Foundation
+import Factory
 
-final class ReportRepositoryImpl<T: RemoteDataSource>: ReportRepository {
-    let dataSource: T
-    
-    init(dataSource: T) {
-        self.dataSource = dataSource
-    }
+final class ReportRepositoryImpl: ReportRepository {
+    @Injected(\.remoteDataSource) var dataSource: RemoteDataSource
     
     func register(params: [String: Any]) -> AnyPublisher<Bool, any Error> {
         let apiEndPoint = Bundle.main.reportURL
         
         return dataSource.sendPostRequest(to: apiEndPoint, params: params, resultType: PostResponseDTO.self)
-            .map {
-                if $0.result.resultCode == 200 {
-                    return true
+            .flatMap { dto -> AnyPublisher<Bool, any Error> in
+                guard dto.result.resultCode == 200 else {
+                    return Fail(error: RemoteServerError.invalidResponse(message: dto.result.resultMessage))
+                        .eraseToAnyPublisher()
                 }
                 
-                return false
+                return Just(true)
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
             

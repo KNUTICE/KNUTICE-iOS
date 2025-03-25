@@ -1,0 +1,189 @@
+{
+  "result": {
+    "resultCode": 200,
+    "resultMessage": "성공",
+    "resultDescription": "성공"
+  },
+  "body": [
+    {
+      "nttId": 1077414,
+      "title": "2025학년도 1학기 학부 및 전공명 변경(폐지) 관련 복학생 전공배정 3차 신청 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1077414",
+      "contentImage": null,
+      "departmentName": "학사관리과",
+      "registeredAt": "2025-02-20",
+      "noticeName": "ACADEMIC_NEWS"
+    },
+    {
+      "nttId": 1077304,
+      "title": "2025학년도 교직과정 선발 결과 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1077304",
+      "contentImage": null,
+      "departmentName": "교직부",
+      "registeredAt": "2025-02-17",
+      "noticeName": "ACADEMIC_NEWS"
+    },
+    {
+      "nttId": 1077273,
+      "title": "2025학년도 입학식 커피 및 간식 트럭 운영 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1077273",
+      "contentImage": null,
+      "departmentName": "학사관리과",
+      "registeredAt": "2025-02-14",
+      "noticeName": "ACADEMIC_NEWS"
+    },
+    {
+      "nttId": 1077244,
+      "title": "2025학년도 입학식 순환 차량(셔틀버스) 운행 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1077244",
+      "contentImage": null,
+      "departmentName": "학사관리과",
+      "registeredAt": "2025-02-13",
+      "noticeName": "ACADEMIC_NEWS"
+    },
+    {
+      "nttId": 1077241,
+      "title": "2024학년도 전기 학위수여식 포토존 및 학위가운 대여 안내(충주캠퍼스)",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1077241",
+      "contentImage": null,
+      "departmentName": "학사관리과",
+      "registeredAt": "2025-02-13",
+      "noticeName": "ACADEMIC_NEWS"
+    },
+    {
+      "nttId": 1077102,
+      "title": "2025학년도 학부별 전공배정 세부기준(건설환경도시교통공학부, 식품생명학부, AI·데이터공학부)",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1077102",
+      "contentImage": null,
+      "departmentName": "학사관리과",
+      "registeredAt": "2025-02-10",
+      "noticeName": "ACADEMIC_NEWS"
+    },
+    {
+      "nttId": 1077055,
+      "title": "2025학년도 입학식 행사 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1077055",
+      "contentImage": null,
+      "departmentName": "학사관리과",
+      "registeredAt": "2025-02-07",
+      "noticeName": "ACADEMIC_NEWS"
+    },
+    {
+      "nttId": 1077053,
+      "title": "2024학년도 전기 학위수여식 행사 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1077053",
+      "contentImage": null,
+      "departmentName": "학사관리과",
+      "registeredAt": "2025-02-07",
+      "noticeName": "ACADEMIC_NEWS"
+    },
+    {
+      "nttId": 1077052,
+      "title": "2025학년도 1학기 군복무 중 학점인정 신청 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1077052",
+      "contentImage": null,
+      "departmentName": "학사관리과",
+      "registeredAt": "2025-02-07",
+      "noticeName": "ACADEMIC_NEWS"
+    },
+    {
+      "nttId": 1077025,
+      "title": "2025학년도 1학기 K-MOOC 강좌 수강 및 학점인정 신청 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1077025",
+      "contentImage": null,
+      "departmentName": "학사관리과",
+      "registeredAt": "2025-02-06",
+      "noticeName": "ACADEMIC_NEWS"
+    },
+    {
+      "nttId": 1076999,
+      "title": "2025학년도 신입생 학점인정 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1076999",
+      "contentImage": null,
+      "departmentName": "학사관리과",
+      "registeredAt": "2025-02-06",
+      "noticeName": "ACADEMIC_NEWS"
+    },
+    {
+      "nttId": 1076969,
+      "title": "2025학년도 신·편입생 학번 및 수강신청 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1076969",
+      "contentImage": null,
+      "departmentName": "학사관리과",
+      "registeredAt": "2025-02-05",
+      "noticeName": "ACADEMIC_NEWS"
+    },
+    {
+      "nttId": 1076738,
+      "title": "2025학년도 1학기 학부 및 전공명 변경(폐지) 관련 복학생 전공배정 2차 신청 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1076738",
+      "contentImage": null,
+      "departmentName": "학사관리과",
+      "registeredAt": "2025-01-21 2025-02-03 ~ 2025-02-19",
+      "noticeName": "ACADEMIC_NEWS"
+    },
+    {
+      "nttId": 1076718,
+      "title": "2025학년도 1학기 수강신청 관련 주요 Q&A",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1076718",
+      "contentImage": null,
+      "departmentName": "학사관리과",
+      "registeredAt": "2025-01-20",
+      "noticeName": "ACADEMIC_NEWS"
+    },
+    {
+      "nttId": 1076652,
+      "title": "2025학년도 1학기 OCU컨소시엄 사이버 강좌 운영 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1076652",
+      "contentImage": null,
+      "departmentName": "학사관리과",
+      "registeredAt": "2025-01-15",
+      "noticeName": "ACADEMIC_NEWS"
+    },
+    {
+      "nttId": 1076540,
+      "title": "졸업자격인증제 인증요건 최종 충족기한 안내(2025년 2월 졸업예정자)",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1076540",
+      "contentImage": null,
+      "departmentName": "학사관리과",
+      "registeredAt": "2025-01-09",
+      "noticeName": "ACADEMIC_NEWS"
+    },
+    {
+      "nttId": 1076478,
+      "title": "2025학년도 1학기 수강신청 기간 변경 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1076478",
+      "contentImage": null,
+      "departmentName": "학사관리과",
+      "registeredAt": "2025-01-08",
+      "noticeName": "ACADEMIC_NEWS"
+    },
+    {
+      "nttId": 1076383,
+      "title": "2024학년도 동계 계절학기 성적처리 일정 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1076383",
+      "contentImage": null,
+      "departmentName": "학사관리과",
+      "registeredAt": "2025-01-06",
+      "noticeName": "ACADEMIC_NEWS"
+    },
+    {
+      "nttId": 1076313,
+      "title": "2025학년도 1학기 조기졸업 신청 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1076313",
+      "contentImage": null,
+      "departmentName": "학사관리과",
+      "registeredAt": "2025-01-03",
+      "noticeName": "ACADEMIC_NEWS"
+    },
+    {
+      "nttId": 1076257,
+      "title": "2025학년도 교직과정 이수자 선발 공고 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1076257",
+      "contentImage": null,
+      "departmentName": "교직부",
+      "registeredAt": "2025-01-02",
+      "noticeName": "ACADEMIC_NEWS"
+    }
+  ]
+}
