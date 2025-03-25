@@ -12,6 +12,7 @@ protocol NoticeCreatable {
 }
 
 extension NoticeCreatable {
+    @available(*, deprecated)
     func createNotice(_ dto: NoticeReponseDTO) -> [Notice]? {
         return dto.body?.map {
             return Notice(id: $0.nttID,
@@ -22,5 +23,16 @@ extension NoticeCreatable {
                           imageUrl: $0.contentImage,
                           noticeCategory: NoticeCategory(rawValue: $0.noticeName))
         }
+    }
+    
+    func createNotice(_ body: NoticeReponseBody) -> Notice {
+        return Notice(
+            id: body.nttID,
+            title: body.title,
+            contentUrl: body.contentURL,
+            department: body.departmentName,
+            uploadDate: body.registeredAt,
+            imageUrl: body.contentImage,
+            noticeCategory: NoticeCategory(rawValue: body.noticeName))
     }
 }
