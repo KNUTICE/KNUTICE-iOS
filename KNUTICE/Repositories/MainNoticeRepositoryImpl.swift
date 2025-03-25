@@ -7,20 +7,17 @@
 
 import RxSwift
 import Combine
+import Factory
 
-final class MainNoticeRepositoryImpl<T: RemoteDataSource>: MainNoticeRepository {
-    private let dataSource: T
-    
-    init(dataSource: T) {
-        self.dataSource = dataSource
-    }
+final class MainNoticeRepositoryImpl: MainNoticeRepository {
+    @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
     
     ///GET 요청 함수 with RxSwift
     @available(*, deprecated)
     func fetchMainNotices() -> Observable<[SectionOfNotice]> {
         return dataSource.sendGetRequest(to: Bundle.main.mainNoticeURL, resultType: MainNoticeResponseDTO.self)
             .map { [weak self] in
-                return self?.convertToNotice($0) ?? []
+                return self?.createScectionOfNotice($0) ?? []
             }
             .asObservable()
     }
@@ -29,24 +26,20 @@ final class MainNoticeRepositoryImpl<T: RemoteDataSource>: MainNoticeRepository 
     func fetch() -> AnyPublisher<[SectionOfNotice], any Error> {
         return dataSource.sendGetRequest(to: Bundle.main.mainNoticeURL, resultType: MainNoticeResponseDTO.self)
             .map { [weak self] in
-                self?.convertToNotice($0) ?? []
+                self?.createScectionOfNotice($0) ?? []
             }
             .eraseToAnyPublisher()
     }
     
-    private func convertToNotice(_ dto: MainNoticeResponseDTO) -> [SectionOfNotice] {
+    private func createScectionOfNotice(_ dto: MainNoticeResponseDTO) -> [SectionOfNotice] {
         var sectionOfNotices = [SectionOfNotice]()
         
         //일반공지
         sectionOfNotices.append(
             SectionOfNotice(header: "일반소식",
                             items: dto.body.latestThreeGeneralNews.map {
-                                MainNotice(id: $0.nttID,
-                                           presentationType: .actual,
-                                           title: $0.title,
-                                           contentUrl: $0.contentURL,
-                                           department: $0.departName,
-                                           uploadDate: $0.registeredAt)
+                                MainNotice(presentationType: .actual,
+                                           notice: createNotice($0))
                             })
         )
         
@@ -54,12 +47,8 @@ final class MainNoticeRepositoryImpl<T: RemoteDataSource>: MainNoticeRepository 
         sectionOfNotices.append(
             SectionOfNotice(header: "학사공지",
                             items: dto.body.latestThreeAcademicNews.map {
-                                MainNotice(id: $0.nttID,
-                                           presentationType: .actual,
-                                           title: $0.title,
-                                           contentUrl: $0.contentURL,
-                                           department: $0.departName,
-                                           uploadDate: $0.registeredAt)
+                                MainNotice(presentationType: .actual,
+                                           notice: createNotice($0))
                             })
         )
         
@@ -67,12 +56,8 @@ final class MainNoticeRepositoryImpl<T: RemoteDataSource>: MainNoticeRepository 
         sectionOfNotices.append(
             SectionOfNotice(header: "장학안내",
                             items: dto.body.latestThreeScholarshipNews.map {
-                                MainNotice(id: $0.nttID,
-                                           presentationType: .actual,
-                                           title: $0.title,
-                                           contentUrl: $0.contentURL,
-                                           department: $0.departName,
-                                           uploadDate: $0.registeredAt)
+                                MainNotice(presentationType: .actual,
+                                           notice: createNotice($0))
                             })
         )
         
@@ -80,15 +65,53 @@ final class MainNoticeRepositoryImpl<T: RemoteDataSource>: MainNoticeRepository 
         sectionOfNotices.append(
             SectionOfNotice(header: "행사안내",
                             items: dto.body.latestThreeEventNews.map {
-                                MainNotice(id: $0.nttID,
-                                           presentationType: .actual,
-                                           title: $0.title,
-                                           contentUrl: $0.contentURL,
-                                           department: $0.departName,
-                                           uploadDate: $0.registeredAt)
+                                MainNotice(presentationType: .actual,
+                                           notice: createNotice($0))
                             })
         )
         
         return sectionOfNotices
+    }
+    
+    private func createNotice(_ body: NoticeReponseBody) -> Notice {
+        Notice(
+            id: body.nttID,
+            title: body.title,
+            contentUrl: body.contentURL,
+            department: body.departmentName,
+            uploadDate: body.registeredAt,
+            imageUrl: body.contentImage,
+            noticeCategory: NoticeCategory(rawValue: body.noticeName)
+        )
+    }
+    
+    func fetchTempData() -> AnyPublisher<[SectionOfNotice], any Error> {
+        let notices =  [
+            SectionOfNotice(header: "일반소식",
+                            items: Array(repeating: MainNotice(presentationType: .skeleton, notice: createTempNotice()), count: 3)),
+                    
+            SectionOfNotice(header: "학사공지",
+                            items: Array(repeating: MainNotice(presentationType: .skeleton, notice: createTempNotice()), count: 3)),
+            
+            SectionOfNotice(header: "장학공지",
+                            items: Array(repeating: MainNotice(presentationType: .skeleton, notice: createTempNotice()), count: 3)),
+                    
+            SectionOfNotice(header: "행사안내",
+                            items: Array(repeating: MainNotice(presentationType: .skeleton, notice: createTempNotice()), count: 3))
+        ]
+        
+        return Just(notices)
+            .setFailureType(to: Error.self)
+            .eraseToAnyPublisher()
+    }
+    
+    private func createTempNotice() -> Notice {
+        Notice(id: UUID().hashValue,
+               title: " ",
+               contentUrl: " ",
+               department: " ",
+               uploadDate: " ",
+               imageUrl: nil,
+               noticeCategory: nil)
     }
 }

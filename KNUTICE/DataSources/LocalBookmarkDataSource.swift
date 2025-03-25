@@ -49,13 +49,14 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
         noticeEntity.uploadDate = bookmark.notice.uploadDate
         noticeEntity.contentUrl = bookmark.notice.contentUrl
         noticeEntity.imageUrl = bookmark.notice.imageUrl
+        noticeEntity.category = bookmark.notice.noticeCategory?.rawValue
         
         bookmarkEntity.bookmarkedNotice = noticeEntity
         
-        return Future { [weak self] promise in
-            self?.backgroundContext.perform {
+        return Future { promise in
+            self.backgroundContext.perform {
                 do {
-                    try self?.backgroundContext.save()
+                    try self.backgroundContext.save()
                     promise(.success(()))
                 } catch {
                     promise(.failure(error))
@@ -76,13 +77,13 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
     }
     
     private func readEntities() -> AnyPublisher<[BookmarkEntity], any Error> {
-        return Future { [weak self] promise in
-            self?.backgroundContext.perform {
+        return Future { promise in
+            self.backgroundContext.perform {
                 let fetchRequest = NSFetchRequest<BookmarkEntity>(entityName: "BookmarkEntity")
                 
                 do {
-                    let bookmarkEntities = try self?.backgroundContext.fetch(fetchRequest)
-                    promise(.success(bookmarkEntities ?? []))
+                    let bookmarkEntities = try self.backgroundContext.fetch(fetchRequest)
+                    promise(.success(bookmarkEntities))
                 } catch {
                     promise(.failure(error))
                 }
@@ -114,17 +115,17 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
     func delete(id: Int) -> AnyPublisher<Void, any Error> {
         return readEntities()
             .flatMap { entities -> AnyPublisher<Void, any Error> in
-                return Future { [weak self] promise in
-                    self?.backgroundContext.perform {
+                return Future { promise in
+                    self.backgroundContext.perform {
                         do {
                             //일치하는 id 필터링 후 삭제
                             let filteredEntities = entities.filter { $0.bookmarkedNotice?.id == Int64(id) }
                             filteredEntities.forEach {
-                                self?.backgroundContext.delete($0)
+                                self.backgroundContext.delete($0)
                             }
                             
                             //영구 저장소에 반영
-                            try self?.backgroundContext.save()
+                            try self.backgroundContext.save()
                             promise(.success(()))
                         } catch {
                             promise(.failure(error))
@@ -139,8 +140,8 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
     func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
         return readEntities()
             .flatMap { entities -> AnyPublisher<Void, any Error> in
-                return Future { [weak self] promise in
-                    self?.backgroundContext.perform {
+                return Future { promise in
+                    self.backgroundContext.perform {
                         do {
                             let filteredEntities = entities.filter { $0.bookmarkedNotice?.id == Int64(bookmark.notice.id) }
                             filteredEntities.forEach {
@@ -148,7 +149,7 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
                                 $0.alarmDate = bookmark.alarmDate
                             }
                             
-                            try self?.backgroundContext.save()
+                            try self.backgroundContext.save()
                             promise(.success(()))
                         } catch {
                             promise(.failure(error))

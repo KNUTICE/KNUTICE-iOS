@@ -5,12 +5,10 @@
 //  Created by 이정훈 on 1/14/25.
 //
 
+import Factory
 import Foundation
 
 class BookmarkManager {
-    let repository: BookmarkRepository
-    
-    init(repository: BookmarkRepository) {
-        self.repository = repository
-    }
+    @Injected(\.bookmarkRepository) var repository: BookmarkRepository
+    @Injected(\.bookmarkService) var service: BookmarkService
 }

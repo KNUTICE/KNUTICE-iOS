@@ -7,24 +7,17 @@
 
 import Combine
 import UserNotifications
+import Factory
 import Foundation
 
 final class BookmarkRepositoryImpl: BookmarkRepository {
-    enum ExistingBookmarkError: String, Error {
-        case alreadyExist = "이미 존재하는 북마크에요."
-    }
-    
-    private let dataSource: LocalBookmarkDataSource
-    
-    init(dataSource: LocalBookmarkDataSource) {
-        self.dataSource = dataSource
-    }
+    @Injected(\.localBookmarkDataSource) private var dataSource: LocalBookmarkDataSource
     
     func save(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
         return dataSource.isDuplication(id: bookmark.notice.id)
             .flatMap { isExist -> AnyPublisher<Void, any Error> in
                 guard !isExist else {
-                    return Fail(error: ExistingBookmarkError.alreadyExist)
+                    return Fail(error: ExistingBookmarkError.alreadyExist(message: "이미 존재하는 북마크에요."))
                         .eraseToAnyPublisher()
                 }
                 
@@ -37,27 +30,31 @@ final class BookmarkRepositoryImpl: BookmarkRepository {
         return dataSource.readDTO()
             .map {
                 $0.compactMap { dto in
-                    self.getBookMark(from: dto)
+                    self.createBookMark(from: dto)
                 }
             }
             .delay(for: DispatchQueue.SchedulerTimeType.Stride(integerLiteral: delay), scheduler: DispatchQueue.global())
             .eraseToAnyPublisher()
     }
     
-    private func getBookMark(from dto: BookmarkDTO) -> Bookmark? {
+    private func createBookMark(from dto: BookmarkDTO) -> Bookmark? {
         guard let noticeEntity = dto.notice else {
             return nil
         }
         
-        return Bookmark(notice: Notice(id: Int(noticeEntity.id),
-                                       boardNumber: nil,
-                                       title: noticeEntity.title ?? "",
-                                       contentUrl: noticeEntity.contentUrl ?? "",
-                                       department: noticeEntity.department ?? "",
-                                       uploadDate: noticeEntity.uploadDate ?? "",
-                                       imageUrl: noticeEntity.imageUrl),
-                        memo: dto.details ?? "",
-                        alarmDate: dto.alarmDate)
+        return Bookmark(
+            notice: Notice(
+                id: Int(noticeEntity.id),
+                title: noticeEntity.title ?? "",
+                contentUrl: noticeEntity.contentUrl ?? "",
+                department: noticeEntity.department ?? "",
+                uploadDate: noticeEntity.uploadDate ?? "",
+                imageUrl: noticeEntity.imageUrl,
+                noticeCategory: NoticeCategory(rawValue: noticeEntity.category ?? "")
+            ),
+            memo: dto.details ?? "",
+            alarmDate: dto.alarmDate
+        )
     }
     
     func delete(by id: Int) -> AnyPublisher<Void, any Error> {

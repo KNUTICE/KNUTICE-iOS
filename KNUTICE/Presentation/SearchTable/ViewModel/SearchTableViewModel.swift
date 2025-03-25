@@ -7,6 +7,7 @@
 
 import RxSwift
 import RxRelay
+import Factory
 import os
 
 final class SearchTableViewModel: SearchResultRepresentable {
@@ -21,13 +22,9 @@ final class SearchTableViewModel: SearchResultRepresentable {
         .asObservable()
     }
     
-    private let repository: SearchRepository
+    @Injected(\.searchRepository) private var repository: SearchRepository
     private let disposeBag = DisposeBag()
     private let logger = Logger(subsystem: "KNUTICE", category: "SearchTableViewModel")
-    
-    init(repository: SearchRepository) {
-        self.repository = repository
-    }
     
     func search(_ keyword: String) {
         guard !keyword.isEmpty else {
