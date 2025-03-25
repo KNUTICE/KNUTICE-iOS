@@ -81,29 +81,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     //Background 알림 설정
     //알림을 클릭했을 때 호출
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        let userInfo = response.notification.request.content.userInfo
-        if let nttIdStr = userInfo["nttId"] as? String,
-           let nttId = Int(nttIdStr),
-           let title = userInfo["contentTitle"] as? String,
-           let contentURL = userInfo["contentUrl"] as? String,
-           let contentImage = userInfo["contentImage"] as? String,
-           let departmentName = userInfo["departmentName"] as? String,
-           let registeredAt = userInfo["registeredAt"] as? String,
-           let noticeName = userInfo["noticeName"] as? String {
-            let notice = Notice(
-                id: nttId,
-                title: title,
-                contentUrl: contentURL,
-                department: departmentName,
-                uploadDate: registeredAt,
-                imageUrl: contentImage,
-                noticeCategory: NoticeCategory(rawValue: noticeName)
-            )
-            let encoder = JSONEncoder()
-            if let encodedData = try? encoder.encode(notice) {
-                UserDefaults.standard.set(encodedData, forKey: "pushNotice")
-            }
-        }
+        set(userInfo: response.notification.request.content.userInfo)
         completionHandler()
+    }
+    
+    private func set(userInfo: [AnyHashable : Any]) {
+        UserDefaults.standard.set(userInfo, forKey: UserDefaultsKeys.pushNotice.rawValue)
     }
 }
