@@ -63,7 +63,7 @@
 		8E1C654D2D755E060003AB94 /* TopThreeNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E1C654C2D755E060003AB94 /* TopThreeNotices.json */; };
 		8E1C654E2D755E060003AB94 /* TopThreeNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E1C654C2D755E060003AB94 /* TopThreeNotices.json */; };
 		8E1C65502D755E5E0003AB94 /* MockTopThreeNoticesURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C654F2D755E5E0003AB94 /* MockTopThreeNoticesURLProtocol.swift */; };
-		8E1C65522D755FEF0003AB94 /* MockMainNoticesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C65512D755FEF0003AB94 /* MockMainNoticesTest.swift */; };
+		8E1C65522D755FEF0003AB94 /* MockTopThreeNoticesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C65512D755FEF0003AB94 /* MockTopThreeNoticesTest.swift */; };
 		8E1C65572D75760A0003AB94 /* SearchedNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E1C65562D75760A0003AB94 /* SearchedNotices.json */; };
 		8E1C65582D75760A0003AB94 /* SearchedNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E1C65562D75760A0003AB94 /* SearchedNotices.json */; };
 		8E1C655A2D75762B0003AB94 /* MockSearchedNoticesURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C65592D75762B0003AB94 /* MockSearchedNoticesURLProtocol.swift */; };
@@ -407,7 +407,7 @@
 		8E1C65452D7555CD0003AB94 /* MockEventNoticesURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEventNoticesURLProtocol.swift; sourceTree = "<group>"; };
 		8E1C654C2D755E060003AB94 /* TopThreeNotices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TopThreeNotices.json; sourceTree = "<group>"; };
 		8E1C654F2D755E5E0003AB94 /* MockTopThreeNoticesURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTopThreeNoticesURLProtocol.swift; sourceTree = "<group>"; };
-		8E1C65512D755FEF0003AB94 /* MockMainNoticesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMainNoticesTest.swift; sourceTree = "<group>"; };
+		8E1C65512D755FEF0003AB94 /* MockTopThreeNoticesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTopThreeNoticesTest.swift; sourceTree = "<group>"; };
 		8E1C65562D75760A0003AB94 /* SearchedNotices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SearchedNotices.json; sourceTree = "<group>"; };
 		8E1C65592D75762B0003AB94 /* MockSearchedNoticesURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchedNoticesURLProtocol.swift; sourceTree = "<group>"; };
 		8E1C655B2D7576EC0003AB94 /* MockSearchedNoticesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchedNoticesTest.swift; sourceTree = "<group>"; };
@@ -875,7 +875,7 @@
 			isa = PBXGroup;
 			children = (
 				8E1C654F2D755E5E0003AB94 /* MockTopThreeNoticesURLProtocol.swift */,
-				8E1C65512D755FEF0003AB94 /* MockMainNoticesTest.swift */,
+				8E1C65512D755FEF0003AB94 /* MockTopThreeNoticesTest.swift */,
 				8EDC2E462D925B6F00AAB60F /* MockMainTableViewModelTest.swift */,
 			);
 			path = MainNoticesTest;
@@ -1923,7 +1923,7 @@
 				8EE4B4FD2D17D96500EFF10B /* RequestResult.swift in Sources */,
 				8E1C65622D757F1F0003AB94 /* MockPostAPIURLProtocol.swift in Sources */,
 				8E1C655A2D75762B0003AB94 /* MockSearchedNoticesURLProtocol.swift in Sources */,
-				8E1C65522D755FEF0003AB94 /* MockMainNoticesTest.swift in Sources */,
+				8E1C65522D755FEF0003AB94 /* MockTopThreeNoticesTest.swift in Sources */,
 				8EDC2E472D925B6F00AAB60F /* MockMainTableViewModelTest.swift in Sources */,
 				8E1C655C2D7576EC0003AB94 /* MockSearchedNoticesTest.swift in Sources */,
 				8E1C65422D7550680003AB94 /* MockNoticesTableViewModelTests.swift in Sources */,
