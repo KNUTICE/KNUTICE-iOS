@@ -96,6 +96,12 @@ extension Container {
         }
     }
     
+    var tabBarService: Factory<TabBarService> {
+        Factory(self) {
+            TabBarServiceImpl()
+        }
+    }
+    
     //MARK: - ViewModel
     var mainViewModel: Factory<MainTableViewModel> {
         Factory(self) {
