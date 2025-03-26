@@ -149,6 +149,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>RxCocoa-RxCocoa_Privacy.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>RxCocoa.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -159,7 +164,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>RxRelay-RxRelay_Privacy.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>RxRelay.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>RxSwift-RxSwift_Privacy.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
