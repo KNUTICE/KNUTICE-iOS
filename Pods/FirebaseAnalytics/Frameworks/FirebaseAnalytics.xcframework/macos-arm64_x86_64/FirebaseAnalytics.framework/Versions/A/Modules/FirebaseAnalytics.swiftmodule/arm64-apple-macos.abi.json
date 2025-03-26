@@ -6,6 +6,16 @@
     "children": [
       {
         "kind": "Import",
+        "name": "FirebaseAnalyticsPrivate",
+        "printedName": "FirebaseAnalyticsPrivate",
+        "declKind": "Import",
+        "moduleName": "FirebaseAnalytics",
+        "declAttributes": [
+          "ImplementationOnly"
+        ]
+      },
+      {
+        "kind": "Import",
         "name": "StoreKit",
         "printedName": "StoreKit",
         "declKind": "Import",
@@ -222,63 +232,63 @@
   },
   "ConstValues": [
     {
-      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/analytics-11\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+StoreKit.swift",
+      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/m161\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+StoreKit.swift",
       "kind": "BooleanLiteral",
-      "offset": 1259,
+      "offset": 1320,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/analytics-11\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+StoreKit.swift",
+      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/m161\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+StoreKit.swift",
       "kind": "BooleanLiteral",
-      "offset": 1297,
+      "offset": 1358,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/analytics-11\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+StoreKit.swift",
+      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/m161\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+StoreKit.swift",
       "kind": "IntegerLiteral",
-      "offset": 2523,
+      "offset": 3034,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/analytics-11\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+StoreKit.swift",
+      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/m161\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+StoreKit.swift",
       "kind": "IntegerLiteral",
-      "offset": 2564,
+      "offset": 3075,
       "length": 1,
       "value": "1"
     },
     {
-      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/analytics-11\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+StoreKit.swift",
+      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/m161\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+StoreKit.swift",
       "kind": "IntegerLiteral",
-      "offset": 2607,
+      "offset": 3118,
       "length": 1,
       "value": "2"
     },
     {
-      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/analytics-11\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+StoreKit.swift",
+      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/m161\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+StoreKit.swift",
       "kind": "IntegerLiteral",
-      "offset": 2651,
+      "offset": 3162,
       "length": 1,
       "value": "3"
     },
     {
-      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/analytics-11\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+StoreKit.swift",
+      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/m161\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+StoreKit.swift",
       "kind": "IntegerLiteral",
-      "offset": 2683,
+      "offset": 3194,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/analytics-11\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+SwiftUI.swift",
+      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/m161\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+SwiftUI.swift",
       "kind": "StringLiteral",
       "offset": 2654,
       "length": 6,
       "value": "\"View\""
     },
     {
-      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/analytics-11\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+SwiftUI.swift",
+      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/m161\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+SwiftUI.swift",
       "kind": "Dictionary",
       "offset": 2701,
       "length": 3,
