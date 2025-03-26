@@ -8,9 +8,41 @@
 
 import Foundation
 
-#if swift(>=5.5.2) && canImport(_Concurrency) && !os(Linux)
+#if swift(>=5.6) && canImport(_Concurrency) && !os(Linux)
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public extension PrimitiveSequenceType where Trait == SingleTrait {
+    /**
+     Creates a `Single` from the result of an asynchronous operation
+
+     - seealso: [create operator on reactivex.io](http://reactivex.io/documentation/operators/create.html)
+
+     - parameter work: An `async` closure expected to return an element of type `Element`
+
+     - returns: A `Single` of the `async` closure's element type
+     */
+    @_disfavoredOverload
+    static func create(
+        detached: Bool = false,
+        priority: TaskPriority? = nil,
+        work: @Sendable @escaping () async throws -> Element
+    ) -> PrimitiveSequence<Trait, Element> {
+        .create { single in
+            let operation: () async throws -> Void = {
+                await single(
+                    Result { try await work() }
+                )
+            }
+
+            let task = if detached {
+                Task.detached(priority: priority, operation: operation)
+            } else {
+                Task(priority: priority, operation: operation)
+            }
+
+            return Disposables.create { task.cancel() }
+        }
+    }
+    
     /// Allows awaiting the success or failure of this `Single`
     /// asynchronously via Swift's concurrency features (`async/await`)
     ///
@@ -29,10 +61,21 @@ public extension PrimitiveSequenceType where Trait == SingleTrait {
             return try await withTaskCancellationHandler(
                 operation: {
                     try await withCheckedThrowingContinuation { continuation in
+                        var didResume = false
                         disposable.setDisposable(
                             self.subscribe(
-                                onSuccess: { continuation.resume(returning: $0) },
-                                onFailure: { continuation.resume(throwing: $0) }
+                                onSuccess: {
+                                    didResume = true
+                                    continuation.resume(returning: $0)
+                                },
+                                onFailure: {
+                                    didResume = true
+                                    continuation.resume(throwing: $0)
+                                },
+                                onDisposed: {
+                                    guard !didResume else { return }
+                                    continuation.resume(throwing: CancellationError())
+                                }
                             )
                         )
                     }
@@ -69,16 +112,26 @@ public extension PrimitiveSequenceType where Trait == MaybeTrait {
                 operation: {
                     try await withCheckedThrowingContinuation { continuation in
                         var didEmit = false
+                        var didResume = false
                         disposable.setDisposable(
                             self.subscribe(
                                 onSuccess: { value in
                                     didEmit = true
+                                    didResume = true
                                     continuation.resume(returning: value)
                                 },
-                                onError: { error in continuation.resume(throwing: error) },
+                                onError: { error in
+                                    didResume = true
+                                    continuation.resume(throwing: error)
+                                },
                                 onCompleted: {
                                     guard !didEmit else { return }
+                                    didResume = true
                                     continuation.resume(returning: nil)
+                                },
+                                onDisposed: {
+                                    guard !didResume else { return }
+                                    continuation.resume(throwing: CancellationError())
                                 }
                             )
                         )
@@ -114,10 +167,21 @@ public extension PrimitiveSequenceType where Trait == CompletableTrait, Element 
             return try await withTaskCancellationHandler(
                 operation: {
                     try await withCheckedThrowingContinuation { continuation in
+                        var didResume = false
                         disposable.setDisposable(
                             self.subscribe(
-                                onCompleted: { continuation.resume() },
-                                onError: { error in continuation.resume(throwing: error) }
+                                onCompleted: {
+                                    didResume = true
+                                    continuation.resume()
+                                },
+                                onError: { error in
+                                    didResume = true
+                                    continuation.resume(throwing: error)
+                                },
+                                onDisposed: {
+                                    guard !didResume else { return }
+                                    continuation.resume(throwing: CancellationError())
+                                }
                             )
                         )
                     }
@@ -126,6 +190,18 @@ public extension PrimitiveSequenceType where Trait == CompletableTrait, Element 
                     disposable.dispose()
                 }
             )
+        }
+    }
+}
+
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+extension Result where Failure == Swift.Error {
+    @_disfavoredOverload
+    init(catching body: () async throws -> Success) async {
+        do {
+            self = try await .success(body())
+        } catch {
+            self = .failure(error)
         }
     }
 }
