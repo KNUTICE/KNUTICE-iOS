@@ -25,14 +25,14 @@ final class BookmarkServiceImpl: BookmarkService {
     }
     
     func save(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
-        return UNUserNotificationCenter.current().registerLocalNotification(for: bookmark)
+        return bookmarkRepository.save(bookmark: bookmark)
             .flatMap { [weak self] _ -> AnyPublisher<Void, any Error> in
                 guard let self else {
                     return Fail(error: NSError(domain: "SelfDeallocated", code: -1))
                         .eraseToAnyPublisher()
                 }
                 
-                return self.bookmarkRepository.save(bookmark: bookmark)
+                return UNUserNotificationCenter.current().registerLocalNotification(for: bookmark)
             }
             .eraseToAnyPublisher()
     }
