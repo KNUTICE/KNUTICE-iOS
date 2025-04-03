@@ -26,13 +26,11 @@ final class BookmarkServiceImpl: BookmarkService {
     
     func save(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
         return bookmarkRepository.save(bookmark: bookmark)
-            .flatMap { [weak self] _ -> AnyPublisher<Void, any Error> in
-                guard let self else {
-                    return Fail(error: NSError(domain: "SelfDeallocated", code: -1))
-                        .eraseToAnyPublisher()
-                }
-                
-                return UNUserNotificationCenter.current().registerLocalNotification(for: bookmark)
+            .flatMap { _ -> AnyPublisher<Void, any Error> in
+                UNUserNotificationCenter.current().registerLocalNotification(for: bookmark)
+            }
+            .flatMap { _ -> AnyPublisher<Void, any Error> in
+                UNUserNotificationCenter.current().updatePendingNotificationRequestsBadge()
             }
             .eraseToAnyPublisher()
     }
@@ -42,7 +40,7 @@ final class BookmarkServiceImpl: BookmarkService {
             //NotificationRequests 대기열에서 삭제
             UNUserNotificationCenter.current().removeNotificationRequest(with: .init(bookmark.notice.id))
             //NotificationRequests 대기열의 Badge Count 업데이트
-            return UNUserNotificationCenter.current().updateNotificationRequestsBadgeAfterDeletion(by: .init(bookmark.notice.id))
+            return UNUserNotificationCenter.current().updatePendingNotificationRequestsBadge()
                 .flatMap { [weak self] _ -> AnyPublisher<Void, any Error> in
                     guard let self else {
                         return Fail(error: NSError(domain: "SelfDeallocated", code: -1))
@@ -61,7 +59,7 @@ final class BookmarkServiceImpl: BookmarkService {
         if let _ = bookmark.alarmDate {
             return UNUserNotificationCenter.current().registerLocalNotification(for: bookmark)
                 .flatMap { _ -> AnyPublisher<Void, any Error> in
-                    UNUserNotificationCenter.current().updateNotificationRequestsBadge()
+                    UNUserNotificationCenter.current().updatePendingNotificationRequestsBadge()
                 }
                 .flatMap { [weak self] _ -> AnyPublisher<Void, any Error> in
                     guard let self else {

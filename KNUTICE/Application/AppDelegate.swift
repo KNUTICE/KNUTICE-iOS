@@ -75,7 +75,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     //Foreground 알림 설정
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.list, .banner])
+        completionHandler([.list, .banner, .sound])
+        
+        //전달된 모든 알림 객체 삭제
+        //삭제하지 않으면 Remote Notification Badge Count 불일치
+        center.removeAllDeliveredNotifications()
+        
+        //Bookmark 알림을 Foreground 상태에서 받는 경우, 남아 있는 Notification Request Badge Count 재설정
+        if let _ = notification.request.trigger as? UNCalendarNotificationTrigger {
+            UNUserNotificationCenter.current().updatePendingNotificationRequestsBadge() as Void
+        }
     }
     
     //Background 알림 설정
