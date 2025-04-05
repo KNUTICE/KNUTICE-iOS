@@ -74,6 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     //Foreground 알림 설정
+    //알림을 터치하지 않아도 알림이 전달되면 호출
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.list, .banner, .sound])
         
@@ -83,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         //Bookmark 알림을 Foreground 상태에서 받는 경우, 남아 있는 Notification Request Badge Count 재설정
         if let _ = notification.request.trigger as? UNCalendarNotificationTrigger {
-            UNUserNotificationCenter.current().updatePendingNotificationRequestsBadge() as Void
+            UNUserNotificationCenter.current().updatePendingNotificationRequestBadges() as Void
         }
     }
     
