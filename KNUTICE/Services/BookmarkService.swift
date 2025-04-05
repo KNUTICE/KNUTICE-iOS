@@ -29,25 +29,19 @@ final class BookmarkServiceImpl: BookmarkService {
             .flatMap { _ -> AnyPublisher<Void, any Error> in
                 UNUserNotificationCenter.current().registerLocalNotification(for: bookmark)
             }
-            .flatMap { _ -> AnyPublisher<Void, any Error> in
-                UNUserNotificationCenter.current().updatePendingNotificationRequestsBadge()
-            }
             .eraseToAnyPublisher()
     }
     
     func delete(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
         if let _ = bookmark.alarmDate {
-            //NotificationRequests 대기열에서 삭제
-            UNUserNotificationCenter.current().removeNotificationRequest(with: .init(bookmark.notice.id))
-            //NotificationRequests 대기열의 Badge Count 업데이트
-            return UNUserNotificationCenter.current().updatePendingNotificationRequestsBadge()
+            return UNUserNotificationCenter.current().removeNotificationRequest(from: bookmark)    //NotificationRequests 대기열에서 삭제
                 .flatMap { [weak self] _ -> AnyPublisher<Void, any Error> in
                     guard let self else {
                         return Fail(error: NSError(domain: "SelfDeallocated", code: -1))
                             .eraseToAnyPublisher()
                     }
                     
-                    return self.bookmarkRepository.delete(by: bookmark.notice.id)
+                    return self.bookmarkRepository.delete(by: bookmark.notice.id)    //CoreData 데이터 삭제
                 }
                 .eraseToAnyPublisher()
         } else {
@@ -56,10 +50,10 @@ final class BookmarkServiceImpl: BookmarkService {
     }
     
     func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
-        if let _ = bookmark.alarmDate {
-            return UNUserNotificationCenter.current().registerLocalNotification(for: bookmark)
+        if let alarmDate = bookmark.alarmDate, alarmDate > Date() {
+            return UNUserNotificationCenter.current().removeNotificationRequest(from: bookmark)    //기존 알림 삭제
                 .flatMap { _ -> AnyPublisher<Void, any Error> in
-                    UNUserNotificationCenter.current().updatePendingNotificationRequestsBadge()
+                    UNUserNotificationCenter.current().registerLocalNotification(for: bookmark)    //새로운 알림 등록
                 }
                 .flatMap { [weak self] _ -> AnyPublisher<Void, any Error> in
                     guard let self else {
