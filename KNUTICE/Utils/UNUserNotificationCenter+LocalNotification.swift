@@ -20,22 +20,26 @@ extension UNUserNotificationCenter {
             }
             
             Task {
-                let count = await self.pendingNotificationRequests().count
-                let content = self.createNotificationContent(body: bookmark.notice.title, badge: count + 1)
-                
-                //알림 시점에 대한 DateComponents 생성
-                let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
-                
-                //알림 시점, 반복 여부 설정
-                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-                
-                //알림 요청을 위한 Request 객체 생성
-                let notificationRequest = UNNotificationRequest(identifier: String(bookmark.notice.id),
-                                                    content: content,
-                                                    trigger: trigger)
+                let pendingNotificationRequests = await self.pendingNotificationRequests()
+                let insertionIndex = pendingNotificationRequests.rightInsertionIndex(for: date)
+                let content = self.createNotificationContent(body: bookmark.notice.title, badge: insertionIndex + 1)
+                let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)    //알림 날짜
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)    //알림 시점, 반복 여부 설정
+                let notificationRequest = UNNotificationRequest(
+                    identifier: String(bookmark.notice.id),
+                    content: content,
+                    trigger: trigger
+                )
                 
                 do {
+                    //새로운 NotificationRequest 추가
                     try await self.add(notificationRequest)
+                    //기존 NotificationRequest Badge 업데이트
+                    try await self.modifyNotificationBadges(
+                        pendingNotificationRequests,
+                        startingAt: insertionIndex,
+                        by: +
+                    )
                     promise(.success(()))
                 } catch {
                     promise(.failure(error))
@@ -43,64 +47,6 @@ extension UNUserNotificationCenter {
             }
         }
         .eraseToAnyPublisher()
-    }
-    
-    /// 앱이 Active 상태로 진입 후 앱 Bade Count를 초기화 한 후 남은 Notification Request에 대해 Badge Count 업데이트
-    func updatePendingNotificationRequestsBadge() {
-        //새로운 Badge Count로 설정된 Notification Request 등록
-        //동일한 identifier를 가지는 Request는 덮어씀
-        Task {
-            await createNotificationRequests().forEach { request in
-                add(request) { error in
-                    if let error = error {
-                        print("UNUserNotificationCenter.updatePendingNotificationRequestsBadge Error: \(error)")
-                    } else {
-                        print("Successfully reset pending notification requests.")
-                    }
-                }
-            }
-        }
-    }
-    
-    ///Bookmark 수정 시 Notification Request의 Badge Count 수정
-    func updatePendingNotificationRequestsBadge() -> AnyPublisher<Void, any Error> {
-        return Future { promise in
-            //새로운 Badge Count로 설정된 Notification Request 등록
-            //동일한 identifier를 가지는 Request는 덮어씀
-            Task {
-                await self.createNotificationRequests().forEach { request in
-                    self.add(request) { error in
-                        if let error {
-                            promise(.failure(error))
-                        }
-                    }
-                }
-                
-                promise(.success(()))
-            }
-        }
-        .eraseToAnyPublisher()
-    }
-    
-    private func createNotificationRequests() async -> [UNNotificationRequest] {
-        let pendingNotificationRequests = await pendingNotificationRequests()
-        let sortedNotificationRequests = pendingNotificationRequests.sorted {
-            let lhs = $0.trigger as? UNCalendarNotificationTrigger
-            let rhs = $1.trigger as? UNCalendarNotificationTrigger
-            return lhs?.nextTriggerDate() ?? Date() < rhs?.nextTriggerDate() ?? Date()
-        }
-        var newNotificationRequests = [UNNotificationRequest]()
-        sortedNotificationRequests.enumerated().forEach { (i, request) in
-            let content = createNotificationContent(body: request.content.body, badge: i + 1)
-            let newRequest = UNNotificationRequest(
-                identifier: request.identifier,
-                content: content,
-                trigger: request.trigger
-            )
-            newNotificationRequests.append(newRequest)
-        }
-        
-        return newNotificationRequests
     }
     
     private func createNotificationContent(body: String, badge: Int) -> UNMutableNotificationContent {
@@ -113,9 +59,95 @@ extension UNUserNotificationCenter {
         return content
     }
     
+    func updatePendingNotificationRequestBadges() {
+        Task {
+            do {
+                let requests = await pendingNotificationRequests()
+                try await modifyNotificationBadges(requests, startingAt: 0, by: -)
+            } catch {
+                print("UNUserNotificationCenter.updatePendingNotificationRequestsBadge Error: \(error)")
+            }
+        }
+    }
+    
+    private func modifyNotificationBadges(
+        _ requests: [UNNotificationRequest],
+        startingAt index: Int,
+        by operation: (Int, Int) -> Int
+    ) async throws {
+        guard index < requests.count else { return }
+        for request in requests[index...] {
+            if let badge = request.content.badge as? Int {
+                let badge = operation(badge, 1)
+                let newContent = createNotificationContent(body: request.content.body, badge: badge)
+                let newRequest = UNNotificationRequest(
+                    identifier: request.identifier,
+                    content: newContent,
+                    trigger: request.trigger
+                )
+                try await add(newRequest)
+            }
+        }
+    }
+    
     func removeNotificationRequest(with identifier: String) {
         let identifiers: [String] = [identifier]
         self.removePendingNotificationRequests(withIdentifiers: identifiers)
+    }
+    
+    func removeNotificationRequest(from bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
+        return Future { promise in
+            Task {
+                let pendingNotificationRequests = await self.pendingNotificationRequests()
+                let pos = pendingNotificationRequests.firstIndex(of: .init(bookmark.notice.id))
+                if let pos {
+                    do {
+                        try await self.modifyNotificationBadges(pendingNotificationRequests, startingAt: pos + 1, by: -)    //남아 있는 NotificationRequest Badge 업데이트
+                        self.removeNotificationRequest(with: .init(bookmark.notice.id))
+                        promise(.success(()))
+                    } catch {
+                        promise(.failure(error))
+                    }
+                } else {
+                    promise(.success(()))    //존재하지 않는 객체는 삭제 필요 없음
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+}
+
+fileprivate extension Array where Element == UNNotificationRequest {
+    /// NotificationRequest가 위치할 또는 위치한 인덱스 반환
+    func rightInsertionIndex(
+        for targetDate: Date
+    ) -> Int {
+        var pl = 0, pr = self.count - 1
+        while pl <= pr {
+            let pm = (pl + pr) / 2
+            guard let trigger = self[pm].trigger as? UNCalendarNotificationTrigger,
+                  let nextTriggerDate = trigger.nextTriggerDate() else {
+                //비교할 nextTriggerDate가 존재하지 않는 경우, 가장 마지막 위치 반환
+                return self.count
+            }
+            
+            if nextTriggerDate <= targetDate {
+                pl += 1
+            } else {
+                pr -= 1
+            }
+        }
+        
+        return pl
+    }
+    
+    func firstIndex(of identifier: String) -> Int? {
+        for i in self.indices {
+            if self[i].identifier == identifier {
+                return i
+            }
+        }
+        return nil
     }
 }
 
