@@ -118,10 +118,8 @@ extension UNUserNotificationCenter {
 }
 
 fileprivate extension Array where Element == UNNotificationRequest {
-    /// NotificationRequest가 위치할 또는 위치한 인덱스 반환
-    func rightInsertionIndex(
-        for targetDate: Date
-    ) -> Int {
+    /// NotificationRequest가 위치할 인덱스 반환
+    func rightInsertionIndex(for targetDate: Date) -> Int {
         var pl = 0, pr = self.count - 1
         while pl <= pr {
             let pm = (pl + pr) / 2
@@ -132,9 +130,9 @@ fileprivate extension Array where Element == UNNotificationRequest {
             }
             
             if nextTriggerDate <= targetDate {
-                pl += 1
+                pl = pm + 1
             } else {
-                pr -= 1
+                pr = pm - 1
             }
         }
         
