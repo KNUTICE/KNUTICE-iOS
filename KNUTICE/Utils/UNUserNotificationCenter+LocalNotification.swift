@@ -21,7 +21,7 @@ extension UNUserNotificationCenter {
             
             Task {
                 let pendingNotificationRequests = await self.pendingNotificationRequests()
-                let insertionIndex = pendingNotificationRequests.rightInsertionIndex(for: date)
+                let insertionIndex = pendingNotificationRequests.rightInsertionIndex(of: date)
                 let content = self.createNotificationContent(body: bookmark.notice.title, badge: insertionIndex + 1)
                 let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)    //알림 날짜
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)    //알림 시점, 반복 여부 설정
@@ -34,7 +34,7 @@ extension UNUserNotificationCenter {
                 do {
                     //새로운 NotificationRequest 추가
                     try await self.add(notificationRequest)
-                    //기존 NotificationRequest Badge 업데이트
+                    //기존 NotificationRequest Badge Count 1씩 증가
                     try await self.modifyNotificationBadges(
                         pendingNotificationRequests,
                         startingAt: insertionIndex,
@@ -119,7 +119,7 @@ extension UNUserNotificationCenter {
 
 fileprivate extension Array where Element == UNNotificationRequest {
     /// NotificationRequest가 위치할 인덱스 반환
-    func rightInsertionIndex(for targetDate: Date) -> Int {
+    func rightInsertionIndex(of targetDate: Date) -> Int {
         var pl = 0, pr = self.count - 1
         while pl <= pr {
             let pm = (pl + pr) / 2
