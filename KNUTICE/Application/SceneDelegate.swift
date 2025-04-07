@@ -33,9 +33,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
-        
-        //전달된 모든 알림 데이터 삭제
-        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -46,16 +43,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+        
+        UNUserNotificationCenter.current().setBadgeCount(0)    //앱 아이콘 Badge 0으로 설정
+        Task {
+            await UNUserNotificationCenter.current().updatePendingNotificationsAfterForeground()    //스케줄링 되어 있는 알림 Badge 값 1씩 감소
+            UNUserNotificationCenter.current().removeAllDeliveredNotifications()    //전달된 모든 알림 데이터 삭제
+        }
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
-        
-        //남아 있는 Notification Request Badge Count 재설정
-        //앱 실행 중 알림이 발생하는 경우를 대비하기 위해 앱이 Background 상태로 진입 했을 때 Badge Count 재설정
-        UNUserNotificationCenter.current().updatePendingNotificationRequestsBadge()
     }
 
 

@@ -14,7 +14,6 @@ import os
 final class NoticeTableViewModel: NoticeFetchable {
     let notices: BehaviorRelay = BehaviorRelay<[Notice]>(value: [])
     let isFetching: BehaviorRelay = BehaviorRelay<Bool>(value: false)
-    let isFinished: BehaviorRelay = BehaviorRelay<Bool>(value: false)
     let isRefreshing: BehaviorRelay = BehaviorRelay<Bool>(value: false)
     @Injected(\.noticeRepository) private var repository: NoticeRepository
     private var category: NoticeCategory
@@ -68,13 +67,12 @@ extension NoticeTableViewModel: NoticesRepresentable {
     }
     
     func fetchNextNotices() {
-        guard let lastNumber = notices.value.last?.id, !isFinished.value else {
+        guard let lastNumber = notices.value.last?.id else {
             return
         }
         
         isFetching.accept(true)
         repository.fetchNotices(for: category, after: lastNumber)
-            .delay(for: .seconds(0.5), scheduler: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                 case .finished:
