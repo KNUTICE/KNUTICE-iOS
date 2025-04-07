@@ -151,7 +151,7 @@ fileprivate extension Array where Element == UNNotificationRequest {
 
 public extension UNUserNotificationCenter {
     /// Remote Notification이 도착 후 Badge Count를 업데이트하는 메서드
-    func updatePendingNotificationsBadge() async {
+    func updatePendingNotificationsBadgeAfterDelivered() async {
         let pendingNotificationRequests = await pendingNotificationRequests()
         guard !pendingNotificationRequests.isEmpty else { return }
         
@@ -167,6 +167,28 @@ public extension UNUserNotificationCenter {
             )
             
             self.add(newRequest)
+        }
+    }
+}
+
+extension UNUserNotificationCenter {
+    /// Foreground 상태 진입 시 스케줄 되어 있는 알림 Badge 재설정
+    func updatePendingNotificationsAfterForeground() async {
+        let deliveredNotifications = await deliveredNotifications()
+        let count = deliveredNotifications.count
+        guard count > 0 else { return }    //전달된 알림이 없으면 바로 종료
+        
+        await pendingNotificationRequests().forEach { request in
+            if let badge = request.content.badge as? Int {
+                let content = createNotificationContent(body: request.content.body, badge: badge - count)
+                let newRequest = UNNotificationRequest(
+                    identifier: request.identifier,
+                    content: content,
+                    trigger: request.trigger
+                )
+                
+                self.add(newRequest)
+            }
         }
     }
 }
