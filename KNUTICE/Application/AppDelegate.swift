@@ -79,13 +79,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         completionHandler([.list, .banner, .sound])
         
         //전달된 모든 알림 객체 삭제
-        //삭제하지 않으면 Remote Notification Badge Count 불일치
+        /*
+         삭제하지 않으면 리모트 알림 Badge 값 불일치
+         ex: Foreground에서 리모트 알림 받은 후, Background 상태에서 Badge 불일치
+         */
         center.removeAllDeliveredNotifications()
         
-        //Bookmark 알림을 Foreground 상태에서 받는 경우, 남아 있는 Notification Request Badge Count 재설정
-        if let _ = notification.request.trigger as? UNCalendarNotificationTrigger {
-            UNUserNotificationCenter.current().updatePendingNotificationRequestBadges() as Void
-        }
+        //Foreground 상태에서 Bookmark 알림 받는 경우, 남아 있는 Notification Request Badge 값 재설정
+        //Foreground 상태에서 Remote 알림을 받는 경우 NotificationService에서 남아 있는 알림의 Badge 값을 증가 시킴
+        center.updatePendingNotificationRequestBadges() as Void
     }
     
     //Background 알림 설정
