@@ -50,23 +50,25 @@ final class BookmarkServiceImpl: BookmarkService {
     }
     
     func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
-        if let alarmDate = bookmark.alarmDate, alarmDate > Date() {
-            return UNUserNotificationCenter.current().removeNotificationRequest(from: bookmark)    //기존 알림 삭제
-                .flatMap { _ -> AnyPublisher<Void, any Error> in
-                    UNUserNotificationCenter.current().registerLocalNotification(for: bookmark)    //새로운 알림 등록
+        return UNUserNotificationCenter.current().removeNotificationRequest(from: bookmark)    //기존 알림 삭제
+            .flatMap { _ -> AnyPublisher<Void, any Error> in
+                guard let alarmDate = bookmark.alarmDate, alarmDate > Date() else {
+                    return Just(())
+                        .setFailureType(to: Error.self)
+                        .eraseToAnyPublisher()
                 }
-                .flatMap { [weak self] _ -> AnyPublisher<Void, any Error> in
-                    guard let self else {
-                        return Fail(error: NSError(domain: "SelfDeallocated", code: -1))
-                            .eraseToAnyPublisher()
-                    }
-                    
-                    return self.bookmarkRepository.update(bookmark: bookmark)
+                
+                return UNUserNotificationCenter.current().registerLocalNotification(for: bookmark)    //새로운 알림 등록
+            }
+            .flatMap { [weak self] _ -> AnyPublisher<Void, any Error> in
+                guard let self else {
+                    return Fail(error: NSError(domain: "SelfDeallocated", code: -1))
+                        .eraseToAnyPublisher()
                 }
-                .eraseToAnyPublisher()
-        } else {
-            return bookmarkRepository.update(bookmark: bookmark)
-        }
+                
+                return self.bookmarkRepository.update(bookmark: bookmark)
+            }
+            .eraseToAnyPublisher()
     }
     
     /// CoreData에서 저장되어 있는 Notice 데이터를 서버 DB와 동기화 후 Bookmark 배열을 반환하는 함수
