@@ -35,7 +35,6 @@ final class UITabBarViewController: UITabBarController {
         super.viewDidLoad()
         
         setViewControllers([mainViewController, reminderViewController], animated: true)
-        setupShadowView()
         setupTabBar()
         bind()
         viewModel.fetchPushNoticeIfExists()
@@ -61,40 +60,11 @@ extension UITabBarViewController {
         reminderViewController.tabBarItem.selectedImage = UIImage(systemName: "bookmark.fill")
         reminderViewController.tabBarItem.title = "북마크"
         
-        tabBar.backgroundColor = .tabBar
-        tabBar.layer.cornerRadius = 20
-        tabBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        tabBar.layer.masksToBounds = true
-        
         let appearance = UITabBarAppearance()
         appearance.configureWithDefaultBackground()
-        appearance.backgroundColor = .tabBar
         
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = appearance
-    }
-    
-    private func setupShadowView() {
-        let shadowView = UIView(frame: .zero)
-        shadowView.translatesAutoresizingMaskIntoConstraints = false
-        shadowView.backgroundColor = .tabBar
-        shadowView.layer.cornerRadius = 20
-        shadowView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        shadowView.layer.shadowColor = UIColor.black.cgColor
-        shadowView.layer.borderWidth = 1
-        shadowView.layer.borderColor = UIColor.tabBar.cgColor
-        shadowView.layer.shadowOffset = CGSize(width: 0, height: 25)
-        shadowView.layer.shadowOpacity = 0.5
-        shadowView.layer.shadowRadius = 20
-        
-        view.addSubview(shadowView)
-        view.bringSubviewToFront(tabBar)
-        shadowView.snp.makeConstraints { make in
-            make.width.equalTo(tabBar.snp.width)
-            make.height.equalTo(tabBar.snp.height).offset(-1)
-            make.centerX.equalTo(tabBar.snp.centerX)
-            make.bottom.equalTo(tabBar.snp.bottom)
-        }
     }
 }
 
