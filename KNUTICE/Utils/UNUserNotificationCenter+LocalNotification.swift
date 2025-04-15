@@ -10,6 +10,7 @@ import Foundation
 import UserNotifications
 
 extension UNUserNotificationCenter {
+    /// 새로운 Bookmark 알림 생성
     func registerLocalNotification(for bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
         return Future { promise in
             guard let date = bookmark.alarmDate else {
@@ -18,142 +19,176 @@ extension UNUserNotificationCenter {
                 return
             }
             
-            let content = self.createNotificationContent(body: bookmark.notice.title)
-            
-            //알림 시점에 대한 DateComponents 생성
-            let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
-            
-            //알림 시점, 반복 여부 설정
-            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-            
-            //알림 요청을 위한 Request 객체 생성
-            let request = UNNotificationRequest(identifier: String(bookmark.notice.id),
-                                                content: content,
-                                                trigger: trigger)
-            
-            self.add(request) { error in
-                if let error = error {
-                    promise(.failure(error))
-                } else {
+            Task {
+                let pendingNotificationRequests = await self.pendingNotificationRequests()
+                let insertionIndex = pendingNotificationRequests.rightInsertionIndex(of: date)
+                let content = self.createNotificationContent(body: bookmark.notice.title, badge: insertionIndex + 1)
+                let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)    //알림 날짜
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)    //알림 시점, 반복 여부 설정
+                let notificationRequest = UNNotificationRequest(
+                    identifier: String(bookmark.notice.id),
+                    content: content,
+                    trigger: trigger
+                )
+                
+                do {
+                    //새로운 NotificationRequest 추가
+                    try await self.add(notificationRequest)
+                    //기존 NotificationRequest Badge Count 1씩 증가
+                    try await self.modifyNotificationBadges(
+                        pendingNotificationRequests,
+                        startingAt: insertionIndex,
+                        by: +
+                    )
                     promise(.success(()))
+                } catch {
+                    promise(.failure(error))
                 }
             }
         }
         .eraseToAnyPublisher()
     }
     
-    /// 앱이 Actice 상태로 진입 후 앱 Bade Count를 초기화 한 후 남은 Notification Request에 대해 Badge Count 업데이트
-    func updatePendingNotificationRequestsBadge() {
-        //Badge Count 초기화
-        self.resetBadgeCount()
-        
-        //새로운 Badge Count로 설정된 Notification Request 등록
-        //동일한 identifier를 가지는 Request는 덮어씀
-        self.createNotificationRequests { newRequests in
-            newRequests.forEach {
-                self.add($0) { error in
-                    if let error = error {
-                        print("UNUserNotificationCenter.resetPendingNotificationRequests Error: \(error)")
-                    } else {
-                        print("Successfully reset pending notification requests.")
-                    }
-                }
-            }
-        }
-    }
-    
-    ///Bookmark 수정 시 Notification Request의 Badge Count 수정
-    func updateNotificationRequestsBadge() -> AnyPublisher<Void, any Error> {
-        return Future { promise in
-            //Badge Count 초기화
-            self.resetBadgeCount()
-            
-            //새로운 Badge Count로 설정된 Notification Request 등록
-            //동일한 identifier를 가지는 Request는 덮어씀
-            self.createNotificationRequests { newRequests in
-                newRequests.forEach {
-                    self.add($0) { error in
-                        if let error = error {
-                            promise(.failure(error))
-                        }
-                    }
-                }
-                
-                promise(.success(()))
-            }
-        }
-        .eraseToAnyPublisher()
-    }
-    
-    func updateNotificationRequestsBadgeAfterDeletion(by identifier: String) -> AnyPublisher<Void, any Error> {
-        return Future { promise in
-            //Badge Count 초기화
-            self.resetBadgeCount()
-            
-            //삭제할 Notification Request는 필터링 후 나머지 Request에 대해 배지 Count 업데이트
-            self.createNotificationRequests(filterIdentifier: identifier) { filteredRequests in
-                filteredRequests.forEach {
-                    self.add($0) { error in
-                        if let error = error {
-                            promise(.failure(error))
-                        }
-                    }
-                }
-                
-                promise(.success(()))
-            }
-        }
-        .eraseToAnyPublisher()
-    }
-    
-    private func resetBadgeCount() {
-        self.setBadgeCount(0)
-        UserDefaults.standard.set(0, forKey: "badgeCount")
-    }
-    
-    private func createNotificationRequests(filterIdentifier: String? = nil,
-                                            completionHandler: @escaping ([UNNotificationRequest]) -> Void) {
-        self.getPendingNotificationRequests { requests in
-            var newRequests = [UNNotificationRequest]()
-            
-            //삭제한 NotificationRequest는 필터링
-            let filteredRequests = filterIdentifier != nil ? requests.filter { $0.identifier != filterIdentifier! } : requests
-            
-            //반환 하는 Request 배열은 날짜 순서를 보장하지 않음
-            //알림 날짜 순서로 정렬
-            let sortedRequests = filteredRequests.sorted {
-                let lhs = $0.trigger as? UNCalendarNotificationTrigger
-                let rhs = $1.trigger as? UNCalendarNotificationTrigger
-                return lhs?.nextTriggerDate() ?? Date() < rhs?.nextTriggerDate() ?? Date()
-            }
-            
-            sortedRequests.forEach { request in
-                let content = self.createNotificationContent(body: request.content.body)
-                let trigger = request.trigger
-                let newRequest = UNNotificationRequest(identifier: request.identifier,
-                                                       content: content,
-                                                       trigger: trigger)
-                newRequests.append(newRequest)
-            }
-            
-            completionHandler(newRequests)
-        }
-    }
-    
-    private func createNotificationContent(body: String) -> UNMutableNotificationContent {
+    private func createNotificationContent(body: String, badge: Int) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
-        let badgeCount = UserDefaults.standard.integer(forKey: "badgeCount")
-        UserDefaults.standard.set(badgeCount + 1, forKey: "badgeCount")
         content.title = "북마크 알림"
         content.body = body
         content.sound = .default
-        content.badge = badgeCount + 1 as NSNumber
+        content.badge = badge as NSNumber
         
         return content
+    }
+    
+    func updatePendingNotificationRequestBadges() {
+        Task {
+            do {
+                let requests = await pendingNotificationRequests()
+                try await modifyNotificationBadges(requests, startingAt: 0, by: -)
+            } catch {
+                print("UNUserNotificationCenter.updatePendingNotificationRequestsBadge Error: \(error)")
+            }
+        }
+    }
+    
+    private func modifyNotificationBadges(
+        _ requests: [UNNotificationRequest],
+        startingAt index: Int,
+        by operation: (Int, Int) -> Int
+    ) async throws {
+        guard index < requests.count else { return }
+        for request in requests[index...] {
+            if let badge = request.content.badge as? Int {
+                let badge = operation(badge, 1)
+                let newContent = createNotificationContent(body: request.content.body, badge: badge)
+                let newRequest = UNNotificationRequest(
+                    identifier: request.identifier,
+                    content: newContent,
+                    trigger: request.trigger
+                )
+                try await add(newRequest)
+            }
+        }
     }
     
     func removeNotificationRequest(with identifier: String) {
         let identifiers: [String] = [identifier]
         self.removePendingNotificationRequests(withIdentifiers: identifiers)
+    }
+    
+    func removeNotificationRequest(from bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
+        return Future { promise in
+            Task {
+                let pendingNotificationRequests = await self.pendingNotificationRequests()
+                let pos = pendingNotificationRequests.firstIndex(of: .init(bookmark.notice.id))
+                if let pos {
+                    do {
+                        try await self.modifyNotificationBadges(pendingNotificationRequests, startingAt: pos + 1, by: -)    //남아 있는 NotificationRequest Badge 업데이트
+                        self.removeNotificationRequest(with: .init(bookmark.notice.id))
+                        promise(.success(()))
+                    } catch {
+                        promise(.failure(error))
+                    }
+                } else {
+                    promise(.success(()))    //존재하지 않는 객체는 삭제 필요 없음
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+}
+
+fileprivate extension Array where Element == UNNotificationRequest {
+    /// NotificationRequest가 위치할 인덱스 반환
+    func rightInsertionIndex(of targetDate: Date) -> Int {
+        var pl = 0, pr = self.count - 1
+        while pl <= pr {
+            let pm = (pl + pr) / 2
+            guard let trigger = self[pm].trigger as? UNCalendarNotificationTrigger,
+                  let nextTriggerDate = trigger.nextTriggerDate() else {
+                //비교할 nextTriggerDate가 존재하지 않는 경우, 가장 마지막 위치 반환
+                return self.count
+            }
+            
+            if nextTriggerDate <= targetDate {
+                pl = pm + 1
+            } else {
+                pr = pm - 1
+            }
+        }
+        
+        return pl
+    }
+    
+    func firstIndex(of identifier: String) -> Int? {
+        for i in self.indices {
+            if self[i].identifier == identifier {
+                return i
+            }
+        }
+        return nil
+    }
+}
+
+public extension UNUserNotificationCenter {
+    /// Remote Notification이 도착 후 Badge Count를 업데이트하는 메서드
+    func updatePendingNotificationsBadgeAfterDelivered() async {
+        let pendingNotificationRequests = await pendingNotificationRequests()
+        guard !pendingNotificationRequests.isEmpty else { return }
+        
+        let deliveredNotifications = await deliveredNotifications()
+        let count = deliveredNotifications.count + 1    //contentHandler가 호출될 때까지 count는 증가하지 않음
+        
+        pendingNotificationRequests.enumerated().forEach { (i, request) in
+            let content = createNotificationContent(body: request.content.body, badge: count + 1 + i)
+            let newRequest = UNNotificationRequest(
+                identifier: request.identifier,
+                content: content,
+                trigger: request.trigger
+            )
+            
+            self.add(newRequest)
+        }
+    }
+}
+
+extension UNUserNotificationCenter {
+    /// Foreground 상태 진입 시 스케줄 되어 있는 알림 Badge 재설정
+    func updatePendingNotificationsAfterForeground() async {
+        let deliveredNotifications = await deliveredNotifications()
+        let count = deliveredNotifications.count
+        guard count > 0 else { return }    //전달된 알림이 없으면 바로 종료
+        
+        await pendingNotificationRequests().forEach { request in
+            if let badge = request.content.badge as? Int {
+                let content = createNotificationContent(body: request.content.body, badge: badge - count)
+                let newRequest = UNNotificationRequest(
+                    identifier: request.identifier,
+                    content: content,
+                    trigger: request.trigger
+                )
+                
+                self.add(newRequest)
+            }
+        }
     }
 }
