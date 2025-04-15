@@ -9,4 +9,5 @@ import Foundation
 
 enum UserDefaultsKeys: String {
     case pushNotice
+    case isBadgeResetRequired
 }

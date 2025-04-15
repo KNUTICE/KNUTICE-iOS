@@ -30,16 +30,16 @@ final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
     
     func fetchNotices(for category: NoticeCategory) -> AnyPublisher<[Notice], any Error> {
         return dataSource.sendGetRequest(to: category.remoteURL, resultType: NoticeReponseDTO.self)
-            .map { [weak self] in
-                self?.createNotice($0) ?? []
+            .compactMap { [weak self] in
+                self?.createNotice($0)
             }
             .eraseToAnyPublisher()
     }
     
     func fetchNotices(for category: NoticeCategory, after number: Int) -> AnyPublisher<[Notice], any Error> {
         return dataSource.sendGetRequest(to: category.remoteURL + "&nttId=\(number)", resultType: NoticeReponseDTO.self)
-            .map { [weak self] in
-                self?.createNotice($0) ?? []
+            .compactMap { [weak self] in
+                self?.createNotice($0)
             }
             .eraseToAnyPublisher()
     }
@@ -57,8 +57,8 @@ final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
         ]
         
         return dataSource.sendPostRequest(to: Bundle.main.noticeSyncURL, params: params, resultType: NoticeReponseDTO.self)
-            .map { [weak self] in
-                self?.createNotice($0) ?? []
+            .compactMap { [weak self] in
+                self?.createNotice($0)
             }
             .eraseToAnyPublisher()
     }

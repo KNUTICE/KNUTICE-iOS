@@ -12,23 +12,32 @@ class NotificationService: UNNotificationServiceExtension {
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?
 
+    //Foreground, Background, Terminated 상태에 호출
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         
-        if let bestAttemptContent = bestAttemptContent {
-            // Modify the notification content here...
+        guard let bestAttemptContent else {
+            return
+        }
+        
+        Task {
+            let deliveredNotifications = await UNUserNotificationCenter.current().deliveredNotifications()
+            bestAttemptContent.badge = (deliveredNotifications.count + 1) as NSNumber
+            await UNUserNotificationCenter.current().updatePendingNotificationsBadgeAfterDelivered()    //Pending 되어 있는 알림 Badge 값 1씩 증가
             
             guard let imageData = request.content.userInfo["fcm_options"] as? [String: Any],
                   let imageURLStr = imageData["image"] as? String else {
+                //이미지가 없는 경우
                 contentHandler(bestAttemptContent)
                 return
             }
             
+            //이미지가 있는 경우
             do {
-                try saveFile(id: "notification_image.jpeg", imageURLString: imageURLStr) { fileURL in
+                try self.saveFile(id: "notification_image.jpeg", imageURLString: imageURLStr) { fileURL in
                     do {
-                        let attachment = try UNNotificationAttachment(identifier: "", url: fileURL, options: nil)
+                        let attachment = try UNNotificationAttachment(identifier: "image_attachment", url: fileURL, options: nil)
                         bestAttemptContent.attachments = [attachment]
                         contentHandler(bestAttemptContent)
                     } catch {

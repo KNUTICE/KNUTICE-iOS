@@ -34,10 +34,10 @@ extension Scrollable {
         tableView.rx.willDisplayCell
             .subscribe(on: MainScheduler.instance)    //Subscription Code가 수행될 스케줄러 지정
             .bind { [weak self] cell, indexPath in
-                guard let self = self else { return }
+                guard let self else { return }
                 
                 if indexPath.row == self.viewModel.noticesCount - 1 {
-                    guard !(viewModel.isFetching.value) && !viewModel.isFinished.value else { return }
+                    guard !viewModel.isFetching.value else { return }
                     
                     tableView.tableFooterView = createActivityIndicator()
                     viewModel.fetchNextNotices()

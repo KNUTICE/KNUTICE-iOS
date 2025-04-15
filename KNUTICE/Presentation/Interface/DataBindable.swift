@@ -53,14 +53,6 @@ extension DataBindable {
                             self.tableView.tableFooterView = nil
                         }
                     }
-                    
-                    if viewModel.isFinished.value {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            UIView.animate(withDuration: 2) {
-                                self.viewModel.notices.accept(self.viewModel.notices.value)
-                            }
-                        }
-                    }
                 }
             })
             .disposed(by: disposeBag)
