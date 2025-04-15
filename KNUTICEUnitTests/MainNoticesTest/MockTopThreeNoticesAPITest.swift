@@ -1,0 +1,43 @@
+import Alamofire
+import Combine
+import Factory
+import XCTest
+@testable import KNUTICE
+
+final class MockTopThreeNoticesAPITests: XCTestCase {
+    private var dataSource: RemoteDataSource!
+    private var cancellables: Set<AnyCancellable>!
+
+    override func setUpWithError() throws {
+        // Put setup code here. This method is called before the invocation of each test method in the class.
+        let configuration = URLSessionConfiguration.default
+        configuration.protocolClasses = [MockTopThreeNoticesURLProtocol.self]
+        let session = Session(configuration: configuration)
+        Container.shared.remoteDataSource.register {
+            RemoteDataSourceImpl(session: session)
+        }
+        dataSource = Container.shared.remoteDataSource()
+        cancellables = []
+    }
+
+    override func tearDownWithError() throws {
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        dataSource = nil
+        cancellables = nil
+    }
+    
+    func test_fetchTopThreeNotices_returnsMainNoticeResponseDTO() {
+        let expectation = XCTestExpectation(description: "Wait for fetch top three notices")
+        dataSource.sendGetRequest(to: Bundle.main.mainNoticeURL, resultType: MainNoticeResponseDTO.self)
+            .sink {
+                print($0)
+            } receiveValue: { dto in
+                print(dto)
+                XCTAssertEqual(dto.result.resultCode, 200)
+                expectation.fulfill()
+            }
+            .store(in: &cancellables)
+        
+        wait(for: [expectation], timeout: 1)
+    }
+}
