@@ -10,10 +10,33 @@ import SwiftUI
 import RxSwift
 
 final class UITabBarViewController: UITabBarController {
-    private let mainViewController = MainTableViewController()
-    private let reminderViewController = UIHostingController(
-        rootView: BookmarkList(viewModel: BookmarkListViewModel())
-    )
+    private let mainViewController: UIViewController = {
+        let viewController = MainTableViewController()
+        viewController.tabBarItem.image = UIImage(systemName: "house")
+        viewController.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
+        viewController.tabBarItem.title = "홈"
+        
+        return viewController
+    }()
+    private let bookmarkViewController: UIViewController = {
+        let viewController = UIHostingController(
+            rootView: BookmarkList(viewModel: BookmarkListViewModel())
+        )
+        viewController.tabBarItem.image = UIImage(systemName: "bookmark")
+        viewController.tabBarItem.selectedImage = UIImage(systemName: "bookmark.fill")
+        viewController.tabBarItem.title = "북마크"
+        
+        return viewController
+    }()
+    private let searchViewController: UIViewController = {
+        let viewController = UINavigationController(
+            rootViewController: SearchTableViewController(viewModel: SearchTableViewModel())
+        )
+        viewController.tabBarItem.image = UIImage(systemName: "magnifyingglass")
+        viewController.tabBarItem.title = "검색"
+        
+        return viewController
+    }()
     let viewModel: TabBarViewModel
     let disposeBag: DisposeBag = .init()
     
@@ -34,8 +57,58 @@ final class UITabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setViewControllers([mainViewController, reminderViewController], animated: true)
-        setupTabBar()
+        let appearance = UITabBarAppearance()
+        appearance.configureWithDefaultBackground()
+        
+        tabBar.standardAppearance = appearance
+        tabBar.scrollEdgeAppearance = appearance
+        
+        if #available(iOS 18, *) {
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                tabs = [
+                    UITab(title: "홈",
+                          image: UIImage(systemName: "house.fill"),
+                          identifier: "Tabs.main") { _ in
+                              self.mainViewController
+                          },
+                    
+                    UISearchTab { _ in
+                        UINavigationController(
+                            rootViewController: SearchResultsTableViewController()
+                        )
+                    },
+                    
+                    UITab(title: "북마크",
+                          image: UIImage(systemName: "bookmark.fill"),
+                          identifier: "Tabs.bookmark") { _ in
+                              self.bookmarkViewController
+                          }
+                ]
+            } else {
+                tabs = [
+                    UITab(title: "홈",
+                          image: UIImage(systemName: "house.fill"),
+                          identifier: "Tabs.main") { _ in
+                              self.mainViewController
+                          },
+                    
+                    UITab(title: "북마크",
+                          image: UIImage(systemName: "bookmark.fill"),
+                          identifier: "Tabs.bookmark") { _ in
+                              self.bookmarkViewController
+                          },
+                    
+                    UISearchTab { _ in
+                        UINavigationController(
+                            rootViewController: SearchResultsTableViewController()
+                        )
+                    }
+                ]
+            }
+        } else {
+            setViewControllers([mainViewController, searchViewController, bookmarkViewController], animated: true)
+        }
+            
         bind()
         viewModel.fetchPushNoticeIfExists()
         
@@ -47,24 +120,6 @@ final class UITabBarViewController: UITabBarController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-}
-
-extension UITabBarViewController {
-    private func setupTabBar() {
-        mainViewController.tabBarItem.image = UIImage(systemName: "house")
-        mainViewController.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
-        mainViewController.tabBarItem.title = "홈"
-        
-        reminderViewController.tabBarItem.image = UIImage(systemName: "bookmark")
-        reminderViewController.tabBarItem.selectedImage = UIImage(systemName: "bookmark.fill")
-        reminderViewController.tabBarItem.title = "북마크"
-        
-        let appearance = UITabBarAppearance()
-        appearance.configureWithDefaultBackground()
-        
-        tabBar.standardAppearance = appearance
-        tabBar.scrollEdgeAppearance = appearance
     }
 }
 
