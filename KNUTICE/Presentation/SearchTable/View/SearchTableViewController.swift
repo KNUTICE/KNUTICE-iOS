@@ -10,7 +10,7 @@ import SwiftUI
 import RxSwift
 
 final class SearchTableViewController: UIViewController, TableViewConfigurable {
-    let tableView = UITableView(frame: .zero, style: .grouped)
+    let tableView = UITableView(frame: .zero, style: .plain)
     let searchBar = UISearchBar()
     let refreshControl = UIRefreshControl()    //protocol 요구사항 구현
     let viewModel: SearchResultRepresentable
@@ -34,7 +34,6 @@ final class SearchTableViewController: UIViewController, TableViewConfigurable {
         bindWithSearchBar()
         bindWithTableView()
         bindWithBackgroundView()
-        tableView.contentInset = UIEdgeInsets(top: -34, left: 0, bottom: 0, right: 0);    //상단 빈 공간 제거
     }
     
     override func viewWillAppear(_ animated: Bool) {

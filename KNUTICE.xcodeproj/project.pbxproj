@@ -165,6 +165,8 @@
 		8E3FC0292D6C112E0078EFBB /* EventNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E3FC01C2D6BF5CA0078EFBB /* EventNotices.json */; };
 		8E4F599D2CD5176E007D43BC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E613E9D2C951C8D006FC272 /* GoogleService-Info.plist */; };
 		8E4F599E2CD517DD007D43BC /* ServiceInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C190A432BFD6AA500E0254B /* ServiceInfo.plist */; };
+		8E51DAAB2DB1D82300910BC8 /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E51DAAA2DB1D82300910BC8 /* SearchResultsTableViewController.swift */; };
+		8E51DAAC2DB1D82300910BC8 /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E51DAAA2DB1D82300910BC8 /* SearchResultsTableViewController.swift */; };
 		8E5385742C644AB000AF151B /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385732C644AB000AF151B /* TokenRepository.swift */; };
 		8E5385782C644C3F00AF151B /* TokenRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385772C644C3F00AF151B /* TokenRepositoryImpl.swift */; };
 		8E5385872C64A24A00AF151B /* ci_post_clone.sh in Resources */ = {isa = PBXBuildFile; fileRef = 8E53857E2C647D9A00AF151B /* ci_post_clone.sh */; };
@@ -440,6 +442,7 @@
 		8E3FC01E2D6BF8660078EFBB /* MockGeneralNoticesURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGeneralNoticesURLProtocol.swift; sourceTree = "<group>"; };
 		8E3FC0202D6BFC310078EFBB /* MockNoticesAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNoticesAPITests.swift; sourceTree = "<group>"; };
 		8E3FC0232D6C05060078EFBB /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		8E51DAAA2DB1D82300910BC8 /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
 		8E5385732C644AB000AF151B /* TokenRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepository.swift; sourceTree = "<group>"; };
 		8E5385772C644C3F00AF151B /* TokenRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepositoryImpl.swift; sourceTree = "<group>"; };
 		8E53857E2C647D9A00AF151B /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
@@ -1224,6 +1227,7 @@
 				8EFE52F02CDC9331003A7330 /* SearchTableViewController+Layout.swift */,
 				8E60EAF62CDDF946003612FB /* SearchTableViewController+Binding.swift */,
 				8E60EAF92CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift */,
+				8E51DAAA2DB1D82300910BC8 /* SearchResultsTableViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1759,6 +1763,7 @@
 				8ECE2B182C35045800D7F499 /* MainNotice.swift in Sources */,
 				8E6931682CEF08E00074142B /* LocalNotificationSubscriptionDataSource.swift in Sources */,
 				8EFCF86D2C37810B004A53E9 /* UIFont+DynamicFont.swift in Sources */,
+				8E51DAAB2DB1D82300910BC8 /* SearchResultsTableViewController.swift in Sources */,
 				8EDD51A62C6D7D68002101CA /* MainTableViewController+NotificationCenter.swift in Sources */,
 				5C190A532BFDF5EB00E0254B /* NoticeRepositoryImpl.swift in Sources */,
 				5C89DD462BFA0D6800CCCCCD /* MainNoticeRepository.swift in Sources */,
@@ -1878,6 +1883,7 @@
 				8E2051212CD4F32F00D87C6A /* MainNotice.swift in Sources */,
 				8E6931672CEF08E00074142B /* LocalNotificationSubscriptionDataSource.swift in Sources */,
 				8E2051222CD4F32F00D87C6A /* UIFont+DynamicFont.swift in Sources */,
+				8E51DAAC2DB1D82300910BC8 /* SearchResultsTableViewController.swift in Sources */,
 				8E2051232CD4F32F00D87C6A /* MainTableViewController+NotificationCenter.swift in Sources */,
 				8E2051242CD4F32F00D87C6A /* NoticeRepositoryImpl.swift in Sources */,
 				8E2051252CD4F32F00D87C6A /* MainNoticeRepository.swift in Sources */,
