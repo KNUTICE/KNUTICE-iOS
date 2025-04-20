@@ -56,12 +56,4 @@ extension MainTableViewController {
         let viewController = UIHostingController(rootView: SettingView(viewModel: SettingViewModel()))
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
-    //MARK: - Search Button Action
-    @objc func navigateToSearch(_ sender: UIButton) {
-        let viewController = SearchTableViewController(viewModel: SearchTableViewModel())
-        let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true, completion: nil)
-    }
 }
