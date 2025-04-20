@@ -42,7 +42,7 @@ final class WebViewController: UIViewController {
         button.layer.shadowOpacity = 0.3
         button.layer.shadowRadius = 7
         button.layer.shadowOffset = CGSize(width: 0, height: 0)
-        button.addTarget(self, action: #selector(openReminderForm(_:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(openBookmarkForm(_:)), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
@@ -153,7 +153,7 @@ extension WebViewController {
         activityViewController.popoverPresentationController?.sourceView = self.view
         activityViewController.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, arrayReturnedItems: [Any]?, error: Error?) in
             if completed {
-                self.showCompleAlert()
+                self.showCompletionAlert()
             } else {
                 
             }
@@ -161,7 +161,7 @@ extension WebViewController {
         self.present(activityViewController, animated: true, completion: nil)
     }
     
-    private func showCompleAlert() {
+    private func showCompletionAlert() {
         let alert = UIAlertController(title: "알림", message: "공유를 완료했어요.", preferredStyle: .actionSheet)
         let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
         alert.addAction(okButton)
@@ -169,13 +169,13 @@ extension WebViewController {
         
     }
     
-    @objc func openReminderForm(_ sender: UIButton) {
+    @objc func openBookmarkForm(_ sender: UIButton) {
         let bookmarkForm = BookmarkForm(viewModel: BookmarkFormViewModel(), notice: self.notice) {
             self.dismiss(animated: true)
         }
         let viewController = UIHostingController(rootView: bookmarkForm)
         let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.modalPresentationStyle = .popover
+        navigationController.modalPresentationStyle = .pageSheet
         present(navigationController, animated: true, completion: nil)
     }
 }
