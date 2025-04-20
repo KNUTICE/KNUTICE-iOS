@@ -64,51 +64,37 @@ final class UITabBarViewController: UITabBarController {
         tabBar.scrollEdgeAppearance = appearance
         
         if #available(iOS 18, *) {
-            if UIDevice.current.userInterfaceIdiom == .phone {
-                tabs = [
-                    UITab(title: "홈",
-                          image: UIImage(systemName: "house.fill"),
-                          identifier: "Tabs.main") { _ in
-                              self.mainViewController
-                          },
-                    
-                    UISearchTab { _ in
-                        UINavigationController(
-                            rootViewController: SearchResultsTableViewController()
-                        )
-                    },
-                    
-                    UITab(title: "북마크",
-                          image: UIImage(systemName: "bookmark.fill"),
-                          identifier: "Tabs.bookmark") { _ in
-                              self.bookmarkViewController
+            tabs = [
+                UITab(title: "홈",
+                      image: UIImage(systemName: "house.fill"),
+                      identifier: "Tabs.main") { _ in
+                          if UIDevice.current.userInterfaceIdiom == .phone {
+                              return self.mainViewController
+                          } else {
+                              return UINavigationController(rootViewController: self.mainViewController)
                           }
-                ]
-            } else {
-                tabs = [
-                    UITab(title: "홈",
-                          image: UIImage(systemName: "house.fill"),
-                          identifier: "Tabs.main") { _ in
-                              self.mainViewController
-                          },
-                    
-                    UITab(title: "북마크",
-                          image: UIImage(systemName: "bookmark.fill"),
-                          identifier: "Tabs.bookmark") { _ in
-                              self.bookmarkViewController
-                          },
-                    
-                    UISearchTab { _ in
-                        UINavigationController(
-                            rootViewController: SearchResultsTableViewController()
-                        )
-                    }
-                ]
-            }
+                      },
+                
+                UITab(title: "북마크",
+                      image: UIImage(systemName: "bookmark.fill"),
+                      identifier: "Tabs.bookmark") { _ in
+                          if UIDevice.current.userInterfaceIdiom == .phone {
+                              return self.bookmarkViewController
+                          } else {
+                              return UINavigationController(rootViewController: self.bookmarkViewController)
+                          }
+                      },
+                
+                UISearchTab { _ in
+                    UINavigationController(
+                        rootViewController: SearchResultsTableViewController()
+                    )
+                }
+            ]
         } else {
             setViewControllers([mainViewController, searchViewController, bookmarkViewController], animated: true)
         }
-            
+        
         bind()
         viewModel.fetchPushNoticeIfExists()
         

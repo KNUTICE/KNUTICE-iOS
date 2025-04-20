@@ -17,7 +17,9 @@ struct BookmarkList: View {
     var body: some View {
         if let bookmarkList = viewModel.bookmarkList {
             VStack(spacing: 0) {
-                BookmarkListNavBar()
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    BookmarkListNavBar()
+                }
                 
                 List {
                     if !bookmarkList.isEmpty {
@@ -58,6 +60,17 @@ struct BookmarkList: View {
                 .onAppear {
                     if !viewModel.isBindingWithNotification {
                         viewModel.bindingRefreshNotification()
+                    }
+                }
+            }
+            .toolbar {
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        NavigationLink {
+                            SettingView(viewModel: SettingViewModel())
+                        } label: {
+                            Image(systemName: "gearshape")
+                        }
                     }
                 }
             }
