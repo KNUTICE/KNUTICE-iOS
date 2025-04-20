@@ -54,25 +54,6 @@ final class MainTableViewController: UIViewController {
         
         return button
     }()
-    lazy var searchBtn: UIButton = {
-        let targetSize = CGSize(width: 25, height: 24)
-        let renderer = UIGraphicsImageRenderer(size: targetSize)
-        let magnifyingglassImage = UIImage(systemName: "magnifyingglass")
-        let selectedMagnifyingglassImage = UIImage(systemName: "magnifyingglass")?.withTintColor(.lightGray)
-        let resizedMagnifyingglassImage = renderer.image { _ in
-            magnifyingglassImage?.draw(in: CGRect(origin: .zero, size: targetSize))
-        }.withTintColor(.navigationButton)
-        let resizedSelectedMagnifyingglassImage = renderer.image { _ in
-            selectedMagnifyingglassImage?.draw(in: CGRect(origin: .zero, size: targetSize))
-        }
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(resizedMagnifyingglassImage, for: .normal)
-        button.setImage(resizedSelectedMagnifyingglassImage, for: .highlighted)
-        button.addTarget(self, action: #selector(navigateToSearch(_:)), for: .touchUpInside)
-        
-        return button
-    }()
     let refreshControl = UIRefreshControl()
     @Injected(\.mainViewModel) var viewModel: MainTableViewModel
     let disposeBag = DisposeBag()
@@ -83,6 +64,7 @@ final class MainTableViewController: UIViewController {
         
         view.backgroundColor = .mainBackground
         setupLayout()
+        createNavigationItems()
         bind()
         recordEntryTime()
         observeNotification()

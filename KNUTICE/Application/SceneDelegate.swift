@@ -18,8 +18,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScen = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScen)
-        let viewContoller = UINavigationController(rootViewController: ParentViewController(viewModel: ParentViewModel()))
-        self.window?.rootViewController = viewContoller
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            let viewContoller = UINavigationController(rootViewController: ParentViewController(viewModel: ParentViewModel()))
+            self.window?.rootViewController = viewContoller
+        } else {
+            self.window?.rootViewController = ParentViewController(viewModel: ParentViewModel())
+        }
         self.window?.makeKeyAndVisible()
     }
 
