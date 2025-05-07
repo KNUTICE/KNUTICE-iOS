@@ -196,10 +196,6 @@
 		8E5E8BEE2D362AD70078C007 /* BookmarkEditFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5E8BEC2D362AD70078C007 /* BookmarkEditFormViewModel.swift */; };
 		8E5E8BF02D36309A0078C007 /* BookmarkDetailSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5E8BEF2D36309A0078C007 /* BookmarkDetailSwitchView.swift */; };
 		8E5E8BF12D36309A0078C007 /* BookmarkDetailSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5E8BEF2D36309A0078C007 /* BookmarkDetailSwitchView.swift */; };
-		8E60EAF72CDDF946003612FB /* SearchTableViewController+Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60EAF62CDDF946003612FB /* SearchTableViewController+Binding.swift */; };
-		8E60EAF82CDDF946003612FB /* SearchTableViewController+Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60EAF62CDDF946003612FB /* SearchTableViewController+Binding.swift */; };
-		8E60EAFA2CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60EAF92CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift */; };
-		8E60EAFB2CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60EAF92CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift */; };
 		8E613EA02C95214C006FC272 /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E613E9F2C95214C006FC272 /* RequestResult.swift */; };
 		8E6175482CA24157002B6021 /* UIDevice+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6175472CA24157002B6021 /* UIDevice+Identifier.swift */; };
 		8E659EBE2D29438500305D56 /* UITabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E659EBD2D29438500305D56 /* UITabBarViewController.swift */; };
@@ -229,6 +225,10 @@
 		8E7A4A712D2A44CE00BD1B7F /* Date+StringFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A6F2D2A44CE00BD1B7F /* Date+StringFormat.swift */; };
 		8E7A4A732D2A531B00BD1B7F /* NoticeKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A722D2A531B00BD1B7F /* NoticeKind.swift */; };
 		8E7A4A742D2A531B00BD1B7F /* NoticeKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A722D2A531B00BD1B7F /* NoticeKind.swift */; };
+		8E7A9E742DCB17750001D4AA /* SearchResultsTableViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A9E732DCB17750001D4AA /* SearchResultsTableViewController+Layout.swift */; };
+		8E7A9E752DCB17750001D4AA /* SearchResultsTableViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A9E732DCB17750001D4AA /* SearchResultsTableViewController+Layout.swift */; };
+		8E9442C92DCB105C0036859E /* SearchResultsTableViewController+Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9442C82DCB105C0036859E /* SearchResultsTableViewController+Binding.swift */; };
+		8E9442CA2DCB105C0036859E /* SearchResultsTableViewController+Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9442C82DCB105C0036859E /* SearchResultsTableViewController+Binding.swift */; };
 		8EA47FE92D922C5800B68EAD /* TabBarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA47FE82D922C5800B68EAD /* TabBarService.swift */; };
 		8EA47FEA2D922C5800B68EAD /* TabBarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA47FE82D922C5800B68EAD /* TabBarService.swift */; };
 		8EA72DC92CD5CA4800D1B300 /* DeveloperTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA72DC82CD5CA4800D1B300 /* DeveloperTools.swift */; };
@@ -284,10 +284,6 @@
 		8EEE1A522CEA19C90011FD87 /* NoticeFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEE1A502CEA19C90011FD87 /* NoticeFetchable.swift */; };
 		8EFCF8672C37742A004A53E9 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF8662C37742A004A53E9 /* SettingView.swift */; };
 		8EFCF86D2C37810B004A53E9 /* UIFont+DynamicFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFCF86C2C37810B004A53E9 /* UIFont+DynamicFont.swift */; };
-		8EFE52E72CDC89CF003A7330 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFE52E62CDC89CF003A7330 /* SearchTableViewController.swift */; };
-		8EFE52E82CDC89CF003A7330 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFE52E62CDC89CF003A7330 /* SearchTableViewController.swift */; };
-		8EFE52F12CDC9331003A7330 /* SearchTableViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFE52F02CDC9331003A7330 /* SearchTableViewController+Layout.swift */; };
-		8EFE52F22CDC9331003A7330 /* SearchTableViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFE52F02CDC9331003A7330 /* SearchTableViewController+Layout.swift */; };
 		8EFE52FA2CDCBA80003A7330 /* SearchTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFE52F92CDCBA80003A7330 /* SearchTableViewModel.swift */; };
 		8EFE52FB2CDCBA80003A7330 /* SearchTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFE52F92CDCBA80003A7330 /* SearchTableViewModel.swift */; };
 		8EFE52FD2CDCBB89003A7330 /* SearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFE52FC2CDCBB89003A7330 /* SearchRepository.swift */; };
@@ -461,8 +457,6 @@
 		8E5E8BE92D3623720078C007 /* BookmarkFormHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkFormHandler.swift; sourceTree = "<group>"; };
 		8E5E8BEC2D362AD70078C007 /* BookmarkEditFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkEditFormViewModel.swift; sourceTree = "<group>"; };
 		8E5E8BEF2D36309A0078C007 /* BookmarkDetailSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkDetailSwitchView.swift; sourceTree = "<group>"; };
-		8E60EAF62CDDF946003612FB /* SearchTableViewController+Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchTableViewController+Binding.swift"; sourceTree = "<group>"; };
-		8E60EAF92CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchTableViewController+UISearchBarDelegate.swift"; sourceTree = "<group>"; };
 		8E613E9D2C951C8D006FC272 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8E613E9F2C95214C006FC272 /* RequestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestResult.swift; sourceTree = "<group>"; };
 		8E6175472CA24157002B6021 /* UIDevice+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Identifier.swift"; sourceTree = "<group>"; };
@@ -481,6 +475,8 @@
 		8E7A4A6C2D2A43A900BD1B7F /* BookmarkListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkListRow.swift; sourceTree = "<group>"; };
 		8E7A4A6F2D2A44CE00BD1B7F /* Date+StringFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+StringFormat.swift"; sourceTree = "<group>"; };
 		8E7A4A722D2A531B00BD1B7F /* NoticeKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeKind.swift; sourceTree = "<group>"; };
+		8E7A9E732DCB17750001D4AA /* SearchResultsTableViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchResultsTableViewController+Layout.swift"; sourceTree = "<group>"; };
+		8E9442C82DCB105C0036859E /* SearchResultsTableViewController+Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchResultsTableViewController+Binding.swift"; sourceTree = "<group>"; };
 		8EA47FE82D922C5800B68EAD /* TabBarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarService.swift; sourceTree = "<group>"; };
 		8EA72DC82CD5CA4800D1B300 /* DeveloperTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperTools.swift; sourceTree = "<group>"; };
 		8EA72DCB2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperToolsViewModel.swift; sourceTree = "<group>"; };
@@ -516,8 +512,6 @@
 		8EEE1A502CEA19C90011FD87 /* NoticeFetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeFetchable.swift; sourceTree = "<group>"; };
 		8EFCF8662C37742A004A53E9 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		8EFCF86C2C37810B004A53E9 /* UIFont+DynamicFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+DynamicFont.swift"; sourceTree = "<group>"; };
-		8EFE52E62CDC89CF003A7330 /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
-		8EFE52F02CDC9331003A7330 /* SearchTableViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchTableViewController+Layout.swift"; sourceTree = "<group>"; };
 		8EFE52F92CDCBA80003A7330 /* SearchTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewModel.swift; sourceTree = "<group>"; };
 		8EFE52FC2CDCBB89003A7330 /* SearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepository.swift; sourceTree = "<group>"; };
 		8EFE52FF2CDCBD3D003A7330 /* SearchRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -1223,11 +1217,9 @@
 		8EFE52E42CDC895E003A7330 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8EFE52E62CDC89CF003A7330 /* SearchTableViewController.swift */,
-				8EFE52F02CDC9331003A7330 /* SearchTableViewController+Layout.swift */,
-				8E60EAF62CDDF946003612FB /* SearchTableViewController+Binding.swift */,
-				8E60EAF92CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift */,
 				8E51DAAA2DB1D82300910BC8 /* SearchResultsTableViewController.swift */,
+				8E9442C82DCB105C0036859E /* SearchResultsTableViewController+Binding.swift */,
+				8E7A9E732DCB17750001D4AA /* SearchResultsTableViewController+Layout.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1697,7 +1689,6 @@
 				8E3F021E2C9FB46100AE89D5 /* ReportService.swift in Sources */,
 				8E5E8BF12D36309A0078C007 /* BookmarkDetailSwitchView.swift in Sources */,
 				8E6931572CEEFC0F0074142B /* NotificationSubscriptionList.swift in Sources */,
-				8EFE52F22CDC9331003A7330 /* SearchTableViewController+Layout.swift in Sources */,
 				8E5385742C644AB000AF151B /* TokenRepository.swift in Sources */,
 				8E69315A2CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift in Sources */,
 				5C5698922BEFB4A20085E389 /* MainTableViewModel.swift in Sources */,
@@ -1712,7 +1703,6 @@
 				8E7A4A5E2D2979DB00BD1B7F /* BookmarkList.swift in Sources */,
 				8EADB8FB2D558F7300489086 /* Factory+Instance.swift in Sources */,
 				8E7A4A702D2A44CE00BD1B7F /* Date+StringFormat.swift in Sources */,
-				8EFE52E72CDC89CF003A7330 /* SearchTableViewController.swift in Sources */,
 				8E3F02202C9FB6A000AE89D5 /* ReportRepository.swift in Sources */,
 				8E613EA02C95214C006FC272 /* RequestResult.swift in Sources */,
 				8E5C1ACD2D4075620092BF88 /* MainPopupContent.swift in Sources */,
@@ -1735,14 +1725,12 @@
 				8E7A4A732D2A531B00BD1B7F /* NoticeKind.swift in Sources */,
 				8E7A4A6B2D2A2CD800BD1B7F /* Bookmark.swift in Sources */,
 				8E3F02262C9FB86400AE89D5 /* PostResponseDTO.swift in Sources */,
-				8E60EAFA2CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift in Sources */,
 				8E5E8BE72D361F510078C007 /* BookmarkManager.swift in Sources */,
 				8E3F022D2CA0023A00AE89D5 /* VIew+TextEditorBackground.swift in Sources */,
 				8E0C3F892C9EC93B005E2A16 /* ReportView.swift in Sources */,
 				8EBBE2402CA0E3FC00826D5A /* LightTextView.swift in Sources */,
 				8EB767812D439DE90086AB60 /* Date+EndOfToday.swift in Sources */,
 				8E5E8BE42D36190E0078C007 /* BookmarkListRefreshable.swift in Sources */,
-				8E60EAF82CDDF946003612FB /* SearchTableViewController+Binding.swift in Sources */,
 				8E7A4A612D297A4D00BD1B7F /* BookmarkListViewModel.swift in Sources */,
 				8EC6B8962D309EA9002B45C7 /* LocalBookmarkDataSource.swift in Sources */,
 				5C190A552BFDF66600E0254B /* NoticeReponseDTO.swift in Sources */,
@@ -1789,7 +1777,9 @@
 				8EFE52FD2CDCBB89003A7330 /* SearchRepository.swift in Sources */,
 				8EEE1A512CEA19C90011FD87 /* NoticeFetchable.swift in Sources */,
 				8E5C1AD22D4077140092BF88 /* MainPopupContentRepository.swift in Sources */,
+				8E7A9E752DCB17750001D4AA /* SearchResultsTableViewController+Layout.swift in Sources */,
 				8E00AF6C2C361F780037EC38 /* WebViewController.swift in Sources */,
+				8E9442C92DCB105C0036859E /* SearchResultsTableViewController+Binding.swift in Sources */,
 				8E5C1ACF2D40768B0092BF88 /* MainPopupContentDTO.swift in Sources */,
 				8E3B8C492D2BBFFD007E9579 /* BookmarkFormViewModel.swift in Sources */,
 				8E00AF7F2C367D8A0037EC38 /* DataBindable.swift in Sources */,
@@ -1817,7 +1807,6 @@
 				8E2050FF2CD4F32F00D87C6A /* ReportService.swift in Sources */,
 				8E5E8BF02D36309A0078C007 /* BookmarkDetailSwitchView.swift in Sources */,
 				8E6931562CEEFC0F0074142B /* NotificationSubscriptionList.swift in Sources */,
-				8EFE52F12CDC9331003A7330 /* SearchTableViewController+Layout.swift in Sources */,
 				8E2051002CD4F32F00D87C6A /* TokenRepository.swift in Sources */,
 				8E6931592CEEFC2F0074142B /* NotificationSubscriptionListViewModel.swift in Sources */,
 				8E2051012CD4F32F00D87C6A /* MainTableViewModel.swift in Sources */,
@@ -1832,7 +1821,6 @@
 				8E7A4A5F2D2979DB00BD1B7F /* BookmarkList.swift in Sources */,
 				8EADB8FA2D558F7300489086 /* Factory+Instance.swift in Sources */,
 				8E7A4A712D2A44CE00BD1B7F /* Date+StringFormat.swift in Sources */,
-				8EFE52E82CDC89CF003A7330 /* SearchTableViewController.swift in Sources */,
 				8E2051062CD4F32F00D87C6A /* ReportRepository.swift in Sources */,
 				8E2051072CD4F32F00D87C6A /* RequestResult.swift in Sources */,
 				8E5C1ACC2D4075620092BF88 /* MainPopupContent.swift in Sources */,
@@ -1855,14 +1843,12 @@
 				8E7A4A742D2A531B00BD1B7F /* NoticeKind.swift in Sources */,
 				8E7A4A6A2D2A2CD800BD1B7F /* Bookmark.swift in Sources */,
 				8E2051102CD4F32F00D87C6A /* PostResponseDTO.swift in Sources */,
-				8E60EAFB2CDE00F7003612FB /* SearchTableViewController+UISearchBarDelegate.swift in Sources */,
 				8E5E8BE82D361F510078C007 /* BookmarkManager.swift in Sources */,
 				8E2051112CD4F32F00D87C6A /* VIew+TextEditorBackground.swift in Sources */,
 				8E2051122CD4F32F00D87C6A /* ReportView.swift in Sources */,
 				8E2051132CD4F32F00D87C6A /* LightTextView.swift in Sources */,
 				8EB767822D439DE90086AB60 /* Date+EndOfToday.swift in Sources */,
 				8E5E8BE52D36190E0078C007 /* BookmarkListRefreshable.swift in Sources */,
-				8E60EAF72CDDF946003612FB /* SearchTableViewController+Binding.swift in Sources */,
 				8E7A4A622D297A4D00BD1B7F /* BookmarkListViewModel.swift in Sources */,
 				8EC6B8952D309EA9002B45C7 /* LocalBookmarkDataSource.swift in Sources */,
 				8E2051162CD4F32F00D87C6A /* NoticeReponseDTO.swift in Sources */,
@@ -1909,7 +1895,9 @@
 				8EFE52FE2CDCBB89003A7330 /* SearchRepository.swift in Sources */,
 				8EEE1A522CEA19C90011FD87 /* NoticeFetchable.swift in Sources */,
 				8E5C1AD32D4077140092BF88 /* MainPopupContentRepository.swift in Sources */,
+				8E7A9E742DCB17750001D4AA /* SearchResultsTableViewController+Layout.swift in Sources */,
 				8E2051302CD4F32F00D87C6A /* WebViewController.swift in Sources */,
+				8E9442CA2DCB105C0036859E /* SearchResultsTableViewController+Binding.swift in Sources */,
 				8E5C1AD02D40768B0092BF88 /* MainPopupContentDTO.swift in Sources */,
 				8E3B8C482D2BBFFD007E9579 /* BookmarkFormViewModel.swift in Sources */,
 				8E2051312CD4F32F00D87C6A /* DataBindable.swift in Sources */,

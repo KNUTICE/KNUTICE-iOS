@@ -30,7 +30,7 @@ final class UITabBarViewController: UITabBarController {
     }()
     private let searchViewController: UIViewController = {
         let viewController = UINavigationController(
-            rootViewController: SearchTableViewController(viewModel: SearchTableViewModel())
+            rootViewController: SearchResultsTableViewController()
         )
         viewController.tabBarItem.image = UIImage(systemName: "magnifyingglass")
         viewController.tabBarItem.title = "검색"
@@ -70,9 +70,9 @@ final class UITabBarViewController: UITabBarController {
                       identifier: "Tabs.main") { _ in
                           if UIDevice.current.userInterfaceIdiom == .phone {
                               return self.mainViewController
-                          } else {
-                              return UINavigationController(rootViewController: self.mainViewController)
                           }
+                          
+                          return UINavigationController(rootViewController: self.mainViewController)
                       },
                 
                 UITab(title: "북마크",
@@ -80,13 +80,17 @@ final class UITabBarViewController: UITabBarController {
                       identifier: "Tabs.bookmark") { _ in
                           if UIDevice.current.userInterfaceIdiom == .phone {
                               return self.bookmarkViewController
-                          } else {
-                              return UINavigationController(rootViewController: self.bookmarkViewController)
                           }
+                          
+                          return UINavigationController(rootViewController: self.bookmarkViewController)
                       },
                 
                 UISearchTab { _ in
-                    UINavigationController(
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return SearchResultsTableViewController()
+                    }
+                    
+                    return UINavigationController(
                         rootViewController: SearchResultsTableViewController()
                     )
                 }
