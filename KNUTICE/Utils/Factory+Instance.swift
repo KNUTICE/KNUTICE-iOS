@@ -114,4 +114,10 @@ extension Container {
             ReportViewModel()
         }
     }
+    
+    var searchTableViewModel: Factory<SearchTableViewModel> {
+        Factory(self) {
+            SearchTableViewModel()
+        }
+    }
 }
