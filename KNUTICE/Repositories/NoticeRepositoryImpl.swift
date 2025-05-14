@@ -12,34 +12,28 @@ import Factory
 final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
     
-    @available(*, deprecated, message: "Use Combine instead.")
-    func fetchNotices(for category: NoticeCategory) -> Single<[Notice]> {
+    func fetchNotices(for category: NoticeCategory) -> AnyPublisher<NoticeSectionModel, any Error> {
         return dataSource.sendGetRequest(to: category.remoteURL, resultType: NoticeReponseDTO.self)
-            .map { [weak self] in
-                return self?.createNotice($0) ?? []
+            .compactMap { [weak self] dto in
+                dto.body?.compactMap {
+                    self?.createNotice($0)
+                }
             }
-    }
-    
-    @available(*, deprecated, message: "Use Combine instead.")
-    func fetchNotices(for category: NoticeCategory, after number: Int) -> Single<[Notice]> {
-        return dataSource.sendGetRequest(to: category.remoteURL + "&nttId=\(number)", resultType: NoticeReponseDTO.self)
-            .map { [weak self] in
-                return self?.createNotice($0) ?? []
-            }
-    }
-    
-    func fetchNotices(for category: NoticeCategory) -> AnyPublisher<[Notice], any Error> {
-        return dataSource.sendGetRequest(to: category.remoteURL, resultType: NoticeReponseDTO.self)
-            .compactMap { [weak self] in
-                self?.createNotice($0)
+            .map {
+                NoticeSectionModel(items: $0)
             }
             .eraseToAnyPublisher()
     }
     
-    func fetchNotices(for category: NoticeCategory, after number: Int) -> AnyPublisher<[Notice], any Error> {
+    func fetchNotices(for category: NoticeCategory, after number: Int) -> AnyPublisher<NoticeSectionModel, any Error> {
         return dataSource.sendGetRequest(to: category.remoteURL + "&nttId=\(number)", resultType: NoticeReponseDTO.self)
-            .compactMap { [weak self] in
-                self?.createNotice($0)
+            .compactMap { [weak self] dto in
+                dto.body?.compactMap {
+                    self?.createNotice($0)
+                }
+            }
+            .map {
+                NoticeSectionModel(items: $0)
             }
             .eraseToAnyPublisher()
     }
