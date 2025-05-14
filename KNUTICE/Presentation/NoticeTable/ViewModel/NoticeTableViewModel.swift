@@ -40,8 +40,8 @@ extension NoticeTableViewModel: NoticesRepresentable {
                 }
                 
                 self?.isFetching.accept(false)
-            }, receiveValue: { [weak self] in
-                self?.notices.accept($0)
+            }, receiveValue: { [weak self] _ in
+//                self?.notices.accept($0)
             })
             .store(in: &cancellables)
     }
@@ -60,8 +60,8 @@ extension NoticeTableViewModel: NoticesRepresentable {
                 }
                 
                 self?.isRefreshing.accept(false)
-            }, receiveValue: { [weak self] in
-                self?.notices.accept($0)
+            }, receiveValue: { [weak self] _ in
+//                self?.notices.accept($0)
             })
             .store(in: &cancellables)
     }
@@ -81,15 +81,15 @@ extension NoticeTableViewModel: NoticesRepresentable {
                     self?.logger.error("NoticeViewModel.fetchNextNotices() error: \(error.localizedDescription)")
                 }
                 self?.isFetching.accept(false)
-            }, receiveValue: { [weak self] in
-                var currentNotices = self?.notices.value
-                currentNotices? += $0
-                
-                guard let currentNotices else {
-                    return
-                }
-                
-                self?.notices.accept(currentNotices)
+            }, receiveValue: { [weak self] _ in
+//                var currentNotices = self?.notices.value
+//                currentNotices? += $0
+//                
+//                guard let currentNotices else {
+//                    return
+//                }
+//                
+//                self?.notices.accept(currentNotices)
             })
             .store(in: &cancellables)
     }
