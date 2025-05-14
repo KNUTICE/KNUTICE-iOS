@@ -29,19 +29,22 @@ extension MainTableViewController {
     
     //MARK: - General Notice Button Callback Function
     func navigateToGeneralNotice(_ sender: UIButton) {
-        let viewController = NoticeTableViewController(viewModel: NoticeTableViewModel(category: .generalNotice), navigationTitle: "일반공지")
+//        let viewController = NoticeTableViewController(viewModel: NoticeTableViewModel(category: .generalNotice), navigationTitle: "일반공지")
+        let viewController = NoticeCollectionViewController(viewModel: NoticeCollectionViewModel(category: .generalNotice), navigationTitle: "일반공지")
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     //MARK: - Academic Notice Button Callback Function
     func navigateToAcademicNotice(_ sender: UIButton) {
-        let viewController = NoticeTableViewController(viewModel: NoticeTableViewModel(category: .academicNotice), navigationTitle: "학사공지")
+//        let viewController = NoticeTableViewController(viewModel: NoticeTableViewModel(category: .academicNotice), navigationTitle: "학사공지")
+        let viewController = NoticeCollectionViewController(viewModel: NoticeCollectionViewModel(category: .academicNotice), navigationTitle: "학사공지")
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     //MARK: - Scholarship Notice Button Callback Function
     func navigateToScholarshipNotice(_ sender: UIButton) {
-        let viewController = NoticeTableViewController(viewModel: NoticeTableViewModel(category: .scholarshipNotice), navigationTitle: "장학안내")
+//        let viewController = NoticeTableViewController(viewModel: NoticeTableViewModel(category: .scholarshipNotice), navigationTitle: "장학안내")
+        let viewController = NoticeCollectionViewController(viewModel: NoticeCollectionViewModel(category: .scholarshipNotice), navigationTitle: "장학안내")
         navigationController?.pushViewController(viewController, animated: true)
     }
     
