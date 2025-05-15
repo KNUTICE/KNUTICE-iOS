@@ -7,6 +7,7 @@
 
 import Combine
 import Factory
+import Foundation
 
 protocol NotificationSubscriptionService {
     func updatePermission(_ notice: NoticeCategory, to value: Bool) -> AnyPublisher<Void, any Error>

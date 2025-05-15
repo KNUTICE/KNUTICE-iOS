@@ -7,6 +7,7 @@
 
 import RxSwift
 import RxDataSources
+import UIKit
 
 //MARK: - Binding
 extension MainTableViewController {
