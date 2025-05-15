@@ -6,6 +6,7 @@
 //
 
 import RxSwift
+import UIKit
 
 extension SearchResultsTableViewController {
     func bind() {

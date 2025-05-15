@@ -6,6 +6,7 @@
 //
 
 import RxSwift
+import UIKit
 
 protocol DataBindable: AnyObject {
     var viewModel: NoticeTableViewModel { get }
