@@ -14,6 +14,7 @@ final class NoticeCellWithThumbnail: UICollectionViewCell {
         let label = UILabel(frame: .zero)
         label.font = .preferredFont(forTextStyle: .subheadline)
         label.textColor = .accent
+        label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
     }()
@@ -21,13 +22,7 @@ final class NoticeCellWithThumbnail: UICollectionViewCell {
         let label = UILabel(frame: .zero)
         label.font = .preferredFont(forTextStyle: .caption2)
         label.textColor = .subTitle
-        
-        return label
-    }()
-    private let uploadDateLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.font = .preferredFont(forTextStyle: .caption2)
-        label.textColor = .subTitle
+        label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
     }()
@@ -75,7 +70,7 @@ final class NoticeCellWithThumbnail: UICollectionViewCell {
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.width.equalTo(UIScreen.main.bounds.width - 32)
-            make.height.equalTo(UIScreen.main.bounds.width * 0.4)
+            make.height.equalTo(UIDevice.current.userInterfaceIdiom == .phone ? UIScreen.main.bounds.width * 0.4 : UIScreen.main.bounds.width * 0.2)
         }
         
         contentView.addSubview(titleLabel)
@@ -89,13 +84,6 @@ final class NoticeCellWithThumbnail: UICollectionViewCell {
         subTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(16)
-            make.bottom.equalToSuperview().offset(-20)
-        }
-        
-        contentView.addSubview(uploadDateLabel)
-        uploadDateLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.leading.equalTo(subTitleLabel.snp.trailing).offset(5)
             make.bottom.equalToSuperview().offset(-20)
         }
     }
