@@ -13,6 +13,7 @@ final class NoticeCell: UICollectionViewCell {
         let label = UILabel(frame: .zero)
         label.font = .preferredFont(forTextStyle: .subheadline)
         label.textColor = .accent
+        label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
     }()
@@ -20,6 +21,7 @@ final class NoticeCell: UICollectionViewCell {
         let label = UILabel(frame: .zero)
         label.font = .preferredFont(forTextStyle: .caption2)
         label.textColor = .subTitle
+        label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
     }()
