@@ -41,6 +41,7 @@ final class NoticeCollectionViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         setUpLayout()
+        setUpNavigationBar(title: navigationTitle)
         bind()
         viewModel.fetchNotices()
     }
