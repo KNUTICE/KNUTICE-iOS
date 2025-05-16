@@ -20,6 +20,7 @@ final class NoticeCollectionViewController: UIViewController {
         let loadingIndicator = UIActivityIndicatorView(style: .large)
         loadingIndicator.startAnimating()
         collectionView.backgroundView = loadingIndicator
+        collectionView.refreshControl = refreshControl
         
         return collectionView
     }()
