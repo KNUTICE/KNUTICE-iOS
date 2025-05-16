@@ -25,7 +25,25 @@ extension NoticeCollectionViewController {
         })
         
         viewModel.notices
+            .do(onNext: { [weak self] _ in
+                guard let self else { return }
+                
+                let offset = self.collectionView.contentOffset
+                self.collectionView.setContentOffset(offset, animated: false)
+            })
             .bind(to: collectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
+        collectionView.rx.willDisplayCell
+            .bind { [weak self] cell, indexPath in
+                guard let self else { return }
+                
+                if let valuesCount = self.viewModel.notices.value.first?.items.count,
+                   indexPath.item == valuesCount - 1 {
+                    self.viewModel.fetchNextPage()
+                }
+                
+            }
             .disposed(by: disposeBag)
     }
 }
