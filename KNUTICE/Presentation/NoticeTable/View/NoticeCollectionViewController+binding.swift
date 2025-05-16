@@ -24,16 +24,20 @@ extension NoticeCollectionViewController {
             return cell
         })
         
+        //MARK: - viewModel.notices
         viewModel.notices
             .do(onNext: { [weak self] _ in
                 guard let self else { return }
                 
-                let offset = self.collectionView.contentOffset
-                self.collectionView.setContentOffset(offset, animated: false)
+                if self.viewModel.isRefreshing.value == false {
+                    let offset = self.collectionView.contentOffset
+                    self.collectionView.setContentOffset(offset, animated: false)
+                }
             })
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
+        //MARK: - collectionView.rx.willDisplayCell
         collectionView.rx.willDisplayCell
             .bind { [weak self] cell, indexPath in
                 guard let self else { return }
@@ -44,6 +48,18 @@ extension NoticeCollectionViewController {
                 }
                 
             }
+            .disposed(by: disposeBag)
+        
+        //MARK: - viewModel.isRefreshing
+        viewModel.isRefreshing
+            .bind(to: refreshControl.rx.isRefreshing)
+            .disposed(by: disposeBag)
+        
+        //MARK: - refreshControl
+        refreshControl.rx.controlEvent(.valueChanged)
+            .bind(onNext: { [weak self] in
+                self?.viewModel.fetchNotices(isRefreshing: true)
+            })
             .disposed(by: disposeBag)
     }
 }
