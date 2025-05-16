@@ -26,8 +26,10 @@ extension NoticeCollectionViewController {
         
         //MARK: - viewModel.notices
         viewModel.notices
+            .skip(1)    //초기값은 무시
             .do(onNext: { [weak self] _ in
                 guard let self else { return }
+                collectionView.backgroundView = nil
                 
                 if self.viewModel.isRefreshing.value == false {
                     let offset = self.collectionView.contentOffset
