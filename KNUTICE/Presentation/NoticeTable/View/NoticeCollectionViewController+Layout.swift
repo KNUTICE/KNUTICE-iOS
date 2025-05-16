@@ -14,4 +14,9 @@ extension NoticeCollectionViewController {
             make.edges.equalToSuperview()
         }
     }
+    
+    func setUpNavigationBar(title: String) {
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.title = title
+    }
 }
