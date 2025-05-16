@@ -11,11 +11,15 @@ import RxSwift
 protocol NoticeFetchable {
     var isFetching: BehaviorRelay<Bool> { get }
     
-    func fetchNotices()
+    func fetchNotices(isRefreshing: Bool)
 }
 
 extension NoticeFetchable {
     var isFetchingObservable: Observable<Bool> {
         return isFetching.asObservable()
+    }
+    
+    func fetchNotices(isRefreshing: Bool = false) {
+        self.fetchNotices(isRefreshing: isRefreshing)
     }
 }

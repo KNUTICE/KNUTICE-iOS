@@ -20,6 +20,7 @@ final class NoticeCollectionViewController: UIViewController {
         
         return collectionView
     }()
+    let refreshControl: UIRefreshControl = UIRefreshControl()
     private let currentColumnCount: CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 1 : 2
     let viewModel: NoticeCollectionViewModel
     private let navigationTitle: String
@@ -40,6 +41,7 @@ final class NoticeCollectionViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
+        collectionView.refreshControl = refreshControl
         setUpLayout()
         setUpNavigationBar(title: navigationTitle)
         bind()

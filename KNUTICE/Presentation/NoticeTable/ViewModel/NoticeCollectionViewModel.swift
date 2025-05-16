@@ -19,6 +19,8 @@ final class NoticeCollectionViewModel: NoticeFetchable {
     @Injected(\.noticeRepository) private var repository
     /// 서버와 통신 중임을 나타내는 변수
     let isFetching: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    /// 새로고침 여부를 나타내는 변수
+    let isRefreshing: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     /// 공지 카테고리를 나타내는 프로퍼티로, 공지의 종류를 구분하는 데 사용
     private let category: NoticeCategory
     /// Publisher 구독 메모리 관리를 위한 cancellable bag
@@ -32,12 +34,21 @@ final class NoticeCollectionViewModel: NoticeFetchable {
     
     /// 서버에 `category`에 대한 공지사항 데이터 요청하고,
     /// 전달 받은 데이터는 `notices`에 업데이트
-    func fetchNotices() {
-        isFetching.accept(true)
+    func fetchNotices(isRefreshing: Bool = false) {
+        if isRefreshing {
+            self.isRefreshing.accept(true)
+        } else {
+            self.isFetching.accept(true)
+        }
+        
         repository.fetchNotices(for: category)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
-                self?.isFetching.accept(false)
+                if isRefreshing {
+                    self?.isRefreshing.accept(false)
+                } else {
+                    self?.isFetching.accept(false)
+                }
                 
                 switch completion {
                 case .finished:
