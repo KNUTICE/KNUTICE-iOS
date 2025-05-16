@@ -17,6 +17,9 @@ final class NoticeCollectionViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(NoticeCell.self, forCellWithReuseIdentifier: NoticeCell.reuseIdentifier)
         collectionView.register(NoticeCellWithThumbnail.self, forCellWithReuseIdentifier: NoticeCellWithThumbnail.reuseIdentifier)
+        let loadingIndicator = UIActivityIndicatorView(style: .large)
+        loadingIndicator.startAnimating()
+        collectionView.backgroundView = loadingIndicator
         
         return collectionView
     }()
@@ -40,8 +43,6 @@ final class NoticeCollectionViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        collectionView.refreshControl = refreshControl
         setUpLayout()
         setUpNavigationBar(title: navigationTitle)
         bind()
