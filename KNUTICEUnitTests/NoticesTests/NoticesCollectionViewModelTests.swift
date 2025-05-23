@@ -32,7 +32,7 @@ final class NoticesCollectionViewModelTests: XCTestCase {
         disposeBag = nil
     }
     
-    func testFetchGeneralNotices_ReturnNotices() {
+    func test_fetchGeneralNotices_returnNotices() {
         //Given
         let expectation = XCTestExpectation(description: "fetch general notices")
         MockURLProtocol.setUpMockData(.fetchGeneralNoticesShouldSucceed)
@@ -54,7 +54,7 @@ final class NoticesCollectionViewModelTests: XCTestCase {
         
     }
     
-    func testFetchAcademicNotices_ReturnNotices() {
+    func test_fetchAcademicNotices_returnNotices() {
         //Given
         let expectation = XCTestExpectation(description: "fetch academic notices")
         MockURLProtocol.setUpMockData(.fetchAcademicNoticesShouldSucceed)
@@ -74,7 +74,7 @@ final class NoticesCollectionViewModelTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 
-    func testFetchScholarshipNotices_ReturnNotices() {
+    func test_fetchScholarshipNotices_returnNotices() {
         //Given
         let expectation = XCTestExpectation(description: "fetch academic notices")
         MockURLProtocol.setUpMockData(.fetchScholarshipNoticesShouldSucceed)
@@ -94,7 +94,7 @@ final class NoticesCollectionViewModelTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
     
-    func testFetchEventNotices_ReturnNotices() {
+    func test_fetchEventNotices_returnNotices() {
         //Given
         let expectation = XCTestExpectation(description: "fetch academic notices")
         MockURLProtocol.setUpMockData(.fetchEventNoticesShouldSucceed)
@@ -105,6 +105,26 @@ final class NoticesCollectionViewModelTests: XCTestCase {
             .subscribe(onNext: { notices in
                 //Then
                 XCTAssertEqual(notices.flatMap { $0.items }.count, 20)
+                expectation.fulfill()
+            })
+            .disposed(by: disposeBag)
+        
+        //When
+        viewModel.fetchNotices()
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    func test_fetchEmploymentNotices_returnNotices() {
+        //Given
+        let expectation = XCTestExpectation(description: "fetch academic notices")
+        MockURLProtocol.setUpMockData(.fetchEmploymentNoticesShouldSucceed)
+        viewModel = NoticeCollectionViewModel(category: .employmentNotice)
+        
+        viewModel.notices
+            .skip(1)
+            .subscribe(onNext: { notices in
+                //Then
+                XCTAssertEqual(notices.flatMap { $0.items }.count, 4)
                 expectation.fulfill()
             })
             .disposed(by: disposeBag)
