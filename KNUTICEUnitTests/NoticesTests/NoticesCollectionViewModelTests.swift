@@ -1,5 +1,5 @@
 //
-//  NoticesTableViewModelMockTest.swift
+//  NoticesCollectionViewModelTests.swift
 //  KNUTICEUnitTests
 //
 //  Created by 이정훈 on 3/3/25.
@@ -11,38 +11,38 @@ import RxSwift
 import XCTest
 @testable import KNUTICE
 
-final class MockNoticesTableViewModelTests: XCTestCase {
-    private var viewModel: NoticeTableViewModel!
-    private var configuration: URLSessionConfiguration!
+final class NoticesCollectionViewModelTests: XCTestCase {
+    private var viewModel: NoticeCollectionViewModel!
     private var disposeBag: DisposeBag!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        configuration = URLSessionConfiguration.default
+        let configuration = URLSessionConfiguration.default
+        configuration.protocolClasses = [MockURLProtocol.self]
+        let session = Session(configuration: configuration)
+        Container.shared.remoteDataSource.register {
+            RemoteDataSourceImpl(session: session)
+        }
         disposeBag = DisposeBag()
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         viewModel = nil
-        configuration = nil
         disposeBag = nil
     }
     
     func testFetchGeneralNotices_ReturnNotices() {
         //Given
         let expectation = XCTestExpectation(description: "fetch general notices")
-        configuration.protocolClasses = [MockGeneralNoticesURLProtocol.self]
-        let session = Session(configuration: configuration)
-        Container.shared.remoteDataSource.register {
-            RemoteDataSourceImpl(session: session)
-        }
-        viewModel = NoticeTableViewModel(category: .generalNotice)
+        MockURLProtocol.setUpMockData(.fetchGeneralNoticesShouldSucceed)
+        viewModel = NoticeCollectionViewModel(category: .generalNotice)
+        
         viewModel.notices
             .skip(1)
             .subscribe(onNext: { notices in
                 //Then
-                XCTAssertEqual(notices.count, 20)
+                XCTAssertEqual(notices.flatMap { $0.items }.count, 20)
                 expectation.fulfill()
             })
             .disposed(by: disposeBag)
@@ -57,17 +57,14 @@ final class MockNoticesTableViewModelTests: XCTestCase {
     func testFetchAcademicNotices_ReturnNotices() {
         //Given
         let expectation = XCTestExpectation(description: "fetch academic notices")
-        configuration.protocolClasses = [MockAcademicNoticesURLProtocol.self]
-        let session = Session(configuration: configuration)
-        Container.shared.remoteDataSource.register {
-            RemoteDataSourceImpl(session: session)
-        }
-        viewModel = NoticeTableViewModel(category: .academicNotice)
+        MockURLProtocol.setUpMockData(.fetchAcademicNoticesShouldSucceed)
+        viewModel = NoticeCollectionViewModel(category: .academicNotice)
+        
         viewModel.notices
             .skip(1)
             .subscribe(onNext: { notices in
                 //Then
-                XCTAssertEqual(notices.count, 20)
+                XCTAssertEqual(notices.flatMap { $0.items }.count, 20)
                 expectation.fulfill()
             })
             .disposed(by: disposeBag)
@@ -80,17 +77,14 @@ final class MockNoticesTableViewModelTests: XCTestCase {
     func testFetchScholarshipNotices_ReturnNotices() {
         //Given
         let expectation = XCTestExpectation(description: "fetch academic notices")
-        configuration.protocolClasses = [MockScholarshipNoticesURLProtocol.self]
-        let session = Session(configuration: configuration)
-        Container.shared.remoteDataSource.register {
-            RemoteDataSourceImpl(session: session)
-        }
-        viewModel = NoticeTableViewModel(category: .scholarshipNotice)
+        MockURLProtocol.setUpMockData(.fetchScholarshipNoticesShouldSucceed)
+        viewModel = NoticeCollectionViewModel(category: .scholarshipNotice)
+        
         viewModel.notices
             .skip(1)
             .subscribe(onNext: { notices in
                 //Then
-                XCTAssertEqual(notices.count, 20)
+                XCTAssertEqual(notices.flatMap { $0.items }.count, 20)
                 expectation.fulfill()
             })
             .disposed(by: disposeBag)
@@ -103,17 +97,14 @@ final class MockNoticesTableViewModelTests: XCTestCase {
     func testFetchEventNotices_ReturnNotices() {
         //Given
         let expectation = XCTestExpectation(description: "fetch academic notices")
-        configuration.protocolClasses = [MockEventNoticesURLProtocol.self]
-        let session = Session(configuration: configuration)
-        Container.shared.remoteDataSource.register {
-            RemoteDataSourceImpl(session: session)
-        }
-        viewModel = NoticeTableViewModel(category: .eventNotice)
+        MockURLProtocol.setUpMockData(.fetchEventNoticesShouldSucceed)
+        viewModel = NoticeCollectionViewModel(category: .eventNotice)
+        
         viewModel.notices
             .skip(1)
             .subscribe(onNext: { notices in
                 //Then
-                XCTAssertEqual(notices.count, 20)
+                XCTAssertEqual(notices.flatMap { $0.items }.count, 20)
                 expectation.fulfill()
             })
             .disposed(by: disposeBag)
