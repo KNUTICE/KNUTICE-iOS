@@ -66,6 +66,7 @@ extension MockURLProtocol {
         case fetchScholarshipNoticesShouldSucceed
         case fetchEventNoticesShouldSucceed
         case fetchEmploymentNoticesShouldSucceed
+        case fetchSearchedNoticesShouldSucceed
         
         var jsonFileName: String {
             switch self {
@@ -81,6 +82,8 @@ extension MockURLProtocol {
                 return "EventNotices"
             case .fetchEmploymentNoticesShouldSucceed:
                 return "EmploymentNotices"
+            case .fetchSearchedNoticesShouldSucceed:
+                return "SearchedNotices"
             }
         }
     }
