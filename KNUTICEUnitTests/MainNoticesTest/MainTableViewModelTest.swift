@@ -11,14 +11,14 @@ import RxSwift
 import XCTest
 @testable import KNUTICE
 
-final class MockMainTableViewModelTest: XCTestCase {
+final class MainTableViewModelTest: XCTestCase {
     private var viewModel: MainTableViewModel!
     private var disposeBag: DisposeBag!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         let configuration = URLSessionConfiguration.default
-        configuration.protocolClasses = [MockTopThreeNoticesURLProtocol.self]
+        configuration.protocolClasses = [MockURLProtocol.self]
         let session = Session(configuration: configuration)
         Container.shared.remoteDataSource.register {
             RemoteDataSourceImpl(session: session)
@@ -36,6 +36,7 @@ final class MockMainTableViewModelTest: XCTestCase {
     func testFetchTopThreeNotices_ReturnNotices() {
         //Given
         let expectation = expectation(description: "fetch top three notices")
+        MockURLProtocol.setUpMockData(.fetchTopThreeNoticesShouldSucceed)
         viewModel.noticesObservable
             .skip(2)
             .subscribe(onNext: {
@@ -44,6 +45,7 @@ final class MockMainTableViewModelTest: XCTestCase {
                 XCTAssertEqual($0[1].items.count, 3)
                 XCTAssertEqual($0[2].items.count, 3)
                 XCTAssertEqual($0[3].items.count, 3)
+                XCTAssertEqual($0[4].items.count, 3)
                 expectation.fulfill()
             })
             .disposed(by: disposeBag)
