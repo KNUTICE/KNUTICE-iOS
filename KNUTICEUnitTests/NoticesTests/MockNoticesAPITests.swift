@@ -130,7 +130,7 @@ final class MockNoticesAPITests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
     
-    func test_fetchEmploymentNotices_returNoticesDTO() {
+    func test_fetchEmploymentNotices_returnNoticesDTO() {
         let expectation = XCTestExpectation(description: "fetch event notices")
         let endPoint = Bundle.main.noticeURL + "?noticeName=\(NoticeCategory.employmentNotice.rawValue)"
         MockURLProtocol.setUpMockData(.fetchEmploymentNoticesShouldSucceed)
