@@ -18,6 +18,16 @@ extension Bundle {
         return url
     }
     
+    var noticeURL: String {
+        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
+              let resource = NSDictionary(contentsOfFile: file),
+              let url = resource["Notice_URL"] as? String else {
+            return ""
+        }
+        
+        return url
+    }
+    
     var generalNoticeURL: String {
         guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
               let resource = NSDictionary(contentsOfFile: file),

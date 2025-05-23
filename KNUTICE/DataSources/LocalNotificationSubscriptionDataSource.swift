@@ -131,6 +131,9 @@ final class LocalNotificationDataSourceImpl: LocalNotificationSubscriptionDataSo
                         results.first?.scholarshipNoticeNotification = value
                     case .eventNotice:
                         results.first?.eventNoticeNotification = value
+                    case .employmentNotice:
+                        //TODO: 취업공지 구독 여부
+                        break
                     }
                     
                     try self.backgroundContext.save()

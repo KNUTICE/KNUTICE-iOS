@@ -58,7 +58,6 @@
 		8E1C65462D7555CD0003AB94 /* MockEventNoticesURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C65452D7555CD0003AB94 /* MockEventNoticesURLProtocol.swift */; };
 		8E1C654D2D755E060003AB94 /* TopThreeNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E1C654C2D755E060003AB94 /* TopThreeNotices.json */; };
 		8E1C654E2D755E060003AB94 /* TopThreeNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E1C654C2D755E060003AB94 /* TopThreeNotices.json */; };
-		8E1C65502D755E5E0003AB94 /* MockTopThreeNoticesURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C654F2D755E5E0003AB94 /* MockTopThreeNoticesURLProtocol.swift */; };
 		8E1C65522D755FEF0003AB94 /* MockTopThreeNoticesAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C65512D755FEF0003AB94 /* MockTopThreeNoticesAPITest.swift */; };
 		8E1C65572D75760A0003AB94 /* SearchedNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E1C65562D75760A0003AB94 /* SearchedNotices.json */; };
 		8E1C65582D75760A0003AB94 /* SearchedNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E1C65562D75760A0003AB94 /* SearchedNotices.json */; };
@@ -296,7 +295,7 @@
 		8EDAFD432D6818D000834E00 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDAFD412D6818D000834E00 /* Errors.swift */; };
 		8EDC2E442D9245EA00AAB60F /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDC2E432D9245EA00AAB60F /* UserDefaultsKeys.swift */; };
 		8EDC2E452D9245EA00AAB60F /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDC2E432D9245EA00AAB60F /* UserDefaultsKeys.swift */; };
-		8EDC2E472D925B6F00AAB60F /* MockMainTableViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDC2E462D925B6F00AAB60F /* MockMainTableViewModelTest.swift */; };
+		8EDC2E472D925B6F00AAB60F /* MainTableViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDC2E462D925B6F00AAB60F /* MainTableViewModelTest.swift */; };
 		8EDD51A62C6D7D68002101CA /* MainTableViewController+NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD51A52C6D7D68002101CA /* MainTableViewController+NotificationCenter.swift */; };
 		8EDE5C762DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDE5C752DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift */; };
 		8EDE5C772DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDE5C752DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift */; };
@@ -420,7 +419,6 @@
 		8E1C65432D75547A0003AB94 /* MockScholarshipNoticesURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockScholarshipNoticesURLProtocol.swift; sourceTree = "<group>"; };
 		8E1C65452D7555CD0003AB94 /* MockEventNoticesURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEventNoticesURLProtocol.swift; sourceTree = "<group>"; };
 		8E1C654C2D755E060003AB94 /* TopThreeNotices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TopThreeNotices.json; sourceTree = "<group>"; };
-		8E1C654F2D755E5E0003AB94 /* MockTopThreeNoticesURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTopThreeNoticesURLProtocol.swift; sourceTree = "<group>"; };
 		8E1C65512D755FEF0003AB94 /* MockTopThreeNoticesAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTopThreeNoticesAPITest.swift; sourceTree = "<group>"; };
 		8E1C65562D75760A0003AB94 /* SearchedNotices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SearchedNotices.json; sourceTree = "<group>"; };
 		8E1C65592D75762B0003AB94 /* MockSearchedNoticesURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchedNoticesURLProtocol.swift; sourceTree = "<group>"; };
@@ -523,7 +521,7 @@
 		8ECE2B192C3512CE00D7F499 /* DetailedNoticeCellWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedNoticeCellWithImage.swift; sourceTree = "<group>"; };
 		8EDAFD412D6818D000834E00 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		8EDC2E432D9245EA00AAB60F /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
-		8EDC2E462D925B6F00AAB60F /* MockMainTableViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMainTableViewModelTest.swift; sourceTree = "<group>"; };
+		8EDC2E462D925B6F00AAB60F /* MainTableViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewModelTest.swift; sourceTree = "<group>"; };
 		8EDD51A52C6D7D68002101CA /* MainTableViewController+NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainTableViewController+NotificationCenter.swift"; sourceTree = "<group>"; };
 		8EDE5C752DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoticeCollectionViewController+binding.swift"; sourceTree = "<group>"; };
 		8EE4B4E42D16CE1E00EFF10B /* SpinningIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinningIndicator.swift; sourceTree = "<group>"; };
@@ -891,9 +889,8 @@
 		8E1C65482D755D610003AB94 /* MainNoticesTest */ = {
 			isa = PBXGroup;
 			children = (
-				8E1C654F2D755E5E0003AB94 /* MockTopThreeNoticesURLProtocol.swift */,
 				8E1C65512D755FEF0003AB94 /* MockTopThreeNoticesAPITest.swift */,
-				8EDC2E462D925B6F00AAB60F /* MockMainTableViewModelTest.swift */,
+				8EDC2E462D925B6F00AAB60F /* MainTableViewModelTest.swift */,
 			);
 			path = MainNoticesTest;
 			sourceTree = "<group>";
@@ -1783,11 +1780,10 @@
 				8E1C65622D757F1F0003AB94 /* MockPostAPIURLProtocol.swift in Sources */,
 				8E1C655A2D75762B0003AB94 /* MockSearchedNoticesURLProtocol.swift in Sources */,
 				8E1C65522D755FEF0003AB94 /* MockTopThreeNoticesAPITest.swift in Sources */,
-				8EDC2E472D925B6F00AAB60F /* MockMainTableViewModelTest.swift in Sources */,
+				8EDC2E472D925B6F00AAB60F /* MainTableViewModelTest.swift in Sources */,
 				8E1C655C2D7576EC0003AB94 /* MockSearchedNoticesTest.swift in Sources */,
 				8E1C65422D7550680003AB94 /* MockNoticesTableViewModelTests.swift in Sources */,
 				8E1C65642D757F790003AB94 /* MockReportTest.swift in Sources */,
-				8E1C65502D755E5E0003AB94 /* MockTopThreeNoticesURLProtocol.swift in Sources */,
 				8E1C653E2D74AA390003AB94 /* MockAcademicNoticesURLProtocol.swift in Sources */,
 				8E1C65462D7555CD0003AB94 /* MockEventNoticesURLProtocol.swift in Sources */,
 				8EE4B4FC2D17D93700EFF10B /* NoticeReponseDTO.swift in Sources */,
