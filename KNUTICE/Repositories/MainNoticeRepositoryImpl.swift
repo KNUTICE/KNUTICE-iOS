@@ -37,38 +37,54 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
         
         //일반공지
         sectionOfNotices.append(
-            SectionOfNotice(header: "일반소식",
-                            items: dto.body.latestThreeGeneralNews.map {
-                                MainNotice(presentationType: .actual,
-                                           notice: createNotice($0))
-                            })
+            SectionOfNotice(
+                header: "일반소식",
+                items: dto.body.latestThreeGeneralNews.map {
+                    MainNotice(presentationType: .actual,
+                               notice: createNotice($0))
+                })
         )
         
         //학사공지
         sectionOfNotices.append(
-            SectionOfNotice(header: "학사공지",
-                            items: dto.body.latestThreeAcademicNews.map {
-                                MainNotice(presentationType: .actual,
-                                           notice: createNotice($0))
-                            })
+            SectionOfNotice(
+                header: "학사공지",
+                items: dto.body.latestThreeAcademicNews.map {
+                    MainNotice(presentationType: .actual,
+                               notice: createNotice($0))
+                })
         )
         
         //장학공지
         sectionOfNotices.append(
-            SectionOfNotice(header: "장학안내",
-                            items: dto.body.latestThreeScholarshipNews.map {
-                                MainNotice(presentationType: .actual,
-                                           notice: createNotice($0))
-                            })
+            SectionOfNotice(
+                header: "장학안내",
+                items: dto.body.latestThreeScholarshipNews.map {
+                    MainNotice(presentationType: .actual,
+                               notice: createNotice($0))
+                })
         )
         
         //행사안내
         sectionOfNotices.append(
-            SectionOfNotice(header: "행사안내",
-                            items: dto.body.latestThreeEventNews.map {
-                                MainNotice(presentationType: .actual,
-                                           notice: createNotice($0))
-                            })
+            SectionOfNotice(
+                header: "행사안내",
+                items: dto.body.latestThreeEventNews.map {
+                    MainNotice(presentationType: .actual,
+                               notice: createNotice($0))
+                })
+        )
+        
+        //취업공지
+        sectionOfNotices.append(
+            SectionOfNotice(
+                header: "취업공지",
+                items: dto.body.latestThreeEmploymentNews.map {
+                    MainNotice(
+                        presentationType: .actual,
+                        notice: createNotice($0)
+                    )
+                })
         )
         
         return sectionOfNotices
