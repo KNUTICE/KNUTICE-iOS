@@ -8,10 +8,17 @@
 import Foundation
 
 extension Bundle {
-    var mainNoticeURL: String {
+    private var resource: NSDictionary? {
         guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
-              let resource = NSDictionary(contentsOfFile: file),
-              let url = resource["Main_Notice_URL"] as? String else {
+              let resource = NSDictionary(contentsOfFile: file) else {
+            return nil
+        }
+        
+        return resource
+    }
+    
+    var mainNoticeURL: String {
+        guard let resource, let url = resource["Main_Notice_URL"] as? String else {
             return ""
         }
         
@@ -19,49 +26,7 @@ extension Bundle {
     }
     
     var noticeURL: String {
-        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
-              let resource = NSDictionary(contentsOfFile: file),
-              let url = resource["Notice_URL"] as? String else {
-            return ""
-        }
-        
-        return url
-    }
-    
-    var generalNoticeURL: String {
-        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
-              let resource = NSDictionary(contentsOfFile: file),
-              let url = resource["General_Notice_URL"] as? String else {
-            return ""
-        }
-        
-        return url
-    }
-    
-    var academicNoticeURL: String {
-        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
-              let resource = NSDictionary(contentsOfFile: file),
-              let url = resource["Academic_Notice_URL"] as? String else {
-            return ""
-        }
-        
-        return url
-    }
-    
-    var scholarshipNoticeURL: String {
-        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
-              let resource = NSDictionary(contentsOfFile: file),
-              let url = resource["Scholarship_Notice_URL"] as? String else {
-            return ""
-        }
-        
-        return url
-    }
-    
-    var eventNoticeURL: String {
-        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
-              let resource = NSDictionary(contentsOfFile: file),
-              let url = resource["Event_Notice_URL"] as? String else {
+        guard let resource, let url = resource["Notice_URL"] as? String else {
             return ""
         }
         
@@ -69,9 +34,7 @@ extension Bundle {
     }
     
     var openSourceURL: String {
-        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
-              let resource = NSDictionary(contentsOfFile: file),
-              let url = resource["OpenSourceLicenseURL"] as? String else {
+        guard let resource, let url = resource["OpenSourceLicenseURL"] as? String else {
             return ""
         }
         
@@ -79,9 +42,7 @@ extension Bundle {
     }
     
     var tokenURL: String {
-        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
-              let resource = NSDictionary(contentsOfFile: file),
-              let url = resource["Token_URL"] as? String else {
+        guard let resource, let url = resource["Token_URL"] as? String else {
             return ""
         }
         
@@ -89,9 +50,7 @@ extension Bundle {
     }
     
     var reportURL: String {
-        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
-              let resource = NSDictionary(contentsOfFile: file),
-              let url = resource["Report_URL"] as? String else {
+        guard let resource, let url = resource["Report_URL"] as? String else {
             return ""
         }
         
@@ -99,9 +58,7 @@ extension Bundle {
     }
     
     var searchURL: String {
-        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
-              let resource = NSDictionary(contentsOfFile: file),
-              let url = resource["Search_URL"] as? String else {
+        guard let resource, let url = resource["Search_URL"] as? String else {
             return ""
         }
         
@@ -109,9 +66,7 @@ extension Bundle {
     }
     
     var notificationPermissionURL: String {
-        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
-              let resource = NSDictionary(contentsOfFile: file),
-              let url = resource["Notification_Permission_URL"] as? String else {
+        guard let resource, let url = resource["Notification_Permission_URL"] as? String else {
             return ""
         }
         
@@ -119,9 +74,7 @@ extension Bundle {
     }
     
     var mainPopupContentURL: String {
-        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
-              let resource = NSDictionary(contentsOfFile: file),
-              let url = resource["Main_Popup_URL"] as? String else {
+        guard let resource, let url = resource["Main_Popup_URL"] as? String else {
             return ""
         }
         
@@ -129,9 +82,7 @@ extension Bundle {
     }
     
     var noticeSyncURL: String {
-        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
-              let resource = NSDictionary(contentsOfFile: file),
-              let url = resource["Notice_Sync_URL"] as? String else {
+        guard let resource, let url = resource["Notice_Sync_URL"] as? String else {
             return ""
         }
         
