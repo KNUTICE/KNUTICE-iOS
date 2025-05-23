@@ -33,7 +33,7 @@ final class MockNoticesAPITests: XCTestCase {
         cancellables = nil
     }
 
-    func test_FetchGeneralNotices_ReturnNoticesDTO() {
+    func test_fetchGeneralNotices_returnNoticesDTO() {
         //Given
         let expectation = XCTestExpectation(description: "fetch general notices")
         let endPoint = Bundle.main.noticeURL + "?noticeName=\(NoticeCategory.generalNotice.rawValue)"
@@ -58,7 +58,7 @@ final class MockNoticesAPITests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
     
-    func testFetchAcademicNotices_ReturnNoticesDTO() {
+    func test_fetchAcademicNotices_returnNoticesDTO() {
         //Given
         let expectation = XCTestExpectation(description: "fetch academic notices")
         let endPoint = Bundle.main.noticeURL + "?noticeName=\(NoticeCategory.academicNotice.rawValue)"
@@ -82,7 +82,7 @@ final class MockNoticesAPITests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
     
-    func testFetchScholarshipNotices_ReturnNoticesDTO() {
+    func test_fetchScholarshipNotices_returnNoticesDTO() {
         //Given
         let expectation = XCTestExpectation(description: "fetch scholarship notices")
         let endPoint = Bundle.main.noticeURL + "?noticeName=\(NoticeCategory.scholarshipNotice.rawValue)"
@@ -106,7 +106,8 @@ final class MockNoticesAPITests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
     
-    func test_FetchEventNotices_ReturnNoticesDTO() {
+    func test_fetchEventNotices_returnNoticesDTO() {
+        //Given
         let expectation = XCTestExpectation(description: "fetch event notices")
         let endPoint = Bundle.main.noticeURL + "?noticeName=\(NoticeCategory.eventNotice.rawValue)"
         MockURLProtocol.setUpMockData(.fetchEventNoticesShouldSucceed)
@@ -122,6 +123,29 @@ final class MockNoticesAPITests: XCTestCase {
                 }
             }, receiveValue: {
                 XCTAssertEqual($0.body?.count, 20)
+                XCTAssertEqual($0.result.resultCode, 200)
+            })
+            .store(in: &cancellables)
+        
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    func test_fetchEmploymentNotices_returNoticesDTO() {
+        let expectation = XCTestExpectation(description: "fetch event notices")
+        let endPoint = Bundle.main.noticeURL + "?noticeName=\(NoticeCategory.employmentNotice.rawValue)"
+        MockURLProtocol.setUpMockData(.fetchEmploymentNoticesShouldSucceed)
+        
+        //When
+        dataSource.sendGetRequest(to: endPoint, resultType: NoticeReponseDTO.self)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    expectation.fulfill()
+                case .failure(let error):
+                    XCTFail("\(error)")
+                }
+            }, receiveValue: {
+                XCTAssertEqual($0.body?.count, 4)
                 XCTAssertEqual($0.result.resultCode, 200)
             })
             .store(in: &cancellables)
