@@ -14,7 +14,9 @@ final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
     
     func fetchNotices(for category: NoticeCategory) -> AnyPublisher<NoticeSectionModel, any Error> {
-        return dataSource.sendGetRequest(to: category.remoteURL, resultType: NoticeReponseDTO.self)
+        let endPoint = Bundle.main.noticeURL
+        
+        return dataSource.sendGetRequest(to: endPoint + "?noticeName=\(category.rawValue)", resultType: NoticeReponseDTO.self)
             .compactMap { [weak self] dto in
                 dto.body?.compactMap {
                     self?.createNotice($0)
@@ -27,7 +29,9 @@ final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
     }
     
     func fetchNotices(for category: NoticeCategory, after number: Int) -> AnyPublisher<NoticeSectionModel, any Error> {
-        return dataSource.sendGetRequest(to: category.remoteURL + "&nttId=\(number)", resultType: NoticeReponseDTO.self)
+        let endPoint = Bundle.main.noticeURL
+        
+        return dataSource.sendGetRequest(to: endPoint + "?noticeName=\(category.rawValue)" + "&nttId=\(number)", resultType: NoticeReponseDTO.self)
             .compactMap { [weak self] dto in
                 dto.body?.compactMap {
                     self?.createNotice($0)
@@ -66,20 +70,5 @@ final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
                 }
             }
             .eraseToAnyPublisher()
-    }
-}
-
-fileprivate extension NoticeCategory {
-    var remoteURL: String {
-        switch self {
-        case .generalNotice:
-            return Bundle.main.generalNoticeURL
-        case .academicNotice:
-            return Bundle.main.academicNoticeURL
-        case .scholarshipNotice:
-            return Bundle.main.scholarshipNoticeURL
-        case .eventNotice:
-            return Bundle.main.eventNoticeURL
-        }
     }
 }

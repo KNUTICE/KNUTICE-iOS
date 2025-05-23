@@ -12,4 +12,5 @@ enum NoticeCategory: String, Codable {
     case academicNotice = "ACADEMIC_NEWS"
     case scholarshipNotice = "SCHOLARSHIP_NEWS"
     case eventNotice = "EVENT_NEWS"
+    case employmentNotice = "EMPLOYMENT_NEWS"
 }

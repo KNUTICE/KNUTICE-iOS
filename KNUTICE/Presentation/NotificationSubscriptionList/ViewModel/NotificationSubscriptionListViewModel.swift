@@ -97,6 +97,9 @@ final class NotificationSubscriptionListViewModel: ObservableObject {
                     self?.isScholarshipNoticeNotificationSubscribed? = value
                 case .eventNotice:
                     self?.isEventNoticeNotificationSubscribed? = value
+                case .employmentNotice:
+                    //TODO: 취업공지 구독 여부
+                    break
                 }
             })
             .store(in: &cancellables)

@@ -22,6 +22,8 @@ extension MainTableViewController {
             navigateToScholarshipNotice(sender)
         case 3:
             navigateToEventNotice(sender)
+        case 4:
+            navigateToEmploymentNotice()
         default:
             break
         }
@@ -48,6 +50,16 @@ extension MainTableViewController {
     //MARK: - Event Notice Button Callback Function
     func navigateToEventNotice(_ sender: UIButton) {
         let viewController = NoticeCollectionViewController(viewModel: NoticeCollectionViewModel(category: .eventNotice), navigationTitle: "장학안내")
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    //MARK: - Employment Notice Button Callback Function
+    func navigateToEmploymentNotice() {
+        let viewController = NoticeCollectionViewController(
+            viewModel: NoticeCollectionViewModel(category: .employmentNotice),
+            navigationTitle: "취업공지"
+        )
+        
         navigationController?.pushViewController(viewController, animated: true)
     }
     
