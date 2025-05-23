@@ -12,8 +12,8 @@ class MockURLProtocol: URLProtocol {
         let configuration: URLSessionConfiguration = URLSessionConfiguration.ephemeral
         return URLSession(configuration: configuration)
     }()
-    
     var activeTask: URLSessionTask?
+    private static var mockFileName: String!
     
     //파라미터로 전달된 Request를 처리할 수 있는지 여부
     override class func canInit(with request: URLRequest) -> Bool {
@@ -50,6 +50,27 @@ class MockURLProtocol: URLProtocol {
     }
     
     func createMockData() -> Data? {
-        return nil
+        guard let fileURL = Bundle.main.url(forResource: Self.mockFileName, withExtension: "json") else {
+            return nil
+        }
+        
+        return try? Data(contentsOf: fileURL)
+    }
+}
+
+extension MockURLProtocol {
+    enum MockDataType {
+        case fetchTopThreeNoticesShouldSucceed
+        
+        var jsonFileName: String {
+            switch self {
+            case .fetchTopThreeNoticesShouldSucceed:
+                return "TopThreeNotices"
+            }
+        }
+    }
+    
+    static func setUpMockData(_ type: MockDataType) {
+        mockFileName = type.jsonFileName
     }
 }
