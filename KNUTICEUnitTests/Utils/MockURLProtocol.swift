@@ -61,11 +61,23 @@ class MockURLProtocol: URLProtocol {
 extension MockURLProtocol {
     enum MockDataType {
         case fetchTopThreeNoticesShouldSucceed
+        case fetchGeneralNoticesShouldSucceed
+        case fetchAcademicNoticesShouldSucceed
+        case fetchScholarshipNoticesShouldSucceed
+        case fetchEventNoticesShouldSucceed
         
         var jsonFileName: String {
             switch self {
             case .fetchTopThreeNoticesShouldSucceed:
                 return "TopThreeNotices"
+            case .fetchGeneralNoticesShouldSucceed:
+                return "GeneralNotices"
+            case .fetchAcademicNoticesShouldSucceed:
+                return "AcademicNotices"
+            case .fetchScholarshipNoticesShouldSucceed:
+                return "ScholarshipNotices"
+            case .fetchEventNoticesShouldSucceed:
+                return "EventNotices"
             }
         }
     }
