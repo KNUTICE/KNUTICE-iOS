@@ -98,10 +98,15 @@ final class LocalNotificationDataSourceImpl: LocalNotificationSubscriptionDataSo
                     let request = NotificationPermissions.fetchRequest()
                     let results = try self.backgroundContext.fetch(request)
                     if let result = results.first {
-                        let permissions = ["generalNotice": result.generalNoticeNotification,
-                                           "academicNotice": result.academicNoticeNotification,
-                                           "scholarshipNotice": result.scholarshipNoticeNotification,
-                                           "eventNotice": result.eventNoticeNotification]
+                        let permissions = [
+                            "generalNotice": result.generalNoticeNotification,
+                            "academicNotice": result.academicNoticeNotification,
+                            "scholarshipNotice": result.scholarshipNoticeNotification,
+                            "eventNotice": result.eventNoticeNotification,
+                            "employmentNotice": result.employmentNoticeNotification
+                        ]
+                        
+                        print(permissions)
                         
                         promise(.success(permissions))
                     } else {
@@ -132,8 +137,7 @@ final class LocalNotificationDataSourceImpl: LocalNotificationSubscriptionDataSo
                     case .eventNotice:
                         results.first?.eventNoticeNotification = value
                     case .employmentNotice:
-                        //TODO: 취업공지 구독 여부
-                        break
+                        results.first?.employmentNoticeNotification = value
                     }
                     
                     try self.backgroundContext.save()

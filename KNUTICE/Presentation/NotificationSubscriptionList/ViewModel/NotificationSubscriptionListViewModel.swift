@@ -14,6 +14,7 @@ final class NotificationSubscriptionListViewModel: ObservableObject {
     @Published var isAcademicNoticeNotificationSubscribed: Bool?
     @Published var isScholarshipNoticeNotificationSubscribed: Bool?
     @Published var isEventNoticeNotificationSubscribed: Bool?
+    @Published var isEmploymentNoticeNotificationSubscribed: Bool?
     @Published var isLoading: Bool = false
     @Published var isShowingAlert: Bool = false
     
@@ -69,6 +70,7 @@ final class NotificationSubscriptionListViewModel: ObservableObject {
                 self?.isAcademicNoticeNotificationSubscribed = $0["academicNotice"]
                 self?.isScholarshipNoticeNotificationSubscribed = $0["scholarshipNotice"]
                 self?.isEventNoticeNotificationSubscribed = $0["eventNotice"]
+                self?.isEmploymentNoticeNotificationSubscribed = $0["employmentNotice"]
             })
             .store(in: &cancellables)
     }
@@ -98,8 +100,7 @@ final class NotificationSubscriptionListViewModel: ObservableObject {
                 case .eventNotice:
                     self?.isEventNoticeNotificationSubscribed? = value
                 case .employmentNotice:
-                    //TODO: 취업공지 구독 여부
-                    break
+                    self?.isEmploymentNoticeNotificationSubscribed? = value
                 }
             })
             .store(in: &cancellables)
