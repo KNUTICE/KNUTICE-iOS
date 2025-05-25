@@ -9,8 +9,10 @@ import UIKit
 import Kingfisher
 
 final class NoticeCellWithThumbnail: UICollectionViewCell {
-    static let reuseIdentifier = "NoticeCellWithThumbnail"
-    private let titleLabel: UILabel = {
+    static var reuseIdentifier: String {
+        "NoticeCellWithThumbnail"
+    }
+    let titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = .preferredFont(forTextStyle: .subheadline)
         label.textColor = .accent
@@ -18,7 +20,7 @@ final class NoticeCellWithThumbnail: UICollectionViewCell {
         
         return label
     }()
-    private let subTitleLabel: UILabel = {
+    let subTitleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = .preferredFont(forTextStyle: .caption2)
         label.textColor = .subTitle
@@ -27,7 +29,7 @@ final class NoticeCellWithThumbnail: UICollectionViewCell {
         return label
     }()
     private let image: UIImageView = UIImageView(frame: .zero)
-    private var imageURL: String = "" {
+    var imageURL: String = "" {
         willSet {
             let processor = DownsamplingImageProcessor(size: CGSize(width: UIScreen.main.bounds.width - 32, height: UIScreen.main.bounds.width * 0.4)) |>
                             CroppingImageProcessor(size: CGSize(width: UIScreen.main.bounds.width - 32, height: UIScreen.main.bounds.width * 0.4),
