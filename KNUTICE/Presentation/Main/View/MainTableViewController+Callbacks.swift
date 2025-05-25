@@ -31,7 +31,7 @@ extension MainTableViewController {
     
     //MARK: - General Notice Button Callback Function
     func navigateToGeneralNotice(_ sender: UIButton) {
-        let viewController = NoticeCollectionViewController(viewModel: NoticeCollectionViewModel(category: .generalNotice), navigationTitle: "일반공지")
+        let viewController = NoticeCollectionViewController(viewModel: NoticeCollectionViewModel(category: .generalNotice), navigationTitle: "일반소식")
         navigationController?.pushViewController(viewController, animated: true)
     }
     
