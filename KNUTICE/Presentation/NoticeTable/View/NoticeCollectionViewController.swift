@@ -88,7 +88,7 @@ extension NoticeCollectionViewController: UICollectionViewDelegateFlowLayout {
 #Preview {
     NoticeCollectionViewController(
         viewModel: NoticeCollectionViewModel(category: .generalNotice),
-        navigationTitle: "일반공지"
+        navigationTitle: "일반소식"
     )
     .makePreview()
 }
