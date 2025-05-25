@@ -35,7 +35,7 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
     private func createScectionOfNotice(_ dto: MainNoticeResponseDTO) -> [SectionOfNotice] {
         var sectionOfNotices = [SectionOfNotice]()
         
-        //일반공지
+        //일반소식
         sectionOfNotices.append(
             SectionOfNotice(
                 header: "일반소식",
@@ -75,10 +75,10 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
                 })
         )
         
-        //취업공지
+        //취업안내
         sectionOfNotices.append(
             SectionOfNotice(
-                header: "취업공지",
+                header: "취업안내",
                 items: dto.body.latestThreeEmploymentNews.map {
                     MainNotice(
                         presentationType: .actual,
