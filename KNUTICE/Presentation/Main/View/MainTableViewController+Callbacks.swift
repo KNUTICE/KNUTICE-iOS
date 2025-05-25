@@ -57,7 +57,7 @@ extension MainTableViewController {
     func navigateToEmploymentNotice() {
         let viewController = NoticeCollectionViewController(
             viewModel: NoticeCollectionViewModel(category: .employmentNotice),
-            navigationTitle: "취업공지"
+            navigationTitle: "취업안내"
         )
         
         navigationController?.pushViewController(viewController, animated: true)
