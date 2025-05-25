@@ -60,7 +60,7 @@ extension NoticeTableViewController: UITableViewDelegate {
 //MARK: - Preview
 #if DEBUG
 #Preview {
-    NoticeTableViewController(viewModel: NoticeTableViewModel(category: .generalNotice), navigationTitle: "일반공지")
+    NoticeTableViewController(viewModel: NoticeTableViewModel(category: .generalNotice), navigationTitle: "일반소식")
         .makePreview()
 }
 #endif
