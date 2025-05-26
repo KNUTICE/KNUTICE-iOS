@@ -14,18 +14,12 @@ cat <<EOF > "/Volumes/workspace/repository/KNUTICE/Application/ServiceInfo.plist
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>Notice_URL</key>
+    <string>${Notice_URL}</string>
     <key>Report_URL</key>
     <string>${Report_URL}</string>
     <key>Token_URL</key>
     <string>${Token_URL}</string>
-    <key>Event_Notice_URL</key>
-    <string>${Event_Notice_URL}</string>
-    <key>Scholarship_Notice_URL</key>
-    <string>${Scholarship_Notice_URL}</string>
-    <key>Academic_Notice_URL</key>
-    <string>${Academic_Notice_URL}</string>
-    <key>General_Notice_URL</key>
-    <string>${General_Notice_URL}</string>
     <key>Main_Notice_URL</key>
     <string>${Main_Notice_URL}</string>
     <key>OpenSourceLicenseURL</key>
