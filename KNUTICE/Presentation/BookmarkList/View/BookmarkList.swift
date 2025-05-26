@@ -67,7 +67,7 @@ struct BookmarkList: View {
                 if UIDevice.current.userInterfaceIdiom == .pad {
                     ToolbarItem(placement: .topBarTrailing) {
                         NavigationLink {
-                            SettingView(viewModel: SettingViewModel())
+                            SettingView()
                         } label: {
                             Image(systemName: "gearshape")
                         }
@@ -95,7 +95,7 @@ fileprivate struct BookmarkListNavBar: View {
             Spacer()
             
             NavigationLink {
-                SettingView(viewModel: SettingViewModel())
+                SettingView()
             } label: {
                 Image(systemName: "gearshape")
                     .resizable()
