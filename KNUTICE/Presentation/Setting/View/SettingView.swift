@@ -10,29 +10,34 @@ import Combine
 import Factory
 
 struct SettingView: View {
-    @ObservedObject private var viewModel: SettingViewModel
     @State private var isShowingReport: Bool = false
     @Environment(\.colorScheme) private var colorScheme
-    
-    init(viewModel: SettingViewModel) {
-        _viewModel = ObservedObject(wrappedValue: viewModel)
-    }
     
     var body: some View {
         List {
             Section {
+                Text("알림")
+                    .bold()
+                    .padding(.bottom)
+                    .listRowSeparator(.hidden)
+                
                 NavigationLink {
                     NotificationSubscriptionList(viewModel: NotificationSubscriptionListViewModel())
                 } label: {
                     Text("서비스 알림")
                 }
-                .padding([.top, .bottom])
-            } header: {
-                Text("알림")
+                .listRowSeparator(.hidden)
             }
-            .listRowBackground(Color.detailViewBackground)
+            
+            Divider()
+                .listRowSeparator(.hidden)
             
             Section {
+                Text("지원")
+                    .bold()
+                    .padding(.bottom)
+                    .listRowSeparator(.hidden)
+                
                 Button {
                     isShowingReport.toggle()
                 } label: {
@@ -47,55 +52,59 @@ struct SettingView: View {
                             .font(.footnote)
                     }
                 }
-                .padding([.top, .bottom])
-            } header: {
-                Text("지원")
+                .listRowSeparator(.hidden)
             }
-            .listRowBackground(Color.detailViewBackground)
+            
+            Divider()
+                .listRowSeparator(.hidden)
             
             Section {
-                HStack {
+                Text("앱 정보")
+                    .bold()
+                    .padding(.bottom)
+                    .listRowSeparator(.hidden)
+                
+                NavigationLink {
+                    AppVersionView(viewModel: AppVersionViewModel())
+                } label: {
                     Text("버전 정보")
-                    
-                    Spacer()
-                    
-                    Text("\(viewModel.appVersion)")
                 }
-                .padding([.top, .bottom])
+                .listRowSeparator(.hidden)
                 
                 NavigationLink {
                     ContentWebView(navigationTitle: "오픈소스 라이선스", contentURL: Bundle.main.openSourceURL)
                 } label: {
                     Text("오픈소스 라이선스")
-                        .padding([.top, .bottom])
                 }
-            } header: {
-                Text("앱 정보")
+                .listRowSeparator(.hidden)
             }
-            .listRowBackground(Color.detailViewBackground)
             
             #if DEV
+            
+            Divider()
+                .listRowSeparator(.hidden)
+            
             Section {
+                Text("개발")
+                    .bold()
+                    .padding(.bottom)
+                    .listRowSeparator(.hidden)
+                
                 NavigationLink {
                     DeveloperTools(viewModel: DeveloperToolsViewModel())
                 } label: {
                     Text("Developer Tools")
-                        .padding([.top, .bottom])
                 }
-            } header: {
-                Text("개발")
             }
-            .listRowBackground(Color.detailViewBackground)
+            .listRowSeparator(.hidden)
+            
+            Divider()
+                .listRowSeparator(.hidden)
             #endif
         }
-        .background(.detailViewBackground)
         .listStyle(.plain)
         .navigationTitle("설정")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            viewModel.getVersion()
-            viewModel.getNotificationSettings()
-        }
         .fullScreenCover(isPresented: $isShowingReport) {
             NavigationView {
                 ReportView(viewModel: Container.shared.reportViewModel())
@@ -106,6 +115,6 @@ struct SettingView: View {
 
 #Preview {
     NavigationView {
-        SettingView(viewModel: SettingViewModel())
+        SettingView()
     }
 }
