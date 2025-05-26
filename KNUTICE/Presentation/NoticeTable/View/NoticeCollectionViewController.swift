@@ -85,6 +85,7 @@ extension NoticeCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+#if DEBUG
 #Preview {
     NoticeCollectionViewController(
         viewModel: NoticeCollectionViewModel(category: .generalNotice),
@@ -92,3 +93,4 @@ extension NoticeCollectionViewController: UICollectionViewDelegateFlowLayout {
     )
     .makePreview()
 }
+#endif
