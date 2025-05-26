@@ -92,7 +92,9 @@ extension SearchResultsTableViewController: UISearchBarDelegate {
     }
 }
 
+#if DEBUG
 #Preview {
     SearchResultsTableViewController()
         .makePreview()
 }
+#endif
