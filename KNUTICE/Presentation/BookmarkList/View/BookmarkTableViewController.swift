@@ -1,0 +1,87 @@
+//
+//  BookmarkTableViewController.swift
+//  KNUTICE
+//
+//  Created by 이정훈 on 5/27/25.
+//
+
+import Factory
+import UIKit
+import SwiftUI
+import RxSwift
+
+final class BookmarkTableViewController: UIViewController {
+    lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.estimatedRowHeight = 100    //cell height가 설정되기 전 임시 크기
+        tableView.rowHeight = UITableView.automaticDimension    //동적 Height 설정
+        tableView.sectionHeaderHeight = 0
+        tableView.delegate = self
+        tableView.register(BookmarkTableViewCell.self, forCellReuseIdentifier: BookmarkTableViewCell.reuseIdentifier)
+        
+        return tableView
+    }()
+    let navigationBar = UIView(frame: .zero)
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "북마크"
+        label.font = UIFont.systemFont(ofSize: 22, weight: .heavy)
+        
+        return label
+    }()
+    lazy var settingBtn: UIButton = {
+        let targetSize = CGSize(width: 25, height: 24)
+        let renderer = UIGraphicsImageRenderer(size: targetSize)
+        let gearImage = UIImage(systemName: "gearshape")
+        let selectedGearImage = UIImage(systemName: "gearshape")?.withTintColor(.lightGray)
+        let resizedGearImage = renderer.image { _ in
+            gearImage?.draw(in: CGRect(origin: .zero, size: targetSize))
+        }.withTintColor(.navigationButton)
+        let resizedSelectedGearImage = renderer.image { _ in
+            selectedGearImage?.draw(in: CGRect(origin: .zero, size: targetSize))
+        }
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(resizedGearImage, for: .normal)
+        button.setImage(resizedSelectedGearImage, for: .highlighted)
+        button.addTarget(self, action: #selector(navigateToSetting(_:)), for: .touchUpInside)
+        
+        return button
+    }()
+    @Injected(\.bookmarkTableViewModel) var viewModel
+    let disposeBag: DisposeBag = .init()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = .mainBackground
+        setUpLayout()
+        bind()
+        
+        viewModel.fetchBookmarks()
+    }
+}
+
+extension BookmarkTableViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let bookmark = viewModel.bookmarks.value[indexPath.row].items[0]
+        let viewController = UIHostingController(rootView: BookmarkDetailSwitchView(bookmark: bookmark))
+        navigationController?.pushViewController(viewController, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension BookmarkTableViewController {
+    @objc func navigateToSetting(_ sender: UIButton) {
+        let viewController = UIHostingController(rootView: SettingView())
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+}
+
+#Preview {
+    BookmarkTableViewController()
+        .makePreview()
+        .edgesIgnoringSafeArea(.all)
+}

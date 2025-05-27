@@ -19,9 +19,10 @@ final class UITabBarViewController: UITabBarController {
         return viewController
     }()
     private let bookmarkViewController: UIViewController = {
-        let viewController = UIHostingController(
-            rootView: BookmarkList(viewModel: BookmarkListViewModel())
-        )
+//        let viewController = UIHostingController(
+//            rootView: BookmarkList(viewModel: BookmarkListViewModel())
+//        )
+        let viewController = BookmarkTableViewController()
         viewController.tabBarItem.image = UIImage(systemName: "bookmark")
         viewController.tabBarItem.selectedImage = UIImage(systemName: "bookmark.fill")
         viewController.tabBarItem.title = "북마크"

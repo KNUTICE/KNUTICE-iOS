@@ -120,4 +120,16 @@ extension Container {
             SearchTableViewModel()
         }
     }
+    
+    var bookmarkListViewModel: Factory<BookmarkListViewModel> {
+        Factory(self) {
+            BookmarkListViewModel()
+        }
+    }
+    
+    var bookmarkTableViewModel: Factory<BookmarkTableViewModel> {
+        Factory(self) {
+            BookmarkTableViewModel()
+        }
+    }
 }
