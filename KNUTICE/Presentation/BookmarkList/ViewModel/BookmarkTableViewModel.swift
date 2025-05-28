@@ -14,14 +14,28 @@ import os
 
 final class BookmarkTableViewModel {
     let bookmarks: BehaviorRelay<[BookmarkSectionModel]> = .init(value: [])
+    let isRefreshing: BehaviorRelay<Bool> = .init(value: false)
     @Injected(\.bookmarkRepository) private var repository
     private var cancellables: Set<AnyCancellable> = []
     private let logger: Logger = Logger()
     
-    func fetchBookmarks() {
+    func fetchBookmarks(isRefreshing: Bool = false) {
+        if isRefreshing {
+            self.isRefreshing.accept(true)
+        }
+        
         repository.read(delay: 0)
-            .receive(on: DispatchQueue.main)
+            .map { bookmarks in
+                bookmarks.map {
+                    BookmarkSectionModel(items: [$0])
+                }
+            }
+            .delay(for: .milliseconds(isRefreshing ? 200 : 0), scheduler: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
+                if isRefreshing {
+                    self?.isRefreshing.accept(false)
+                }
+                
                 switch completion {
                 case .finished:
                     self?.logger.info("BookmarkTableViewModel.fetchBookmarks() completed fetching bookmarks successfully")
@@ -29,10 +43,7 @@ final class BookmarkTableViewModel {
                     self?.logger.error("BookmarkTableViewModel.fetchBookmarks() error : \(error.localizedDescription)")
                 }
             }, receiveValue: { [weak self] bookmarks in
-                let sectionModels: [BookmarkSectionModel] = bookmarks.map {
-                    BookmarkSectionModel(items: [$0])
-                }
-                self?.bookmarks.accept(sectionModels)
+                self?.bookmarks.accept(bookmarks)
             })
             .store(in: &cancellables)
     }

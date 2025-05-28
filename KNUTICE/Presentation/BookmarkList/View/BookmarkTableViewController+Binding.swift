@@ -25,5 +25,15 @@ extension BookmarkTableViewController {
             .skip(1)
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+        
+        refreshController.rx.controlEvent(.valueChanged)
+            .bind(onNext: { [weak self] in
+                self?.viewModel.fetchBookmarks(isRefreshing: true)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.isRefreshing
+            .bind(to: refreshController.rx.isRefreshing)
+            .disposed(by: disposeBag)
     }
 }
