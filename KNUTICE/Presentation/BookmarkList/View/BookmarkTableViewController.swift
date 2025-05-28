@@ -11,6 +11,7 @@ import SwiftUI
 import RxSwift
 
 final class BookmarkTableViewController: UIViewController {
+    let refreshController: UIRefreshControl = UIRefreshControl()
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -18,6 +19,7 @@ final class BookmarkTableViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension    //동적 Height 설정
         tableView.sectionHeaderHeight = 0
         tableView.delegate = self
+        tableView.refreshControl = refreshController
         tableView.register(BookmarkTableViewCell.self, forCellReuseIdentifier: BookmarkTableViewCell.reuseIdentifier)
         
         return tableView
