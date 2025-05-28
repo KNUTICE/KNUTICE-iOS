@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import RxDataSources
 import RxSwift
 import UIKit
@@ -23,6 +24,14 @@ extension BookmarkTableViewController {
         viewModel.bookmarks
             .observe(on: MainScheduler.instance)
             .skip(1)
+            .do(onNext: { [weak self] bookmarks in
+                if bookmarks.isEmpty {
+                    let backgroundView = UIHostingController(rootView: EmptyBookmarkView())
+                    self?.tableView.backgroundView = backgroundView.view
+                }  else {
+                    self?.tableView.backgroundView = nil
+                }
+            })
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
