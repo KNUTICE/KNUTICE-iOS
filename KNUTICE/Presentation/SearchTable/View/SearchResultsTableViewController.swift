@@ -24,8 +24,7 @@ final class SearchResultsTableViewController: UIViewController {
         let searchBar = UISearchBar()
         searchBar.delegate = self
         searchBar.placeholder = "공지사항 검색"
-        searchBar.layer.borderWidth = 1
-        searchBar.layer.borderColor = traitCollection.userInterfaceStyle == .light ? UIColor.white.cgColor : UIColor.black.cgColor
+        searchBar.searchBarStyle = .minimal
         
         return searchBar
     }()
@@ -43,6 +42,7 @@ final class SearchResultsTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .mainBackground
         setupLayout()
         bind()
     }

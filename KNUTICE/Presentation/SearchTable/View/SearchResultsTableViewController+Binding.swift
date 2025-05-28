@@ -7,6 +7,7 @@
 
 import RxSwift
 import UIKit
+import SwiftUI
 
 extension SearchResultsTableViewController {
     func bind() {
@@ -21,6 +22,13 @@ extension SearchResultsTableViewController {
         
         viewModel.tableData
             .observe(on: MainScheduler.instance)
+            .do { [weak self] in
+                if let text = self?.searchBar.text, !text.isEmpty, $0.isEmpty {
+                    self?.resultsTableView.backgroundView = UIHostingController(rootView: ResultNotFoundView()).view
+                } else {
+                    self?.resultsTableView.backgroundView = UIHostingController(rootView: SearchResultsBackgroundView()).view
+                }
+            }
             .bind(to: resultsTableView.rx.items) { tableView, row, item in
                 if let imageURL = item.imageUrl {
                     let cell = tableView.dequeueReusableCell(withIdentifier: DetailedNoticeCellWithImage.reuseIdentifier, for: IndexPath(row: row, section: 0)) as! DetailedNoticeCellWithImage
