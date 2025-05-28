@@ -12,8 +12,8 @@ extension SearchResultsTableViewController {
         view.addSubview(searchBar)
         view.addSubview(cancelButton)
         searchBar.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10)
-            make.trailing.equalToSuperview().offset(-10)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
         }
         
@@ -36,13 +36,13 @@ extension SearchResultsTableViewController {
         if isShowCancelButton {
             cancelButton.snp.makeConstraints { make in
                 make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-                make.trailing.equalToSuperview().offset(-10)
+                make.trailing.equalToSuperview()
                 make.centerY.equalTo(searchBar.snp.centerY)
             }
             
             searchBar.snp.makeConstraints { make in
-                make.leading.equalToSuperview().offset(10)
-                make.trailing.equalTo(cancelButton.snp.leading)
+                make.leading.equalToSuperview()
+                make.trailing.equalTo(cancelButton.snp.leading).offset(10)
                 make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             }
         } else {
@@ -52,8 +52,8 @@ extension SearchResultsTableViewController {
             }
             
             searchBar.snp.makeConstraints { make in
-                make.leading.equalToSuperview().offset(10)
-                make.trailing.equalToSuperview().offset(-10)
+                make.leading.equalToSuperview()
+                make.trailing.equalToSuperview()
                 make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             }
         }
