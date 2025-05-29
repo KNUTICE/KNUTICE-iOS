@@ -44,5 +44,11 @@ extension BookmarkTableViewController {
         viewModel.isRefreshing
             .bind(to: refreshController.rx.isRefreshing)
             .disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx.notification(.bookmarkListRefresh)
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.fetchBookmarks()
+            })
+            .disposed(by: disposeBag)
     }
 }

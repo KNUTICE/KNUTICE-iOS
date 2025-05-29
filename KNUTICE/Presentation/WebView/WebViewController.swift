@@ -170,9 +170,12 @@ extension WebViewController {
     }
     
     @objc func openBookmarkForm(_ sender: UIButton) {
-        let bookmarkForm = BookmarkForm(viewModel: BookmarkFormViewModel(), notice: self.notice) {
+        let bookmarkForm = BookmarkForm(for: .create) {
             self.dismiss(animated: true)
         }
+        .environmentObject(
+            BookmarkFormViewModel(bookmark: Bookmark(notice: notice, memo: ""))
+        )
         let viewController = UIHostingController(rootView: bookmarkForm)
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.modalPresentationStyle = .pageSheet

@@ -7,24 +7,26 @@
 
 import SwiftUI
 
-struct BookmarkForm<T: BookmarkFormHandler>: View {
-    @StateObject private var viewModel: T
+struct BookmarkForm: View {
+    enum FormType {
+        case create
+        case update
+    }
     
-    private let notice: Notice
+    @EnvironmentObject private var viewModel: BookmarkFormViewModel
+    
+    private let formType: FormType
     private let dismissAction: () -> Void
     
-    init(viewModel: T,
-         notice: Notice,
-         dismissAction: @escaping () -> Void) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-        self.notice = notice
+    init(for formType: FormType, dismissAction: @escaping () -> Void) {
+        self.formType = formType
         self.dismissAction = dismissAction
     }
     
     var body: some View {
         ZStack {
             ScrollView {
-                NoticeView(notice: notice)
+                NoticeView(notice: viewModel.bookmark.notice)
                 
                 Rectangle()
                     .fill(.mainBackground)
@@ -33,14 +35,34 @@ struct BookmarkForm<T: BookmarkFormHandler>: View {
                 VStack(spacing: -5) {
                     SectionHeader(title: "알림 반복")
                     
-                    StrokedAdvanceNoticePicker(isAlarmOn: $viewModel.isAlarmOn,
-                                               alarmDate: $viewModel.alarmDate)
+                    StrokedAdvanceNoticePicker(
+                        isAlarmOn: Binding(
+                            get: {
+                                return viewModel.isAlarmOn
+                            }, set: {
+                                if $0 {
+                                    viewModel.bookmark.alarmDate = Date()
+                                } else {
+                                    viewModel.bookmark.alarmDate = nil
+                                }
+                                
+                                viewModel.isAlarmOn = $0
+                            }),
+                        alarmDate: Binding(
+                            get: {
+                                return viewModel.bookmark.alarmDate ?? Date()
+                            },
+                            set: {
+                                viewModel.bookmark.alarmDate = $0
+                            }
+                        )
+                    )
                 }
                 
                 VStack(spacing: -5) {
                     SectionHeader(title: "메모")
                     
-                    BorderedDescriptionTextField(description: $viewModel.memo)
+                    BorderedDescriptionTextField(description: $viewModel.bookmark.memo)
                 }
             }
             .animation(.easeInOut, value: viewModel.isAlarmOn)
@@ -58,7 +80,12 @@ struct BookmarkForm<T: BookmarkFormHandler>: View {
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        viewModel.save(with: notice)
+                        switch formType {
+                        case .create:
+                            viewModel.save()
+                        case .update:
+                            viewModel.update()
+                        }
                     } label: {
                         Text("저장")
                             .accentColor(.accent2)
@@ -182,9 +209,8 @@ fileprivate struct BorderedDescriptionTextField: View {
 #if DEBUG
 #Preview {
     NavigationStack {
-        BookmarkForm(viewModel: BookmarkFormViewModel(),
-                     notice: Notice.generalNoticesSampleData.first!,
-                     dismissAction: {})
+        BookmarkForm(for: .create, dismissAction: {})
+            .environmentObject(BookmarkFormViewModel(bookmark: Bookmark.sample))
     }
 }
 #endif

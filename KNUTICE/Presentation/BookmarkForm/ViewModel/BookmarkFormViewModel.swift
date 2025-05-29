@@ -10,22 +10,23 @@ import Factory
 import Foundation
 import os
 
-final class BookmarkFormViewModel: ObservableObject, BookmarkFormHandler {
-    @Published var title: String = ""
-    @Published var alarmDate: Date = Date()
-    @Published var isAlarmOn: Bool = false
-    @Published var memo: String = ""
+final class BookmarkFormViewModel: ObservableObject, BookmarkListRefreshable {
+    @Published var isAlarmOn: Bool
     @Published var isShowingAlert: Bool = false
     @Published var isLoading: Bool = false
+    @Published var bookmark: Bookmark
     
     @Injected(\.bookmarkService) private var service: BookmarkService
     private var cancellables: Set<AnyCancellable> = []
     private let logger: Logger = Logger()
     var alertMessage: String = ""
     
-    func save(with notice: Notice) {
-        let bookmark = Bookmark(notice: notice, memo: memo, alarmDate: isAlarmOn ? alarmDate : nil)
-        
+    init(bookmark: Bookmark) {
+        self.bookmark = bookmark
+        self.isAlarmOn = bookmark.alarmDate != nil
+    }
+    
+    func save() {        
         isLoading = true
         service.save(bookmark: bookmark)
             .receive(on: DispatchQueue.main)
@@ -52,5 +53,49 @@ final class BookmarkFormViewModel: ObservableObject, BookmarkFormHandler {
             logger.error("BookmarkFormViewModel error: \(error.localizedDescription)")
             alertMessage = "북마크 저장에 실패했어요."
         }
+    }
+    
+    func update() {
+        isLoading = true
+        service.update(bookmark: bookmark)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                switch completion {
+                case .finished:
+                    self?.logger.log(level: .debug, "BookmarkEditFormViewModel.save(with:) Successfully saved Bookmark")
+                    self?.alertMessage = "저장을 완료했어요."
+                case .failure(let error):
+                    self?.logger.log(level: .error, "BookmarkEditFormViewModel.save(with:) Failed to save Bookmark: \(error.localizedDescription)")
+                    self?.alertMessage = "저장을 실패했어요."
+                }
+                
+                self?.isLoading = false
+                self?.isShowingAlert = true
+            }, receiveValue: {
+                
+            })
+            .store(in: &cancellables)
+    }
+    
+    func delete() {
+        isLoading = true
+        service.delete(bookmark: bookmark)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                switch completion {
+                case .finished:
+                    self?.logger.log(level: .debug, "BookmarkDetailViewModel.delete(by:): Bookmark deletion completed")
+                    self?.alertMessage = "삭제를 완료 했어요."
+                case .failure(let error):
+                    self?.logger.error("BookmarkDetailViewModel.delete(by:): \(error.localizedDescription)")
+                    self?.alertMessage = "삭제를 실패 했어요."
+                }
+                
+                self?.isLoading = false
+                self?.isShowingAlert = true
+            }, receiveValue: {
+                
+            })
+            .store(in: &cancellables)
     }
 }
