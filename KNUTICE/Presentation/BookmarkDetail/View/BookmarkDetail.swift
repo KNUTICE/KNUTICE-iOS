@@ -8,37 +8,31 @@
 import SwiftUI
 
 struct BookmarkDetail: View {
-    @StateObject private var viewModel: BookmarkDetailViewModel
+    @EnvironmentObject private var viewModel: BookmarkFormViewModel
     @Environment(\.dismiss) private var dismiss
     @State private var isShowingWebView: Bool = false
     @Binding private var selectedMode: BookmarkDetailSwitchView.BookmarkViewMode
     
-    private let bookmark: Bookmark
-    
-    init(viewModel: BookmarkDetailViewModel,
-         bookmark: Bookmark,
-         selectedMode: Binding<BookmarkDetailSwitchView.BookmarkViewMode>) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-        self.bookmark = bookmark
+    init(selectedMode: Binding<BookmarkDetailSwitchView.BookmarkViewMode>) {
         _selectedMode = selectedMode
     }
     
     var body: some View {
         ZStack {
             ScrollView {
-                HeaderView(notice: bookmark.notice)
+                HeaderView(notice: viewModel.bookmark.notice)
                     .padding()
                 
                 Divider()
                     .padding([.leading, .trailing])
                 
-                AlarmDetail(alarmDate: bookmark.alarmDate)
+                AlarmDetail(alarmDate: viewModel.bookmark.alarmDate)
                     .padding()
                 
                 Divider()
                     .padding([.leading, .trailing])
                 
-                UserMemoDetail(userMemo: bookmark.memo)
+                UserMemoDetail(userMemo: viewModel.bookmark.memo)
                     .padding()
                 
                 Divider()
@@ -73,7 +67,7 @@ struct BookmarkDetail: View {
                         
                         Section {
                             Button(role: .destructive) {
-                                viewModel.delete(bookmark: bookmark)
+                                viewModel.delete()
                             } label: {
                                 Text("삭제")
                                     .foregroundStyle(.red)
@@ -86,7 +80,7 @@ struct BookmarkDetail: View {
             }
             .fullScreenCover(isPresented: $isShowingWebView) {
                 NavigationStack {
-                    NoticeWebVCWrapper(notice: bookmark.notice)
+                    NoticeWebVCWrapper(notice: viewModel.bookmark.notice)
                         .edgesIgnoringSafeArea(.bottom)
                         .toolbar {
                             ToolbarItem(placement: .topBarLeading) {
@@ -113,9 +107,7 @@ struct BookmarkDetail: View {
                 Text("확인")
             }
         } message: {
-            if let message = viewModel.alertMessage {
-                Text(message)
-            }
+            Text(viewModel.alertMessage)
         }
     }
 }
@@ -177,9 +169,8 @@ fileprivate struct UserMemoDetail: View {
 #if DEBUG
 #Preview {
     NavigationStack {
-        BookmarkDetail(viewModel: BookmarkDetailViewModel(),
-                       bookmark: Bookmark.sample,
-                       selectedMode: .constant(.detailView))
+        BookmarkDetail(selectedMode: .constant(.detailView))
+            .environmentObject(BookmarkFormViewModel(bookmark: Bookmark.sample))
     }
 }
 #endif

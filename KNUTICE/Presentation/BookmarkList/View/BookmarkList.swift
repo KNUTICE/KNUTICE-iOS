@@ -36,7 +36,9 @@ struct BookmarkList: View {
                     ForEach(bookmarkList, id: \.self.notice.id) { bookmark in
                         ZStack {
                             NavigationLink {
-                                BookmarkDetailSwitchView(bookmark: bookmark)
+                                BookmarkDetailSwitchView(
+                                    viewModel: BookmarkFormViewModel(bookmark: bookmark)
+                                )
                             } label: {
                                 EmptyView()
                             }

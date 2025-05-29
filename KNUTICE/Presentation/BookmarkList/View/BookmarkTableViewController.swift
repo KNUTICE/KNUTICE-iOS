@@ -69,7 +69,9 @@ final class BookmarkTableViewController: UIViewController {
 extension BookmarkTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let bookmark = viewModel.bookmarks.value[indexPath.row].items[0]
-        let viewController = UIHostingController(rootView: BookmarkDetailSwitchView(bookmark: bookmark))
+        let viewController = UIHostingController(
+            rootView: BookmarkDetailSwitchView(viewModel: BookmarkFormViewModel(bookmark: bookmark))
+        )
         navigationController?.pushViewController(viewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
