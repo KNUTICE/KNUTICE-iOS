@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension BookmarkTableViewController {
     func setUpLayout() {
@@ -34,5 +35,36 @@ extension BookmarkTableViewController {
             make.top.equalTo(navigationBar.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
+    }
+    
+    func createTableHeaderView(text: String) -> UIView {
+        let headerView = {
+            let view = UIView()
+            
+            return view
+        }()
+        let label: UILabel = {
+            let label = UILabel(frame: .zero)
+            label.text = text
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.font = .preferredFont(forTextStyle: .subheadline)
+            label.textColor = .gray
+            
+            return label
+        }()
+        
+        
+        headerView.snp.makeConstraints { make in
+            make.width.equalTo(UIScreen.main.bounds.width)
+            make.height.equalTo(44)
+        }
+        
+        headerView.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(19)
+        }
+        
+        return headerView
     }
 }
