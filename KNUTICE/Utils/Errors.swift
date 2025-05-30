@@ -18,3 +18,7 @@ enum ExistingBookmarkError: Error {
 enum UserInfoError: Error {
     case nttIdNotFound(message: String)
 }
+
+enum TokenError: Error {
+    case notFound
+}

@@ -23,6 +23,26 @@ protocol RemoteDataSource {
     func sendPostRequest<T: Decodable>(to url: String,
                                        params: Parameters,
                                        resultType: T.Type) -> AnyPublisher<T, any Error>
+    
+    func request<T: Decodable>(
+        _ url: String,
+        method: HTTPMethod,
+        parameters: Parameters?,
+        decoding type: T.Type,
+        isInterceptable: Bool
+    ) async throws -> T
+}
+
+extension RemoteDataSource {
+    func request<T: Decodable>(
+        _ url: String,
+        method: HTTPMethod,
+        parameters: Parameters? = nil,
+        decoding type: T.Type,
+        isInterceptable: Bool = false
+    ) async throws -> T {
+        return try await self.request(url, method: method, parameters: parameters, decoding: type, isInterceptable: isInterceptable)
+    }
 }
 
 final class RemoteDataSourceImpl: RemoteDataSource {
@@ -81,18 +101,38 @@ final class RemoteDataSourceImpl: RemoteDataSource {
             .eraseToAnyPublisher()
     }
     
-    func sendPostRequest<T: Decodable>(to url: String,
-                                       params: Parameters,
-                                       resultType: T.Type) -> AnyPublisher<T, any Error> {
-        return session.request(url,
-                          method: .post,
-                          parameters: params,
-                          encoding: JSONEncoding.default)
+    func sendPostRequest<T: Decodable>(
+        to url: String,
+        params: Parameters,
+        resultType: T.Type) -> AnyPublisher<T, any Error>{
+            return session.request(
+                url,
+                method: .post,
+                parameters: params,
+                encoding: JSONEncoding.default)
             .publishDecodable(type: T.self)
             .value()
             .mapError {
                 $0 as Error
             }
             .eraseToAnyPublisher()
+    }
+    
+    func request<T>(
+        _ url: String,
+        method: HTTPMethod,
+        parameters: Parameters? = nil,
+        decoding type: T.Type,
+        isInterceptable: Bool = false
+    ) async throws -> T where T : Decodable {
+        return try await session.request(
+            url,
+            method: method,
+            parameters: parameters,
+            encoding: JSONEncoding.default,
+            interceptor: isInterceptable ? TokenInterceptor() : nil
+        )
+        .serializingDecodable(type)
+        .value
     }
 }
