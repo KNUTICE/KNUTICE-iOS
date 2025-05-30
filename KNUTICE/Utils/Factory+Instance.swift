@@ -16,12 +16,6 @@ extension Container {
         }
     }
     
-    var localNotificationDataSource: Factory<LocalNotificationSubscriptionDataSource> {
-        Factory(self) {
-            LocalNotificationDataSourceImpl.shared
-        }
-    }
-    
     var localBookmarkDataSource: Factory<LocalBookmarkDataSource> {
         Factory(self) {
             LocalBookmarkDataSourceImpl.shared
@@ -84,12 +78,6 @@ extension Container {
         }
     }
     
-    var notificationService: Factory<NotificationSubscriptionService> {
-        Factory(self) {
-            NotificationSubscriptionServiceImpl()
-        }
-    }
-    
     var bookmarkService: Factory<BookmarkService> {
         Factory(self) {
             BookmarkServiceImpl()
@@ -99,6 +87,12 @@ extension Container {
     var tabBarService: Factory<TabBarService> {
         Factory(self) {
             TabBarServiceImpl()
+        }
+    }
+    
+    var subscriptionService: Factory<SubscriptionService> {
+        Factory(self) {
+            SubscriptionServiceImpl()
         }
     }
     

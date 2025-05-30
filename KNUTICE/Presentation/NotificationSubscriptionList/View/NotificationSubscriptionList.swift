@@ -96,12 +96,11 @@ struct NotificationSubscriptionList: View {
             .tint(.accent2)
             .navigationTitle("서비스 알림")
             .navigationBarTitleDisplayMode(.inline)
-            .onAppear {
-                if !UserDefaults.standard.bool(forKey: "isInitializedNotificationSettings") {
-                    viewModel.initializeAndFetchNotificationSubscriptions()
-                } else if !viewModel.isAllDataLoaded {
-                    viewModel.fetchNotificationSubscriptions()
-                }
+            .task {
+                await viewModel.fetchNotificationSubscriptions()
+            }
+            .onDisappear {
+                viewModel.task?.cancel()
             }
             .alert("알림 상태를 변경할 수 없어요.", isPresented: $viewModel.isShowingAlert) {
                 Button("확인") {}

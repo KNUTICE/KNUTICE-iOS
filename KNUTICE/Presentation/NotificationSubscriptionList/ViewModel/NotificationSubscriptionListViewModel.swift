@@ -9,6 +9,7 @@ import Combine
 import Factory
 import os
 
+@MainActor
 final class NotificationSubscriptionListViewModel: ObservableObject {
     @Published var isGeneralNoticeNotificationSubscribed: Bool?
     @Published var isAcademicNoticeNotificationSubscribed: Bool?
@@ -18,11 +19,12 @@ final class NotificationSubscriptionListViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var isShowingAlert: Bool = false
     
-    @Injected(\.notificationRepository) private var repository: NotificationSubscriptionRepository
-    @Injected(\.notificationService) private var notificationService: NotificationSubscriptionService
+    @Injected(\.notificationRepository) private var repository
+    @Injected(\.subscriptionService) private var subscriptionService
     private let logger = Logger()
     private var cancellables = Set<AnyCancellable>()
     private(set) var alertMessage: String = ""
+    private(set) var task: Task<Void, Never>?
     
     var isAllDataLoaded: Bool {
         let data = [
@@ -35,75 +37,55 @@ final class NotificationSubscriptionListViewModel: ObservableObject {
         return data.allSatisfy { $0 != nil }
     }
     
-    func initializeAndFetchNotificationSubscriptions() {
+    func fetchNotificationSubscriptions() async {
         isLoading = true
-        repository.createLocalSubscription()
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
-                switch completion {
-                case .finished:
-                    self?.logger.info("Successfully created initial subscription data")
-                case .failure(let error):
-                    self?.logger.error("NotificationSubscriptionListViewModel.initializeData() error : \(error.localizedDescription)")
-                }
-            }, receiveValue: { [weak self] in
-                self?.fetchNotificationSubscriptions()
-            })
-            .store(in: &cancellables)
-    }
-    
-    func fetchNotificationSubscriptions() {
-        isLoading = true
-        repository.fetchNotificationPermissions()
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
-                self?.isLoading = false
-                
-                switch completion {
-                case .finished:
-                    self?.logger.log(level: .debug, "Notification permission request finished.")
-                case .failure(let error):
-                    self?.logger.log(level: .error, "NotificationListViewModel: \(error.localizedDescription)")
-                }
-            }, receiveValue: { [weak self] in
-                self?.isGeneralNoticeNotificationSubscribed = $0["generalNotice"]
-                self?.isAcademicNoticeNotificationSubscribed = $0["academicNotice"]
-                self?.isScholarshipNoticeNotificationSubscribed = $0["scholarshipNotice"]
-                self?.isEventNoticeNotificationSubscribed = $0["eventNotice"]
-                self?.isEmploymentNoticeNotificationSubscribed = $0["employmentNotice"]
-            })
-            .store(in: &cancellables)
+        let result = await repository.fetch()
+        
+        guard !Task.isCancelled else {
+            return
+        }
+        
+        isLoading = false
+        switch result {
+        case .success(let subscriptions):
+            isGeneralNoticeNotificationSubscribed = subscriptions.generalNotice
+            isAcademicNoticeNotificationSubscribed = subscriptions.academicNotice
+            isScholarshipNoticeNotificationSubscribed = subscriptions.scholarshipNotice
+            isEventNoticeNotificationSubscribed = subscriptions.eventNotice
+            isEmploymentNoticeNotificationSubscribed = subscriptions.employmentNotice
+        case .failure(let error):
+            logger.log(level: .error, "NotificationListViewModel.fetchNotificationSubscriptions(): \(error.localizedDescription)")
+        }
     }
     
     func update(key: NoticeCategory, value: Bool) {
-        isLoading = true
-        notificationService.updatePermission(key, to: value)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
-                self?.isLoading = false
-                
-                switch completion {
-                case .finished:
-                    self?.logger.log(level: .debug, "Notification permission update finished.")
-                case .failure(let error):
-                    self?.logger.log(level: .error, "NotificationListViewModel: \(error.localizedDescription)")
-                    self?.handleError(with: error)
-                }
-            }, receiveValue: { [weak self] in
+        task = Task {
+            isLoading = true
+            let result = await subscriptionService.update(key, to: value)
+            
+            guard !Task.isCancelled else {
+                return
+            }
+            
+            isLoading = false
+            switch result {
+            case .success:
                 switch key {
                 case .generalNotice:
-                    self?.isGeneralNoticeNotificationSubscribed? = value
+                    isGeneralNoticeNotificationSubscribed = value
                 case .academicNotice:
-                    self?.isAcademicNoticeNotificationSubscribed? = value
+                    isAcademicNoticeNotificationSubscribed = value
                 case .scholarshipNotice:
-                    self?.isScholarshipNoticeNotificationSubscribed? = value
+                    isScholarshipNoticeNotificationSubscribed = value
                 case .eventNotice:
-                    self?.isEventNoticeNotificationSubscribed? = value
+                    isEventNoticeNotificationSubscribed = value
                 case .employmentNotice:
-                    self?.isEmploymentNoticeNotificationSubscribed? = value
+                    isEmploymentNoticeNotificationSubscribed = value
                 }
-            })
-            .store(in: &cancellables)
+            case .failure(let error):
+                logger.log(level: .error, "NotificationListViewModel.update(key:value:): \(error.localizedDescription)")
+            }
+        }
     }
     
     private func handleError(with error: Error) {
