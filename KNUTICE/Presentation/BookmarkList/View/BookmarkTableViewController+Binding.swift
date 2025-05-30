@@ -28,8 +28,11 @@ extension BookmarkTableViewController {
                 if bookmarks.isEmpty {
                     let backgroundView = UIHostingController(rootView: EmptyBookmarkView())
                     self?.tableView.backgroundView = backgroundView.view
+                    self?.tableView.tableHeaderView = nil
                 }  else {
                     self?.tableView.backgroundView = nil
+                    self?.tableView.tableHeaderView = self?.createTableHeaderView(text: "개수(\(bookmarks.count))")
+                    self?.tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44)
                 }
             })
             .bind(to: tableView.rx.items(dataSource: dataSource))
