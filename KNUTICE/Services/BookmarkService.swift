@@ -12,6 +12,7 @@ import UserNotifications
 protocol BookmarkService {
     func save(bookmark: Bookmark) -> AnyPublisher<Void, any Error>
     func delete(bookmark: Bookmark) -> AnyPublisher<Void, any Error>
+    func delete(bookmark: Bookmark) -> AnyPublisher<[Bookmark], any Error>
     func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error>
     func syncBookmarksWithNotice() -> AnyPublisher<[Bookmark], any Error>
 }
@@ -47,6 +48,22 @@ final class BookmarkServiceImpl: BookmarkService {
         } else {
             return bookmarkRepository.delete(by: bookmark.notice.id)
         }
+    }
+    
+    func delete(bookmark: Bookmark) -> AnyPublisher<[Bookmark], any Error> {
+        let publisher: AnyPublisher<Void, any Error> = delete(bookmark: bookmark)
+        
+        return publisher
+            .flatMap { [weak self] _ -> AnyPublisher<[Bookmark], any Error> in
+                guard let self else {
+                    return Just([])
+                        .setFailureType(to: Error.self)
+                        .eraseToAnyPublisher()
+                }
+                
+                return self.bookmarkRepository.read(delay: 0)
+            }
+            .eraseToAnyPublisher()
     }
     
     func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {

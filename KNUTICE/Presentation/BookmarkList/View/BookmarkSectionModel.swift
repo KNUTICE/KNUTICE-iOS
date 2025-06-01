@@ -9,10 +9,14 @@ import RxDataSources
 
 struct BookmarkSectionModel {
     var items: [Item]
+    var identity: Int {
+        items[0].notice.id
+    }
 }
 
-extension BookmarkSectionModel: SectionModelType {
+extension BookmarkSectionModel: AnimatableSectionModelType {
     typealias Item = Bookmark
+    typealias Identity = Int
     
     init(original: BookmarkSectionModel, items: [Item]) {
         self = original

@@ -13,13 +13,15 @@ import UIKit
 
 extension BookmarkTableViewController {
     func bind() {
-        let dataSource = RxTableViewSectionedReloadDataSource<BookmarkSectionModel>(configureCell: { dataSource, tableView, indexPath, item -> UITableViewCell in
+        let dataSource = RxTableViewSectionedAnimatedDataSource<BookmarkSectionModel>(
+            animationConfiguration: AnimationConfiguration(deleteAnimation: .top)
+        ) { data, tableView, indexPath, item in
             let cell = tableView.dequeueReusableCell(withIdentifier: BookmarkTableViewCell.reuseIdentifier, for: indexPath) as! BookmarkTableViewCell
             cell.configure(item)
             
             return cell
-            
-        })
+        }
+        dataSource.canEditRowAtIndexPath = { _, _ in true }
         
         viewModel.bookmarks
             .observe(on: MainScheduler.instance)
@@ -28,14 +30,20 @@ extension BookmarkTableViewController {
                 if bookmarks.isEmpty {
                     let backgroundView = UIHostingController(rootView: EmptyBookmarkView())
                     self?.tableView.backgroundView = backgroundView.view
-                    self?.tableView.tableHeaderView = nil
                 }  else {
                     self?.tableView.backgroundView = nil
-                    self?.tableView.tableHeaderView = self?.createTableHeaderView(text: "개수(\(bookmarks.count))")
-                    self?.tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44)
                 }
             })
             .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
+        tableView.rx.itemDeleted
+            .observe(on: MainScheduler.instance)
+            .bind(with: self, onNext: { owner, indexPath in
+                let sections = owner.viewModel.bookmarks.value
+                let bookmark = sections[indexPath.section].items[0]
+                owner.viewModel.delete(bookmark: bookmark)
+            })
             .disposed(by: disposeBag)
         
         refreshController.rx.controlEvent(.valueChanged)
