@@ -214,14 +214,8 @@
 		8E6931602CEF00600074142B /* NotificationSubscriptionRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69315E2CEF00600074142B /* NotificationSubscriptionRepositoryImpl.swift */; };
 		8E782B9F2DE96CCE005E4432 /* SubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E782B9E2DE96CCE005E4432 /* SubscriptionService.swift */; };
 		8E782BA02DE96CCE005E4432 /* SubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E782B9E2DE96CCE005E4432 /* SubscriptionService.swift */; };
-		8E7A4A5E2D2979DB00BD1B7F /* BookmarkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A5D2D2979DB00BD1B7F /* BookmarkList.swift */; };
-		8E7A4A5F2D2979DB00BD1B7F /* BookmarkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A5D2D2979DB00BD1B7F /* BookmarkList.swift */; };
-		8E7A4A612D297A4D00BD1B7F /* BookmarkListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A602D297A4D00BD1B7F /* BookmarkListViewModel.swift */; };
-		8E7A4A622D297A4D00BD1B7F /* BookmarkListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A602D297A4D00BD1B7F /* BookmarkListViewModel.swift */; };
 		8E7A4A6A2D2A2CD800BD1B7F /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A692D2A2CD800BD1B7F /* Bookmark.swift */; };
 		8E7A4A6B2D2A2CD800BD1B7F /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A692D2A2CD800BD1B7F /* Bookmark.swift */; };
-		8E7A4A6D2D2A43A900BD1B7F /* BookmarkListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A6C2D2A43A900BD1B7F /* BookmarkListRow.swift */; };
-		8E7A4A6E2D2A43A900BD1B7F /* BookmarkListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A6C2D2A43A900BD1B7F /* BookmarkListRow.swift */; };
 		8E7A4A702D2A44CE00BD1B7F /* Date+StringFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A6F2D2A44CE00BD1B7F /* Date+StringFormat.swift */; };
 		8E7A4A712D2A44CE00BD1B7F /* Date+StringFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A6F2D2A44CE00BD1B7F /* Date+StringFormat.swift */; };
 		8E7A4A732D2A531B00BD1B7F /* NoticeKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A722D2A531B00BD1B7F /* NoticeKind.swift */; };
@@ -498,10 +492,7 @@
 		8E69315E2CEF00600074142B /* NotificationSubscriptionRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSubscriptionRepositoryImpl.swift; sourceTree = "<group>"; };
 		8E782B9E2DE96CCE005E4432 /* SubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionService.swift; sourceTree = "<group>"; };
 		8E7945E42CA28F6900208662 /* KNUTICEUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KNUTICEUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E7A4A5D2D2979DB00BD1B7F /* BookmarkList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkList.swift; sourceTree = "<group>"; };
-		8E7A4A602D297A4D00BD1B7F /* BookmarkListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkListViewModel.swift; sourceTree = "<group>"; };
 		8E7A4A692D2A2CD800BD1B7F /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
-		8E7A4A6C2D2A43A900BD1B7F /* BookmarkListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkListRow.swift; sourceTree = "<group>"; };
 		8E7A4A6F2D2A44CE00BD1B7F /* Date+StringFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+StringFormat.swift"; sourceTree = "<group>"; };
 		8E7A4A722D2A531B00BD1B7F /* NoticeKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeKind.swift; sourceTree = "<group>"; };
 		8E7A9E732DCB17750001D4AA /* SearchResultsTableViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchResultsTableViewController+Layout.swift"; sourceTree = "<group>"; };
@@ -1157,8 +1148,6 @@
 			isa = PBXGroup;
 			children = (
 				8E0907742DE591E6008BDF18 /* BookmarkSectionModel.swift */,
-				8E7A4A5D2D2979DB00BD1B7F /* BookmarkList.swift */,
-				8E7A4A6C2D2A43A900BD1B7F /* BookmarkListRow.swift */,
 				8EC141202D33E4E8001FD93C /* NoticeWebVCWrapper.swift */,
 				8E0907652DE578B6008BDF18 /* BookmarkTableViewController.swift */,
 				8E0907682DE57948008BDF18 /* BookmarkTableViewController+Layout.swift */,
@@ -1172,7 +1161,6 @@
 		8E7A4A5C2D29797700BD1B7F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				8E7A4A602D297A4D00BD1B7F /* BookmarkListViewModel.swift */,
 				8E0907772DE5BAD2008BDF18 /* BookmarkTableViewModel.swift */,
 			);
 			path = ViewModel;
@@ -1567,7 +1555,6 @@
 				8E3DEAA12D7FC7CB00A5B435 /* ParentViewModel.swift in Sources */,
 				8EA9ACAB2C46AEC900C9E287 /* ContentWebView.swift in Sources */,
 				8E7A9E7E2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift in Sources */,
-				8E7A4A5E2D2979DB00BD1B7F /* BookmarkList.swift in Sources */,
 				8EADB8FB2D558F7300489086 /* Factory+Instance.swift in Sources */,
 				8E09077C2DE698C8008BDF18 /* EmptyBookmarkView.swift in Sources */,
 				8E7A4A702D2A44CE00BD1B7F /* Date+StringFormat.swift in Sources */,
@@ -1601,7 +1588,6 @@
 				8EC1ECA72DD452B6005E71B3 /* NoticeCollectionViewModel.swift in Sources */,
 				8EB767812D439DE90086AB60 /* Date+EndOfToday.swift in Sources */,
 				8E5E8BE42D36190E0078C007 /* BookmarkListRefreshable.swift in Sources */,
-				8E7A4A612D297A4D00BD1B7F /* BookmarkListViewModel.swift in Sources */,
 				8EC6B8962D309EA9002B45C7 /* LocalBookmarkDataSource.swift in Sources */,
 				8E0907812DE6A6E6008BDF18 /* ResultNotFoundView.swift in Sources */,
 				5C190A552BFDF66600E0254B /* NoticeReponseDTO.swift in Sources */,
@@ -1645,7 +1631,6 @@
 				8E09076A2DE57948008BDF18 /* BookmarkTableViewController+Layout.swift in Sources */,
 				8EDAFD432D6818D000834E00 /* Errors.swift in Sources */,
 				8EE65DAE2DE947F50059770D /* NotificationSubscription.swift in Sources */,
-				8E7A4A6D2D2A43A900BD1B7F /* BookmarkListRow.swift in Sources */,
 				8E7A9E822DCB53040001D4AA /* NoticeCell.swift in Sources */,
 				8E0C3F8C2C9ECD1B005E2A16 /* ReportViewModel.swift in Sources */,
 				8E7A9E7B2DCB4D3C0001D4AA /* NoticeCollectionViewController.swift in Sources */,
@@ -1701,7 +1686,6 @@
 				8E3DEAA22D7FC7CB00A5B435 /* ParentViewModel.swift in Sources */,
 				8E2051052CD4F32F00D87C6A /* ContentWebView.swift in Sources */,
 				8E7A9E7F2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift in Sources */,
-				8E7A4A5F2D2979DB00BD1B7F /* BookmarkList.swift in Sources */,
 				8EADB8FA2D558F7300489086 /* Factory+Instance.swift in Sources */,
 				8E09077B2DE698C8008BDF18 /* EmptyBookmarkView.swift in Sources */,
 				8E7A4A712D2A44CE00BD1B7F /* Date+StringFormat.swift in Sources */,
@@ -1735,7 +1719,6 @@
 				8EC1ECA82DD452B6005E71B3 /* NoticeCollectionViewModel.swift in Sources */,
 				8EB767822D439DE90086AB60 /* Date+EndOfToday.swift in Sources */,
 				8E5E8BE52D36190E0078C007 /* BookmarkListRefreshable.swift in Sources */,
-				8E7A4A622D297A4D00BD1B7F /* BookmarkListViewModel.swift in Sources */,
 				8EC6B8952D309EA9002B45C7 /* LocalBookmarkDataSource.swift in Sources */,
 				8E0907822DE6A6E6008BDF18 /* ResultNotFoundView.swift in Sources */,
 				8E2051162CD4F32F00D87C6A /* NoticeReponseDTO.swift in Sources */,
@@ -1779,7 +1762,6 @@
 				8E0907692DE57948008BDF18 /* BookmarkTableViewController+Layout.swift in Sources */,
 				8EDAFD422D6818D000834E00 /* Errors.swift in Sources */,
 				8EE65DAD2DE947F50059770D /* NotificationSubscription.swift in Sources */,
-				8E7A4A6E2D2A43A900BD1B7F /* BookmarkListRow.swift in Sources */,
 				8E7A9E812DCB53040001D4AA /* NoticeCell.swift in Sources */,
 				8E20512F2CD4F32F00D87C6A /* ReportViewModel.swift in Sources */,
 				8E7A9E7C2DCB4D3C0001D4AA /* NoticeCollectionViewController.swift in Sources */,
