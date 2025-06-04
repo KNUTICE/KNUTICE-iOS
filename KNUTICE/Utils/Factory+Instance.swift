@@ -115,12 +115,6 @@ extension Container {
         }
     }
     
-    var bookmarkListViewModel: Factory<BookmarkListViewModel> {
-        Factory(self) {
-            BookmarkListViewModel()
-        }
-    }
-    
     var bookmarkTableViewModel: Factory<BookmarkTableViewModel> {
         Factory(self) {
             BookmarkTableViewModel()

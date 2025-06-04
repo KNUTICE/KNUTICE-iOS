@@ -299,6 +299,8 @@
 		8EDD51A62C6D7D68002101CA /* MainTableViewController+NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD51A52C6D7D68002101CA /* MainTableViewController+NotificationCenter.swift */; };
 		8EDE5C762DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDE5C752DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift */; };
 		8EDE5C772DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDE5C752DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift */; };
+		8EE3821D2DF00AC100B57315 /* Date+SpecificTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE3821C2DF00AC100B57315 /* Date+SpecificTime.swift */; };
+		8EE3821E2DF00AC100B57315 /* Date+SpecificTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE3821C2DF00AC100B57315 /* Date+SpecificTime.swift */; };
 		8EE4B4E52D16CE1E00EFF10B /* SpinningIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4E42D16CE1E00EFF10B /* SpinningIndicator.swift */; };
 		8EE4B4E62D16CE1E00EFF10B /* SpinningIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4E42D16CE1E00EFF10B /* SpinningIndicator.swift */; };
 		8EE4B4FC2D17D93700EFF10B /* NoticeReponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A542BFDF66600E0254B /* NoticeReponseDTO.swift */; };
@@ -534,6 +536,7 @@
 		8EDC2E462D925B6F00AAB60F /* MainTableViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewModelTest.swift; sourceTree = "<group>"; };
 		8EDD51A52C6D7D68002101CA /* MainTableViewController+NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainTableViewController+NotificationCenter.swift"; sourceTree = "<group>"; };
 		8EDE5C752DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoticeCollectionViewController+binding.swift"; sourceTree = "<group>"; };
+		8EE3821C2DF00AC100B57315 /* Date+SpecificTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+SpecificTime.swift"; sourceTree = "<group>"; };
 		8EE4B4E42D16CE1E00EFF10B /* SpinningIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinningIndicator.swift; sourceTree = "<group>"; };
 		8EE65DA92DE947BC0059770D /* NotificationSubscriptionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSubscriptionDTO.swift; sourceTree = "<group>"; };
 		8EE65DAC2DE947F50059770D /* NotificationSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSubscription.swift; sourceTree = "<group>"; };
@@ -619,6 +622,7 @@
 				8EADB8F92D558F7300489086 /* Factory+Instance.swift */,
 				8EDAFD412D6818D000834E00 /* Errors.swift */,
 				8EDC2E432D9245EA00AAB60F /* UserDefaultsKeys.swift */,
+				8EE3821C2DF00AC100B57315 /* Date+SpecificTime.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1555,6 +1559,7 @@
 				8E3DEAA12D7FC7CB00A5B435 /* ParentViewModel.swift in Sources */,
 				8EA9ACAB2C46AEC900C9E287 /* ContentWebView.swift in Sources */,
 				8E7A9E7E2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift in Sources */,
+				8EE3821D2DF00AC100B57315 /* Date+SpecificTime.swift in Sources */,
 				8EADB8FB2D558F7300489086 /* Factory+Instance.swift in Sources */,
 				8E09077C2DE698C8008BDF18 /* EmptyBookmarkView.swift in Sources */,
 				8E7A4A702D2A44CE00BD1B7F /* Date+StringFormat.swift in Sources */,
@@ -1686,6 +1691,7 @@
 				8E3DEAA22D7FC7CB00A5B435 /* ParentViewModel.swift in Sources */,
 				8E2051052CD4F32F00D87C6A /* ContentWebView.swift in Sources */,
 				8E7A9E7F2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift in Sources */,
+				8EE3821E2DF00AC100B57315 /* Date+SpecificTime.swift in Sources */,
 				8EADB8FA2D558F7300489086 /* Factory+Instance.swift in Sources */,
 				8E09077B2DE698C8008BDF18 /* EmptyBookmarkView.swift in Sources */,
 				8E7A4A712D2A44CE00BD1B7F /* Date+StringFormat.swift in Sources */,

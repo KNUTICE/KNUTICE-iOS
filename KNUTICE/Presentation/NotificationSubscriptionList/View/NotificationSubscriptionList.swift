@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NotificationSubscriptionList: View {
     @StateObject private var viewModel: NotificationSubscriptionListViewModel
+    @State private var time: Date = Date()
     
     init(viewModel: NotificationSubscriptionListViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -18,13 +19,47 @@ struct NotificationSubscriptionList: View {
         ZStack {
             List {
                 Section {
+                    Toggle(isOn: $viewModel.isEtiquetteTimeActivate) {
+                        Text("에티켓 시간")
+                    }
+                    
+                    if viewModel.isEtiquetteTimeActivate == true {
+                        DatePicker(
+                            "시작 시간",
+                            selection: Binding(
+                                get: {
+                                    viewModel.etiquetteTimeStart ?? Date.tenPM
+                                }, set: {
+                                    viewModel.etiquetteTimeStart = $0
+                                }
+                            ),
+                            displayedComponents: .hourAndMinute
+                        )
+                        
+                        DatePicker(
+                            "종료 시간",
+                            selection: Binding(
+                                get: {
+                                    viewModel.etiquetteTimeEnd ?? Date.eightAM
+                                }, set: {
+                                    viewModel.etiquetteTimeEnd = $0
+                                }
+                            ),
+                            displayedComponents: .hourAndMinute)
+                    }
+                } footer: {
+                    Text("에티켓 시간 동안 알림을 받지 않습니다.")
+                }
+                
+                Section {
                     Toggle(
-                        isOn: Binding(get: {
-                            viewModel.isGeneralNoticeNotificationSubscribed ?? false
-                        }, set: {
-                            viewModel.update(key: .generalNotice, value: $0)
-                        }),
-                        label: {
+                        isOn: Binding(
+                            get: {
+                                viewModel.isGeneralNoticeNotificationSubscribed ?? false
+                            }, set: {
+                                viewModel.update(key: .generalNotice, value: $0)
+                            }
+                        ), label: {
                             Text("일반소식")
                         })
                 } footer: {
@@ -38,8 +73,8 @@ struct NotificationSubscriptionList: View {
                                 viewModel.isAcademicNoticeNotificationSubscribed ?? false
                             }, set: {
                                 viewModel.update(key: .academicNotice, value: $0)
-                            }),
-                        label: {
+                            }
+                        ), label: {
                             Text("학사공지")
                         })
                 } footer: {
@@ -53,8 +88,8 @@ struct NotificationSubscriptionList: View {
                                 viewModel.isScholarshipNoticeNotificationSubscribed ?? false
                             }, set: {
                                 viewModel.update(key: .scholarshipNotice, value: $0)
-                            }),
-                        label: {
+                            }
+                        ), label: {
                             Text("장학안내")
                         })
                 } footer: {
@@ -68,8 +103,8 @@ struct NotificationSubscriptionList: View {
                                 viewModel.isEventNoticeNotificationSubscribed ?? false
                             }, set: {
                                 viewModel.update(key: .eventNotice, value: $0)
-                            }),
-                        label: {
+                            }
+                        ), label: {
                             Text("행사안내")
                         })
                 } footer: {
@@ -83,8 +118,8 @@ struct NotificationSubscriptionList: View {
                                 viewModel.isEmploymentNoticeNotificationSubscribed ?? false
                             }, set: {
                                 viewModel.update(key: .employmentNotice, value: $0)
-                            }),
-                        label: {
+                            }
+                        ), label: {
                             Text("취업안내")
                         }
                     )
@@ -106,6 +141,11 @@ struct NotificationSubscriptionList: View {
                 Button("확인") {}
             } message: {
                 Text(viewModel.alertMessage)
+            }
+            .animation(.default, value: viewModel.isEtiquetteTimeActivate)
+            .onAppear {
+                viewModel.fetchEtiquetteTime()
+                viewModel.bind()
             }
             
             if viewModel.isLoading {
