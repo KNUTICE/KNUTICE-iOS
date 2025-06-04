@@ -7,6 +7,7 @@
 
 import Combine
 import Factory
+import Foundation
 import os
 
 @MainActor
@@ -16,6 +17,9 @@ final class NotificationSubscriptionListViewModel: ObservableObject {
     @Published var isScholarshipNoticeNotificationSubscribed: Bool?
     @Published var isEventNoticeNotificationSubscribed: Bool?
     @Published var isEmploymentNoticeNotificationSubscribed: Bool?
+    @Published var isEtiquetteTimeActivate: Bool = false
+    @Published var etiquetteTimeStart: Date?
+    @Published var etiquetteTimeEnd: Date?
     @Published var isLoading: Bool = false
     @Published var isShowingAlert: Bool = false
     
@@ -95,5 +99,53 @@ final class NotificationSubscriptionListViewModel: ObservableObject {
             alertMessage = "잠시 후 다시 시도해주세요.\n지속적으로 발생할 경우 고객센터로 문의해주세요."
         }
         isShowingAlert = true
+    }
+    
+    func fetchEtiquetteTime() {
+        if let etiquetteTimeStart = UserDefaults.standard.object(forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue) as? Date,
+           let etiquetteTimeEnd = UserDefaults.standard.object(forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue) as? Date {
+            self.isEtiquetteTimeActivate = true
+            self.etiquetteTimeStart = etiquetteTimeStart
+            self.etiquetteTimeEnd = etiquetteTimeEnd
+        }
+    }
+    
+    func bind() {
+        $isEtiquetteTimeActivate
+            .dropFirst()
+            .removeDuplicates()
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                
+                if $0 == true {
+                    self.etiquetteTimeStart = UserDefaults.standard.object(forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue) as? Date ?? Date.tenPM
+                    self.etiquetteTimeEnd = UserDefaults.standard.object(forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue) as? Date ?? Date.eightAM
+                } else {
+                    self.etiquetteTimeStart = nil
+                    UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue)
+                    
+                    self.etiquetteTimeEnd = nil
+                    UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue)
+                }
+            })
+            .store(in: &cancellables)
+        
+        $etiquetteTimeStart
+            .removeDuplicates()
+            .sink(receiveValue: {
+                if let date = $0 {
+                    UserDefaults.standard.set(date, forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue)
+                }
+            })
+            .store(in: &cancellables)
+        
+        $etiquetteTimeEnd
+            .removeDuplicates()
+            .sink(receiveValue: {
+                if let date = $0 {
+                    UserDefaults.standard.set(date, forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue)
+                }
+            })
+            .store(in: &cancellables)
     }
 }
