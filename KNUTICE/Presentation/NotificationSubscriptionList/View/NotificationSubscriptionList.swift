@@ -9,7 +9,6 @@ import SwiftUI
 
 struct NotificationSubscriptionList: View {
     @StateObject private var viewModel: NotificationSubscriptionListViewModel
-    @State private var time: Date = Date()
     
     init(viewModel: NotificationSubscriptionListViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
