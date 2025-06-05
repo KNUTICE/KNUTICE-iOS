@@ -68,4 +68,9 @@ extension MainTableViewController {
         let viewController = UIHostingController(rootView: SettingView())
         navigationController?.pushViewController(viewController, animated: true)
     }
+    
+    //MARK: - Notification Button Actrion
+    @objc func navigateToUncheckedNotifications(_ sender: UIButton) {
+        
+    }
 }

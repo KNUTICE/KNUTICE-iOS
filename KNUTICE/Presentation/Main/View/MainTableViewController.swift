@@ -36,21 +36,31 @@ final class MainTableViewController: UIViewController {
         return label
     }()
     lazy var settingBtn: UIButton = {
-        let targetSize = CGSize(width: 25, height: 24)
-        let renderer = UIGraphicsImageRenderer(size: targetSize)
-        let gearImage = UIImage(systemName: "gearshape")
-        let selectedGearImage = UIImage(systemName: "gearshape")?.withTintColor(.lightGray)
-        let resizedGearImage = renderer.image { _ in
-            gearImage?.draw(in: CGRect(origin: .zero, size: targetSize))
-        }.withTintColor(.navigationButton)
-        let resizedSelectedGearImage = renderer.image { _ in
-            selectedGearImage?.draw(in: CGRect(origin: .zero, size: targetSize))
-        }
+        let configuration = UIImage.SymbolConfiguration(textStyle: .title2)
+        let gearImage = UIImage(systemName: "gearshape", withConfiguration: configuration)?
+            .withRenderingMode(.alwaysTemplate)
+        let selectedGearImage = UIImage(systemName: "gearshape", withConfiguration: configuration)?
+            .withRenderingMode(.alwaysOriginal)
+            .withTintColor(.lightGray)
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(resizedGearImage, for: .normal)
-        button.setImage(resizedSelectedGearImage, for: .highlighted)
+        button.setImage(gearImage, for: .normal)
+        button.setImage(selectedGearImage, for: .highlighted)
         button.addTarget(self, action: #selector(navigateToSetting(_:)), for: .touchUpInside)
+        
+        return button
+    }()
+    lazy var bellBtn: UIButton = {
+        let configuration = UIImage.SymbolConfiguration(textStyle: .title2)
+        let bellImage = UIImage(systemName: "bell", withConfiguration: configuration)?
+            .withRenderingMode(.alwaysTemplate)
+        let selectedBellImage = UIImage(systemName: "bell", withConfiguration: configuration)?
+            .withRenderingMode(.alwaysOriginal)
+            .withTintColor(.lightGray)
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(bellImage, for: .normal)
+        button.setImage(selectedBellImage, for: .highlighted)
         
         return button
     }()
