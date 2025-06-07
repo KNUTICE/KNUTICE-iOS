@@ -30,7 +30,7 @@ final class MockTopThreeNoticesAPITests: XCTestCase {
         let expectation = XCTestExpectation(description: "Wait for fetch top three notices")
         MockURLProtocol.setUpMockData(.fetchTopThreeNoticesShouldSucceed)
         
-        dataSource.sendGetRequest(to: Bundle.main.mainNoticeURL, resultType: MainNoticeResponseDTO.self)
+        dataSource.request(Bundle.main.mainNoticeURL, method: .get, decoding: MainNoticeResponseDTO.self)
             .sink { completion in
                 switch completion {
                 case .finished:
