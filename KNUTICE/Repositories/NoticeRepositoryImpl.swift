@@ -55,11 +55,18 @@ final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
             ]
         ]
         
-        return dataSource.sendPostRequest(to: Bundle.main.noticeSyncURL, params: params, resultType: NoticeReponseDTO.self)
-            .compactMap { [weak self] in
+        return dataSource.request(
+            Bundle.main.noticeSyncURL,
+            method: .post,
+            parameters: params,
+            decoding: NoticeReponseDTO.self
+        )
+        .compactMap { [weak self] dto in
+            dto.body?.compactMap {
                 self?.createNotice($0)
             }
-            .eraseToAnyPublisher()
+        }
+        .eraseToAnyPublisher()
     }
     
     func fetchNotice(by nttId: Int) -> AnyPublisher<Notice?, any Error> {
