@@ -10,12 +10,6 @@ import Combine
 import Alamofire
 
 protocol RemoteDataSource {
-    func sendGetRequest<T: Decodable>(to url: String,
-                                      resultType: T.Type) -> Single<T>
-    
-    func sendGetRequest<T: Decodable>(to url: String,
-                                      resultType: T.Type) -> AnyPublisher<T, any Error>
-    
     /// Sends an HTTP request and decodes the response into the specified type.
     ///
     /// - Parameters:
@@ -110,34 +104,6 @@ final class RemoteDataSourceImpl: RemoteDataSource {
     
     init(session: Session = Session.default) {
         self.session = session
-    }
-    
-    func sendGetRequest<T: Decodable>(to url: String,
-                                      resultType: T.Type) -> Single<T> {
-        return Single.create { observer in
-            self.session.request(url)
-                .responseDecodable(of: resultType.self) { response in
-                    switch response.result {
-                    case .success(let dto):
-                        observer(.success(dto))
-                    case .failure(let error):
-                        observer(.failure(error))
-                    }
-                }
-            
-            return Disposables.create()
-        }
-    }
-    
-    func sendGetRequest<T: Decodable>(to url: String,
-                                      resultType: T.Type) -> AnyPublisher<T, any Error> {
-        return session.request(url)
-            .publishDecodable(type: T.self)
-            .value()
-            .mapError {
-                $0 as Error
-            }
-            .eraseToAnyPublisher()
     }
     
     func request<T>(

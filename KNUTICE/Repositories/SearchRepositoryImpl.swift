@@ -15,9 +15,13 @@ final class SearchRepositoryImpl: SearchRepository, NoticeCreatable {
     func search(keyword: String) -> Single<[Notice]> {
         let url = Bundle.main.searchURL + "?keyword=\(keyword)"
         
-        return dataSource.sendGetRequest(to: url, resultType: NoticeReponseDTO.self)
-            .map { [weak self] in
-                return self?.createNotice($0) ?? []
-            }
+        return dataSource.request(
+            url,
+            method: .get,
+            decoding: NoticeReponseDTO.self
+        )
+        .map { [weak self] in
+            return self?.createNotice($0) ?? []
+        }
     }
 }
