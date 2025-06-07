@@ -27,11 +27,16 @@ final class TokenRepositoryImpl: TokenRepository {
             ]
         ] as [String : Any]
         
-        return dataSource.sendPostRequest(to: remoteURL, params: params, resultType: PostResponseDTO.self)
-            .map {
-                return $0.result.resultCode == 200 ? true : false
-            }
-            .asObservable()
+        return dataSource.request(
+            remoteURL,
+            method: .post,
+            parameters: params,
+            decoding: PostResponseDTO.self
+        )
+        .map {
+            return $0.result.resultCode == 200 ? true : false
+        }
+        .asObservable()
     }
     
     func getFCMToken() -> AnyPublisher<String, any Error> {
