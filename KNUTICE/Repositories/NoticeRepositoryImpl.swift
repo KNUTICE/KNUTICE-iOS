@@ -16,31 +16,37 @@ final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
     func fetchNotices(for category: NoticeCategory) -> AnyPublisher<NoticeSectionModel, any Error> {
         let endPoint = Bundle.main.noticeURL
         
-        return dataSource.sendGetRequest(to: endPoint + "?noticeName=\(category.rawValue)", resultType: NoticeReponseDTO.self)
-            .compactMap { [weak self] dto in
-                dto.body?.compactMap {
-                    self?.createNotice($0)
-                }
+        return dataSource.request(
+            endPoint + "?noticeName=\(category.rawValue)",
+            method: .get,
+            decoding: NoticeReponseDTO.self)
+        .compactMap { [weak self] dto in
+            dto.body?.compactMap {
+                self?.createNotice($0)
             }
-            .map {
-                NoticeSectionModel(items: $0)
-            }
-            .eraseToAnyPublisher()
+        }
+        .map {
+            NoticeSectionModel(items: $0)
+        }
+        .eraseToAnyPublisher()
     }
     
     func fetchNotices(for category: NoticeCategory, after number: Int) -> AnyPublisher<NoticeSectionModel, any Error> {
         let endPoint = Bundle.main.noticeURL
         
-        return dataSource.sendGetRequest(to: endPoint + "?noticeName=\(category.rawValue)" + "&nttId=\(number)", resultType: NoticeReponseDTO.self)
-            .compactMap { [weak self] dto in
-                dto.body?.compactMap {
-                    self?.createNotice($0)
-                }
+        return dataSource.request(
+            endPoint + "?noticeName=\(category.rawValue)" + "&nttId=\(number)",
+            method: .get,
+            decoding: NoticeReponseDTO.self)
+        .compactMap { [weak self] dto in
+            dto.body?.compactMap {
+                self?.createNotice($0)
             }
-            .map {
-                NoticeSectionModel(items: $0)
-            }
-            .eraseToAnyPublisher()
+        }
+        .map {
+            NoticeSectionModel(items: $0)
+        }
+        .eraseToAnyPublisher()
     }
     
     func fetchNotices(by nttIds: [Int]) -> AnyPublisher<[Notice], any Error> {
@@ -70,12 +76,16 @@ final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
     }
     
     func fetchNotice(by nttId: Int) -> AnyPublisher<Notice?, any Error> {
-        return dataSource.sendGetRequest(to: Bundle.main.mainNoticeURL + "/\(nttId)", resultType: SingleNoticeResponseDTO.self)
-            .map { [weak self] dto in
-                return dto.body.flatMap {
-                    self?.createNotice($0)
-                }
+        return dataSource.request(
+            Bundle.main.mainNoticeURL + "/\(nttId)",
+            method: .get,
+            decoding: SingleNoticeResponseDTO.self
+        )
+        .map { [weak self] dto in
+            return dto.body.flatMap {
+                self?.createNotice($0)
             }
-            .eraseToAnyPublisher()
+        }
+        .eraseToAnyPublisher()
     }
 }

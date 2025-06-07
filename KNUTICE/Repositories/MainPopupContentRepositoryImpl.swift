@@ -14,10 +14,14 @@ final class MainPopupContentRepositoryImpl: MainPopupContentRepository {
     
     func fetchMainPopupContent() -> AnyPublisher<MainPopupContent?, any Error> {
         let apiEndPoint = Bundle.main.mainPopupContentURL
-        return dataSource.sendGetRequest(to: apiEndPoint, resultType: MainPopupContentDTO.self)
-            .map {
-                self.createMainPopupContent(from: $0)
-            }
-            .eraseToAnyPublisher()
+        return dataSource.request(
+            apiEndPoint,
+            method:. get,
+            decoding: MainPopupContentDTO.self
+        )
+        .compactMap { [weak self] in
+            self?.createMainPopupContent(from: $0)
+        }
+        .eraseToAnyPublisher()
     }
 }
