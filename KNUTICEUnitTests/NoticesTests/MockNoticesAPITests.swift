@@ -40,7 +40,7 @@ final class MockNoticesAPITests: XCTestCase {
         MockURLProtocol.setUpMockData(.fetchGeneralNoticesShouldSucceed)
         
         //When
-        dataSource.sendGetRequest(to: endPoint, resultType: NoticeReponseDTO.self)
+        dataSource.request(endPoint, method: .get, decoding: NoticeReponseDTO.self)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
@@ -65,7 +65,7 @@ final class MockNoticesAPITests: XCTestCase {
         MockURLProtocol.setUpMockData(.fetchAcademicNoticesShouldSucceed)
         
         //When
-        dataSource.sendGetRequest(to: endPoint, resultType: NoticeReponseDTO.self)
+        dataSource.request(endPoint, method: .get, decoding: NoticeReponseDTO.self)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
@@ -89,7 +89,7 @@ final class MockNoticesAPITests: XCTestCase {
         MockURLProtocol.setUpMockData(.fetchScholarshipNoticesShouldSucceed)
         
         //When
-        dataSource.sendGetRequest(to: endPoint, resultType: NoticeReponseDTO.self)
+        dataSource.request(endPoint, method: .get, decoding: NoticeReponseDTO.self)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
@@ -113,7 +113,7 @@ final class MockNoticesAPITests: XCTestCase {
         MockURLProtocol.setUpMockData(.fetchEventNoticesShouldSucceed)
         
         //When
-        dataSource.sendGetRequest(to: endPoint, resultType: NoticeReponseDTO.self)
+        dataSource.request(endPoint, method: .get, decoding: NoticeReponseDTO.self)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
@@ -136,7 +136,7 @@ final class MockNoticesAPITests: XCTestCase {
         MockURLProtocol.setUpMockData(.fetchEmploymentNoticesShouldSucceed)
         
         //When
-        dataSource.sendGetRequest(to: endPoint, resultType: NoticeReponseDTO.self)
+        dataSource.request(endPoint, method: .get, decoding: NoticeReponseDTO.self)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
