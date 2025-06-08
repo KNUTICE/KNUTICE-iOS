@@ -1,0 +1,14 @@
+{
+    "result": {
+        "resultCode": 200,
+        "resultMessage": "성공",
+        "resultDescription": "성공"
+    },
+    "body": {
+        "generalNewsTopic": true,
+        "scholarshipNewsTopic": true,
+        "eventNewsTopic": true,
+        "academicNewsTopic": true,
+        "employmentNewsTopic": true
+    }
+}
