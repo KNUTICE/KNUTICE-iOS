@@ -6,7 +6,6 @@
 //
 
 import Alamofire
-import Combine
 import Factory
 import XCTest
 @testable import KNUTICE
@@ -24,7 +23,6 @@ final class TopicSubscriptionFetchAPITests: XCTestCase {
             RemoteDataSourceImpl(session: session)
         }
         dataSource = Container.shared.remoteDataSource()
-        MockURLProtocol.setUpMockData(.fetchTopicSubscriptionsShouldSucceed)
     }
 
     override func tearDownWithError() throws {
@@ -36,6 +34,7 @@ final class TopicSubscriptionFetchAPITests: XCTestCase {
     func test_fetchTopicSubscriptionsStatus_returnsNotificationSubscriptionDTO() {
         //Given
         let expectation = expectation(description: "fetch topic subscriptions status")
+        MockURLProtocol.setUpMockData(.fetchTopicSubscriptionsShouldSucceed)
         
         Task {
             do {
@@ -65,4 +64,41 @@ final class TopicSubscriptionFetchAPITests: XCTestCase {
         
         wait(for: [expectation], timeout: 1)
     }
+    
+    func test_updateTopicSubscription_returnsSuccessDTO() {
+        //Given
+        let expectation = XCTestExpectation(description: "update topic subscription")
+        MockURLProtocol.setUpMockData(.postRequestShouldSucceed)
+        
+        Task {
+            do {
+                let params: [String: Any] = [
+                    "result": [
+                        "resultCode": 0,
+                        "resultMessage": "string",
+                        "resultDescription": "string"
+                    ],
+                    "body": [
+                        "fcmToken": "string",
+                        "noticeName" : "GENERAL_NEWS",
+                        "isSubscribed" : true
+                    ]
+                ]
+                let dto = try await dataSource.request(
+                    Bundle.main.notificationPermissionURL,
+                    method: .post,
+                    parameters: params,
+                    decoding: PostResponseDTO.self
+                )
+                
+                XCTAssertTrue(dto.body == true)
+                expectation.fulfill()
+            } catch {
+                XCTFail(error.localizedDescription)
+            }
+        }
+        
+        wait(for: [expectation], timeout: 1)
+    }
+
 }
