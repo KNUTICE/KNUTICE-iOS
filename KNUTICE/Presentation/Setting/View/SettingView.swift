@@ -22,7 +22,7 @@ struct SettingView: View {
                     .listRowSeparator(.hidden)
                 
                 NavigationLink {
-                    NotificationSubscriptionList(viewModel: NotificationSubscriptionListViewModel())
+                    TopicSubscriptionList(viewModel: TopicSubscriptionListViewModel())
                 } label: {
                     Text("서비스 알림")
                 }

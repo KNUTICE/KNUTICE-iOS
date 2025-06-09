@@ -1,5 +1,5 @@
 //
-//  NotificationSubscriptionRepositoryImpl.swift
+//  TopicSubscriptionRepositoryImpl.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 11/21/24.
@@ -9,7 +9,7 @@ import Combine
 import Factory
 import Foundation
 
-final class NotificationSubscriptionRepositoryImpl: NotificationSubscriptionRepository {
+final class TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
     
     func fetch() async -> Result<NotificationSubscription, Error> {

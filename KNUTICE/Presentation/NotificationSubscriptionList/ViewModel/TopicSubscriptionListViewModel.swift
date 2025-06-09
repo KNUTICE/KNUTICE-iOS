@@ -11,7 +11,7 @@ import Foundation
 import os
 
 @MainActor
-final class NotificationSubscriptionListViewModel: ObservableObject {
+final class TopicSubscriptionListViewModel: ObservableObject {
     @Published var isGeneralNoticeNotificationSubscribed: Bool?
     @Published var isAcademicNoticeNotificationSubscribed: Bool?
     @Published var isScholarshipNoticeNotificationSubscribed: Bool?
@@ -23,7 +23,7 @@ final class NotificationSubscriptionListViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var isShowingAlert: Bool = false
     
-    @Injected(\.notificationRepository) private var repository
+    @Injected(\.topicSubscriptionRepository) private var repository
     @Injected(\.subscriptionService) private var subscriptionService
     private let logger = Logger()
     private var cancellables = Set<AnyCancellable>()

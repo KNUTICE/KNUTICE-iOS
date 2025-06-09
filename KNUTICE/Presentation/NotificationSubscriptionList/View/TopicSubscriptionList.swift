@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct NotificationSubscriptionList: View {
-    @StateObject private var viewModel: NotificationSubscriptionListViewModel
+struct TopicSubscriptionList: View {
+    @StateObject private var viewModel: TopicSubscriptionListViewModel
     
-    init(viewModel: NotificationSubscriptionListViewModel) {
+    init(viewModel: TopicSubscriptionListViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     
@@ -156,6 +156,6 @@ struct NotificationSubscriptionList: View {
 
 #Preview {
     NavigationStack {
-        NotificationSubscriptionList(viewModel: NotificationSubscriptionListViewModel())
+        TopicSubscriptionList(viewModel: TopicSubscriptionListViewModel())
     }
 }
