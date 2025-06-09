@@ -53,9 +53,9 @@ extension Container {
         }
     }
     
-    var notificationRepository: Factory<NotificationSubscriptionRepository> {
+    var topicSubscriptionRepository: Factory<TopicSubscriptionRepository> {
         Factory(self) {
-            NotificationSubscriptionRepositoryImpl()
+            TopicSubscriptionRepositoryImpl()
         }
     }
     
@@ -90,9 +90,9 @@ extension Container {
         }
     }
     
-    var subscriptionService: Factory<SubscriptionService> {
+    var subscriptionService: Factory<TopicSubscriptionService> {
         Factory(self) {
-            SubscriptionServiceImpl()
+            TopicSubscriptionServiceImpl()
         }
     }
     

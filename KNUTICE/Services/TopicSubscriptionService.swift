@@ -1,5 +1,5 @@
 //
-//  SubscriptionService.swift
+//  TopicSubscriptionService.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 5/30/25.
@@ -8,13 +8,13 @@
 import Factory
 import Foundation
 
-protocol SubscriptionService {
+protocol TopicSubscriptionService {
     func update(_ noticeName: NoticeCategory, to value: Bool) async -> Result<Void, Error>
 }
 
-final class SubscriptionServiceImpl: SubscriptionService {
+final class TopicSubscriptionServiceImpl: TopicSubscriptionService {
     @Injected(\.tokenRepository) private var tokenRepository
-    @Injected(\.notificationRepository) private var notificationRepository
+    @Injected(\.topicSubscriptionRepository) private var topicSubscriptionRepository
     
     func update(_ noticeName: NoticeCategory, to value: Bool) async -> Result<Void, any Error> {
         do {
@@ -25,7 +25,7 @@ final class SubscriptionServiceImpl: SubscriptionService {
             }
             
             let params: [String: Any] = createParams(token: token, noticeName: noticeName.rawValue, isSubscribed: value)
-            try await notificationRepository.update(params: params)
+            try await topicSubscriptionRepository.update(params: params)
             return .success(())
         } catch {
             return .failure(error)

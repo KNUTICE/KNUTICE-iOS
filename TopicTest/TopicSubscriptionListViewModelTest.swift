@@ -13,7 +13,7 @@ import XCTest
 
 @MainActor
 final class TopicSubscriptionListViewModelTest: XCTestCase {
-    private var viewModel: NotificationSubscriptionListViewModel!
+    private var viewModel: TopicSubscriptionListViewModel!
     private var cancellables: Set<AnyCancellable>!
 
     override func setUpWithError() throws {
@@ -25,7 +25,7 @@ final class TopicSubscriptionListViewModelTest: XCTestCase {
         Container.shared.remoteDataSource.register {
             RemoteDataSourceImpl(session: session)
         }
-        viewModel = NotificationSubscriptionListViewModel()
+        viewModel = TopicSubscriptionListViewModel()
         cancellables = []
     }
 
