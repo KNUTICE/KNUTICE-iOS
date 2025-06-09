@@ -53,7 +53,12 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
         
         bookmarkEntity.bookmarkedNotice = noticeEntity
         
-        return Future { promise in
+        return Future { [weak self] promise in
+            guard let self else {
+                promise(.failure(NSError(domain: "SelfDeallocated", code: -1)))
+                return
+            }
+            
             self.backgroundContext.perform {
                 do {
                     try self.backgroundContext.save()
@@ -67,7 +72,7 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
     }
     
     func readDTO() -> AnyPublisher<[BookmarkDTO], any Error> {
-        return readEntities()
+        return readBookmarkEntities()
             .map { entities in
                 entities.map {
                     BookmarkDTO(notice: $0.bookmarkedNotice, details: $0.memo, alarmDate: $0.alarmDate)
@@ -76,8 +81,13 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
             .eraseToAnyPublisher()
     }
     
-    private func readEntities() -> AnyPublisher<[BookmarkEntity], any Error> {
-        return Future { promise in
+    private func readBookmarkEntities() -> AnyPublisher<[BookmarkEntity], any Error> {
+        return Future { [weak self] promise in
+            guard let self else {
+                promise(.failure(NSError(domain: "SelfDeallocated", code: -1)))
+                return
+            }
+            
             self.backgroundContext.perform {
                 let fetchRequest = NSFetchRequest<BookmarkEntity>(entityName: "BookmarkEntity")
                 
@@ -93,19 +103,9 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
     }
     
     func isDuplication(id: Int) -> AnyPublisher<Bool, any Error> {
-        return readDTO()
-            .flatMap { dto -> AnyPublisher<Bool, any Error> in
-                let duplicationCount = dto.filter { $0.notice?.id == Int64(id) }.count
-                
-                if duplicationCount > 0 {
-                    //중복 id가 존재하는 경우
-                    return Just(true)
-                        .setFailureType(to: Error.self)
-                        .eraseToAnyPublisher()
-                }
-                
-                //중복 id가 존재하지 않는 경우
-                return Just(false)
+        return fetchNoticeEntities(withId: id)
+            .flatMap { entities -> AnyPublisher<Bool, any Error> in
+                return Just(!entities.isEmpty)
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
             }
@@ -113,19 +113,22 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
     }
     
     func delete(id: Int) -> AnyPublisher<Void, any Error> {
-        return readEntities()
+        return fetchNoticeEntities(withId: id)
             .flatMap { entities -> AnyPublisher<Void, any Error> in
-                return Future { promise in
+                return Future { [weak self] promise in
+                    guard let self else {
+                        promise(.failure(NSError(domain: "SelfDeallocated", code: -1)))
+                        return
+                    }
+                    
                     self.backgroundContext.perform {
                         do {
-                            //일치하는 id 필터링 후 삭제
-                            let filteredEntities = entities.filter { $0.bookmarkedNotice?.id == Int64(id) }
-                            filteredEntities.forEach {
+                            //id에 해당하는 북마크 데이터 삭제
+                            entities.forEach {
                                 self.backgroundContext.delete($0)
                             }
                             
-                            //영구 저장소에 반영
-                            try self.backgroundContext.save()
+                            try self.backgroundContext.save()    //영구 저장소에 반영
                             promise(.success(()))
                         } catch {
                             promise(.failure(error))
@@ -135,16 +138,21 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
                 .eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
+        
     }
     
     func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
-        return readEntities()
+        return fetchBookmarkEntities(withId: bookmark.notice.id)
             .flatMap { entities -> AnyPublisher<Void, any Error> in
-                return Future { promise in
+                return Future { [weak self] promise in
+                    guard let self else {
+                        promise(.failure(NSError(domain: "SelfDeallocated", code: -1)))
+                        return
+                    }
+                    
                     self.backgroundContext.perform {
                         do {
-                            let filteredEntities = entities.filter { $0.bookmarkedNotice?.id == Int64(bookmark.notice.id) }
-                            filteredEntities.forEach {
+                            entities.forEach {
                                 $0.memo = bookmark.memo
                                 $0.alarmDate = bookmark.alarmDate
                             }
@@ -159,5 +167,49 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
                 .eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
+    }
+    
+    private func fetchNoticeEntities(withId id: Int) -> AnyPublisher<[NoticeEntity], any Error> {
+        return Future { [weak self] promise in
+            guard let self else {
+                promise(.failure(NSError(domain: "SelfDeallocated", code: -1)))
+                return
+            }
+            
+            self.backgroundContext.perform {
+                let request = NSFetchRequest<NoticeEntity>(entityName: "NoticeEntity")
+                request.predicate = NSPredicate(format: "id == %d", id)
+                
+                do {
+                    let entities = try self.backgroundContext.fetch(request)
+                    promise(.success(entities))
+                } catch {
+                    promise(.failure(error))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    private func fetchBookmarkEntities(withId id: Int) -> AnyPublisher<[BookmarkEntity], any Error> {
+        return Future { [weak self] promise in
+            guard let self else {
+                promise(.failure(NSError(domain: "SelfDeallocated", code: -1)))
+                return
+            }
+            
+            self.backgroundContext.perform {
+                do {
+                    let request = NSFetchRequest<BookmarkEntity>(entityName: "BookmarkEntity")
+                    request.predicate = NSPredicate(format: "bookmarkedNotice.id == %d", id)
+                    let entities = try self.backgroundContext.fetch(request)
+                    print(entities)
+                    promise(.success(entities))
+                } catch {
+                    promise(.failure(error))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
     }
 }
