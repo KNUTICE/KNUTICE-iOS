@@ -53,12 +53,7 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
         
         bookmarkEntity.bookmarkedNotice = noticeEntity
         
-        return Future { [weak self] promise in
-            guard let self else {
-                promise(.failure(NSError(domain: "SelfDeallocated", code: -1)))
-                return
-            }
-            
+        return Future { [unowned self] promise in
             self.backgroundContext.perform {
                 do {
                     try self.backgroundContext.save()
@@ -82,12 +77,7 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
     }
     
     private func readBookmarkEntities() -> AnyPublisher<[BookmarkEntity], any Error> {
-        return Future { [weak self] promise in
-            guard let self else {
-                promise(.failure(NSError(domain: "SelfDeallocated", code: -1)))
-                return
-            }
-            
+        return Future { [unowned self] promise in
             self.backgroundContext.perform {
                 let fetchRequest = NSFetchRequest<BookmarkEntity>(entityName: "BookmarkEntity")
                 
@@ -115,12 +105,7 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
     func delete(id: Int) -> AnyPublisher<Void, any Error> {
         return fetchNoticeEntities(withId: id)
             .flatMap { entities -> AnyPublisher<Void, any Error> in
-                return Future { [weak self] promise in
-                    guard let self else {
-                        promise(.failure(NSError(domain: "SelfDeallocated", code: -1)))
-                        return
-                    }
-                    
+                return Future { [unowned self] promise in
                     self.backgroundContext.perform {
                         do {
                             //id에 해당하는 북마크 데이터 삭제
@@ -144,12 +129,7 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
     func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
         return fetchBookmarkEntities(withId: bookmark.notice.id)
             .flatMap { entities -> AnyPublisher<Void, any Error> in
-                return Future { [weak self] promise in
-                    guard let self else {
-                        promise(.failure(NSError(domain: "SelfDeallocated", code: -1)))
-                        return
-                    }
-                    
+                return Future { [unowned self] promise in
                     self.backgroundContext.perform {
                         do {
                             entities.forEach {
@@ -170,12 +150,7 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
     }
     
     private func fetchNoticeEntities(withId id: Int) -> AnyPublisher<[NoticeEntity], any Error> {
-        return Future { [weak self] promise in
-            guard let self else {
-                promise(.failure(NSError(domain: "SelfDeallocated", code: -1)))
-                return
-            }
-            
+        return Future { [unowned self] promise in
             self.backgroundContext.perform {
                 let request = NSFetchRequest<NoticeEntity>(entityName: "NoticeEntity")
                 request.predicate = NSPredicate(format: "id == %d", id)
@@ -192,12 +167,7 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
     }
     
     private func fetchBookmarkEntities(withId id: Int) -> AnyPublisher<[BookmarkEntity], any Error> {
-        return Future { [weak self] promise in
-            guard let self else {
-                promise(.failure(NSError(domain: "SelfDeallocated", code: -1)))
-                return
-            }
-            
+        return Future { [unowned self] promise in
             self.backgroundContext.perform {
                 do {
                     let request = NSFetchRequest<BookmarkEntity>(entityName: "BookmarkEntity")

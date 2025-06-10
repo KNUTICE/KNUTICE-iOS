@@ -28,9 +28,9 @@ final class BookmarkRepositoryImpl: BookmarkRepository {
     
     func read(delay: Int) -> AnyPublisher<[Bookmark], any Error> {
         return dataSource.readDTO()
-            .map {
+            .map { [weak self] in
                 $0.compactMap { dto in
-                    self.createBookMark(from: dto)
+                    self?.createBookMark(from: dto)
                 }
             }
             .delay(for: DispatchQueue.SchedulerTimeType.Stride(integerLiteral: delay), scheduler: DispatchQueue.global())
