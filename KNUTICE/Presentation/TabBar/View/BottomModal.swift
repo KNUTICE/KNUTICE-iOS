@@ -174,7 +174,7 @@ final class BottomModal: UIView {
             return nil
         }
         
-        let viewController = UIHostingController(rootView: ContentWebView(navigationTitle: "", contentURL: content.contentURL))
+        let viewController = UIHostingController(rootView: BaseWebContentView(navigationTitle: "", contentURL: content.contentURL))
         getViewController()?.navigationController?.pushViewController(viewController, animated: true)
         makeHidden()    //navigation 이동 전 View 삭제
     }
