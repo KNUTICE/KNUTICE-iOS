@@ -19,9 +19,6 @@ final class UITabBarViewController: UITabBarController {
         return viewController
     }()
     private let bookmarkViewController: UIViewController = {
-//        let viewController = UIHostingController(
-//            rootView: BookmarkList(viewModel: BookmarkListViewModel())
-//        )
         let viewController = BookmarkTableViewController()
         viewController.tabBarItem.image = UIImage(systemName: "bookmark")
         viewController.tabBarItem.selectedImage = UIImage(systemName: "bookmark.fill")
@@ -34,7 +31,9 @@ final class UITabBarViewController: UITabBarController {
             rootViewController: SearchResultsTableViewController()
         )
         viewController.tabBarItem.image = UIImage(systemName: "magnifyingglass")
-        viewController.tabBarItem.title = "검색"
+        if UIDevice.current.userInterfaceIdiom  == .phone {
+            viewController.tabBarItem.title = "검색"
+        }
         
         return viewController
     }()
@@ -64,41 +63,7 @@ final class UITabBarViewController: UITabBarController {
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = appearance
         
-        if #available(iOS 18, *) {
-            tabs = [
-                UITab(title: "홈",
-                      image: UIImage(systemName: "house.fill"),
-                      identifier: "Tabs.main") { _ in
-                          if UIDevice.current.userInterfaceIdiom == .phone {
-                              return self.mainViewController
-                          }
-                          
-                          return UINavigationController(rootViewController: self.mainViewController)
-                      },
-                
-                UITab(title: "북마크",
-                      image: UIImage(systemName: "bookmark.fill"),
-                      identifier: "Tabs.bookmark") { _ in
-                          if UIDevice.current.userInterfaceIdiom == .phone {
-                              return self.bookmarkViewController
-                          }
-                          
-                          return UINavigationController(rootViewController: self.bookmarkViewController)
-                      },
-                
-                UISearchTab { _ in
-                    if UIDevice.current.userInterfaceIdiom == .phone {
-                        return SearchResultsTableViewController()
-                    }
-                    
-                    return UINavigationController(
-                        rootViewController: SearchResultsTableViewController()
-                    )
-                }
-            ]
-        } else {
-            setViewControllers([mainViewController, searchViewController, bookmarkViewController], animated: true)
-        }
+        setViewControllers([mainViewController, bookmarkViewController, searchViewController], animated: true)
         
         bind()
         viewModel.fetchPushNoticeIfExists()
