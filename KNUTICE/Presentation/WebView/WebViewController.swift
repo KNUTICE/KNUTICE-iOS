@@ -11,12 +11,13 @@ import SwiftUI
 import Foundation
 
 final class WebViewController: UIViewController {
-    let progressView: UIProgressView = {
-        let progressView = UIProgressView(progressViewStyle: .bar)
-        progressView.progressTintColor = .accent2
-        progressView.translatesAutoresizingMaskIntoConstraints = false
+    let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
-        return progressView
+        return activityIndicator
     }()
     lazy var webView: WKWebView = {
         let webView = WKWebView()
@@ -85,16 +86,8 @@ final class WebViewController: UIViewController {
 }
 
 extension WebViewController: WKNavigationDelegate, WKUIDelegate {
-    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        progressView.progress = Float(Double(webView.estimatedProgress))
-    }
-    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        progressView.progress = 1.0
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.progressView.isHidden = true
-        }
+        activityIndicator.isHidden = true
         
         //롱터치 방지
         webView.evaluateJavaScript("document.documentElement.style.webkitUserSelect='none'", completionHandler: nil)
@@ -122,17 +115,10 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
 
 extension WebViewController {
     func setupLayout() {
-        //progressView
-        view.addSubview(progressView)
-        progressView.snp.makeConstraints { make in
-            make.left.top.right.equalTo(self.view.safeAreaLayoutGuide)
-        }
-        
         //webView
         view.addSubview(webView)
         webView.snp.makeConstraints { make in
-            make.top.equalTo(progressView.snp.bottom)
-            make.leading.trailing.bottom.equalToSuperview()
+            make.edges.equalToSuperview()
         }
         
         //reminderSheetBtn
@@ -141,6 +127,12 @@ extension WebViewController {
             make.bottom.equalToSuperview().offset(-50)
             make.trailing.equalToSuperview().offset(-20)
             make.width.height.equalTo(50)
+        }
+        
+        view.addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
         }
     }
 }
@@ -187,8 +179,10 @@ extension WebViewController {
 //MARK: - Preview
 struct WebViewControllerPreview: PreviewProvider {
     static var previews: some View {
-        WebViewController(notice: Notice.generalNoticesSampleData.first!)
-            .makePreview()
+        NavigationStack {
+            WebViewController(notice: Notice.generalNoticesSampleData.first!)
+                .makePreview()
+        }
     }
 }
 #endif
