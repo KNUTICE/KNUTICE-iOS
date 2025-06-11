@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentWebView: View {
+struct BaseWebContentView: View {
     @State private var isLoading: Bool = false
     @State private var progress: Double = 0.0
     @Environment(\.colorScheme) var colorScheme
@@ -27,7 +27,7 @@ struct ContentWebView: View {
                     .frame(height: 4)
             }
             
-            WebView(progress: $progress,
+            BaseWebView(progress: $progress,
                     isLoading: $isLoading,
                     url: contentURL)
         }
@@ -39,7 +39,7 @@ struct ContentWebView: View {
 #if DEBUG
 #Preview {
     NavigationView {
-        ContentWebView(navigationTitle: "오픈소스 라이선스", contentURL: Bundle.main.openSourceURL)
+        BaseWebContentView(navigationTitle: "오픈소스 라이선스", contentURL: Bundle.main.openSourceURL)
     }
 }
 #endif

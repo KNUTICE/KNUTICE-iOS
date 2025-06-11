@@ -1,5 +1,5 @@
 //
-//  WebView.swift
+//  BaseWebView.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 7/16/24.
@@ -8,7 +8,7 @@
 import WebKit
 import SwiftUI
 
-struct WebView: UIViewRepresentable {
+struct BaseWebView: UIViewRepresentable {
     @Binding var progress: Double
     @Binding var isLoading: Bool
     
@@ -34,11 +34,11 @@ struct WebView: UIViewRepresentable {
     func updateUIView(_ uiView: UIViewType, context: Context) {}
 }
 
-extension WebView {
+extension BaseWebView {
     final class Coordinator: NSObject, WKNavigationDelegate {
-        private let parent: WebView
+        private let parent: BaseWebView
         
-        init(parent: WebView) {
+        init(parent: BaseWebView) {
             self.parent = parent
         }
         

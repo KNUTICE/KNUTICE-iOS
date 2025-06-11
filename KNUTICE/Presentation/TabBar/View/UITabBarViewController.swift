@@ -57,14 +57,7 @@ final class UITabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let appearance = UITabBarAppearance()
-        appearance.configureWithDefaultBackground()
-        
-        tabBar.standardAppearance = appearance
-        tabBar.scrollEdgeAppearance = appearance
-        
-        setViewControllers([mainViewController, bookmarkViewController, searchViewController], animated: true)
-        
+        setUpTabBar()
         bind()
         viewModel.fetchPushNoticeIfExists()
         
@@ -80,6 +73,16 @@ final class UITabBarViewController: UITabBarController {
 }
 
 extension UITabBarViewController {
+    func setUpTabBar() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithDefaultBackground()
+        
+        tabBar.standardAppearance = appearance
+        tabBar.scrollEdgeAppearance = appearance
+        
+        setViewControllers([mainViewController, bookmarkViewController, searchViewController], animated: true)
+    }
+    
     func bind() {
         viewModel.mainPopupContent
             .delay(.seconds(1), scheduler: MainScheduler.instance)
