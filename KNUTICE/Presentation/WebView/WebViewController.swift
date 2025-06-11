@@ -31,22 +31,36 @@ final class WebViewController: UIViewController {
         return webView
     }()
     lazy var reminderSheetBtn: UIButton = {
-        let button = UIButton()
-        let plusImage = UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate)
-        button.setImage(plusImage, for: .normal)
-        button.setImage(plusImage, for: .highlighted)
-        button.tintColor = .white
-        button.backgroundColor = .accent2
-        button.layer.cornerRadius = 25
-        button.layer.masksToBounds = false
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.3
-        button.layer.shadowRadius = 7
-        button.layer.shadowOffset = CGSize(width: 0, height: 0)
-        button.addTarget(self, action: #selector(openBookmarkForm(_:)), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        return button
+        if #available(iOS 26, *) {
+            var config = UIButton.Configuration.glass()
+            let button = UIButton(configuration: config)
+            let plusImage = UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate)
+            button.setImage(plusImage, for: .normal)
+            button.layer.shadowColor = UIColor.black.cgColor
+            button.layer.shadowOpacity = 0.3
+            button.layer.shadowRadius = 7
+            button.layer.shadowOffset = CGSize(width: 0, height: 0)
+            button.addTarget(self, action: #selector(openBookmarkForm(_:)), for: .touchUpInside)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            
+            return button
+        } else {
+            let button = UIButton()
+            let plusImage = UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate)
+            button.setImage(plusImage, for: .normal)
+            button.setImage(plusImage, for: .highlighted)
+            button.tintColor = .white
+            button.backgroundColor = .accent2
+            button.layer.cornerRadius = 25
+            button.layer.shadowColor = UIColor.black.cgColor
+            button.layer.shadowOpacity = 0.3
+            button.layer.shadowRadius = 7
+            button.layer.shadowOffset = CGSize(width: 0, height: 0)
+            button.addTarget(self, action: #selector(openBookmarkForm(_:)), for: .touchUpInside)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            
+            return button
+        }
     }()
     let notice: Notice
     
