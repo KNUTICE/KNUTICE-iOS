@@ -13,6 +13,7 @@ import WebKit
 @Observable
 final class WebContentViewModel {
     let page: WebPage = WebPage()
+    var isShowingWebView: Bool = false
     @ObservationIgnored let contentURL: String
     
     init(contentURL: String) {
