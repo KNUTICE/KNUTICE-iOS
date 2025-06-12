@@ -61,5 +61,16 @@ extension BookmarkTableViewController {
                 self?.viewModel.fetchBookmarks()
             })
             .disposed(by: disposeBag)
+        
+        tableView.rx.willDisplayCell
+            .subscribe(on: MainScheduler.instance)
+            .bind { [weak self] cell, indexPath in
+                guard let self else { return }
+                
+                if indexPath.section + 1 == self.viewModel.bookmarks.value.count && self.viewModel.bookmarks.value.count >= 20 {
+                    viewModel.fetchBookmarks()
+                }
+            }
+            .disposed(by: disposeBag)
     }
 }

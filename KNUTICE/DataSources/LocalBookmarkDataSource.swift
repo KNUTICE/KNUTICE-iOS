@@ -10,10 +10,16 @@ import CoreData
 
 protocol LocalBookmarkDataSource {
     func save(_ bookmark: Bookmark) -> AnyPublisher<Void, any Error>
-    func readDTO() -> AnyPublisher<[BookmarkDTO], any Error>
+    func fetch(page: Int, pageSize: Int) -> AnyPublisher<[BookmarkDTO], any Error>
     func isDuplication(id: Int) -> AnyPublisher<Bool, any Error>
     func delete(id: Int) -> AnyPublisher<Void, any Error>
     func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error>
+}
+
+extension LocalBookmarkDataSource {
+    func fetch(page: Int, pageSize: Int = 20) -> AnyPublisher<[BookmarkDTO], any Error> {
+        return self.fetch(page: page, pageSize: pageSize)
+    }
 }
 
 final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
@@ -42,6 +48,7 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
         
         bookmarkEntity.memo = bookmark.memo
         bookmarkEntity.alarmDate = bookmark.alarmDate
+        bookmarkEntity.createdAt = Date()
         
         noticeEntity.id = Int64(bookmark.notice.id)
         noticeEntity.title = bookmark.notice.title
@@ -66,8 +73,8 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
         .eraseToAnyPublisher()
     }
     
-    func readDTO() -> AnyPublisher<[BookmarkDTO], any Error> {
-        return readBookmarkEntities()
+    func fetch(page: Int, pageSize: Int = 20) -> AnyPublisher<[BookmarkDTO], any Error> {
+        return readBookmarkEntities(page: page, fetchLimit: pageSize)
             .map { entities in
                 entities.map {
                     BookmarkDTO(notice: $0.bookmarkedNotice, details: $0.memo, alarmDate: $0.alarmDate)
@@ -76,10 +83,13 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
             .eraseToAnyPublisher()
     }
     
-    private func readBookmarkEntities() -> AnyPublisher<[BookmarkEntity], any Error> {
+    private func readBookmarkEntities(page: Int, fetchLimit: Int = 20) -> AnyPublisher<[BookmarkEntity], any Error> {
         return Future { [unowned self] promise in
             self.backgroundContext.perform {
                 let fetchRequest = NSFetchRequest<BookmarkEntity>(entityName: "BookmarkEntity")
+                fetchRequest.fetchLimit = fetchLimit
+                fetchRequest.fetchOffset = page * fetchLimit
+                fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
                 
                 do {
                     let bookmarkEntities = try self.backgroundContext.fetch(fetchRequest)

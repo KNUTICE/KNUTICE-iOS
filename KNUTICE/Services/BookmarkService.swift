@@ -12,7 +12,7 @@ import UserNotifications
 protocol BookmarkService {
     func save(bookmark: Bookmark) -> AnyPublisher<Void, any Error>
     func delete(bookmark: Bookmark) -> AnyPublisher<Void, any Error>
-    func delete(bookmark: Bookmark) -> AnyPublisher<[Bookmark], any Error>
+    func delete(bookmark: Bookmark, reloadCount: Int) -> AnyPublisher<[Bookmark], any Error>
     func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error>
     func syncBookmarksWithNotice() -> AnyPublisher<[Bookmark], any Error>
 }
@@ -20,10 +20,6 @@ protocol BookmarkService {
 final class BookmarkServiceImpl: BookmarkService {
     @Injected(\.bookmarkRepository) private var bookmarkRepository: BookmarkRepository
     @Injected(\.noticeRepository) private var noticeRepository: NoticeRepository
-    
-    func read(delay: Int = 0) -> AnyPublisher<[Bookmark], any Error> {
-        return bookmarkRepository.read(delay: delay)
-    }
     
     func save(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
         return bookmarkRepository.save(bookmark: bookmark)
@@ -50,10 +46,8 @@ final class BookmarkServiceImpl: BookmarkService {
         }
     }
     
-    func delete(bookmark: Bookmark) -> AnyPublisher<[Bookmark], any Error> {
-        let publisher: AnyPublisher<Void, any Error> = delete(bookmark: bookmark)
-        
-        return publisher
+    func delete(bookmark: Bookmark, reloadCount: Int) -> AnyPublisher<[Bookmark], any Error> {
+        return delete(bookmark: bookmark)
             .flatMap { [weak self] _ -> AnyPublisher<[Bookmark], any Error> in
                 guard let self else {
                     return Just([])
@@ -61,7 +55,7 @@ final class BookmarkServiceImpl: BookmarkService {
                         .eraseToAnyPublisher()
                 }
                 
-                return self.bookmarkRepository.read(delay: 0)
+                return self.bookmarkRepository.read(page: 0, pageSize: reloadCount, delay: 0)
             }
             .eraseToAnyPublisher()
     }
@@ -86,6 +80,10 @@ final class BookmarkServiceImpl: BookmarkService {
                 return self.bookmarkRepository.update(bookmark: bookmark)
             }
             .eraseToAnyPublisher()
+    }
+    
+    private func read(delay: Int = 0) -> AnyPublisher<[Bookmark], any Error> {
+        return bookmarkRepository.read(page: 0, pageSize: 0, delay: delay)
     }
     
     /// CoreData에서 저장되어 있는 Notice 데이터를 서버 DB와 동기화 후 Bookmark 배열을 반환하는 함수
