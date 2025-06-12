@@ -44,8 +44,12 @@ final class BookmarkTableViewModel {
                     self?.logger.error("BookmarkTableViewModel.fetchBookmarks() error : \(error.localizedDescription)")
                 }
             }, receiveValue: { [weak self] bookmarks in
-                let value = self?.bookmarks.value ?? []
-                self?.bookmarks.accept(value + bookmarks)
+                if isRefreshing {
+                    self?.bookmarks.accept(bookmarks)
+                } else {
+                    let value = self?.bookmarks.value ?? []
+                    self?.bookmarks.accept(value + bookmarks)
+                }
             })
             .store(in: &cancellables)
     }
