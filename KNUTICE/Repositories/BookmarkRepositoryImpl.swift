@@ -26,8 +26,8 @@ final class BookmarkRepositoryImpl: BookmarkRepository {
             .eraseToAnyPublisher()
     }
     
-    func read(delay: Int) -> AnyPublisher<[Bookmark], any Error> {
-        return dataSource.readDTO()
+    func read(page pageNum: Int, pageSize: Int = 20, delay: Int) -> AnyPublisher<[Bookmark], any Error> {
+        return dataSource.fetch(page: pageNum, pageSize: pageSize)
             .map { [weak self] in
                 $0.compactMap { dto in
                     self?.createBookMark(from: dto)

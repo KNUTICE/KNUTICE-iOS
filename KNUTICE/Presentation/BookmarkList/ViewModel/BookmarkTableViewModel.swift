@@ -25,7 +25,7 @@ final class BookmarkTableViewModel {
             self.isRefreshing.accept(true)
         }
         
-        repository.read(delay: 0)
+        repository.read(page: bookmarks.value.count / 20, delay: 0)
             .map { bookmarks in
                 bookmarks.map {
                     BookmarkSectionModel(items: [$0])
@@ -44,13 +44,14 @@ final class BookmarkTableViewModel {
                     self?.logger.error("BookmarkTableViewModel.fetchBookmarks() error : \(error.localizedDescription)")
                 }
             }, receiveValue: { [weak self] bookmarks in
-                self?.bookmarks.accept(bookmarks)
+                let value = self?.bookmarks.value ?? []
+                self?.bookmarks.accept(value + bookmarks)
             })
             .store(in: &cancellables)
     }
     
     func delete(bookmark: Bookmark) {
-        bookmarkService.delete(bookmark: bookmark)
+        bookmarkService.delete(bookmark: bookmark, reloadCount: bookmarks.value.count - 1)
             .map { bookmarks in
                 bookmarks.map {
                     BookmarkSectionModel(items: [$0])
