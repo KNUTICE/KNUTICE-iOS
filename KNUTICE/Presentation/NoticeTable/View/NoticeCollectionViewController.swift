@@ -80,8 +80,16 @@ extension NoticeCollectionViewController: UICollectionViewDelegateFlowLayout {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        let viewController = WebViewController(notice: viewModel.notices.value[0].items[indexPath.row])
-        navigationController?.pushViewController(viewController, animated: true)
+        if #available(iOS 26, *) {
+            let viewController = UIHostingController(
+                rootView: WebNoticeView()
+                    .environment(WebNoticeViewModel(notice: viewModel.notices.value[0].items[indexPath.row]))
+            )
+            navigationController?.pushViewController(viewController, animated: true)
+        } else {
+            let viewController = WebViewController(notice: viewModel.notices.value[0].items[indexPath.row])
+            navigationController?.pushViewController(viewController, animated: true)
+        }
     }
 }
 
