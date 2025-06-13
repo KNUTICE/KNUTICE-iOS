@@ -47,9 +47,9 @@ extension BookmarkTableViewController {
             .disposed(by: disposeBag)
         
         refreshController.rx.controlEvent(.valueChanged)
-            .bind(onNext: { [weak self] in
-                self?.viewModel.fetchBookmarks(isRefreshing: true)
-            })
+            .bind(with: self) { _, _ in
+                self.viewModel.reloadData()
+            }
             .disposed(by: disposeBag)
         
         viewModel.isRefreshing

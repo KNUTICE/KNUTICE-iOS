@@ -26,14 +26,13 @@ final class BookmarkRepositoryImpl: BookmarkRepository {
             .eraseToAnyPublisher()
     }
     
-    func read(page pageNum: Int, pageSize: Int = 20, delay: Int) -> AnyPublisher<[Bookmark], any Error> {
+    func read(page pageNum: Int, pageSize: Int = 20) -> AnyPublisher<[Bookmark], any Error> {
         return dataSource.fetch(page: pageNum, pageSize: pageSize)
             .map { [weak self] in
                 $0.compactMap { dto in
                     self?.createBookMark(from: dto)
                 }
             }
-            .delay(for: DispatchQueue.SchedulerTimeType.Stride(integerLiteral: delay), scheduler: DispatchQueue.global())
             .eraseToAnyPublisher()
     }
     
