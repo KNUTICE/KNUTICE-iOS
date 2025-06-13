@@ -9,13 +9,13 @@ import Combine
 
 protocol BookmarkRepository {
     func save(bookmark: Bookmark) -> AnyPublisher<Void, any Error>
-    func read(page pageNum: Int, pageSize: Int, delay: Int) -> AnyPublisher<[Bookmark], any Error>
+    func read(page pageNum: Int, pageSize: Int) -> AnyPublisher<[Bookmark], any Error>
     func delete(by id: Int) -> AnyPublisher<Void, any Error>
     func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error>
 }
 
 extension BookmarkRepository {
-    func read(page pageNum: Int, pageSize: Int = 20, delay: Int) -> AnyPublisher<[Bookmark], any Error> {
-        return self.read(page: pageNum, pageSize: pageSize, delay: delay)
+    func read(page pageNum: Int, pageSize: Int = 20) -> AnyPublisher<[Bookmark], any Error> {
+        return self.read(page: pageNum, pageSize: pageSize)
     }
 }

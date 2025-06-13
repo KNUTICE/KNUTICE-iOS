@@ -55,7 +55,7 @@ final class BookmarkServiceImpl: BookmarkService {
                         .eraseToAnyPublisher()
                 }
                 
-                return self.bookmarkRepository.read(page: 0, pageSize: reloadCount, delay: 0)
+                return self.bookmarkRepository.read(page: 0, pageSize: reloadCount)
             }
             .eraseToAnyPublisher()
     }
@@ -83,7 +83,7 @@ final class BookmarkServiceImpl: BookmarkService {
     }
     
     private func read(delay: Int = 0) -> AnyPublisher<[Bookmark], any Error> {
-        return bookmarkRepository.read(page: 0, pageSize: 0, delay: delay)
+        return bookmarkRepository.read(page: 0, pageSize: 0)
     }
     
     /// CoreData에서 저장되어 있는 Notice 데이터를 서버 DB와 동기화 후 Bookmark 배열을 반환하는 함수
