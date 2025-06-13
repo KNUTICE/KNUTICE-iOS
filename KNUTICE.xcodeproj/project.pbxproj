@@ -171,7 +171,6 @@
 		8E3FC0272D6C11270078EFBB /* AcademicNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E3FC0122D6BF5640078EFBB /* AcademicNotices.json */; };
 		8E3FC0282D6C112B0078EFBB /* ScholarshipNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E3FC0182D6BF5980078EFBB /* ScholarshipNotices.json */; };
 		8E3FC0292D6C112E0078EFBB /* EventNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E3FC01C2D6BF5CA0078EFBB /* EventNotices.json */; };
-		8E4F599D2CD5176E007D43BC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E613E9D2C951C8D006FC272 /* GoogleService-Info.plist */; };
 		8E4F599E2CD517DD007D43BC /* ServiceInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C190A432BFD6AA500E0254B /* ServiceInfo.plist */; };
 		8E51DAAB2DB1D82300910BC8 /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E51DAAA2DB1D82300910BC8 /* SearchResultsTableViewController.swift */; };
 		8E51DAAC2DB1D82300910BC8 /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E51DAAA2DB1D82300910BC8 /* SearchResultsTableViewController.swift */; };
@@ -207,6 +206,8 @@
 		8E6428BE2DE00F9E00826D37 /* SearchTableViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6428BD2DE00F9E00826D37 /* SearchTableViewModelTest.swift */; };
 		8E659EBE2D29438500305D56 /* UITabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E659EBD2D29438500305D56 /* UITabBarViewController.swift */; };
 		8E659EBF2D29438500305D56 /* UITabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E659EBD2D29438500305D56 /* UITabBarViewController.swift */; };
+		8E65BF032DFBBECB00CEEF8F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E65BF002DFBBECB00CEEF8F /* GoogleService-Info.plist */; };
+		8E65BF112DFBC06C00CEEF8F /* GoogleService-Info-Dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E65BF102DFBC06C00CEEF8F /* GoogleService-Info-Dev.plist */; };
 		8E6898322CD61EF1005F0EEA /* NotificationService-dev.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8E68982B2CD61EF1005F0EEA /* NotificationService-dev.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8E6931562CEEFC0F0074142B /* TopicSubscriptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931552CEEFC0F0074142B /* TopicSubscriptionList.swift */; };
 		8E6931572CEEFC0F0074142B /* TopicSubscriptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6931552CEEFC0F0074142B /* TopicSubscriptionList.swift */; };
@@ -244,7 +245,6 @@
 		8EA72DCD2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA72DCB2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift */; };
 		8EA9ACA92C46AC3C00C9E287 /* BaseWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9ACA82C46AC3C00C9E287 /* BaseWebView.swift */; };
 		8EA9ACAB2C46AEC900C9E287 /* BaseWebContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9ACAA2C46AEC900C9E287 /* BaseWebContentView.swift */; };
-		8EACD3462DA38C200048C652 /* GoogleService-Info-Dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8EACD3452DA38C200048C652 /* GoogleService-Info-Dev.plist */; };
 		8EADB8FA2D558F7300489086 /* Factory+Instance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EADB8F92D558F7300489086 /* Factory+Instance.swift */; };
 		8EADB8FB2D558F7300489086 /* Factory+Instance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EADB8F92D558F7300489086 /* Factory+Instance.swift */; };
 		8EB3F92F2D3E192F00DD47B3 /* BottomModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3F92E2D3E192F00DD47B3 /* BottomModal.swift */; };
@@ -497,12 +497,13 @@
 		8E5E8BE32D36190E0078C007 /* BookmarkListRefreshable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkListRefreshable.swift; sourceTree = "<group>"; };
 		8E5E8BE62D361F510078C007 /* BookmarkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkManager.swift; sourceTree = "<group>"; };
 		8E5E8BEF2D36309A0078C007 /* BookmarkDetailSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkDetailSwitchView.swift; sourceTree = "<group>"; };
-		8E613E9D2C951C8D006FC272 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8E613E9F2C95214C006FC272 /* RequestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestResult.swift; sourceTree = "<group>"; };
 		8E6175472CA24157002B6021 /* UIDevice+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Identifier.swift"; sourceTree = "<group>"; };
 		8E6428BA2DE0093500826D37 /* EmploymentNotices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EmploymentNotices.json; sourceTree = "<group>"; };
 		8E6428BD2DE00F9E00826D37 /* SearchTableViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewModelTest.swift; sourceTree = "<group>"; };
 		8E659EBD2D29438500305D56 /* UITabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarViewController.swift; sourceTree = "<group>"; };
+		8E65BF002DFBBECB00CEEF8F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8E65BF102DFBC06C00CEEF8F /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
 		8E68982B2CD61EF1005F0EEA /* NotificationService-dev.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "NotificationService-dev.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E6931552CEEFC0F0074142B /* TopicSubscriptionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicSubscriptionList.swift; sourceTree = "<group>"; };
 		8E6931582CEEFC2F0074142B /* TopicSubscriptionListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicSubscriptionListViewModel.swift; sourceTree = "<group>"; };
@@ -524,7 +525,6 @@
 		8EA72DCB2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperToolsViewModel.swift; sourceTree = "<group>"; };
 		8EA9ACA82C46AC3C00C9E287 /* BaseWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWebView.swift; sourceTree = "<group>"; };
 		8EA9ACAA2C46AEC900C9E287 /* BaseWebContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWebContentView.swift; sourceTree = "<group>"; };
-		8EACD3452DA38C200048C652 /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
 		8EADB8F92D558F7300489086 /* Factory+Instance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Factory+Instance.swift"; sourceTree = "<group>"; };
 		8EB3F92E2D3E192F00DD47B3 /* BottomModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomModal.swift; sourceTree = "<group>"; };
 		8EB6D1FD2C663627004E8AC2 /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -725,7 +725,6 @@
 				8EB6D1FE2C663627004E8AC2 /* NotificationService */,
 				8ECB82DC2CDB6C3D00420349 /* NotificationService-dev */,
 				8E7945E52CA28F6900208662 /* KNUTICEUnitTests */,
-				8E2CF4BC2DF490B900B580CA /* TopicTest */,
 				8EC7322D2DD5A9440038AD59 /* Frameworks */,
 				5C82563F2BE5CE1A0038D4C8 /* Products */,
 			);
@@ -746,8 +745,8 @@
 		5C8256402BE5CE1A0038D4C8 /* KNUTICE */ = {
 			isa = PBXGroup;
 			children = (
-				8E613E9D2C951C8D006FC272 /* GoogleService-Info.plist */,
-				8EACD3452DA38C200048C652 /* GoogleService-Info-Dev.plist */,
+				8E65BF002DFBBECB00CEEF8F /* GoogleService-Info.plist */,
+				8E65BF102DFBC06C00CEEF8F /* GoogleService-Info-Dev.plist */,
 				8E54C8462C5E63940070E689 /* KNUTICE.entitlements */,
 				8EE65DAF2DE967B20059770D /* Network */,
 				8E6931612CEF02440074142B /* CoreData */,
@@ -1160,6 +1159,7 @@
 		8E7945E52CA28F6900208662 /* KNUTICEUnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				8E2CF4BC2DF490B900B580CA /* TopicTest */,
 				8EB8FA802DF9BC3E00715F73 /* BookmarkTests */,
 				8E3FC0222D6C04F30078EFBB /* Utils */,
 				8E6B34E02D6BF29B00130BED /* JSON */,
@@ -1530,6 +1530,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E1C65582D75760A0003AB94 /* SearchedNotices.json in Resources */,
+				8E65BF032DFBBECB00CEEF8F /* GoogleService-Info.plist in Resources */,
 				8E3FC0272D6C11270078EFBB /* AcademicNotices.json in Resources */,
 				8E4F599E2CD517DD007D43BC /* ServiceInfo.plist in Resources */,
 				8E3FC0292D6C112E0078EFBB /* EventNotices.json in Resources */,
@@ -1539,7 +1540,6 @@
 				8E1C654E2D755E060003AB94 /* TopThreeNotices.json in Resources */,
 				8E6428BB2DE0093500826D37 /* EmploymentNotices.json in Resources */,
 				8E3FC0252D6C10E30078EFBB /* GeneralNotices.json in Resources */,
-				8E4F599D2CD5176E007D43BC /* GoogleService-Info.plist in Resources */,
 				8E3DEA912D7FC02200A5B435 /* LoadingLaunchScreen.storyboard in Resources */,
 				8E2CF4C52DF4943F00B580CA /* TopicSubscriptionsStatus.json in Resources */,
 				8E5385872C64A24A00AF151B /* ci_post_clone.sh in Resources */,
@@ -1553,7 +1553,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E20513B2CD4F32F00D87C6A /* ServiceInfo.plist in Resources */,
-				8EACD3462DA38C200048C652 /* GoogleService-Info-Dev.plist in Resources */,
+				8E65BF112DFBC06C00CEEF8F /* GoogleService-Info-Dev.plist in Resources */,
 				8E20513C2CD4F32F00D87C6A /* Assets.xcassets in Resources */,
 				8E3DEA922D7FC02200A5B435 /* LoadingLaunchScreen.storyboard in Resources */,
 				8E20513E2CD4F32F00D87C6A /* LaunchScreen.storyboard in Resources */,
