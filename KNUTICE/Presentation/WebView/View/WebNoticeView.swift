@@ -50,6 +50,11 @@ struct WebNoticeView: View {
                 )
             }
         }
+        .toolbar {
+            if let url = URL(string: viewModel.notice.contentUrl) {
+                ShareLink(item: url)
+            }
+        }
     }
 }
 
