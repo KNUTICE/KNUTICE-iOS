@@ -767,8 +767,6 @@
 		5C89DD412BFA0CF700CCCCCD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */,
-				8EC1ECA12DD43542005E71B3 /* NoticeSectionModel.swift */,
 				5C5698962BEFB6760085E389 /* Notice.swift */,
 				8ECE2B172C35045800D7F499 /* MainNotice.swift */,
 				8E7A4A692D2A2CD800BD1B7F /* Bookmark.swift */,
@@ -1359,6 +1357,7 @@
 		8EFE52EB2CDC8CE9003A7330 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				8EC1ECA12DD43542005E71B3 /* NoticeSectionModel.swift */,
 				5C9B810A2BF451BC0038EB27 /* NoticeTableViewModel.swift */,
 				8EC1ECA62DD452B6005E71B3 /* NoticeCollectionViewModel.swift */,
 			);
@@ -1368,6 +1367,7 @@
 		8EFE52EC2CDC8CF4003A7330 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */,
 				5C5698912BEFB4A20085E389 /* MainTableViewModel.swift */,
 			);
 			path = ViewModel;
