@@ -13,38 +13,30 @@ import Foundation
 final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
     
-    func fetchNotices(for category: NoticeCategory) -> AnyPublisher<NoticeSectionModel, any Error> {
-        let endPoint = Bundle.main.noticeURL
-        
+    func fetchNotices(for category: NoticeCategory) -> AnyPublisher<[Notice], any Error> {
         return dataSource.request(
-            endPoint + "?noticeName=\(category.rawValue)",
+            Bundle.main.noticeURL + "?noticeName=\(category.rawValue)",
             method: .get,
-            decoding: NoticeReponseDTO.self)
+            decoding: NoticeReponseDTO.self
+        )
         .compactMap { [weak self] dto in
             dto.body?.compactMap {
                 self?.createNotice($0)
             }
-        }
-        .map {
-            NoticeSectionModel(items: $0)
         }
         .eraseToAnyPublisher()
     }
     
-    func fetchNotices(for category: NoticeCategory, after number: Int) -> AnyPublisher<NoticeSectionModel, any Error> {
-        let endPoint = Bundle.main.noticeURL
-        
+    func fetchNotices(for category: NoticeCategory, after number: Int) -> AnyPublisher<[Notice], any Error> {
         return dataSource.request(
-            endPoint + "?noticeName=\(category.rawValue)" + "&nttId=\(number)",
+            Bundle.main.noticeURL + "?noticeName=\(category.rawValue)" + "&nttId=\(number)",
             method: .get,
-            decoding: NoticeReponseDTO.self)
+            decoding: NoticeReponseDTO.self
+        )
         .compactMap { [weak self] dto in
             dto.body?.compactMap {
                 self?.createNotice($0)
             }
-        }
-        .map {
-            NoticeSectionModel(items: $0)
         }
         .eraseToAnyPublisher()
     }

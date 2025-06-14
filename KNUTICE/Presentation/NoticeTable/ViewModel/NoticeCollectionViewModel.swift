@@ -42,6 +42,9 @@ final class NoticeCollectionViewModel: NoticeFetchable {
         }
         
         repository.fetchNotices(for: category)
+            .map {
+                NoticeSectionModel(items: $0)
+            }
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 if isRefreshing {
@@ -71,6 +74,9 @@ final class NoticeCollectionViewModel: NoticeFetchable {
         
         isFetching.accept(true)
         repository.fetchNotices(for: category, after: lastNumber)
+            .map {
+                NoticeSectionModel(items: $0)
+            }
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 self?.isFetching.accept(false)
