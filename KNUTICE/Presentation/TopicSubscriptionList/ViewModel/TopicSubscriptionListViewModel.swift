@@ -102,8 +102,8 @@ final class TopicSubscriptionListViewModel: ObservableObject {
     }
     
     func fetchEtiquetteTime() {
-        if let etiquetteTimeStart = UserDefaults.standard.object(forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue) as? Date,
-           let etiquetteTimeEnd = UserDefaults.standard.object(forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue) as? Date {
+        if let etiquetteTimeStart = UserDefaults.shared.object(forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue) as? Date,
+           let etiquetteTimeEnd = UserDefaults.shared.object(forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue) as? Date {
             self.isEtiquetteTimeActivate = true
             self.etiquetteTimeStart = etiquetteTimeStart
             self.etiquetteTimeEnd = etiquetteTimeEnd
@@ -118,14 +118,14 @@ final class TopicSubscriptionListViewModel: ObservableObject {
                 guard let self else { return }
                 
                 if $0 == true {
-                    self.etiquetteTimeStart = UserDefaults.standard.object(forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue) as? Date ?? Date.tenPM
-                    self.etiquetteTimeEnd = UserDefaults.standard.object(forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue) as? Date ?? Date.eightAM
+                    self.etiquetteTimeStart = UserDefaults.shared.object(forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue) as? Date ?? Date.tenPM
+                    self.etiquetteTimeEnd = UserDefaults.shared.object(forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue) as? Date ?? Date.eightAM
                 } else {
                     self.etiquetteTimeStart = nil
-                    UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue)
+                    UserDefaults.shared.removeObject(forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue)
                     
                     self.etiquetteTimeEnd = nil
-                    UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue)
+                    UserDefaults.shared.removeObject(forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue)
                 }
             })
             .store(in: &cancellables)
@@ -134,7 +134,7 @@ final class TopicSubscriptionListViewModel: ObservableObject {
             .removeDuplicates()
             .sink(receiveValue: {
                 if let date = $0 {
-                    UserDefaults.standard.set(date, forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue)
+                    UserDefaults.shared.set(date, forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue)
                 }
             })
             .store(in: &cancellables)
@@ -143,7 +143,7 @@ final class TopicSubscriptionListViewModel: ObservableObject {
             .removeDuplicates()
             .sink(receiveValue: {
                 if let date = $0 {
-                    UserDefaults.standard.set(date, forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue)
+                    UserDefaults.shared.set(date, forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue)
                 }
             })
             .store(in: &cancellables)
