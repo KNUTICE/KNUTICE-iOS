@@ -80,4 +80,18 @@ final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
         }
         .eraseToAnyPublisher()
     }
+    
+    func fetchNotice(by nttId: Int) async throws -> Notice? {
+        let dto =  try await dataSource.request(
+            Bundle.main.mainNoticeURL + "/\(nttId)",
+            method: .get,
+            decoding: SingleNoticeResponseDTO.self
+        )
+        
+        guard let body = dto.body else {
+            return nil
+        }
+        
+        return createNotice(body)
+    }
 }

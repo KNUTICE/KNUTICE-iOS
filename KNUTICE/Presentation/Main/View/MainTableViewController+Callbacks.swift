@@ -70,7 +70,11 @@ extension MainTableViewController {
     }
     
     //MARK: - Notification Button Actrion
-    @objc func navigateToUncheckedNotifications(_ sender: UIButton) {
-        
+    @objc func navigateToPendingNoticeList(_ sender: UIButton) {
+        let viewController = UIHostingController(
+            rootView: PendingNoticeList()
+                .environmentObject(PendingNoticeListViewModel())
+        )
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

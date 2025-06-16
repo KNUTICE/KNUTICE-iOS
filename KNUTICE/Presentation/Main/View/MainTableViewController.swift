@@ -61,6 +61,7 @@ final class MainTableViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(bellImage, for: .normal)
         button.setImage(selectedBellImage, for: .highlighted)
+        button.addTarget(self, action: #selector(navigateToPendingNoticeList(_:)), for: .touchUpInside)
         
         return button
     }()
