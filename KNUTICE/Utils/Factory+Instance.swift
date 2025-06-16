@@ -22,6 +22,12 @@ extension Container {
         }
     }
     
+    var pendingNoticeDataSource: Factory<PendingNoticeDataSource> {
+        Factory(self) {
+            PendingNoticeDataSource.shared
+        }
+    }
+    
     //MARK: - Repositroy
     var mainNoticeRepository: Factory<MainNoticeRepository> {
         Factory(self) {
@@ -71,6 +77,12 @@ extension Container {
         }
     }
     
+    var pendingNoticeRepository: Factory<PendingNoticeRepository> {
+        Factory(self) {
+            PendingNoticeRepositoryImpl()
+        }
+    }
+    
     //MARK: - Service
     var reportService: Factory<ReportService> {
         Factory(self) {
@@ -93,6 +105,12 @@ extension Container {
     var subscriptionService: Factory<TopicSubscriptionService> {
         Factory(self) {
             TopicSubscriptionServiceImpl()
+        }
+    }
+    
+    var pendingNoticeService: Factory<PendingNoticeService> {
+        Factory(self) {
+            PendingNoticeServiceImpl()
         }
     }
     
