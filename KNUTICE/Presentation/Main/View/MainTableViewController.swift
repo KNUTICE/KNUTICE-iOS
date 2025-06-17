@@ -51,16 +51,10 @@ final class MainTableViewController: UIViewController {
         return button
     }()
     lazy var bellBtn: UIButton = {
-        let configuration = UIImage.SymbolConfiguration(textStyle: .title2)
-        let bellImage = UIImage(systemName: "bell", withConfiguration: configuration)?
-            .withRenderingMode(.alwaysTemplate)
-        let selectedBellImage = UIImage(systemName: "bell", withConfiguration: configuration)?
-            .withRenderingMode(.alwaysOriginal)
-            .withTintColor(.lightGray)
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(bellImage, for: .normal)
-        button.setImage(selectedBellImage, for: .highlighted)
+        button.setImage(createNormalBellIcon(), for: .normal)
+        button.setImage(createHighlightedBellIcon(), for: .highlighted)
         button.addTarget(self, action: #selector(navigateToPendingNoticeList(_:)), for: .touchUpInside)
         
         return button
@@ -82,6 +76,34 @@ final class MainTableViewController: UIViewController {
         
         //API Call
         viewModel.fetchNoticesWithCombine()
+    }
+    
+    func createNormalBellIcon() -> UIImage? {
+        let configuration: UIImage.SymbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title2)
+        
+        if UserDefaults.shared.bool(forKey: UserDefaultsKeys.hasNewPendingNotice.rawValue) {
+            let paletteStyleConfig = UIImage.SymbolConfiguration(paletteColors: [.red, .black])
+            configuration.applying(paletteStyleConfig)
+            return UIImage(systemName: "bell.badge", withConfiguration: configuration)?
+                .withRenderingMode(.alwaysOriginal)
+        }
+        
+        return UIImage(systemName: "bell", withConfiguration: configuration)?
+            .withRenderingMode(.alwaysTemplate)
+    }
+    
+    func createHighlightedBellIcon() -> UIImage? {
+        let configuration = UIImage.SymbolConfiguration(textStyle: .title2)
+        
+        if UserDefaults.shared.bool(forKey: UserDefaultsKeys.hasNewPendingNotice.rawValue) {
+            return UIImage(systemName: "bell.badge", withConfiguration: configuration)?
+                .withRenderingMode(.alwaysOriginal)
+                .withTintColor(.lightGray)
+        }
+        
+        return UIImage(systemName: "bell", withConfiguration: configuration)?
+            .withRenderingMode(.alwaysOriginal)
+            .withTintColor(.lightGray)
     }
 }
 

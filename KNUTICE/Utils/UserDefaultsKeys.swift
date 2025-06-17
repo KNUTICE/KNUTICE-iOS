@@ -12,4 +12,5 @@ enum UserDefaultsKeys: String {
     case isBadgeResetRequired
     case etiquetteTimeStart
     case etiquetteTimeEnd
+    case hasNewPendingNotice
 }
