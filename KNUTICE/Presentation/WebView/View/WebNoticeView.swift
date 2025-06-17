@@ -11,6 +11,7 @@ import WebKit
 @available(iOS 26, *)
 struct WebNoticeView: View {
     @Environment(WebNoticeViewModel.self) private var viewModel
+    @Environment(\.colorScheme) private var colorScheme
     @State private var isShowingSheet: Bool = false
     
     var body: some View {
@@ -40,6 +41,7 @@ struct WebNoticeView: View {
                 .progressViewStyle(.circular)
                 .opacity(viewModel.page.isLoading ? 1 : 0)
         }
+        .background(colorScheme == .light ? .white : .black)
         .sheet(isPresented: $isShowingSheet) {
             NavigationStack {
                 BookmarkForm(for: .create) {

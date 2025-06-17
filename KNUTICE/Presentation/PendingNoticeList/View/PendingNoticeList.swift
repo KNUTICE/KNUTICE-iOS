@@ -38,18 +38,63 @@ struct PendingNoticeList: View {
 }
 
 fileprivate struct PendingNoticeListRow: View {
+    @State private var isShowingFullScreenContent: Bool = false
     let notice: Notice
     
     var body: some View {
-        NavigationLink {
+        VStack {
+            if let category = notice.noticeCategory {
+                CategoryBadge(category: category)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
             
-        } label: {
+            Text(notice.title)
+                .lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.bottom, 3)
+            
             HStack {
-                Image(systemName: "bell")
+                Text("[\(notice.department)]")
                 
-                Text(notice.title)
+                Text(notice.uploadDate)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .font(.caption)
+            .foregroundStyle(.gray)
+        }
+        .padding()
+        .onTapGesture {
+            isShowingFullScreenContent.toggle()
+        }
+        .fullScreenCover(isPresented: $isShowingFullScreenContent) {
+            NavigationStack {
+                if #available(iOS 26, *) {
+                    WebNoticeView()
+                        .environment(WebNoticeViewModel(notice: notice))
+                        .toolbar {
+                            ToolbarItem(placement: .topBarLeading) {
+                                Button {
+                                    isShowingFullScreenContent.toggle()
+                                } label: {
+                                    Image(systemName: "xmark")
+                                }
+                            }
+                        }
+                } else {
+                    NoticeWebVCWrapper(notice: notice)
+                        .toolbar {
+                            ToolbarItem(placement: .topBarLeading) {
+                                Button {
+                                    isShowingFullScreenContent.toggle()
+                                } label: {
+                                    Image(systemName: "xmark")
+                                }
+                            }
+                        }
+                }
             }
         }
+        
     }
 }
 
@@ -69,9 +114,45 @@ fileprivate struct EmptyPendingNoticeView: View {
     }
 }
 
+fileprivate struct CategoryBadge: View {
+    let category: NoticeCategory
+    
+    var body: some View {
+        Text(category.localizedDescription)
+            .font(.caption2)
+            .foregroundStyle(.white)
+            .padding(8)
+            .background(backgroundColor(for: category))
+            .cornerRadius(20)
+    }
+    
+    private func backgroundColor(for category: NoticeCategory) -> Color {
+        switch category {
+        case .generalNotice:
+            return Color.salmon
+        case .academicNotice:
+            return Color.lightOrange
+        case .scholarshipNotice:
+            return Color.lightGreen
+        case .eventNotice:
+            return Color.dodgerBlue
+        case .employmentNotice:
+            return Color.orchid
+        }
+    }
+}
+
 #Preview {
     NavigationStack {
         PendingNoticeList()
             .environmentObject(PendingNoticeListViewModel())
     }
 }
+
+#if DEBUG
+#Preview {
+    NavigationStack {
+        PendingNoticeListRow(notice: Notice.generalNoticesSampleData[0])
+    }
+}
+#endif
