@@ -43,6 +43,7 @@ final class PendingNoticeDataSource {
         try await backgroundContext.perform {
             let pendingNoticeEntity = PendingNoticeEntity(context: self.backgroundContext)
             pendingNoticeEntity.id = Int64(id)
+            pendingNoticeEntity.createdAt = Date()
             
             if self.backgroundContext.hasChanges {
                 try self.backgroundContext.save()
@@ -61,6 +62,8 @@ final class PendingNoticeDataSource {
     func fetchAll() async throws -> [Int] {
         return try await backgroundContext.perform {
             let fetchRequest = NSFetchRequest<PendingNoticeEntity>(entityName: "PendingNoticeEntity")
+            let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: false)
+            fetchRequest.sortDescriptors = [sortDescriptor]
             let entities = try self.backgroundContext.fetch(fetchRequest)
             
             return entities.map {
