@@ -8,7 +8,7 @@
 import Combine
 import WebKit
 
-@available(iOS 18.4, *)
+@available(iOS 26, *)
 @MainActor
 @Observable
 final class WebContentViewModel {

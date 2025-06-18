@@ -72,7 +72,7 @@ struct SettingView: View {
                 .listRowSeparator(.hidden)
                 
                 NavigationLink {
-                    if #available(iOS 18.4, *) {
+                    if #available(iOS 26, *) {
                         WebContentView()
                             .navigationTitle("오픈소스 라이선스")
                             .environment(WebContentViewModel(contentURL: Bundle.main.openSourceURL))
