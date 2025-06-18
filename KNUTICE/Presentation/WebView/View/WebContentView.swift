@@ -8,7 +8,7 @@
 import SwiftUI
 import WebKit
 
-@available(iOS 18.4, *)
+@available(iOS 26, *)
 struct WebContentView: View {
     @Environment(WebContentViewModel.self) private var viewModel
     
@@ -31,7 +31,7 @@ struct WebContentView: View {
 }
 
 #Preview {
-    if #available(iOS 18.4, *) {
+    if #available(iOS 26, *) {
         WebContentView()
             .environment(WebContentViewModel(contentURL: "https://www.google.com"))
     } else {
