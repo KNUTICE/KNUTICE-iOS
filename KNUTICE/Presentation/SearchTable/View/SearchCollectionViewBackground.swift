@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SearchResultsBackgroundView: View {
+struct SearchCollectionViewBackground: View {
     var body: some View {
         ZStack {
             Color.mainBackground
@@ -28,5 +28,5 @@ struct SearchResultsBackgroundView: View {
 }
 
 #Preview {
-    SearchResultsBackgroundView()
+    SearchCollectionViewBackground()
 }

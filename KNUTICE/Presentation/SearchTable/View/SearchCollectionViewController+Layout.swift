@@ -1,29 +1,29 @@
 //
-//  SearchResultsTableViewController+Layout.swift
+//  SearchCollectionViewController+Layout.swift
 //  KNUTICE
 //
-//  Created by 이정훈 on 5/7/25.
+//  Created by 이정훈 on 6/19/25.
 //
 
 import UIKit
 
-extension SearchResultsTableViewController {
+extension SearchCollectionViewController {
     func setupLayout() {
         view.addSubview(searchBar)
-        view.addSubview(cancelButton)
         searchBar.snp.makeConstraints { make in
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
         }
         
+        view.addSubview(cancelButton)
         cancelButton.snp.makeConstraints { make in
             make.leading.equalTo(view.snp.trailing)
             make.centerY.equalTo(searchBar.snp.centerY)
         }
         
-        view.addSubview(resultsTableView)
-        resultsTableView.snp.makeConstraints { make in
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(searchBar.snp.bottom)
         }

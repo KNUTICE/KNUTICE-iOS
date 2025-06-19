@@ -1,15 +1,16 @@
 //
-//  NoticeCollectionViewController.swift
+//  SearchCollectionViewController.swift
 //  KNUTICE
 //
-//  Created by 이정훈 on 5/7/25.
+//  Created by 이정훈 on 6/19/25.
 //
 
+import Factory
+import RxSwift
 import UIKit
 import SwiftUI
-import RxSwift
 
-final class NoticeCollectionViewController: UIViewController, CompositionalLayoutConfigurable {
+final class SearchCollectionViewController: UIViewController, CompositionalLayoutConfigurable {
     lazy var collectionView: UICollectionView = {
         let layout = createCompositionalLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -20,43 +21,49 @@ final class NoticeCollectionViewController: UIViewController, CompositionalLayou
         let loadingIndicator = UIActivityIndicatorView(style: .large)
         loadingIndicator.startAnimating()
         collectionView.backgroundView = loadingIndicator
-        collectionView.refreshControl = refreshControl
         
         return collectionView
     }()
-    let refreshControl: UIRefreshControl = UIRefreshControl()
-    private let currentColumnCount: CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 1 : 2
-    let viewModel: NoticeCollectionViewModel
-    private let navigationTitle: String
-    let disposeBag = DisposeBag()
-    
-    init(viewModel: NoticeCollectionViewModel, navigationTitle: String = "") {
-        self.viewModel = viewModel
-        self.navigationTitle = navigationTitle
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.delegate = self
+        searchBar.placeholder = "공지사항 검색"
+        searchBar.backgroundImage = UIImage()
+        
+        return searchBar
+    }()
+    lazy var cancelButton: UIButton = {
+        let configuration = UIButton.Configuration.plain()
+        let button = UIButton(configuration: configuration)
+        button.setTitle("취소", for: .normal)
+        button.addTarget(self, action: #selector(cancelButtonAction(_:)), for: .touchUpInside)
+        
+        return button
+    }()
+    @Injected(\.searchCollectionViewModel) var viewModel
+    let disposeBag: DisposeBag = .init()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        setUpLayout()
-        setUpNavigationBar(title: navigationTitle)
+        setupLayout()
         bind()
-        viewModel.fetchNotices()
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        collectionView.reloadData()
+    private func resignFirstResponderIfNeeded() {
+        searchBar.resignFirstResponder()
+        updateSearchBarConstraints(isShowCancelButton: false)
     }
+    
+
+    @objc func cancelButtonAction(_ sender: UIButton) {
+       resignFirstResponderIfNeeded()
+    }
+
 }
 
-extension NoticeCollectionViewController: UICollectionViewDelegateFlowLayout {
+extension SearchCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
@@ -74,12 +81,18 @@ extension NoticeCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-#if DEBUG
-#Preview {
-    NoticeCollectionViewController(
-        viewModel: NoticeCollectionViewModel(category: .generalNotice),
-        navigationTitle: "일반소식"
-    )
-    .makePreview()
+extension SearchCollectionViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        resignFirstResponderIfNeeded()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        updateSearchBarConstraints(isShowCancelButton: true)
+    }
 }
-#endif
+
+#Preview {
+    SearchCollectionViewController()
+        .makePreview()
+        .ignoresSafeArea(.all)
+}
