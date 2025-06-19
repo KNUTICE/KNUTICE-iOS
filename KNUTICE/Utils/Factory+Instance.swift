@@ -127,9 +127,9 @@ extension Container {
         }
     }
     
-    var searchTableViewModel: Factory<SearchTableViewModel> {
+    var searchCollectionViewModel: Factory<SearchCollectionViewModel> {
         Factory(self) {
-            SearchTableViewModel()
+            SearchCollectionViewModel()
         }
     }
     

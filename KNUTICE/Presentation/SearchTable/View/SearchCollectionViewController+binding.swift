@@ -1,16 +1,25 @@
 //
-//  NoticeCollectionViewController+binding.swift
+//  SearchCollectionViewController+binding.swift
 //  KNUTICE
 //
-//  Created by 이정훈 on 5/14/25.
+//  Created by 이정훈 on 6/19/25.
 //
 
-import UIKit
-import RxCocoa
 import RxDataSources
+import RxSwift
+import SwiftUI
 
-extension NoticeCollectionViewController {
+extension SearchCollectionViewController {
     func bind() {
+        searchBar.rx.text
+            .debounce(.milliseconds(500), scheduler: MainScheduler.instance)    //0.5초 대기
+            .distinctUntilChanged()    //동일한 값은 무시
+            .bind(onNext: { [weak self] keywork in
+                guard let keyword = keywork else { return }
+                self?.viewModel.search(keyword)
+            })
+            .disposed(by: disposeBag)
+        
         let dataSource = RxCollectionViewSectionedReloadDataSource<NoticeSectionModel>(configureCell: { [weak self] (dataSource, collectionView, indexPath, item) in
             guard let self else {
                 return UICollectionViewCell()
@@ -49,44 +58,19 @@ extension NoticeCollectionViewController {
             return cell
         })
         
-        //MARK: - viewModel.notices
         viewModel.notices
-            .skip(1)    //초기값은 무시
-            .do(onNext: { [weak self] _ in
-                guard let self else { return }
-                collectionView.backgroundView = nil
-                
-                if self.viewModel.isRefreshing.value == false {
-                    let offset = self.collectionView.contentOffset
-                    self.collectionView.setContentOffset(offset, animated: false)
+            .observe(on: MainScheduler.instance)
+            .do { [weak self] in
+                if let text = self?.searchBar.text, !text.isEmpty,
+                   let result = $0.first, result.items.isEmpty == true {
+                    self?.collectionView.backgroundView = UIHostingController(rootView: ResultNotFoundView()).view
+                } else if let text = self?.searchBar.text, text.isEmpty {
+                    self?.collectionView.backgroundView = UIHostingController(rootView: SearchCollectionViewBackground()).view
+                } else {
+                    self?.collectionView.backgroundView = nil
                 }
-            })
-            .bind(to: collectionView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
-        
-        //MARK: - collectionView.rx.willDisplayCell
-        collectionView.rx.willDisplayCell
-            .bind { [weak self] cell, indexPath in
-                guard let self else { return }
-                
-                if let valuesCount = self.viewModel.notices.value.first?.items.count,
-                   indexPath.item == valuesCount - 1 {
-                    self.viewModel.fetchNextPage()
-                }
-                
             }
-            .disposed(by: disposeBag)
-        
-        //MARK: - viewModel.isRefreshing
-        viewModel.isRefreshing
-            .bind(to: refreshControl.rx.isRefreshing)
-            .disposed(by: disposeBag)
-        
-        //MARK: - refreshControl
-        refreshControl.rx.controlEvent(.valueChanged)
-            .bind(onNext: { [weak self] in
-                self?.viewModel.fetchNotices(isRefreshing: true)
-            })
+            .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }
 }
