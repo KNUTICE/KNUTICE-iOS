@@ -56,7 +56,7 @@ extension NoticeCollectionViewController {
                 guard let self else { return }
                 collectionView.backgroundView = nil
                 
-                if self.viewModel.isRefreshing.value == false {
+                if let viewModel = self.viewModel as? NoticeFetchable, viewModel.isRefreshing.value == false {
                     let offset = self.collectionView.contentOffset
                     self.collectionView.setContentOffset(offset, animated: false)
                 }
@@ -69,23 +69,28 @@ extension NoticeCollectionViewController {
             .bind { [weak self] cell, indexPath in
                 guard let self else { return }
                 
-                if let valuesCount = self.viewModel.notices.value.first?.items.count,
+                if let viewModel = self.viewModel as? NoticeFetchable,
+                   let valuesCount = self.viewModel.notices.value.first?.items.count,
                    indexPath.item == valuesCount - 1 {
-                    self.viewModel.fetchNextPage()
+                    viewModel.fetchNextPage()
                 }
                 
             }
             .disposed(by: disposeBag)
         
         //MARK: - viewModel.isRefreshing
-        viewModel.isRefreshing
-            .bind(to: refreshControl.rx.isRefreshing)
-            .disposed(by: disposeBag)
+        if let viewModel = viewModel as? NoticeFetchable {
+            viewModel.isRefreshing
+                .bind(to: refreshControl.rx.isRefreshing)
+                .disposed(by: disposeBag)
+        }
         
         //MARK: - refreshControl
         refreshControl.rx.controlEvent(.valueChanged)
             .bind(onNext: { [weak self] in
-                self?.viewModel.fetchNotices(isRefreshing: true)
+                if let viewModel = self?.viewModel as? NoticeFetchable {
+                    viewModel.fetchNotices(isRefreshing: true)
+                }
             })
             .disposed(by: disposeBag)
     }

@@ -11,7 +11,7 @@ import Foundation
 import os
 import RxRelay
 
-final class NoticeCollectionViewModel: NoticeFetchable {
+final class NoticeCollectionViewModel: NoticeSectionModelProvidable, NoticeFetchable {
     /// View와 바인딩할 데이터
     /// 서버에서 가져온 데이터를 해당 변수에 저장
     let notices: BehaviorRelay<[NoticeSectionModel]> = BehaviorRelay(value: [])
