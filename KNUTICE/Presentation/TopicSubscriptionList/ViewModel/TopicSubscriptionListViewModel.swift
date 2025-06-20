@@ -17,9 +17,9 @@ final class TopicSubscriptionListViewModel: ObservableObject {
     @Published var isScholarshipNoticeNotificationSubscribed: Bool?
     @Published var isEventNoticeNotificationSubscribed: Bool?
     @Published var isEmploymentNoticeNotificationSubscribed: Bool?
-    @Published var isEtiquetteTimeActivate: Bool = false
-    @Published var etiquetteTimeStart: Date?
-    @Published var etiquetteTimeEnd: Date?
+//    @Published var isEtiquetteTimeActivate: Bool = false
+//    @Published var etiquetteTimeStart: Date?
+//    @Published var etiquetteTimeEnd: Date?
     @Published var isLoading: Bool = false
     @Published var isShowingAlert: Bool = false
     
@@ -101,51 +101,51 @@ final class TopicSubscriptionListViewModel: ObservableObject {
         isShowingAlert = true
     }
     
-    func fetchEtiquetteTime() {
-        if let etiquetteTimeStart = UserDefaults.shared.object(forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue) as? Date,
-           let etiquetteTimeEnd = UserDefaults.shared.object(forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue) as? Date {
-            self.isEtiquetteTimeActivate = true
-            self.etiquetteTimeStart = etiquetteTimeStart
-            self.etiquetteTimeEnd = etiquetteTimeEnd
-        }
-    }
+//    func fetchEtiquetteTime() {
+//        if let etiquetteTimeStart = UserDefaults.shared.object(forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue) as? Date,
+//           let etiquetteTimeEnd = UserDefaults.shared.object(forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue) as? Date {
+//            self.isEtiquetteTimeActivate = true
+//            self.etiquetteTimeStart = etiquetteTimeStart
+//            self.etiquetteTimeEnd = etiquetteTimeEnd
+//        }
+//    }
     
-    func bind() {
-        $isEtiquetteTimeActivate
-            .dropFirst()
-            .removeDuplicates()
-            .sink(receiveValue: { [weak self] in
-                guard let self else { return }
-                
-                if $0 == true {
-                    self.etiquetteTimeStart = UserDefaults.shared.object(forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue) as? Date ?? Date.tenPM
-                    self.etiquetteTimeEnd = UserDefaults.shared.object(forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue) as? Date ?? Date.eightAM
-                } else {
-                    self.etiquetteTimeStart = nil
-                    UserDefaults.shared.removeObject(forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue)
-                    
-                    self.etiquetteTimeEnd = nil
-                    UserDefaults.shared.removeObject(forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue)
-                }
-            })
-            .store(in: &cancellables)
-        
-        $etiquetteTimeStart
-            .removeDuplicates()
-            .sink(receiveValue: {
-                if let date = $0 {
-                    UserDefaults.shared.set(date, forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue)
-                }
-            })
-            .store(in: &cancellables)
-        
-        $etiquetteTimeEnd
-            .removeDuplicates()
-            .sink(receiveValue: {
-                if let date = $0 {
-                    UserDefaults.shared.set(date, forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue)
-                }
-            })
-            .store(in: &cancellables)
-    }
+//    func bind() {
+//        $isEtiquetteTimeActivate
+//            .dropFirst()
+//            .removeDuplicates()
+//            .sink(receiveValue: { [weak self] in
+//                guard let self else { return }
+//                
+//                if $0 == true {
+//                    self.etiquetteTimeStart = UserDefaults.shared.object(forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue) as? Date ?? Date.tenPM
+//                    self.etiquetteTimeEnd = UserDefaults.shared.object(forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue) as? Date ?? Date.eightAM
+//                } else {
+//                    self.etiquetteTimeStart = nil
+//                    UserDefaults.shared.removeObject(forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue)
+//                    
+//                    self.etiquetteTimeEnd = nil
+//                    UserDefaults.shared.removeObject(forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue)
+//                }
+//            })
+//            .store(in: &cancellables)
+//        
+//        $etiquetteTimeStart
+//            .removeDuplicates()
+//            .sink(receiveValue: {
+//                if let date = $0 {
+//                    UserDefaults.shared.set(date, forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue)
+//                }
+//            })
+//            .store(in: &cancellables)
+//        
+//        $etiquetteTimeEnd
+//            .removeDuplicates()
+//            .sink(receiveValue: {
+//                if let date = $0 {
+//                    UserDefaults.shared.set(date, forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue)
+//                }
+//            })
+//            .store(in: &cancellables)
+//    }
 }

@@ -17,38 +17,38 @@ struct TopicSubscriptionList: View {
     var body: some View {
         ZStack {
             List {
-                Section {
-                    Toggle(isOn: $viewModel.isEtiquetteTimeActivate) {
-                        Text("에티켓 시간")
-                    }
-                    
-                    if viewModel.isEtiquetteTimeActivate == true {
-                        DatePicker(
-                            "시작 시간",
-                            selection: Binding(
-                                get: {
-                                    viewModel.etiquetteTimeStart ?? Date.tenPM
-                                }, set: {
-                                    viewModel.etiquetteTimeStart = $0
-                                }
-                            ),
-                            displayedComponents: .hourAndMinute
-                        )
-                        
-                        DatePicker(
-                            "종료 시간",
-                            selection: Binding(
-                                get: {
-                                    viewModel.etiquetteTimeEnd ?? Date.eightAM
-                                }, set: {
-                                    viewModel.etiquetteTimeEnd = $0
-                                }
-                            ),
-                            displayedComponents: .hourAndMinute)
-                    }
-                } footer: {
-                    Text("에티켓 시간 동안 알림을 받지 않습니다.")
-                }
+//                Section {
+//                    Toggle(isOn: $viewModel.isEtiquetteTimeActivate) {
+//                        Text("에티켓 시간")
+//                    }
+//                    
+//                    if viewModel.isEtiquetteTimeActivate == true {
+//                        DatePicker(
+//                            "시작 시간",
+//                            selection: Binding(
+//                                get: {
+//                                    viewModel.etiquetteTimeStart ?? Date.tenPM
+//                                }, set: {
+//                                    viewModel.etiquetteTimeStart = $0
+//                                }
+//                            ),
+//                            displayedComponents: .hourAndMinute
+//                        )
+//                        
+//                        DatePicker(
+//                            "종료 시간",
+//                            selection: Binding(
+//                                get: {
+//                                    viewModel.etiquetteTimeEnd ?? Date.eightAM
+//                                }, set: {
+//                                    viewModel.etiquetteTimeEnd = $0
+//                                }
+//                            ),
+//                            displayedComponents: .hourAndMinute)
+//                    }
+//                } footer: {
+//                    Text("에티켓 시간 동안 알림을 받지 않습니다.")
+//                }
                 
                 Section {
                     Toggle(
@@ -141,11 +141,11 @@ struct TopicSubscriptionList: View {
             } message: {
                 Text(viewModel.alertMessage)
             }
-            .animation(.default, value: viewModel.isEtiquetteTimeActivate)
-            .onAppear {
-                viewModel.fetchEtiquetteTime()
-                viewModel.bind()
-            }
+//            .animation(.default, value: viewModel.isEtiquetteTimeActivate)
+//            .onAppear {
+//                viewModel.fetchEtiquetteTime()
+//                viewModel.bind()
+//            }
             
             if viewModel.isLoading {
                 SpinningIndicator()
