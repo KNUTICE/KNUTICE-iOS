@@ -10,7 +10,7 @@ import RxRelay
 import RxSwift
 import os
 
-final class SearchCollectionViewModel {
+final class SearchCollectionViewModel: NoticeSectionModelProvidable, Searchable {
     let notices: BehaviorRelay<[NoticeSectionModel]> = .init(value: [])
     let keyword: BehaviorRelay<String> = .init(value: "")
     @Injected(\.searchRepository) private var repository

@@ -127,7 +127,7 @@ extension Container {
         }
     }
     
-    var searchCollectionViewModel: Factory<SearchCollectionViewModel> {
+    var searchCollectionViewModel: Factory<NoticeSectionModelProvidable> {
         Factory(self) {
             SearchCollectionViewModel()
         }

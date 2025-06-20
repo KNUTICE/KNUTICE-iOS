@@ -26,7 +26,7 @@ final class NoticeCollectionViewController: UIViewController, CompositionalLayou
     }()
     let refreshControl: UIRefreshControl = UIRefreshControl()
     private let currentColumnCount: CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 1 : 2
-    let viewModel: NoticeCollectionViewModel
+    let viewModel: NoticeSectionModelProvidable
     private let navigationTitle: String
     let disposeBag = DisposeBag()
     
@@ -47,7 +47,10 @@ final class NoticeCollectionViewController: UIViewController, CompositionalLayou
         setUpLayout()
         setUpNavigationBar(title: navigationTitle)
         bind()
-        viewModel.fetchNotices()
+        
+        if let viewModel = viewModel as? NoticeFetchable {
+            viewModel.fetchNotices()
+        }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
