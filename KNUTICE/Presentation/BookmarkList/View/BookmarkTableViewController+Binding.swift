@@ -72,5 +72,34 @@ extension BookmarkTableViewController {
                 }
             }
             .disposed(by: disposeBag)
+        
+        viewModel.sortOption
+            .bind(onNext: { [weak self] value in
+                let ascendingAction = UIAction(
+                    title: "오래된 순",
+                    image: value == .createdAtAscending ? UIImage(systemName: "checkmark") : nil,
+                    handler: { _ in
+                        UserDefaults.standard.set(BookmarkSortOption.createdAtAscending.rawValue, forKey: UserDefaultsKeys.bookmarkSortOption.rawValue)
+                        self?.viewModel.sortOption.accept(.createdAtAscending)
+                    }
+                )
+                let descendingAction = UIAction(
+                    title: "최신 순",
+                    image: value == .createdAtDescending ? UIImage(systemName: "checkmark") : nil,
+                    handler: { _ in
+                        UserDefaults.standard.set(BookmarkSortOption.createdAtDescending.rawValue, forKey: UserDefaultsKeys.bookmarkSortOption.rawValue)
+                        self?.viewModel.sortOption.accept(.createdAtDescending)
+                    }
+                )
+                
+                self?.menuBtn.menu = UIMenu(
+                    identifier: nil,
+                    options: .displayInline,
+                    children: [descendingAction, ascendingAction]
+                )
+                
+                self?.viewModel.reloadData()
+            })
+            .disposed(by: disposeBag)
     }
 }

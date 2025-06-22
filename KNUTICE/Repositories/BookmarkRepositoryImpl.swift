@@ -26,8 +26,24 @@ final class BookmarkRepositoryImpl: BookmarkRepository {
             .eraseToAnyPublisher()
     }
     
-    func read(page pageNum: Int, pageSize: Int = 20) -> AnyPublisher<[Bookmark], any Error> {
+    func read(
+        page pageNum: Int,
+        pageSize: Int = 20,
+        sortBy option: BookmarkSortOption = .createdAtDescending
+    ) -> AnyPublisher<[Bookmark], any Error> {
         return dataSource.fetch(page: pageNum, pageSize: pageSize)
+            .map { dto in
+                switch option {
+                case .createdAtAscending:
+                    dto.sorted {
+                        $0.createdAt < $1.createdAt
+                    }
+                case .createdAtDescending:
+                    dto.sorted {
+                        $0.createdAt > $1.createdAt
+                    }
+                }
+            }
             .map { [weak self] in
                 $0.compactMap { dto in
                     self?.createBookMark(from: dto)

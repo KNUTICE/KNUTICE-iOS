@@ -30,6 +30,12 @@ extension BookmarkTableViewController {
             make.centerY.equalTo(titleLabel.snp.centerY)
         }
         
+        navigationBar.addSubview(menuBtn)
+        menuBtn.snp.makeConstraints { make in
+            make.trailing.equalTo(settingBtn.snp.leading).offset(-16)
+            make.centerY.equalTo(titleLabel.snp.centerY)
+        }
+        
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.top.equalTo(navigationBar.snp.bottom)

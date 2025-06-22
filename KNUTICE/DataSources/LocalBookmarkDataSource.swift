@@ -77,7 +77,12 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
         return readBookmarkEntities(page: page, fetchLimit: pageSize)
             .map { entities in
                 entities.map {
-                    BookmarkDTO(notice: $0.bookmarkedNotice, details: $0.memo, alarmDate: $0.alarmDate)
+                    BookmarkDTO(
+                        notice: $0.bookmarkedNotice,
+                        details: $0.memo,
+                        alarmDate: $0.alarmDate,
+                        createdAt: $0.createdAt ?? $0.bookmarkedNotice?.uploadDate?.toDate() ?? Date()
+                    )
                 }
             }
             .eraseToAnyPublisher()
@@ -89,7 +94,7 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
                 let fetchRequest = NSFetchRequest<BookmarkEntity>(entityName: "BookmarkEntity")
                 fetchRequest.fetchLimit = fetchLimit
                 fetchRequest.fetchOffset = page * fetchLimit
-                fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
+//                fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
                 
                 do {
                     let bookmarkEntities = try self.backgroundContext.fetch(fetchRequest)
@@ -191,5 +196,15 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
             }
         }
         .eraseToAnyPublisher()
+    }
+}
+
+fileprivate extension String {
+    func toDate() -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
+        
+        return dateFormatter.date(from: self)
     }
 }
