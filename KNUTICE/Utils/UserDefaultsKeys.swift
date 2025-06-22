@@ -13,4 +13,5 @@ enum UserDefaultsKeys: String {
     case etiquetteTimeStart
     case etiquetteTimeEnd
     case hasNewPendingNotice
+    case bookmarkSortOption
 }

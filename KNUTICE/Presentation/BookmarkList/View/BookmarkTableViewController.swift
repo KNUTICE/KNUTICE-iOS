@@ -48,6 +48,21 @@ final class BookmarkTableViewController: UIViewController {
         
         return button
     }()
+    let menuBtn: UIButton = {
+        let configuration = UIImage.SymbolConfiguration(textStyle: .title2)
+        let upAndDownImage = UIImage(systemName: "arrow.up.arrow.down.circle", withConfiguration: configuration)?
+            .withRenderingMode(.alwaysTemplate)
+        let selectedUpAndDownImage = UIImage(systemName: "arrow.up.arrow.down.circle", withConfiguration: configuration)?
+            .withRenderingMode(.alwaysOriginal)
+            .withTintColor(.lightGray)
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.showsMenuAsPrimaryAction = true
+        button.setImage(upAndDownImage, for: .normal)
+        button.setImage(selectedUpAndDownImage, for: .highlighted)
+        
+        return button
+    }()
     @Injected(\.bookmarkTableViewModel) var viewModel
     let disposeBag: DisposeBag = .init()
 
