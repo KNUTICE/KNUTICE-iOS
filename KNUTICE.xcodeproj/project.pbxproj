@@ -208,7 +208,6 @@
 		8E6175482CA24157002B6021 /* UIDevice+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6175472CA24157002B6021 /* UIDevice+Identifier.swift */; };
 		8E6428BB2DE0093500826D37 /* EmploymentNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E6428BA2DE0093500826D37 /* EmploymentNotices.json */; };
 		8E6428BC2DE0093500826D37 /* EmploymentNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E6428BA2DE0093500826D37 /* EmploymentNotices.json */; };
-		8E6428BE2DE00F9E00826D37 /* SearchTableViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6428BD2DE00F9E00826D37 /* SearchTableViewModelTest.swift */; };
 		8E659EBE2D29438500305D56 /* UITabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E659EBD2D29438500305D56 /* UITabBarViewController.swift */; };
 		8E659EBF2D29438500305D56 /* UITabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E659EBD2D29438500305D56 /* UITabBarViewController.swift */; };
 		8E65BF032DFBBECB00CEEF8F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E65BF002DFBBECB00CEEF8F /* GoogleService-Info.plist */; };
@@ -520,7 +519,6 @@
 		8E613E9F2C95214C006FC272 /* RequestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestResult.swift; sourceTree = "<group>"; };
 		8E6175472CA24157002B6021 /* UIDevice+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Identifier.swift"; sourceTree = "<group>"; };
 		8E6428BA2DE0093500826D37 /* EmploymentNotices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EmploymentNotices.json; sourceTree = "<group>"; };
-		8E6428BD2DE00F9E00826D37 /* SearchTableViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewModelTest.swift; sourceTree = "<group>"; };
 		8E659EBD2D29438500305D56 /* UITabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarViewController.swift; sourceTree = "<group>"; };
 		8E65BF002DFBBECB00CEEF8F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8E65BF102DFBC06C00CEEF8F /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
@@ -957,7 +955,6 @@
 			isa = PBXGroup;
 			children = (
 				8E1C655B2D7576EC0003AB94 /* MockSearchedNoticesAPITest.swift */,
-				8E6428BD2DE00F9E00826D37 /* SearchTableViewModelTest.swift */,
 			);
 			path = SearchTest;
 			sourceTree = "<group>";
@@ -1967,7 +1964,6 @@
 				8E2CF4C82DF5537400B580CA /* TopicSubscriptionListViewModelTest.swift in Sources */,
 				8EE4B4FD2D17D96500EFF10B /* RequestResult.swift in Sources */,
 				8E69F8872DFEA1E100F313F0 /* PendingNoticeTests.swift in Sources */,
-				8E6428BE2DE00F9E00826D37 /* SearchTableViewModelTest.swift in Sources */,
 				8E1C65622D757F1F0003AB94 /* MockPostAPIURLProtocol.swift in Sources */,
 				8E1C65522D755FEF0003AB94 /* MockTopThreeNoticesAPITest.swift in Sources */,
 				8EB8FA832DF9BC7200715F73 /* BookmarkTests.swift in Sources */,
