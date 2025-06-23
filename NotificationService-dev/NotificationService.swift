@@ -26,6 +26,11 @@ class NotificationService: UNNotificationServiceExtension {
             bestAttemptContent.badge = (deliveredNotifications.count + 1) as NSNumber
             await UNUserNotificationCenter.current().updatePendingNotificationsBadgeAfterDelivered()    //Pending 되어 있는 알림 Badge 값 1씩 증가
             
+            //알림 제목 수정
+            if let name = bestAttemptContent.userInfo["noticeName"] as? String {
+                bestAttemptContent.title = "새로운 \(name) 알림이 도착했어요!"
+            }
+            
             guard let imageData = request.content.userInfo["fcm_options"] as? [String: Any],
                   let imageURLStr = imageData["image"] as? String else {
                 //이미지가 없는 경우
