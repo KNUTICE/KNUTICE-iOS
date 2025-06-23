@@ -152,4 +152,28 @@ final class MockNoticesAPITests: XCTestCase {
         
         wait(for: [expectation], timeout: 1)
     }
+    
+    func test_fetchSingleNotice_returnNoticeDTO() {
+        let expectation = XCTestExpectation(description: "fetch single notice")
+        let endpoint = Bundle.main.mainNoticeURL + "/noticeId"
+        MockURLProtocol.setUpMockData(.fetchSingleNoticeShouldSucceed)
+        
+        Task {
+            do {
+                let dto = try await dataSource.request(
+                    endpoint,
+                    method: .get,
+                    decoding: SingleNoticeResponseDTO.self
+                )
+                
+                XCTAssertEqual(dto.body?.nttID, 1079970)
+            } catch {
+                XCTFail(error.localizedDescription)
+            }
+            
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1)
+    }
 }
