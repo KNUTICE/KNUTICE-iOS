@@ -94,7 +94,6 @@ final class LocalBookmarkDataSourceImpl: LocalBookmarkDataSource {
                 let fetchRequest = NSFetchRequest<BookmarkEntity>(entityName: "BookmarkEntity")
                 fetchRequest.fetchLimit = fetchLimit
                 fetchRequest.fetchOffset = page * fetchLimit
-//                fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
                 
                 do {
                     let bookmarkEntities = try self.backgroundContext.fetch(fetchRequest)
