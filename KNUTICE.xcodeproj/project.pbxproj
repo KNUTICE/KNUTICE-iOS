@@ -246,6 +246,8 @@
 		8E7A9E7C2DCB4D3C0001D4AA /* NoticeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A9E7A2DCB4D3C0001D4AA /* NoticeCollectionViewController.swift */; };
 		8E7A9E7E2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A9E7D2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift */; };
 		8E7A9E7F2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A9E7D2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift */; };
+		8E887D4D2E0A37A400D5E2E3 /* NoticeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E887D4C2E0A37A400D5E2E3 /* NoticeHeader.swift */; };
+		8E887D4E2E0A37A400D5E2E3 /* NoticeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E887D4C2E0A37A400D5E2E3 /* NoticeHeader.swift */; };
 		8EA47FE92D922C5800B68EAD /* TabBarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA47FE82D922C5800B68EAD /* TabBarService.swift */; };
 		8EA47FEA2D922C5800B68EAD /* TabBarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA47FE82D922C5800B68EAD /* TabBarService.swift */; };
 		8EA72DC92CD5CA4800D1B300 /* DeveloperTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA72DC82CD5CA4800D1B300 /* DeveloperTools.swift */; };
@@ -541,6 +543,7 @@
 		8E7A4A722D2A531B00BD1B7F /* NoticeKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeKind.swift; sourceTree = "<group>"; };
 		8E7A9E7A2DCB4D3C0001D4AA /* NoticeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCollectionViewController.swift; sourceTree = "<group>"; };
 		8E7A9E7D2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoticeCollectionViewController+Layout.swift"; sourceTree = "<group>"; };
+		8E887D4C2E0A37A400D5E2E3 /* NoticeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeHeader.swift; sourceTree = "<group>"; };
 		8EA47FE82D922C5800B68EAD /* TabBarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarService.swift; sourceTree = "<group>"; };
 		8EA72DC82CD5CA4800D1B300 /* DeveloperTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperTools.swift; sourceTree = "<group>"; };
 		8EA72DCB2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperToolsViewModel.swift; sourceTree = "<group>"; };
@@ -1093,6 +1096,7 @@
 		8E5E8BDB2D35F0240078C007 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8E887D4C2E0A37A400D5E2E3 /* NoticeHeader.swift */,
 				8EC6B8A32D3107FC002B45C7 /* BookmarkDetail.swift */,
 				8E5E8BEF2D36309A0078C007 /* BookmarkDetailSwitchView.swift */,
 			);
@@ -1689,6 +1693,7 @@
 				8E7A9E7E2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift in Sources */,
 				8EE3821D2DF00AC100B57315 /* Date+SpecificTime.swift in Sources */,
 				8EADB8FB2D558F7300489086 /* Factory+Instance.swift in Sources */,
+				8E887D4E2E0A37A400D5E2E3 /* NoticeHeader.swift in Sources */,
 				8E09077C2DE698C8008BDF18 /* EmptyBookmarkView.swift in Sources */,
 				8E7A4A702D2A44CE00BD1B7F /* Date+StringFormat.swift in Sources */,
 				8E3F02202C9FB6A000AE89D5 /* ReportRepository.swift in Sources */,
@@ -1829,6 +1834,7 @@
 				8E7A9E7F2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift in Sources */,
 				8EE3821E2DF00AC100B57315 /* Date+SpecificTime.swift in Sources */,
 				8EADB8FA2D558F7300489086 /* Factory+Instance.swift in Sources */,
+				8E887D4D2E0A37A400D5E2E3 /* NoticeHeader.swift in Sources */,
 				8E09077B2DE698C8008BDF18 /* EmptyBookmarkView.swift in Sources */,
 				8E7A4A712D2A44CE00BD1B7F /* Date+StringFormat.swift in Sources */,
 				8E2051062CD4F32F00D87C6A /* ReportRepository.swift in Sources */,

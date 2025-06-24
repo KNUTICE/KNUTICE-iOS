@@ -20,23 +20,11 @@ struct BookmarkDetail: View {
     var body: some View {
         ZStack {
             ScrollView {
-                HeaderView(notice: viewModel.bookmark.notice)
-                    .padding()
-                
-                Divider()
-                    .padding([.leading, .trailing])
+                NoticeHeader(notice: viewModel.bookmark.notice)
                 
                 AlarmDetail(alarmDate: viewModel.bookmark.alarmDate)
-                    .padding()
-                
-                Divider()
-                    .padding([.leading, .trailing])
                 
                 UserMemoDetail(userMemo: viewModel.bookmark.memo)
-                    .padding()
-                
-                Divider()
-                    .padding([.leading, .trailing])
                 
                 Button {
                     isShowingWebView = true
@@ -49,9 +37,9 @@ struct BookmarkDetail: View {
                         .cornerRadius(20)
                 }
                 .padding([.leading, .trailing])
-                .padding(.top, 50)
+                .padding(.top)
             }
-            .background(.detailViewBackground)
+            .background(.primaryBackground)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Menu {
@@ -112,57 +100,45 @@ struct BookmarkDetail: View {
     }
 }
 
-fileprivate struct HeaderView: View {
-    let notice: Notice
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(notice.title)
-                .bold()
-                .font(.headline)
-            
-            HStack {
-                Text(notice.department)
-                
-                Divider()
-                
-                Text(notice.uploadDate)
-                
-                Spacer()
-            }
-            .font(.caption)
-            .foregroundStyle(.gray)
-        }
-    }
-}
-
 fileprivate struct AlarmDetail: View {
+    @Environment(\.colorScheme) private var colorScheme
     let alarmDate: Date?
     
     var body: some View {
         HStack {
-            Text("알림")
+            Text("미리 알림")
+                .bold()
             
             Spacer()
             
             Text(alarmDate?.dateTime ?? "없음")
         }
         .font(.subheadline)
+        .padding()
+        .background(colorScheme == .light ? .white : .mainCellBackground)
+        .cornerRadius(20)
+        .padding()
     }
 }
 
 fileprivate struct UserMemoDetail: View {
+    @Environment(\.colorScheme) private var colorScheme
     let userMemo: String
     
     var body: some View {
         VStack(alignment: .leading) {
             Text("메모")
+                .bold()
                 .padding(.bottom)
             
             Text(userMemo)
         }
         .font(.subheadline)
         .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
+        .background(colorScheme == .light ? .white : .mainCellBackground)
+        .cornerRadius(20)
+        .padding()
     }
 }
 
