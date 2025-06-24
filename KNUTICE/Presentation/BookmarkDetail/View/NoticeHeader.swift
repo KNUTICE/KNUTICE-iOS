@@ -14,7 +14,7 @@ struct NoticeHeader: View {
         VStack(alignment: .leading) {
             Text(notice.title)
                 .bold()
-                .font(.headline)
+                .font(.subheadline)
             
             HStack {
                 Text(notice.department)
@@ -28,6 +28,9 @@ struct NoticeHeader: View {
             .font(.caption)
             .foregroundStyle(.gray)
         }
+        .padding()
+        .background(.mainCellBackground)
+        .cornerRadius(20)
         .padding()
     }
 }
