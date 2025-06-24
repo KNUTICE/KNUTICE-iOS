@@ -13,6 +13,10 @@ final class TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
     
     func fetch() async -> Result<NotificationSubscription, Error> {
+        guard !Task.isCancelled else {
+            return .failure(CancellationError())
+        }
+        
         do {
             let endPoint = Bundle.main.notificationPermissionURL
             let dto = try await dataSource.request(
@@ -37,6 +41,8 @@ final class TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
     }
     
     func update(params: [String: Any]) async throws {
+        try Task.checkCancellation()
+        
         let endPoint = Bundle.main.notificationPermissionURL
         try await dataSource.request(
             endPoint,
