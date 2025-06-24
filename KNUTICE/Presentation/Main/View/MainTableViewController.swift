@@ -20,7 +20,7 @@ final class MainTableViewController: UIViewController {
         tableView.register(MainTableViewSkeletonCell.self, forCellReuseIdentifier: MainTableViewSkeletonCell.reuseIdentifier)
         tableView.estimatedRowHeight = 100    //cell height가 설정되기 전 임시 크기
         tableView.rowHeight = UITableView.automaticDimension    //동적 Height 설정
-        tableView.backgroundColor = .mainBackground
+        tableView.backgroundColor = .primaryBackground
         tableView.delegate = self
         tableView.refreshControl = refreshControl
         
@@ -67,7 +67,7 @@ final class MainTableViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        view.backgroundColor = .mainBackground
+        view.backgroundColor = .primaryBackground
         setupLayout()
         createNavigationItems()
         bind()

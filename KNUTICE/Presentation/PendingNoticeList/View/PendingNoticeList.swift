@@ -129,15 +129,15 @@ fileprivate struct CategoryBadge: View {
     private func backgroundColor(for category: NoticeCategory) -> Color {
         switch category {
         case .generalNotice:
-            return Color.salmon
+            return Color.accentOrange
         case .academicNotice:
-            return Color.lightOrange
+            return Color.accentAmber
         case .scholarshipNotice:
-            return Color.lightGreen
+            return Color.accentMint
         case .eventNotice:
-            return Color.dodgerBlue
+            return Color.accentBlue
         case .employmentNotice:
-            return Color.orchid
+            return Color.accentPurple
         }
     }
 }
