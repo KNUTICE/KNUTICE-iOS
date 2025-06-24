@@ -29,7 +29,7 @@ struct BookmarkForm: View {
                 NoticeView(notice: viewModel.bookmark.notice)
                 
                 Rectangle()
-                    .fill(.mainBackground)
+                    .fill(.primaryBackground)
                     .frame(height: 8)
                 
                 VStack(spacing: -5) {

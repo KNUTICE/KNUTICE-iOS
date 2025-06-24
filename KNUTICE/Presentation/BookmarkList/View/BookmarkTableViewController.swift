@@ -69,7 +69,7 @@ final class BookmarkTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .mainBackground
+        view.backgroundColor = .primaryBackground
         setUpLayout()
         bind()
         

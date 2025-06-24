@@ -10,7 +10,7 @@ import SwiftUI
 struct ResultNotFoundView: View {
     var body: some View {
         ZStack {
-            Color.mainBackground
+            Color.primaryBackground
             
             VStack(spacing: 30) {
                 ZStack {

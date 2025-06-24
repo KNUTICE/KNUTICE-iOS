@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchCollectionViewBackground: View {
     var body: some View {
         ZStack {
-            Color.mainBackground
+            Color.primaryBackground
             
             VStack(spacing: 20) {
                 Image("Magnifying_Glasses_3D")
