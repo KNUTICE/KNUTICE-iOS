@@ -70,6 +70,7 @@ protocol RemoteDataSource {
 }
 
 extension RemoteDataSource {
+    @discardableResult
     func request<T: Decodable>(
         _ url: String,
         method: HTTPMethod,

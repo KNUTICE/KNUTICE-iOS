@@ -23,6 +23,10 @@ final class PendingNoticeServiceImpl: PendingNoticeService {
     @Injected(\.pendingNoticeRepository) private var pendingNoticeRepository
     
     func fetchPendingNotices() async -> Result<[Notice], any Error> {
+        guard !Task.isCancelled else {
+            return .failure(CancellationError())
+        }
+        
         do {
             let nttIds = try await pendingNoticeRepository.fetchAll()
             var notices = [Notice]()

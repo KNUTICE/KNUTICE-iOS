@@ -82,6 +82,8 @@ final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
     }
     
     func fetchNotice(by nttId: Int) async throws -> Notice? {
+        try Task.checkCancellation()
+        
         let dto =  try await dataSource.request(
             Bundle.main.mainNoticeURL + "/\(nttId)",
             method: .get,
