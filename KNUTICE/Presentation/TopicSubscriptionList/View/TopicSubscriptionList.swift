@@ -126,7 +126,7 @@ struct TopicSubscriptionList: View {
                     Text("취업안내는 채용 정보, 취업 지원 프로그램, 진로 상담 등 학생들의 진로 설계를 돕기 위한 공지 사항이 포합됩니다.")
                 }
             }
-            .background(.detailViewBackground)
+            .background(.primaryBackground)
             .tint(.accent2)
             .navigationTitle("서비스 알림")
             .navigationBarTitleDisplayMode(.inline)
