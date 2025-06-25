@@ -21,6 +21,7 @@ final class SearchCollectionViewController: UIViewController, CompositionalLayou
         let loadingIndicator = UIActivityIndicatorView(style: .large)
         loadingIndicator.startAnimating()
         collectionView.backgroundView = loadingIndicator
+        collectionView.backgroundColor = .primaryBackground
         
         return collectionView
     }()

@@ -21,6 +21,7 @@ final class NoticeCollectionViewController: UIViewController, CompositionalLayou
         loadingIndicator.startAnimating()
         collectionView.backgroundView = loadingIndicator
         collectionView.refreshControl = refreshControl
+        collectionView.backgroundColor = .primaryBackground
         
         return collectionView
     }()
