@@ -11,5 +11,4 @@ struct BookmarkDTO {
     let notice: NoticeEntity?
     let details: String?
     let alarmDate: Date?
-    let createdAt: Date
 }
