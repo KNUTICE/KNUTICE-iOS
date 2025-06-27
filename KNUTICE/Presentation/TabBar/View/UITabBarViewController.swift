@@ -16,6 +16,10 @@ final class UITabBarViewController: UITabBarController {
         viewController.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
         viewController.tabBarItem.title = "홈"
         
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return UINavigationController(rootViewController: viewController)
+        }
+        
         return viewController
     }()
     private let bookmarkViewController: UIViewController = {
@@ -24,6 +28,10 @@ final class UITabBarViewController: UITabBarController {
         viewController.tabBarItem.selectedImage = UIImage(systemName: "bookmark.fill")
         viewController.tabBarItem.title = "북마크"
         
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return UINavigationController(rootViewController: viewController)
+        }
+        
         return viewController
     }()
     private let searchViewController: UIViewController = {
@@ -31,6 +39,10 @@ final class UITabBarViewController: UITabBarController {
         viewController.tabBarItem.image = UIImage(systemName: "magnifyingglass")
         if UIDevice.current.userInterfaceIdiom  == .phone {
             viewController.tabBarItem.title = "검색"
+        }
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return UINavigationController(rootViewController: viewController)
         }
         
         return viewController
