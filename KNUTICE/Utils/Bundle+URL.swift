@@ -88,4 +88,12 @@ extension Bundle {
         
         return url
     }
+    
+    var defaultThumbnailURL: String {
+        guard let resource, let url = resource["DefaultThumbnail_URL"] as? String else {
+            return ""
+        }
+        
+        return url
+    }
 }
