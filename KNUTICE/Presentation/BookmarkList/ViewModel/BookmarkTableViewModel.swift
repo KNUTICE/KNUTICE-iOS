@@ -74,7 +74,7 @@ final class BookmarkTableViewModel {
     }
     
     func delete(bookmark: Bookmark) {
-        bookmarkService.delete(bookmark: bookmark, reloadCount: bookmarks.value.count - 1, sortBy: sortOption.value)
+        bookmarkService.delete(bookmark: bookmark, reloadCount: bookmarks.value.count, sortBy: sortOption.value)
             .map { bookmarks in
                 bookmarks.map {
                     BookmarkSectionModel(items: [$0])
