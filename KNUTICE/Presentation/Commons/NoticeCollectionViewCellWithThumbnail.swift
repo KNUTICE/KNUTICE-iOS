@@ -10,7 +10,7 @@ import Kingfisher
 
 final class NoticeCollectionViewCellWithThumbnail: UICollectionViewCell {
     static var reuseIdentifier: String {
-            "NoticeCollectionViewCellWithThumbnail"
+        "NoticeCollectionViewCellWithThumbnail"
     }
     let titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
@@ -35,7 +35,7 @@ final class NoticeCollectionViewCellWithThumbnail: UICollectionViewCell {
             CroppingImageProcessor(size: CGSize(width: UIScreen.main.bounds.width - 32, height: UIScreen.main.bounds.width * 0.4),
                                    anchor: CGPoint(x: 0, y: 0))
             image.kf.indicatorType = .activity
-            image.kf.setImage(with: URL(string: newValue), options: [.processor(processor)])
+            image.kf.setImage(with: URL(string: newValue), options: [.processor(processor), .forceRefresh])    //TODO: 릴리즈 버전에서 .forceRefresh 옵션 삭제
             image.layer.cornerRadius = 10
             image.clipsToBounds = true    //코너 라운드를 벗어나는 경우 잘라냄
         }
@@ -82,6 +82,8 @@ final class NoticeCollectionViewCellWithThumbnail: UICollectionViewCell {
         
         if let imageURL = item.imageUrl {
             self.imageURL = imageURL
+        } else {
+            self.imageURL = Bundle.main.defaultThumbnailURL
         }
     }
     
