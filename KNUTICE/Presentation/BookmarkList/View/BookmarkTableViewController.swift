@@ -73,7 +73,7 @@ final class BookmarkTableViewController: UIViewController {
         setUpLayout()
         bind()
         
-        viewModel.fetchBookmarks()
+//        viewModel.fetchBookmarks()
     }
 }
 

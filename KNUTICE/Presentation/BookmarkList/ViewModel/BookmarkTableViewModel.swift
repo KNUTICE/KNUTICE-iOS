@@ -19,7 +19,6 @@ final class BookmarkTableViewModel {
         let value = UserDefaults.standard.string(forKey: UserDefaultsKeys.bookmarkSortOption.rawValue) ?? "createdAtDescending"
         return BehaviorRelay(value: BookmarkSortOption(rawValue: value) ?? .createdAtDescending)
     }()
-    @Injected(\.bookmarkRepository) private var repository
     @Injected(\.bookmarkService) private var bookmarkService
     private var cancellables: Set<AnyCancellable> = []
     private let logger: Logger = Logger()
@@ -30,7 +29,7 @@ final class BookmarkTableViewModel {
             return
         }
         
-        repository.read(page: bookmarks.value.count / 20, sortBy: sortOption.value)
+        bookmarkService.fetchBookmarks(page: bookmarks.value.count / 20, sortBy: sortOption.value)
             .map { bookmarks in
                 bookmarks.map {
                     BookmarkSectionModel(items: [$0])
@@ -52,7 +51,7 @@ final class BookmarkTableViewModel {
     
     func reloadData() {
         isRefreshing.accept(true)
-        repository.read(page: 0, sortBy: sortOption.value)
+        bookmarkService.fetchBookmarks(page: 0, sortBy: sortOption.value)
             .map { bookmarks in
                 bookmarks.map {
                     BookmarkSectionModel(items: [$0])
@@ -75,7 +74,7 @@ final class BookmarkTableViewModel {
     }
     
     func delete(bookmark: Bookmark) {
-        bookmarkService.delete(bookmark: bookmark, reloadCount: bookmarks.value.count - 1)
+        bookmarkService.delete(bookmark: bookmark, reloadCount: bookmarks.value.count - 1, sortBy: sortOption.value)
             .map { bookmarks in
                 bookmarks.map {
                     BookmarkSectionModel(items: [$0])

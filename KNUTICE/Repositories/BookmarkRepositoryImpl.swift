@@ -28,22 +28,20 @@ final class BookmarkRepositoryImpl: BookmarkRepository {
     
     func read(
         page pageNum: Int,
-        pageSize: Int = 20,
-        sortBy option: BookmarkSortOption = .createdAtDescending
+        pageSize: Int,
+        sortBy option: BookmarkSortOption
     ) -> AnyPublisher<[Bookmark], any Error> {
-        return dataSource.fetch(page: pageNum, pageSize: pageSize)
-            .map { dto in
-                switch option {
-                case .createdAtAscending:
-                    dto.sorted {
-                        $0.createdAt < $1.createdAt
-                    }
-                case .createdAtDescending:
-                    dto.sorted {
-                        $0.createdAt > $1.createdAt
-                    }
+        return dataSource.fetch(page: pageNum, pageSize: pageSize, sortBy: option)
+            .map { [weak self] in
+                $0.compactMap { dto in
+                    self?.createBookMark(from: dto)
                 }
             }
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchWhereCreatedAtIsNil() -> AnyPublisher<[Bookmark], any Error> {
+        return dataSource.fetchItemsWhereCreatedAtIsNil()
             .map { [weak self] in
                 $0.compactMap { dto in
                     self?.createBookMark(from: dto)
@@ -78,5 +76,9 @@ final class BookmarkRepositoryImpl: BookmarkRepository {
     
     func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
         return dataSource.update(bookmark: bookmark)
+    }
+    
+    func update(bookmarks: [(Bookmark, Date)]) -> AnyPublisher<Void, any Error> {
+        return dataSource.update(bookmarks: bookmarks)
     }
 }
