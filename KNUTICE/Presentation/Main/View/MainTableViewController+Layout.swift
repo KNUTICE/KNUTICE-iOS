@@ -52,10 +52,7 @@ extension MainTableViewController {
     
     func createNavigationItems() {
         if UIDevice.current.userInterfaceIdiom == .pad {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"),
-                                                                style: .plain,
-                                                                target: self,
-                                                                action: #selector(navigateToSetting(_:)))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(customView: settingBtn)
         }
     }
     
