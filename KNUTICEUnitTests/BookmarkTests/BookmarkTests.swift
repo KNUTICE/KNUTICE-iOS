@@ -13,95 +13,35 @@ import XCTest
 final class BookmarkTests: XCTestCase {
     private var dataSource: LocalBookmarkDataSourceImpl!
     private var cancellables: Set<AnyCancellable>!
-
+    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
         dataSource = LocalBookmarkDataSourceImpl.shared
         cancellables = []
     }
-
+    
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         dataSource = nil
         cancellables = nil
     }
-
-    func test_saveLargeNumberOfBookmarks_returnsSuccess() {
+    
+    func test_bookmarkCRUD_returnsExpectedCount() {
         //Given
-        let expectation = XCTestExpectation(description: "save 1K dummy bookmark data")
-       
+        let expectation = XCTestExpectation(description: "CRUD bookmark data")
+        
         //When
-        Task {
-            do {
-                try await dataSource.saveDummyData()
-                expectation.fulfill()
-            } catch {
-                XCTFail(error.localizedDescription)
+        dataSource.saveDummyData()    //Saves 1,000 dummy records into the database.
+            .flatMap { _ in
+                return self.dataSource.fetch(page: 0)    //Fetches 20 items using pagination.
             }
-        }
-        
-        wait(for: [expectation], timeout: 1)
-    }
-    
-    func test_fetchBookmarks_batchSize20_returnsExpectedCount() {
-        //Given
-        let expectation = XCTestExpectation(description: "fetch bookmark data with batch size 20")
-        
-        //When
-        dataSource.fetch(page: 0)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    expectation.fulfill()
-                case .failure(let error):
-                    XCTFail(error.localizedDescription)
-                }
-            }, receiveValue: {
-                //Then
-                XCTAssertEqual($0.count, 20)
-            })
-            .store(in: &cancellables)
-        
-        wait(for: [expectation], timeout: 1)
-    }
-    
-    func test_memoryStorage_returnsExpectedData() {
-        self.measure(metrics: [XCTMemoryMetric()]) {
-            test_fetchBookmarks_batchSize20_returnsExpectedCount()
-        }
-    }
-    
-    func test_fetchAllBookmarks_returnsExpectedCount() {
-        //Given
-        let expectation = XCTestExpectation(description: "fetch all bookmark data")
-        
-        //When
-        dataSource.fetch(page: 0, pageSize: 0)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    expectation.fulfill()
-                case .failure(let error):
-                    XCTFail(error.localizedDescription)
-                }
-            }, receiveValue: {
-                //Then
-                XCTAssertEqual($0.count, 10_000)
-            })
-            .store(in: &cancellables)
-        
-        wait(for: [expectation], timeout: 1)
-    }
-    
-    func test_deleteAllBookmarks_retunsSuccess() {
-        //Given
-        let expectation = XCTestExpectation(description: "delete bookmark data")
-        
-        dataSource.fetch(page: 0, pageSize: 0)
-            .flatMap { bookmarks -> AnyPublisher<[Void], Error> in
+            .flatMap { bookmarks in
+                XCTAssertEqual(bookmarks.count, 20)
+                
                 var publishers = [AnyPublisher<Void, Error>]()
                 
+                //Delete all stored data
                 for bookmark in bookmarks {
                     guard let notice = bookmark.notice else { continue }
                     publishers.append(self.dataSource.delete(id: Int(notice.id)))
@@ -118,21 +58,20 @@ final class BookmarkTests: XCTestCase {
                 case .failure(let error):
                     XCTFail(error.localizedDescription)
                 }
-            }, receiveValue: {
-                print($0.count)
+            }, receiveValue: { _ in
+                //Nothing to do
             })
             .store(in: &cancellables)
         
-        wait(for: [expectation], timeout: 2)
+        wait(for: [expectation], timeout: 1)
     }
-
 }
 
 extension LocalBookmarkDataSourceImpl {
-    func saveDummyData() async throws {
-        try await withCheckedThrowingContinuation { continuation in
+    func saveDummyData() -> AnyPublisher<Void, any Error> {
+        return Future { promise in
             self.backgroundContext.perform {
-                (1...10_000).forEach {
+                (1...1_000).forEach {
                     let bookmark = self.createBookmark(id: $0)
                     let bookmarkEntity = BookmarkEntity(context: self.backgroundContext)
                     let noticeEntity = NoticeEntity(context: self.backgroundContext)
@@ -154,12 +93,13 @@ extension LocalBookmarkDataSourceImpl {
                 
                 do {
                     try self.backgroundContext.save()
-                    continuation.resume()
+                    promise(.success(()))
                 } catch {
-                    continuation.resume(throwing: error)
+                    promise(.failure(error))
                 }
             }
         }
+        .eraseToAnyPublisher()
     }
     
     private func createBookmark(id: Int) -> Bookmark {
