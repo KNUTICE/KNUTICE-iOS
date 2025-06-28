@@ -31,6 +31,12 @@ extension MainTableViewController {
                 make.trailing.equalToSuperview().offset(-16)
                 make.centerY.equalTo(titleLabel.snp.centerY)
             }
+            
+//            navigationBar.addSubview(bellBtn)
+//            bellBtn.snp.makeConstraints { make in
+//                make.trailing.equalTo(settingBtn.snp.leading).offset(-25)
+//                make.centerY.equalTo(titleLabel.snp.centerY)
+//            }
         }
         
         view.addSubview(tableView)
@@ -46,15 +52,12 @@ extension MainTableViewController {
     
     func createNavigationItems() {
         if UIDevice.current.userInterfaceIdiom == .pad {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"),
-                                                                style: .plain,
-                                                                target: self,
-                                                                action: #selector(navigateToSetting(_:)))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(customView: settingBtn)
         }
     }
     
     func createSectionHeader(for section: Int) -> UIView {
-        let headerColors: [UIColor] = [.salmon, .lightOrange, .lightGreen, .dodgerBlue, .orchid]
+        let headerColors: [UIColor] = [.accentOrange, .accentAmber, .accentMint, .accentBlue, .accentPurple]
         let headerView = UIView()
         let title: UILabel = {
             let label = UILabel()

@@ -11,7 +11,7 @@ import Foundation
 import os
 import RxRelay
 
-final class NoticeCollectionViewModel: NoticeFetchable {
+final class NoticeCollectionViewModel: NoticeSectionModelProvidable, NoticeFetchable {
     /// View와 바인딩할 데이터
     /// 서버에서 가져온 데이터를 해당 변수에 저장
     let notices: BehaviorRelay<[NoticeSectionModel]> = BehaviorRelay(value: [])
@@ -42,6 +42,9 @@ final class NoticeCollectionViewModel: NoticeFetchable {
         }
         
         repository.fetchNotices(for: category)
+            .map {
+                NoticeSectionModel(items: $0)
+            }
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 if isRefreshing {
@@ -71,6 +74,9 @@ final class NoticeCollectionViewModel: NoticeFetchable {
         
         isFetching.accept(true)
         repository.fetchNotices(for: category, after: lastNumber)
+            .map {
+                NoticeSectionModel(items: $0)
+            }
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 self?.isFetching.accept(false)

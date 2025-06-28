@@ -13,34 +13,32 @@ import Foundation
 final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
     
-    func fetchNotices(for category: NoticeCategory) -> AnyPublisher<NoticeSectionModel, any Error> {
-        let endPoint = Bundle.main.noticeURL
-        
-        return dataSource.sendGetRequest(to: endPoint + "?noticeName=\(category.rawValue)", resultType: NoticeReponseDTO.self)
-            .compactMap { [weak self] dto in
-                dto.body?.compactMap {
-                    self?.createNotice($0)
-                }
+    func fetchNotices(for category: NoticeCategory) -> AnyPublisher<[Notice], any Error> {
+        return dataSource.request(
+            Bundle.main.noticeURL + "?noticeName=\(category.rawValue)",
+            method: .get,
+            decoding: NoticeReponseDTO.self
+        )
+        .compactMap { [weak self] dto in
+            dto.body?.compactMap {
+                self?.createNotice($0)
             }
-            .map {
-                NoticeSectionModel(items: $0)
-            }
-            .eraseToAnyPublisher()
+        }
+        .eraseToAnyPublisher()
     }
     
-    func fetchNotices(for category: NoticeCategory, after number: Int) -> AnyPublisher<NoticeSectionModel, any Error> {
-        let endPoint = Bundle.main.noticeURL
-        
-        return dataSource.sendGetRequest(to: endPoint + "?noticeName=\(category.rawValue)" + "&nttId=\(number)", resultType: NoticeReponseDTO.self)
-            .compactMap { [weak self] dto in
-                dto.body?.compactMap {
-                    self?.createNotice($0)
-                }
+    func fetchNotices(for category: NoticeCategory, after number: Int) -> AnyPublisher<[Notice], any Error> {
+        return dataSource.request(
+            Bundle.main.noticeURL + "?noticeName=\(category.rawValue)" + "&nttId=\(number)",
+            method: .get,
+            decoding: NoticeReponseDTO.self
+        )
+        .compactMap { [weak self] dto in
+            dto.body?.compactMap {
+                self?.createNotice($0)
             }
-            .map {
-                NoticeSectionModel(items: $0)
-            }
-            .eraseToAnyPublisher()
+        }
+        .eraseToAnyPublisher()
     }
     
     func fetchNotices(by nttIds: [Int]) -> AnyPublisher<[Notice], any Error> {
@@ -55,20 +53,47 @@ final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
             ]
         ]
         
-        return dataSource.sendPostRequest(to: Bundle.main.noticeSyncURL, params: params, resultType: NoticeReponseDTO.self)
-            .compactMap { [weak self] in
+        return dataSource.request(
+            Bundle.main.noticeSyncURL,
+            method: .post,
+            parameters: params,
+            decoding: NoticeReponseDTO.self
+        )
+        .compactMap { [weak self] dto in
+            dto.body?.compactMap {
                 self?.createNotice($0)
             }
-            .eraseToAnyPublisher()
+        }
+        .eraseToAnyPublisher()
     }
     
     func fetchNotice(by nttId: Int) -> AnyPublisher<Notice?, any Error> {
-        return dataSource.sendGetRequest(to: Bundle.main.mainNoticeURL + "/\(nttId)", resultType: SingleNoticeResponseDTO.self)
-            .map { [weak self] dto in
-                return dto.body.flatMap {
-                    self?.createNotice($0)
-                }
+        return dataSource.request(
+            Bundle.main.mainNoticeURL + "/\(nttId)",
+            method: .get,
+            decoding: SingleNoticeResponseDTO.self
+        )
+        .map { [weak self] dto in
+            return dto.body.flatMap {
+                self?.createNotice($0)
             }
-            .eraseToAnyPublisher()
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    func fetchNotice(by nttId: Int) async throws -> Notice? {
+        try Task.checkCancellation()
+        
+        let dto =  try await dataSource.request(
+            Bundle.main.mainNoticeURL + "/\(nttId)",
+            method: .get,
+            decoding: SingleNoticeResponseDTO.self
+        )
+        
+        guard let body = dto.body else {
+            return nil
+        }
+        
+        return createNotice(body)
     }
 }

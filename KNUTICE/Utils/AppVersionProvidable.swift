@@ -18,9 +18,19 @@ extension AppVersionProvidable {
         }
         
         #if DEV
-        return version + " beta 1"
+        return version + " beta " + Bundle.main.betaVersion
         #else
         return version
         #endif
+    }
+}
+
+fileprivate extension Bundle {
+    var betaVersion: String {
+        guard let resource, let version = resource["Beta_Version"] as? String else {
+            return ""
+        }
+        
+        return version
     }
 }

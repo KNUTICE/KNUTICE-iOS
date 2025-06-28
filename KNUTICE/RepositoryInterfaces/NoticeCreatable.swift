@@ -8,23 +8,10 @@
 import Foundation
 
 protocol NoticeCreatable {
-    func createNotice(_ dto: NoticeReponseDTO) -> [Notice]?
+    func createNotice(_ body: NoticeReponseBody) -> Notice
 }
 
-extension NoticeCreatable {
-    @available(*, deprecated)
-    func createNotice(_ dto: NoticeReponseDTO) -> [Notice]? {
-        return dto.body?.map {
-            return Notice(id: $0.nttID,
-                          title: $0.title,
-                          contentUrl: $0.contentURL,
-                          department: $0.departmentName,
-                          uploadDate: $0.registeredAt,
-                          imageUrl: $0.contentImage,
-                          noticeCategory: NoticeCategory(rawValue: $0.noticeName))
-        }
-    }
-    
+extension NoticeCreatable {    
     func createNotice(_ body: NoticeReponseBody) -> Notice {
         return Notice(
             id: body.nttID,

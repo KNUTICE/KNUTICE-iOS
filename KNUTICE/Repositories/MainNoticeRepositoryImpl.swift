@@ -16,20 +16,26 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
     ///GET 요청 함수 with RxSwift
     @available(*, deprecated)
     func fetchMainNotices() -> Observable<[SectionOfNotice]> {
-        return dataSource.sendGetRequest(to: Bundle.main.mainNoticeURL, resultType: MainNoticeResponseDTO.self)
-            .map { [weak self] in
-                return self?.createScectionOfNotice($0) ?? []
-            }
-            .asObservable()
+        return dataSource.request(
+            Bundle.main.mainNoticeURL,
+            method: .get,
+            decoding: MainNoticeResponseDTO.self)
+        .map { [weak self] in
+            return self?.createScectionOfNotice($0) ?? []
+        }
+        .asObservable()
     }
     
     ///GET 요청 함수 with Combine
     func fetch() -> AnyPublisher<[SectionOfNotice], any Error> {
-        return dataSource.sendGetRequest(to: Bundle.main.mainNoticeURL, resultType: MainNoticeResponseDTO.self)
-            .map { [weak self] in
-                self?.createScectionOfNotice($0) ?? []
-            }
-            .eraseToAnyPublisher()
+        return dataSource.request(
+            Bundle.main.mainNoticeURL,
+            method: .get,
+            decoding: MainNoticeResponseDTO.self)
+        .map { [weak self] in
+            self?.createScectionOfNotice($0) ?? []
+        }
+        .eraseToAnyPublisher()
     }
     
     private func createScectionOfNotice(_ dto: MainNoticeResponseDTO) -> [SectionOfNotice] {

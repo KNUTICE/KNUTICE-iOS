@@ -9,24 +9,25 @@ import UIKit
 import SwiftUI
 import RxSwift
 
-final class NoticeCollectionViewController: UIViewController {
+final class NoticeCollectionViewController: UIViewController, CompositionalLayoutConfigurable {
     lazy var collectionView: UICollectionView = {
         let layout = createCompositionalLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(NoticeCell.self, forCellWithReuseIdentifier: NoticeCell.reuseIdentifier)
-        collectionView.register(NoticeCellWithThumbnail.self, forCellWithReuseIdentifier: NoticeCellWithThumbnail.reuseIdentifier)
+        collectionView.register(NoticeCollectionViewCell.self, forCellWithReuseIdentifier: NoticeCollectionViewCell.reuseIdentifier)
+        collectionView.register(NoticeCollectionViewCellWithThumbnail.self, forCellWithReuseIdentifier: NoticeCollectionViewCellWithThumbnail.reuseIdentifier)
         let loadingIndicator = UIActivityIndicatorView(style: .large)
         loadingIndicator.startAnimating()
         collectionView.backgroundView = loadingIndicator
         collectionView.refreshControl = refreshControl
+        collectionView.backgroundColor = .primaryBackground
         
         return collectionView
     }()
     let refreshControl: UIRefreshControl = UIRefreshControl()
     private let currentColumnCount: CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 1 : 2
-    let viewModel: NoticeCollectionViewModel
+    let viewModel: NoticeSectionModelProvidable
     private let navigationTitle: String
     let disposeBag = DisposeBag()
     
@@ -47,32 +48,16 @@ final class NoticeCollectionViewController: UIViewController {
         setUpLayout()
         setUpNavigationBar(title: navigationTitle)
         bind()
-        viewModel.fetchNotices()
+        
+        if let viewModel = viewModel as? NoticeFetchable {
+            viewModel.fetchNotices()
+        }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         collectionView.reloadData()
     }
-    
-    private func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(UIDevice.current.userInterfaceIdiom == .phone ? 1.0 : 0.5),
-            heightDimension: .estimated(500)
-        )
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(500)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        let section = NSCollectionLayoutSection(group: group)
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        
-        return layout
-        
-    }
-
 }
 
 extension NoticeCollectionViewController: UICollectionViewDelegateFlowLayout {
@@ -80,8 +65,16 @@ extension NoticeCollectionViewController: UICollectionViewDelegateFlowLayout {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        let viewController = WebViewController(notice: viewModel.notices.value[0].items[indexPath.row])
-        navigationController?.pushViewController(viewController, animated: true)
+        if #available(iOS 26, *) {
+            let viewController = UIHostingController(
+                rootView: WebNoticeView()
+                    .environment(WebNoticeViewModel(notice: viewModel.notices.value[0].items[indexPath.row]))
+            )
+            navigationController?.pushViewController(viewController, animated: true)
+        } else {
+            let viewController = WebViewController(notice: viewModel.notices.value[0].items[indexPath.row])
+            navigationController?.pushViewController(viewController, animated: true)
+        }
     }
 }
 

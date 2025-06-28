@@ -10,7 +10,7 @@ import SwiftUI
 struct EmptyBookmarkView: View {
     var body: some View {
         ZStack {
-            Color.mainBackground
+            Color.primaryBackground
             
             VStack(spacing: 20) {
                 Image("Bookmark_3D")

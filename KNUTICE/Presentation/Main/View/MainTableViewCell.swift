@@ -46,6 +46,10 @@ class MainTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        cellBackgroundView.backgroundColor = highlighted ? .cellHighlight : .mainCellBackground
+    }
+    
     func configure(with item: MainNotice) {
         titleLabel.text = item.notice.title
         subTitleLabel.text = "[\(item.notice.department)]  \(item.notice.uploadDate)"

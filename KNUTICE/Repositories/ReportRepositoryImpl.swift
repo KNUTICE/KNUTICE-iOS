@@ -15,18 +15,22 @@ final class ReportRepositoryImpl: ReportRepository {
     func register(params: [String: Any]) -> AnyPublisher<Bool, any Error> {
         let apiEndPoint = Bundle.main.reportURL
         
-        return dataSource.sendPostRequest(to: apiEndPoint, params: params, resultType: PostResponseDTO.self)
-            .flatMap { dto -> AnyPublisher<Bool, any Error> in
-                guard dto.result.resultCode == 200 else {
-                    return Fail(error: RemoteServerError.invalidResponse(message: dto.result.resultMessage))
-                        .eraseToAnyPublisher()
-                }
-                
-                return Just(true)
-                    .setFailureType(to: Error.self)
+        return dataSource.request(
+            apiEndPoint,
+            method: .post,
+            parameters: params,
+            decoding: PostResponseDTO.self
+        )
+        .flatMap { dto -> AnyPublisher<Bool, any Error> in
+            guard dto.result.resultCode == 200 else {
+                return Fail(error: RemoteServerError.invalidResponse(message: dto.result.resultMessage))
                     .eraseToAnyPublisher()
             }
-            .eraseToAnyPublisher()
             
+            return Just(true)
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+        }
+        .eraseToAnyPublisher()
     }
 }

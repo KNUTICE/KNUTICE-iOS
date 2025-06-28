@@ -10,8 +10,10 @@ import RxSwift
 
 protocol NoticeFetchable {
     var isFetching: BehaviorRelay<Bool> { get }
+    var isRefreshing: BehaviorRelay<Bool> { get }
     
     func fetchNotices(isRefreshing: Bool)
+    func fetchNextPage()
 }
 
 extension NoticeFetchable {
