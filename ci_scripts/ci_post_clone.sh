@@ -34,6 +34,8 @@ cat <<EOF > "/Volumes/workspace/repository/KNUTICE/Application/ServiceInfo.plist
     <string>${Notice_Sync_URL}</string>
     <key>DefaultThumbnail_URL</key>
     <string>${DefaultThumbnail_URL}</string>
+    <key>Beta_Version</key>
+    <string>${Beta_Version}</string>
 </dict>
 </plist>
 EOF
