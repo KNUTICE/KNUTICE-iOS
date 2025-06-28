@@ -8,7 +8,7 @@
 import Foundation
 
 extension Bundle {
-    private var resource: NSDictionary? {
+    var resource: NSDictionary? {
         guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
               let resource = NSDictionary(contentsOfFile: file) else {
             return nil
