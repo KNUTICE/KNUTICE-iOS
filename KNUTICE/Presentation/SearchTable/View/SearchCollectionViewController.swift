@@ -92,8 +92,10 @@ extension SearchCollectionViewController: UISearchBarDelegate {
     }
 }
 
+#if DEBUG
 #Preview {
     SearchCollectionViewController()
         .makePreview()
         .ignoresSafeArea(.all)
 }
+#endif
