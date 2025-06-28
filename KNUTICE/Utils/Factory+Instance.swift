@@ -22,6 +22,12 @@ extension Container {
         }
     }
     
+    var pendingNoticeDataSource: Factory<PendingNoticeDataSource> {
+        Factory(self) {
+            PendingNoticeDataSource.shared
+        }
+    }
+    
     //MARK: - Repositroy
     var mainNoticeRepository: Factory<MainNoticeRepository> {
         Factory(self) {
@@ -53,9 +59,9 @@ extension Container {
         }
     }
     
-    var notificationRepository: Factory<NotificationSubscriptionRepository> {
+    var topicSubscriptionRepository: Factory<TopicSubscriptionRepository> {
         Factory(self) {
-            NotificationSubscriptionRepositoryImpl()
+            TopicSubscriptionRepositoryImpl()
         }
     }
     
@@ -68,6 +74,12 @@ extension Container {
     var mainPopupContentRepository: Factory<MainPopupContentRepository> {
         Factory(self) {
             MainPopupContentRepositoryImpl()
+        }
+    }
+    
+    var pendingNoticeRepository: Factory<PendingNoticeRepository> {
+        Factory(self) {
+            PendingNoticeRepositoryImpl()
         }
     }
     
@@ -90,9 +102,15 @@ extension Container {
         }
     }
     
-    var subscriptionService: Factory<SubscriptionService> {
+    var subscriptionService: Factory<TopicSubscriptionService> {
         Factory(self) {
-            SubscriptionServiceImpl()
+            TopicSubscriptionServiceImpl()
+        }
+    }
+    
+    var pendingNoticeService: Factory<PendingNoticeService> {
+        Factory(self) {
+            PendingNoticeServiceImpl()
         }
     }
     
@@ -109,15 +127,9 @@ extension Container {
         }
     }
     
-    var searchTableViewModel: Factory<SearchTableViewModel> {
+    var searchCollectionViewModel: Factory<NoticeSectionModelProvidable> {
         Factory(self) {
-            SearchTableViewModel()
-        }
-    }
-    
-    var bookmarkListViewModel: Factory<BookmarkListViewModel> {
-        Factory(self) {
-            BookmarkListViewModel()
+            SearchCollectionViewModel()
         }
     }
     

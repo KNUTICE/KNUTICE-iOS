@@ -40,7 +40,7 @@ final class MockNoticesAPITests: XCTestCase {
         MockURLProtocol.setUpMockData(.fetchGeneralNoticesShouldSucceed)
         
         //When
-        dataSource.sendGetRequest(to: endPoint, resultType: NoticeReponseDTO.self)
+        dataSource.request(endPoint, method: .get, decoding: NoticeReponseDTO.self)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
@@ -65,7 +65,7 @@ final class MockNoticesAPITests: XCTestCase {
         MockURLProtocol.setUpMockData(.fetchAcademicNoticesShouldSucceed)
         
         //When
-        dataSource.sendGetRequest(to: endPoint, resultType: NoticeReponseDTO.self)
+        dataSource.request(endPoint, method: .get, decoding: NoticeReponseDTO.self)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
@@ -89,7 +89,7 @@ final class MockNoticesAPITests: XCTestCase {
         MockURLProtocol.setUpMockData(.fetchScholarshipNoticesShouldSucceed)
         
         //When
-        dataSource.sendGetRequest(to: endPoint, resultType: NoticeReponseDTO.self)
+        dataSource.request(endPoint, method: .get, decoding: NoticeReponseDTO.self)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
@@ -113,7 +113,7 @@ final class MockNoticesAPITests: XCTestCase {
         MockURLProtocol.setUpMockData(.fetchEventNoticesShouldSucceed)
         
         //When
-        dataSource.sendGetRequest(to: endPoint, resultType: NoticeReponseDTO.self)
+        dataSource.request(endPoint, method: .get, decoding: NoticeReponseDTO.self)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
@@ -136,7 +136,7 @@ final class MockNoticesAPITests: XCTestCase {
         MockURLProtocol.setUpMockData(.fetchEmploymentNoticesShouldSucceed)
         
         //When
-        dataSource.sendGetRequest(to: endPoint, resultType: NoticeReponseDTO.self)
+        dataSource.request(endPoint, method: .get, decoding: NoticeReponseDTO.self)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
@@ -149,6 +149,30 @@ final class MockNoticesAPITests: XCTestCase {
                 XCTAssertEqual($0.result.resultCode, 200)
             })
             .store(in: &cancellables)
+        
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    func test_fetchSingleNotice_returnNoticeDTO() {
+        let expectation = XCTestExpectation(description: "fetch single notice")
+        let endpoint = Bundle.main.mainNoticeURL + "/noticeId"
+        MockURLProtocol.setUpMockData(.fetchSingleNoticeShouldSucceed)
+        
+        Task {
+            do {
+                let dto = try await dataSource.request(
+                    endpoint,
+                    method: .get,
+                    decoding: SingleNoticeResponseDTO.self
+                )
+                
+                XCTAssertEqual(dto.body?.nttID, 1079970)
+            } catch {
+                XCTFail(error.localizedDescription)
+            }
+            
+            expectation.fulfill()
+        }
         
         wait(for: [expectation], timeout: 1)
     }

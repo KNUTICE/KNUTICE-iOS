@@ -6,10 +6,13 @@
 //
 
 import Combine
+import Foundation
 
 protocol BookmarkRepository {
     func save(bookmark: Bookmark) -> AnyPublisher<Void, any Error>
-    func read(delay: Int) -> AnyPublisher<[Bookmark], any Error>
+    func read(page pageNum: Int, pageSize: Int, sortBy option: BookmarkSortOption) -> AnyPublisher<[Bookmark], any Error>
+    func fetchWhereCreatedAtIsNil() -> AnyPublisher<[Bookmark], any Error>
     func delete(by id: Int) -> AnyPublisher<Void, any Error>
     func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error>
+    func update(bookmarks: [(Bookmark, Date)]) -> AnyPublisher<Void, any Error>
 }

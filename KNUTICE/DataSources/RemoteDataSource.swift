@@ -10,30 +10,67 @@ import Combine
 import Alamofire
 
 protocol RemoteDataSource {
-    func sendGetRequest<T: Decodable>(to url: String,
-                                      resultType: T.Type) -> Single<T>
-    
-    func sendPostRequest<T: Decodable>(to url: String,
-                                       params: Parameters,
-                                       resultType: T.Type) -> Single<T>
-    
-    func sendGetRequest<T: Decodable>(to url: String,
-                                      resultType: T.Type) -> AnyPublisher<T, any Error>
-    
-    func sendPostRequest<T: Decodable>(to url: String,
-                                       params: Parameters,
-                                       resultType: T.Type) -> AnyPublisher<T, any Error>
-    
-    func request<T: Decodable>(
+    /// Sends an HTTP request and decodes the response into the specified type.
+    ///
+    /// - Parameters:
+    ///   - url: The endpoint URL as a `String`.
+    ///   - method: The HTTP method to use (e.g., `.get`, `.post`).
+    ///   - parameters: Optional request parameters as a `Parameters` dictionary (usually `[String: Any]`).
+    ///   - type: The expected `Decodable` type to decode the response into.
+    ///   - isInterceptable: A flag indicating whether the request should be intercepted (e.g., for authentication handling).
+    ///
+    /// - Returns: A decoded object of type `T`.
+    ///
+    /// - Throws: An error if the request fails or the response cannot be decoded.
+    ///
+    /// - Note: This is an asynchronous function and must be called with `await`.
+    func request<T>(
         _ url: String,
         method: HTTPMethod,
         parameters: Parameters?,
         decoding type: T.Type,
         isInterceptable: Bool
-    ) async throws -> T
+    ) async throws -> T where T: Decodable
+    
+    /// Sends an HTTP request and publishes a decoded response of the specified type.
+    ///
+    /// - Parameters:
+    ///   - url: The endpoint URL as a `String`.
+    ///   - method: The HTTP method to use (e.g., `.get`, `.post`).
+    ///   - parameters: Optional request parameters as a `Parameters` dictionary (usually `[String: Any]`).
+    ///   - type: The expected `Decodable` type to decode the response into.
+    ///
+    /// - Returns: An `AnyPublisher` that publishes a decoded object of type `T` or an `Error`.
+    ///
+    /// - Note: The publisher performs the network request and decoding. Subscribe on an appropriate thread and handle cancellation if needed.
+    func request<T>(
+        _ url: String,
+        method: HTTPMethod,
+        parameters: Parameters?,
+        decoding type: T.Type
+    ) -> AnyPublisher<T, any Error> where T: Decodable
+    
+    /// Sends an HTTP request and emits a single decoded response of the specified type.
+    ///
+    /// - Parameters:
+    ///   - url: The endpoint URL as a `String`.
+    ///   - method: The HTTP method to use (e.g., `.get`, `.post`).
+    ///   - parameters: Optional request parameters as a `Parameters` dictionary (typically `[String: Any]`).
+    ///   - type: The expected `Decodable` type to decode the response into.
+    ///
+    /// - Returns: A `Single` that emits a decoded object of type `T` on success, or an error on failure.
+    ///
+    /// - Note: Use this method for one-time network requests that return a single value. The request is performed when subscribed to.
+    func request<T>(
+        _ url: String,
+        method: HTTPMethod,
+        parameters: Parameters?,
+        decoding type: T.Type
+    ) -> Single<T> where T: Decodable
 }
 
 extension RemoteDataSource {
+    @discardableResult
     func request<T: Decodable>(
         _ url: String,
         method: HTTPMethod,
@@ -43,6 +80,24 @@ extension RemoteDataSource {
     ) async throws -> T {
         return try await self.request(url, method: method, parameters: parameters, decoding: type, isInterceptable: isInterceptable)
     }
+    
+    func request<T>(
+        _ url: String,
+        method: HTTPMethod,
+        parameters: Parameters? = nil,
+        decoding type: T.Type
+    ) -> AnyPublisher<T, any Error> where T: Decodable {
+        return request(url, method: method, parameters: parameters, decoding: type)
+    }
+    
+    func request<T>(
+        _ url: String,
+        method: HTTPMethod,
+        parameters: Parameters? = nil,
+        decoding type: T.Type
+    ) -> Single<T> where T: Decodable {
+        return request(url, method: method, parameters: parameters, decoding: type)
+    }
 }
 
 final class RemoteDataSourceImpl: RemoteDataSource {
@@ -50,72 +105,6 @@ final class RemoteDataSourceImpl: RemoteDataSource {
     
     init(session: Session = Session.default) {
         self.session = session
-    }
-    
-    func sendGetRequest<T: Decodable>(to url: String,
-                                      resultType: T.Type) -> Single<T> {
-        return Single.create { observer in
-            self.session.request(url)
-                .responseDecodable(of: resultType.self) { response in
-                    switch response.result {
-                    case .success(let dto):
-                        observer(.success(dto))
-                    case .failure(let error):
-                        observer(.failure(error))
-                    }
-                }
-            
-            return Disposables.create()
-        }
-    }
-    
-    func sendPostRequest<T: Decodable>(to url: String,
-                                       params: Parameters,
-                                       resultType: T.Type) -> Single<T> {
-        return Single.create { observer in
-            self.session.request(url,
-                       method: .post,
-                       parameters: params,
-                       encoding: JSONEncoding.default)
-                .responseDecodable(of: resultType.self) { response in
-                    switch response.result {
-                    case .success(let dto):
-                        observer(.success(dto))
-                    case .failure(let error):
-                        observer(.failure(error))
-                    }
-                }
-            
-            return Disposables.create()
-        }
-    }
-    
-    func sendGetRequest<T: Decodable>(to url: String,
-                                      resultType: T.Type) -> AnyPublisher<T, any Error> {
-        return session.request(url)
-            .publishDecodable(type: T.self)
-            .value()
-            .mapError {
-                $0 as Error
-            }
-            .eraseToAnyPublisher()
-    }
-    
-    func sendPostRequest<T: Decodable>(
-        to url: String,
-        params: Parameters,
-        resultType: T.Type) -> AnyPublisher<T, any Error>{
-            return session.request(
-                url,
-                method: .post,
-                parameters: params,
-                encoding: JSONEncoding.default)
-            .publishDecodable(type: T.self)
-            .value()
-            .mapError {
-                $0 as Error
-            }
-            .eraseToAnyPublisher()
     }
     
     func request<T>(
@@ -134,5 +123,51 @@ final class RemoteDataSourceImpl: RemoteDataSource {
         )
         .serializingDecodable(type)
         .value
+    }
+    
+    func request<T>(
+        _ url: String,
+        method: HTTPMethod,
+        parameters: Parameters? = nil,
+        decoding type: T.Type
+    ) -> AnyPublisher<T, any Error> where T : Decodable {
+        return session.request(
+            url,
+            method: method,
+            parameters: parameters,
+            encoding: JSONEncoding.default
+        )
+        .publishDecodable(type: T.self)
+        .value()
+        .mapError {
+            $0 as Error
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    func request<T>(
+        _ url: String,
+        method: HTTPMethod,
+        parameters: Parameters? = nil,
+        decoding type: T.Type
+    ) -> Single<T> where T : Decodable {
+        return Single<T>.create { observer in
+            self.session.request(
+                url,
+                method: method,
+                parameters: parameters,
+                encoding: JSONEncoding.default
+            )
+            .responseDecodable(of: type.self) { response in
+                switch response.result {
+                case .success(let dto):
+                    observer(.success(dto))
+                case .failure(let error):
+                    observer(.failure(error))
+                }
+            }
+            
+            return Disposables.create()
+        }
     }
 }

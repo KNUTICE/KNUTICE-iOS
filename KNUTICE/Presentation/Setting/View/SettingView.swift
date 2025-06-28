@@ -14,101 +14,104 @@ struct SettingView: View {
     @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
-        List {
-            Section {
-                Text("알림")
-                    .bold()
-                    .padding(.bottom)
-                    .listRowSeparator(.hidden)
-                
+        ScrollView {
+            ContentSection("알림") {
                 NavigationLink {
-                    NotificationSubscriptionList(viewModel: NotificationSubscriptionListViewModel())
+                    TopicSubscriptionList(viewModel: TopicSubscriptionListViewModel())
                 } label: {
-                    Text("서비스 알림")
+                    NavigationIndicator(title: "서비스 알림")
                 }
-                .listRowSeparator(.hidden)
             }
             
-            Divider()
-                .listRowSeparator(.hidden)
-            
-            Section {
-                Text("지원")
-                    .bold()
-                    .padding(.bottom)
-                    .listRowSeparator(.hidden)
-                
+            ContentSection("지원") {
                 Button {
                     isShowingReport.toggle()
                 } label: {
-                    HStack {
-                        Text("고객센터")
-                        
-                        Spacer()
-                        
-                        Image(systemName: "chevron.right")
-                            .foregroundStyle(.chevronGray)
-                            .bold()
-                            .font(.footnote)
-                    }
+                    NavigationIndicator(title: "고객센터")
                 }
-                .listRowSeparator(.hidden)
             }
             
-            Divider()
-                .listRowSeparator(.hidden)
-            
-            Section {
-                Text("앱 정보")
-                    .bold()
-                    .padding(.bottom)
-                    .listRowSeparator(.hidden)
-                
+            ContentSection("앱 정보") {
                 NavigationLink {
                     AppVersionView(viewModel: AppVersionViewModel())
                 } label: {
-                    Text("버전 정보")
+                    NavigationIndicator(title: "버전 정보")
                 }
-                .listRowSeparator(.hidden)
+                .padding(.bottom)
                 
                 NavigationLink {
-                    ContentWebView(navigationTitle: "오픈소스 라이선스", contentURL: Bundle.main.openSourceURL)
+                    if #available(iOS 26, *) {
+                        WebContentView()
+                            .navigationTitle("오픈소스 라이선스")
+                            .environment(WebContentViewModel(contentURL: Bundle.main.openSourceURL))
+                    } else {
+                        BaseWebContentView(navigationTitle: "오픈소스 라이선스", contentURL: Bundle.main.openSourceURL)
+                    }
                 } label: {
-                    Text("오픈소스 라이선스")
+                    NavigationIndicator(title: "오픈소스 라이선스")
                 }
-                .listRowSeparator(.hidden)
             }
             
             #if DEV
             
-            Divider()
-                .listRowSeparator(.hidden)
-            
-            Section {
-                Text("개발")
-                    .bold()
-                    .padding(.bottom)
-                    .listRowSeparator(.hidden)
-                
+            ContentSection("개발자 도구") {
                 NavigationLink {
                     DeveloperTools(viewModel: DeveloperToolsViewModel())
                 } label: {
-                    Text("Developer Tools")
+                    NavigationIndicator(title: "Developer Tools")
                 }
             }
-            .listRowSeparator(.hidden)
-            
-            Divider()
-                .listRowSeparator(.hidden)
             #endif
         }
-        .listStyle(.plain)
+        .listStyle(.insetGrouped)
+        .background(.primaryBackground)
         .navigationTitle("설정")
         .navigationBarTitleDisplayMode(.inline)
         .fullScreenCover(isPresented: $isShowingReport) {
             NavigationView {
                 ReportView(viewModel: Container.shared.reportViewModel())
             }
+        }
+    }
+}
+
+fileprivate struct ContentSection<Content: View>: View {
+    let title: String
+    let content: () -> Content
+    
+    init(_ title: String, @ViewBuilder content: @escaping () -> Content) {
+        self.title = title
+        self.content = content
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(title)
+                .bold()
+                .padding(.bottom)
+            
+            content()
+        }
+        .padding()
+        .background(.mainCellBackground)
+        .cornerRadius(20)
+        .padding()
+    }
+}
+
+fileprivate struct NavigationIndicator: View {
+    let title: String
+    
+    var body: some View {
+        HStack {
+            Text(title)
+            
+            Spacer()
+            
+            Image(systemName: "chevron.right")
+                .foregroundStyle(.chevronGray)
+                .bold()
+                .font(.footnote)
         }
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 extension Bundle {
-    private var resource: NSDictionary? {
+    var resource: NSDictionary? {
         guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
               let resource = NSDictionary(contentsOfFile: file) else {
             return nil
@@ -83,6 +83,14 @@ extension Bundle {
     
     var noticeSyncURL: String {
         guard let resource, let url = resource["Notice_Sync_URL"] as? String else {
+            return ""
+        }
+        
+        return url
+    }
+    
+    var defaultThumbnailURL: String {
+        guard let resource, let url = resource["DefaultThumbnail_URL"] as? String else {
             return ""
         }
         

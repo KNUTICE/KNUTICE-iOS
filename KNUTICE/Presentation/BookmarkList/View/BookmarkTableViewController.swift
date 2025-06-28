@@ -34,21 +34,32 @@ final class BookmarkTableViewController: UIViewController {
         return label
     }()
     lazy var settingBtn: UIButton = {
-        let targetSize = CGSize(width: 25, height: 24)
-        let renderer = UIGraphicsImageRenderer(size: targetSize)
-        let gearImage = UIImage(systemName: "gearshape")
-        let selectedGearImage = UIImage(systemName: "gearshape")?.withTintColor(.lightGray)
-        let resizedGearImage = renderer.image { _ in
-            gearImage?.draw(in: CGRect(origin: .zero, size: targetSize))
-        }.withTintColor(.navigationButton)
-        let resizedSelectedGearImage = renderer.image { _ in
-            selectedGearImage?.draw(in: CGRect(origin: .zero, size: targetSize))
-        }
+        let configuration = UIImage.SymbolConfiguration(textStyle: .title2)
+        let gearImage = UIImage(systemName: "gearshape", withConfiguration: configuration)?
+            .withRenderingMode(.alwaysTemplate)
+        let selectedGearImage = UIImage(systemName: "gearshape", withConfiguration: configuration)?
+            .withRenderingMode(.alwaysOriginal)
+            .withTintColor(.lightGray)
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(resizedGearImage, for: .normal)
-        button.setImage(resizedSelectedGearImage, for: .highlighted)
+        button.setImage(gearImage, for: .normal)
+        button.setImage(selectedGearImage, for: .highlighted)
         button.addTarget(self, action: #selector(navigateToSetting(_:)), for: .touchUpInside)
+        
+        return button
+    }()
+    let menuBtn: UIButton = {
+        let configuration = UIImage.SymbolConfiguration(textStyle: .title2)
+        let upAndDownImage = UIImage(systemName: "arrow.up.arrow.down.circle", withConfiguration: configuration)?
+            .withRenderingMode(.alwaysTemplate)
+        let selectedUpAndDownImage = UIImage(systemName: "arrow.up.arrow.down.circle", withConfiguration: configuration)?
+            .withRenderingMode(.alwaysOriginal)
+            .withTintColor(.lightGray)
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.showsMenuAsPrimaryAction = true
+        button.setImage(upAndDownImage, for: .normal)
+        button.setImage(selectedUpAndDownImage, for: .highlighted)
         
         return button
     }()
@@ -58,17 +69,16 @@ final class BookmarkTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .mainBackground
+        view.backgroundColor = .primaryBackground
         setUpLayout()
         bind()
-        
-        viewModel.fetchBookmarks()
+        createNavigationItems()
     }
 }
 
 extension BookmarkTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let bookmark = viewModel.bookmarks.value[indexPath.row].items[0]
+        let bookmark = viewModel.bookmarks.value[indexPath.section].items[0]
         let viewController = UIHostingController(
             rootView: BookmarkDetailSwitchView(viewModel: BookmarkFormViewModel(bookmark: bookmark))
         )
@@ -84,8 +94,10 @@ extension BookmarkTableViewController {
     }
 }
 
+#if DEBUG
 #Preview {
     BookmarkTableViewController()
         .makePreview()
         .edgesIgnoringSafeArea(.all)
 }
+#endif

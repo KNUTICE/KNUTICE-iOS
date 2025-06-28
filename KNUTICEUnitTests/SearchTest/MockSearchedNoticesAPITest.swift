@@ -39,7 +39,7 @@ final class MockSearchedNoticesAPITest: XCTestCase {
         let expectation = expectation(description: "fetch searched notices")
         
         //When
-        dataSource.sendGetRequest(to: Bundle.main.searchURL + "?keyword=공지", resultType: NoticeReponseDTO.self)
+        dataSource.request(Bundle.main.searchURL + "?keyword=공지", method: .get, decoding: NoticeReponseDTO.self)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
