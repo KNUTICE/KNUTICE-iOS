@@ -11,11 +11,11 @@ import RxSwift
 extension ParentViewController {
     func bind() {
         viewModel.isFinishedTokenRegistration
-            .subscribe(onNext: { [weak self] in
-                if $0 {
-                    self?.switchViewController()
+            .bind(with: self) { owner, isFinished in
+                if isFinished {
+                    owner.switchViewController()
                 }
-            })
+            }
             .disposed(by: disposeBag)
     }
     
