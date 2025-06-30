@@ -49,9 +49,9 @@ final class BookmarkTableViewModel {
             .store(in: &cancellables)
     }
     
-    func reloadData() {
+    func reloadData(preserveCount: Bool = false) {
         isRefreshing.accept(true)
-        bookmarkService.fetchBookmarks(page: 0, sortBy: sortOption.value)
+        bookmarkService.fetchBookmarks(page: 0, pageSize: preserveCount ? bookmarks.value.count : 20, sortBy: sortOption.value)
             .map { bookmarks in
                 bookmarks.map {
                     BookmarkSectionModel(items: [$0])
