@@ -12,9 +12,21 @@ protocol BookmarkListRefreshable {
 }
 
 extension BookmarkListRefreshable {
+    /// Sends a notification to refresh bookmarks.
+    /// - Note: Refreshes data with the **initial batch size (e.g., 20 items)** regardless of current state.
     func sendRefreshNotification() {
         NotificationCenter.default.post(
-            name: .bookmarkListRefresh,
+            name: .bookmarkRefresh,
+            object: nil
+        )
+    }
+    
+    
+    /// Sends a notification to reload bookmarks.
+    /// - Note: Reloads data based on the **currently loaded item count**.
+    func sendReloadNotification() {
+        NotificationCenter.default.post(
+            name: .bookmarkReload,
             object: nil
         )
     }

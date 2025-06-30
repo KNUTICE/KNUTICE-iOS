@@ -56,10 +56,16 @@ extension BookmarkTableViewController {
             .bind(to: refreshController.rx.isRefreshing)
             .disposed(by: disposeBag)
         
-        NotificationCenter.default.rx.notification(.bookmarkListRefresh)
-            .subscribe(onNext: { [weak self] _ in
-                self?.viewModel.fetchBookmarks()
-            })
+        NotificationCenter.default.rx.notification(.bookmarkRefresh)
+            .bind(with: self) { [weak self] _, _ in
+                self?.viewModel.reloadData()
+            }
+            .disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx.notification(.bookmarkReload)
+            .bind(with: self) { _, _ in
+                self.viewModel.reloadData(preserveCount: true)
+            }
             .disposed(by: disposeBag)
         
         tableView.rx.willDisplayCell
