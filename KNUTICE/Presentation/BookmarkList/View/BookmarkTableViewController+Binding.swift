@@ -39,16 +39,24 @@ extension BookmarkTableViewController {
         
         tableView.rx.itemDeleted
             .observe(on: MainScheduler.instance)
-            .bind(with: self, onNext: { owner, indexPath in
+            .bind(with: self) { owner, indexPath in
                 let sections = owner.viewModel.bookmarks.value
                 let bookmark = sections[indexPath.section].items[0]
-                owner.viewModel.delete(bookmark: bookmark)
-            })
+                let alert = UIAlertController(title: "북마크를 삭제할까요?", message: bookmark.notice.title, preferredStyle: .alert)
+                let delete = UIAlertAction(title: "삭제", style: .destructive) { _ in
+                    owner.viewModel.delete(bookmark: bookmark)
+                }
+                let cancel = UIAlertAction(title: "취소", style: .default)
+                
+                alert.addAction(cancel)
+                alert.addAction(delete)
+                owner.present(alert, animated: true, completion: nil)
+            }
             .disposed(by: disposeBag)
         
         refreshController.rx.controlEvent(.valueChanged)
-            .bind(with: self) { _, _ in
-                self.viewModel.reloadData()
+            .bind(with: self) { owner, _ in
+                owner.viewModel.reloadData()
             }
             .disposed(by: disposeBag)
         
@@ -57,36 +65,34 @@ extension BookmarkTableViewController {
             .disposed(by: disposeBag)
         
         NotificationCenter.default.rx.notification(.bookmarkRefresh)
-            .bind(with: self) { [weak self] _, _ in
-                self?.viewModel.reloadData()
+            .bind(with: self) { owner, _ in
+                owner.viewModel.reloadData()
             }
             .disposed(by: disposeBag)
         
         NotificationCenter.default.rx.notification(.bookmarkReload)
-            .bind(with: self) { _, _ in
-                self.viewModel.reloadData(preserveCount: true)
+            .bind(with: self) { owner, _ in
+                owner.viewModel.reloadData(preserveCount: true)
             }
             .disposed(by: disposeBag)
         
         tableView.rx.willDisplayCell
             .subscribe(on: MainScheduler.instance)
-            .bind { [weak self] cell, indexPath in
-                guard let self else { return }
-                
-                if indexPath.section + 1 == self.viewModel.bookmarks.value.count && self.viewModel.bookmarks.value.count >= 20 {
-                    viewModel.fetchBookmarks()
+            .bind(with: self) { owner, cell in
+                if cell.indexPath.section + 1 == owner.viewModel.bookmarks.value.count && owner.viewModel.bookmarks.value.count >= 20 {
+                    owner.viewModel.fetchBookmarks()
                 }
             }
             .disposed(by: disposeBag)
         
         viewModel.sortOption
-            .bind(onNext: { [weak self] value in
+            .bind(with: self) { owner, value in
                 let ascendingAction = UIAction(
                     title: "오래된 순",
                     image: value == .createdAtAscending ? UIImage(systemName: "checkmark") : nil,
                     handler: { _ in
                         UserDefaults.standard.set(BookmarkSortOption.createdAtAscending.rawValue, forKey: UserDefaultsKeys.bookmarkSortOption.rawValue)
-                        self?.viewModel.sortOption.accept(.createdAtAscending)
+                        owner.viewModel.sortOption.accept(.createdAtAscending)
                     }
                 )
                 let descendingAction = UIAction(
@@ -94,18 +100,18 @@ extension BookmarkTableViewController {
                     image: value == .createdAtDescending ? UIImage(systemName: "checkmark") : nil,
                     handler: { _ in
                         UserDefaults.standard.set(BookmarkSortOption.createdAtDescending.rawValue, forKey: UserDefaultsKeys.bookmarkSortOption.rawValue)
-                        self?.viewModel.sortOption.accept(.createdAtDescending)
+                        owner.viewModel.sortOption.accept(.createdAtDescending)
                     }
                 )
                 
-                self?.menuBtn.menu = UIMenu(
+                owner.menuBtn.menu = UIMenu(
                     identifier: nil,
                     options: .displayInline,
                     children: [descendingAction, ascendingAction]
                 )
                 
-                self?.viewModel.reloadData()
-            })
+                owner.viewModel.reloadData()
+            }
             .disposed(by: disposeBag)
     }
 }
