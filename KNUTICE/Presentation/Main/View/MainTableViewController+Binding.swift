@@ -38,9 +38,9 @@ extension MainTableViewController {
         
         //RefreshControl의 valueChanged 이벤트 관찰 후 수행할 작업
         refreshControl.rx.controlEvent(.valueChanged)
-            .bind(onNext: { [weak self] in
-                self?.viewModel.refreshNoticesWithCombine()
-            })
+            .bind(with: self) { owner, _ in
+                owner.viewModel.refreshNoticesWithCombine()
+            }
             .disposed(by: disposeBag)
     }
 }
