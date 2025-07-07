@@ -123,6 +123,20 @@
 		8E20513E2CD4F32F00D87C6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C82564C2BE5CE1B0038D4C8 /* LaunchScreen.storyboard */; };
 		8E20513F2CD4F32F00D87C6A /* ci_post_clone.sh in Resources */ = {isa = PBXBuildFile; fileRef = 8E53857E2C647D9A00AF151B /* ci_post_clone.sh */; };
 		8E2051402CD4F32F00D87C6A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5C82564D2BE5CE1B0038D4C8 /* Base */; };
+		8E214E152E13614500E2B830 /* TipBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E214E142E13614500E2B830 /* TipBannerView.swift */; };
+		8E214E162E13614500E2B830 /* TipBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E214E142E13614500E2B830 /* TipBannerView.swift */; };
+		8E214E182E1361C400E2B830 /* TipBannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E214E172E1361C400E2B830 /* TipBannerViewModel.swift */; };
+		8E214E192E1361C400E2B830 /* TipBannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E214E172E1361C400E2B830 /* TipBannerViewModel.swift */; };
+		8E214E1B2E13629100E2B830 /* TipDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E214E1A2E13629100E2B830 /* TipDTO.swift */; };
+		8E214E1C2E13629100E2B830 /* TipDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E214E1A2E13629100E2B830 /* TipDTO.swift */; };
+		8E214E1E2E1362B600E2B830 /* TipRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E214E1D2E1362B600E2B830 /* TipRepository.swift */; };
+		8E214E1F2E1362B600E2B830 /* TipRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E214E1D2E1362B600E2B830 /* TipRepository.swift */; };
+		8E214E212E1362D900E2B830 /* Tip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E214E202E1362D900E2B830 /* Tip.swift */; };
+		8E214E222E1362D900E2B830 /* Tip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E214E202E1362D900E2B830 /* Tip.swift */; };
+		8E214E232E1362D900E2B830 /* Tip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E214E202E1362D900E2B830 /* Tip.swift */; };
+		8E214E242E1362D900E2B830 /* Tip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E214E202E1362D900E2B830 /* Tip.swift */; };
+		8E214E262E13639A00E2B830 /* TipRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E214E252E13639A00E2B830 /* TipRepositoryImpl.swift */; };
+		8E214E272E13639A00E2B830 /* TipRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E214E252E13639A00E2B830 /* TipRepositoryImpl.swift */; };
 		8E2755CB2D9E25AB005C4EBC /* UNUserNotificationCenter+LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0CDED52D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift */; };
 		8E2755CC2D9E25AB005C4EBC /* UNUserNotificationCenter+LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0CDED52D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift */; };
 		8E2CF4BE2DF490F700B580CA /* TopicSubscriptionFetchAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2CF4BD2DF490F700B580CA /* TopicSubscriptionFetchAPITests.swift */; };
@@ -471,6 +485,12 @@
 		8E1C65632D757F790003AB94 /* MockReportTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockReportTest.swift; sourceTree = "<group>"; };
 		8E2051472CD4F32F00D87C6A /* KNUTICE-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KNUTICE-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E2051482CD4F32F00D87C6A /* Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Dev.plist"; path = "/Users/ijeonghun/Desktop/GitHub/iOS/KNUTICE-iOS/KNUTICE/Application/Info-Dev.plist"; sourceTree = "<absolute>"; };
+		8E214E142E13614500E2B830 /* TipBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipBannerView.swift; sourceTree = "<group>"; };
+		8E214E172E1361C400E2B830 /* TipBannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipBannerViewModel.swift; sourceTree = "<group>"; };
+		8E214E1A2E13629100E2B830 /* TipDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipDTO.swift; sourceTree = "<group>"; };
+		8E214E1D2E1362B600E2B830 /* TipRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipRepository.swift; sourceTree = "<group>"; };
+		8E214E202E1362D900E2B830 /* Tip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tip.swift; sourceTree = "<group>"; };
+		8E214E252E13639A00E2B830 /* TipRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipRepositoryImpl.swift; sourceTree = "<group>"; };
 		8E2CF4BD2DF490F700B580CA /* TopicSubscriptionFetchAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicSubscriptionFetchAPITests.swift; sourceTree = "<group>"; };
 		8E2CF4C42DF4943F00B580CA /* TopicSubscriptionsStatus.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TopicSubscriptionsStatus.json; sourceTree = "<group>"; };
 		8E2CF4C72DF5537400B580CA /* TopicSubscriptionListViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicSubscriptionListViewModelTest.swift; sourceTree = "<group>"; };
@@ -682,6 +702,7 @@
 			isa = PBXGroup;
 			children = (
 				5C82564C2BE5CE1B0038D4C8 /* LaunchScreen.storyboard */,
+				8E214E112E1360F500E2B830 /* Tip */,
 				8ED4E53D2DFFD17D000EDB36 /* PendingNoticeList */,
 				8E3DEA962D7FC3B700A5B435 /* ParentView */,
 				8E3DEA8E2D7FBFFA00A5B435 /* LoadingLaunchScreen */,
@@ -804,6 +825,7 @@
 				8E5C1ACB2D4075620092BF88 /* MainPopupContent.swift */,
 				8E02F80D2D601E64000FE803 /* NoticeCategory.swift */,
 				8EE65DAC2DE947F50059770D /* NotificationSubscription.swift */,
+				8E214E202E1362D900E2B830 /* Tip.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -821,6 +843,7 @@
 				8EC6B8972D30B25F002B45C7 /* BookmarkRepository.swift */,
 				8E5C1AD12D4077140092BF88 /* MainPopupContentRepository.swift */,
 				8ED4E5472DFFD5A2000EDB36 /* PendingNoticeRepository.swift */,
+				8E214E1D2E1362B600E2B830 /* TipRepository.swift */,
 			);
 			path = RepositoryInterfaces;
 			sourceTree = "<group>";
@@ -837,6 +860,7 @@
 				8EC6B89D2D30BAA3002B45C7 /* BookmarkRepositoryImpl.swift */,
 				8E5C1AD42D40773F0092BF88 /* MainPopupContentRepositoryImpl.swift */,
 				8ED4E53A2DFFCA3C000EDB36 /* PendingNoticeRepositoryImpl.swift */,
+				8E214E252E13639A00E2B830 /* TipRepositoryImpl.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -861,6 +885,7 @@
 				8EC6B89A2D30B307002B45C7 /* BookmarkDTO.swift */,
 				8E5C1ACE2D40768B0092BF88 /* MainPopupContentDTO.swift */,
 				8EE65DA92DE947BC0059770D /* NotificationSubscriptionDTO.swift */,
+				8E214E1A2E13629100E2B830 /* TipDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -968,6 +993,31 @@
 				8E1C65632D757F790003AB94 /* MockReportTest.swift */,
 			);
 			path = ReportTest;
+			sourceTree = "<group>";
+		};
+		8E214E112E1360F500E2B830 /* Tip */ = {
+			isa = PBXGroup;
+			children = (
+				8E214E132E13610100E2B830 /* ViewModel */,
+				8E214E122E1360FB00E2B830 /* View */,
+			);
+			path = Tip;
+			sourceTree = "<group>";
+		};
+		8E214E122E1360FB00E2B830 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8E214E142E13614500E2B830 /* TipBannerView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8E214E132E13610100E2B830 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8E214E172E1361C400E2B830 /* TipBannerViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		8E2CF4BC2DF490B900B580CA /* TopicTest */ = {
@@ -1686,12 +1736,14 @@
 				8EE65DAB2DE947BC0059770D /* NotificationSubscriptionDTO.swift in Sources */,
 				8E0907792DE5BAD2008BDF18 /* BookmarkTableViewModel.swift in Sources */,
 				8EC141212D33E4E8001FD93C /* NoticeWebVCWrapper.swift in Sources */,
+				8E214E1E2E1362B600E2B830 /* TipRepository.swift in Sources */,
 				8E69F8822DFE7F0900F313F0 /* PendingNoticeDataSource.swift in Sources */,
 				8EE65DB12DE967C90059770D /* TokenInterceptor.swift in Sources */,
 				8E3DEAA12D7FC7CB00A5B435 /* ParentViewModel.swift in Sources */,
 				8EA9ACAB2C46AEC900C9E287 /* BaseWebContentView.swift in Sources */,
 				8E7A9E7E2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift in Sources */,
 				8EE3821D2DF00AC100B57315 /* Date+SpecificTime.swift in Sources */,
+				8E214E152E13614500E2B830 /* TipBannerView.swift in Sources */,
 				8EADB8FB2D558F7300489086 /* Factory+Instance.swift in Sources */,
 				8E887D4E2E0A37A400D5E2E3 /* NoticeHeader.swift in Sources */,
 				8E09077C2DE698C8008BDF18 /* EmptyBookmarkView.swift in Sources */,
@@ -1710,6 +1762,7 @@
 				8E5E8BE22D3605090078C007 /* NotificationName.swift in Sources */,
 				8EB6D20C2C66FC5B004E8AC2 /* AppVersionViewModel.swift in Sources */,
 				8E0CDED42D3B4CA5000F8DEF /* BookmarkService.swift in Sources */,
+				8E214E192E1361C400E2B830 /* TipBannerViewModel.swift in Sources */,
 				8EDC2E442D9245EA00AAB60F /* UserDefaultsKeys.swift in Sources */,
 				8ED4E54B2DFFE4E8000EDB36 /* UserDefaults+AppGroup.swift in Sources */,
 				8E5C1AC92D4074D50092BF88 /* TabBarViewModel.swift in Sources */,
@@ -1734,6 +1787,7 @@
 				8EB767812D439DE90086AB60 /* Date+EndOfToday.swift in Sources */,
 				8E5E8BE42D36190E0078C007 /* BookmarkListRefreshable.swift in Sources */,
 				8EC6B8962D309EA9002B45C7 /* LocalBookmarkDataSource.swift in Sources */,
+				8E214E1C2E13629100E2B830 /* TipDTO.swift in Sources */,
 				8E0907812DE6A6E6008BDF18 /* ResultNotFoundView.swift in Sources */,
 				5C190A552BFDF66600E0254B /* NoticeReponseDTO.swift in Sources */,
 				8EB6D20E2C6713BB004E8AC2 /* View+Fork.swift in Sources */,
@@ -1764,6 +1818,7 @@
 				8EA72DCA2CD5CA4800D1B300 /* DeveloperTools.swift in Sources */,
 				8EFE53062CDCC30F003A7330 /* NoticeCreatable.swift in Sources */,
 				8E3F02222C9FB76800AE89D5 /* ReportRepositoryImpl.swift in Sources */,
+				8E214E212E1362D900E2B830 /* Tip.swift in Sources */,
 				8E668E662E051E6F00358B9F /* BookmarkSortOption.swift in Sources */,
 				8E0AA23D2D2419740068681C /* RemoteDataSource.swift in Sources */,
 				8EB8FA742DF9205900715F73 /* WebContentView.swift in Sources */,
@@ -1789,6 +1844,7 @@
 				8EC1ECA22DD43542005E71B3 /* NoticeSectionModel.swift in Sources */,
 				8E5C1AD22D4077140092BF88 /* MainPopupContentRepository.swift in Sources */,
 				8E09076F2DE58152008BDF18 /* BookmarkTableViewCell.swift in Sources */,
+				8E214E262E13639A00E2B830 /* TipRepositoryImpl.swift in Sources */,
 				8E00AF6C2C361F780037EC38 /* WebViewController.swift in Sources */,
 				8E5C1ACF2D40768B0092BF88 /* MainPopupContentDTO.swift in Sources */,
 				8E3B8C492D2BBFFD007E9579 /* BookmarkFormViewModel.swift in Sources */,
@@ -1827,12 +1883,14 @@
 				8EE65DAA2DE947BC0059770D /* NotificationSubscriptionDTO.swift in Sources */,
 				8E0907782DE5BAD2008BDF18 /* BookmarkTableViewModel.swift in Sources */,
 				8EC141222D33E4E8001FD93C /* NoticeWebVCWrapper.swift in Sources */,
+				8E214E1F2E1362B600E2B830 /* TipRepository.swift in Sources */,
 				8E69F8812DFE7F0900F313F0 /* PendingNoticeDataSource.swift in Sources */,
 				8EE65DB22DE967C90059770D /* TokenInterceptor.swift in Sources */,
 				8E3DEAA22D7FC7CB00A5B435 /* ParentViewModel.swift in Sources */,
 				8E2051052CD4F32F00D87C6A /* BaseWebContentView.swift in Sources */,
 				8E7A9E7F2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift in Sources */,
 				8EE3821E2DF00AC100B57315 /* Date+SpecificTime.swift in Sources */,
+				8E214E162E13614500E2B830 /* TipBannerView.swift in Sources */,
 				8EADB8FA2D558F7300489086 /* Factory+Instance.swift in Sources */,
 				8E887D4D2E0A37A400D5E2E3 /* NoticeHeader.swift in Sources */,
 				8E09077B2DE698C8008BDF18 /* EmptyBookmarkView.swift in Sources */,
@@ -1851,6 +1909,7 @@
 				8E5E8BE12D3605090078C007 /* NotificationName.swift in Sources */,
 				8E20510A2CD4F32F00D87C6A /* AppVersionViewModel.swift in Sources */,
 				8E0CDED32D3B4CA5000F8DEF /* BookmarkService.swift in Sources */,
+				8E214E182E1361C400E2B830 /* TipBannerViewModel.swift in Sources */,
 				8EDC2E452D9245EA00AAB60F /* UserDefaultsKeys.swift in Sources */,
 				8ED4E54C2DFFE4E8000EDB36 /* UserDefaults+AppGroup.swift in Sources */,
 				8E5C1ACA2D4074D50092BF88 /* TabBarViewModel.swift in Sources */,
@@ -1875,6 +1934,7 @@
 				8EB767822D439DE90086AB60 /* Date+EndOfToday.swift in Sources */,
 				8E5E8BE52D36190E0078C007 /* BookmarkListRefreshable.swift in Sources */,
 				8EC6B8952D309EA9002B45C7 /* LocalBookmarkDataSource.swift in Sources */,
+				8E214E1B2E13629100E2B830 /* TipDTO.swift in Sources */,
 				8E0907822DE6A6E6008BDF18 /* ResultNotFoundView.swift in Sources */,
 				8E2051162CD4F32F00D87C6A /* NoticeReponseDTO.swift in Sources */,
 				8E2051172CD4F32F00D87C6A /* View+Fork.swift in Sources */,
@@ -1905,6 +1965,7 @@
 				8EA72DC92CD5CA4800D1B300 /* DeveloperTools.swift in Sources */,
 				8EFE53072CDCC30F003A7330 /* NoticeCreatable.swift in Sources */,
 				8E2051272CD4F32F00D87C6A /* ReportRepositoryImpl.swift in Sources */,
+				8E214E232E1362D900E2B830 /* Tip.swift in Sources */,
 				8E668E672E051E6F00358B9F /* BookmarkSortOption.swift in Sources */,
 				8E0AA23E2D2419740068681C /* RemoteDataSource.swift in Sources */,
 				8EB8FA732DF9205900715F73 /* WebContentView.swift in Sources */,
@@ -1930,6 +1991,7 @@
 				8EC1ECA32DD43542005E71B3 /* NoticeSectionModel.swift in Sources */,
 				8E5C1AD32D4077140092BF88 /* MainPopupContentRepository.swift in Sources */,
 				8E0907702DE58152008BDF18 /* BookmarkTableViewCell.swift in Sources */,
+				8E214E272E13639A00E2B830 /* TipRepositoryImpl.swift in Sources */,
 				8E2051302CD4F32F00D87C6A /* WebViewController.swift in Sources */,
 				8E5C1AD02D40768B0092BF88 /* MainPopupContentDTO.swift in Sources */,
 				8E3B8C482D2BBFFD007E9579 /* BookmarkFormViewModel.swift in Sources */,
@@ -1958,6 +2020,7 @@
 				8E0699A82E0127E4008A5DCE /* UserDefaultsKeys.swift in Sources */,
 				8E69F8842DFE7F0900F313F0 /* PendingNoticeDataSource.swift in Sources */,
 				8ECB82DD2CDB6C3D00420349 /* NotificationService.swift in Sources */,
+				8E214E242E1362D900E2B830 /* Tip.swift in Sources */,
 				8ED4E54E2DFFE4EF000EDB36 /* UserDefaults+AppGroup.swift in Sources */,
 				8E2755CC2D9E25AB005C4EBC /* UNUserNotificationCenter+LocalNotification.swift in Sources */,
 			);
@@ -1995,6 +2058,7 @@
 				8E0699A72E0127E4008A5DCE /* UserDefaultsKeys.swift in Sources */,
 				8E69F8832DFE7F0900F313F0 /* PendingNoticeDataSource.swift in Sources */,
 				8EB6D2002C663627004E8AC2 /* NotificationService.swift in Sources */,
+				8E214E222E1362D900E2B830 /* Tip.swift in Sources */,
 				8ED4E54D2DFFE4EF000EDB36 /* UserDefaults+AppGroup.swift in Sources */,
 				8E2755CB2D9E25AB005C4EBC /* UNUserNotificationCenter+LocalNotification.swift in Sources */,
 			);

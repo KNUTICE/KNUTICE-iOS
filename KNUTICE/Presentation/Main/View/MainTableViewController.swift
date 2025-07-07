@@ -50,6 +50,7 @@ final class MainTableViewController: UIViewController {
         
         return button
     }()
+    let tipView = UIHostingController(rootView: TipBannerView().environmentObject(TipBannerViewModel())).view
 //    lazy var bellBtn: UIButton = {
 //        let button = UIButton()
 //        button.translatesAutoresizingMaskIntoConstraints = false
