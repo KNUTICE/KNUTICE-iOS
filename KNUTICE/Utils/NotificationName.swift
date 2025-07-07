@@ -11,4 +11,5 @@ extension Notification.Name {
     static let bookmarkRefresh = Notification.Name("bookmarkRefresh")
     static let bookmarkReload = Notification.Name("bookmarkReload")
     static let fcmToken = Notification.Name("FCMToken")
+    static let hasTipData = Notification.Name("hasTipData")
 }
