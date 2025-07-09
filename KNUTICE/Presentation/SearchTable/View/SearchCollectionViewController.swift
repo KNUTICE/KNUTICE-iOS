@@ -48,6 +48,7 @@ final class SearchCollectionViewController: UIViewController, CompositionalLayou
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        view.backgroundColor = .primaryBackground
         setupLayout()
         bind()
     }
