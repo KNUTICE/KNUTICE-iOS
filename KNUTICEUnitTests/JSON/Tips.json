@@ -1,0 +1,23 @@
+{
+    "result": {
+        "resultCode": 200,
+        "resultMessage": "성공",
+        "resultDescription": "성공"
+    },
+    "body": [
+        {
+            "id": "686f6974fd8db43307bd7093",
+            "title": "여름 방학과 함께 찾아온 7월 업데이트 안내 🎉",
+            "url": "https://wheat-sound-4d3.notion.site/7-229e42146891809aab45f3f6a7f593b3",
+            "deviceType": "iOS",
+            "registeredAt": "2025-07-10T16:19:16.026"
+        },
+        {
+            "id": "686f6969fd8db43307bd7092",
+            "title": "베타 테스트 안내",
+            "url": "https://wheat-sound-4d3.notion.site/22ce4214689180e19e98c6e7b09444a7?source=copy_link",
+            "deviceType": "iOS",
+            "registeredAt": "2025-07-10T16:19:05.705"
+        }
+    ]
+}
