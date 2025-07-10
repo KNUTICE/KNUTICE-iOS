@@ -262,6 +262,9 @@
 		8E7A9E7F2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A9E7D2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift */; };
 		8E887D4D2E0A37A400D5E2E3 /* NoticeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E887D4C2E0A37A400D5E2E3 /* NoticeHeader.swift */; };
 		8E887D4E2E0A37A400D5E2E3 /* NoticeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E887D4C2E0A37A400D5E2E3 /* NoticeHeader.swift */; };
+		8E9BC16E2E1FA12500B74B35 /* Tips.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E9BC16D2E1FA12500B74B35 /* Tips.json */; };
+		8E9BC16F2E1FA12500B74B35 /* Tips.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E9BC16D2E1FA12500B74B35 /* Tips.json */; };
+		8E9BC1712E1FA21B00B74B35 /* MockTipAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9BC1702E1FA21B00B74B35 /* MockTipAPITest.swift */; };
 		8EA47FE92D922C5800B68EAD /* TabBarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA47FE82D922C5800B68EAD /* TabBarService.swift */; };
 		8EA47FEA2D922C5800B68EAD /* TabBarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA47FE82D922C5800B68EAD /* TabBarService.swift */; };
 		8EA72DC92CD5CA4800D1B300 /* DeveloperTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA72DC82CD5CA4800D1B300 /* DeveloperTools.swift */; };
@@ -564,6 +567,8 @@
 		8E7A9E7A2DCB4D3C0001D4AA /* NoticeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCollectionViewController.swift; sourceTree = "<group>"; };
 		8E7A9E7D2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoticeCollectionViewController+Layout.swift"; sourceTree = "<group>"; };
 		8E887D4C2E0A37A400D5E2E3 /* NoticeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeHeader.swift; sourceTree = "<group>"; };
+		8E9BC16D2E1FA12500B74B35 /* Tips.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Tips.json; sourceTree = "<group>"; };
+		8E9BC1702E1FA21B00B74B35 /* MockTipAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTipAPITest.swift; sourceTree = "<group>"; };
 		8EA47FE82D922C5800B68EAD /* TabBarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarService.swift; sourceTree = "<group>"; };
 		8EA72DC82CD5CA4800D1B300 /* DeveloperTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperTools.swift; sourceTree = "<group>"; };
 		8EA72DCB2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperToolsViewModel.swift; sourceTree = "<group>"; };
@@ -1243,6 +1248,7 @@
 				8E6428BA2DE0093500826D37 /* EmploymentNotices.json */,
 				8E2CF4C42DF4943F00B580CA /* TopicSubscriptionsStatus.json */,
 				8E69F8752DFE504300F313F0 /* SingleNotice.json */,
+				8E9BC16D2E1FA12500B74B35 /* Tips.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -1259,6 +1265,7 @@
 				8E1C65482D755D610003AB94 /* MainNoticesTest */,
 				8E1C65552D7575BA0003AB94 /* SearchTest */,
 				8E1C655D2D757C7A0003AB94 /* ReportTest */,
+				8E9BC16C2E1F9EB900B74B35 /* TipTest */,
 			);
 			path = KNUTICEUnitTests;
 			sourceTree = "<group>";
@@ -1292,6 +1299,14 @@
 				8E0907772DE5BAD2008BDF18 /* BookmarkTableViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8E9BC16C2E1F9EB900B74B35 /* TipTest */ = {
+			isa = PBXGroup;
+			children = (
+				8E9BC1702E1FA21B00B74B35 /* MockTipAPITest.swift */,
+			);
+			path = TipTest;
 			sourceTree = "<group>";
 		};
 		8EA72DC52CD5C9B500D1B300 /* Developer Tools */ = {
@@ -1656,6 +1671,7 @@
 				8E1C65602D757E620003AB94 /* PostRequestSuccess.json in Resources */,
 				8E1599A12CA2735E001F75A3 /* LaunchScreen.storyboard in Resources */,
 				8E1C654E2D755E060003AB94 /* TopThreeNotices.json in Resources */,
+				8E9BC16E2E1FA12500B74B35 /* Tips.json in Resources */,
 				8E6428BB2DE0093500826D37 /* EmploymentNotices.json in Resources */,
 				8E3FC0252D6C10E30078EFBB /* GeneralNotices.json in Resources */,
 				8E3DEA912D7FC02200A5B435 /* LoadingLaunchScreen.storyboard in Resources */,
@@ -1697,6 +1713,7 @@
 				8E1C65572D75760A0003AB94 /* SearchedNotices.json in Resources */,
 				8E3FC01D2D6BF5CA0078EFBB /* EventNotices.json in Resources */,
 				8E3FC0132D6BF5640078EFBB /* AcademicNotices.json in Resources */,
+				8E9BC16F2E1FA12500B74B35 /* Tips.json in Resources */,
 				8E3FC00D2D6BF4D70078EFBB /* GeneralNotices.json in Resources */,
 				8E6428BC2DE0093500826D37 /* EmploymentNotices.json in Resources */,
 				8E69F8762DFE504300F313F0 /* SingleNotice.json in Resources */,
@@ -2038,6 +2055,7 @@
 				8EB8FA832DF9BC7200715F73 /* BookmarkTests.swift in Sources */,
 				8EDC2E472D925B6F00AAB60F /* MainTableViewModelTest.swift in Sources */,
 				8E1C655C2D7576EC0003AB94 /* MockSearchedNoticesAPITest.swift in Sources */,
+				8E9BC1712E1FA21B00B74B35 /* MockTipAPITest.swift in Sources */,
 				8E2CF4BE2DF490F700B580CA /* TopicSubscriptionFetchAPITests.swift in Sources */,
 				8E1C65422D7550680003AB94 /* NoticesCollectionViewModelTests.swift in Sources */,
 				8E1C65642D757F790003AB94 /* MockReportTest.swift in Sources */,
