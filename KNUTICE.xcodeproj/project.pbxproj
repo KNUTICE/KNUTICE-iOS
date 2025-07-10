@@ -75,7 +75,6 @@
 		8E1C655C2D7576EC0003AB94 /* MockSearchedNoticesAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C655B2D7576EC0003AB94 /* MockSearchedNoticesAPITest.swift */; };
 		8E1C655F2D757E620003AB94 /* PostRequestSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E1C655E2D757E620003AB94 /* PostRequestSuccess.json */; };
 		8E1C65602D757E620003AB94 /* PostRequestSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E1C655E2D757E620003AB94 /* PostRequestSuccess.json */; };
-		8E1C65622D757F1F0003AB94 /* MockPostAPIURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C65612D757F1F0003AB94 /* MockPostAPIURLProtocol.swift */; };
 		8E1C65642D757F790003AB94 /* MockReportTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C65632D757F790003AB94 /* MockReportTest.swift */; };
 		8E2050FD2CD4F32F00D87C6A /* MainNoticeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD4F2BFA120B00CCCCCD /* MainNoticeResponseDTO.swift */; };
 		8E2050FE2CD4F32F00D87C6A /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2EFC02BF356FB00066C87 /* UIViewController+Preview.swift */; };
@@ -484,7 +483,6 @@
 		8E1C65562D75760A0003AB94 /* SearchedNotices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SearchedNotices.json; sourceTree = "<group>"; };
 		8E1C655B2D7576EC0003AB94 /* MockSearchedNoticesAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchedNoticesAPITest.swift; sourceTree = "<group>"; };
 		8E1C655E2D757E620003AB94 /* PostRequestSuccess.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PostRequestSuccess.json; sourceTree = "<group>"; };
-		8E1C65612D757F1F0003AB94 /* MockPostAPIURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPostAPIURLProtocol.swift; sourceTree = "<group>"; };
 		8E1C65632D757F790003AB94 /* MockReportTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockReportTest.swift; sourceTree = "<group>"; };
 		8E2051472CD4F32F00D87C6A /* KNUTICE-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KNUTICE-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E2051482CD4F32F00D87C6A /* Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Dev.plist"; path = "/Users/ijeonghun/Desktop/GitHub/iOS/KNUTICE-iOS/KNUTICE/Application/Info-Dev.plist"; sourceTree = "<absolute>"; };
@@ -1118,7 +1116,6 @@
 			isa = PBXGroup;
 			children = (
 				8E3FC0232D6C05060078EFBB /* MockURLProtocol.swift */,
-				8E1C65612D757F1F0003AB94 /* MockPostAPIURLProtocol.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2050,7 +2047,6 @@
 				8E2CF4C82DF5537400B580CA /* TopicSubscriptionListViewModelTest.swift in Sources */,
 				8EE4B4FD2D17D96500EFF10B /* RequestResult.swift in Sources */,
 				8E69F8872DFEA1E100F313F0 /* PendingNoticeTests.swift in Sources */,
-				8E1C65622D757F1F0003AB94 /* MockPostAPIURLProtocol.swift in Sources */,
 				8E1C65522D755FEF0003AB94 /* MockTopThreeNoticesAPITest.swift in Sources */,
 				8EB8FA832DF9BC7200715F73 /* BookmarkTests.swift in Sources */,
 				8EDC2E472D925B6F00AAB60F /* MainTableViewModelTest.swift in Sources */,

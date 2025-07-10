@@ -68,16 +68,10 @@ final class MockTipAPITest: XCTestCase {
         
         viewModel.$tips
             .dropFirst()
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    expectation.fulfill()
-                case .failure(let error):
-                    XCTFail(error.localizedDescription)
-                }
-            }, receiveValue: {
+            .sink(receiveValue: {
                 //Then
                 XCTAssertEqual($0?.count, 2)
+                expectation.fulfill()
             })
             .store(in: &cancellables)
         
