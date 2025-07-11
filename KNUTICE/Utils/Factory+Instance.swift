@@ -83,6 +83,12 @@ extension Container {
         }
     }
     
+    var TipRepository: Factory<TipRepository> {
+        Factory(self) {
+            TipRepositoryImpl()
+        }
+    }
+    
     //MARK: - Service
     var reportService: Factory<ReportService> {
         Factory(self) {

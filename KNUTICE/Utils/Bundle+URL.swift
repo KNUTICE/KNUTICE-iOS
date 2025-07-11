@@ -96,4 +96,12 @@ extension Bundle {
         
         return url
     }
+    
+    var tipURL: String {
+        guard let resource, let url = resource["TipURL"] as? String else {
+            return ""
+        }
+        
+        return url
+    }
 }

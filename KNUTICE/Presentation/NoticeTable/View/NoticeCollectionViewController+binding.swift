@@ -66,15 +66,14 @@ extension NoticeCollectionViewController {
         
         //MARK: - collectionView.rx.willDisplayCell
         collectionView.rx.willDisplayCell
-            .bind { [weak self] cell, indexPath in
-                guard let self else { return }
+            .bind(with: self) { owner, cell in
+                let (_, indexPath) = cell
                 
-                if let viewModel = self.viewModel as? NoticeFetchable,
-                   let valuesCount = self.viewModel.notices.value.first?.items.count,
-                   indexPath.item == valuesCount - 1 {
+                if let viewModel = owner.viewModel as? NoticeFetchable,
+                   let count = owner.viewModel.notices.value.first?.items.count,
+                   indexPath.item == count - 1 {
                     viewModel.fetchNextPage()
                 }
-                
             }
             .disposed(by: disposeBag)
         

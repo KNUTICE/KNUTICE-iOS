@@ -14,13 +14,11 @@ extension SearchCollectionViewController: RxDataSourceProvidable {
         searchBar.rx.text
             .debounce(.milliseconds(500), scheduler: MainScheduler.instance)    //0.5초 대기
             .distinctUntilChanged()    //동일한 값은 무시
-            .bind(onNext: { [weak self] keywork in
-                guard let keyword = keywork else { return }
-                
-                if let viewModel = self?.viewModel as? Searchable {
+            .bind(with: self) { owner, keyword in
+                if let viewModel = owner.viewModel as? Searchable, let keyword {
                     viewModel.search(keyword)
                 }
-            })
+            }
             .disposed(by: disposeBag)
         
         viewModel.notices
