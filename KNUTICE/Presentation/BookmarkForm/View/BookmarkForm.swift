@@ -99,7 +99,12 @@ struct BookmarkForm: View {
         }
         .alert("알림", isPresented: $viewModel.isShowingAlert) {
             Button {
-                viewModel.sendRefreshNotification()
+                if formType == .create {
+                    viewModel.sendRefreshNotification()
+                } else {
+                    viewModel.sendReloadNotification()
+                }
+                
                 dismissAction()
             } label: {
                 Text("확인")

@@ -48,6 +48,8 @@ extension MainTableViewController {
                 make.edges.equalToSuperview()
             }
         }
+        
+        tableView.tableHeaderView = tipView
     }
     
     func createNavigationItems() {
