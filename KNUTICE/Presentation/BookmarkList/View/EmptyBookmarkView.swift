@@ -20,6 +20,7 @@ struct EmptyBookmarkView: View {
                 
                 Text("북마크가 존재하지 않아요")
                     .foregroundStyle(.gray)
+                    .bold()
             }
             .offset(y: -44)
         }

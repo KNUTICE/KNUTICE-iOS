@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Magnifying_Glasses_3D.png",
+      "filename" : "Question_Mark.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -12,7 +12,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Magnifying_Glasses_3D_Dark.png",
+      "filename" : "Question_Mark_Dark.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
