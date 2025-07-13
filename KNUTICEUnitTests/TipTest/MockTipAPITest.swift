@@ -38,28 +38,16 @@ final class MockTipAPITest: XCTestCase {
         dataSource = nil
     }
     
-    func test_fetchTipData_returnsTipDTO() {
-        //Given
-        let expectation = XCTestExpectation(description: "Successfully fetches TipDTO")
+    func test_fetchTipData_returnsTipDTO() async throws {
+        //When
+        let dto = try await dataSource.request(
+            Bundle.main.tipURL,
+            method: .get,
+            decoding: TipDTO.self
+        )
         
-        Task {
-            do {
-                //When
-                let dto = try await dataSource.request(
-                    Bundle.main.tipURL,
-                    method: .get,
-                    decoding: TipDTO.self
-                )
-                
-                //Then
-                XCTAssertEqual(dto.body?.count, 2)
-                expectation.fulfill()
-            } catch {
-                XCTFail(error.localizedDescription)
-            }
-        }
-        
-        wait(for: [expectation], timeout: 1)
+        //Then
+        XCTAssertEqual(dto.body?.count, 2)
     }
     
     func test_tipBannerViewModel_returnsTips() {

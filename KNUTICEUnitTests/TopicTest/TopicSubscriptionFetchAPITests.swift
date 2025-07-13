@@ -31,74 +31,56 @@ final class TopicSubscriptionFetchAPITests: XCTestCase {
         dataSource = nil
     }
     
-    func test_fetchTopicSubscriptionsStatus_returnsNotificationSubscriptionDTO() {
+    func test_fetchTopicSubscriptionsStatus_returnsNotificationSubscriptionDTO() async throws {
         //Given
-        let expectation = expectation(description: "fetch topic subscriptions status")
         MockURLProtocol.setUpMockData(.fetchTopicSubscriptionsShouldSucceed)
         
-        Task {
-            do {
-                //When
-                let dto = try await dataSource.request(
-                    Bundle.main.notificationPermissionURL,
-                    method: .get,
-                    decoding: NotificationSubscriptionDTO.self
-                )
-                let result = [
-                    dto.body.generalNewsTopic,
-                    dto.body.academicNewsTopic,
-                    dto.body.scholarshipNewsTopic,
-                    dto.body.eventNewsTopic,
-                    dto.body.employmentNewsTopic
-                ].allSatisfy {
-                    $0 == true
-                }
-                
-                //Then
-                XCTAssertTrue(result)
-                expectation.fulfill()
-            } catch {
-                XCTFail(error.localizedDescription)
-            }
+        //When
+        let dto = try await dataSource.request(
+            Bundle.main.notificationPermissionURL,
+            method: .get,
+            decoding: NotificationSubscriptionDTO.self
+        )
+        let result = [
+            dto.body.generalNewsTopic,
+            dto.body.academicNewsTopic,
+            dto.body.scholarshipNewsTopic,
+            dto.body.eventNewsTopic,
+            dto.body.employmentNewsTopic
+        ].allSatisfy {
+            $0 == true
         }
         
-        wait(for: [expectation], timeout: 1)
+        //Then
+        XCTAssertTrue(result)
     }
     
-    func test_updateTopicSubscription_returnsSuccessDTO() {
+    func test_updateTopicSubscription_returnsSuccessDTO() async throws {
         //Given
-        let expectation = XCTestExpectation(description: "update topic subscription")
         MockURLProtocol.setUpMockData(.postRequestShouldSucceed)
+        let params: [String: Any] = [
+            "result": [
+                "resultCode": 0,
+                "resultMessage": "string",
+                "resultDescription": "string"
+            ],
+            "body": [
+                "fcmToken": "string",
+                "noticeName" : "GENERAL_NEWS",
+                "isSubscribed" : true
+            ]
+        ]
         
-        Task {
-            do {
-                let params: [String: Any] = [
-                    "result": [
-                        "resultCode": 0,
-                        "resultMessage": "string",
-                        "resultDescription": "string"
-                    ],
-                    "body": [
-                        "fcmToken": "string",
-                        "noticeName" : "GENERAL_NEWS",
-                        "isSubscribed" : true
-                    ]
-                ]
-                let dto = try await dataSource.request(
-                    Bundle.main.notificationPermissionURL,
-                    method: .post,
-                    parameters: params,
-                    decoding: PostResponseDTO.self
-                )
-                
-                XCTAssertTrue(dto.body == true)
-                expectation.fulfill()
-            } catch {
-                XCTFail(error.localizedDescription)
-            }
-        }
+        //When
+        let dto = try await dataSource.request(
+            Bundle.main.notificationPermissionURL,
+            method: .post,
+            parameters: params,
+            decoding: PostResponseDTO.self
+        )
         
-        wait(for: [expectation], timeout: 1)
+        //Then
+        XCTAssertTrue(dto.body == true)
     }
 
 }
