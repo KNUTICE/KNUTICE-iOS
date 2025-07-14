@@ -51,15 +51,6 @@ final class MainTableViewController: UIViewController {
         return button
     }()
     let tipView = UIHostingController(rootView: TipBannerView().environmentObject(TipBannerViewModel())).view
-//    lazy var bellBtn: UIButton = {
-//        let button = UIButton()
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.setImage(createNormalBellIcon(), for: .normal)
-//        button.setImage(createHighlightedBellIcon(), for: .highlighted)
-//        button.addTarget(self, action: #selector(navigateToPendingNoticeList(_:)), for: .touchUpInside)
-//        
-//        return button
-//    }()
     let refreshControl = UIRefreshControl()
     @Injected(\.mainViewModel) var viewModel: MainTableViewModel
     let disposeBag = DisposeBag()

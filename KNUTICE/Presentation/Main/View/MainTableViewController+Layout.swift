@@ -31,12 +31,6 @@ extension MainTableViewController {
                 make.trailing.equalToSuperview().offset(-16)
                 make.centerY.equalTo(titleLabel.snp.centerY)
             }
-            
-//            navigationBar.addSubview(bellBtn)
-//            bellBtn.snp.makeConstraints { make in
-//                make.trailing.equalTo(settingBtn.snp.leading).offset(-25)
-//                make.centerY.equalTo(titleLabel.snp.centerY)
-//            }
         }
         
         view.addSubview(tableView)
