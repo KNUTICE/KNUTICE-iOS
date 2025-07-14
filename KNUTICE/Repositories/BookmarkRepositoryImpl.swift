@@ -40,8 +40,8 @@ final class BookmarkRepositoryImpl: BookmarkRepository {
             .eraseToAnyPublisher()
     }
     
-    func fetchWhereCreatedAtIsNil() -> AnyPublisher<[Bookmark], any Error> {
-        return dataSource.fetchItemsWhereCreatedAtIsNil()
+    func fetchWhereTimestampsAreNil() -> AnyPublisher<[Bookmark], any Error> {
+        return dataSource.fetchItemsWhereTimestampsAreNil()
             .map { [weak self] in
                 $0.compactMap { dto in
                     self?.createBookMark(from: dto)
@@ -78,7 +78,7 @@ final class BookmarkRepositoryImpl: BookmarkRepository {
         return dataSource.update(bookmark: bookmark)
     }
     
-    func update(bookmarks: [(Bookmark, Date)]) -> AnyPublisher<Void, any Error> {
-        return dataSource.update(bookmarks: bookmarks)
+    func update(_ updates: [BookmarkUpdate]) -> AnyPublisher<Void, any Error> {
+        return dataSource.update(updates)
     }
 }

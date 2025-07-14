@@ -14,5 +14,5 @@ enum UserDefaultsKeys: String {
     case etiquetteTimeEnd
     case hasNewPendingNotice
     case bookmarkSortOption
-    case isBookmarkUpdatedAfter1_5_0
+    case isBookmarkTimestampUpdated
 }

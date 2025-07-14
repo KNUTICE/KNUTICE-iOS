@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct BookmarkUpdate {
+    let bookmark: Bookmark
+    let createdAt: Date
+    let updatedAt: Date
+}
