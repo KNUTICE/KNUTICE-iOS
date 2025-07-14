@@ -178,23 +178,28 @@ final class BookmarkServiceImpl: BookmarkService {
         sortBy option: BookmarkSortOption
     ) -> AnyPublisher<[Bookmark], any Error> {
         return Deferred {
-            if UserDefaults.standard.bool(forKey: UserDefaultsKeys.isBookmarkUpdatedAfter1_5_0.rawValue) {
-                return self.bookmarkRepository.fetchWhereCreatedAtIsNil()    //createdAt 필드가 nil인 모든 Bookmark 데이터를 가져옴
-                    .map { bookmarks in
-                        bookmarks.map {
-                            ($0, $0.notice.uploadDate.toDate() ?? Date())    //createdAt 필드에 업데이트할 값을 튜플 형태로 반환
-                        }
-                    }
+            if !UserDefaults.standard.bool(forKey: UserDefaultsKeys.isBookmarkTimestampUpdated.rawValue) {
+                return self.bookmarkRepository.fetchWhereTimestampsAreNil()    //createdAt 필드가 nil인 모든 Bookmark 데이터를 가져옴
                     .flatMap { [weak self] bookmarks -> AnyPublisher<Void, any Error> in
                         guard let self else {
                             return Fail(error: NSError(domain: "SelfDeallocated", code: -1))
                                 .eraseToAnyPublisher()
                         }
                         
-                        return self.bookmarkRepository.update(bookmarks: bookmarks)    //Bookmark 업데이트
+                        let updates = bookmarks.map {
+                            let timestamp = $0.notice.uploadDate.toDate() ?? Date()
+                            
+                            return BookmarkUpdate(
+                                bookmark: $0,
+                                createdAt: timestamp,
+                                updatedAt: timestamp
+                            )
+                        }
+                        
+                        return self.bookmarkRepository.update(updates)    //Bookmark 업데이트
                     }
                     .flatMap { [weak self] _ -> AnyPublisher<[Bookmark], any Error> in
-                        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.isBookmarkUpdatedAfter1_5_0.rawValue)
+                        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.isBookmarkTimestampUpdated.rawValue)
                         
                         guard let self else {
                             return Fail(error: NSError(domain: "SelfDeallocated", code: -1))

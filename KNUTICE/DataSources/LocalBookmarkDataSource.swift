@@ -46,15 +46,17 @@ protocol LocalBookmarkDataSource {
     ///   If at least one entity is found, it is considered a duplicate.
     func isDuplication(id: Int) -> AnyPublisher<Bool, any Error>
     
-    /// Fetches all bookmarks from Core Data where the `createdAt` field is `nil`.
+    /// Fetches bookmark items where either `createdAt` or `updatedAt` is `nil`.
     ///
-    /// - Returns: An `AnyPublisher<[BookmarkDTO], Error>` that emits an array of `BookmarkDTO` or an error.
+    /// This method asynchronously fetches `BookmarkEntity` objects from the background context
+    /// where either `createdAt` or `updatedAt` is `nil`. The result is then mapped to an array of
+    /// `BookmarkDTO` and returned as a Combine publisher.
     ///
-    /// - Note:
-    ///   This method performs a fetch request on the background context to retrieve `BookmarkEntity` objects
-    ///   where `createdAt` is `nil`, maps them to `BookmarkDTO`, and returns the result.
-    ///   Useful for identifying and handling legacy or incomplete data entries.
-    func fetchItemsWhereCreatedAtIsNil() -> AnyPublisher<[BookmarkDTO], any Error>
+    /// - Returns: An `AnyPublisher` that emits an array of `BookmarkDTO` on success,
+    ///            or an `Error` if the fetch fails.
+    ///
+    /// - Note: This operation is performed on a background context using `NSManagedObjectContext.perform`.
+    func fetchItemsWhereTimestampsAreNil() -> AnyPublisher<[BookmarkDTO], any Error>
     
     /// Deletes all `NoticeEntity` objects that match the given ID from Core Data.
     ///
@@ -77,19 +79,22 @@ protocol LocalBookmarkDataSource {
     ///   It updates the `memo` and `alarmDate` fields of each matching entity, then saves the changes to the background context.
     func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error>
     
-    /// Updates the `createdAt` field of multiple `Bookmark` entities in Core Data
-    /// and saves the background context when all updates finish.
+    /// Updates the `createdAt` and `updatedAt` timestamps for the given bookmarks in Core Data.
     ///
-    /// The work is performed off-thread on `backgroundContext`, and the method
-    /// returns immediately with a Combine publisher that completes when the
-    /// context save succeeds (or fails with an error).
+    /// This method takes an array of `BookmarkUpdate` objects, each containing a `Bookmark` and its
+    /// corresponding `createdAt` and `updatedAt` timestamps. It performs the following steps:
+    /// 1. Fetches the corresponding `BookmarkEntity` instances from Core Data based on the bookmark ID.
+    /// 2. Applies the new timestamps using the background context.
+    /// 3. Collects all update operations and saves the context once after all updates are complete.
     ///
-    /// - Parameter bookmarks: An array of pairs containing the domain-level
-    ///   `Bookmark` model and the desired creation date to write into Core Data.
-    /// - Returns: `AnyPublisher<Void, Error>` that publishes one `Void` on success
-    ///   and then finishes. Errors from fetching entities or saving the context are
-    ///   forwarded downstream.
-    func update(bookmarks: [(Bookmark, Date)]) -> AnyPublisher<Void, any Error>
+    /// - Parameter updates: An array of `BookmarkUpdate` values representing the bookmarks to update
+    ///                      along with their respective timestamps.
+    /// - Returns: A Combine `AnyPublisher` that emits `Void` on success or an `Error` if any step fails.
+    ///
+    /// - Note:
+    ///   - The updates are executed on a background context asynchronously using `NSManagedObjectContext.perform`.
+    ///   - The final context save is performed synchronously with `performAndWait` to ensure consistency.
+    func update(_ updates: [BookmarkUpdate]) -> AnyPublisher<Void, any Error>
 }
 
 extension LocalBookmarkDataSource {
@@ -168,7 +173,7 @@ extension LocalBookmarkDataSourceImpl {
     ) -> AnyPublisher<[BookmarkDTO], any Error> {
         return readBookmarkEntities(page: page, fetchLimit: pageSize, sortBy: option)
             .map { [unowned self] entities in
-                self.createBookmarkDTOs(from: entities)
+                return self.createBookmarkDTOs(from: entities)
             }
             .eraseToAnyPublisher()
     }
@@ -183,11 +188,11 @@ extension LocalBookmarkDataSourceImpl {
             .eraseToAnyPublisher()
     }
     
-    func fetchItemsWhereCreatedAtIsNil() -> AnyPublisher<[BookmarkDTO], any Error> {
+    func fetchItemsWhereTimestampsAreNil() -> AnyPublisher<[BookmarkDTO], any Error> {
         return Future { [unowned self] promise in
             self.backgroundContext.perform {
                 let request = NSFetchRequest<BookmarkEntity>(entityName: "BookmarkEntity")
-                request.predicate = NSPredicate(format: "createdAt == nil")
+                request.predicate = NSPredicate(format: "createdAt == nil OR updatedAt == nil")
                 
                 do {
                     let entities = try self.backgroundContext.fetch(request)
@@ -265,7 +270,7 @@ extension LocalBookmarkDataSourceImpl {
     
     private func createBookmarkDTOs(from entities: [BookmarkEntity]) -> [BookmarkDTO] {
         entities.map {
-            BookmarkDTO(
+            return BookmarkDTO(
                 notice: $0.bookmarkedNotice,
                 details: $0.memo,
                 alarmDate: $0.alarmDate
@@ -313,6 +318,7 @@ extension LocalBookmarkDataSourceImpl {
                         entities.forEach {
                             $0.memo = bookmark.memo
                             $0.alarmDate = bookmark.alarmDate
+                            $0.updatedAt = Date()
                         }
                         
                         do {
@@ -331,15 +337,16 @@ extension LocalBookmarkDataSourceImpl {
             .eraseToAnyPublisher()
     }
     
-    func update(bookmarks: [(Bookmark, Date)]) -> AnyPublisher<Void, any Error> {
+    func update(_ updates: [BookmarkUpdate]) -> AnyPublisher<Void, any Error> {
         var publishers = [AnyPublisher<Void, any Error>]()
         
-        for (bookmark, creationDate) in bookmarks {
-            let publisher = fetchBookmarkEntities(withId: bookmark.notice.id)
+        for update in updates {
+            let publisher = fetchBookmarkEntities(withId: update.bookmark.notice.id)
                 .map { [weak self] entities in
-                    self?.backgroundContext.perform {
+                    self?.backgroundContext.performAndWait {
                         entities.forEach {
-                            $0.createdAt = creationDate
+                            $0.createdAt = update.createdAt
+                            $0.updatedAt = update.updatedAt
                         }
                     }
                     
