@@ -242,10 +242,6 @@
 		8E69F87D2DFE7DCB00F313F0 /* PendingNotice.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E69F87A2DFE7DCB00F313F0 /* PendingNotice.xcdatamodeld */; };
 		8E69F87E2DFE7DCB00F313F0 /* PendingNotice.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E69F87A2DFE7DCB00F313F0 /* PendingNotice.xcdatamodeld */; };
 		8E69F87F2DFE7DCB00F313F0 /* PendingNotice.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E69F87A2DFE7DCB00F313F0 /* PendingNotice.xcdatamodeld */; };
-		8E69F8812DFE7F0900F313F0 /* PendingNoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69F8802DFE7F0900F313F0 /* PendingNoticeDataSource.swift */; };
-		8E69F8822DFE7F0900F313F0 /* PendingNoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69F8802DFE7F0900F313F0 /* PendingNoticeDataSource.swift */; };
-		8E69F8832DFE7F0900F313F0 /* PendingNoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69F8802DFE7F0900F313F0 /* PendingNoticeDataSource.swift */; };
-		8E69F8842DFE7F0900F313F0 /* PendingNoticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69F8802DFE7F0900F313F0 /* PendingNoticeDataSource.swift */; };
 		8E69F8872DFEA1E100F313F0 /* PendingNoticeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69F8862DFEA1E100F313F0 /* PendingNoticeTests.swift */; };
 		8E782B9F2DE96CCE005E4432 /* TopicSubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E782B9E2DE96CCE005E4432 /* TopicSubscriptionService.swift */; };
 		8E782BA02DE96CCE005E4432 /* TopicSubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E782B9E2DE96CCE005E4432 /* TopicSubscriptionService.swift */; };
@@ -330,16 +326,6 @@
 		8EC7323D2DD5A97E0038AD59 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8EC7323C2DD5A97E0038AD59 /* SnapKit */; };
 		8ECB82DD2CDB6C3D00420349 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECB82DB2CDB6C3D00420349 /* NotificationService.swift */; };
 		8ECE2B182C35045800D7F499 /* MainNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B172C35045800D7F499 /* MainNotice.swift */; };
-		8ED4E5352DFFC8A2000EDB36 /* PendingNoticeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED4E5342DFFC8A2000EDB36 /* PendingNoticeService.swift */; };
-		8ED4E5362DFFC8A2000EDB36 /* PendingNoticeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED4E5342DFFC8A2000EDB36 /* PendingNoticeService.swift */; };
-		8ED4E53B2DFFCA3C000EDB36 /* PendingNoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED4E53A2DFFCA3C000EDB36 /* PendingNoticeRepositoryImpl.swift */; };
-		8ED4E53C2DFFCA3C000EDB36 /* PendingNoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED4E53A2DFFCA3C000EDB36 /* PendingNoticeRepositoryImpl.swift */; };
-		8ED4E5412DFFD303000EDB36 /* PendingNoticeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED4E5402DFFD303000EDB36 /* PendingNoticeListViewModel.swift */; };
-		8ED4E5422DFFD303000EDB36 /* PendingNoticeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED4E5402DFFD303000EDB36 /* PendingNoticeListViewModel.swift */; };
-		8ED4E5442DFFD406000EDB36 /* PendingNoticeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED4E5432DFFD406000EDB36 /* PendingNoticeList.swift */; };
-		8ED4E5452DFFD406000EDB36 /* PendingNoticeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED4E5432DFFD406000EDB36 /* PendingNoticeList.swift */; };
-		8ED4E5482DFFD5A2000EDB36 /* PendingNoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED4E5472DFFD5A2000EDB36 /* PendingNoticeRepository.swift */; };
-		8ED4E5492DFFD5A2000EDB36 /* PendingNoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED4E5472DFFD5A2000EDB36 /* PendingNoticeRepository.swift */; };
 		8ED4E54B2DFFE4E8000EDB36 /* UserDefaults+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED4E54A2DFFE4E8000EDB36 /* UserDefaults+AppGroup.swift */; };
 		8ED4E54C2DFFE4E8000EDB36 /* UserDefaults+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED4E54A2DFFE4E8000EDB36 /* UserDefaults+AppGroup.swift */; };
 		8ED4E54D2DFFE4EF000EDB36 /* UserDefaults+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED4E54A2DFFE4E8000EDB36 /* UserDefaults+AppGroup.swift */; };
@@ -555,7 +541,6 @@
 		8E69F8782DFE7C4800F313F0 /* NotificationService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationService.entitlements; sourceTree = "<group>"; };
 		8E69F8792DFE7C5500F313F0 /* NotificationService-dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "NotificationService-dev.entitlements"; sourceTree = "<group>"; };
 		8E69F87B2DFE7DCB00F313F0 /* PendingNotice.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PendingNotice.xcdatamodel; sourceTree = "<group>"; };
-		8E69F8802DFE7F0900F313F0 /* PendingNoticeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingNoticeDataSource.swift; sourceTree = "<group>"; };
 		8E69F8862DFEA1E100F313F0 /* PendingNoticeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingNoticeTests.swift; sourceTree = "<group>"; };
 		8E782B9E2DE96CCE005E4432 /* TopicSubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicSubscriptionService.swift; sourceTree = "<group>"; };
 		8E7945E42CA28F6900208662 /* KNUTICEUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KNUTICEUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -598,11 +583,6 @@
 		8ECB82DA2CDB6C3D00420349 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8ECB82DB2CDB6C3D00420349 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		8ECE2B172C35045800D7F499 /* MainNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotice.swift; sourceTree = "<group>"; };
-		8ED4E5342DFFC8A2000EDB36 /* PendingNoticeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingNoticeService.swift; sourceTree = "<group>"; };
-		8ED4E53A2DFFCA3C000EDB36 /* PendingNoticeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingNoticeRepositoryImpl.swift; sourceTree = "<group>"; };
-		8ED4E5402DFFD303000EDB36 /* PendingNoticeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingNoticeListViewModel.swift; sourceTree = "<group>"; };
-		8ED4E5432DFFD406000EDB36 /* PendingNoticeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingNoticeList.swift; sourceTree = "<group>"; };
-		8ED4E5472DFFD5A2000EDB36 /* PendingNoticeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingNoticeRepository.swift; sourceTree = "<group>"; };
 		8ED4E54A2DFFE4E8000EDB36 /* UserDefaults+AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+AppGroup.swift"; sourceTree = "<group>"; };
 		8EDAFD412D6818D000834E00 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		8EDC2E432D9245EA00AAB60F /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
@@ -706,7 +686,6 @@
 			children = (
 				5C82564C2BE5CE1B0038D4C8 /* LaunchScreen.storyboard */,
 				8E214E112E1360F500E2B830 /* Tip */,
-				8ED4E53D2DFFD17D000EDB36 /* PendingNoticeList */,
 				8E3DEA962D7FC3B700A5B435 /* ParentView */,
 				8E3DEA8E2D7FBFFA00A5B435 /* LoadingLaunchScreen */,
 				8E5E8BDA2D35F01C0078C007 /* BookmarkDetail */,
@@ -845,7 +824,6 @@
 				8E69315B2CEEFF950074142B /* TopicSubscriptionRepository.swift */,
 				8EC6B8972D30B25F002B45C7 /* BookmarkRepository.swift */,
 				8E5C1AD12D4077140092BF88 /* MainPopupContentRepository.swift */,
-				8ED4E5472DFFD5A2000EDB36 /* PendingNoticeRepository.swift */,
 				8E214E1D2E1362B600E2B830 /* TipRepository.swift */,
 			);
 			path = RepositoryInterfaces;
@@ -862,7 +840,6 @@
 				8E69315E2CEF00600074142B /* TopicSubscriptionRepositoryImpl.swift */,
 				8EC6B89D2D30BAA3002B45C7 /* BookmarkRepositoryImpl.swift */,
 				8E5C1AD42D40773F0092BF88 /* MainPopupContentRepositoryImpl.swift */,
-				8ED4E53A2DFFCA3C000EDB36 /* PendingNoticeRepositoryImpl.swift */,
 				8E214E252E13639A00E2B830 /* TipRepositoryImpl.swift */,
 			);
 			path = Repositories;
@@ -873,7 +850,6 @@
 			children = (
 				8EC6B8942D309EA9002B45C7 /* LocalBookmarkDataSource.swift */,
 				8E0AA23C2D2419740068681C /* RemoteDataSource.swift */,
-				8E69F8802DFE7F0900F313F0 /* PendingNoticeDataSource.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -1107,7 +1083,6 @@
 				8E0CDED22D3B4CA5000F8DEF /* BookmarkService.swift */,
 				8EA47FE82D922C5800B68EAD /* TabBarService.swift */,
 				8E782B9E2DE96CCE005E4432 /* TopicSubscriptionService.swift */,
-				8ED4E5342DFFC8A2000EDB36 /* PendingNoticeService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1402,31 +1377,6 @@
 				8ECB82DA2CDB6C3D00420349 /* Info.plist */,
 			);
 			path = "NotificationService-dev";
-			sourceTree = "<group>";
-		};
-		8ED4E53D2DFFD17D000EDB36 /* PendingNoticeList */ = {
-			isa = PBXGroup;
-			children = (
-				8ED4E53F2DFFD2E2000EDB36 /* ViewModel */,
-				8ED4E53E2DFFD2DC000EDB36 /* View */,
-			);
-			path = PendingNoticeList;
-			sourceTree = "<group>";
-		};
-		8ED4E53E2DFFD2DC000EDB36 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				8ED4E5432DFFD406000EDB36 /* PendingNoticeList.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		8ED4E53F2DFFD2E2000EDB36 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				8ED4E5402DFFD303000EDB36 /* PendingNoticeListViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		8EE65DAF2DE967B20059770D /* Network */ = {
@@ -1751,7 +1701,6 @@
 				8E0907792DE5BAD2008BDF18 /* BookmarkTableViewModel.swift in Sources */,
 				8EC141212D33E4E8001FD93C /* NoticeWebVCWrapper.swift in Sources */,
 				8E214E1E2E1362B600E2B830 /* TipRepository.swift in Sources */,
-				8E69F8822DFE7F0900F313F0 /* PendingNoticeDataSource.swift in Sources */,
 				8EE65DB12DE967C90059770D /* TokenInterceptor.swift in Sources */,
 				8E3DEAA12D7FC7CB00A5B435 /* ParentViewModel.swift in Sources */,
 				8EA9ACAB2C46AEC900C9E287 /* BaseWebContentView.swift in Sources */,
@@ -1768,7 +1717,6 @@
 				8E0907662DE578B6008BDF18 /* BookmarkTableViewController.swift in Sources */,
 				8E6931602CEF00600074142B /* TopicSubscriptionRepositoryImpl.swift in Sources */,
 				8E3DEA9E2D7FC71500A5B435 /* ParentViewController.swift in Sources */,
-				8ED4E5442DFFD406000EDB36 /* PendingNoticeList.swift in Sources */,
 				8E3DEAA42D7FE95000A5B435 /* ParentViewController+Binding.swift in Sources */,
 				5C89DD3E2BFA043200CCCCCD /* MainTableViewController+Binding.swift in Sources */,
 				8EC6B89B2D30B307002B45C7 /* BookmarkDTO.swift in Sources */,
@@ -1790,7 +1738,6 @@
 				8E7A4A6B2D2A2CD800BD1B7F /* Bookmark.swift in Sources */,
 				8E69F87C2DFE7DCB00F313F0 /* PendingNotice.xcdatamodeld in Sources */,
 				8E3F02262C9FB86400AE89D5 /* PostResponseDTO.swift in Sources */,
-				8ED4E5492DFFD5A2000EDB36 /* PendingNoticeRepository.swift in Sources */,
 				8E4BD5912E03CE6E00218365 /* SearchCollectionViewModel.swift in Sources */,
 				8E5E8BE72D361F510078C007 /* BookmarkManager.swift in Sources */,
 				8E3F022D2CA0023A00AE89D5 /* VIew+TextEditorBackground.swift in Sources */,
@@ -1805,7 +1752,6 @@
 				8E0907812DE6A6E6008BDF18 /* ResultNotFoundView.swift in Sources */,
 				5C190A552BFDF66600E0254B /* NoticeReponseDTO.swift in Sources */,
 				8EB6D20E2C6713BB004E8AC2 /* View+Fork.swift in Sources */,
-				8ED4E5352DFFC8A2000EDB36 /* PendingNoticeService.swift in Sources */,
 				8E3F02292C9FC77E00AE89D5 /* AppVersionProvidable.swift in Sources */,
 				8EA72DCD2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift in Sources */,
 				8E4BD5A02E03E6C000218365 /* NoticeSectionModelProvidable.swift in Sources */,
@@ -1813,7 +1759,6 @@
 				8E54C84A2C5E6F5E0070E689 /* AppDelegate+Messaging.swift in Sources */,
 				5C190A4F2BFDF4E100E0254B /* NoticeRepository.swift in Sources */,
 				8EC6B8912D30971A002B45C7 /* Bookmark.xcdatamodeld in Sources */,
-				8ED4E53C2DFFCA3C000EDB36 /* PendingNoticeRepositoryImpl.swift in Sources */,
 				8E6175482CA24157002B6021 /* UIDevice+Identifier.swift in Sources */,
 				8EC6B8A52D3107FC002B45C7 /* BookmarkDetail.swift in Sources */,
 				5C5698902BEFB3C50085E389 /* MainTableViewCell.swift in Sources */,
@@ -1849,7 +1794,6 @@
 				8E09076A2DE57948008BDF18 /* BookmarkTableViewController+Layout.swift in Sources */,
 				8EDAFD432D6818D000834E00 /* Errors.swift in Sources */,
 				8EE65DAE2DE947F50059770D /* NotificationSubscription.swift in Sources */,
-				8ED4E5412DFFD303000EDB36 /* PendingNoticeListViewModel.swift in Sources */,
 				8E0C3F8C2C9ECD1B005E2A16 /* ReportViewModel.swift in Sources */,
 				8E7A9E7B2DCB4D3C0001D4AA /* NoticeCollectionViewController.swift in Sources */,
 				8EFE52FD2CDCBB89003A7330 /* SearchRepository.swift in Sources */,
@@ -1898,7 +1842,6 @@
 				8E0907782DE5BAD2008BDF18 /* BookmarkTableViewModel.swift in Sources */,
 				8EC141222D33E4E8001FD93C /* NoticeWebVCWrapper.swift in Sources */,
 				8E214E1F2E1362B600E2B830 /* TipRepository.swift in Sources */,
-				8E69F8812DFE7F0900F313F0 /* PendingNoticeDataSource.swift in Sources */,
 				8EE65DB22DE967C90059770D /* TokenInterceptor.swift in Sources */,
 				8E3DEAA22D7FC7CB00A5B435 /* ParentViewModel.swift in Sources */,
 				8E2051052CD4F32F00D87C6A /* BaseWebContentView.swift in Sources */,
@@ -1915,7 +1858,6 @@
 				8E0907672DE578B6008BDF18 /* BookmarkTableViewController.swift in Sources */,
 				8E69315F2CEF00600074142B /* TopicSubscriptionRepositoryImpl.swift in Sources */,
 				8E3DEA9F2D7FC71500A5B435 /* ParentViewController.swift in Sources */,
-				8ED4E5452DFFD406000EDB36 /* PendingNoticeList.swift in Sources */,
 				8E3DEAA52D7FE95000A5B435 /* ParentViewController+Binding.swift in Sources */,
 				8E2051082CD4F32F00D87C6A /* MainTableViewController+Binding.swift in Sources */,
 				8EC6B89C2D30B307002B45C7 /* BookmarkDTO.swift in Sources */,
@@ -1937,7 +1879,6 @@
 				8E7A4A6A2D2A2CD800BD1B7F /* Bookmark.swift in Sources */,
 				8E69F87D2DFE7DCB00F313F0 /* PendingNotice.xcdatamodeld in Sources */,
 				8E2051102CD4F32F00D87C6A /* PostResponseDTO.swift in Sources */,
-				8ED4E5482DFFD5A2000EDB36 /* PendingNoticeRepository.swift in Sources */,
 				8E4BD5902E03CE6E00218365 /* SearchCollectionViewModel.swift in Sources */,
 				8E5E8BE82D361F510078C007 /* BookmarkManager.swift in Sources */,
 				8E2051112CD4F32F00D87C6A /* VIew+TextEditorBackground.swift in Sources */,
@@ -1952,7 +1893,6 @@
 				8E0907822DE6A6E6008BDF18 /* ResultNotFoundView.swift in Sources */,
 				8E2051162CD4F32F00D87C6A /* NoticeReponseDTO.swift in Sources */,
 				8E2051172CD4F32F00D87C6A /* View+Fork.swift in Sources */,
-				8ED4E5362DFFC8A2000EDB36 /* PendingNoticeService.swift in Sources */,
 				8E2051182CD4F32F00D87C6A /* AppVersionProvidable.swift in Sources */,
 				8EA72DCC2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift in Sources */,
 				8E4BD59F2E03E6C000218365 /* NoticeSectionModelProvidable.swift in Sources */,
@@ -1960,7 +1900,6 @@
 				8E20511A2CD4F32F00D87C6A /* AppDelegate+Messaging.swift in Sources */,
 				8E20511B2CD4F32F00D87C6A /* NoticeRepository.swift in Sources */,
 				8EC6B8922D30971A002B45C7 /* Bookmark.xcdatamodeld in Sources */,
-				8ED4E53B2DFFCA3C000EDB36 /* PendingNoticeRepositoryImpl.swift in Sources */,
 				8E20511C2CD4F32F00D87C6A /* UIDevice+Identifier.swift in Sources */,
 				8EC6B8A42D3107FC002B45C7 /* BookmarkDetail.swift in Sources */,
 				8E20511F2CD4F32F00D87C6A /* MainTableViewCell.swift in Sources */,
@@ -1996,7 +1935,6 @@
 				8E0907692DE57948008BDF18 /* BookmarkTableViewController+Layout.swift in Sources */,
 				8EDAFD422D6818D000834E00 /* Errors.swift in Sources */,
 				8EE65DAD2DE947F50059770D /* NotificationSubscription.swift in Sources */,
-				8ED4E5422DFFD303000EDB36 /* PendingNoticeListViewModel.swift in Sources */,
 				8E20512F2CD4F32F00D87C6A /* ReportViewModel.swift in Sources */,
 				8E7A9E7C2DCB4D3C0001D4AA /* NoticeCollectionViewController.swift in Sources */,
 				8EFE52FE2CDCBB89003A7330 /* SearchRepository.swift in Sources */,
@@ -2032,7 +1970,6 @@
 				8EC6B88D2D309529002B45C7 /* Notice.swift in Sources */,
 				8E69F87F2DFE7DCB00F313F0 /* PendingNotice.xcdatamodeld in Sources */,
 				8E0699A82E0127E4008A5DCE /* UserDefaultsKeys.swift in Sources */,
-				8E69F8842DFE7F0900F313F0 /* PendingNoticeDataSource.swift in Sources */,
 				8ECB82DD2CDB6C3D00420349 /* NotificationService.swift in Sources */,
 				8E214E242E1362D900E2B830 /* Tip.swift in Sources */,
 				8ED4E54E2DFFE4EF000EDB36 /* UserDefaults+AppGroup.swift in Sources */,
@@ -2070,7 +2007,6 @@
 				8EC6B88C2D309529002B45C7 /* Notice.swift in Sources */,
 				8E69F87E2DFE7DCB00F313F0 /* PendingNotice.xcdatamodeld in Sources */,
 				8E0699A72E0127E4008A5DCE /* UserDefaultsKeys.swift in Sources */,
-				8E69F8832DFE7F0900F313F0 /* PendingNoticeDataSource.swift in Sources */,
 				8EB6D2002C663627004E8AC2 /* NotificationService.swift in Sources */,
 				8E214E222E1362D900E2B830 /* Tip.swift in Sources */,
 				8ED4E54D2DFFE4EF000EDB36 /* UserDefaults+AppGroup.swift in Sources */,

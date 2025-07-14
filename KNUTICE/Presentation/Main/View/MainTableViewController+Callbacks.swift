@@ -68,19 +68,4 @@ extension MainTableViewController {
         let viewController = UIHostingController(rootView: SettingView())
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
-    //MARK: - Notification Button Actrion
-    @objc func navigateToPendingNoticeList(_ sender: UIButton) {
-        let viewController = UIHostingController(
-            rootView: PendingNoticeList()
-                .environmentObject(PendingNoticeListViewModel())
-        )
-        navigationController?.pushViewController(viewController, animated: true)
-        
-//        if UserDefaults.shared.bool(forKey: UserDefaultsKeys.hasNewPendingNotice.rawValue) {
-//            UserDefaults.shared.set(false, forKey: UserDefaultsKeys.hasNewPendingNotice.rawValue)
-//            bellBtn.setImage(createNormalBellIcon(), for: .normal)
-//            bellBtn.setImage(createHighlightedBellIcon(), for: .highlighted)
-//        }
-    }
 }
