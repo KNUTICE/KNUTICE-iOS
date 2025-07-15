@@ -70,16 +70,8 @@ extension SearchCollectionViewController: UICollectionViewDelegateFlowLayout {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        if #available(iOS 26, *) {
-            let viewController = UIHostingController(
-                rootView: WebNoticeView()
-                    .environment(WebNoticeViewModel(notice: viewModel.notices.value[0].items[indexPath.row]))
-            )
-            navigationController?.pushViewController(viewController, animated: true)
-        } else {
-            let viewController = WebViewController(notice: viewModel.notices.value[0].items[indexPath.row])
-            navigationController?.pushViewController(viewController, animated: true)
-        }
+        let viewController = WebViewController(notice: viewModel.notices.value[0].items[indexPath.row])
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 

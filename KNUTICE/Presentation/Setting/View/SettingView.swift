@@ -40,13 +40,7 @@ struct SettingView: View {
                 .padding(.bottom)
                 
                 NavigationLink {
-                    if #available(iOS 26, *) {
-                        WebContentView()
-                            .navigationTitle("오픈소스 라이선스")
-                            .environment(WebContentViewModel(contentURL: Bundle.main.openSourceURL))
-                    } else {
-                        BaseWebContentView(navigationTitle: "오픈소스 라이선스", contentURL: Bundle.main.openSourceURL)
-                    }
+                    BaseWebContentView(navigationTitle: "오픈소스 라이선스", contentURL: Bundle.main.openSourceURL)
                 } label: {
                     NavigationIndicator(title: "오픈소스 라이선스")
                 }
