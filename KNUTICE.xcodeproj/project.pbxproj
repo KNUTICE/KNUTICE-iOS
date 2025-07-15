@@ -278,14 +278,6 @@
 		8EB6D20E2C6713BB004E8AC2 /* View+Fork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6D20D2C6713BB004E8AC2 /* View+Fork.swift */; };
 		8EB767812D439DE90086AB60 /* Date+EndOfToday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB767802D439DE90086AB60 /* Date+EndOfToday.swift */; };
 		8EB767822D439DE90086AB60 /* Date+EndOfToday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB767802D439DE90086AB60 /* Date+EndOfToday.swift */; };
-		8EB8FA732DF9205900715F73 /* WebContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB8FA722DF9205900715F73 /* WebContentView.swift */; };
-		8EB8FA742DF9205900715F73 /* WebContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB8FA722DF9205900715F73 /* WebContentView.swift */; };
-		8EB8FA782DF9319500715F73 /* WebContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB8FA772DF9319500715F73 /* WebContentViewModel.swift */; };
-		8EB8FA792DF9319500715F73 /* WebContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB8FA772DF9319500715F73 /* WebContentViewModel.swift */; };
-		8EB8FA7B2DF9540D00715F73 /* WebNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB8FA7A2DF9540D00715F73 /* WebNoticeView.swift */; };
-		8EB8FA7C2DF9540D00715F73 /* WebNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB8FA7A2DF9540D00715F73 /* WebNoticeView.swift */; };
-		8EB8FA7E2DF954C200715F73 /* WebNoticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB8FA7D2DF954C200715F73 /* WebNoticeViewModel.swift */; };
-		8EB8FA7F2DF954C200715F73 /* WebNoticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB8FA7D2DF954C200715F73 /* WebNoticeViewModel.swift */; };
 		8EB8FA832DF9BC7200715F73 /* BookmarkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB8FA812DF9BC7200715F73 /* BookmarkTests.swift */; };
 		8EBBE2402CA0E3FC00826D5A /* LightTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBBE23F2CA0E3FB00826D5A /* LightTextView.swift */; };
 		8EC141212D33E4E8001FD93C /* NoticeWebVCWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC141202D33E4E8001FD93C /* NoticeWebVCWrapper.swift */; };
@@ -565,10 +557,6 @@
 		8EB6D20B2C66FC5B004E8AC2 /* AppVersionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionViewModel.swift; sourceTree = "<group>"; };
 		8EB6D20D2C6713BB004E8AC2 /* View+Fork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Fork.swift"; sourceTree = "<group>"; };
 		8EB767802D439DE90086AB60 /* Date+EndOfToday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+EndOfToday.swift"; sourceTree = "<group>"; };
-		8EB8FA722DF9205900715F73 /* WebContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebContentView.swift; sourceTree = "<group>"; };
-		8EB8FA772DF9319500715F73 /* WebContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebContentViewModel.swift; sourceTree = "<group>"; };
-		8EB8FA7A2DF9540D00715F73 /* WebNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebNoticeView.swift; sourceTree = "<group>"; };
-		8EB8FA7D2DF954C200715F73 /* WebNoticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebNoticeViewModel.swift; sourceTree = "<group>"; };
 		8EB8FA812DF9BC7200715F73 /* BookmarkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkTests.swift; sourceTree = "<group>"; };
 		8EBBE23F2CA0E3FB00826D5A /* LightTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTextView.swift; sourceTree = "<group>"; };
 		8EC141202D33E4E8001FD93C /* NoticeWebVCWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeWebVCWrapper.swift; sourceTree = "<group>"; };
@@ -905,7 +893,6 @@
 		8E00AF6D2C361F7E0037EC38 /* WebView */ = {
 			isa = PBXGroup;
 			children = (
-				8EB8FA762DF9318A00715F73 /* ViewModel */,
 				8EB8FA752DF9318100715F73 /* View */,
 			);
 			path = WebView;
@@ -1338,20 +1325,9 @@
 			children = (
 				8EA9ACA82C46AC3C00C9E287 /* BaseWebView.swift */,
 				8EA9ACAA2C46AEC900C9E287 /* BaseWebContentView.swift */,
-				8EB8FA722DF9205900715F73 /* WebContentView.swift */,
 				8E00AF6B2C361F780037EC38 /* WebViewController.swift */,
-				8EB8FA7A2DF9540D00715F73 /* WebNoticeView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		8EB8FA762DF9318A00715F73 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				8EB8FA772DF9319500715F73 /* WebContentViewModel.swift */,
-				8EB8FA7D2DF954C200715F73 /* WebNoticeViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		8EB8FA802DF9BC3E00715F73 /* BookmarkTests */ = {
@@ -1686,13 +1662,11 @@
 				8EB3F92F2D3E192F00DD47B3 /* BottomModal.swift in Sources */,
 				8EDE5C762DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift in Sources */,
 				5C89DD502BFA120B00CCCCCD /* MainNoticeResponseDTO.swift in Sources */,
-				8EB8FA7E2DF954C200715F73 /* WebNoticeViewModel.swift in Sources */,
 				5CD2EFC12BF356FB00066C87 /* UIViewController+Preview.swift in Sources */,
 				8E3F021E2C9FB46100AE89D5 /* ReportService.swift in Sources */,
 				8E5E8BF12D36309A0078C007 /* BookmarkDetailSwitchView.swift in Sources */,
 				8E6931572CEEFC0F0074142B /* TopicSubscriptionList.swift in Sources */,
 				8E5385742C644AB000AF151B /* TokenRepository.swift in Sources */,
-				8EB8FA7C2DF9540D00715F73 /* WebNoticeView.swift in Sources */,
 				8E69315A2CEEFC2F0074142B /* TopicSubscriptionListViewModel.swift in Sources */,
 				5C5698922BEFB4A20085E389 /* MainTableViewModel.swift in Sources */,
 				5C8256462BE5CE1A0038D4C8 /* MainTableViewController.swift in Sources */,
@@ -1779,7 +1753,6 @@
 				8E214E212E1362D900E2B830 /* Tip.swift in Sources */,
 				8E668E662E051E6F00358B9F /* BookmarkSortOption.swift in Sources */,
 				8E0AA23D2D2419740068681C /* RemoteDataSource.swift in Sources */,
-				8EB8FA742DF9205900715F73 /* WebContentView.swift in Sources */,
 				8E5385782C644C3F00AF151B /* TokenRepositoryImpl.swift in Sources */,
 				8E3B8C432D2B9A97007E9579 /* BookmarkForm.swift in Sources */,
 				8E4BD5932E03D26F00218365 /* SearchCollectionViewController+binding.swift in Sources */,
@@ -1812,7 +1785,6 @@
 				5C8256442BE5CE1A0038D4C8 /* SceneDelegate.swift in Sources */,
 				8EFE53002CDCBD3D003A7330 /* SearchRepositoryImpl.swift in Sources */,
 				8EAEAD982E24C9C500763F08 /* BookmarkUpdate.swift in Sources */,
-				8EB8FA792DF9319500715F73 /* WebContentViewModel.swift in Sources */,
 				8E0907752DE591E6008BDF18 /* BookmarkSectionModel.swift in Sources */,
 				8E09077E2DE69FF3008BDF18 /* SearchCollectionViewBackground.swift in Sources */,
 				5C190A462BFD6BDB00E0254B /* Bundle+URL.swift in Sources */,
@@ -1827,13 +1799,11 @@
 				8EB3F9302D3E192F00DD47B3 /* BottomModal.swift in Sources */,
 				8EDE5C772DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift in Sources */,
 				8E2050FD2CD4F32F00D87C6A /* MainNoticeResponseDTO.swift in Sources */,
-				8EB8FA7F2DF954C200715F73 /* WebNoticeViewModel.swift in Sources */,
 				8E2050FE2CD4F32F00D87C6A /* UIViewController+Preview.swift in Sources */,
 				8E2050FF2CD4F32F00D87C6A /* ReportService.swift in Sources */,
 				8E5E8BF02D36309A0078C007 /* BookmarkDetailSwitchView.swift in Sources */,
 				8E6931562CEEFC0F0074142B /* TopicSubscriptionList.swift in Sources */,
 				8E2051002CD4F32F00D87C6A /* TokenRepository.swift in Sources */,
-				8EB8FA7B2DF9540D00715F73 /* WebNoticeView.swift in Sources */,
 				8E6931592CEEFC2F0074142B /* TopicSubscriptionListViewModel.swift in Sources */,
 				8E2051012CD4F32F00D87C6A /* MainTableViewModel.swift in Sources */,
 				8E2051022CD4F32F00D87C6A /* MainTableViewController.swift in Sources */,
@@ -1920,7 +1890,6 @@
 				8E214E232E1362D900E2B830 /* Tip.swift in Sources */,
 				8E668E672E051E6F00358B9F /* BookmarkSortOption.swift in Sources */,
 				8E0AA23E2D2419740068681C /* RemoteDataSource.swift in Sources */,
-				8EB8FA732DF9205900715F73 /* WebContentView.swift in Sources */,
 				8E2051292CD4F32F00D87C6A /* TokenRepositoryImpl.swift in Sources */,
 				8E3B8C422D2B9A97007E9579 /* BookmarkForm.swift in Sources */,
 				8E4BD5942E03D26F00218365 /* SearchCollectionViewController+binding.swift in Sources */,
@@ -1953,7 +1922,6 @@
 				8E2051332CD4F32F00D87C6A /* SceneDelegate.swift in Sources */,
 				8EFE53012CDCBD3D003A7330 /* SearchRepositoryImpl.swift in Sources */,
 				8EAEAD992E24C9C500763F08 /* BookmarkUpdate.swift in Sources */,
-				8EB8FA782DF9319500715F73 /* WebContentViewModel.swift in Sources */,
 				8E0907762DE591E6008BDF18 /* BookmarkSectionModel.swift in Sources */,
 				8E09077F2DE69FF3008BDF18 /* SearchCollectionViewBackground.swift in Sources */,
 				8E2051362CD4F32F00D87C6A /* Bundle+URL.swift in Sources */,

@@ -122,16 +122,8 @@ extension MainTableViewController: UITableViewDelegate {
     
     //MARK: - Cell이 선택 되었을 때 해당 공지사항 웹 페이지로 이동
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if #available(iOS 26, *) {
-            let viewController = UIHostingController(
-                rootView: WebNoticeView()
-                    .environment(WebNoticeViewModel(notice: viewModel.cellValues[indexPath.section].items[indexPath.row].notice))
-            )
-            navigationController?.pushViewController(viewController, animated: true)
-        } else {
-            let viewController = WebViewController(notice: viewModel.cellValues[indexPath.section].items[indexPath.row].notice)
-            navigationController?.pushViewController(viewController, animated: true)
-        }
+        let viewController = WebViewController(notice: viewModel.cellValues[indexPath.section].items[indexPath.row].notice)
+        navigationController?.pushViewController(viewController, animated: true)
         
         tableView.deselectRow(at: indexPath, animated: true)
     }

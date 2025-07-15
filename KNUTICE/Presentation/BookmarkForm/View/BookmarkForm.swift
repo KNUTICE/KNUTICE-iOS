@@ -64,12 +64,7 @@ struct BookmarkForm: View {
                     Button {
                         dismissAction()
                     } label: {
-                        if #available(iOS 26, *) {
-                            Image(systemName: "xmark")
-                        } else {
-                            Text("취소")
-                                .accentColor(.accent2)
-                        }
+                        Image(systemName: "xmark")
                     }
                 }
                 
@@ -82,11 +77,7 @@ struct BookmarkForm: View {
                             viewModel.update()
                         }
                     } label: {
-                        if #available(iOS 26, *) {
-                            Image(systemName: "checkmark")
-                        } else {
-                            Text("저장")
-                        }
+                        Image(systemName: "checkmark")
                     }
                     .foregroundStyle(.accent2)
                 }
