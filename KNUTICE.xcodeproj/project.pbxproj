@@ -541,6 +541,7 @@
 		8E7A9E7A2DCB4D3C0001D4AA /* NoticeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCollectionViewController.swift; sourceTree = "<group>"; };
 		8E7A9E7D2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoticeCollectionViewController+Layout.swift"; sourceTree = "<group>"; };
 		8E887D4C2E0A37A400D5E2E3 /* NoticeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeHeader.swift; sourceTree = "<group>"; };
+		8E8F51442E266ADB00CE1A23 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		8E9BC16D2E1FA12500B74B35 /* Tips.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Tips.json; sourceTree = "<group>"; };
 		8E9BC1702E1FA21B00B74B35 /* MockTipAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTipAPITest.swift; sourceTree = "<group>"; };
 		8EA47FE82D922C5800B68EAD /* TabBarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarService.swift; sourceTree = "<group>"; };
@@ -1551,11 +1552,11 @@
 			};
 			buildConfigurationList = 5C8256392BE5CE1A0038D4C8 /* Build configuration list for PBXProject "KNUTICE" */;
 			compatibilityVersion = "Xcode 15.3";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				ko,
 			);
 			mainGroup = 5C8256352BE5CE1A0038D4C8;
 			packageReferences = (
@@ -2012,6 +2013,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				5C82564D2BE5CE1B0038D4C8 /* Base */,
+				8E8F51442E266ADB00CE1A23 /* ko */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -2157,6 +2159,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KNUTICE/Application/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = KNUTICE;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -2195,6 +2198,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KNUTICE/Application/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = KNUTICE;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -2234,6 +2238,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "KNUTICE/Application/Info-Dev.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "KNUTICE beta";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -2275,6 +2280,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "KNUTICE/Application/Info-Dev.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "KNUTICE beta";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
