@@ -30,7 +30,7 @@ final class WebViewController: UIViewController {
         
         return webView
     }()
-    lazy var reminderSheetBtn: UIButton = {
+    lazy var bookmarkBtn: UIButton = {
         let button = UIButton()
         let plusImage = UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate)
         button.setImage(plusImage, for: .normal)
@@ -57,12 +57,6 @@ final class WebViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.parent?.navigationItem.rightBarButtonItem = self.navigationItem.rightBarButtonItem
     }
     
     override func viewDidLoad() {
@@ -93,14 +87,20 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
         webView.evaluateJavaScript("document.documentElement.style.webkitTouchCallout='none'", completionHandler: nil)
         
         //Header와 Footer 숨김
-        webView.evaluateJavaScript("document.getElementById(\"header\").style.display='none';document.getElementById(\"footer\").style.display='none';", completionHandler: { (res, error) -> Void in
+        webView.evaluateJavaScript(
+            """
+            document.getElementById(\"header\").style.display='none';
+            document.getElementById(\"footer\").style.display='none';
+            document.getElementById(\"remote\").style.display='none';
+            """
+        ) { (res, error) -> Void in
+            //로딩 완료 후 webView 활성화
+            webView.isHidden = false
+            
             if let error {
                 print("WebViewController error: \(error.localizedDescription)")
             }
-        })
-        
-        //로딩 완료 후 webView 활성화
-        webView.isHidden = false
+        }
     }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
@@ -120,10 +120,10 @@ extension WebViewController {
             make.edges.equalToSuperview()
         }
         
-        //reminderSheetBtn
-        view.addSubview(reminderSheetBtn)
-        reminderSheetBtn.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-50)
+        //bookmarkBtn
+        view.addSubview(bookmarkBtn)
+        bookmarkBtn.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(UIDevice.current.userInterfaceIdiom == .phone ? -50 : -100)
             make.trailing.equalToSuperview().offset(-20)
             make.width.height.equalTo(50)
         }
