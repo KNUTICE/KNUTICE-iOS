@@ -90,7 +90,21 @@ extension UITabBarViewController {
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = appearance
         
-        setViewControllers([mainViewController, bookmarkViewController, searchViewController], animated: true)
+        if #available(iOS 18, *) {
+            tabs = [
+                UITab(title: "홈", image: UIImage(systemName: "house.fill"), identifier: "Tabs.main") { _ in
+                    self.mainViewController
+                },
+                UITab(title: "북마크", image: UIImage(systemName: "bookmark.fill"), identifier: "Tabs.bookmark") { _ in
+                    self.bookmarkViewController
+                },
+                UISearchTab { _ in
+                    self.searchViewController
+                }
+            ]
+        } else {
+            setViewControllers([mainViewController, bookmarkViewController, searchViewController], animated: true)
+        }
     }
     
     func bind() {
