@@ -57,8 +57,7 @@ final class NoticeCollectionViewCellWithThumbnail: UICollectionViewCell {
             make.top.equalToSuperview().offset(20)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
-            make.width.equalTo(UIScreen.main.bounds.width - 32)
-            make.height.equalTo(UIDevice.current.userInterfaceIdiom == .phone ? UIScreen.main.bounds.width * 0.4 : UIScreen.main.bounds.width * 0.2)
+            make.height.equalTo(image.snp.width).multipliedBy(0.4)
         }
         
         contentView.addSubview(titleLabel)
