@@ -15,7 +15,6 @@ final class WebViewController: UIViewController {
         let activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         return activityIndicator
     }()
@@ -26,7 +25,6 @@ final class WebViewController: UIViewController {
         webView.allowsBackForwardNavigationGestures = false
         webView.configuration.defaultWebpagePreferences.allowsContentJavaScript = true
         webView.isHidden = true
-        webView.translatesAutoresizingMaskIntoConstraints = false
         
         return webView
     }()
@@ -43,7 +41,6 @@ final class WebViewController: UIViewController {
         button.layer.shadowRadius = 7
         button.layer.shadowOffset = CGSize(width: 0, height: 0)
         button.addTarget(self, action: #selector(openBookmarkForm(_:)), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }()
@@ -64,8 +61,8 @@ final class WebViewController: UIViewController {
         
         navigationItem.largeTitleDisplayMode = .never    //navigation inline title
         view.backgroundColor = .detailViewBackground
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(openSharePanel))
         setupLayout()
+        setupNavigationBar()
         loadPage(notice.contentUrl)
     }
     
@@ -82,13 +79,10 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         activityIndicator.isHidden = true
         
-        //롱터치 방지
-        webView.evaluateJavaScript("document.documentElement.style.webkitUserSelect='none'", completionHandler: nil)
-        webView.evaluateJavaScript("document.documentElement.style.webkitTouchCallout='none'", completionHandler: nil)
-        
-        //Header와 Footer 숨김
         webView.evaluateJavaScript(
             """
+            document.documentElement.style.webkitUserSelect='none';
+            document.documentElement.style.webkitTouchCallout='none';
             document.getElementById(\"header\").style.display='none';
             document.getElementById(\"footer\").style.display='none';
             document.getElementById(\"remote\").style.display='none';
@@ -117,7 +111,8 @@ extension WebViewController {
         //webView
         view.addSubview(webView)
         webView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.leading.trailing.bottom.equalToSuperview()
         }
         
         //bookmarkBtn
@@ -133,6 +128,16 @@ extension WebViewController {
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
         }
+    }
+    
+    func setupNavigationBar() {
+        //NavigationItem
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "square.and.arrow.up"),
+            style: .plain,
+            target: self,
+            action: #selector(openSharePanel)
+        )
     }
 }
 
