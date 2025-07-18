@@ -64,7 +64,7 @@ struct BookmarkForm: View {
                     Button {
                         dismissAction()
                     } label: {
-                        Image(systemName: "xmark")
+                        Text("취소")
                     }
                 }
                 
@@ -77,7 +77,7 @@ struct BookmarkForm: View {
                             viewModel.update()
                         }
                     } label: {
-                        Image(systemName: "checkmark")
+                        Text("저장")
                     }
                     .foregroundStyle(.accent2)
                 }
