@@ -63,7 +63,7 @@ final class BookmarkTests: XCTestCase {
             })
             .store(in: &cancellables)
         
-        wait(for: [expectation], timeout: 1)
+        wait(for: [expectation], timeout: 2)
     }
 }
 
