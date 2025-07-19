@@ -15,7 +15,6 @@ final class WebViewController: UIViewController {
         let activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         return activityIndicator
     }()
@@ -26,11 +25,10 @@ final class WebViewController: UIViewController {
         webView.allowsBackForwardNavigationGestures = false
         webView.configuration.defaultWebpagePreferences.allowsContentJavaScript = true
         webView.isHidden = true
-        webView.translatesAutoresizingMaskIntoConstraints = false
         
         return webView
     }()
-    lazy var reminderSheetBtn: UIButton = {
+    lazy var bookmarkBtn: UIButton = {
         let button = UIButton()
         let plusImage = UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate)
         button.setImage(plusImage, for: .normal)
@@ -43,7 +41,6 @@ final class WebViewController: UIViewController {
         button.layer.shadowRadius = 7
         button.layer.shadowOffset = CGSize(width: 0, height: 0)
         button.addTarget(self, action: #selector(openBookmarkForm(_:)), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }()
@@ -59,19 +56,13 @@ final class WebViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.parent?.navigationItem.rightBarButtonItem = self.navigationItem.rightBarButtonItem
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.largeTitleDisplayMode = .never    //navigation inline title
         view.backgroundColor = .detailViewBackground
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(openSharePanel))
         setupLayout()
+        setupNavigationBar()
         loadPage(notice.contentUrl)
     }
     
@@ -88,19 +79,22 @@ extension WebViewController: WKNavigationDelegate, WKUIDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         activityIndicator.isHidden = true
         
-        //롱터치 방지
-        webView.evaluateJavaScript("document.documentElement.style.webkitUserSelect='none'", completionHandler: nil)
-        webView.evaluateJavaScript("document.documentElement.style.webkitTouchCallout='none'", completionHandler: nil)
-        
-        //Header와 Footer 숨김
-        webView.evaluateJavaScript("document.getElementById(\"header\").style.display='none';document.getElementById(\"footer\").style.display='none';", completionHandler: { (res, error) -> Void in
+        webView.evaluateJavaScript(
+            """
+            document.documentElement.style.webkitUserSelect='none';
+            document.documentElement.style.webkitTouchCallout='none';
+            document.getElementById(\"header\").style.display='none';
+            document.getElementById(\"footer\").style.display='none';
+            document.getElementById(\"remote\").style.display='none';
+            """
+        ) { (res, error) -> Void in
+            //로딩 완료 후 webView 활성화
+            webView.isHidden = false
+            
             if let error {
                 print("WebViewController error: \(error.localizedDescription)")
             }
-        })
-        
-        //로딩 완료 후 webView 활성화
-        webView.isHidden = false
+        }
     }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
@@ -117,13 +111,14 @@ extension WebViewController {
         //webView
         view.addSubview(webView)
         webView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.leading.trailing.bottom.equalToSuperview()
         }
         
-        //reminderSheetBtn
-        view.addSubview(reminderSheetBtn)
-        reminderSheetBtn.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-50)
+        //bookmarkBtn
+        view.addSubview(bookmarkBtn)
+        bookmarkBtn.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(UIDevice.current.userInterfaceIdiom == .phone ? -50 : -100)
             make.trailing.equalToSuperview().offset(-20)
             make.width.height.equalTo(50)
         }
@@ -133,6 +128,16 @@ extension WebViewController {
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
         }
+    }
+    
+    func setupNavigationBar() {
+        //NavigationItem
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "square.and.arrow.up"),
+            style: .plain,
+            target: self,
+            action: #selector(openSharePanel)
+        )
     }
 }
 
