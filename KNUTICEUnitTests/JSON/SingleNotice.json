@@ -1,0 +1,16 @@
+{
+    "result": {
+        "resultCode": 200,
+        "resultMessage": "성공",
+        "resultDescription": "성공"
+    },
+    "body": {
+        "nttId": 1079970,
+        "title": "[졸업생특화프로그램사업] 4학년 재학생 대상 진로·취업 지원 희망 동의 및 현황조사 안내",
+        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1079970",
+        "contentImage": "https://www.ut.ac.kr/namo/binary/images/000098/포스터_1.png",
+        "departmentName": "취업성공지원과",
+        "registeredAt": "2025-06-12",
+        "noticeName": "GENERAL_NEWS"
+    }
+}

@@ -8,40 +8,37 @@
 import RxSwift
 import Combine
 import Factory
+import Foundation
 
 final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
     
-    @available(*, deprecated, message: "Use Combine instead.")
-    func fetchNotices(for category: NoticeCategory) -> Single<[Notice]> {
-        return dataSource.sendGetRequest(to: category.remoteURL, resultType: NoticeReponseDTO.self)
-            .map { [weak self] in
-                return self?.createNotice($0) ?? []
-            }
-    }
-    
-    @available(*, deprecated, message: "Use Combine instead.")
-    func fetchNotices(for category: NoticeCategory, after number: Int) -> Single<[Notice]> {
-        return dataSource.sendGetRequest(to: category.remoteURL + "&nttId=\(number)", resultType: NoticeReponseDTO.self)
-            .map { [weak self] in
-                return self?.createNotice($0) ?? []
-            }
-    }
-    
     func fetchNotices(for category: NoticeCategory) -> AnyPublisher<[Notice], any Error> {
-        return dataSource.sendGetRequest(to: category.remoteURL, resultType: NoticeReponseDTO.self)
-            .compactMap { [weak self] in
+        return dataSource.request(
+            Bundle.main.noticeURL + "?noticeName=\(category.rawValue)",
+            method: .get,
+            decoding: NoticeReponseDTO.self
+        )
+        .compactMap { [weak self] dto in
+            dto.body?.compactMap {
                 self?.createNotice($0)
             }
-            .eraseToAnyPublisher()
+        }
+        .eraseToAnyPublisher()
     }
     
     func fetchNotices(for category: NoticeCategory, after number: Int) -> AnyPublisher<[Notice], any Error> {
-        return dataSource.sendGetRequest(to: category.remoteURL + "&nttId=\(number)", resultType: NoticeReponseDTO.self)
-            .compactMap { [weak self] in
+        return dataSource.request(
+            Bundle.main.noticeURL + "?noticeName=\(category.rawValue)" + "&nttId=\(number)",
+            method: .get,
+            decoding: NoticeReponseDTO.self
+        )
+        .compactMap { [weak self] dto in
+            dto.body?.compactMap {
                 self?.createNotice($0)
             }
-            .eraseToAnyPublisher()
+        }
+        .eraseToAnyPublisher()
     }
     
     func fetchNotices(by nttIds: [Int]) -> AnyPublisher<[Notice], any Error> {
@@ -56,35 +53,47 @@ final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
             ]
         ]
         
-        return dataSource.sendPostRequest(to: Bundle.main.noticeSyncURL, params: params, resultType: NoticeReponseDTO.self)
-            .compactMap { [weak self] in
+        return dataSource.request(
+            Bundle.main.noticeSyncURL,
+            method: .post,
+            parameters: params,
+            decoding: NoticeReponseDTO.self
+        )
+        .compactMap { [weak self] dto in
+            dto.body?.compactMap {
                 self?.createNotice($0)
             }
-            .eraseToAnyPublisher()
+        }
+        .eraseToAnyPublisher()
     }
     
     func fetchNotice(by nttId: Int) -> AnyPublisher<Notice?, any Error> {
-        return dataSource.sendGetRequest(to: Bundle.main.mainNoticeURL + "/\(nttId)", resultType: SingleNoticeResponseDTO.self)
-            .map { [weak self] dto in
-                return dto.body.flatMap {
-                    self?.createNotice($0)
-                }
+        return dataSource.request(
+            Bundle.main.mainNoticeURL + "/\(nttId)",
+            method: .get,
+            decoding: SingleNoticeResponseDTO.self
+        )
+        .map { [weak self] dto in
+            return dto.body.flatMap {
+                self?.createNotice($0)
             }
-            .eraseToAnyPublisher()
-    }
-}
-
-fileprivate extension NoticeCategory {
-    var remoteURL: String {
-        switch self {
-        case .generalNotice:
-            return Bundle.main.generalNoticeURL
-        case .academicNotice:
-            return Bundle.main.academicNoticeURL
-        case .scholarshipNotice:
-            return Bundle.main.scholarshipNoticeURL
-        case .eventNotice:
-            return Bundle.main.eventNoticeURL
         }
+        .eraseToAnyPublisher()
+    }
+    
+    func fetchNotice(by nttId: Int) async throws -> Notice? {
+        try Task.checkCancellation()
+        
+        let dto =  try await dataSource.request(
+            Bundle.main.mainNoticeURL + "/\(nttId)",
+            method: .get,
+            decoding: SingleNoticeResponseDTO.self
+        )
+        
+        guard let body = dto.body else {
+            return nil
+        }
+        
+        return createNotice(body)
     }
 }

@@ -10,10 +10,43 @@ import SwiftUI
 import RxSwift
 
 final class UITabBarViewController: UITabBarController {
-    private let mainViewController = MainTableViewController()
-    private let reminderViewController = UIHostingController(
-        rootView: BookmarkList(viewModel: BookmarkListViewModel())
-    )
+    private let mainViewController: UIViewController = {
+        let viewController = MainTableViewController()
+        viewController.tabBarItem.image = UIImage(systemName: "house")
+        viewController.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
+        viewController.tabBarItem.title = "홈"
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return UINavigationController(rootViewController: viewController)
+        }
+        
+        return viewController
+    }()
+    private let bookmarkViewController: UIViewController = {
+        let viewController = BookmarkTableViewController()
+        viewController.tabBarItem.image = UIImage(systemName: "bookmark")
+        viewController.tabBarItem.selectedImage = UIImage(systemName: "bookmark.fill")
+        viewController.tabBarItem.title = "북마크"
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return UINavigationController(rootViewController: viewController)
+        }
+        
+        return viewController
+    }()
+    private let searchViewController: UIViewController = {
+        let viewController = SearchCollectionViewController()
+        viewController.tabBarItem.image = UIImage(systemName: "magnifyingglass")
+        if UIDevice.current.userInterfaceIdiom  == .phone {
+            viewController.tabBarItem.title = "검색"
+        }
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return UINavigationController(rootViewController: viewController)
+        }
+        
+        return viewController
+    }()
     let viewModel: TabBarViewModel
     let disposeBag: DisposeBag = .init()
     
@@ -34,9 +67,7 @@ final class UITabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setViewControllers([mainViewController, reminderViewController], animated: true)
-        setupShadowView()
-        setupTabBar()
+        setUpTabBar()
         bind()
         viewModel.fetchPushNoticeIfExists()
         
@@ -52,53 +83,30 @@ final class UITabBarViewController: UITabBarController {
 }
 
 extension UITabBarViewController {
-    private func setupTabBar() {
-        mainViewController.tabBarItem.image = UIImage(systemName: "house")
-        mainViewController.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
-        mainViewController.tabBarItem.title = "홈"
-        
-        reminderViewController.tabBarItem.image = UIImage(systemName: "bookmark")
-        reminderViewController.tabBarItem.selectedImage = UIImage(systemName: "bookmark.fill")
-        reminderViewController.tabBarItem.title = "북마크"
-        
-        tabBar.backgroundColor = .tabBar
-        tabBar.layer.cornerRadius = 20
-        tabBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        tabBar.layer.masksToBounds = true
-        
+    func setUpTabBar() {
         let appearance = UITabBarAppearance()
         appearance.configureWithDefaultBackground()
-        appearance.backgroundColor = .tabBar
         
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = appearance
-    }
-    
-    private func setupShadowView() {
-        let shadowView = UIView(frame: .zero)
-        shadowView.translatesAutoresizingMaskIntoConstraints = false
-        shadowView.backgroundColor = .tabBar
-        shadowView.layer.cornerRadius = 20
-        shadowView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        shadowView.layer.shadowColor = UIColor.black.cgColor
-        shadowView.layer.borderWidth = 1
-        shadowView.layer.borderColor = UIColor.tabBar.cgColor
-        shadowView.layer.shadowOffset = CGSize(width: 0, height: 25)
-        shadowView.layer.shadowOpacity = 0.5
-        shadowView.layer.shadowRadius = 20
         
-        view.addSubview(shadowView)
-        view.bringSubviewToFront(tabBar)
-        shadowView.snp.makeConstraints { make in
-            make.width.equalTo(tabBar.snp.width)
-            make.height.equalTo(tabBar.snp.height).offset(-1)
-            make.centerX.equalTo(tabBar.snp.centerX)
-            make.bottom.equalTo(tabBar.snp.bottom)
+        if #available(iOS 18, *) {
+            tabs = [
+                UITab(title: "홈", image: UIImage(systemName: "house.fill"), identifier: "Tabs.main") { _ in
+                    self.mainViewController
+                },
+                UITab(title: "북마크", image: UIImage(systemName: "bookmark.fill"), identifier: "Tabs.bookmark") { _ in
+                    self.bookmarkViewController
+                },
+                UISearchTab { _ in
+                    self.searchViewController
+                }
+            ]
+        } else {
+            setViewControllers([mainViewController, bookmarkViewController, searchViewController], animated: true)
         }
     }
-}
-
-extension UITabBarViewController {
+    
     func bind() {
         viewModel.mainPopupContent
             .delay(.seconds(1), scheduler: MainScheduler.instance)

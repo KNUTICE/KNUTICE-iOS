@@ -13,24 +13,26 @@ struct BookmarkDetailSwitchView: View {
         case editView
     }
     
+    @StateObject private var viewModel: BookmarkFormViewModel
     @State private var selectedMode: BookmarkViewMode = .detailView
     @Environment(\.dismiss) private var dismiss
     
-    let bookmark: Bookmark
+    init(viewModel: BookmarkFormViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
     
     var body: some View {
         Group {
             if selectedMode == .detailView {
-                BookmarkDetail(viewModel: BookmarkDetailViewModel(),
-                               bookmark: bookmark,
-                               selectedMode: $selectedMode)
+                BookmarkDetail(selectedMode: $selectedMode)
+                    .environmentObject(viewModel)
             } else {
-                BookmarkForm(viewModel: BookmarkEditFormViewModel(bookmark: bookmark),
-                             notice: bookmark.notice) {
+                BookmarkForm(for: .update) {
                     withAnimation(.easeInOut) {
                         selectedMode = .detailView
                     }
                 }
+                .environmentObject(viewModel)
                 .navigationBarBackButtonHidden(true)
             }
         }
@@ -42,7 +44,9 @@ struct BookmarkDetailSwitchView: View {
 #if DEBUG
 #Preview {
     NavigationStack {
-        BookmarkDetailSwitchView(bookmark: Bookmark.sample)
+        BookmarkDetailSwitchView(
+            viewModel: BookmarkFormViewModel(bookmark: Bookmark.sample)
+        )
     }
 }
 #endif

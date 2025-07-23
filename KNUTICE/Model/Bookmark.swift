@@ -6,11 +6,24 @@
 //
 
 import Foundation
+import RxDataSources
 
 struct Bookmark {
     let notice: Notice
     var memo: String
     var alarmDate: Date?
+}
+
+extension Bookmark: IdentifiableType, Equatable {
+    typealias Identity = Int
+    
+    var identity: Int {
+        return notice.id
+    }
+    
+    static func == (lhs: Bookmark, rhs: Bookmark) -> Bool {
+        return lhs.identity == rhs.identity
+    }
 }
 
 #if DEBUG

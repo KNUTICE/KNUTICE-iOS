@@ -14,35 +14,40 @@ import XCTest
 final class MockReportTest: XCTestCase {
     private var viewModel: ReportViewModel!
     private var cancellables: Set<AnyCancellable>!
+    private var expectation: XCTestExpectation!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        // Given: ViewModel과 필수 설정 준비
         let configuration = URLSessionConfiguration.default
-        configuration.protocolClasses = [MockPostAPIURLProtocol.self]
+        configuration.protocolClasses = [MockURLProtocol.self]
         let session = Session(configuration: configuration)
         Container.shared.remoteDataSource.register {
             RemoteDataSourceImpl(session: session)
         }
         viewModel = ReportViewModel()
+        viewModel.content = "문의사항입니다."
         cancellables = []
+        expectation = XCTestExpectation(description: "Report transmission succeeds")
+        MockURLProtocol.setUpMockData(.postRequestShouldSucceed)
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        
         viewModel = nil
         cancellables = nil
+        expectation = nil
     }
     
-    func test_문의사항_입력후_제출버튼을_누르면_성공응답을_받음() {
-        //Given
-        let expectation = expectation(description: "Report transmission success")
-        viewModel.content = "문의사항입니다."
+    func test_givenContent_whenReportSubmitted_thenReceivesSuccessResponse() {
         viewModel.$isShowingAlert
             .dropFirst()
             .sink(receiveValue: { [weak self] _ in
                 //Then
                 XCTAssertEqual(self?.viewModel.alertType, .success)
-                expectation.fulfill()
+                self?.expectation.fulfill()
             })
             .store(in: &cancellables)
         
