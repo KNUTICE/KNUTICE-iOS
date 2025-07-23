@@ -26,14 +26,27 @@ final class BookmarkRepositoryImpl: BookmarkRepository {
             .eraseToAnyPublisher()
     }
     
-    func read(delay: Int) -> AnyPublisher<[Bookmark], any Error> {
-        return dataSource.readDTO()
-            .map {
+    func read(
+        page pageNum: Int,
+        pageSize: Int,
+        sortBy option: BookmarkSortOption
+    ) -> AnyPublisher<[Bookmark], any Error> {
+        return dataSource.fetch(page: pageNum, pageSize: pageSize, sortBy: option)
+            .map { [weak self] in
                 $0.compactMap { dto in
-                    self.createBookMark(from: dto)
+                    self?.createBookMark(from: dto)
                 }
             }
-            .delay(for: DispatchQueue.SchedulerTimeType.Stride(integerLiteral: delay), scheduler: DispatchQueue.global())
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchWhereTimestampsAreNil() -> AnyPublisher<[Bookmark], any Error> {
+        return dataSource.fetchItemsWhereTimestampsAreNil()
+            .map { [weak self] in
+                $0.compactMap { dto in
+                    self?.createBookMark(from: dto)
+                }
+            }
             .eraseToAnyPublisher()
     }
     
@@ -63,5 +76,9 @@ final class BookmarkRepositoryImpl: BookmarkRepository {
     
     func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
         return dataSource.update(bookmark: bookmark)
+    }
+    
+    func update(_ updates: [BookmarkUpdate]) -> AnyPublisher<Void, any Error> {
+        return dataSource.update(updates)
     }
 }

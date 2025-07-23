@@ -16,12 +16,6 @@ extension Container {
         }
     }
     
-    var localNotificationDataSource: Factory<LocalNotificationSubscriptionDataSource> {
-        Factory(self) {
-            LocalNotificationDataSourceImpl.shared
-        }
-    }
-    
     var localBookmarkDataSource: Factory<LocalBookmarkDataSource> {
         Factory(self) {
             LocalBookmarkDataSourceImpl.shared
@@ -59,9 +53,9 @@ extension Container {
         }
     }
     
-    var notificationRepository: Factory<NotificationSubscriptionRepository> {
+    var topicSubscriptionRepository: Factory<TopicSubscriptionRepository> {
         Factory(self) {
-            NotificationSubscriptionRepositoryImpl()
+            TopicSubscriptionRepositoryImpl()
         }
     }
     
@@ -77,16 +71,16 @@ extension Container {
         }
     }
     
+    var TipRepository: Factory<TipRepository> {
+        Factory(self) {
+            TipRepositoryImpl()
+        }
+    }
+    
     //MARK: - Service
     var reportService: Factory<ReportService> {
         Factory(self) {
             ReportServiceImpl()
-        }
-    }
-    
-    var notificationService: Factory<NotificationSubscriptionService> {
-        Factory(self) {
-            NotificationSubscriptionServiceImpl()
         }
     }
     
@@ -102,6 +96,12 @@ extension Container {
         }
     }
     
+    var subscriptionService: Factory<TopicSubscriptionService> {
+        Factory(self) {
+            TopicSubscriptionServiceImpl()
+        }
+    }
+    
     //MARK: - ViewModel
     var mainViewModel: Factory<MainTableViewModel> {
         Factory(self) {
@@ -112,6 +112,18 @@ extension Container {
     var reportViewModel: Factory<ReportViewModel> {
         Factory(self) {
             ReportViewModel()
+        }
+    }
+    
+    var searchCollectionViewModel: Factory<NoticeSectionModelProvidable> {
+        Factory(self) {
+            SearchCollectionViewModel()
+        }
+    }
+    
+    var bookmarkTableViewModel: Factory<BookmarkTableViewModel> {
+        Factory(self) {
+            BookmarkTableViewModel()
         }
     }
 }

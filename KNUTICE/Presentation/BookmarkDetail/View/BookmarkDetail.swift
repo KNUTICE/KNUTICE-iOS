@@ -8,41 +8,23 @@
 import SwiftUI
 
 struct BookmarkDetail: View {
-    @StateObject private var viewModel: BookmarkDetailViewModel
+    @EnvironmentObject private var viewModel: BookmarkFormViewModel
     @Environment(\.dismiss) private var dismiss
     @State private var isShowingWebView: Bool = false
     @Binding private var selectedMode: BookmarkDetailSwitchView.BookmarkViewMode
     
-    private let bookmark: Bookmark
-    
-    init(viewModel: BookmarkDetailViewModel,
-         bookmark: Bookmark,
-         selectedMode: Binding<BookmarkDetailSwitchView.BookmarkViewMode>) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-        self.bookmark = bookmark
+    init(selectedMode: Binding<BookmarkDetailSwitchView.BookmarkViewMode>) {
         _selectedMode = selectedMode
     }
     
     var body: some View {
         ZStack {
             ScrollView {
-                HeaderView(notice: bookmark.notice)
-                    .padding()
+                NoticeHeader(notice: viewModel.bookmark.notice)
                 
-                Divider()
-                    .padding([.leading, .trailing])
+                AlarmDetail(alarmDate: viewModel.bookmark.alarmDate)
                 
-                AlarmDetail(alarmDate: bookmark.alarmDate)
-                    .padding()
-                
-                Divider()
-                    .padding([.leading, .trailing])
-                
-                UserMemoDetail(userMemo: bookmark.memo)
-                    .padding()
-                
-                Divider()
-                    .padding([.leading, .trailing])
+                UserMemoDetail(userMemo: viewModel.bookmark.memo)
                 
                 Button {
                     isShowingWebView = true
@@ -55,9 +37,9 @@ struct BookmarkDetail: View {
                         .cornerRadius(20)
                 }
                 .padding([.leading, .trailing])
-                .padding(.top, 50)
+                .padding(.top)
             }
-            .background(.detailViewBackground)
+            .background(.primaryBackground)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Menu {
@@ -73,7 +55,7 @@ struct BookmarkDetail: View {
                         
                         Section {
                             Button(role: .destructive) {
-                                viewModel.delete(bookmark: bookmark)
+                                viewModel.delete()
                             } label: {
                                 Text("삭제")
                                     .foregroundStyle(.red)
@@ -86,7 +68,7 @@ struct BookmarkDetail: View {
             }
             .fullScreenCover(isPresented: $isShowingWebView) {
                 NavigationStack {
-                    NoticeWebVCWrapper(notice: bookmark.notice)
+                    NoticeWebVCWrapper(notice: viewModel.bookmark.notice)
                         .edgesIgnoringSafeArea(.bottom)
                         .toolbar {
                             ToolbarItem(placement: .topBarLeading) {
@@ -113,73 +95,58 @@ struct BookmarkDetail: View {
                 Text("확인")
             }
         } message: {
-            if let message = viewModel.alertMessage {
-                Text(message)
-            }
-        }
-    }
-}
-
-fileprivate struct HeaderView: View {
-    let notice: Notice
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(notice.title)
-                .bold()
-                .font(.headline)
-            
-            HStack {
-                Text(notice.department)
-                
-                Divider()
-                
-                Text(notice.uploadDate)
-                
-                Spacer()
-            }
-            .font(.caption)
-            .foregroundStyle(.gray)
+            Text(viewModel.alertMessage)
         }
     }
 }
 
 fileprivate struct AlarmDetail: View {
+    @Environment(\.colorScheme) private var colorScheme
     let alarmDate: Date?
     
     var body: some View {
         HStack {
-            Text("알림")
+            Text("미리 알림")
+                .bold()
             
             Spacer()
             
             Text(alarmDate?.dateTime ?? "없음")
         }
         .font(.subheadline)
+        .padding()
+        .background(colorScheme == .light ? .white : .mainCellBackground)
+        .cornerRadius(20)
+        .padding()
     }
 }
 
 fileprivate struct UserMemoDetail: View {
+    @Environment(\.colorScheme) private var colorScheme
     let userMemo: String
     
     var body: some View {
         VStack(alignment: .leading) {
             Text("메모")
+                .bold()
                 .padding(.bottom)
             
             Text(userMemo)
         }
         .font(.subheadline)
         .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
+        .background(colorScheme == .light ? .white : .mainCellBackground)
+        .cornerRadius(20)
+        .padding()
     }
 }
 
 #if DEBUG
 #Preview {
     NavigationStack {
-        BookmarkDetail(viewModel: BookmarkDetailViewModel(),
-                       bookmark: Bookmark.sample,
-                       selectedMode: .constant(.detailView))
+        BookmarkDetail(selectedMode: .constant(.detailView))
+            .environmentObject(BookmarkFormViewModel(bookmark: Bookmark.sample))
     }
 }
 #endif

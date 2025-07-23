@@ -8,6 +8,7 @@
 import RxSwift
 import Combine
 import Factory
+import Foundation
 
 final class MainNoticeRepositoryImpl: MainNoticeRepository {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
@@ -15,59 +16,81 @@ final class MainNoticeRepositoryImpl: MainNoticeRepository {
     ///GET 요청 함수 with RxSwift
     @available(*, deprecated)
     func fetchMainNotices() -> Observable<[SectionOfNotice]> {
-        return dataSource.sendGetRequest(to: Bundle.main.mainNoticeURL, resultType: MainNoticeResponseDTO.self)
-            .map { [weak self] in
-                return self?.createScectionOfNotice($0) ?? []
-            }
-            .asObservable()
+        return dataSource.request(
+            Bundle.main.mainNoticeURL,
+            method: .get,
+            decoding: MainNoticeResponseDTO.self)
+        .map { [weak self] in
+            return self?.createScectionOfNotice($0) ?? []
+        }
+        .asObservable()
     }
     
     ///GET 요청 함수 with Combine
     func fetch() -> AnyPublisher<[SectionOfNotice], any Error> {
-        return dataSource.sendGetRequest(to: Bundle.main.mainNoticeURL, resultType: MainNoticeResponseDTO.self)
-            .map { [weak self] in
-                self?.createScectionOfNotice($0) ?? []
-            }
-            .eraseToAnyPublisher()
+        return dataSource.request(
+            Bundle.main.mainNoticeURL,
+            method: .get,
+            decoding: MainNoticeResponseDTO.self)
+        .map { [weak self] in
+            self?.createScectionOfNotice($0) ?? []
+        }
+        .eraseToAnyPublisher()
     }
     
     private func createScectionOfNotice(_ dto: MainNoticeResponseDTO) -> [SectionOfNotice] {
         var sectionOfNotices = [SectionOfNotice]()
         
-        //일반공지
+        //일반소식
         sectionOfNotices.append(
-            SectionOfNotice(header: "일반소식",
-                            items: dto.body.latestThreeGeneralNews.map {
-                                MainNotice(presentationType: .actual,
-                                           notice: createNotice($0))
-                            })
+            SectionOfNotice(
+                header: "일반소식",
+                items: dto.body.latestThreeGeneralNews.map {
+                    MainNotice(presentationType: .actual,
+                               notice: createNotice($0))
+                })
         )
         
         //학사공지
         sectionOfNotices.append(
-            SectionOfNotice(header: "학사공지",
-                            items: dto.body.latestThreeAcademicNews.map {
-                                MainNotice(presentationType: .actual,
-                                           notice: createNotice($0))
-                            })
+            SectionOfNotice(
+                header: "학사공지",
+                items: dto.body.latestThreeAcademicNews.map {
+                    MainNotice(presentationType: .actual,
+                               notice: createNotice($0))
+                })
         )
         
         //장학공지
         sectionOfNotices.append(
-            SectionOfNotice(header: "장학안내",
-                            items: dto.body.latestThreeScholarshipNews.map {
-                                MainNotice(presentationType: .actual,
-                                           notice: createNotice($0))
-                            })
+            SectionOfNotice(
+                header: "장학안내",
+                items: dto.body.latestThreeScholarshipNews.map {
+                    MainNotice(presentationType: .actual,
+                               notice: createNotice($0))
+                })
         )
         
         //행사안내
         sectionOfNotices.append(
-            SectionOfNotice(header: "행사안내",
-                            items: dto.body.latestThreeEventNews.map {
-                                MainNotice(presentationType: .actual,
-                                           notice: createNotice($0))
-                            })
+            SectionOfNotice(
+                header: "행사안내",
+                items: dto.body.latestThreeEventNews.map {
+                    MainNotice(presentationType: .actual,
+                               notice: createNotice($0))
+                })
+        )
+        
+        //취업안내
+        sectionOfNotices.append(
+            SectionOfNotice(
+                header: "취업안내",
+                items: dto.body.latestThreeEmploymentNews.map {
+                    MainNotice(
+                        presentationType: .actual,
+                        notice: createNotice($0)
+                    )
+                })
         )
         
         return sectionOfNotices

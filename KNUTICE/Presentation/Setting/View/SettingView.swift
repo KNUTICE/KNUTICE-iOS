@@ -10,92 +10,57 @@ import Combine
 import Factory
 
 struct SettingView: View {
-    @ObservedObject private var viewModel: SettingViewModel
     @State private var isShowingReport: Bool = false
     @Environment(\.colorScheme) private var colorScheme
     
-    init(viewModel: SettingViewModel) {
-        _viewModel = ObservedObject(wrappedValue: viewModel)
-    }
-    
     var body: some View {
-        List {
-            Section {
+        ScrollView {
+            ContentSection("알림") {
                 NavigationLink {
-                    NotificationSubscriptionList(viewModel: NotificationSubscriptionListViewModel())
+                    TopicSubscriptionList(viewModel: TopicSubscriptionListViewModel())
                 } label: {
-                    Text("서비스 알림")
+                    NavigationIndicator(title: "서비스 알림")
                 }
-                .padding([.top, .bottom])
-            } header: {
-                Text("알림")
             }
-            .listRowBackground(Color.detailViewBackground)
             
-            Section {
+            ContentSection("지원") {
                 Button {
                     isShowingReport.toggle()
                 } label: {
-                    HStack {
-                        Text("고객센터")
-                        
-                        Spacer()
-                        
-                        Image(systemName: "chevron.right")
-                            .foregroundStyle(.chevronGray)
-                            .bold()
-                            .font(.footnote)
-                    }
+                    NavigationIndicator(title: "고객센터")
                 }
-                .padding([.top, .bottom])
-            } header: {
-                Text("지원")
             }
-            .listRowBackground(Color.detailViewBackground)
             
-            Section {
-                HStack {
-                    Text("버전 정보")
-                    
-                    Spacer()
-                    
-                    Text("\(viewModel.appVersion)")
+            ContentSection("앱 정보") {
+                NavigationLink {
+                    AppVersionView(viewModel: AppVersionViewModel())
+                } label: {
+                    NavigationIndicator(title: "버전 정보")
                 }
-                .padding([.top, .bottom])
+                .padding(.bottom)
                 
                 NavigationLink {
-                    ContentWebView(navigationTitle: "오픈소스 라이선스", contentURL: Bundle.main.openSourceURL)
+                    BaseWebContentView(navigationTitle: "오픈소스 라이선스", contentURL: Bundle.main.openSourceURL)
                 } label: {
-                    Text("오픈소스 라이선스")
-                        .padding([.top, .bottom])
+                    NavigationIndicator(title: "오픈소스 라이선스")
                 }
-            } header: {
-                Text("앱 정보")
             }
-            .listRowBackground(Color.detailViewBackground)
             
             #if DEV
-            Section {
+            
+            ContentSection("개발자 도구") {
                 NavigationLink {
                     DeveloperTools(viewModel: DeveloperToolsViewModel())
                 } label: {
-                    Text("Developer Tools")
-                        .padding([.top, .bottom])
+                    NavigationIndicator(title: "Developer Tools")
                 }
-            } header: {
-                Text("개발")
             }
-            .listRowBackground(Color.detailViewBackground)
             #endif
         }
-        .background(.detailViewBackground)
-        .listStyle(.plain)
+        .listStyle(.insetGrouped)
+        .background(.primaryBackground)
         .navigationTitle("설정")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            viewModel.getVersion()
-            viewModel.getNotificationSettings()
-        }
         .fullScreenCover(isPresented: $isShowingReport) {
             NavigationView {
                 ReportView(viewModel: Container.shared.reportViewModel())
@@ -104,8 +69,49 @@ struct SettingView: View {
     }
 }
 
+fileprivate struct ContentSection<Content: View>: View {
+    let title: String
+    let content: () -> Content
+    
+    init(_ title: String, @ViewBuilder content: @escaping () -> Content) {
+        self.title = title
+        self.content = content
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(title)
+                .bold()
+                .padding(.bottom)
+            
+            content()
+        }
+        .padding()
+        .background(.mainCellBackground)
+        .cornerRadius(20)
+        .padding()
+    }
+}
+
+fileprivate struct NavigationIndicator: View {
+    let title: String
+    
+    var body: some View {
+        HStack {
+            Text(title)
+            
+            Spacer()
+            
+            Image(systemName: "chevron.right")
+                .foregroundStyle(.chevronGray)
+                .bold()
+                .font(.footnote)
+        }
+    }
+}
+
 #Preview {
     NavigationView {
-        SettingView(viewModel: SettingViewModel())
+        SettingView()
     }
 }

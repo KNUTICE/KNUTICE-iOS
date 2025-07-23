@@ -5,8 +5,9 @@
 //  Created by 이정훈 on 8/15/24.
 //
 
-import RxSwift
 import Foundation
+import RxSwift
+import UIKit
 
 extension MainTableViewController {
     //MARK: - App이 처음 실행 될 때 시간 기록

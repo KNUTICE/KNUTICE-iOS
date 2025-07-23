@@ -20,7 +20,7 @@ final class MainTableViewController: UIViewController {
         tableView.register(MainTableViewSkeletonCell.self, forCellReuseIdentifier: MainTableViewSkeletonCell.reuseIdentifier)
         tableView.estimatedRowHeight = 100    //cell height가 설정되기 전 임시 크기
         tableView.rowHeight = UITableView.automaticDimension    //동적 Height 설정
-        tableView.backgroundColor = .mainBackground
+        tableView.backgroundColor = .primaryBackground
         tableView.delegate = self
         tableView.refreshControl = refreshControl
         
@@ -36,43 +36,21 @@ final class MainTableViewController: UIViewController {
         return label
     }()
     lazy var settingBtn: UIButton = {
-        let targetSize = CGSize(width: 25, height: 24)
-        let renderer = UIGraphicsImageRenderer(size: targetSize)
-        let gearImage = UIImage(systemName: "gearshape")
-        let selectedGearImage = UIImage(systemName: "gearshape")?.withTintColor(.lightGray)
-        let resizedGearImage = renderer.image { _ in
-            gearImage?.draw(in: CGRect(origin: .zero, size: targetSize))
-        }.withTintColor(.navigationButton)
-        let resizedSelectedGearImage = renderer.image { _ in
-            selectedGearImage?.draw(in: CGRect(origin: .zero, size: targetSize))
-        }
+        let configuration = UIImage.SymbolConfiguration(textStyle: .title2)
+        let gearImage = UIImage(systemName: "gearshape", withConfiguration: configuration)?
+            .withRenderingMode(.alwaysTemplate)
+        let selectedGearImage = UIImage(systemName: "gearshape", withConfiguration: configuration)?
+            .withRenderingMode(.alwaysOriginal)
+            .withTintColor(.lightGray)
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(resizedGearImage, for: .normal)
-        button.setImage(resizedSelectedGearImage, for: .highlighted)
+        button.setImage(gearImage, for: .normal)
+        button.setImage(selectedGearImage, for: .highlighted)
         button.addTarget(self, action: #selector(navigateToSetting(_:)), for: .touchUpInside)
         
         return button
     }()
-    lazy var searchBtn: UIButton = {
-        let targetSize = CGSize(width: 25, height: 24)
-        let renderer = UIGraphicsImageRenderer(size: targetSize)
-        let magnifyingglassImage = UIImage(systemName: "magnifyingglass")
-        let selectedMagnifyingglassImage = UIImage(systemName: "magnifyingglass")?.withTintColor(.lightGray)
-        let resizedMagnifyingglassImage = renderer.image { _ in
-            magnifyingglassImage?.draw(in: CGRect(origin: .zero, size: targetSize))
-        }.withTintColor(.navigationButton)
-        let resizedSelectedMagnifyingglassImage = renderer.image { _ in
-            selectedMagnifyingglassImage?.draw(in: CGRect(origin: .zero, size: targetSize))
-        }
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(resizedMagnifyingglassImage, for: .normal)
-        button.setImage(resizedSelectedMagnifyingglassImage, for: .highlighted)
-        button.addTarget(self, action: #selector(navigateToSearch(_:)), for: .touchUpInside)
-        
-        return button
-    }()
+    let tipView = UIHostingController(rootView: TipBannerView().environmentObject(TipBannerViewModel())).view
     let refreshControl = UIRefreshControl()
     @Injected(\.mainViewModel) var viewModel: MainTableViewModel
     let disposeBag = DisposeBag()
@@ -81,14 +59,43 @@ final class MainTableViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        view.backgroundColor = .mainBackground
+        view.backgroundColor = .primaryBackground
         setupLayout()
+        createNavigationItems()
         bind()
         recordEntryTime()
         observeNotification()
         
         //API Call
         viewModel.fetchNoticesWithCombine()
+    }
+    
+    func createNormalBellIcon() -> UIImage? {
+        let configuration: UIImage.SymbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title2)
+        
+        if UserDefaults.shared.bool(forKey: UserDefaultsKeys.hasNewPendingNotice.rawValue) {
+            let paletteStyleConfig = UIImage.SymbolConfiguration(paletteColors: [.red, .black])
+            configuration.applying(paletteStyleConfig)
+            return UIImage(systemName: "bell.badge", withConfiguration: configuration)?
+                .withRenderingMode(.alwaysOriginal)
+        }
+        
+        return UIImage(systemName: "bell", withConfiguration: configuration)?
+            .withRenderingMode(.alwaysTemplate)
+    }
+    
+    func createHighlightedBellIcon() -> UIImage? {
+        let configuration = UIImage.SymbolConfiguration(textStyle: .title2)
+        
+        if UserDefaults.shared.bool(forKey: UserDefaultsKeys.hasNewPendingNotice.rawValue) {
+            return UIImage(systemName: "bell.badge", withConfiguration: configuration)?
+                .withRenderingMode(.alwaysOriginal)
+                .withTintColor(.lightGray)
+        }
+        
+        return UIImage(systemName: "bell", withConfiguration: configuration)?
+            .withRenderingMode(.alwaysOriginal)
+            .withTintColor(.lightGray)
     }
 }
 

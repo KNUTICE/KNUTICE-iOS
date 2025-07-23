@@ -7,6 +7,7 @@
 
 import RxSwift
 import RxDataSources
+import UIKit
 
 //MARK: - Binding
 extension MainTableViewController {
@@ -37,9 +38,25 @@ extension MainTableViewController {
         
         //RefreshControl의 valueChanged 이벤트 관찰 후 수행할 작업
         refreshControl.rx.controlEvent(.valueChanged)
-            .bind(onNext: { [weak self] in
-                self?.viewModel.refreshNoticesWithCombine()
-            })
+            .bind(with: self) { owner, _ in
+                owner.viewModel.refreshNoticesWithCombine()
+            }
+            .disposed(by: disposeBag)
+        
+        // Tip API에서 새 팁 데이터가 도착했음을 알리는 Notification(.hasTipData)을 수신하면
+        // 1) tableHeaderView 높이를 70pt로 확정하고 화면 너비에 맞춰 리사이즈한 뒤
+        // 2) beginUpdates / endUpdates 로 테이블 레이아웃을 즉시 갱신
+        NotificationCenter.default.rx.notification(Notification.Name.hasTipData)
+            .bind(with: self) { owner, _ in
+                owner.tableView.tableHeaderView?.frame = CGRect(
+                    x: 0,
+                    y: 0,
+                    width: owner.view.bounds.width,
+                    height: 70
+                )
+                owner.tableView.beginUpdates()
+                owner.tableView.endUpdates()
+            }
             .disposed(by: disposeBag)
     }
 }

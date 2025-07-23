@@ -7,118 +7,147 @@
   "body": {
     "latestThreeGeneralNews": [
       {
-        "nttId": 1077686,
-        "title": "2025학년도 제1학기 대학(원)생 등록금 추가 수납 안내",
-        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1077686",
-        "contentImage": null,
-        "departmentName": "재무과",
-        "registeredAt": "2025-03-01",
+        "nttId": 1079465,
+        "title": "[창업지원교육센터] IDF 로봇암 제작과정(UTRO+) 모집 안내",
+        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1079465",
+        "contentImage": "https://www.ut.ac.kr/namo/binary/images/000098/로봇암_키오스크.jpg",
+        "departmentName": "창업지원교육센터",
+        "registeredAt": "2025-05-20",
         "noticeName": "GENERAL_NEWS"
       },
       {
-        "nttId": 1077584,
-        "title": "[상명대학교] 2024-2학기 상명 창의융복합 통합성과 대회 참여 안내",
-        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1077584",
-        "contentImage": null,
-        "departmentName": "대학교육혁신원",
-        "registeredAt": "2025-02-26",
+        "nttId": 1079440,
+        "title": "2025학년도 실전 성공창업 CEO열전-시리즈3 운영",
+        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1079440",
+        "contentImage": "https://www.ut.ac.kr/namo/binary/images/000098/시리즈3_1.jpg",
+        "departmentName": "창업지원교육센터",
+        "registeredAt": "2025-05-19",
         "noticeName": "GENERAL_NEWS"
       },
       {
-        "nttId": 1077552,
-        "title": "충주시 HPV(자궁경부암) 무료예방접종 안내",
-        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1077552",
+        "nttId": 1079433,
+        "title": "2025학년도 진로 및 취업(High Leadership) 캠프 참가자 모집 안내",
+        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1079433",
         "contentImage": null,
-        "departmentName": "학생과",
-        "registeredAt": "2025-02-24",
+        "departmentName": "취업성공지원과",
+        "registeredAt": "2025-05-19",
         "noticeName": "GENERAL_NEWS"
       }
     ],
     "latestThreeScholarshipNews": [
       {
-        "nttId": 1077628,
-        "title": "주거안정장학금 우선 지원 및 지원 제외 기준 공고",
-        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1077628",
+        "nttId": 1079452,
+        "title": "2025년도 2학기 1차 국가근로장학금 학생신청기간 안내",
+        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1079452",
         "contentImage": null,
         "departmentName": "학생과",
-        "registeredAt": "2025-02-27",
+        "registeredAt": "2025-05-19",
         "noticeName": "SCHOLARSHIP_NEWS"
       },
       {
-        "nttId": 1077540,
-        "title": "2025년도 1학기 국가근로장학금 근로장학생 신규 선발 및 사전교육 안내",
-        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1077540",
+        "nttId": 1079406,
+        "title": "★2025년도 국가근로장학금 하계방학 집중근로 프로그램 학생 희망근로지 신청 안내",
+        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1079406",
         "contentImage": null,
         "departmentName": "학생과",
-        "registeredAt": "2025-02-24",
+        "registeredAt": "Fri May 16 09:00:00 KST 2025",
         "noticeName": "SCHOLARSHIP_NEWS"
       },
       {
-        "nttId": 1077525,
-        "title": "2025년도 대학생 청소년교육지원장학금 학생신청 안내",
-        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1077525",
+        "nttId": 1079372,
+        "title": "2025학년도 2학기 1차 주거안정장학금 학생 신청 안내",
+        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?bbsId=BBSMSTR_000000000060&nttId=1079372",
         "contentImage": null,
         "departmentName": "학생과",
-        "registeredAt": "2025-02-24",
+        "registeredAt": "Thu May 15 09:00:00 KST 2025",
         "noticeName": "SCHOLARSHIP_NEWS"
       }
     ],
     "latestThreeEventNews": [
       {
-        "nttId": 1077626,
-        "title": "2025 절주서포터즈 모집",
-        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do?bbsId=BBSMSTR_000000000061&nttId=1077626",
+        "nttId": 1078505,
+        "title": "2025학년도 하계 해외봉사단 최종선발 안내",
+        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do?bbsId=BBSMSTR_000000000061&nttId=1078505",
         "contentImage": null,
         "departmentName": "학생과",
-        "registeredAt": "2025-02-27",
+        "registeredAt": "Mon Apr 07 09:00:00 KST 2025",
         "noticeName": "EVENT_NEWS"
       },
       {
-        "nttId": 1077543,
-        "title": "2025 청년 도박문제 예방활동단 모집",
-        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do?bbsId=BBSMSTR_000000000061&nttId=1077543",
+        "nttId": 1078372,
+        "title": "2025학년도 하계 학생 해외봉사단(네팔) 1차 합격자 발표 및 2차 면접시간 안내",
+        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do?bbsId=BBSMSTR_000000000061&nttId=1078372",
         "contentImage": null,
         "departmentName": "학생과",
-        "registeredAt": "2025-02-24",
+        "registeredAt": "Mon Mar 31 09:00:00 KST 2025",
         "noticeName": "EVENT_NEWS"
       },
       {
-        "nttId": 1077334,
-        "title": "제 3기 공정병역 지킴이 모집",
-        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do?bbsId=BBSMSTR_000000000061&nttId=1077334",
+        "nttId": 1078346,
+        "title": "2025학년도 하계 학생 해외봉사단(네팔) 1차 합격자 발표 및 2차 면접시간 안내",
+        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do?bbsId=BBSMSTR_000000000061&nttId=1078346",
         "contentImage": null,
         "departmentName": "학생과",
-        "registeredAt": "2025-02-18",
+        "registeredAt": "Mon Mar 31 09:00:00 KST 2025",
         "noticeName": "EVENT_NEWS"
       }
     ],
     "latestThreeAcademicNews": [
       {
-        "nttId": 1077668,
-        "title": "2025학년도 1학기 수강신청 교과목의 철회 신청 안내",
-        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1077668",
+        "nttId": 1079326,
+        "title": "2025학년도 1학기 3C인재 인증 신청 안내",
+        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1079326",
         "contentImage": null,
         "departmentName": "학사관리과",
-        "registeredAt": "2025-02-28",
+        "registeredAt": "Tue May 13 09:00:00 KST 2025",
         "noticeName": "ACADEMIC_NEWS"
       },
       {
-        "nttId": 1077575,
-        "title": "2025학년도 1학기 K-융합전공 수강교과목 이수구분 변경 안내",
-        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1077575",
+        "nttId": 1079136,
+        "title": "2025학년도 2학기 재입학 신청 안내",
+        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1079136",
         "contentImage": null,
         "departmentName": "학사관리과",
-        "registeredAt": "2025-02-26",
+        "registeredAt": "Wed Apr 30 09:00:00 KST 2025",
         "noticeName": "ACADEMIC_NEWS"
       },
       {
-        "nttId": 1077414,
-        "title": "2025학년도 1학기 학부 및 전공명 변경(폐지) 관련 복학생 전공배정 3차 신청 안내",
-        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1077414",
+        "nttId": 1079007,
+        "title": "[충청권 국립대학] 2025학년도 한밭대,한국교원대,공주대 하계 계절학기 학점교류 안내",
+        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?bbsId=BBSMSTR_000000000055&nttId=1079007",
         "contentImage": null,
         "departmentName": "학사관리과",
-        "registeredAt": "2025-02-20",
+        "registeredAt": "Wed Apr 23 09:00:00 KST 2025",
         "noticeName": "ACADEMIC_NEWS"
+      }
+    ],
+    "latestThreeEmploymentNews": [
+      {
+        "nttId": 1079388,
+        "title": "2025 청주채용박람회",
+        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do?bbsId=BBSMSTR_000000000179&nttId=1079388",
+        "contentImage": null,
+        "departmentName": "취업성공지원과",
+        "registeredAt": "2025-05-16",
+        "noticeName": "EMPLOYMENT_NEWS"
+      },
+      {
+        "nttId": 1079366,
+        "title": "2025학년도 (기취업 졸업생) 역량강화 프로그램 참여자 모집 안내",
+        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do?bbsId=BBSMSTR_000000000179&nttId=1079366",
+        "contentImage": null,
+        "departmentName": "대학일자리플러스센터",
+        "registeredAt": "2025-05-15",
+        "noticeName": "EMPLOYMENT_NEWS"
+      },
+      {
+        "nttId": 1079317,
+        "title": "2025년 국민취업지원제도 홍보(출장상담) 안내",
+        "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do?bbsId=BBSMSTR_000000000179&nttId=1079317",
+        "contentImage": null,
+        "departmentName": "대학일자리플러스센터",
+        "registeredAt": "2025-05-13",
+        "noticeName": "EMPLOYMENT_NEWS"
       }
     ]
   }

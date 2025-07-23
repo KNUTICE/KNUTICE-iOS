@@ -7,6 +7,7 @@
 
 import Combine
 import Factory
+import Foundation
 
 protocol ReportService {
     func report(content: String, device: String) -> AnyPublisher<Bool, any Error>

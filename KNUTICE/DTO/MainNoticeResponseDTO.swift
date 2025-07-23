@@ -15,5 +15,5 @@ struct MainNoticeResponseDTO: Decodable {
 
 // MARK: - Body
 struct MainNoticeResponseBody: Decodable {
-    let latestThreeGeneralNews, latestThreeScholarshipNews, latestThreeEventNews, latestThreeAcademicNews: [NoticeReponseBody]
+    let latestThreeGeneralNews, latestThreeScholarshipNews, latestThreeEventNews, latestThreeAcademicNews, latestThreeEmploymentNews: [NoticeReponseBody]
 }

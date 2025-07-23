@@ -13,114 +13,166 @@ import XCTest
 
 final class MockNoticesAPITests: XCTestCase {
     private var dataSource: RemoteDataSource!
-    private var configuration: URLSessionConfiguration!
     private var cancellables: Set<AnyCancellable>!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        configuration = URLSessionConfiguration.default
+        let configuration = URLSessionConfiguration.default
+        configuration.protocolClasses = [MockURLProtocol.self]
+        let session = Session(configuration: configuration)
+        Container.shared.remoteDataSource.register {
+            RemoteDataSourceImpl(session: session)
+        }
+        dataSource = Container.shared.remoteDataSource()
         cancellables = []
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         dataSource = nil
-        configuration = nil
         cancellables = nil
     }
 
-    func test_FetchGeneralNotices_ReturnNoticesDTO() {
+    func test_fetchGeneralNotices_returnNoticesDTO() {
         //Given
         let expectation = XCTestExpectation(description: "fetch general notices")
-        configuration.protocolClasses = [MockGeneralNoticesURLProtocol.self]
-        let session = Session(configuration: configuration)
-        Container.shared.remoteDataSource.register {
-            RemoteDataSourceImpl(session: session)
-        }
-        dataSource = Container.shared.remoteDataSource()
+        let endPoint = Bundle.main.noticeURL + "?noticeName=\(NoticeCategory.generalNotice.rawValue)"
+        MockURLProtocol.setUpMockData(.fetchGeneralNoticesShouldSucceed)
         
         //When
-        dataSource.sendGetRequest(to: Bundle.main.generalNoticeURL, resultType: NoticeReponseDTO.self)
-            .sink(receiveCompletion: {
-                print($0)
+        dataSource.request(endPoint, method: .get, decoding: NoticeReponseDTO.self)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    expectation.fulfill()
+                case .failure(let error):
+                    XCTFail("\(error)")
+                }
             }, receiveValue: {
                 //Then
                 XCTAssertTrue($0.body?.count == 20)
                 XCTAssertEqual($0.result.resultCode, 200)
-                expectation.fulfill()
             })
             .store(in: &cancellables)
         
         wait(for: [expectation], timeout: 1)
     }
     
-    func testFetchAcademicNotices_ReturnNoticesDTO() {
+    func test_fetchAcademicNotices_returnNoticesDTO() {
         //Given
         let expectation = XCTestExpectation(description: "fetch academic notices")
-        configuration.protocolClasses = [MockAcademicNoticesURLProtocol.self]
-        let session = Session(configuration: configuration)
-        Container.shared.remoteDataSource.register {
-            RemoteDataSourceImpl(session: session)
-        }
-        dataSource = Container.shared.remoteDataSource()
+        let endPoint = Bundle.main.noticeURL + "?noticeName=\(NoticeCategory.academicNotice.rawValue)"
+        MockURLProtocol.setUpMockData(.fetchAcademicNoticesShouldSucceed)
         
         //When
-        dataSource.sendGetRequest(to: Bundle.main.academicNoticeURL, resultType: NoticeReponseDTO.self)
-            .sink(receiveCompletion: {
-                print($0)
+        dataSource.request(endPoint, method: .get, decoding: NoticeReponseDTO.self)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    expectation.fulfill()
+                case .failure(let error):
+                    XCTFail("\(error)")
+                }
             }, receiveValue: {
                 XCTAssertEqual($0.body?.count, 20)
                 XCTAssertEqual($0.result.resultCode, 200)
-                expectation.fulfill()
             })
             .store(in: &cancellables)
         
         wait(for: [expectation], timeout: 1)
     }
     
-    func testFetchScholarshipNotices_ReturnNoticesDTO() {
+    func test_fetchScholarshipNotices_returnNoticesDTO() {
         //Given
         let expectation = XCTestExpectation(description: "fetch scholarship notices")
-        configuration.protocolClasses = [MockScholarshipNoticesURLProtocol.self]
-        let session = Session(configuration: configuration)
-        Container.shared.remoteDataSource.register {
-            RemoteDataSourceImpl(session: session)
-        }
-        dataSource = Container.shared.remoteDataSource()
+        let endPoint = Bundle.main.noticeURL + "?noticeName=\(NoticeCategory.scholarshipNotice.rawValue)"
+        MockURLProtocol.setUpMockData(.fetchScholarshipNoticesShouldSucceed)
         
         //When
-        dataSource.sendGetRequest(to: Bundle.main.scholarshipNoticeURL, resultType: NoticeReponseDTO.self)
-            .sink(receiveCompletion: {
-                print($0)
+        dataSource.request(endPoint, method: .get, decoding: NoticeReponseDTO.self)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    expectation.fulfill()
+                case .failure(let error):
+                    XCTFail("\(error)")
+                }
             }, receiveValue: {
                 XCTAssertEqual($0.body?.count, 20)
                 XCTAssertEqual($0.result.resultCode, 200)
-                expectation.fulfill()
             })
             .store(in: &cancellables)
         
         wait(for: [expectation], timeout: 1)
     }
     
-    func test_FetchEventNotices_ReturnNoticesDTO() {
+    func test_fetchEventNotices_returnNoticesDTO() {
+        //Given
         let expectation = XCTestExpectation(description: "fetch event notices")
-        configuration.protocolClasses = [MockEventNoticesURLProtocol.self]
-        let session = Session(configuration: configuration)
-        Container.shared.remoteDataSource.register {
-            RemoteDataSourceImpl(session: session)
-        }
-        dataSource = Container.shared.remoteDataSource()
+        let endPoint = Bundle.main.noticeURL + "?noticeName=\(NoticeCategory.eventNotice.rawValue)"
+        MockURLProtocol.setUpMockData(.fetchEventNoticesShouldSucceed)
         
         //When
-        dataSource.sendGetRequest(to: Bundle.main.eventNoticeURL, resultType: NoticeReponseDTO.self)
-            .sink(receiveCompletion: {
-                print($0)
+        dataSource.request(endPoint, method: .get, decoding: NoticeReponseDTO.self)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    expectation.fulfill()
+                case .failure(let error):
+                    XCTFail("\(error)")
+                }
             }, receiveValue: {
                 XCTAssertEqual($0.body?.count, 20)
                 XCTAssertEqual($0.result.resultCode, 200)
-                expectation.fulfill()
             })
             .store(in: &cancellables)
+        
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    func test_fetchEmploymentNotices_returnNoticesDTO() {
+        let expectation = XCTestExpectation(description: "fetch event notices")
+        let endPoint = Bundle.main.noticeURL + "?noticeName=\(NoticeCategory.employmentNotice.rawValue)"
+        MockURLProtocol.setUpMockData(.fetchEmploymentNoticesShouldSucceed)
+        
+        //When
+        dataSource.request(endPoint, method: .get, decoding: NoticeReponseDTO.self)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    expectation.fulfill()
+                case .failure(let error):
+                    XCTFail("\(error)")
+                }
+            }, receiveValue: {
+                XCTAssertEqual($0.body?.count, 4)
+                XCTAssertEqual($0.result.resultCode, 200)
+            })
+            .store(in: &cancellables)
+        
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    func test_fetchSingleNotice_returnNoticeDTO() {
+        let expectation = XCTestExpectation(description: "fetch single notice")
+        let endpoint = Bundle.main.mainNoticeURL + "/noticeId"
+        MockURLProtocol.setUpMockData(.fetchSingleNoticeShouldSucceed)
+        
+        Task {
+            do {
+                let dto = try await dataSource.request(
+                    endpoint,
+                    method: .get,
+                    decoding: SingleNoticeResponseDTO.self
+                )
+                
+                XCTAssertEqual(dto.body?.nttID, 1079970)
+            } catch {
+                XCTFail(error.localizedDescription)
+            }
+            
+            expectation.fulfill()
+        }
         
         wait(for: [expectation], timeout: 1)
     }
