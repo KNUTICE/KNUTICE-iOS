@@ -49,9 +49,9 @@ extension Bundle {
         return url
     }
     
-    var searchURL: String {
+    var searchURL: String? {
         guard let resource, let url = resource["Search_URL"] as? String else {
-            return ""
+            return nil
         }
         
         return url
