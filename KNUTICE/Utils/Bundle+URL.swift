@@ -33,9 +33,9 @@ extension Bundle {
         return url
     }
     
-    var tokenURL: String {
+    var tokenURL: String? {
         guard let resource, let url = resource["Token_URL"] as? String else {
-            return ""
+            return nil
         }
         
         return url
