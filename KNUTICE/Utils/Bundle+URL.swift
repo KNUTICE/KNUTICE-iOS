@@ -41,9 +41,9 @@ extension Bundle {
         return url
     }
     
-    var reportURL: String {
+    var reportURL: String? {
         guard let resource, let url = resource["Report_URL"] as? String else {
-            return ""
+            return nil
         }
         
         return url
