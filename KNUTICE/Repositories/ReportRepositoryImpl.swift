@@ -13,10 +13,13 @@ final class ReportRepositoryImpl: ReportRepository {
     @Injected(\.remoteDataSource) var dataSource: RemoteDataSource
     
     func register(params: [String: Any]) -> AnyPublisher<Bool, any Error> {
-        let apiEndPoint = Bundle.main.reportURL
+        guard let endpoint = Bundle.main.reportURL else {
+            return Fail(error: NetworkError.invalidURL(message: "Invalid or missing report URL."))
+                .eraseToAnyPublisher()
+        }
         
         return dataSource.request(
-            apiEndPoint,
+            endpoint,
             method: .post,
             parameters: params,
             decoding: PostResponseDTO.self
