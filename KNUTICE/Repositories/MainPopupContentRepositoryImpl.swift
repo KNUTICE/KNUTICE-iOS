@@ -13,7 +13,11 @@ final class MainPopupContentRepositoryImpl: MainPopupContentRepository {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
     
     func fetchMainPopupContent() -> AnyPublisher<MainPopupContent?, any Error> {
-        let apiEndPoint = Bundle.main.mainPopupContentURL
+        guard let apiEndPoint = Bundle.main.mainPopupContentURL else {
+            return Fail(error: NetworkError.invalidURL(message: "The urgent API URL is missing or invalid."))
+                .eraseToAnyPublisher()
+        }
+        
         return dataSource.request(
             apiEndPoint,
             method:. get,

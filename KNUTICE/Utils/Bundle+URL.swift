@@ -65,9 +65,9 @@ extension Bundle {
         return url
     }
     
-    var mainPopupContentURL: String {
+    var mainPopupContentURL: String? {
         guard let resource, let url = resource["Main_Popup_URL"] as? String else {
-            return ""
+            return nil
         }
         
         return url
