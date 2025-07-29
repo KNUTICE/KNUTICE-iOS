@@ -17,17 +17,9 @@ extension Bundle {
         return resource
     }
     
-    var mainNoticeURL: String {
-        guard let resource, let url = resource["Main_Notice_URL"] as? String else {
-            return ""
-        }
-        
-        return url
-    }
-    
-    var noticeURL: String {
+    var noticeURL: String? {        
         guard let resource, let url = resource["Notice_URL"] as? String else {
-            return ""
+            return nil
         }
         
         return url
@@ -75,14 +67,6 @@ extension Bundle {
     
     var mainPopupContentURL: String {
         guard let resource, let url = resource["Main_Popup_URL"] as? String else {
-            return ""
-        }
-        
-        return url
-    }
-    
-    var noticeSyncURL: String {
-        guard let resource, let url = resource["Notice_Sync_URL"] as? String else {
             return ""
         }
         
