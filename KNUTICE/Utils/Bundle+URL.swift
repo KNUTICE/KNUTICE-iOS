@@ -57,9 +57,9 @@ extension Bundle {
         return url
     }
     
-    var notificationPermissionURL: String {
+    var notificationPermissionURL: String? {
         guard let resource, let url = resource["Notification_Permission_URL"] as? String else {
-            return ""
+            return nil
         }
         
         return url
