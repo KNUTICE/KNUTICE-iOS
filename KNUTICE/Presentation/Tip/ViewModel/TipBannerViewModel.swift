@@ -13,10 +13,12 @@ import os
 @MainActor
 final class TipBannerViewModel: ObservableObject {
     @Published var tips: [Tip]? = nil
+    @Published var selectedIndex: Int = 0
     
     @Injected(\.TipRepository) private var repository
     private let logger: Logger = Logger()
     var selectedURL: String = ""
+    var task: Task<Void, Never>?
     
     func fetchTips() async {
         let result = await repository.fetchTips()
@@ -31,6 +33,22 @@ final class TipBannerViewModel: ObservableObject {
             }
         case .failure(let error):
             logger.error("\(error.localizedDescription)")
+        }
+    }
+    
+    func timer() {
+        task = Task {
+            while true {
+                try? await Task.sleep(nanoseconds: 5 * 1_000_000_000)    //5초
+                
+                guard !Task.isCancelled else { break }
+                
+                if let count = tips?.count, selectedIndex == count - 1 {
+                    selectedIndex = 0
+                } else {
+                    selectedIndex += 1
+                }
+            }
         }
     }
 }
