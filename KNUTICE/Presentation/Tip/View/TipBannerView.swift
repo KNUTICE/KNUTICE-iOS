@@ -31,7 +31,7 @@ struct TipBannerView: View {
                 .animation(.easeInOut(duration: 0.8), value: viewModel.selectedIndex)
             }
             .onAppear {
-                viewModel.timer()
+                viewModel.startAutoScrollTimer()
             }
             .onDisappear {
                 viewModel.task?.cancel()

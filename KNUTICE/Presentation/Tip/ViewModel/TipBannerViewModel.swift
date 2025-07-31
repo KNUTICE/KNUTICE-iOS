@@ -36,14 +36,16 @@ final class TipBannerViewModel: ObservableObject {
         }
     }
     
-    func timer() {
+    func startAutoScrollTimer() {
+        guard let count = tips?.count, count > 1 else { return }
+        
         task = Task {
-            while true {
+            while !Task.isCancelled {
                 try? await Task.sleep(nanoseconds: 5 * 1_000_000_000)    //5초
                 
                 guard !Task.isCancelled else { break }
                 
-                if let count = tips?.count, selectedIndex == count - 1 {
+                if selectedIndex == count - 1 {
                     selectedIndex = 0
                 } else {
                     selectedIndex += 1
