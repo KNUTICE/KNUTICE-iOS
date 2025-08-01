@@ -36,10 +36,15 @@ final class MockSearchedNoticesAPITest: XCTestCase {
 
     func test_fetchNotices_returnNoticeReponseDTO() {
         //Given
+        guard let endpoint = Bundle.main.searchURL else {
+            XCTFail("Failed to load searchURL from Bundle.main. Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension.")
+            return
+        }
+        
         let expectation = expectation(description: "fetch searched notices")
         
         //When
-        dataSource.request(Bundle.main.searchURL + "?keyword=공지", method: .get, decoding: NoticeReponseDTO.self)
+        dataSource.request(endpoint + "?keyword=공지", method: .get, decoding: NoticeReponseDTO.self)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
