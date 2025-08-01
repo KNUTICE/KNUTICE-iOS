@@ -7,53 +7,64 @@
 
 import SwiftUI
 
-struct TipBannerView: View {
+struct TipBannerView: View, EntryTimeRecordable {
     @EnvironmentObject private var viewModel: TipBannerViewModel
     @State private var isShowingFullScreen: Bool = false
-    @State private var selectedItem: Int = 0
     
     var body: some View {
         if let tips = viewModel.tips {
             ZStack {
                 Color.primaryBackground
                 
-                TabView(selection: $selectedItem) {
-                    ForEach(tips.indices, id: \.self) { idx in
-                        TipItemView(content: tips[idx].title)
-                            .tag(idx)
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.mainCellBackground)
+                    .frame(height: 40)
+                    .padding(16)
+
+                ZStack {
+                    ForEach([viewModel.selectedIndex], id: \.self) { index in
+                        TipItemView(content: tips[index].title)
+                            .transition(.push(from: .top))
+                            .padding([.leading, .trailing], 30)
                     }
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                .background(.mainCellBackground)
-                .cornerRadius(10)
-                .padding([.leading, .trailing, .bottom], 16)
-                .frame(height: 70)
-                .padding(.top)
-                .onTapGesture {
-                    viewModel.selectedURL = tips[selectedItem].contentURL
-                    isShowingFullScreen.toggle()
-                }
-                .fullScreenCover(isPresented: $isShowingFullScreen) {
-                    NavigationStack {
-                        BaseWebView(
-                            progress: .constant(0),
-                            isLoading: .constant(false),
-                            url: viewModel.selectedURL
-                        )
-                        .toolbar {
-                            ToolbarItem(placement: .topBarLeading) {
-                                Button {
-                                    isShowingFullScreen.toggle()
-                                } label: {
-                                    Image(systemName: "xmark")
-                                }
+                .animation(.easeInOut(duration: 0.8), value: viewModel.selectedIndex)
+            }
+            .onAppear {
+                viewModel.startAutoScrollTimer()
+            }
+            .onDisappear {
+                viewModel.task?.cancel()
+            }
+            .onTapGesture {
+                viewModel.selectedURL = tips[viewModel.selectedIndex].contentURL
+                isShowingFullScreen.toggle()
+            }
+            .fullScreenCover(isPresented: $isShowingFullScreen) {
+                NavigationStack {
+                    BaseWebView(
+                        progress: .constant(0),
+                        isLoading: .constant(false),
+                        url: viewModel.selectedURL
+                    )
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
+                            Button {
+                                isShowingFullScreen.toggle()
+                            } label: {
+                                Image(systemName: "xmark")
                             }
                         }
                     }
                 }
-                
-                if tips.count > 1 {
-                    PageIndicator(selectedItem: $selectedItem, range: tips.indices)
+            }
+            .onReceive(foregroundPublisher) { _ in
+                if timeIntervalSinceLastEntry() >= 1800 {
+                    recordEntryTime()
+                    
+                    Task {
+                        await viewModel.fetchTips()
+                    }
                 }
             }
         } else {
@@ -70,27 +81,9 @@ fileprivate struct TipItemView: View {
     
     var body: some View {
         Text(content)
-            .font(.footnote)
+            .font(.caption)
             .lineLimit(1)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding([.leading, .trailing])
-    }
-}
-
-fileprivate struct PageIndicator: View {
-    @Binding var selectedItem: Int
-    let range: Range<Int>
-    
-    var body: some View {
-        HStack {
-            ForEach(range, id: \.self) { idx in
-                Circle()
-                    .frame(width: 5, height: 5)
-                    .foregroundStyle(idx == selectedItem ? .accent2 : .gray)
-            }
-        }
-        .frame(maxWidth: .infinity, alignment: .trailing)
-        .offset(x: -30, y: -18)
     }
 }
 

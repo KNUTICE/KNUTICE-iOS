@@ -15,7 +15,10 @@ final class TokenRepositoryImpl: TokenRepository {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
     
     func registerToken(token: String) -> Observable<Bool> {
-        let remoteURL = Bundle.main.tokenURL
+        guard let endpoint = Bundle.main.tokenURL else {
+            return Observable.error(NetworkError.invalidURL(message: "Invalid or missong 'Token_URL' in resource."))
+        }
+        
         let params = [
             "result": [
                 "resultCode": 0,
@@ -28,7 +31,7 @@ final class TokenRepositoryImpl: TokenRepository {
         ] as [String : Any]
         
         return dataSource.request(
-            remoteURL,
+            endpoint,
             method: .post,
             parameters: params,
             decoding: PostResponseDTO.self

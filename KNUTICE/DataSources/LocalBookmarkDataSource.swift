@@ -379,6 +379,10 @@ fileprivate extension BookmarkSortOption {
             return NSSortDescriptor(key: "createdAt", ascending: true)
         case .createdAtDescending:
             return NSSortDescriptor(key: "createdAt", ascending: false)
+        case .updatedAtAscending:
+            return NSSortDescriptor(key: "updatedAt", ascending: true)
+        case .updatedAtDescending:
+            return NSSortDescriptor(key: "updatedAt", ascending: false)
         }
     }
 }

@@ -33,11 +33,16 @@ final class TopicSubscriptionFetchAPITests: XCTestCase {
     
     func test_fetchTopicSubscriptionsStatus_returnsNotificationSubscriptionDTO() async throws {
         //Given
+        guard let endpoint = Bundle.main.notificationPermissionURL else {
+            XCTFail("Failed to load notificationPermissionURL from Bundle.main. Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension.")
+            return
+        }
+        
         MockURLProtocol.setUpMockData(.fetchTopicSubscriptionsShouldSucceed)
         
         //When
         let dto = try await dataSource.request(
-            Bundle.main.notificationPermissionURL,
+            endpoint,
             method: .get,
             decoding: NotificationSubscriptionDTO.self
         )
@@ -57,6 +62,11 @@ final class TopicSubscriptionFetchAPITests: XCTestCase {
     
     func test_updateTopicSubscription_returnsSuccessDTO() async throws {
         //Given
+        guard let endpoint = Bundle.main.notificationPermissionURL else {
+            XCTFail("Failed to load notificationPermissionURL from Bundle.main. Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension.")
+            return
+        }
+        
         MockURLProtocol.setUpMockData(.postRequestShouldSucceed)
         let params: [String: Any] = [
             "result": [
@@ -73,7 +83,7 @@ final class TopicSubscriptionFetchAPITests: XCTestCase {
         
         //When
         let dto = try await dataSource.request(
-            Bundle.main.notificationPermissionURL,
+            endpoint,
             method: .post,
             parameters: params,
             decoding: PostResponseDTO.self
