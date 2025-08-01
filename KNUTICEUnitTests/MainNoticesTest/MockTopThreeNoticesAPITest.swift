@@ -27,10 +27,15 @@ final class MockTopThreeNoticesAPITests: XCTestCase {
     }
     
     func test_fetchTopThreeNotices_returnsMainNoticeResponseDTO() {
+        guard let endpoint = Bundle.main.mainPopupContentURL else {
+            XCTFail("Failed to load mainPopupContentURL from Bundle.main. Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension.")
+            return
+        }
+        
         let expectation = XCTestExpectation(description: "Wait for fetch top three notices")
         MockURLProtocol.setUpMockData(.fetchTopThreeNoticesShouldSucceed)
         
-        dataSource.request(Bundle.main.mainNoticeURL, method: .get, decoding: MainNoticeResponseDTO.self)
+        dataSource.request(endpoint, method: .get, decoding: MainNoticeResponseDTO.self)
             .sink { completion in
                 switch completion {
                 case .finished:

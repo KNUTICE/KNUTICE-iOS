@@ -40,8 +40,13 @@ final class MockTipAPITest: XCTestCase {
     
     func test_fetchTipData_returnsTipDTO() async throws {
         //When
+        guard let endpoint = Bundle.main.tipURL else {
+            XCTFail("Failed to load tipURL from Bundle.main. Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension.")
+            return
+        }
+        
         let dto = try await dataSource.request(
-            Bundle.main.tipURL,
+            endpoint,
             method: .get,
             decoding: TipDTO.self
         )
