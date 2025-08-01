@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 5/4/24.
 //
 
+import Combine
 import UIKit
 import RxSwift
 import SwiftUI
@@ -54,6 +55,7 @@ final class MainTableViewController: UIViewController {
     let refreshControl = UIRefreshControl()
     @Injected(\.mainViewModel) var viewModel: MainTableViewModel
     let disposeBag = DisposeBag()
+    var cancellables: Set<AnyCancellable> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +66,7 @@ final class MainTableViewController: UIViewController {
         createNavigationItems()
         bind()
         recordEntryTime()
-        observeNotification()
+        subscribeEntryTime()
         
         //API Call
         viewModel.fetchNoticesWithCombine()
