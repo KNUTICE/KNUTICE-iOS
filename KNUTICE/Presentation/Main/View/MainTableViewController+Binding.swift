@@ -52,7 +52,7 @@ extension MainTableViewController {
                     x: 0,
                     y: 0,
                     width: owner.view.bounds.width,
-                    height: 70
+                    height: 50
                 )
                 owner.tableView.beginUpdates()
                 owner.tableView.endUpdates()

@@ -13,8 +13,12 @@ final class SearchRepositoryImpl: SearchRepository, NoticeCreatable {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
     
     func search(keyword: String) -> Single<[Notice]> {
+        guard let baseURL = Bundle.main.searchURL else {
+            return Single.error(NetworkError.invalidURL(message: "The search API URL is missing or invalid."))
+        }
+        
         return dataSource.request(
-            Bundle.main.searchURL + "?keyword=\(keyword)",
+            baseURL + "?keyword=\(keyword)",
             method: .get,
             decoding: NoticeReponseDTO.self
         )

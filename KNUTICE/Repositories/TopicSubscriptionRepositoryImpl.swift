@@ -17,8 +17,12 @@ final class TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
             return .failure(CancellationError())
         }
         
+        guard let endPoint = Bundle.main.notificationPermissionURL else {
+            return .failure(NetworkError.invalidURL(message: "The Topic subscription API URL is missing or invalid."))
+        }
+        
         do {
-            let endPoint = Bundle.main.notificationPermissionURL
+            
             let dto = try await dataSource.request(
                 endPoint,
                 method: .get,
@@ -43,7 +47,10 @@ final class TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
     func update(params: [String: Any]) async throws {
         try Task.checkCancellation()
         
-        let endPoint = Bundle.main.notificationPermissionURL
+        guard let endPoint = Bundle.main.notificationPermissionURL else {
+            throw NetworkError.invalidURL(message: "The Topic subscription API URL is missing or invalid.")
+        }
+        
         try await dataSource.request(
             endPoint,
             method: .post,

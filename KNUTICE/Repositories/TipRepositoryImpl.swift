@@ -12,7 +12,9 @@ final class TipRepositoryImpl: TipRepository {
     @Injected(\.remoteDataSource) private var dataSource
     
     func fetchTips() async -> Result<[Tip]?, any Error> {
-        let endpoint = Bundle.main.tipURL
+        guard let endpoint = Bundle.main.tipURL else {
+            return .failure(NetworkError.invalidURL(message: "The tip API URL is missing or invalid."))
+        }
         
         do {
             let dto = try await dataSource.request(endpoint, method: .get, decoding: TipDTO.self)

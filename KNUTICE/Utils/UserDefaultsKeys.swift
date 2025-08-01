@@ -15,4 +15,5 @@ enum UserDefaultsKeys: String {
     case hasNewPendingNotice
     case bookmarkSortOption
     case isBookmarkTimestampUpdated
+    case entryTime
 }

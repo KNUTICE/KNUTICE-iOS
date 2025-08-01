@@ -28,19 +28,6 @@ final class MainTableViewModel {
     private var cancellables: Set<AnyCancellable> = []
     private let logger: Logger = Logger()
     
-    ///Fetch Notices with RxSwift
-    @available(*, deprecated, message: "Combine 함수 대체 사용")
-    func fetchNotices() {
-        repository.fetchMainNotices()
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] result in
-                //해당 스트림은 MainNoticeRepositoryImpl에서 onComplete()를 호출하기 때문에
-                //[weak self]를 굳이 사용하지 않아도 reference count가 증가 되지는 않음.
-                self?.notices.accept(result)
-            })
-            .disposed(by: disposeBag)
-    }
-    
     ///Fetch Notices with Combine
     func fetchNoticesWithCombine() {
         repository.fetch()
@@ -57,20 +44,6 @@ final class MainTableViewModel {
                 self?.notices.accept($0)
             })
             .store(in: &cancellables)
-    }
-    
-    //Refresh Notices with RxSwift
-    @available(*, deprecated, message: "Combine 함수 대체 사용")
-    func refreshNotices() {
-        isLoading.accept(true)
-        
-        repository.fetchMainNotices()
-            .delay(.milliseconds(500), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] result in
-                self?.notices.accept(result)
-                self?.isLoading.accept(false)
-            })
-            .disposed(by: disposeBag)
     }
     
     ///Refresh Notices with Combine

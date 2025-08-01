@@ -10,4 +10,6 @@ import Foundation
 enum BookmarkSortOption: String {
     case createdAtAscending
     case createdAtDescending
+    case updatedAtAscending
+    case updatedAtDescending
 }

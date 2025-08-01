@@ -35,81 +35,111 @@ final class MockNoticesAPITests: XCTestCase {
 
     func test_fetchGeneralNotices_returnNoticesDTO() {
         //Given
+        guard let endpoint = Bundle.main.noticeURL else {
+            XCTFail("Failed to load noticeURL from Bundle.main. Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension.")
+            return
+        }
+        
         let expectation = XCTestExpectation(description: "fetch general notices")
-        let endPoint = Bundle.main.noticeURL + "?noticeName=\(NoticeCategory.generalNotice.rawValue)"
         MockURLProtocol.setUpMockData(.fetchGeneralNoticesShouldSucceed)
         
         //When
-        dataSource.request(endPoint, method: .get, decoding: NoticeReponseDTO.self)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    expectation.fulfill()
-                case .failure(let error):
-                    XCTFail("\(error)")
-                }
-            }, receiveValue: {
-                //Then
-                XCTAssertTrue($0.body?.count == 20)
-                XCTAssertEqual($0.result.resultCode, 200)
-            })
-            .store(in: &cancellables)
+        dataSource.request(
+            endpoint + "?noticeName=\(NoticeCategory.generalNotice.rawValue)",
+            method: .get,
+            decoding: NoticeReponseDTO.self
+        )
+        .sink(receiveCompletion: { completion in
+            switch completion {
+            case .finished:
+                expectation.fulfill()
+            case .failure(let error):
+                XCTFail("\(error)")
+            }
+        }, receiveValue: {
+            //Then
+            XCTAssertTrue($0.body?.count == 20)
+            XCTAssertEqual($0.result.resultCode, 200)
+        })
+        .store(in: &cancellables)
         
         wait(for: [expectation], timeout: 1)
     }
     
     func test_fetchAcademicNotices_returnNoticesDTO() {
         //Given
+        guard let endpoint = Bundle.main.noticeURL else {
+            XCTFail("Failed to load noticeURL from Bundle.main. Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension.")
+            return
+        }
+        
         let expectation = XCTestExpectation(description: "fetch academic notices")
-        let endPoint = Bundle.main.noticeURL + "?noticeName=\(NoticeCategory.academicNotice.rawValue)"
         MockURLProtocol.setUpMockData(.fetchAcademicNoticesShouldSucceed)
         
         //When
-        dataSource.request(endPoint, method: .get, decoding: NoticeReponseDTO.self)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    expectation.fulfill()
-                case .failure(let error):
-                    XCTFail("\(error)")
-                }
-            }, receiveValue: {
-                XCTAssertEqual($0.body?.count, 20)
-                XCTAssertEqual($0.result.resultCode, 200)
-            })
-            .store(in: &cancellables)
+        dataSource.request(
+            endpoint + "?noticeName=\(NoticeCategory.academicNotice.rawValue)",
+            method: .get,
+            decoding: NoticeReponseDTO.self
+        )
+        .sink(receiveCompletion: { completion in
+            switch completion {
+            case .finished:
+                expectation.fulfill()
+            case .failure(let error):
+                XCTFail("\(error)")
+            }
+        }, receiveValue: {
+            XCTAssertEqual($0.body?.count, 20)
+            XCTAssertEqual($0.result.resultCode, 200)
+        })
+        .store(in: &cancellables)
         
         wait(for: [expectation], timeout: 1)
     }
     
     func test_fetchScholarshipNotices_returnNoticesDTO() {
         //Given
+        guard let endpoint = Bundle.main.noticeURL else {
+            XCTFail("Failed to load noticeURL from Bundle.main. Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension.")
+            return
+        }
+
+        
         let expectation = XCTestExpectation(description: "fetch scholarship notices")
-        let endPoint = Bundle.main.noticeURL + "?noticeName=\(NoticeCategory.scholarshipNotice.rawValue)"
         MockURLProtocol.setUpMockData(.fetchScholarshipNoticesShouldSucceed)
         
         //When
-        dataSource.request(endPoint, method: .get, decoding: NoticeReponseDTO.self)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    expectation.fulfill()
-                case .failure(let error):
-                    XCTFail("\(error)")
-                }
-            }, receiveValue: {
-                XCTAssertEqual($0.body?.count, 20)
-                XCTAssertEqual($0.result.resultCode, 200)
-            })
-            .store(in: &cancellables)
+        dataSource.request(
+            endpoint + "?noticeName=\(NoticeCategory.scholarshipNotice.rawValue)",
+            method: .get,
+            decoding: NoticeReponseDTO.self
+        )
+        .sink(receiveCompletion: { completion in
+            switch completion {
+            case .finished:
+                expectation.fulfill()
+            case .failure(let error):
+                XCTFail("\(error)")
+            }
+        }, receiveValue: {
+            XCTAssertEqual($0.body?.count, 20)
+            XCTAssertEqual($0.result.resultCode, 200)
+        })
+        .store(in: &cancellables)
         
         wait(for: [expectation], timeout: 1)
     }
     
     func test_fetchEventNotices_returnNoticesDTO() {
         //Given
+        guard let endpoint = Bundle.main.noticeURL else {
+            XCTFail("Failed to load noticeURL from Bundle.main. Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension.")
+            return
+        }
+        
         let expectation = XCTestExpectation(description: "fetch event notices")
-        let endPoint = Bundle.main.noticeURL + "?noticeName=\(NoticeCategory.eventNotice.rawValue)"
+        let endPoint = endpoint + "?noticeName=\(NoticeCategory.eventNotice.rawValue)"
         MockURLProtocol.setUpMockData(.fetchEventNoticesShouldSucceed)
         
         //When
@@ -131,37 +161,50 @@ final class MockNoticesAPITests: XCTestCase {
     }
     
     func test_fetchEmploymentNotices_returnNoticesDTO() {
+        guard let endpoint = Bundle.main.noticeURL else {
+            XCTFail("Failed to load noticeURL from Bundle.main. Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension.")
+            return
+        }
+
+        
         let expectation = XCTestExpectation(description: "fetch event notices")
-        let endPoint = Bundle.main.noticeURL + "?noticeName=\(NoticeCategory.employmentNotice.rawValue)"
         MockURLProtocol.setUpMockData(.fetchEmploymentNoticesShouldSucceed)
         
         //When
-        dataSource.request(endPoint, method: .get, decoding: NoticeReponseDTO.self)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    expectation.fulfill()
-                case .failure(let error):
-                    XCTFail("\(error)")
-                }
-            }, receiveValue: {
-                XCTAssertEqual($0.body?.count, 4)
-                XCTAssertEqual($0.result.resultCode, 200)
-            })
-            .store(in: &cancellables)
+        dataSource.request(
+            endpoint + "?noticeName=\(NoticeCategory.employmentNotice.rawValue)",
+            method: .get,
+            decoding: NoticeReponseDTO.self
+        )
+        .sink(receiveCompletion: { completion in
+            switch completion {
+            case .finished:
+                expectation.fulfill()
+            case .failure(let error):
+                XCTFail("\(error)")
+            }
+        }, receiveValue: {
+            XCTAssertEqual($0.body?.count, 4)
+            XCTAssertEqual($0.result.resultCode, 200)
+        })
+        .store(in: &cancellables)
         
         wait(for: [expectation], timeout: 1)
     }
     
     func test_fetchSingleNotice_returnNoticeDTO() {
+        guard let endpoint = Bundle.main.noticeURL else {
+            XCTFail("Failed to load noticeURL from Bundle.main. Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension.")
+            return
+        }
+        
         let expectation = XCTestExpectation(description: "fetch single notice")
-        let endpoint = Bundle.main.mainNoticeURL + "/noticeId"
         MockURLProtocol.setUpMockData(.fetchSingleNoticeShouldSucceed)
         
         Task {
             do {
                 let dto = try await dataSource.request(
-                    endpoint,
+                    endpoint + "/noticeId",
                     method: .get,
                     decoding: SingleNoticeResponseDTO.self
                 )

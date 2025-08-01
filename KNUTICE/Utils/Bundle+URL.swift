@@ -17,17 +17,9 @@ extension Bundle {
         return resource
     }
     
-    var mainNoticeURL: String {
-        guard let resource, let url = resource["Main_Notice_URL"] as? String else {
-            return ""
-        }
-        
-        return url
-    }
-    
-    var noticeURL: String {
+    var noticeURL: String? {        
         guard let resource, let url = resource["Notice_URL"] as? String else {
-            return ""
+            return nil
         }
         
         return url
@@ -41,49 +33,41 @@ extension Bundle {
         return url
     }
     
-    var tokenURL: String {
+    var tokenURL: String? {
         guard let resource, let url = resource["Token_URL"] as? String else {
-            return ""
+            return nil
         }
         
         return url
     }
     
-    var reportURL: String {
+    var reportURL: String? {
         guard let resource, let url = resource["Report_URL"] as? String else {
-            return ""
+            return nil
         }
         
         return url
     }
     
-    var searchURL: String {
+    var searchURL: String? {
         guard let resource, let url = resource["Search_URL"] as? String else {
-            return ""
+            return nil
         }
         
         return url
     }
     
-    var notificationPermissionURL: String {
+    var notificationPermissionURL: String? {
         guard let resource, let url = resource["Notification_Permission_URL"] as? String else {
-            return ""
+            return nil
         }
         
         return url
     }
     
-    var mainPopupContentURL: String {
+    var mainPopupContentURL: String? {
         guard let resource, let url = resource["Main_Popup_URL"] as? String else {
-            return ""
-        }
-        
-        return url
-    }
-    
-    var noticeSyncURL: String {
-        guard let resource, let url = resource["Notice_Sync_URL"] as? String else {
-            return ""
+            return nil
         }
         
         return url
@@ -97,9 +81,9 @@ extension Bundle {
         return url
     }
     
-    var tipURL: String {
+    var tipURL: String? {
         guard let resource, let url = resource["TipURL"] as? String else {
-            return ""
+            return nil
         }
         
         return url

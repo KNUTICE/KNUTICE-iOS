@@ -12,26 +12,19 @@ import Foundation
 
 final class MainNoticeRepositoryImpl: MainNoticeRepository {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
+    private let baseURL: String? = Bundle.main.noticeURL
     
-    ///GET 요청 함수 with RxSwift
-    @available(*, deprecated)
-    func fetchMainNotices() -> Observable<[SectionOfNotice]> {
-        return dataSource.request(
-            Bundle.main.mainNoticeURL,
-            method: .get,
-            decoding: MainNoticeResponseDTO.self)
-        .map { [weak self] in
-            return self?.createScectionOfNotice($0) ?? []
-        }
-        .asObservable()
-    }
-    
-    ///GET 요청 함수 with Combine
     func fetch() -> AnyPublisher<[SectionOfNotice], any Error> {
+        guard let baseURL = baseURL else {
+            return Fail(error: NetworkError.invalidURL(message: "Invalid or missing 'Notice_URL' in resource."))
+                .eraseToAnyPublisher()
+        }
+        
         return dataSource.request(
-            Bundle.main.mainNoticeURL,
+            baseURL + "/latest",
             method: .get,
-            decoding: MainNoticeResponseDTO.self)
+            decoding: MainNoticeResponseDTO.self
+        )
         .map { [weak self] in
             self?.createScectionOfNotice($0) ?? []
         }
