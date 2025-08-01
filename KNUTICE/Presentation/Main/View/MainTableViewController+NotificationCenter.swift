@@ -9,25 +9,17 @@ import Foundation
 import RxSwift
 import UIKit
 
-extension MainTableViewController {
-    //MARK: - App이 처음 실행 될 때 시간 기록
-    func recordEntryTime() {
-        UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: "entryTime")
-    }
-    
+extension MainTableViewController: EntryTimeRecordable {
     //MARK: - Foreground 진입 감지
-    func observeNotification() {
-        NotificationCenter.default.rx.notification(UIApplication.willEnterForegroundNotification)
-            .subscribe(onNext: { [weak self] _ in
-                let lastEntryTime = UserDefaults.standard.double(forKey: "entryTime")
-                let timeDifference = Date().timeIntervalSince1970 - lastEntryTime
-                
+    func subscribeEntryTime() {
+        foregroundPublisher
+            .sink(receiveValue: { [weak self] _ in
                 //마지막 App 진입 시간과 30분 이상 차이나면 새로고침
-                if timeDifference >= 1800 {
+                if let time = self?.timeIntervalSinceLastEntry(), time >= 1800 {
                     self?.recordEntryTime()
                     self?.viewModel.fetchNoticesWithCombine()
                 }
             })
-            .disposed(by: disposeBag)
+            .store(in: &cancellables)
     }
 }

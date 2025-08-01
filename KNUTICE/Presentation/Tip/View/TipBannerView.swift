@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TipBannerView: View {
+struct TipBannerView: View, EntryTimeRecordable {
     @EnvironmentObject private var viewModel: TipBannerViewModel
     @State private var isShowingFullScreen: Bool = false
     
@@ -55,6 +55,15 @@ struct TipBannerView: View {
                                 Image(systemName: "xmark")
                             }
                         }
+                    }
+                }
+            }
+            .onReceive(foregroundPublisher) { _ in
+                if timeIntervalSinceLastEntry() >= 1800 {
+                    recordEntryTime()
+                    
+                    Task {
+                        await viewModel.fetchTips()
                     }
                 }
             }
