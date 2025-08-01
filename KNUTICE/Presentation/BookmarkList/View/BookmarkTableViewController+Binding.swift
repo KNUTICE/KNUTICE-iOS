@@ -87,31 +87,36 @@ extension BookmarkTableViewController {
         
         viewModel.sortOption
             .bind(with: self) { owner, value in
-                let ascendingAction = UIAction(
-                    title: "오래된 순",
-                    image: value == .createdAtAscending ? UIImage(systemName: "checkmark") : nil,
-                    handler: { _ in
-                        UserDefaults.standard.set(BookmarkSortOption.createdAtAscending.rawValue, forKey: UserDefaultsKeys.bookmarkSortOption.rawValue)
-                        owner.viewModel.sortOption.accept(.createdAtAscending)
-                    }
-                )
-                let descendingAction = UIAction(
-                    title: "최신 순",
-                    image: value == .createdAtDescending ? UIImage(systemName: "checkmark") : nil,
-                    handler: { _ in
-                        UserDefaults.standard.set(BookmarkSortOption.createdAtDescending.rawValue, forKey: UserDefaultsKeys.bookmarkSortOption.rawValue)
-                        owner.viewModel.sortOption.accept(.createdAtDescending)
-                    }
-                )
-                
-                owner.menuBtn.menu = UIMenu(
-                    identifier: nil,
-                    options: .displayInline,
-                    children: [descendingAction, ascendingAction]
-                )
-                
+                owner.menuBtn.menu = owner.makeSortMenu(selectedOption: value)
                 owner.viewModel.reloadData()
             }
             .disposed(by: disposeBag)
+    }
+    
+    private func makeSortMenu(selectedOption: BookmarkSortOption) -> UIMenu {
+        func makeAction(title: String, option: BookmarkSortOption) -> UIAction {
+            return UIAction(
+                title: title,
+                image: selectedOption == option ? UIImage(systemName: "checkmark") : nil,
+                handler: { [weak self] _ in
+                    UserDefaults.standard.set(option.rawValue, forKey: UserDefaultsKeys.bookmarkSortOption.rawValue)
+                    self?.viewModel.sortOption.accept(option)
+                }
+            )
+        }
+        
+        let actions = [
+            makeAction(title: "오래된 생성일", option: .createdAtAscending),
+            makeAction(title: "최근 생성일", option: .createdAtDescending),
+            makeAction(title: "오래된 수정일", option: .updatedAtAscending),
+            makeAction(title: "최근 수정일", option: .updatedAtDescending)
+        ]
+        
+        return UIMenu(
+            title: "북마크 정렬",
+            identifier: nil,
+            options: .displayInline,
+            children: actions
+        )
     }
 }
