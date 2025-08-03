@@ -11,8 +11,8 @@ extension SearchCollectionViewController {
     func setupLayout() {
         view.addSubview(searchBar)
         searchBar.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.leading.equalToSuperview().offset(8)
+            make.trailing.equalToSuperview().offset(-8)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
         }
         
@@ -33,12 +33,12 @@ extension SearchCollectionViewController {
         if isShowCancelButton {
             cancelButton.snp.remakeConstraints { make in
                 make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-                make.trailing.equalToSuperview()
+                make.trailing.equalToSuperview().offset(-8)
                 make.centerY.equalTo(searchBar.snp.centerY)
             }
             
             searchBar.snp.remakeConstraints { make in
-                make.leading.equalToSuperview()
+                make.leading.equalToSuperview().offset(8)
                 make.trailing.equalTo(cancelButton.snp.leading).offset(10)
                 make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             }
@@ -49,8 +49,8 @@ extension SearchCollectionViewController {
             }
             
             searchBar.snp.remakeConstraints { make in
-                make.leading.equalToSuperview()
-                make.trailing.equalToSuperview()
+                make.leading.equalToSuperview().offset(8)
+                make.trailing.equalToSuperview().offset(-8)
                 make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             }
         }
