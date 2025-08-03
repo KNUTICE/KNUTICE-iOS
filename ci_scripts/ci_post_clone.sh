@@ -20,8 +20,6 @@ cat <<EOF > "/Volumes/workspace/repository/KNUTICE/Application/ServiceInfo.plist
     <string>${Report_URL}</string>
     <key>Token_URL</key>
     <string>${Token_URL}</string>
-    <key>Main_Notice_URL</key>
-    <string>${Main_Notice_URL}</string>
     <key>OpenSourceLicenseURL</key>
     <string>${OpenSourceLicenseURL}</string>
     <key>Search_URL</key>
@@ -30,8 +28,6 @@ cat <<EOF > "/Volumes/workspace/repository/KNUTICE/Application/ServiceInfo.plist
     <string>${Notification_Permission_URL}</string>
     <key>Main_Popup_URL</key>
     <string>${Main_Popup_URL}</string>
-    <key>Notice_Sync_URL</key>
-    <string>${Notice_Sync_URL}</string>
     <key>DefaultThumbnail_URL</key>
     <string>${DefaultThumbnail_URL}</string>
     <key>Beta_Version</key>
