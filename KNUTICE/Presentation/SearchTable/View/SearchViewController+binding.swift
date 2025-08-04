@@ -50,9 +50,9 @@ extension SearchViewController: RxDataSourceProvidable {
                 }
                 .bind(to: bookmarkTableView.rx.items) { tableView, row, item in
                     let cell = self.bookmarkTableView.dequeueReusableCell(withIdentifier: BookmarkTableViewCell.reuseIdentifier, for: IndexPath(row: row, section: 0)) as! BookmarkTableViewCell
-                    
                     cell.configure(item)
                     cell.backgroundColor = .clear
+                    
                     return cell
                 }
                 .disposed(by: disposeBag)

@@ -22,6 +22,7 @@ final class SearchViewModel: NoticeSectionModelProvidable, Searchable {
     func search(with keyword: String) {
         guard !keyword.isEmpty else {
             notices.accept([])
+            bookmarks.accept([])
             return
         }
         
