@@ -7,7 +7,22 @@
 
 import SwiftUI
 
-struct SearchCollectionViewBackground: View {
+struct SearchViewBackground: View {
+    enum Style {
+        case notice
+        case bookmark
+    }
+    
+    let style: Style
+    private var promptText: String {
+        switch style {
+        case .notice: 
+            return "어떤 공지 사항을 찾아드릴까요?"
+        case .bookmark: 
+            return "어떤 북마크를 찾아드릴까요?"
+        }
+    }
+    
     var body: some View {
         ZStack {
             Color.primaryBackground
@@ -18,7 +33,7 @@ struct SearchCollectionViewBackground: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 150, height: 150)
                 
-                Text("어떤 공지 사항을 찾아드릴까요?")
+                Text(promptText)
                     .bold()
                     .foregroundStyle(.gray)
             }
@@ -28,5 +43,5 @@ struct SearchCollectionViewBackground: View {
 }
 
 #Preview {
-    SearchCollectionViewBackground()
+    SearchViewBackground(style: .bookmark)
 }

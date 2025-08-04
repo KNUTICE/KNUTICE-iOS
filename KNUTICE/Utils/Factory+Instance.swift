@@ -102,6 +102,12 @@ extension Container {
         }
     }
     
+    var searchService: Factory<SearchService> {
+        Factory(self) {
+            SearchServiceImpl()
+        }
+    }
+    
     //MARK: - ViewModel
     var mainViewModel: Factory<MainTableViewModel> {
         Factory(self) {
@@ -116,8 +122,8 @@ extension Container {
     }
     
     var searchCollectionViewModel: Factory<NoticeSectionModelProvidable> {
-        Factory(self) {
-            SearchCollectionViewModel()
+        Factory(self) { @MainActor in
+            SearchViewModel()
         }
     }
     

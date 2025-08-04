@@ -81,4 +81,14 @@ final class BookmarkRepositoryImpl: BookmarkRepository {
     func update(_ updates: [BookmarkUpdate]) -> AnyPublisher<Void, any Error> {
         return dataSource.update(updates)
     }
+    
+    func search(with keyword: String) async throws -> [Bookmark] {
+        try Task.checkCancellation()
+        
+        let dtos = try await dataSource.fetch(keyword: keyword)
+        
+        return dtos.compactMap { dto in
+            createBookMark(from: dto)
+        }
+    }
 }

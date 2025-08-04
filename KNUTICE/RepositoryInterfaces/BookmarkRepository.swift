@@ -15,4 +15,5 @@ protocol BookmarkRepository {
     func delete(by id: Int) -> AnyPublisher<Void, any Error>
     func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error>
     func update(_ updates: [BookmarkUpdate]) -> AnyPublisher<Void, any Error>
+    func search(with keyword: String) async throws -> [Bookmark]
 }

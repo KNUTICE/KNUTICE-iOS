@@ -44,7 +44,9 @@ final class BookmarkTableViewCell: UITableViewCell {
     func setUpLayout() {
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.leading.top.trailing.equalToSuperview().inset(16)
+            make.top.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
         }
         
         contentView.addSubview(alarmImageView)

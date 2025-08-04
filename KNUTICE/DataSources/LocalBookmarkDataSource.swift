@@ -95,6 +95,14 @@ protocol LocalBookmarkDataSource {
     ///   - The updates are executed on a background context asynchronously using `NSManagedObjectContext.perform`.
     ///   - The final context save is performed synchronously with `performAndWait` to ensure consistency.
     func update(_ updates: [BookmarkUpdate]) -> AnyPublisher<Void, any Error>
+    
+    /// Asynchronously fetches for bookmarks that match the given keyword.
+    ///
+    /// - Parameter keyword: A string used to search for matching bookmarks. This is typically matched against the title or memo fields.
+    /// - Returns: An array of `BookmarkDTO` objects that contain the keyword in either the title or memo.
+    /// - Throws: An error if the search operation fails.
+    /// - Note: The search is case-insensitive and performs a partial match on the title and memo fields.
+    func fetch(keyword: String) async throws -> [BookmarkDTO]
 }
 
 extension LocalBookmarkDataSource {
@@ -176,6 +184,19 @@ extension LocalBookmarkDataSourceImpl {
                 return self.createBookmarkDTOs(from: entities)
             }
             .eraseToAnyPublisher()
+    }
+    
+    func fetch(keyword: String) async throws -> [BookmarkDTO] {
+        return try await backgroundContext.perform {
+            let request = NSFetchRequest<BookmarkEntity>(entityName: "BookmarkEntity")
+            request.predicate = NSPredicate(format: "bookmarkedNotice.title CONTAINS %@ OR memo CONTAINS %@", keyword, keyword)
+            
+            try Task.checkCancellation()
+            
+            let entities = try self.backgroundContext.fetch(request)
+            
+            return self.createBookmarkDTOs(from: entities)
+        }
     }
     
     func isDuplication(id: Int) -> AnyPublisher<Bool, any Error> {

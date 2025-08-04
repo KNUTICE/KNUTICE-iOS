@@ -28,4 +28,22 @@ final class SearchRepositoryImpl: SearchRepository, NoticeCreatable {
             } ?? []
         }
     }
+    
+    func search(with keyword: String) async throws -> [Notice] {
+        guard let baseURL = Bundle.main.searchURL else {
+            throw NetworkError.invalidURL(message: "The search API URL is missing or invalid.")
+        }
+        
+        try Task.checkCancellation()
+        
+        let dto = try await dataSource.request(
+            baseURL + "?keyword=\(keyword)",
+            method: .get,
+            decoding: NoticeReponseDTO.self
+        )
+        
+        return dto.body?.compactMap {
+            createNotice($0)
+        } ?? []
+    }
 }

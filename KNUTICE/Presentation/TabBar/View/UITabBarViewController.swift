@@ -35,7 +35,7 @@ final class UITabBarViewController: UITabBarController {
         return viewController
     }()
     private let searchViewController: UIViewController = {
-        let viewController = SearchCollectionViewController()
+        let viewController = SearchViewController()
         viewController.tabBarItem.image = UIImage(systemName: "magnifyingglass")
         if UIDevice.current.userInterfaceIdiom  == .phone {
             viewController.tabBarItem.title = "검색"

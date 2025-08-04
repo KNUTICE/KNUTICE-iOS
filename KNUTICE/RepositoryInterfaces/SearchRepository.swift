@@ -9,4 +9,5 @@ import RxSwift
 
 protocol SearchRepository {
     func search(keyword: String) -> Single<[Notice]>
+    func search(with keyword: String) async throws -> [Notice]
 }

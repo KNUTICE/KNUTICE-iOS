@@ -8,5 +8,5 @@
 import Foundation
 
 protocol Searchable {
-    func search(_ keyword: String)
+    func search(with keyword: String)
 }

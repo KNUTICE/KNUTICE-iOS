@@ -7,12 +7,12 @@
 
 import UIKit
 
-extension SearchCollectionViewController {
+extension SearchViewController {
     func setupLayout() {
         view.addSubview(searchBar)
         searchBar.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(8)
-            make.trailing.equalToSuperview().offset(-8)
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(8)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-8)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
         }
         
@@ -22,10 +22,24 @@ extension SearchCollectionViewController {
             make.centerY.equalTo(searchBar.snp.centerY)
         }
         
+        view.addSubview(segmentedControl)
+        segmentedControl.snp.makeConstraints { make in
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
+            make.top.equalTo(searchBar.snp.bottom)
+            make.height.equalTo(30)
+        }
+        
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(searchBar.snp.bottom)
+            make.top.equalTo(segmentedControl.snp.bottom).offset(16)
+        }
+        
+        view.addSubview(bookmarkTableView)
+        bookmarkTableView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(segmentedControl.snp.bottom).offset(16)
         }
     }
     
