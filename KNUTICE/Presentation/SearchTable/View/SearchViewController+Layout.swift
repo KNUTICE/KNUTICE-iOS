@@ -47,12 +47,12 @@ extension SearchViewController {
         if isShowCancelButton {
             cancelButton.snp.remakeConstraints { make in
                 make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-                make.trailing.equalToSuperview().offset(-8)
+                make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-8)
                 make.centerY.equalTo(searchBar.snp.centerY)
             }
             
             searchBar.snp.remakeConstraints { make in
-                make.leading.equalToSuperview().offset(8)
+                make.leading.equalTo(view.safeAreaLayoutGuide).offset(8)
                 make.trailing.equalTo(cancelButton.snp.leading).offset(10)
                 make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             }
@@ -63,8 +63,8 @@ extension SearchViewController {
             }
             
             searchBar.snp.remakeConstraints { make in
-                make.leading.equalToSuperview().offset(8)
-                make.trailing.equalToSuperview().offset(-8)
+                make.leading.equalTo(view.safeAreaLayoutGuide).offset(8)
+                make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-8)
                 make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             }
         }
