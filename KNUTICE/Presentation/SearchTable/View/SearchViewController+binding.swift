@@ -36,7 +36,7 @@ extension SearchViewController: RxDataSourceProvidable {
             .bind(to: collectionView.rx.items(dataSource: makeNoticeDataSource()))
             .disposed(by: disposeBag)
         
-        if let viewModel = viewModel as? SearchViewModel {
+        if let viewModel = viewModel as? Searchable {
             viewModel.bookmarks
                 .observe(on: MainScheduler.instance)
                 .do { [weak self] in

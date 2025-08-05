@@ -89,7 +89,7 @@ final class SearchViewController: UIViewController, CompositionalLayoutConfigura
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        if let viewModel = viewModel as? SearchViewModel {
+        if let viewModel = viewModel as? Searchable {
             viewModel.tasks.forEach {
                 $0.cancel()
             }
@@ -120,7 +120,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let viewModel = viewModel as? SearchViewModel {
+        if let viewModel = viewModel as? Searchable {
             let bookmark = viewModel.bookmarks.value[indexPath.row]
             let viewController = UIHostingController(
                 rootView: BookmarkDetailSwitchView(viewModel: BookmarkFormViewModel(bookmark: bookmark))
