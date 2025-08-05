@@ -15,6 +15,7 @@ struct TipBannerView: View, EntryTimeRecordable {
         if let tips = viewModel.tips {
             ZStack {
                 Color.primaryBackground
+                    .ignoresSafeArea(.all)
                 
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color.mainCellBackground)

@@ -26,6 +26,7 @@ struct SearchViewBackground: View {
     var body: some View {
         ZStack {
             Color.primaryBackground
+                .ignoresSafeArea(.all)
             
             VStack(spacing: 20) {
                 Image("Magnifying_Glasses_3D")
