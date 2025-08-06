@@ -7,6 +7,7 @@
 
 import Factory
 import Foundation
+import KNUTICECore
 
 protocol TopicSubscriptionService {
     func update(_ noticeName: NoticeCategory, to value: Bool) async -> Result<Void, Error>

@@ -7,6 +7,7 @@
 
 import Factory
 import Foundation
+import KNUTICECore
 
 // MARK: - Typealias
 typealias SearchResult = Result<([Notice], [Bookmark]), any Error>

@@ -6,9 +6,10 @@
 //
 
 import Combine
-import UserNotifications
 import Factory
 import Foundation
+import KNUTICECore
+import UserNotifications
 
 final class BookmarkRepositoryImpl: BookmarkRepository {
     @Injected(\.localBookmarkDataSource) private var dataSource: LocalBookmarkDataSource

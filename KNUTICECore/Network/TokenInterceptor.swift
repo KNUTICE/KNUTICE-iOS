@@ -10,8 +10,8 @@ import Factory
 import FirebaseMessaging
 import Foundation
 
-struct TokenInterceptor: RequestInterceptor, @unchecked Sendable {
-    func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, any Error>) -> Void) {
+public struct TokenInterceptor: RequestInterceptor, @unchecked Sendable {
+    public func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, any Error>) -> Void) {
         Task {
             var urlRequest = urlRequest
             let token = try? await getFCMToken()

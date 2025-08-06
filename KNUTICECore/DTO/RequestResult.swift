@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - RequestResult
-struct RequestResult: Codable {
-    let resultCode: Int
-    let resultMessage, resultDescription: String
+public struct RequestResult: Codable {
+    public let resultCode: Int
+    public let resultMessage, resultDescription: String
 }

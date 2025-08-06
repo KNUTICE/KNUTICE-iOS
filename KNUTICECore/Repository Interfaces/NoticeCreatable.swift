@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol NoticeCreatable {
+public protocol NoticeCreatable {
     func createNotice(_ body: NoticeReponseBody) -> Notice
 }
 
-extension NoticeCreatable {    
+public extension NoticeCreatable {
     func createNotice(_ body: NoticeReponseBody) -> Notice {
         return Notice(
             id: body.nttID,

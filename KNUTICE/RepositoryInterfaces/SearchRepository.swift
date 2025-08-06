@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 11/7/24.
 //
 
+import KNUTICECore
 import RxSwift
 
 protocol SearchRepository {

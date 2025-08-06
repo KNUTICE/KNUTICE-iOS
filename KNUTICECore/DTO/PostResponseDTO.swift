@@ -8,7 +8,7 @@
 import Foundation
 
 //MARK: - ReportResponseDTO
-struct PostResponseDTO: Decodable {
-    let result: RequestResult
-    let body: Bool?
+public struct PostResponseDTO: Decodable {
+    public let result: RequestResult
+    public let body: Bool?
 }

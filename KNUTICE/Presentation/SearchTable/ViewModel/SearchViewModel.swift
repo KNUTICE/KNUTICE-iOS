@@ -9,6 +9,7 @@ import Factory
 import RxRelay
 import RxSwift
 import os
+import KNUTICECore
 
 final class SearchViewModel: NoticeSectionModelProvidable, Searchable {
     let notices: BehaviorRelay<[NoticeSectionModel]> = .init(value: [])

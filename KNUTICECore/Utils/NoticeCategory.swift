@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum NoticeCategory: String, Codable {
+public enum NoticeCategory: String, Codable {
     case generalNotice = "GENERAL_NEWS"
     case academicNotice = "ACADEMIC_NEWS"
     case scholarshipNotice = "SCHOLARSHIP_NEWS"
     case eventNotice = "EVENT_NEWS"
     case employmentNotice = "EMPLOYMENT_NEWS"
     
-    var localizedDescription: String {
+    public var localizedDescription: String {
         switch self {
         case .generalNotice:
             return "일반소식"

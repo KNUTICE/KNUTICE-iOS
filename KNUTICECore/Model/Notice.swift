@@ -7,18 +7,28 @@
 
 import Foundation
 
-struct Notice: Codable {
-    let id: Int    //nttId
-    let title: String    //제목
-    let contentUrl: String    //화면 전환 시 이동할 사이트 URL
-    let department: String    //부서
-    let uploadDate: String    //등록 날짜
-    let imageUrl: String?
-    let noticeCategory: NoticeCategory?
+public struct Notice: Codable {
+    public let id: Int    //nttId
+    public let title: String    //제목
+    public let contentUrl: String    //화면 전환 시 이동할 사이트 URL
+    public let department: String    //부서
+    public let uploadDate: String    //등록 날짜
+    public let imageUrl: String?
+    public let noticeCategory: NoticeCategory?
+    
+    public init(id: Int, title: String, contentUrl: String, department: String, uploadDate: String, imageUrl: String?, noticeCategory: NoticeCategory?) {
+        self.id = id
+        self.title = title
+        self.contentUrl = contentUrl
+        self.department = department
+        self.uploadDate = uploadDate
+        self.imageUrl = imageUrl
+        self.noticeCategory = noticeCategory
+    }
 }
 
 #if DEBUG
-extension Notice {
+public extension Notice {
     static var academicNoticesSampleData: [Notice] {
         return [
             Notice(id: 1,

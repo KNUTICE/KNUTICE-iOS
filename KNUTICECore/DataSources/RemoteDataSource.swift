@@ -9,7 +9,7 @@ import RxSwift
 import Combine
 import Alamofire
 
-protocol RemoteDataSource {
+public protocol RemoteDataSource {
     /// Sends an HTTP request and decodes the response into the specified type.
     ///
     /// - Parameters:
@@ -69,7 +69,7 @@ protocol RemoteDataSource {
     ) -> Single<T> where T: Decodable
 }
 
-extension RemoteDataSource {
+public extension RemoteDataSource {
     @discardableResult
     func request<T: Decodable>(
         _ url: String,
@@ -100,14 +100,14 @@ extension RemoteDataSource {
     }
 }
 
-final class RemoteDataSourceImpl: RemoteDataSource {
+public final class RemoteDataSourceImpl: RemoteDataSource {
     private let session: Session
     
     init(session: Session = Session.default) {
         self.session = session
     }
     
-    func request<T>(
+    public func request<T>(
         _ url: String,
         method: HTTPMethod,
         parameters: Parameters? = nil,
@@ -125,7 +125,7 @@ final class RemoteDataSourceImpl: RemoteDataSource {
         .value
     }
     
-    func request<T>(
+    public func request<T>(
         _ url: String,
         method: HTTPMethod,
         parameters: Parameters? = nil,
@@ -145,7 +145,7 @@ final class RemoteDataSourceImpl: RemoteDataSource {
         .eraseToAnyPublisher()
     }
     
-    func request<T>(
+    public func request<T>(
         _ url: String,
         method: HTTPMethod,
         parameters: Parameters? = nil,

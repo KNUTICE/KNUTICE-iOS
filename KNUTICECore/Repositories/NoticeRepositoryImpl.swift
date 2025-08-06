@@ -10,11 +10,13 @@ import Combine
 import Factory
 import Foundation
 
-final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
+public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
     private let baseURL: String? = Bundle.main.noticeURL
     
-    func fetchNotices(for category: NoticeCategory) -> AnyPublisher<[Notice], any Error> {
+    public init() {}
+    
+    public func fetchNotices(for category: NoticeCategory) -> AnyPublisher<[Notice], any Error> {
         guard let baseURL = baseURL else {
             return Fail(error: NetworkError.invalidURL(message: "Invalid or missing 'Notice_URL' in resource."))
                 .eraseToAnyPublisher()
@@ -33,7 +35,7 @@ final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
         .eraseToAnyPublisher()
     }
     
-    func fetchNotices(for category: NoticeCategory, after number: Int) -> AnyPublisher<[Notice], any Error> {
+    public func fetchNotices(for category: NoticeCategory, after number: Int) -> AnyPublisher<[Notice], any Error> {
         guard let baseURL = baseURL else {
             return Fail(error: NetworkError.invalidURL(message: "Invalid or missing 'Notice_URL' in resource."))
                 .eraseToAnyPublisher()
@@ -52,7 +54,7 @@ final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
         .eraseToAnyPublisher()
     }
     
-    func fetchNotices(by nttIds: [Int]) -> AnyPublisher<[Notice], any Error> {
+    public func fetchNotices(by nttIds: [Int]) -> AnyPublisher<[Notice], any Error> {
         guard let baseURL = baseURL else {
             return Fail(error: NetworkError.invalidURL(message: "Invalid or missing 'Notice_URL' in resource."))
                 .eraseToAnyPublisher()
@@ -83,7 +85,7 @@ final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
         .eraseToAnyPublisher()
     }
     
-    func fetchNotice(by nttId: Int) -> AnyPublisher<Notice?, any Error> {
+    public func fetchNotice(by nttId: Int) -> AnyPublisher<Notice?, any Error> {
         guard let baseURL = baseURL else {
             return Fail(error: NetworkError.invalidURL(message: "Invalid or missing 'Notice_URL' in resource."))
                 .eraseToAnyPublisher()
@@ -102,7 +104,7 @@ final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
         .eraseToAnyPublisher()
     }
     
-    func fetchNotice(by nttId: Int) async throws -> Notice? {
+    public func fetchNotice(by nttId: Int) async throws -> Notice? {
         try Task.checkCancellation()
         
         guard let baseURL = baseURL else {
@@ -120,5 +122,24 @@ final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
         }
         
         return createNotice(body)
+    }
+    
+    public func fetchNotices(for category: NoticeCategory, size: Int = 20) async throws -> [Notice] {
+        guard let baseURL = Bundle.main.noticeURL else {
+            throw NetworkError.invalidURL(message: "Invalid or missing 'Notice_URL' in resource.")
+        }
+        
+        try Task.checkCancellation()
+        
+        let dto = try await dataSource.request(
+            baseURL + "?noticeName=\(category.rawValue)" + "&size=\(size)",
+            method: .get,
+            decoding: NoticeReponseDTO.self
+        )
+        let notices = dto.body?.compactMap {
+            createNotice($0)
+        } ?? []
+        
+        return notices
     }
 }

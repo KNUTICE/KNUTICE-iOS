@@ -9,6 +9,7 @@ import UIKit
 import WebKit
 import SwiftUI
 import Foundation
+import KNUTICECore
 
 final class WebViewController: UIViewController {
     let activityIndicator: UIActivityIndicatorView = {

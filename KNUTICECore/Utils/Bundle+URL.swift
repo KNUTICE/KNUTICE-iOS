@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Bundle {
+public extension Bundle {
     var resource: NSDictionary? {
         guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
               let resource = NSDictionary(contentsOfFile: file) else {
@@ -17,7 +17,7 @@ extension Bundle {
         return resource
     }
     
-    var noticeURL: String? {        
+    var noticeURL: String? {
         guard let resource, let url = resource["Notice_URL"] as? String else {
             return nil
         }

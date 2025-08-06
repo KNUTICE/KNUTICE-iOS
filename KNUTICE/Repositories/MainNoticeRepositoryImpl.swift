@@ -9,6 +9,7 @@ import RxSwift
 import Combine
 import Factory
 import Foundation
+import KNUTICECore
 
 final class MainNoticeRepositoryImpl: MainNoticeRepository {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource

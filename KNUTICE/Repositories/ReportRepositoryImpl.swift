@@ -8,6 +8,7 @@
 import Combine
 import Foundation
 import Factory
+import KNUTICECore
 
 final class ReportRepositoryImpl: ReportRepository {
     @Injected(\.remoteDataSource) var dataSource: RemoteDataSource

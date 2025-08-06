@@ -7,6 +7,7 @@
 
 import Factory
 import Foundation
+import KNUTICECore
 
 final class TipRepositoryImpl: TipRepository {
     @Injected(\.remoteDataSource) private var dataSource

@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 1/4/25.
 //
 
+import KNUTICECore
 import UIKit
 import SwiftUI
 import RxSwift

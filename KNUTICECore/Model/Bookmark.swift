@@ -8,26 +8,32 @@
 import Foundation
 import RxDataSources
 
-struct Bookmark {
-    let notice: Notice
-    var memo: String
-    var alarmDate: Date?
+public struct Bookmark {
+    public let notice: Notice
+    public var memo: String
+    public var alarmDate: Date?
+    
+    public init(notice: Notice, memo: String, alarmDate: Date? = nil) {
+        self.notice = notice
+        self.memo = memo
+        self.alarmDate = alarmDate
+    }
 }
 
 extension Bookmark: IdentifiableType, Equatable {
-    typealias Identity = Int
+    public typealias Identity = Int
     
-    var identity: Int {
+    public var identity: Int {
         return notice.id
     }
     
-    static func == (lhs: Bookmark, rhs: Bookmark) -> Bool {
+    public static func == (lhs: Bookmark, rhs: Bookmark) -> Bool {
         return lhs.identity == rhs.identity
     }
 }
 
 #if DEBUG
-extension Bookmark {
+public extension Bookmark {
     static var sample: Bookmark {
         Bookmark(
             notice: Notice.generalNoticesSampleData.first!,
@@ -37,3 +43,15 @@ extension Bookmark {
     }
 }
 #endif
+
+public struct BookmarkUpdate {
+    public let bookmark: Bookmark
+    public let createdAt: Date
+    public let updatedAt: Date
+    
+    public init(bookmark: Bookmark, createdAt: Date, updatedAt: Date) {
+        self.bookmark = bookmark
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+    }
+}
