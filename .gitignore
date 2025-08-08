@@ -1,5 +1,7 @@
 GoogleService-Info.plist
 GoogleService-Info-Dev.plist
+ServiceInfo.plist
+KNUTICECore/ServiceInfo.plist
 *.xcuserstate
 
 # macOS
