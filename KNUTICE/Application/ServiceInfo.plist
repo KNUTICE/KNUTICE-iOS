@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>TipURL</key>
+	<string>TipURL</string>
+	<key>DefaultThumbnail_URL</key>
+	<string>DefaultThumbnail_URL</string>
+	<key>Main_Popup_URL</key>
+	<string>Main_Popup_URL</string>
+	<key>Notification_Permission_URL</key>
+	<string>Notification_Permission_URL</string>
+	<key>Search_URL</key>
+	<string>Search_URL</string>
+	<key>Report_URL</key>
+	<string>Report_URL</string>
+	<key>Token_URL</key>
+	<string>Token_URL</string>
+	<key>OpenSourceLicenseURL</key>
+	<string>OpenSourceLicenseURL</string>
+</dict>
+</plist>
