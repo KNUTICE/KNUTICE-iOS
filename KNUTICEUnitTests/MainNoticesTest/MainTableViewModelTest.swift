@@ -9,6 +9,7 @@ import Alamofire
 import Factory
 import RxSwift
 import XCTest
+import KNUTICECore
 @testable import KNUTICE
 
 final class MainTableViewModelTest: XCTestCase {
