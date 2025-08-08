@@ -13,7 +13,7 @@ import KNUTICECore
 
 final class MainNoticeRepositoryImpl: MainNoticeRepository {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
-    private let baseURL: String? = Bundle.main.noticeURL
+    private let baseURL: String? = Bundle.standard.noticeURL
     
     func fetch() -> AnyPublisher<[SectionOfNotice], any Error> {
         guard let baseURL = baseURL else {
