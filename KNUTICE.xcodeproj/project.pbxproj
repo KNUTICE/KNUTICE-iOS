@@ -69,6 +69,9 @@
 		8E1D70D42E4583E0007FD134 /* KNUTICEWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8E3C85662E41C1380095852C /* KNUTICEWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8E1D70D82E4583F5007FD134 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8E1D70D72E4583F5007FD134 /* RxSwift */; };
 		8E1D70DA2E458408007FD134 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 8E1D70D92E458408007FD134 /* RxCocoa */; };
+		8E1D70DF2E45940D007FD134 /* ServiceInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E1D70DE2E45940D007FD134 /* ServiceInfo.plist */; };
+		8E1D70E12E459B2A007FD134 /* Bundle+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1D70E02E459B2A007FD134 /* Bundle+URL.swift */; };
+		8E1D70E22E459B2A007FD134 /* Bundle+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1D70E02E459B2A007FD134 /* Bundle+URL.swift */; };
 		8E2050FD2CD4F32F00D87C6A /* MainNoticeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD4F2BFA120B00CCCCCD /* MainNoticeResponseDTO.swift */; };
 		8E2050FE2CD4F32F00D87C6A /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2EFC02BF356FB00066C87 /* UIViewController+Preview.swift */; };
 		8E2050FF2CD4F32F00D87C6A /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F021D2C9FB46100AE89D5 /* ReportService.swift */; };
@@ -497,6 +500,8 @@
 		8E1C655B2D7576EC0003AB94 /* MockSearchedNoticesAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchedNoticesAPITest.swift; sourceTree = "<group>"; };
 		8E1C655E2D757E620003AB94 /* PostRequestSuccess.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PostRequestSuccess.json; sourceTree = "<group>"; };
 		8E1C65632D757F790003AB94 /* MockReportTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockReportTest.swift; sourceTree = "<group>"; };
+		8E1D70DE2E45940D007FD134 /* ServiceInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ServiceInfo.plist; sourceTree = "<group>"; };
+		8E1D70E02E459B2A007FD134 /* Bundle+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+URL.swift"; sourceTree = "<group>"; };
 		8E2051472CD4F32F00D87C6A /* KNUTICE-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KNUTICE-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E2051482CD4F32F00D87C6A /* Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Dev.plist"; path = "/Users/ijeonghun/Desktop/GitHub/iOS/KNUTICE-iOS/KNUTICE/Application/Info-Dev.plist"; sourceTree = "<absolute>"; };
 		8E214E142E13614500E2B830 /* TipBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipBannerView.swift; sourceTree = "<group>"; };
@@ -733,6 +738,7 @@
 				8EE3821C2DF00AC100B57315 /* Date+SpecificTime.swift */,
 				8ED4E54A2DFFE4E8000EDB36 /* UserDefaults+AppGroup.swift */,
 				8E668E652E051E6F00358B9F /* BookmarkSortOption.swift */,
+				8E1D70E02E459B2A007FD134 /* Bundle+URL.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1330,6 +1336,7 @@
 		8E8FC54F2E42F1DF002D560F /* KNUTICECore */ = {
 			isa = PBXGroup;
 			children = (
+				8E1D70DE2E45940D007FD134 /* ServiceInfo.plist */,
 				8E8FC54D2E42F1DF002D560F /* KNUTICECore.docc */,
 				8E8248992E43012900FC06E7 /* Repositories */,
 				8E8FC56F2E42F866002D560F /* Repository Interfaces */,
@@ -1862,6 +1869,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E1D70DF2E45940D007FD134 /* ServiceInfo.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1969,6 +1977,7 @@
 				8E3B8C432D2B9A97007E9579 /* BookmarkForm.swift in Sources */,
 				8E4BD5932E03D26F00218365 /* SearchViewController+binding.swift in Sources */,
 				8E3DEA942D7FC31800A5B435 /* LoadingViewController.swift in Sources */,
+				8E1D70E22E459B2A007FD134 /* Bundle+URL.swift in Sources */,
 				8E5E8BDF2D35F03A0078C007 /* BookmarkDetailViewModel.swift in Sources */,
 				8EFCF8672C37742A004A53E9 /* SettingView.swift in Sources */,
 				8EE4B4E62D16CE1E00EFF10B /* SpinningIndicator.swift in Sources */,
@@ -2094,6 +2103,7 @@
 				8E3B8C422D2B9A97007E9579 /* BookmarkForm.swift in Sources */,
 				8E4BD5942E03D26F00218365 /* SearchViewController+binding.swift in Sources */,
 				8E3DEA952D7FC31800A5B435 /* LoadingViewController.swift in Sources */,
+				8E1D70E12E459B2A007FD134 /* Bundle+URL.swift in Sources */,
 				8E5E8BDE2D35F03A0078C007 /* BookmarkDetailViewModel.swift in Sources */,
 				8E20512B2CD4F32F00D87C6A /* SettingView.swift in Sources */,
 				8EE4B4E52D16CE1E00EFF10B /* SpinningIndicator.swift in Sources */,

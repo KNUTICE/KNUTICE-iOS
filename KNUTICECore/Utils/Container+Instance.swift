@@ -9,9 +9,16 @@ import Factory
 
 public extension Container {
     //MARK: - RemoteDataSource
-    public var remoteDataSource: Factory<RemoteDataSource> {
+    var remoteDataSource: Factory<RemoteDataSource> {
         Factory(self) {
             RemoteDataSourceImpl()
+        }
+    }
+    
+    //MARK: - NoticeRepository
+    var noticeRepository: Factory<NoticeRepository> {
+        Factory(self) {
+            NoticeRepositoryImpl()
         }
     }
 }
