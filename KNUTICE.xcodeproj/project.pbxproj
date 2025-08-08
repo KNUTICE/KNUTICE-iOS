@@ -838,7 +838,6 @@
 				8E65BF002DFBBECB00CEEF8F /* GoogleService-Info.plist */,
 				8E65BF102DFBC06C00CEEF8F /* GoogleService-Info-Dev.plist */,
 				8E54C8462C5E63940070E689 /* KNUTICE.entitlements */,
-				8EE65DAF2DE967B20059770D /* Network */,
 				8E6931612CEF02440074142B /* CoreData */,
 				5C190A4C2BFDD92A00E0254B /* Utils */,
 				5C56988E2BEFB37D0085E389 /* Application */,
@@ -1494,13 +1493,6 @@
 				8ECB82DA2CDB6C3D00420349 /* Info.plist */,
 			);
 			path = "NotificationService-dev";
-			sourceTree = "<group>";
-		};
-		8EE65DAF2DE967B20059770D /* Network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Network;
 			sourceTree = "<group>";
 		};
 		8EFE52E32CDC8955003A7330 /* SearchTable */ = {

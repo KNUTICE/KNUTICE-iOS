@@ -13,7 +13,7 @@ public struct NoticeReponseDTO: Decodable {
     public let body: [NoticeReponseBody]?
 }
 
-struct SingleNoticeResponseDTO: Decodable {
+public struct SingleNoticeResponseDTO: Decodable {
     public let result: RequestResult
     public let body: NoticeReponseBody?
 }

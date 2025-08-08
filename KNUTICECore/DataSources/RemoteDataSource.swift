@@ -103,7 +103,7 @@ public extension RemoteDataSource {
 public final class RemoteDataSourceImpl: RemoteDataSource {
     private let session: Session
     
-    init(session: Session = Session.default) {
+    public init(session: Session = Session.default) {
         self.session = session
     }
     
