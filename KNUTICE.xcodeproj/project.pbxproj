@@ -297,6 +297,7 @@
 		8EB767812D439DE90086AB60 /* Date+EndOfToday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB767802D439DE90086AB60 /* Date+EndOfToday.swift */; };
 		8EB767822D439DE90086AB60 /* Date+EndOfToday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB767802D439DE90086AB60 /* Date+EndOfToday.swift */; };
 		8EB8FA832DF9BC7200715F73 /* BookmarkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB8FA812DF9BC7200715F73 /* BookmarkTests.swift */; };
+		8EB90A372E45D7D200B3AEF6 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 8EB90A362E45D7D200B3AEF6 /* Factory */; };
 		8EBBE2402CA0E3FC00826D5A /* LightTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBBE23F2CA0E3FB00826D5A /* LightTextView.swift */; };
 		8EC141212D33E4E8001FD93C /* NoticeWebVCWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC141202D33E4E8001FD93C /* NoticeWebVCWrapper.swift */; };
 		8EC141222D33E4E8001FD93C /* NoticeWebVCWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC141202D33E4E8001FD93C /* NoticeWebVCWrapper.swift */; };
@@ -681,6 +682,7 @@
 				8E8FC5752E42FC3A002D560F /* KNUTICECore.framework in Frameworks */,
 				8E3C856A2E41C1380095852C /* SwiftUI.framework in Frameworks */,
 				8E3C85682E41C1380095852C /* WidgetKit.framework in Frameworks */,
+				8EB90A372E45D7D200B3AEF6 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1643,6 +1645,7 @@
 			);
 			name = KNUTICEWidgetExtension;
 			packageProductDependencies = (
+				8EB90A362E45D7D200B3AEF6 /* Factory */,
 			);
 			productName = KNUTICEWidgetExtension;
 			productReference = 8E3C85662E41C1380095852C /* KNUTICEWidgetExtension.appex */;
@@ -3049,6 +3052,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8EC7321F2DD5A63F0038AD59 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		8EB90A362E45D7D200B3AEF6 /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8EC732162DD5A5B00038AD59 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
 		};
 		8EC732172DD5A5B00038AD59 /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;
