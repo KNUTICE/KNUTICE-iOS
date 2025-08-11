@@ -123,7 +123,7 @@ public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
     }
     
     public func fetchNotices(for category: NoticeCategory, size: Int = 20) async throws -> [Notice] {
-        guard let baseURL = Bundle.main.noticeURL else {
+        guard let baseURL = baseURL else {
             throw NetworkError.invalidURL(message: "Invalid or missing 'Notice_URL' in resource.")
         }
         
