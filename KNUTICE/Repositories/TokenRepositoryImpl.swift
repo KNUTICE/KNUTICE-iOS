@@ -45,7 +45,7 @@ final class TokenRepositoryImpl: TokenRepository {
     func getFCMToken() -> AnyPublisher<String, any Error> {
         return Future { promise in
             if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
-                //Firebase 10.4.0 SDK를 사용하는 UnitTest에서 iOS 16 Simulator와 Xcode 13,  Apple Silicon HW를 만족하지 않으면 토큰을 사용할 수 없는 이슈
+                //Firebase 10.4.0 SDK를 사용하는 UnitTest에서 iOS 16 Simulator와 Xcode 13, Apple Silicon HW를 만족하지 않으면 토큰을 사용할 수 없는 이슈
                 //UnitTest 환경에서 임의의 토큰 정보 반환
                 promise(.success(""))
             } else {
@@ -62,22 +62,14 @@ final class TokenRepositoryImpl: TokenRepository {
     }
     
     func getFCMToken() async throws -> String {
+        guard ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil else {
+            //Firebase 10.4.0 SDK를 사용하는 UnitTest에서 iOS 16 Simulator와 Xcode 13, Apple Silicon HW를 만족하지 않으면 토큰을 사용할 수 없는 이슈
+            //UnitTest 환경에서 임의의 토큰 정보 반환
+            return ""
+        }
+        
         try Task.checkCancellation()
         
-        return try await withCheckedThrowingContinuation { continuation in
-            if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
-                //Firebase 10.4.0 SDK를 사용하는 UnitTest에서 iOS 16 Simulator와 Xcode 13,  Apple Silicon HW를 만족하지 않으면 토큰을 사용할 수 없는 이슈
-                //UnitTest 환경에서 임의의 토큰 정보 반환
-                continuation.resume(returning: "")
-            } else {
-                Messaging.messaging().token { token, error in
-                    if let error = error {
-                        continuation.resume(throwing: error)
-                    } else {
-                        continuation.resume(returning: token ?? "")
-                    }
-                }
-            }
-        }
+        return try await Messaging.messaging().token()
     }
 }
