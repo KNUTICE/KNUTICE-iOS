@@ -6,17 +6,13 @@
 //
 
 import Alamofire
-import Factory
-import FirebaseMessaging
 import Foundation
 
 struct TokenInterceptor: RequestInterceptor, @unchecked Sendable {
-    @Injected(\.tokenRepository) private var repository
-    
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, any Error>) -> Void) {
         Task {
             var urlRequest = urlRequest
-            let token = try? await repository.getFCMToken()
+            let token = try? await FCMTokenManager.shared.getToken()
             
             guard let token else {
                 completion(.failure(TokenError.notFound))
