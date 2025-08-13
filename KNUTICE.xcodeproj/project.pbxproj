@@ -199,6 +199,10 @@
 		8E5385782C644C3F00AF151B /* TokenRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385772C644C3F00AF151B /* TokenRepositoryImpl.swift */; };
 		8E5385872C64A24A00AF151B /* ci_post_clone.sh in Resources */ = {isa = PBXBuildFile; fileRef = 8E53857E2C647D9A00AF151B /* ci_post_clone.sh */; };
 		8E54C84A2C5E6F5E0070E689 /* AppDelegate+Messaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E54C8492C5E6F5E0070E689 /* AppDelegate+Messaging.swift */; };
+		8E5BE20C2E4B6F7F00863FC4 /* FCMTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5BE20B2E4B6F7F00863FC4 /* FCMTokenManager.swift */; };
+		8E5BE20D2E4B6F7F00863FC4 /* FCMTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5BE20B2E4B6F7F00863FC4 /* FCMTokenManager.swift */; };
+		8E5BE20F2E4C163300863FC4 /* SilentPushEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5BE20E2E4C163300863FC4 /* SilentPushEvent.swift */; };
+		8E5BE2102E4C163300863FC4 /* SilentPushEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5BE20E2E4C163300863FC4 /* SilentPushEvent.swift */; };
 		8E5C1AC92D4074D50092BF88 /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5C1AC82D4074D50092BF88 /* TabBarViewModel.swift */; };
 		8E5C1ACA2D4074D50092BF88 /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5C1AC82D4074D50092BF88 /* TabBarViewModel.swift */; };
 		8E5C1ACC2D4075620092BF88 /* MainPopupContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5C1ACB2D4075620092BF88 /* MainPopupContent.swift */; };
@@ -319,10 +323,6 @@
 		8EC7323D2DD5A97E0038AD59 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8EC7323C2DD5A97E0038AD59 /* SnapKit */; };
 		8ECB82DD2CDB6C3D00420349 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECB82DB2CDB6C3D00420349 /* NotificationService.swift */; };
 		8ECE2B182C35045800D7F499 /* MainNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE2B172C35045800D7F499 /* MainNotice.swift */; };
-		8ED4E54B2DFFE4E8000EDB36 /* UserDefaults+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED4E54A2DFFE4E8000EDB36 /* UserDefaults+AppGroup.swift */; };
-		8ED4E54C2DFFE4E8000EDB36 /* UserDefaults+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED4E54A2DFFE4E8000EDB36 /* UserDefaults+AppGroup.swift */; };
-		8ED4E54D2DFFE4EF000EDB36 /* UserDefaults+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED4E54A2DFFE4E8000EDB36 /* UserDefaults+AppGroup.swift */; };
-		8ED4E54E2DFFE4EF000EDB36 /* UserDefaults+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED4E54A2DFFE4E8000EDB36 /* UserDefaults+AppGroup.swift */; };
 		8EDAFD422D6818D000834E00 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDAFD412D6818D000834E00 /* Errors.swift */; };
 		8EDAFD432D6818D000834E00 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDAFD412D6818D000834E00 /* Errors.swift */; };
 		8EDC2E442D9245EA00AAB60F /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDC2E432D9245EA00AAB60F /* UserDefaultsKeys.swift */; };
@@ -509,6 +509,8 @@
 		8E53857E2C647D9A00AF151B /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 		8E54C8462C5E63940070E689 /* KNUTICE.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KNUTICE.entitlements; sourceTree = "<group>"; };
 		8E54C8492C5E6F5E0070E689 /* AppDelegate+Messaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Messaging.swift"; sourceTree = "<group>"; };
+		8E5BE20B2E4B6F7F00863FC4 /* FCMTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMTokenManager.swift; sourceTree = "<group>"; };
+		8E5BE20E2E4C163300863FC4 /* SilentPushEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SilentPushEvent.swift; sourceTree = "<group>"; };
 		8E5C1AC82D4074D50092BF88 /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
 		8E5C1ACB2D4075620092BF88 /* MainPopupContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPopupContent.swift; sourceTree = "<group>"; };
 		8E5C1ACE2D40768B0092BF88 /* MainPopupContentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPopupContentDTO.swift; sourceTree = "<group>"; };
@@ -573,7 +575,6 @@
 		8ECB82DA2CDB6C3D00420349 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8ECB82DB2CDB6C3D00420349 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		8ECE2B172C35045800D7F499 /* MainNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotice.swift; sourceTree = "<group>"; };
-		8ED4E54A2DFFE4E8000EDB36 /* UserDefaults+AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+AppGroup.swift"; sourceTree = "<group>"; };
 		8EDAFD412D6818D000834E00 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		8EDC2E432D9245EA00AAB60F /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		8EDC2E462D925B6F00AAB60F /* MainTableViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewModelTest.swift; sourceTree = "<group>"; };
@@ -665,10 +666,11 @@
 				8EDAFD412D6818D000834E00 /* Errors.swift */,
 				8EDC2E432D9245EA00AAB60F /* UserDefaultsKeys.swift */,
 				8EE3821C2DF00AC100B57315 /* Date+SpecificTime.swift */,
-				8ED4E54A2DFFE4E8000EDB36 /* UserDefaults+AppGroup.swift */,
 				8E668E652E051E6F00358B9F /* BookmarkSortOption.swift */,
 				8E02F80D2D601E64000FE803 /* NoticeCategory.swift */,
 				8EAEAD972E24C9C500763F08 /* BookmarkUpdate.swift */,
+				8E5BE20B2E4B6F7F00863FC4 /* FCMTokenManager.swift */,
+				8E5BE20E2E4C163300863FC4 /* SilentPushEvent.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1662,6 +1664,7 @@
 				8E6931572CEEFC0F0074142B /* TopicSubscriptionList.swift in Sources */,
 				8E5385742C644AB000AF151B /* TokenRepository.swift in Sources */,
 				8E69315A2CEEFC2F0074142B /* TopicSubscriptionListViewModel.swift in Sources */,
+				8E5BE2102E4C163300863FC4 /* SilentPushEvent.swift in Sources */,
 				5C5698922BEFB4A20085E389 /* MainTableViewModel.swift in Sources */,
 				5C8256462BE5CE1A0038D4C8 /* MainTableViewController.swift in Sources */,
 				8E5C1AD52D40773F0092BF88 /* MainPopupContentRepositoryImpl.swift in Sources */,
@@ -1695,7 +1698,6 @@
 				8E0CDED42D3B4CA5000F8DEF /* BookmarkService.swift in Sources */,
 				8E214E192E1361C400E2B830 /* TipBannerViewModel.swift in Sources */,
 				8EDC2E442D9245EA00AAB60F /* UserDefaultsKeys.swift in Sources */,
-				8ED4E54B2DFFE4E8000EDB36 /* UserDefaults+AppGroup.swift in Sources */,
 				8E5C1AC92D4074D50092BF88 /* TabBarViewModel.swift in Sources */,
 				5C8256422BE5CE1A0038D4C8 /* AppDelegate.swift in Sources */,
 				5C5698972BEFB6760085E389 /* Notice.swift in Sources */,
@@ -1744,6 +1746,7 @@
 				8E022B7D2D8EDB4F00FA9E25 /* MainTableViewSkeletonCell.swift in Sources */,
 				8EA72DCA2CD5CA4800D1B300 /* DeveloperTools.swift in Sources */,
 				8EFE53062CDCC30F003A7330 /* NoticeCreatable.swift in Sources */,
+				8E5BE20C2E4B6F7F00863FC4 /* FCMTokenManager.swift in Sources */,
 				8E3F02222C9FB76800AE89D5 /* ReportRepositoryImpl.swift in Sources */,
 				8E214E212E1362D900E2B830 /* Tip.swift in Sources */,
 				8E668E662E051E6F00358B9F /* BookmarkSortOption.swift in Sources */,
@@ -1800,6 +1803,7 @@
 				8E6931562CEEFC0F0074142B /* TopicSubscriptionList.swift in Sources */,
 				8E2051002CD4F32F00D87C6A /* TokenRepository.swift in Sources */,
 				8E6931592CEEFC2F0074142B /* TopicSubscriptionListViewModel.swift in Sources */,
+				8E5BE20F2E4C163300863FC4 /* SilentPushEvent.swift in Sources */,
 				8E2051012CD4F32F00D87C6A /* MainTableViewModel.swift in Sources */,
 				8E2051022CD4F32F00D87C6A /* MainTableViewController.swift in Sources */,
 				8E5C1AD62D40773F0092BF88 /* MainPopupContentRepositoryImpl.swift in Sources */,
@@ -1833,7 +1837,6 @@
 				8E0CDED32D3B4CA5000F8DEF /* BookmarkService.swift in Sources */,
 				8E214E182E1361C400E2B830 /* TipBannerViewModel.swift in Sources */,
 				8EDC2E452D9245EA00AAB60F /* UserDefaultsKeys.swift in Sources */,
-				8ED4E54C2DFFE4E8000EDB36 /* UserDefaults+AppGroup.swift in Sources */,
 				8E5C1ACA2D4074D50092BF88 /* TabBarViewModel.swift in Sources */,
 				8E20510D2CD4F32F00D87C6A /* AppDelegate.swift in Sources */,
 				8E20510E2CD4F32F00D87C6A /* Notice.swift in Sources */,
@@ -1882,6 +1885,7 @@
 				8E022B7E2D8EDB4F00FA9E25 /* MainTableViewSkeletonCell.swift in Sources */,
 				8EA72DC92CD5CA4800D1B300 /* DeveloperTools.swift in Sources */,
 				8EFE53072CDCC30F003A7330 /* NoticeCreatable.swift in Sources */,
+				8E5BE20D2E4B6F7F00863FC4 /* FCMTokenManager.swift in Sources */,
 				8E2051272CD4F32F00D87C6A /* ReportRepositoryImpl.swift in Sources */,
 				8E214E232E1362D900E2B830 /* Tip.swift in Sources */,
 				8E668E672E051E6F00358B9F /* BookmarkSortOption.swift in Sources */,
@@ -1936,7 +1940,6 @@
 				8ECB82DD2CDB6C3D00420349 /* NotificationService.swift in Sources */,
 				8EAEAD9B2E24C9C500763F08 /* BookmarkUpdate.swift in Sources */,
 				8E214E242E1362D900E2B830 /* Tip.swift in Sources */,
-				8ED4E54E2DFFE4EF000EDB36 /* UserDefaults+AppGroup.swift in Sources */,
 				8E2755CC2D9E25AB005C4EBC /* UNUserNotificationCenter+LocalNotification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1972,7 +1975,6 @@
 				8EB6D2002C663627004E8AC2 /* NotificationService.swift in Sources */,
 				8EAEAD9A2E24C9C500763F08 /* BookmarkUpdate.swift in Sources */,
 				8E214E222E1362D900E2B830 /* Tip.swift in Sources */,
-				8ED4E54D2DFFE4EF000EDB36 /* UserDefaults+AppGroup.swift in Sources */,
 				8E2755CB2D9E25AB005C4EBC /* UNUserNotificationCenter+LocalNotification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
