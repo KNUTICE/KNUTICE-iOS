@@ -28,7 +28,7 @@ struct FCMTokenManager {
         async let fcmToken = getToken()
         async let oldToken = FCMTokenKeychainManager.shared.read()
         
-        let (newToken, existingToken) = try await (fcmToken, oldToken ?? { throw TokenError.notFound }())
+        let (newToken, existingToken) = try await (fcmToken, oldToken)
         
         try Task.checkCancellation()
         

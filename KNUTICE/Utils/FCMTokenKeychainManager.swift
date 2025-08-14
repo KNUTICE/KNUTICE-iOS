@@ -13,9 +13,6 @@ struct FCMTokenKeychainManager {
     
     static let shared: FCMTokenKeychainManager = .init()
     
-    private let attrLabel: String = "fcmToken"
-    private let serviceName: String = "KNUTICE"
-    
     private init() {}
     
     // MARK: - Public Methods
@@ -30,21 +27,19 @@ struct FCMTokenKeychainManager {
         return await create(for: token)    //Save token
     }
     
-    /// Reads a string value from the Keychain asynchronously.
+    /// Reads the stored FCM token from the Keychain.
     ///
-    /// This method performs a `SecItemCopyMatching` query on a background thread to avoid blocking the main thread.
-    /// It uses Swift's async/await with `withCheckedContinuation` to bridge the synchronous Keychain API into an async context.
-    ///
-    /// - Returns: The stored string value if found, otherwise `nil`.
-    ///
-    /// ## Note
-    /// - Uses `DispatchQueue.global(qos: .default)` to execute the query off the main thread.
-    /// - The `baseQuery(returnData: true)` must be configured to match the desired Keychain item.
-    /// - Thread-safe: Keychain services are inherently thread-safe, but running on a background queue prevents UI freezes.
-    /// - The returned string is UTF-8 decoded from the stored `Data`.
+    /// - Returns: The stored FCM token as a `String`, or `nil` if not found or decoding fails.
+    /// - Important:
+    ///   - If the Keychain item was saved with `kSecAttrAccessibleWhenUnlocked`,
+    ///     this method will return `nil` when the device is locked (e.g., during a silent push or background execution).
+    ///   - To ensure access in background or locked states, save the item with
+    ///     `kSecAttrAccessibleAfterFirstUnlock` or `kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly`.
+    /// - Note:
+    ///   Uses a background queue to avoid blocking the main thread.
     func read() async -> String? {
         return await withCheckedContinuation { continuation in
-            DispatchQueue.global(qos: .default).async {
+            DispatchQueue.global(qos: .background).async {
                 var item: AnyObject?
                 let result = SecItemCopyMatching(baseQuery(returnData: true), &item)
                 
@@ -77,7 +72,7 @@ struct FCMTokenKeychainManager {
     @discardableResult
     func delete() async -> Bool {
         return await withCheckedContinuation { continuation in
-            DispatchQueue.global(qos: .default).async {
+            DispatchQueue.global(qos: .background).async {
                 continuation.resume(returning: SecItemDelete(baseQuery()) == errSecSuccess)
             }
         }
@@ -102,7 +97,7 @@ struct FCMTokenKeychainManager {
     @discardableResult
     private func create(for token: String) async -> Bool {
         return await withCheckedContinuation { continuation in
-            DispatchQueue.global(qos: .default).async {
+            DispatchQueue.global(qos: .background).async {
                 let saveQuery = baseQuery()
                 saveQuery[kSecValueData] = token.data(using: .utf8)!
                 
@@ -116,7 +111,11 @@ struct FCMTokenKeychainManager {
     /// - Parameter returnData: If `true`, adds `kSecReturnData: true` to the query.
     /// - Returns: A mutable dictionary for Keychain queries.
     private func baseQuery(returnData: Bool = false) -> NSMutableDictionary {
+        let attrLabel: String = "fcmToken"
+        let serviceName: String = "KNUTICE"
+        
         let query: NSMutableDictionary = [
+            kSecAttrAccessible: kSecAttrAccessibleAfterFirstUnlock,
             kSecClass: kSecClassGenericPassword,
             kSecAttrLabel: attrLabel,
             kSecAttrService: serviceName
