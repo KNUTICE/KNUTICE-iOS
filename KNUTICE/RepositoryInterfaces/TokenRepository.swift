@@ -10,6 +10,10 @@ import RxSwift
 
 protocol TokenRepository {
     func registerToken(token: String) -> Observable<Bool>
+    
+    @discardableResult
+    func register(token: String) async throws -> Bool
+    
     func getFCMToken() -> AnyPublisher<String, any Error>
     func getFCMToken() async throws -> String
 }
