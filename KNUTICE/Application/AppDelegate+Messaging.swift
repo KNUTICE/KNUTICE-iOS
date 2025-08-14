@@ -15,6 +15,8 @@ extension AppDelegate: MessagingDelegate {
         print("Firebase registration token: \(String(describing: fcmToken))")
         
         guard let fcmToken else { return }
+        
+        // 토큰 갱신 이벤트를 NotificationCenter로 전파
         let dataDic: [String: String] = ["token": fcmToken]
         NotificationCenter.default.post(
             name: Notification.Name.fcmToken,

@@ -203,6 +203,10 @@
 		8E5BE20D2E4B6F7F00863FC4 /* FCMTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5BE20B2E4B6F7F00863FC4 /* FCMTokenManager.swift */; };
 		8E5BE20F2E4C163300863FC4 /* SilentPushEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5BE20E2E4C163300863FC4 /* SilentPushEvent.swift */; };
 		8E5BE2102E4C163300863FC4 /* SilentPushEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5BE20E2E4C163300863FC4 /* SilentPushEvent.swift */; };
+		8E5BE2122E4C4DA400863FC4 /* FCMTokenKeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5BE2112E4C4DA400863FC4 /* FCMTokenKeychainManager.swift */; };
+		8E5BE2132E4C4DA400863FC4 /* FCMTokenKeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5BE2112E4C4DA400863FC4 /* FCMTokenKeychainManager.swift */; };
+		8E5BE2152E4D611200863FC4 /* FCMTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5BE2142E4D611200863FC4 /* FCMTokenService.swift */; };
+		8E5BE2162E4D611200863FC4 /* FCMTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5BE2142E4D611200863FC4 /* FCMTokenService.swift */; };
 		8E5C1AC92D4074D50092BF88 /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5C1AC82D4074D50092BF88 /* TabBarViewModel.swift */; };
 		8E5C1ACA2D4074D50092BF88 /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5C1AC82D4074D50092BF88 /* TabBarViewModel.swift */; };
 		8E5C1ACC2D4075620092BF88 /* MainPopupContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5C1ACB2D4075620092BF88 /* MainPopupContent.swift */; };
@@ -511,6 +515,8 @@
 		8E54C8492C5E6F5E0070E689 /* AppDelegate+Messaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Messaging.swift"; sourceTree = "<group>"; };
 		8E5BE20B2E4B6F7F00863FC4 /* FCMTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMTokenManager.swift; sourceTree = "<group>"; };
 		8E5BE20E2E4C163300863FC4 /* SilentPushEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SilentPushEvent.swift; sourceTree = "<group>"; };
+		8E5BE2112E4C4DA400863FC4 /* FCMTokenKeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMTokenKeychainManager.swift; sourceTree = "<group>"; };
+		8E5BE2142E4D611200863FC4 /* FCMTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMTokenService.swift; sourceTree = "<group>"; };
 		8E5C1AC82D4074D50092BF88 /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
 		8E5C1ACB2D4075620092BF88 /* MainPopupContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPopupContent.swift; sourceTree = "<group>"; };
 		8E5C1ACE2D40768B0092BF88 /* MainPopupContentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPopupContentDTO.swift; sourceTree = "<group>"; };
@@ -670,6 +676,7 @@
 				8E02F80D2D601E64000FE803 /* NoticeCategory.swift */,
 				8EAEAD972E24C9C500763F08 /* BookmarkUpdate.swift */,
 				8E5BE20B2E4B6F7F00863FC4 /* FCMTokenManager.swift */,
+				8E5BE2112E4C4DA400863FC4 /* FCMTokenKeychainManager.swift */,
 				8E5BE20E2E4C163300863FC4 /* SilentPushEvent.swift */,
 			);
 			path = Utils;
@@ -1076,6 +1083,7 @@
 				8E0CDED22D3B4CA5000F8DEF /* BookmarkService.swift */,
 				8EA47FE82D922C5800B68EAD /* TabBarService.swift */,
 				8E782B9E2DE96CCE005E4432 /* TopicSubscriptionService.swift */,
+				8E5BE2142E4D611200863FC4 /* FCMTokenService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1741,6 +1749,7 @@
 				8EDD51A62C6D7D68002101CA /* MainTableViewController+NotificationCenter.swift in Sources */,
 				5C190A532BFDF5EB00E0254B /* NoticeRepositoryImpl.swift in Sources */,
 				8E0907722DE58773008BDF18 /* BookmarkTableViewController+Binding.swift in Sources */,
+				8E5BE2152E4D611200863FC4 /* FCMTokenService.swift in Sources */,
 				5C89DD462BFA0D6800CCCCCD /* MainNoticeRepository.swift in Sources */,
 				8E4BD59A2E03D64200218365 /* NoticeCollectionViewCellWithThumbnail.swift in Sources */,
 				8E022B7D2D8EDB4F00FA9E25 /* MainTableViewSkeletonCell.swift in Sources */,
@@ -1772,6 +1781,7 @@
 				8EC1ECA22DD43542005E71B3 /* NoticeSectionModel.swift in Sources */,
 				8E5C1AD22D4077140092BF88 /* MainPopupContentRepository.swift in Sources */,
 				8E09076F2DE58152008BDF18 /* BookmarkTableViewCell.swift in Sources */,
+				8E5BE2132E4C4DA400863FC4 /* FCMTokenKeychainManager.swift in Sources */,
 				8E214E262E13639A00E2B830 /* TipRepositoryImpl.swift in Sources */,
 				8E00AF6C2C361F780037EC38 /* WebViewController.swift in Sources */,
 				8E5C1ACF2D40768B0092BF88 /* MainPopupContentDTO.swift in Sources */,
@@ -1880,6 +1890,7 @@
 				8E2051232CD4F32F00D87C6A /* MainTableViewController+NotificationCenter.swift in Sources */,
 				8E2051242CD4F32F00D87C6A /* NoticeRepositoryImpl.swift in Sources */,
 				8E0907732DE58773008BDF18 /* BookmarkTableViewController+Binding.swift in Sources */,
+				8E5BE2162E4D611200863FC4 /* FCMTokenService.swift in Sources */,
 				8E2051252CD4F32F00D87C6A /* MainNoticeRepository.swift in Sources */,
 				8E4BD5992E03D64200218365 /* NoticeCollectionViewCellWithThumbnail.swift in Sources */,
 				8E022B7E2D8EDB4F00FA9E25 /* MainTableViewSkeletonCell.swift in Sources */,
@@ -1911,6 +1922,7 @@
 				8EC1ECA32DD43542005E71B3 /* NoticeSectionModel.swift in Sources */,
 				8E5C1AD32D4077140092BF88 /* MainPopupContentRepository.swift in Sources */,
 				8E0907702DE58152008BDF18 /* BookmarkTableViewCell.swift in Sources */,
+				8E5BE2122E4C4DA400863FC4 /* FCMTokenKeychainManager.swift in Sources */,
 				8E214E272E13639A00E2B830 /* TipRepositoryImpl.swift in Sources */,
 				8E2051302CD4F32F00D87C6A /* WebViewController.swift in Sources */,
 				8E5C1AD02D40768B0092BF88 /* MainPopupContentDTO.swift in Sources */,

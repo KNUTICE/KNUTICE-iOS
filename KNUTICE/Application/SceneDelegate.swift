@@ -19,10 +19,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScen = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScen)
         if UIDevice.current.userInterfaceIdiom == .phone {
-            let viewContoller = UINavigationController(rootViewController: ParentViewController(viewModel: ParentViewModel()))
+            let viewContoller = UINavigationController(rootViewController: ParentViewController())
             self.window?.rootViewController = viewContoller
         } else {
-            self.window?.rootViewController = ParentViewController(viewModel: ParentViewModel())
+            self.window?.rootViewController = ParentViewController()
         }
         self.window?.makeKeyAndVisible()
     }

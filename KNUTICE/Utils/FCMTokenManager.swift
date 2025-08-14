@@ -10,18 +10,25 @@ import FirebaseMessaging
 import Foundation
 
 struct FCMTokenManager {
+    //MARK: - Properies
+    
     @Injected(\.remoteDataSource) private var dataSource
     
     static let shared: FCMTokenManager = .init()
     
     private init() {}
     
+    //MARK: - Methods
+    
     func uploadToken() async throws {
-        let fcmToken = try await getToken()
-        
         guard let baseURL = Bundle.main.tokenURL else {
             throw NetworkError.invalidURL(message: "Invalid or missing 'Token_URL' in resource.")
         }
+        
+        async let fcmToken = getToken()
+        async let oldToken = FCMTokenKeychainManager.shared.read()
+        
+        let (newToken, existingToken) = try await (fcmToken, oldToken ?? { throw TokenError.notFound }())
         
         try Task.checkCancellation()
         
@@ -32,16 +39,20 @@ struct FCMTokenManager {
                 "resultDescription": "string"
             ],
             "body": [
-                "fcmToken": fcmToken
+                "oldFcmToken": existingToken,
+                "newFcmToken": newToken,
+                "deviceType": "iOS"
             ]
         ] as [String : Any]
         
         try await dataSource.request(
-            baseURL + "/silent-push",
-            method: .post,
+            baseURL,
+            method: .patch,
             parameters: params,
             decoding: PostResponseDTO.self
         )
+        
+        await FCMTokenKeychainManager.shared.save(fcmToken: newToken)
     }
     
     func getToken() async throws -> String {

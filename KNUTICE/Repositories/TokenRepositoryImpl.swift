@@ -15,31 +15,34 @@ final class TokenRepositoryImpl: TokenRepository {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
     
     func registerToken(token: String) -> Observable<Bool> {
-        guard let endpoint = Bundle.main.tokenURL else {
-            return Observable.error(NetworkError.invalidURL(message: "Invalid or missong 'Token_URL' in resource."))
+        do {
+            let (endpoint, params) = try makeRegisterTokenRequest(token: token)
+            
+            return dataSource.request(
+                endpoint,
+                method: .post,
+                parameters: params,
+                decoding: PostResponseDTO.self
+            )
+            .map { $0.result.resultCode == 200 }
+            .asObservable()
+        } catch {
+            return Observable.error(error)
         }
+    }
+    
+    @discardableResult
+    func register(token: String) async throws -> Bool {
+        let (endpoint, params) = try makeRegisterTokenRequest(token: token)
         
-        let params = [
-            "result": [
-                "resultCode": 0,
-                "resultMessage": "string",
-                "resultDescription": "string"
-            ],
-            "body": [
-                "fcmToken": token
-            ]
-        ] as [String : Any]
-        
-        return dataSource.request(
+        let dto = try await dataSource.request(
             endpoint,
             method: .post,
             parameters: params,
             decoding: PostResponseDTO.self
         )
-        .map {
-            return $0.result.resultCode == 200 ? true : false
-        }
-        .asObservable()
+        
+        return dto.result.resultCode == 200
     }
     
     func getFCMToken() -> AnyPublisher<String, any Error> {
@@ -71,5 +74,25 @@ final class TokenRepositoryImpl: TokenRepository {
         try Task.checkCancellation()
         
         return try await Messaging.messaging().token()
+    }
+    
+    private func makeRegisterTokenRequest(token: String) throws -> (endpoint: String, params: [String: Any]) {
+        guard let endpoint = Bundle.main.tokenURL else {
+            throw NetworkError.invalidURL(message: "Invalid or missing 'Token_URL' in resource.")
+        }
+        
+        let params: [String: Any] = [
+            "result": [
+                "resultCode": 0,
+                "resultMessage": "string",
+                "resultDescription": "string"
+            ],
+            "body": [
+                "fcmToken": token,
+                "deviceType": "iOS"
+            ]
+        ]
+        
+        return (endpoint, params)
     }
 }
