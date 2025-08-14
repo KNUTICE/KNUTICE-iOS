@@ -5,21 +5,13 @@
 //  Created by 이정훈 on 3/11/25.
 //
 
+import Combine
+import Factory
 import UIKit
-import RxSwift
 
 final class ParentViewController: UIViewController {
-    let viewModel: ParentViewModel
-    let disposeBag: DisposeBag = DisposeBag()
-    
-    init(viewModel: ParentViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    @Injected(\.parentViewModel) var viewModel
+    var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +22,10 @@ final class ParentViewController: UIViewController {
         addChildVC(loadingViewController)
         viewModel.subscribeToFCMToken()
         bind()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        viewModel.task?.cancel()
     }
     
     func addChildVC(_ viewController: UIViewController) {

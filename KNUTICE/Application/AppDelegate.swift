@@ -6,14 +6,11 @@
 //
 
 import UIKit
-import RxSwift
-import CoreData
-import SkeletonView
 import FirebaseCore
 import FirebaseMessaging
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -61,7 +58,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     // MARK: UISceneSession Lifecycle
 
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+    func application(
+        _ application: UIApplication,
+        configurationForConnecting connectingSceneSession: UISceneSession,
+        options: UIScene.ConnectionOptions
+    ) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
@@ -73,7 +74,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
-    //Foreground 알림 설정
+    // MARK: - Handling Silent Push Notifications
+    
+    func application(
+        _ application: UIApplication,
+        didReceiveRemoteNotification userInfo: [AnyHashable : Any],
+        fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
+    ) {
+        guard let value = userInfo["event"],
+              let eventName = value as? String,
+              let event = SilentPushEvent(rawValue: eventName) else {
+            return
+        }
+        
+        // 수신한 사일런트 푸시의 eventName이 token_update인 경우,
+        // FCM 토큰을 서버에 업로드하는 비동기 작업을 실행.
+        if event == .tokenUpdate {
+            Task {
+                do {
+                    try await FCMTokenManager.shared.uploadToken()
+                } catch {
+                    print(error)
+                }
+            }
+        }
+        
+        completionHandler(.noData)
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    // MARK: - Foreground Notification Handling
+    
     //알림을 터치하지 않아도 알림이 전달되면 호출
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.list, .banner, .sound])
@@ -90,7 +122,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         center.updatePendingNotificationRequestBadges() as Void
     }
     
-    //Background 알림 설정
+    // MARK: - Background Notification Handling
+    
     //알림을 클릭했을 때 호출
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         set(userInfo: response.notification.request.content.userInfo)
