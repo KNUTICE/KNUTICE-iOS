@@ -25,6 +25,5 @@ final class FCMTokenServiceImpl: FCMTokenService {
         }
         
         return await FCMTokenKeychainManager.shared.save(fcmToken: fcmToken)
-//        return await FCMTokenKeychainManager.shared.save(fcmToken: "testtest")
     }
 }
