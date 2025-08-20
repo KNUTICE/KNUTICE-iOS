@@ -108,6 +108,12 @@ extension Container {
         }
     }
     
+    var fcmTokenService: Factory<FCMTokenService> {
+        Factory(self) {
+            FCMTokenServiceImpl()
+        }
+    }
+    
     //MARK: - ViewModel
     var mainViewModel: Factory<MainTableViewModel> {
         Factory(self) {
@@ -130,6 +136,12 @@ extension Container {
     var bookmarkTableViewModel: Factory<BookmarkTableViewModel> {
         Factory(self) {
             BookmarkTableViewModel()
+        }
+    }
+    
+    var parentViewModel: Factory<ParentViewModel> {
+        Factory(self) { @MainActor in
+            ParentViewModel()
         }
     }
 }

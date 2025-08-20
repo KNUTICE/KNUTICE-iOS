@@ -71,34 +71,6 @@ final class MainTableViewController: UIViewController {
         //API Call
         viewModel.fetchNoticesWithCombine()
     }
-    
-    func createNormalBellIcon() -> UIImage? {
-        let configuration: UIImage.SymbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title2)
-        
-        if UserDefaults.shared.bool(forKey: UserDefaultsKeys.hasNewPendingNotice.rawValue) {
-            let paletteStyleConfig = UIImage.SymbolConfiguration(paletteColors: [.red, .black])
-            configuration.applying(paletteStyleConfig)
-            return UIImage(systemName: "bell.badge", withConfiguration: configuration)?
-                .withRenderingMode(.alwaysOriginal)
-        }
-        
-        return UIImage(systemName: "bell", withConfiguration: configuration)?
-            .withRenderingMode(.alwaysTemplate)
-    }
-    
-    func createHighlightedBellIcon() -> UIImage? {
-        let configuration = UIImage.SymbolConfiguration(textStyle: .title2)
-        
-        if UserDefaults.shared.bool(forKey: UserDefaultsKeys.hasNewPendingNotice.rawValue) {
-            return UIImage(systemName: "bell.badge", withConfiguration: configuration)?
-                .withRenderingMode(.alwaysOriginal)
-                .withTintColor(.lightGray)
-        }
-        
-        return UIImage(systemName: "bell", withConfiguration: configuration)?
-            .withRenderingMode(.alwaysOriginal)
-            .withTintColor(.lightGray)
-    }
 }
 
 //MARK: - UITableView delegate method

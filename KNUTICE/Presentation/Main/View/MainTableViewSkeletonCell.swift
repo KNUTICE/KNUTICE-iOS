@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 final class MainTableViewSkeletonCell: MainTableViewCell {
     override class var reuseIdentifier: String {
