@@ -22,7 +22,6 @@
 		5C89DD492BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD482BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift */; };
 		5C89DD502BFA120B00CCCCCD /* MainNoticeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD4F2BFA120B00CCCCCD /* MainNoticeResponseDTO.swift */; };
 		5CD2EFC12BF356FB00066C87 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2EFC02BF356FB00066C87 /* UIViewController+Preview.swift */; };
-		8E00AF6C2C361F780037EC38 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF6B2C361F780037EC38 /* WebViewController.swift */; };
 		8E022B7D2D8EDB4F00FA9E25 /* MainTableViewSkeletonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E022B7C2D8EDB4F00FA9E25 /* MainTableViewSkeletonCell.swift */; };
 		8E022B7E2D8EDB4F00FA9E25 /* MainTableViewSkeletonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E022B7C2D8EDB4F00FA9E25 /* MainTableViewSkeletonCell.swift */; };
 		8E03092A2E3C7CF600B1FCAC /* EntryTimeRecordable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0309292E3C7CF600B1FCAC /* EntryTimeRecordable.swift */; };
@@ -78,7 +77,6 @@
 		8E2051002CD4F32F00D87C6A /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5385732C644AB000AF151B /* TokenRepository.swift */; };
 		8E2051012CD4F32F00D87C6A /* MainTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698912BEFB4A20085E389 /* MainTableViewModel.swift */; };
 		8E2051022CD4F32F00D87C6A /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8256452BE5CE1A0038D4C8 /* MainTableViewController.swift */; };
-		8E2051052CD4F32F00D87C6A /* BaseWebContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9ACAA2C46AEC900C9E287 /* BaseWebContentView.swift */; };
 		8E2051062CD4F32F00D87C6A /* ReportRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F021F2C9FB6A000AE89D5 /* ReportRepository.swift */; };
 		8E2051082CD4F32F00D87C6A /* MainTableViewController+Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD3D2BFA043200CCCCCD /* MainTableViewController+Binding.swift */; };
 		8E2051092CD4F32F00D87C6A /* MainNoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD482BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift */; };
@@ -89,7 +87,6 @@
 		8E2051132CD4F32F00D87C6A /* LightTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBBE23F2CA0E3FB00826D5A /* LightTextView.swift */; };
 		8E2051172CD4F32F00D87C6A /* View+Fork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6D20D2C6713BB004E8AC2 /* View+Fork.swift */; };
 		8E2051182CD4F32F00D87C6A /* AppVersionProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02282C9FC77600AE89D5 /* AppVersionProvidable.swift */; };
-		8E2051192CD4F32F00D87C6A /* BaseWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9ACA82C46AC3C00C9E287 /* BaseWebView.swift */; };
 		8E20511A2CD4F32F00D87C6A /* AppDelegate+Messaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E54C8492C5E6F5E0070E689 /* AppDelegate+Messaging.swift */; };
 		8E20511C2CD4F32F00D87C6A /* UIDevice+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6175472CA24157002B6021 /* UIDevice+Identifier.swift */; };
 		8E20511F2CD4F32F00D87C6A /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C56988F2BEFB3C50085E389 /* MainTableViewCell.swift */; };
@@ -103,7 +100,6 @@
 		8E20512C2CD4F32F00D87C6A /* MainTableViewController+Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD392BFA02F400CCCCCD /* MainTableViewController+Callbacks.swift */; };
 		8E20512E2CD4F32F00D87C6A /* SectionOfNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5698942BEFB5A60085E389 /* SectionOfNotice.swift */; };
 		8E20512F2CD4F32F00D87C6A /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0C3F8B2C9ECD1B005E2A16 /* ReportViewModel.swift */; };
-		8E2051302CD4F32F00D87C6A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E00AF6B2C361F780037EC38 /* WebViewController.swift */; };
 		8E2051322CD4F32F00D87C6A /* MainTableViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89DD3B2BFA03D800CCCCCD /* MainTableViewController+Layout.swift */; };
 		8E2051332CD4F32F00D87C6A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8256432BE5CE1A0038D4C8 /* SceneDelegate.swift */; };
 		8E20513B2CD4F32F00D87C6A /* ServiceInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C190A432BFD6AA500E0254B /* ServiceInfo.plist */; };
@@ -284,8 +280,6 @@
 		8EA72DCA2CD5CA4800D1B300 /* DeveloperTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA72DC82CD5CA4800D1B300 /* DeveloperTools.swift */; };
 		8EA72DCC2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA72DCB2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift */; };
 		8EA72DCD2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA72DCB2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift */; };
-		8EA9ACA92C46AC3C00C9E287 /* BaseWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9ACA82C46AC3C00C9E287 /* BaseWebView.swift */; };
-		8EA9ACAB2C46AEC900C9E287 /* BaseWebContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9ACAA2C46AEC900C9E287 /* BaseWebContentView.swift */; };
 		8EADB8FA2D558F7300489086 /* Factory+Instance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EADB8F92D558F7300489086 /* Factory+Instance.swift */; };
 		8EADB8FB2D558F7300489086 /* Factory+Instance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EADB8F92D558F7300489086 /* Factory+Instance.swift */; };
 		8EB3F92F2D3E192F00DD47B3 /* BottomModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3F92E2D3E192F00DD47B3 /* BottomModal.swift */; };
@@ -340,6 +334,20 @@
 		8EDE5C762DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDE5C752DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift */; };
 		8EDE5C772DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDE5C752DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift */; };
 		8EE094682E56EBE2004CDA72 /* Info-Dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8EE094672E56EBE2004CDA72 /* Info-Dev.plist */; };
+		8EE094772E5709B9004CDA72 /* BaseWebContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE094732E5709B9004CDA72 /* BaseWebContentView.swift */; };
+		8EE094782E5709B9004CDA72 /* BaseWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE094742E5709B9004CDA72 /* BaseWebView.swift */; };
+		8EE094792E5709B9004CDA72 /* NoticeDetailWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE094752E5709B9004CDA72 /* NoticeDetailWebViewController.swift */; };
+		8EE0947A2E5709B9004CDA72 /* BaseWebContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE094732E5709B9004CDA72 /* BaseWebContentView.swift */; };
+		8EE0947B2E5709B9004CDA72 /* BaseWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE094742E5709B9004CDA72 /* BaseWebView.swift */; };
+		8EE0947C2E5709B9004CDA72 /* NoticeDetailWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE094752E5709B9004CDA72 /* NoticeDetailWebViewController.swift */; };
+		8EE0947E2E570B03004CDA72 /* NoticeWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE0947D2E570B03004CDA72 /* NoticeWebViewController.swift */; };
+		8EE0947F2E570B03004CDA72 /* NoticeWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE0947D2E570B03004CDA72 /* NoticeWebViewController.swift */; };
+		8EE094842E570F1C004CDA72 /* NoticeContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE094832E570F1C004CDA72 /* NoticeContentViewController.swift */; };
+		8EE094852E570F1C004CDA72 /* NoticeContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE094832E570F1C004CDA72 /* NoticeContentViewController.swift */; };
+		8EE094882E574ADE004CDA72 /* NoticeContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE094872E574ADE004CDA72 /* NoticeContentViewModel.swift */; };
+		8EE094892E574ADE004CDA72 /* NoticeContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE094872E574ADE004CDA72 /* NoticeContentViewModel.swift */; };
+		8EE0948B2E5750B8004CDA72 /* NoticeContentViewController+binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE0948A2E5750B8004CDA72 /* NoticeContentViewController+binding.swift */; };
+		8EE0948C2E5750B8004CDA72 /* NoticeContentViewController+binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE0948A2E5750B8004CDA72 /* NoticeContentViewController+binding.swift */; };
 		8EE3821D2DF00AC100B57315 /* Date+SpecificTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE3821C2DF00AC100B57315 /* Date+SpecificTime.swift */; };
 		8EE3821E2DF00AC100B57315 /* Date+SpecificTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE3821C2DF00AC100B57315 /* Date+SpecificTime.swift */; };
 		8EE4B4E52D16CE1E00EFF10B /* SpinningIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4E42D16CE1E00EFF10B /* SpinningIndicator.swift */; };
@@ -477,7 +485,6 @@
 		5C89DD482BFA100300CCCCCD /* MainNoticeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeRepositoryImpl.swift; sourceTree = "<group>"; };
 		5C89DD4F2BFA120B00CCCCCD /* MainNoticeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNoticeResponseDTO.swift; sourceTree = "<group>"; };
 		5CD2EFC02BF356FB00066C87 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
-		8E00AF6B2C361F780037EC38 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		8E022B7C2D8EDB4F00FA9E25 /* MainTableViewSkeletonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewSkeletonCell.swift; sourceTree = "<group>"; };
 		8E02F80D2D601E64000FE803 /* NoticeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCategory.swift; sourceTree = "<group>"; };
 		8E0309292E3C7CF600B1FCAC /* EntryTimeRecordable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTimeRecordable.swift; sourceTree = "<group>"; };
@@ -600,8 +607,6 @@
 		8EA47FE82D922C5800B68EAD /* TabBarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarService.swift; sourceTree = "<group>"; };
 		8EA72DC82CD5CA4800D1B300 /* DeveloperTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperTools.swift; sourceTree = "<group>"; };
 		8EA72DCB2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperToolsViewModel.swift; sourceTree = "<group>"; };
-		8EA9ACA82C46AC3C00C9E287 /* BaseWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWebView.swift; sourceTree = "<group>"; };
-		8EA9ACAA2C46AEC900C9E287 /* BaseWebContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWebContentView.swift; sourceTree = "<group>"; };
 		8EADB8F92D558F7300489086 /* Factory+Instance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Factory+Instance.swift"; sourceTree = "<group>"; };
 		8EB3F92E2D3E192F00DD47B3 /* BottomModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomModal.swift; sourceTree = "<group>"; };
 		8EB6D1FD2C663627004E8AC2 /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -631,6 +636,13 @@
 		8EDD51A52C6D7D68002101CA /* MainTableViewController+NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainTableViewController+NotificationCenter.swift"; sourceTree = "<group>"; };
 		8EDE5C752DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoticeCollectionViewController+binding.swift"; sourceTree = "<group>"; };
 		8EE094672E56EBE2004CDA72 /* Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Dev.plist"; sourceTree = "<group>"; };
+		8EE094732E5709B9004CDA72 /* BaseWebContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWebContentView.swift; sourceTree = "<group>"; };
+		8EE094742E5709B9004CDA72 /* BaseWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWebView.swift; sourceTree = "<group>"; };
+		8EE094752E5709B9004CDA72 /* NoticeDetailWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailWebViewController.swift; sourceTree = "<group>"; };
+		8EE0947D2E570B03004CDA72 /* NoticeWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeWebViewController.swift; sourceTree = "<group>"; };
+		8EE094832E570F1C004CDA72 /* NoticeContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeContentViewController.swift; sourceTree = "<group>"; };
+		8EE094872E574ADE004CDA72 /* NoticeContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeContentViewModel.swift; sourceTree = "<group>"; };
+		8EE0948A2E5750B8004CDA72 /* NoticeContentViewController+binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoticeContentViewController+binding.swift"; sourceTree = "<group>"; };
 		8EE3821C2DF00AC100B57315 /* Date+SpecificTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+SpecificTime.swift"; sourceTree = "<group>"; };
 		8EE4B4E42D16CE1E00EFF10B /* SpinningIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinningIndicator.swift; sourceTree = "<group>"; };
 		8EE65DA92DE947BC0059770D /* NotificationSubscriptionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSubscriptionDTO.swift; sourceTree = "<group>"; };
@@ -962,7 +974,8 @@
 		8E00AF6D2C361F7E0037EC38 /* WebView */ = {
 			isa = PBXGroup;
 			children = (
-				8EB8FA752DF9318100715F73 /* View */,
+				8EE094862E57494E004CDA72 /* ViewModel */,
+				8EE094762E5709B9004CDA72 /* View */,
 			);
 			path = WebView;
 			sourceTree = "<group>";
@@ -1472,16 +1485,6 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		8EB8FA752DF9318100715F73 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				8EA9ACA82C46AC3C00C9E287 /* BaseWebView.swift */,
-				8EA9ACAA2C46AEC900C9E287 /* BaseWebContentView.swift */,
-				8E00AF6B2C361F780037EC38 /* WebViewController.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		8EB8FA802DF9BC3E00715F73 /* BookmarkTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1507,6 +1510,27 @@
 				8ECB82DA2CDB6C3D00420349 /* Info.plist */,
 			);
 			path = "NotificationService-dev";
+			sourceTree = "<group>";
+		};
+		8EE094762E5709B9004CDA72 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8EE094732E5709B9004CDA72 /* BaseWebContentView.swift */,
+				8EE094742E5709B9004CDA72 /* BaseWebView.swift */,
+				8EE094752E5709B9004CDA72 /* NoticeDetailWebViewController.swift */,
+				8EE0947D2E570B03004CDA72 /* NoticeWebViewController.swift */,
+				8EE094832E570F1C004CDA72 /* NoticeContentViewController.swift */,
+				8EE0948A2E5750B8004CDA72 /* NoticeContentViewController+binding.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8EE094862E57494E004CDA72 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8EE094872E574ADE004CDA72 /* NoticeContentViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		8EFE52E32CDC8955003A7330 /* SearchTable */ = {
@@ -1909,7 +1933,6 @@
 				8EC141212D33E4E8001FD93C /* NoticeWebVCWrapper.swift in Sources */,
 				8E214E1E2E1362B600E2B830 /* TipRepository.swift in Sources */,
 				8E3DEAA12D7FC7CB00A5B435 /* ParentViewModel.swift in Sources */,
-				8EA9ACAB2C46AEC900C9E287 /* BaseWebContentView.swift in Sources */,
 				8E7A9E7E2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift in Sources */,
 				8EE3821D2DF00AC100B57315 /* Date+SpecificTime.swift in Sources */,
 				8E214E152E13614500E2B830 /* TipBannerView.swift in Sources */,
@@ -1931,6 +1954,7 @@
 				8EB6D20C2C66FC5B004E8AC2 /* AppVersionViewModel.swift in Sources */,
 				8E0CDED42D3B4CA5000F8DEF /* BookmarkService.swift in Sources */,
 				8E214E192E1361C400E2B830 /* TipBannerViewModel.swift in Sources */,
+				8EE0948B2E5750B8004CDA72 /* NoticeContentViewController+binding.swift in Sources */,
 				8EDC2E442D9245EA00AAB60F /* UserDefaultsKeys.swift in Sources */,
 				8ED4E54B2DFFE4E8000EDB36 /* UserDefaults+AppGroup.swift in Sources */,
 				8E5C1AC92D4074D50092BF88 /* TabBarViewModel.swift in Sources */,
@@ -1957,7 +1981,7 @@
 				8EA72DCD2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift in Sources */,
 				8EA1CA192E3F756F0031C3E0 /* SearchService.swift in Sources */,
 				8E4BD5A02E03E6C000218365 /* NoticeSectionModelProvidable.swift in Sources */,
-				8EA9ACA92C46AC3C00C9E287 /* BaseWebView.swift in Sources */,
+				8EE094842E570F1C004CDA72 /* NoticeContentViewController.swift in Sources */,
 				8E54C84A2C5E6F5E0070E689 /* AppDelegate+Messaging.swift in Sources */,
 				8EC6B8912D30971A002B45C7 /* Bookmark.xcdatamodeld in Sources */,
 				8E6175482CA24157002B6021 /* UIDevice+Identifier.swift in Sources */,
@@ -1981,7 +2005,9 @@
 				8E5385782C644C3F00AF151B /* TokenRepositoryImpl.swift in Sources */,
 				8E3B8C432D2B9A97007E9579 /* BookmarkForm.swift in Sources */,
 				8E4BD5932E03D26F00218365 /* SearchViewController+binding.swift in Sources */,
+				8EE0947F2E570B03004CDA72 /* NoticeWebViewController.swift in Sources */,
 				8E3DEA942D7FC31800A5B435 /* LoadingViewController.swift in Sources */,
+				8EE094882E574ADE004CDA72 /* NoticeContentViewModel.swift in Sources */,
 				8E1D70E22E459B2A007FD134 /* Bundle+URL.swift in Sources */,
 				8E5E8BDF2D35F03A0078C007 /* BookmarkDetailViewModel.swift in Sources */,
 				8EFCF8672C37742A004A53E9 /* SettingView.swift in Sources */,
@@ -1996,10 +2022,12 @@
 				8EEE1A512CEA19C90011FD87 /* NoticeFetchable.swift in Sources */,
 				8E4BD58A2E03C74F00218365 /* CompositionalLayoutConfigurable.swift in Sources */,
 				8EC1ECA22DD43542005E71B3 /* NoticeSectionModel.swift in Sources */,
+				8EE094772E5709B9004CDA72 /* BaseWebContentView.swift in Sources */,
+				8EE094782E5709B9004CDA72 /* BaseWebView.swift in Sources */,
+				8EE094792E5709B9004CDA72 /* NoticeDetailWebViewController.swift in Sources */,
 				8E5C1AD22D4077140092BF88 /* MainPopupContentRepository.swift in Sources */,
 				8E09076F2DE58152008BDF18 /* BookmarkTableViewCell.swift in Sources */,
 				8E214E262E13639A00E2B830 /* TipRepositoryImpl.swift in Sources */,
-				8E00AF6C2C361F780037EC38 /* WebViewController.swift in Sources */,
 				8E5C1ACF2D40768B0092BF88 /* MainPopupContentDTO.swift in Sources */,
 				8E3B8C492D2BBFFD007E9579 /* BookmarkFormViewModel.swift in Sources */,
 				8E4BD5A22E03E7A500218365 /* Searchable.swift in Sources */,
@@ -2035,7 +2063,6 @@
 				8EC141222D33E4E8001FD93C /* NoticeWebVCWrapper.swift in Sources */,
 				8E214E1F2E1362B600E2B830 /* TipRepository.swift in Sources */,
 				8E3DEAA22D7FC7CB00A5B435 /* ParentViewModel.swift in Sources */,
-				8E2051052CD4F32F00D87C6A /* BaseWebContentView.swift in Sources */,
 				8E7A9E7F2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift in Sources */,
 				8EE3821E2DF00AC100B57315 /* Date+SpecificTime.swift in Sources */,
 				8E214E162E13614500E2B830 /* TipBannerView.swift in Sources */,
@@ -2057,6 +2084,7 @@
 				8E20510A2CD4F32F00D87C6A /* AppVersionViewModel.swift in Sources */,
 				8E0CDED32D3B4CA5000F8DEF /* BookmarkService.swift in Sources */,
 				8E214E182E1361C400E2B830 /* TipBannerViewModel.swift in Sources */,
+				8EE0948C2E5750B8004CDA72 /* NoticeContentViewController+binding.swift in Sources */,
 				8EDC2E452D9245EA00AAB60F /* UserDefaultsKeys.swift in Sources */,
 				8ED4E54C2DFFE4E8000EDB36 /* UserDefaults+AppGroup.swift in Sources */,
 				8E5C1ACA2D4074D50092BF88 /* TabBarViewModel.swift in Sources */,
@@ -2083,7 +2111,7 @@
 				8EA72DCC2CD5CA5D00D1B300 /* DeveloperToolsViewModel.swift in Sources */,
 				8EA1CA182E3F756F0031C3E0 /* SearchService.swift in Sources */,
 				8E4BD59F2E03E6C000218365 /* NoticeSectionModelProvidable.swift in Sources */,
-				8E2051192CD4F32F00D87C6A /* BaseWebView.swift in Sources */,
+				8EE094852E570F1C004CDA72 /* NoticeContentViewController.swift in Sources */,
 				8E20511A2CD4F32F00D87C6A /* AppDelegate+Messaging.swift in Sources */,
 				8EC6B8922D30971A002B45C7 /* Bookmark.xcdatamodeld in Sources */,
 				8E20511C2CD4F32F00D87C6A /* UIDevice+Identifier.swift in Sources */,
@@ -2107,7 +2135,9 @@
 				8E2051292CD4F32F00D87C6A /* TokenRepositoryImpl.swift in Sources */,
 				8E3B8C422D2B9A97007E9579 /* BookmarkForm.swift in Sources */,
 				8E4BD5942E03D26F00218365 /* SearchViewController+binding.swift in Sources */,
+				8EE0947E2E570B03004CDA72 /* NoticeWebViewController.swift in Sources */,
 				8E3DEA952D7FC31800A5B435 /* LoadingViewController.swift in Sources */,
+				8EE094892E574ADE004CDA72 /* NoticeContentViewModel.swift in Sources */,
 				8E1D70E12E459B2A007FD134 /* Bundle+URL.swift in Sources */,
 				8E5E8BDE2D35F03A0078C007 /* BookmarkDetailViewModel.swift in Sources */,
 				8E20512B2CD4F32F00D87C6A /* SettingView.swift in Sources */,
@@ -2122,10 +2152,12 @@
 				8EEE1A522CEA19C90011FD87 /* NoticeFetchable.swift in Sources */,
 				8E4BD58B2E03C74F00218365 /* CompositionalLayoutConfigurable.swift in Sources */,
 				8EC1ECA32DD43542005E71B3 /* NoticeSectionModel.swift in Sources */,
+				8EE0947A2E5709B9004CDA72 /* BaseWebContentView.swift in Sources */,
+				8EE0947B2E5709B9004CDA72 /* BaseWebView.swift in Sources */,
+				8EE0947C2E5709B9004CDA72 /* NoticeDetailWebViewController.swift in Sources */,
 				8E5C1AD32D4077140092BF88 /* MainPopupContentRepository.swift in Sources */,
 				8E0907702DE58152008BDF18 /* BookmarkTableViewCell.swift in Sources */,
 				8E214E272E13639A00E2B830 /* TipRepositoryImpl.swift in Sources */,
-				8E2051302CD4F32F00D87C6A /* WebViewController.swift in Sources */,
 				8E5C1AD02D40768B0092BF88 /* MainPopupContentDTO.swift in Sources */,
 				8E3B8C482D2BBFFD007E9579 /* BookmarkFormViewModel.swift in Sources */,
 				8E4BD5A32E03E7A500218365 /* Searchable.swift in Sources */,
