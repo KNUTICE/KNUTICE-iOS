@@ -12,7 +12,7 @@ struct NoticeWebVCWrapper: UIViewControllerRepresentable {
     private let viewController: UIViewController
     
     init(notice: Notice) {
-        self.viewController = WebViewController(notice: notice)
+        self.viewController = NoticeDetailViewController(notice: notice)
     }
     
     func makeUIViewController(context: Context) -> some UIViewController {

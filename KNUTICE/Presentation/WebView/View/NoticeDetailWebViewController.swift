@@ -1,5 +1,5 @@
 //
-//  WebViewController.swift
+//  NoticeDetailViewController.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 7/4/24.
@@ -11,7 +11,7 @@ import SwiftUI
 import Foundation
 import KNUTICECore
 
-final class NoticeDetailWebViewController: NoticeWebViewController {
+final class NoticeDetailViewController: NoticeWebViewController {
     private let notice: Notice
     
     init(notice: Notice) {
@@ -39,7 +39,7 @@ final class NoticeDetailWebViewController: NoticeWebViewController {
     }
 }
 
-extension NoticeDetailWebViewController {
+extension NoticeDetailViewController {
     @objc override func openSharePanel() {
         let shareText = self.notice.contentUrl
         let shareObject = [shareText]
@@ -72,7 +72,7 @@ extension NoticeDetailWebViewController {
 #if DEBUG
 #Preview {
     NavigationStack {
-        NoticeDetailWebViewController(notice: Notice.generalNoticesSampleData.first!)
+        NoticeDetailViewController(notice: Notice.generalNoticesSampleData.first!)
             .makePreview()
     }
 }

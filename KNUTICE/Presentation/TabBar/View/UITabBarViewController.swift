@@ -129,7 +129,7 @@ extension UITabBarViewController {
                 
                 DispatchQueue.main.async {
                     self?.navigationController?.popToRootViewController(animated: true)
-                    self?.navigationController?.pushViewController(WebViewController(notice: pushNotice), animated: true)
+                    self?.navigationController?.pushViewController(NoticeDetailViewController(notice: pushNotice), animated: true)
                 }
             })
             .disposed(by: disposeBag)
