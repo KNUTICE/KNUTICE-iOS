@@ -94,6 +94,8 @@ struct KNUTICEWidget: Widget {
             KNUTICEWidgetEntryView(entry: entry)
                 .containerBackground(.fill.tertiary, for: .widget)
         }
+        .configurationDisplayName("공지")
+        .description("최신 공지를 한 눈에 확인하세요.")
     }
 }
 
