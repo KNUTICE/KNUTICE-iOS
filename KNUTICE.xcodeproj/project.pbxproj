@@ -339,6 +339,7 @@
 		8EDD51A62C6D7D68002101CA /* MainTableViewController+NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD51A52C6D7D68002101CA /* MainTableViewController+NotificationCenter.swift */; };
 		8EDE5C762DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDE5C752DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift */; };
 		8EDE5C772DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDE5C752DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift */; };
+		8EE094682E56EBE2004CDA72 /* Info-Dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8EE094672E56EBE2004CDA72 /* Info-Dev.plist */; };
 		8EE3821D2DF00AC100B57315 /* Date+SpecificTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE3821C2DF00AC100B57315 /* Date+SpecificTime.swift */; };
 		8EE3821E2DF00AC100B57315 /* Date+SpecificTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE3821C2DF00AC100B57315 /* Date+SpecificTime.swift */; };
 		8EE4B4E52D16CE1E00EFF10B /* SpinningIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4B4E42D16CE1E00EFF10B /* SpinningIndicator.swift */; };
@@ -504,7 +505,6 @@
 		8E1D70DE2E45940D007FD134 /* ServiceInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ServiceInfo.plist; sourceTree = "<group>"; };
 		8E1D70E02E459B2A007FD134 /* Bundle+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+URL.swift"; sourceTree = "<group>"; };
 		8E2051472CD4F32F00D87C6A /* KNUTICE-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KNUTICE-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E2051482CD4F32F00D87C6A /* Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Dev.plist"; path = "/Users/ijeonghun/Desktop/GitHub/iOS/KNUTICE-iOS/KNUTICE/Application/Info-Dev.plist"; sourceTree = "<absolute>"; };
 		8E214E142E13614500E2B830 /* TipBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipBannerView.swift; sourceTree = "<group>"; };
 		8E214E172E1361C400E2B830 /* TipBannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipBannerViewModel.swift; sourceTree = "<group>"; };
 		8E214E1A2E13629100E2B830 /* TipDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipDTO.swift; sourceTree = "<group>"; };
@@ -630,6 +630,7 @@
 		8EDC2E462D925B6F00AAB60F /* MainTableViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewModelTest.swift; sourceTree = "<group>"; };
 		8EDD51A52C6D7D68002101CA /* MainTableViewController+NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainTableViewController+NotificationCenter.swift"; sourceTree = "<group>"; };
 		8EDE5C752DD4183D0029FF5A /* NoticeCollectionViewController+binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoticeCollectionViewController+binding.swift"; sourceTree = "<group>"; };
+		8EE094672E56EBE2004CDA72 /* Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Dev.plist"; sourceTree = "<group>"; };
 		8EE3821C2DF00AC100B57315 /* Date+SpecificTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+SpecificTime.swift"; sourceTree = "<group>"; };
 		8EE4B4E42D16CE1E00EFF10B /* SpinningIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinningIndicator.swift; sourceTree = "<group>"; };
 		8EE65DA92DE947BC0059770D /* NotificationSubscriptionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSubscriptionDTO.swift; sourceTree = "<group>"; };
@@ -806,7 +807,7 @@
 			isa = PBXGroup;
 			children = (
 				5C82564F2BE5CE1B0038D4C8 /* Info.plist */,
-				8E2051482CD4F32F00D87C6A /* Info-Dev.plist */,
+				8EE094672E56EBE2004CDA72 /* Info-Dev.plist */,
 				5C190A432BFD6AA500E0254B /* ServiceInfo.plist */,
 				5C8256412BE5CE1A0038D4C8 /* AppDelegate.swift */,
 				8E54C8492C5E6F5E0070E689 /* AppDelegate+Messaging.swift */,
@@ -1825,6 +1826,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EE094682E56EBE2004CDA72 /* Info-Dev.plist in Resources */,
 				8E20513B2CD4F32F00D87C6A /* ServiceInfo.plist in Resources */,
 				8E65BF112DFBC06C00CEEF8F /* GoogleService-Info-Dev.plist in Resources */,
 				8E20513C2CD4F32F00D87C6A /* Assets.xcassets in Resources */,
