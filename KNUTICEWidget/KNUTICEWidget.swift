@@ -76,10 +76,11 @@ struct KNUTICEWidgetEntryView : View {
                 .font(.headline)
             
             ForEach(entry.notices, id: \.id) { notice in
-                Text(notice.title)
-                    .font(.subheadline)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .widgetURL(URL(string: notice.contentUrl))
+                Link(destination: URL(string: "widget://notice?nttId=\(notice.id)")!) {
+                    Text(notice.title)
+                        .font(.subheadline)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
             }
         }
         .frame(maxHeight: .infinity, alignment: .top)
