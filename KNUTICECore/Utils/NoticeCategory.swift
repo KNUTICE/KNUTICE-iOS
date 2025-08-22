@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum NoticeCategory: String, Codable {
+public enum NoticeCategory: String, Codable, CaseIterable {
     case generalNotice = "GENERAL_NEWS"
     case academicNotice = "ACADEMIC_NEWS"
     case scholarshipNotice = "SCHOLARSHIP_NEWS"
