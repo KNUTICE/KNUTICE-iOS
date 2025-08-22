@@ -16,9 +16,9 @@ struct NoticeManager {
     
     private init() {}
     
-    func fetchNotices(limit size: Int) async -> [Notice] {
+    func fetchNotices(limit size: Int, category: NoticeCategory) async -> [Notice] {
         do {
-            let notices = try await repository.fetchNotices(for: .generalNotice, size: size)
+            let notices = try await repository.fetchNotices(for: category, size: size)
             
             return notices
         } catch {
