@@ -242,8 +242,6 @@
 		8E79F5752E5837AB0026876C /* NoticeCategory+AppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E79F5742E5837AB0026876C /* NoticeCategory+AppEnum.swift */; };
 		8E7A4A702D2A44CE00BD1B7F /* Date+StringFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A6F2D2A44CE00BD1B7F /* Date+StringFormat.swift */; };
 		8E7A4A712D2A44CE00BD1B7F /* Date+StringFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A6F2D2A44CE00BD1B7F /* Date+StringFormat.swift */; };
-		8E7A4A732D2A531B00BD1B7F /* NoticeKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A722D2A531B00BD1B7F /* NoticeKind.swift */; };
-		8E7A4A742D2A531B00BD1B7F /* NoticeKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A722D2A531B00BD1B7F /* NoticeKind.swift */; };
 		8E7A9E7B2DCB4D3C0001D4AA /* NoticeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A9E7A2DCB4D3C0001D4AA /* NoticeCollectionViewController.swift */; };
 		8E7A9E7C2DCB4D3C0001D4AA /* NoticeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A9E7A2DCB4D3C0001D4AA /* NoticeCollectionViewController.swift */; };
 		8E7A9E7E2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A9E7D2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift */; };
@@ -589,7 +587,6 @@
 		8E79F5742E5837AB0026876C /* NoticeCategory+AppEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoticeCategory+AppEnum.swift"; sourceTree = "<group>"; };
 		8E7A4A692D2A2CD800BD1B7F /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		8E7A4A6F2D2A44CE00BD1B7F /* Date+StringFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+StringFormat.swift"; sourceTree = "<group>"; };
-		8E7A4A722D2A531B00BD1B7F /* NoticeKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeKind.swift; sourceTree = "<group>"; };
 		8E7A9E7A2DCB4D3C0001D4AA /* NoticeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCollectionViewController.swift; sourceTree = "<group>"; };
 		8E7A9E7D2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoticeCollectionViewController+Layout.swift"; sourceTree = "<group>"; };
 		8E887D4C2E0A37A400D5E2E3 /* NoticeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeHeader.swift; sourceTree = "<group>"; };
@@ -746,7 +743,6 @@
 			children = (
 				8E3F02282C9FC77600AE89D5 /* AppVersionProvidable.swift */,
 				8E7A4A6F2D2A44CE00BD1B7F /* Date+StringFormat.swift */,
-				8E7A4A722D2A531B00BD1B7F /* NoticeKind.swift */,
 				8E5E8BE02D3605090078C007 /* NotificationName.swift */,
 				8E0CDED52D3B4CCC000F8DEF /* UNUserNotificationCenter+LocalNotification.swift */,
 				8EB767802D439DE90086AB60 /* Date+EndOfToday.swift */,
@@ -1966,7 +1962,6 @@
 				8E4BD58E2E03CB0100218365 /* SearchViewController+Layout.swift in Sources */,
 				8E659EBF2D29438500305D56 /* UITabBarViewController.swift in Sources */,
 				8E4BD5972E03D60500218365 /* NoticeCollectionViewCell.swift in Sources */,
-				8E7A4A732D2A531B00BD1B7F /* NoticeKind.swift in Sources */,
 				8E4BD5912E03CE6E00218365 /* SearchViewModel.swift in Sources */,
 				8E5E8BE72D361F510078C007 /* BookmarkManager.swift in Sources */,
 				8E3F022D2CA0023A00AE89D5 /* VIew+TextEditorBackground.swift in Sources */,
@@ -2096,7 +2091,6 @@
 				8E4BD58D2E03CB0100218365 /* SearchViewController+Layout.swift in Sources */,
 				8E659EBE2D29438500305D56 /* UITabBarViewController.swift in Sources */,
 				8E4BD5962E03D60500218365 /* NoticeCollectionViewCell.swift in Sources */,
-				8E7A4A742D2A531B00BD1B7F /* NoticeKind.swift in Sources */,
 				8E4BD5902E03CE6E00218365 /* SearchViewModel.swift in Sources */,
 				8E5E8BE82D361F510078C007 /* BookmarkManager.swift in Sources */,
 				8E2051112CD4F32F00D87C6A /* VIew+TextEditorBackground.swift in Sources */,
