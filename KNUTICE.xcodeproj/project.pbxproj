@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 63;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -131,6 +131,9 @@
 		8E3B8C432D2B9A97007E9579 /* BookmarkForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B8C412D2B9A97007E9579 /* BookmarkForm.swift */; };
 		8E3B8C482D2BBFFD007E9579 /* BookmarkFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B8C472D2BBFFD007E9579 /* BookmarkFormViewModel.swift */; };
 		8E3B8C492D2BBFFD007E9579 /* BookmarkFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B8C472D2BBFFD007E9579 /* BookmarkFormViewModel.swift */; };
+		8E3C43812E66D8D900EA711B /* KNUTICEWidgetCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; };
+		8E3C43822E66D8D900EA711B /* KNUTICEWidgetCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8E3C43862E66D98400EA711B /* KNUTICEWidgetCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; };
 		8E3C85682E41C1380095852C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C85672E41C1380095852C /* WidgetKit.framework */; };
 		8E3C856A2E41C1380095852C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C85692E41C1380095852C /* SwiftUI.framework */; };
 		8E3DEA912D7FC02200A5B435 /* LoadingLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E3DEA902D7FC02200A5B435 /* LoadingLaunchScreen.storyboard */; };
@@ -223,29 +226,37 @@
 		8E6931602CEF00600074142B /* TopicSubscriptionRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69315E2CEF00600074142B /* TopicSubscriptionRepositoryImpl.swift */; };
 		8E69F8762DFE504300F313F0 /* SingleNotice.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E69F8752DFE504300F313F0 /* SingleNotice.json */; };
 		8E69F8772DFE504300F313F0 /* SingleNotice.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E69F8752DFE504300F313F0 /* SingleNotice.json */; };
-		8E72BCE12E43058A00107794 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8E8FC5712E42FACB002D560F /* FirebaseMessaging */; };
 		8E72BCE32E4305CA00107794 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 8E72BCE22E4305CA00107794 /* RxDataSources */; };
 		8E72BCE42E43060C00107794 /* NoticeCreatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFE53052CDCC30F003A7330 /* NoticeCreatable.swift */; };
 		8E72BCE52E43064C00107794 /* NoticeReponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A542BFDF66600E0254B /* NoticeReponseDTO.swift */; };
 		8E72BCE62E43066F00107794 /* NoticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A4E2BFDF4E100E0254B /* NoticeRepository.swift */; };
 		8E72BCE72E4306E500107794 /* Bundle+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A452BFD6BDB00E0254B /* Bundle+URL.swift */; };
 		8E72BCE82E43071100107794 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDAFD412D6818D000834E00 /* Errors.swift */; };
-		8E72BCE92E43075B00107794 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
-		8E72BCEA2E43075F00107794 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
 		8E72BCEB2E43078600107794 /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E613E9F2C95214C006FC272 /* RequestResult.swift */; };
 		8E72BCED2E430F3200107794 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 8E72BCEC2E430F3200107794 /* RxCocoa */; };
 		8E72BCEF2E430F4400107794 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8E72BCEE2E430F4400107794 /* RxSwift */; };
 		8E72BCF02E430FC700107794 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
-		8E72BCF12E430FC700107794 /* KNUTICECore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8E72BCF12E430FC700107794 /* KNUTICECore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8E782B9F2DE96CCE005E4432 /* TopicSubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E782B9E2DE96CCE005E4432 /* TopicSubscriptionService.swift */; };
 		8E782BA02DE96CCE005E4432 /* TopicSubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E782B9E2DE96CCE005E4432 /* TopicSubscriptionService.swift */; };
-		8E79F5752E5837AB0026876C /* NoticeCategory+AppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E79F5742E5837AB0026876C /* NoticeCategory+AppEnum.swift */; };
 		8E7A4A702D2A44CE00BD1B7F /* Date+StringFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A6F2D2A44CE00BD1B7F /* Date+StringFormat.swift */; };
 		8E7A4A712D2A44CE00BD1B7F /* Date+StringFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A6F2D2A44CE00BD1B7F /* Date+StringFormat.swift */; };
 		8E7A9E7B2DCB4D3C0001D4AA /* NoticeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A9E7A2DCB4D3C0001D4AA /* NoticeCollectionViewController.swift */; };
 		8E7A9E7C2DCB4D3C0001D4AA /* NoticeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A9E7A2DCB4D3C0001D4AA /* NoticeCollectionViewController.swift */; };
 		8E7A9E7E2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A9E7D2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift */; };
 		8E7A9E7F2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A9E7D2DCB516E0001D4AA /* NoticeCollectionViewController+Layout.swift */; };
+		8E7C67FD2E67B3F100341B01 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 8E7C67FC2E67B3F100341B01 /* RxCocoa */; };
+		8E7C67FF2E67B41900341B01 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8E7C67FE2E67B41900341B01 /* FirebaseMessaging */; };
+		8E7C68042E67B5AD00341B01 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 8E7C68032E67B5AD00341B01 /* Factory */; };
+		8E7C680D2E67BEA400341B01 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8E7C680C2E67BEA400341B01 /* FirebaseMessaging */; };
+		8E7C68102E67C4B400341B01 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
+		8E7C68112E67C4B400341B01 /* KNUTICECore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8E7C68132E67C4D100341B01 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
+		8E7C68142E67C4D100341B01 /* KNUTICECore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8E7C68162E67C4D400341B01 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
+		8E7C68172E67C4D400341B01 /* KNUTICECore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8E7C681A2E67C72A00341B01 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8E7C68192E67C72A00341B01 /* FirebaseCore */; };
+		8E7C681C2E67C78700341B01 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8E7C681B2E67C78700341B01 /* FirebaseMessaging */; };
 		8E82489C2E43052500FC06E7 /* NoticeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190A522BFDF5EB00E0254B /* NoticeRepositoryImpl.swift */; };
 		8E887D4D2E0A37A400D5E2E3 /* NoticeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E887D4C2E0A37A400D5E2E3 /* NoticeHeader.swift */; };
 		8E887D4E2E0A37A400D5E2E3 /* NoticeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E887D4C2E0A37A400D5E2E3 /* NoticeHeader.swift */; };
@@ -260,10 +271,8 @@
 		8E8FC55D2E42F36B002D560F /* Container+Instance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8FC55C2E42F36B002D560F /* Container+Instance.swift */; };
 		8E8FC55F2E42F378002D560F /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 8E8FC55E2E42F378002D560F /* Factory */; };
 		8E8FC5612E42F471002D560F /* PostResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F02252C9FB85E00AE89D5 /* PostResponseDTO.swift */; };
-		8E8FC5692E42F854002D560F /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8FC5622E42F854002D560F /* AppIntent.swift */; };
 		8E8FC56A2E42F854002D560F /* KNUTICEWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8FC5652E42F854002D560F /* KNUTICEWidget.swift */; };
 		8E8FC56B2E42F854002D560F /* KNUTICEWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8FC5662E42F854002D560F /* KNUTICEWidgetBundle.swift */; };
-		8E8FC56C2E42F854002D560F /* NoticeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8FC5672E42F854002D560F /* NoticeManager.swift */; };
 		8E8FC56D2E42F854002D560F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E8FC5632E42F854002D560F /* Assets.xcassets */; };
 		8E8FC5702E42FA5A002D560F /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4A692D2A2CD800BD1B7F /* Bookmark.swift */; };
 		8E8FC5732E42FB53002D560F /* NoticeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02F80D2D601E64000FE803 /* NoticeCategory.swift */; };
@@ -375,6 +384,20 @@
 			remoteGlobalIDString = 8E3C85652E41C1380095852C;
 			remoteInfo = KNUTICEWidgetExtension;
 		};
+		8E3C437F2E66D8D900EA711B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E3C43782E66D8D900EA711B;
+			remoteInfo = KNUTICEWidgetCore;
+		};
+		8E3C43882E66D98400EA711B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E3C43782E66D8D900EA711B;
+			remoteInfo = KNUTICEWidgetCore;
+		};
 		8E6898302CD61EF1005F0EEA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
@@ -388,6 +411,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 5C82563D2BE5CE1A0038D4C8;
 			remoteInfo = KNUTICE;
+		};
+		8E7C68072E67B5BE00341B01 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E8FC5342E42F0FA002D560F;
+			remoteInfo = KNUTICECore;
 		};
 		8E8FC53B2E42F0FA002D560F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -435,6 +465,39 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8E7C68122E67C4B400341B01 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8E7C68112E67C4B400341B01 /* KNUTICECore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E7C68152E67C4D100341B01 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8E7C68142E67C4D100341B01 /* KNUTICECore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E7C68182E67C4D400341B01 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8E7C68172E67C4D400341B01 /* KNUTICECore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8E8FC5422E42F0FB002D560F /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -442,6 +505,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				8E8FC53E2E42F0FA002D560F /* KNUTICECore.framework in Embed Frameworks */,
+				8E3C43822E66D8D900EA711B /* KNUTICEWidgetCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -522,6 +586,7 @@
 		8E2CF4C72DF5537400B580CA /* TopicSubscriptionListViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicSubscriptionListViewModelTest.swift; sourceTree = "<group>"; };
 		8E3B8C412D2B9A97007E9579 /* BookmarkForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkForm.swift; sourceTree = "<group>"; };
 		8E3B8C472D2BBFFD007E9579 /* BookmarkFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkFormViewModel.swift; sourceTree = "<group>"; };
+		8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KNUTICEWidgetCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E3C85662E41C1380095852C /* KNUTICEWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = KNUTICEWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E3C85672E41C1380095852C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		8E3C85692E41C1380095852C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -584,7 +649,6 @@
 		8E69F8792DFE7C5500F313F0 /* NotificationService-dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "NotificationService-dev.entitlements"; sourceTree = "<group>"; };
 		8E782B9E2DE96CCE005E4432 /* TopicSubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicSubscriptionService.swift; sourceTree = "<group>"; };
 		8E7945E42CA28F6900208662 /* KNUTICEUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KNUTICEUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E79F5742E5837AB0026876C /* NoticeCategory+AppEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoticeCategory+AppEnum.swift"; sourceTree = "<group>"; };
 		8E7A4A692D2A2CD800BD1B7F /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		8E7A4A6F2D2A44CE00BD1B7F /* Date+StringFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+StringFormat.swift"; sourceTree = "<group>"; };
 		8E7A9E7A2DCB4D3C0001D4AA /* NoticeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCollectionViewController.swift; sourceTree = "<group>"; };
@@ -594,12 +658,10 @@
 		8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KNUTICECore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E8FC54D2E42F1DF002D560F /* KNUTICECore.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = KNUTICECore.docc; sourceTree = "<group>"; };
 		8E8FC55C2E42F36B002D560F /* Container+Instance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+Instance.swift"; sourceTree = "<group>"; };
-		8E8FC5622E42F854002D560F /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		8E8FC5632E42F854002D560F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E8FC5642E42F854002D560F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E8FC5652E42F854002D560F /* KNUTICEWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KNUTICEWidget.swift; sourceTree = "<group>"; };
 		8E8FC5662E42F854002D560F /* KNUTICEWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KNUTICEWidgetBundle.swift; sourceTree = "<group>"; };
-		8E8FC5672E42F854002D560F /* NoticeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeManager.swift; sourceTree = "<group>"; };
 		8E9BC16D2E1FA12500B74B35 /* Tips.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Tips.json; sourceTree = "<group>"; };
 		8E9BC1702E1FA21B00B74B35 /* MockTipAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTipAPITest.swift; sourceTree = "<group>"; };
 		8EA1CA172E3F756F0031C3E0 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
@@ -656,6 +718,10 @@
 		8EFE53052CDCC30F003A7330 /* NoticeCreatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCreatable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		8E3C437A2E66D8D900EA711B /* KNUTICEWidgetCore */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = KNUTICEWidgetCore; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		5C82563B2BE5CE1A0038D4C8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -663,11 +729,14 @@
 			files = (
 				8E8FC53D2E42F0FA002D560F /* KNUTICECore.framework in Frameworks */,
 				8EC732242DD5A6660038AD59 /* Kingfisher in Frameworks */,
+				8E3C43812E66D8D900EA711B /* KNUTICEWidgetCore.framework in Frameworks */,
 				8EC7322A2DD5A6A80038AD59 /* SnapKit in Frameworks */,
 				8EC732272DD5A6900038AD59 /* SkeletonView in Frameworks */,
 				8EC7321E2DD5A5DB0038AD59 /* RxDataSources in Frameworks */,
+				8E7C681A2E67C72A00341B01 /* FirebaseCore in Frameworks */,
 				8EC732182DD5A5B00038AD59 /* Factory in Frameworks */,
 				8E1D70DA2E458408007FD134 /* RxCocoa in Frameworks */,
+				8E7C681C2E67C78700341B01 /* FirebaseMessaging in Frameworks */,
 				8E1D70D82E4583F5007FD134 /* RxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -687,6 +756,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8E3C43762E66D8D900EA711B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E7C68042E67B5AD00341B01 /* Factory in Frameworks */,
+				8E7C68102E67C4B400341B01 /* KNUTICECore.framework in Frameworks */,
+				8E7C67FF2E67B41900341B01 /* FirebaseMessaging in Frameworks */,
+				8E7C67FD2E67B3F100341B01 /* RxCocoa in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8E3C85632E41C1380095852C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -694,6 +774,7 @@
 				8E8FC5752E42FC3A002D560F /* KNUTICECore.framework in Frameworks */,
 				8E3C856A2E41C1380095852C /* SwiftUI.framework in Frameworks */,
 				8E3C85682E41C1380095852C /* WidgetKit.framework in Frameworks */,
+				8E3C43862E66D98400EA711B /* KNUTICEWidgetCore.framework in Frameworks */,
 				8EB90A372E45D7D200B3AEF6 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -702,8 +783,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E72BCE92E43075B00107794 /* KNUTICECore.framework in Frameworks */,
 				8E0699AC2E01404B008A5DCE /* RxDataSources in Frameworks */,
+				8E7C68162E67C4D400341B01 /* KNUTICECore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -718,9 +799,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E72BCE12E43058A00107794 /* FirebaseMessaging in Frameworks */,
 				8E8FC55F2E42F378002D560F /* Factory in Frameworks */,
 				8E8FC5582E42F29C002D560F /* RxSwift in Frameworks */,
+				8E7C680D2E67BEA400341B01 /* FirebaseMessaging in Frameworks */,
 				8E72BCE32E4305CA00107794 /* RxDataSources in Frameworks */,
 				8E8FC5562E42F293002D560F /* Alamofire in Frameworks */,
 			);
@@ -730,8 +811,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E72BCEA2E43075F00107794 /* KNUTICECore.framework in Frameworks */,
 				8E0699AA2E014047008A5DCE /* RxDataSources in Frameworks */,
+				8E7C68132E67C4D100341B01 /* KNUTICECore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -836,6 +917,7 @@
 				8E7945E52CA28F6900208662 /* KNUTICEUnitTests */,
 				8E8FC5682E42F854002D560F /* KNUTICEWidget */,
 				8E8FC54F2E42F1DF002D560F /* KNUTICECore */,
+				8E3C437A2E66D8D900EA711B /* KNUTICEWidgetCore */,
 				8EC7322D2DD5A9440038AD59 /* Frameworks */,
 				5C82563F2BE5CE1A0038D4C8 /* Products */,
 			);
@@ -851,6 +933,7 @@
 				8E68982B2CD61EF1005F0EEA /* NotificationService-dev.appex */,
 				8E3C85662E41C1380095852C /* KNUTICEWidgetExtension.appex */,
 				8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */,
+				8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1404,13 +1487,10 @@
 		8E8FC5682E42F854002D560F /* KNUTICEWidget */ = {
 			isa = PBXGroup;
 			children = (
-				8E8FC5622E42F854002D560F /* AppIntent.swift */,
 				8E8FC5632E42F854002D560F /* Assets.xcassets */,
 				8E8FC5642E42F854002D560F /* Info.plist */,
 				8E8FC5652E42F854002D560F /* KNUTICEWidget.swift */,
 				8E8FC5662E42F854002D560F /* KNUTICEWidgetBundle.swift */,
-				8E8FC5672E42F854002D560F /* NoticeManager.swift */,
-				8E79F5742E5837AB0026876C /* NoticeCategory+AppEnum.swift */,
 			);
 			path = KNUTICEWidget;
 			sourceTree = "<group>";
@@ -1603,6 +1683,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		8E3C43742E66D8D900EA711B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8E8FC5302E42F0FA002D560F /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1629,6 +1716,7 @@
 				8EB6D2032C663627004E8AC2 /* PBXTargetDependency */,
 				8E8FC53C2E42F0FA002D560F /* PBXTargetDependency */,
 				8E1D70D62E4583E0007FD134 /* PBXTargetDependency */,
+				8E3C43802E66D8D900EA711B /* PBXTargetDependency */,
 			);
 			name = KNUTICE;
 			productName = KNUTICE;
@@ -1655,6 +1743,34 @@
 			productReference = 8E2051472CD4F32F00D87C6A /* KNUTICE-dev.app */;
 			productType = "com.apple.product-type.application";
 		};
+		8E3C43782E66D8D900EA711B /* KNUTICEWidgetCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E3C43852E66D8D900EA711B /* Build configuration list for PBXNativeTarget "KNUTICEWidgetCore" */;
+			buildPhases = (
+				8E3C43742E66D8D900EA711B /* Headers */,
+				8E3C43752E66D8D900EA711B /* Sources */,
+				8E3C43762E66D8D900EA711B /* Frameworks */,
+				8E3C43772E66D8D900EA711B /* Resources */,
+				8E7C68122E67C4B400341B01 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8E7C68082E67B5BE00341B01 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				8E3C437A2E66D8D900EA711B /* KNUTICEWidgetCore */,
+			);
+			name = KNUTICEWidgetCore;
+			packageProductDependencies = (
+				8E7C67FC2E67B3F100341B01 /* RxCocoa */,
+				8E7C67FE2E67B41900341B01 /* FirebaseMessaging */,
+				8E7C68032E67B5AD00341B01 /* Factory */,
+			);
+			productName = KNUTICEWidgetCore;
+			productReference = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		8E3C85652E41C1380095852C /* KNUTICEWidgetExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E3C857B2E41C1390095852C /* Build configuration list for PBXNativeTarget "KNUTICEWidgetExtension" */;
@@ -1666,6 +1782,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				8E3C43892E66D98400EA711B /* PBXTargetDependency */,
 			);
 			name = KNUTICEWidgetExtension;
 			packageProductDependencies = (
@@ -1682,6 +1799,7 @@
 				8E6898272CD61EF1005F0EEA /* Sources */,
 				8E6898282CD61EF1005F0EEA /* Frameworks */,
 				8E6898292CD61EF1005F0EEA /* Resources */,
+				8E7C68182E67C4D400341B01 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1729,8 +1847,8 @@
 				8E8FC5552E42F293002D560F /* Alamofire */,
 				8E8FC5572E42F29C002D560F /* RxSwift */,
 				8E8FC55E2E42F378002D560F /* Factory */,
-				8E8FC5712E42FACB002D560F /* FirebaseMessaging */,
 				8E72BCE22E4305CA00107794 /* RxDataSources */,
+				8E7C680C2E67BEA400341B01 /* FirebaseMessaging */,
 			);
 			productName = KNUTICECore;
 			productReference = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */;
@@ -1743,6 +1861,7 @@
 				8EB6D1F92C663627004E8AC2 /* Sources */,
 				8EB6D1FA2C663627004E8AC2 /* Frameworks */,
 				8EB6D1FB2C663627004E8AC2 /* Resources */,
+				8E7C68152E67C4D100341B01 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1765,6 +1884,9 @@
 				TargetAttributes = {
 					5C82563D2BE5CE1A0038D4C8 = {
 						CreatedOnToolsVersion = 15.3;
+					};
+					8E3C43782E66D8D900EA711B = {
+						CreatedOnToolsVersion = 16.4;
 					};
 					8E3C85652E41C1380095852C = {
 						CreatedOnToolsVersion = 16.4;
@@ -1815,6 +1937,7 @@
 				8E7945E32CA28F6900208662 /* KNUTICEUnitTests */,
 				8E3C85652E41C1380095852C /* KNUTICEWidgetExtension */,
 				8E8FC5342E42F0FA002D560F /* KNUTICECore */,
+				8E3C43782E66D8D900EA711B /* KNUTICEWidgetCore */,
 			);
 		};
 /* End PBXProject section */
@@ -1857,6 +1980,13 @@
 				8E20513E2CD4F32F00D87C6A /* LaunchScreen.storyboard in Resources */,
 				8E20513F2CD4F32F00D87C6A /* ci_post_clone.sh in Resources */,
 				8E2051402CD4F32F00D87C6A /* Base in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E3C43772E66D8D900EA711B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2169,15 +2299,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8E3C43752E66D8D900EA711B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8E3C85622E41C1380095852C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E79F5752E5837AB0026876C /* NoticeCategory+AppEnum.swift in Sources */,
-				8E8FC5692E42F854002D560F /* AppIntent.swift in Sources */,
 				8E8FC56A2E42F854002D560F /* KNUTICEWidget.swift in Sources */,
 				8E8FC56B2E42F854002D560F /* KNUTICEWidgetBundle.swift in Sources */,
-				8E8FC56C2E42F854002D560F /* NoticeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2253,6 +2387,16 @@
 			target = 8E3C85652E41C1380095852C /* KNUTICEWidgetExtension */;
 			targetProxy = 8E1D70D52E4583E0007FD134 /* PBXContainerItemProxy */;
 		};
+		8E3C43802E66D8D900EA711B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E3C43782E66D8D900EA711B /* KNUTICEWidgetCore */;
+			targetProxy = 8E3C437F2E66D8D900EA711B /* PBXContainerItemProxy */;
+		};
+		8E3C43892E66D98400EA711B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E3C43782E66D8D900EA711B /* KNUTICEWidgetCore */;
+			targetProxy = 8E3C43882E66D98400EA711B /* PBXContainerItemProxy */;
+		};
 		8E6898312CD61EF1005F0EEA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8E68982A2CD61EF1005F0EEA /* NotificationService-dev */;
@@ -2262,6 +2406,11 @@
 			isa = PBXTargetDependency;
 			target = 5C82563D2BE5CE1A0038D4C8 /* KNUTICE */;
 			targetProxy = 8E7945E82CA28F6900208662 /* PBXContainerItemProxy */;
+		};
+		8E7C68082E67B5BE00341B01 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E8FC5342E42F0FA002D560F /* KNUTICECore */;
+			targetProxy = 8E7C68072E67B5BE00341B01 /* PBXContainerItemProxy */;
 		};
 		8E8FC53C2E42F0FA002D560F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2577,6 +2726,84 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8E3C43832E66D8D900EA711B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QHK65XFL8U;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICEWidgetCore;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8E3C43842E66D8D900EA711B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QHK65XFL8U;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICEWidgetCore;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -2915,6 +3142,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		8E3C43852E66D8D900EA711B /* Build configuration list for PBXNativeTarget "KNUTICEWidgetCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E3C43832E66D8D900EA711B /* Debug */,
+				8E3C43842E66D8D900EA711B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8E3C857B2E41C1390095852C /* Build configuration list for PBXNativeTarget "KNUTICEWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -3065,6 +3301,36 @@
 			package = 8E3C85802E41ECB30095852C /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
 		};
+		8E7C67FC2E67B3F100341B01 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E3C85802E41ECB30095852C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		8E7C67FE2E67B41900341B01 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8EC7321F2DD5A63F0038AD59 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		8E7C68032E67B5AD00341B01 /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8EC732162DD5A5B00038AD59 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
+		};
+		8E7C680C2E67BEA400341B01 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8EC7321F2DD5A63F0038AD59 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		8E7C68192E67C72A00341B01 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8EC7321F2DD5A63F0038AD59 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		8E7C681B2E67C78700341B01 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8EC7321F2DD5A63F0038AD59 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
 		8E8FC5552E42F293002D560F /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8EC732192DD5A5C20038AD59 /* XCRemoteSwiftPackageReference "Alamofire" */;
@@ -3079,11 +3345,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8EC732162DD5A5B00038AD59 /* XCRemoteSwiftPackageReference "Factory" */;
 			productName = Factory;
-		};
-		8E8FC5712E42FACB002D560F /* FirebaseMessaging */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8EC7321F2DD5A63F0038AD59 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseMessaging;
 		};
 		8EB90A362E45D7D200B3AEF6 /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;
