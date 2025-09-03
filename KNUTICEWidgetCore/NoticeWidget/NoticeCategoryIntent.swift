@@ -8,16 +8,16 @@
 import AppIntents
 import KNUTICECore
 
-enum NoticeCategoryIntent: String, AppEnum {
+public enum NoticeCategoryIntent: String, AppEnum {
     case generalNotice = "일반소식"
     case academicNotice = "학사공지"
     case scholarshipNotice = "장학안내"
     case eventNotice = "행사안내"
     case employmentNotice = "취업안내"
     
-    static let typeDisplayRepresentation: TypeDisplayRepresentation = "공지 카테고리"
+    public static let typeDisplayRepresentation: TypeDisplayRepresentation = "공지 카테고리"
         
-    static var caseDisplayRepresentations: [NoticeCategoryIntent: DisplayRepresentation] {
+    public static var caseDisplayRepresentations: [NoticeCategoryIntent: DisplayRepresentation] {
         [
             .generalNotice: "일반소식",
             .academicNotice: "학사공지",
@@ -27,7 +27,7 @@ enum NoticeCategoryIntent: String, AppEnum {
         ]
     }
     
-    var toNoticeCategory: NoticeCategory {
+    public var toNoticeCategory: NoticeCategory {
         switch self {
         case .generalNotice:
             return .generalNotice
