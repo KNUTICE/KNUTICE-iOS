@@ -9,6 +9,7 @@ import Alamofire
 import Factory
 import Combine
 import XCTest
+import KNUTICECore
 @testable import KNUTICE
 
 final class MockReportTest: XCTestCase {

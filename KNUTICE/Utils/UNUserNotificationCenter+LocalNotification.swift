@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import KNUTICECore
 import UserNotifications
 
 extension UNUserNotificationCenter {

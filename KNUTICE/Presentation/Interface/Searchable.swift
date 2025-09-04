@@ -7,6 +7,7 @@
 
 import Foundation
 import RxRelay
+import KNUTICECore
 
 protocol Searchable {
     var bookmarks: BehaviorRelay<[Bookmark]> { get }

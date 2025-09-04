@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 5/27/25.
 //
 
+import KNUTICECore
 import UIKit
 
 final class BookmarkTableViewCell: UITableViewCell {

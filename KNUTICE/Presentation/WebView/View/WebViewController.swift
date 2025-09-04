@@ -9,42 +9,10 @@ import UIKit
 import WebKit
 import SwiftUI
 import Foundation
+import KNUTICECore
 
-final class WebViewController: UIViewController {
-    let activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView(style: .large)
-        activityIndicator.startAnimating()
-        activityIndicator.hidesWhenStopped = true
-        
-        return activityIndicator
-    }()
-    lazy var webView: WKWebView = {
-        let webView = WKWebView()
-        webView.navigationDelegate = self
-        webView.uiDelegate = self
-        webView.allowsBackForwardNavigationGestures = false
-        webView.configuration.defaultWebpagePreferences.allowsContentJavaScript = true
-        webView.isHidden = true
-        
-        return webView
-    }()
-    lazy var bookmarkBtn: UIButton = {
-        let button = UIButton()
-        let plusImage = UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate)
-        button.setImage(plusImage, for: .normal)
-        button.setImage(plusImage, for: .highlighted)
-        button.tintColor = .white
-        button.backgroundColor = .accent2
-        button.layer.cornerRadius = 25
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.3
-        button.layer.shadowRadius = 7
-        button.layer.shadowOffset = CGSize(width: 0, height: 0)
-        button.addTarget(self, action: #selector(openBookmarkForm(_:)), for: .touchUpInside)
-        
-        return button
-    }()
-    let notice: Notice
+final class NoticeDetailWebViewController: NoticeWebViewController {
+    private let notice: Notice
     
     init(notice: Notice) {
         self.notice = notice
@@ -59,10 +27,6 @@ final class WebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.largeTitleDisplayMode = .never    //navigation inline title
-        view.backgroundColor = .detailViewBackground
-        setupLayout()
-        setupNavigationBar()
         loadPage(notice.contentUrl)
     }
     
@@ -75,74 +39,8 @@ final class WebViewController: UIViewController {
     }
 }
 
-extension WebViewController: WKNavigationDelegate, WKUIDelegate {
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        activityIndicator.isHidden = true
-        
-        webView.evaluateJavaScript(
-            """
-            document.documentElement.style.webkitUserSelect='none';
-            document.documentElement.style.webkitTouchCallout='none';
-            document.getElementById(\"header\").style.display='none';
-            document.getElementById(\"footer\").style.display='none';
-            document.getElementById(\"remote\").style.display='none';
-            """
-        ) { (res, error) -> Void in
-            //로딩 완료 후 webView 활성화
-            webView.isHidden = false
-            
-            if let error {
-                print("WebViewController error: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        if let aString = URL(string:(navigationAction.request.url?.absoluteString ?? "")) {
-            UIApplication.shared.open(aString, options:[:]) { _ in }
-        }
-        
-        return nil
-    }
-}
-
-extension WebViewController {
-    func setupLayout() {
-        //webView
-        view.addSubview(webView)
-        webView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            make.leading.trailing.bottom.equalToSuperview()
-        }
-        
-        //bookmarkBtn
-        view.addSubview(bookmarkBtn)
-        bookmarkBtn.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(UIDevice.current.userInterfaceIdiom == .phone ? -50 : -100)
-            make.trailing.equalToSuperview().offset(-20)
-            make.width.height.equalTo(50)
-        }
-        
-        view.addSubview(activityIndicator)
-        activityIndicator.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
-        }
-    }
-    
-    func setupNavigationBar() {
-        //NavigationItem
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "square.and.arrow.up"),
-            style: .plain,
-            target: self,
-            action: #selector(openSharePanel)
-        )
-    }
-}
-
-extension WebViewController {
-    @objc func openSharePanel() {
+extension NoticeDetailWebViewController {
+    @objc override func openSharePanel() {
         let shareText = self.notice.contentUrl
         let shareObject = [shareText]
         let activityViewController = UIActivityViewController(activityItems : shareObject, applicationActivities: nil)
@@ -157,15 +55,7 @@ extension WebViewController {
         self.present(activityViewController, animated: true, completion: nil)
     }
     
-    private func showCompletionAlert() {
-        let alert = UIAlertController(title: "알림", message: "공유를 완료했어요.", preferredStyle: .actionSheet)
-        let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
-        alert.addAction(okButton)
-        present(alert, animated: true, completion: nil)
-        
-    }
-    
-    @objc func openBookmarkForm(_ sender: UIButton) {
+    @objc override func openBookmarkForm(_ sender: UIButton) {
         let bookmarkForm = BookmarkForm(for: .create) {
             self.dismiss(animated: true)
         }
@@ -180,13 +70,10 @@ extension WebViewController {
 }
 
 #if DEBUG
-//MARK: - Preview
-struct WebViewControllerPreview: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            WebViewController(notice: Notice.generalNoticesSampleData.first!)
-                .makePreview()
-        }
+#Preview {
+    NavigationStack {
+        NoticeDetailWebViewController(notice: Notice.generalNoticesSampleData.first!)
+            .makePreview()
     }
 }
 #endif

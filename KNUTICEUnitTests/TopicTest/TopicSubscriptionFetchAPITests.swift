@@ -8,6 +8,7 @@
 import Alamofire
 import Factory
 import XCTest
+import KNUTICECore
 @testable import KNUTICE
 
 final class TopicSubscriptionFetchAPITests: XCTestCase {

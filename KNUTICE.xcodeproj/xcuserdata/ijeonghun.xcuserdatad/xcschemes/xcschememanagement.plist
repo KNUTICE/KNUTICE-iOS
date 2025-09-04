@@ -14,10 +14,30 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>KNUTICECore.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
 		<key>KNUTICEUnitTests.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>2</integer>
+		</dict>
+		<key>KNUTICEWidget-devExtension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
+		<key>KNUTICEWidgetCore.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
+		<key>KNUTICEWidgetExtension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 		<key>NotificationService-dev.xcscheme_^#shared#^_</key>
 		<dict>
@@ -29,6 +49,21 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>Promises (Playground).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
+		<key>Rx (Playground).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
+		</dict>
+		<key>SnapKitPlayground (Playground).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>12</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -38,6 +73,11 @@
 			<true/>
 		</dict>
 		<key>8E2050F72CD4F32F00D87C6A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8E3C85652E41C1380095852C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

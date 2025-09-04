@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KNUTICECore
 
 struct MainNotice {
     enum PresentationType {

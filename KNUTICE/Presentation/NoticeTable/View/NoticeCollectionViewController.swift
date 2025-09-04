@@ -60,7 +60,7 @@ extension NoticeCollectionViewController: UICollectionViewDelegateFlowLayout {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        let viewController = WebViewController(notice: viewModel.notices.value[0].items[indexPath.row])
+        let viewController = NoticeDetailViewController(notice: viewModel.notices.value[0].items[indexPath.row])
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

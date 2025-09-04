@@ -8,6 +8,7 @@
 import Combine
 import Factory
 import Foundation
+import KNUTICECore
 
 final class TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource

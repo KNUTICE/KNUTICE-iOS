@@ -9,6 +9,7 @@ import Alamofire
 import Combine
 import Factory
 import XCTest
+import KNUTICECore
 @testable import KNUTICE
 
 final class MockSearchedNoticesAPITest: XCTestCase {

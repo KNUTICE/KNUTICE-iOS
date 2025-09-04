@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KNUTICECore
 
 // MARK: - NotificationSubscriptionDTO
 struct NotificationSubscriptionDTO: Codable {

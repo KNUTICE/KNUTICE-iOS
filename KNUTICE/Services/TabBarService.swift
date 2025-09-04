@@ -8,6 +8,7 @@
 import Combine
 import Factory
 import Foundation
+import KNUTICECore
 
 protocol TabBarService {
     func fetchPushNotice() -> AnyPublisher<Notice?, any Error>

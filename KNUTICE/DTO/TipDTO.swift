@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KNUTICECore
 
 // MARK: - TipDTO
 struct TipDTO: Codable {

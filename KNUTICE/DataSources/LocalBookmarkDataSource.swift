@@ -7,6 +7,7 @@
 
 import Combine
 import CoreData
+import KNUTICECore
 
 protocol LocalBookmarkDataSource {
     /// Saves a single `Bookmark` to Core Data.

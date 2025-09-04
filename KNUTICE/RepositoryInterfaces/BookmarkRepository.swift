@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import KNUTICECore
 
 protocol BookmarkRepository {
     func save(bookmark: Bookmark) -> AnyPublisher<Void, any Error>

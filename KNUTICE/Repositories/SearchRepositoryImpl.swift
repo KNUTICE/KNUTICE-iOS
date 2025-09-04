@@ -8,6 +8,7 @@
 import RxSwift
 import Foundation
 import Factory
+import KNUTICECore
 
 final class SearchRepositoryImpl: SearchRepository, NoticeCreatable {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource

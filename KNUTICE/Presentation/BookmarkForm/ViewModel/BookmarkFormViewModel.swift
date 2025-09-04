@@ -8,6 +8,7 @@
 import Combine
 import Factory
 import Foundation
+import KNUTICECore
 import os
 
 final class BookmarkFormViewModel: ObservableObject, BookmarkListRefreshable {

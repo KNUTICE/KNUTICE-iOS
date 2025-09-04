@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 6/24/25.
 //
 
+import KNUTICECore
 import SwiftUI
 
 struct NoticeHeader: View {

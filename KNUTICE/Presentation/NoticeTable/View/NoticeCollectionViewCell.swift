@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import KNUTICECore
 
 final class NoticeCollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "NoticeCollectionViewCell"

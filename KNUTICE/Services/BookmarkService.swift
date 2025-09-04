@@ -8,6 +8,7 @@
 import Combine
 import Factory
 import UserNotifications
+import KNUTICECore
 
 protocol BookmarkService {
     func save(bookmark: Bookmark) -> AnyPublisher<Void, any Error>
