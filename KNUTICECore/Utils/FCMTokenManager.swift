@@ -9,18 +9,18 @@ import Factory
 import FirebaseMessaging
 import Foundation
 
-struct FCMTokenManager {
+public struct FCMTokenManager {
     //MARK: - Properies
     
     @Injected(\.remoteDataSource) private var dataSource
     
-    static let shared: FCMTokenManager = .init()
+    public static let shared: FCMTokenManager = .init()
     
     private init() {}
     
     //MARK: - Methods
     
-    func uploadToken() async throws {
+    public func uploadToken() async throws {
         guard let baseURL = Bundle.main.tokenURL else {
             throw NetworkError.invalidURL(message: "Invalid or missing 'Token_URL' in resource.")
         }

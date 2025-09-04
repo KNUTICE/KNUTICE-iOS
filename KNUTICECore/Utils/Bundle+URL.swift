@@ -28,4 +28,12 @@ public extension Bundle {
         
         return url
     }
+    
+    var tokenURL: String? {
+            guard let resource, let url = resource["Token_URL"] as? String else {
+                return nil
+            }
+            
+            return url
+        }
 }

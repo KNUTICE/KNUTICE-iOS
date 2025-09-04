@@ -8,10 +8,10 @@
 import Foundation
 import Security
 
-struct FCMTokenKeychainManager {
+public struct FCMTokenKeychainManager : Sendable {
     //MARK: - Properties
     
-    static let shared: FCMTokenKeychainManager = .init()
+    public static let shared: FCMTokenKeychainManager = .init()
     
     private init() {}
     
@@ -22,7 +22,7 @@ struct FCMTokenKeychainManager {
     /// - Parameter token: The FCM token string to be stored.
     /// - Returns: `true` if successfully saved, otherwise `false`.
     @discardableResult
-    func save(fcmToken token: String) async -> Bool {
+    public func save(fcmToken token: String) async -> Bool {
         await delete()    // Remove existing token before saving
         return await create(for: token)    //Save token
     }
@@ -37,7 +37,7 @@ struct FCMTokenKeychainManager {
     ///     `kSecAttrAccessibleAfterFirstUnlock` or `kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly`.
     /// - Note:
     ///   Uses a background queue to avoid blocking the main thread.
-    func read() async -> String? {
+    public func read() async -> String? {
         return await withCheckedContinuation { continuation in
             DispatchQueue.global(qos: .background).async {
                 var item: AnyObject?
@@ -70,7 +70,7 @@ struct FCMTokenKeychainManager {
     /// - The `baseQuery()` must be configured to target the correct Keychain item.
     /// - Keychain services are thread-safe, but running on a background queue improves performance in UI-intensive environments.
     @discardableResult
-    func delete() async -> Bool {
+    public func delete() async -> Bool {
         return await withCheckedContinuation { continuation in
             DispatchQueue.global(qos: .background).async {
                 continuation.resume(returning: SecItemDelete(baseQuery()) == errSecSuccess)
