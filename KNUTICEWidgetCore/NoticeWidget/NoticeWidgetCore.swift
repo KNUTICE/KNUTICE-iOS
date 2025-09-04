@@ -5,25 +5,21 @@
 //  Created by 이정훈 on 9/2/25.
 //
 
-import AppIntents
-import WidgetKit
 import KNUTICECore
+import WidgetKit
 
-public struct Provider: AppIntentTimelineProvider {
-    public typealias Entry = SimpleEntry
-    public typealias Intent = NoticeWidgetConfigurationAppIntent
-    
+public struct Provider<T: SelectNoticeCategoryIntentInterface>: AppIntentTimelineProvider {
     public init() {}
     
     public func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(), configuration: nil, notices: [])
     }
 
-    public func snapshot(for configuration: NoticeWidgetConfigurationAppIntent, in context: Context) async -> SimpleEntry {
+    public func snapshot(for configuration: T, in context: Context) async -> SimpleEntry {
         SimpleEntry(date: Date(), configuration: nil, notices: [])
     }
     
-    public func timeline(for configuration: NoticeWidgetConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
+    public func timeline(for configuration: T, in context: Context) async -> Timeline<SimpleEntry> {
         print("timeline(for:in:)")
         
         guard !Task.isCancelled else {
@@ -68,10 +64,10 @@ public struct Provider: AppIntentTimelineProvider {
 
 public struct SimpleEntry: TimelineEntry {
     public let date: Date
-    public let configuration: NoticeWidgetConfigurationAppIntent?
+    public let configuration: (any SelectNoticeCategoryIntentInterface)?
     public let notices: [Notice]
     
-    public init(date: Date, configuration: NoticeWidgetConfigurationAppIntent?, notices: [Notice]) {
+    public init(date: Date, configuration: (any SelectNoticeCategoryIntentInterface)?, notices: [Notice]) {
         self.date = date
         self.configuration = configuration
         self.notices = notices

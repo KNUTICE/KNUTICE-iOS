@@ -1,6 +1,6 @@
 //
 //  NoticeCategory.swift
-//  KNUTICEWidgetExtension
+//  KNUTICEWidgetCore
 //
 //  Created by 이정훈 on 8/22/25.
 //
