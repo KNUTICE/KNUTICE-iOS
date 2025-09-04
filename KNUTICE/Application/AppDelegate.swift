@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseCore
 import FirebaseMessaging
+import KNUTICECore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

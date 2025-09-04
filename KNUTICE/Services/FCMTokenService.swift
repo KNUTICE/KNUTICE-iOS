@@ -7,6 +7,7 @@
 
 import Factory
 import Foundation
+import KNUTICECore
 
 protocol FCMTokenService {
     @discardableResult
