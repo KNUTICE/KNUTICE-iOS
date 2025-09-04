@@ -19,8 +19,10 @@ public struct NoticeWidgetEntryView<T: SelectNoticeCategoryIntentInterface> : Vi
 
     public var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            Text(entry.configuration?.category.rawValue ?? "")
-                .font(.headline)
+            if let title = entry.configuration?.category.rawValue as? String {
+                Text(title)
+                    .font(.headline)
+            }
             
             ForEach(entry.notices, id: \.id) { notice in
                 if let url = URL(string: "widget://notice?nttId=\(notice.id)") {
@@ -28,6 +30,7 @@ public struct NoticeWidgetEntryView<T: SelectNoticeCategoryIntentInterface> : Vi
                         Text(notice.title)
                             .font(.subheadline)
                             .frame(maxWidth: .infinity, alignment: .leading)
+                            .lineLimit(1)
                     }
                 } else {
                     // URL 생성 실패 시 fallback
@@ -35,6 +38,7 @@ public struct NoticeWidgetEntryView<T: SelectNoticeCategoryIntentInterface> : Vi
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                        .lineLimit(1)
                 }
             }
         }
@@ -66,7 +70,7 @@ public struct KNUTICEWidget<T: SelectNoticeCategoryIntentInterface>: Widget {
 
 #if DEBUG
 #Preview(as: .systemSmall) {
-    KNUTICEWidget<TestNoticeWidgetConfigurationIntent>(kind: "")
+    KNUTICEWidget<TestSelectNoticeCategoryIntent>(kind: "")
 } timeline: {
     SimpleEntry(date: .now, configuration: nil, notices: [Notice.generalNoticesSampleData.first!])
     SimpleEntry(date: .now, configuration: nil, notices: [Notice.academicNoticesSampleData.first!])

@@ -7,7 +7,28 @@
 
 import AppIntents
 import Foundation
+import KNUTICECore
 import KNUTICEWidgetCore
+
+enum NoticeCategoryIntent: String, AppEnum, NoticeCategoryMappable {
+    case generalNotice = "일반소식"
+    case academicNotice = "학사공지"
+    case scholarshipNotice = "장학안내"
+    case eventNotice = "행사안내"
+    case employmentNotice = "취업안내"
+    
+    static let typeDisplayRepresentation: TypeDisplayRepresentation = "공지 카테고리"
+        
+    static var caseDisplayRepresentations: [NoticeCategoryIntent: DisplayRepresentation] {
+        [
+            .generalNotice: "일반소식",
+            .academicNotice: "학사공지",
+            .scholarshipNotice: "장학안내",
+            .eventNotice: "행사안내",
+            .employmentNotice: "취업안내"
+        ]
+    }
+}
 
 struct SelectNoticeCategoryIntent: SelectNoticeCategoryIntentInterface {
     static var title: LocalizedStringResource { "공지" }
