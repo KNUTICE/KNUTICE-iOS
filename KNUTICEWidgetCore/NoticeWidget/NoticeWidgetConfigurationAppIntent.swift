@@ -9,17 +9,37 @@ import AppIntents
 import WidgetKit
 
 public protocol SelectNoticeCategoryIntentInterface: WidgetConfigurationIntent {
-    var category: NoticeCategoryIntent { get }
+    associatedtype T: AppEnum & NoticeCategoryMappable & RawRepresentable<String>
+    
+    var category: T { get }
 }
 
 #if DEBUG
-public struct TestNoticeWidgetConfigurationIntent: SelectNoticeCategoryIntentInterface {
-    public static var title: LocalizedStringResource { "공지" }
-    public static var description: IntentDescription { "최신 공지를 한 눈에 확인하세요." }
-
-    @Parameter(title: "공지 카테고리", default: .generalNotice)
-    public var category: NoticeCategoryIntent
+enum NoticeCategoryIntent: String, AppEnum, NoticeCategoryMappable {
+    case generalNotice = "일반소식"
+    case academicNotice = "학사공지"
+    case scholarshipNotice = "장학안내"
+    case eventNotice = "행사안내"
+    case employmentNotice = "취업안내"
     
-    public init() {}
+    static let typeDisplayRepresentation: TypeDisplayRepresentation = "공지 카테고리"
+        
+    static var caseDisplayRepresentations: [NoticeCategoryIntent: DisplayRepresentation] {
+        [
+            .generalNotice: "일반소식",
+            .academicNotice: "학사공지",
+            .scholarshipNotice: "장학안내",
+            .eventNotice: "행사안내",
+            .employmentNotice: "취업안내"
+        ]
+    }
+}
+
+struct TestSelectNoticeCategoryIntent: SelectNoticeCategoryIntentInterface {
+    static var title: LocalizedStringResource { "공지" }
+    static var description: IntentDescription { "최신 공지를 한 눈에 확인하세요." }
+    
+    @Parameter(title: "공지 카테고리", default: .generalNotice)
+    var category: NoticeCategoryIntent
 }
 #endif
