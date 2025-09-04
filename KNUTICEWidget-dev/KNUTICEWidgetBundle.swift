@@ -1,8 +1,8 @@
 //
 //  KNUTICEWidgetBundle.swift
-//  KNUTICEWidget
+//  KNUTICEWidget-dev
 //
-//  Created by 이정훈 on 8/5/25.
+//  Created by 이정훈 on 9/3/25.
 //
 
 import KNUTICEWidgetCore
@@ -12,6 +12,6 @@ import SwiftUI
 @main
 struct KNUTICEWidgetBundle: WidgetBundle {
     var body: some Widget {
-        KNUTICEWidget<SelectNoticeCategoryIntent>(kind: "KNUTICEWidget")
+        KNUTICEWidget<SelectNoticeCategoryIntent>(kind: "KNUTICEWidget-dev")
     }
 }
