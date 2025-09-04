@@ -10,6 +10,7 @@ import Combine
 import Foundation
 import FirebaseMessaging
 import Factory
+import KNUTICECore
 
 final class TokenRepositoryImpl: TokenRepository {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource

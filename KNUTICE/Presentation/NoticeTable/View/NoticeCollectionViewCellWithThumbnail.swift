@@ -5,8 +5,9 @@
 //  Created by 이정훈 on 6/19/25.
 //
 
-import UIKit
 import Kingfisher
+import KNUTICECore
+import UIKit
 
 final class NoticeCollectionViewCellWithThumbnail: UICollectionViewCell {
     static var reuseIdentifier: String {

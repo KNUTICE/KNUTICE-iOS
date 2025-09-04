@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 1/4/25.
 //
 
+import KNUTICECore
 import UIKit
 import SwiftUI
 import RxSwift
@@ -128,7 +129,7 @@ extension UITabBarViewController {
                 
                 DispatchQueue.main.async {
                     self?.navigationController?.popToRootViewController(animated: true)
-                    self?.navigationController?.pushViewController(WebViewController(notice: pushNotice), animated: true)
+                    self?.navigationController?.pushViewController(NoticeDetailViewController(notice: pushNotice), animated: true)
                 }
             })
             .disposed(by: disposeBag)

@@ -7,15 +7,9 @@
 
 import Factory
 import Foundation
+import KNUTICECore
 
 extension Container {
-    //MARK: - RemoteDataSource
-    var remoteDataSource: Factory<RemoteDataSource> {
-        Factory(self) {
-            RemoteDataSourceImpl()
-        }
-    }
-    
     var localBookmarkDataSource: Factory<LocalBookmarkDataSource> {
         Factory(self) {
             LocalBookmarkDataSourceImpl.shared
@@ -26,12 +20,6 @@ extension Container {
     var mainNoticeRepository: Factory<MainNoticeRepository> {
         Factory(self) {
             MainNoticeRepositoryImpl()
-        }
-    }
-    
-    var noticeRepository: Factory<NoticeRepository> {
-        Factory(self) {
-            NoticeRepositoryImpl()
         }
     }
     

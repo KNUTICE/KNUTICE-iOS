@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 1/14/25.
 //
 
+import KNUTICECore
 import SwiftUI
 
 struct BookmarkDetailSwitchView: View {

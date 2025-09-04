@@ -7,6 +7,7 @@
 
 import Combine
 import Factory
+import KNUTICECore
 import RxRelay
 import os
 
