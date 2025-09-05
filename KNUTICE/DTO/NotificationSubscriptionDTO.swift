@@ -9,13 +9,13 @@ import Foundation
 import KNUTICECore
 
 // MARK: - NotificationSubscriptionDTO
-struct NotificationSubscriptionDTO: Codable {
+struct NotificationSubscriptionDTO: Decodable {
     let result: RequestResult
     let body: NotificationSubscriptionBody
 }
 
 // MARK: - Body
-struct NotificationSubscriptionBody: Codable {
+struct NotificationSubscriptionBody: Decodable {
     let generalNewsTopic, scholarshipNewsTopic, eventNewsTopic, academicNewsTopic: Bool
     let employmentNewsTopic: Bool
 }

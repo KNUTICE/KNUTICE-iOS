@@ -8,18 +8,18 @@
 import Foundation
 
 // MARK: - NoticeReponseDTO
-public struct NoticeReponseDTO: Decodable {
+public struct NoticeReponseDTO: Decodable, Sendable {
     public let result: RequestResult
     public let body: [NoticeReponseBody]?
 }
 
-public struct SingleNoticeResponseDTO: Decodable {
+public struct SingleNoticeResponseDTO: Decodable, Sendable {
     public let result: RequestResult
     public let body: NoticeReponseBody?
 }
 
 // MARK: - Body
-public struct NoticeReponseBody: Decodable {
+public struct NoticeReponseBody: Decodable, Sendable {
     public let nttID: Int
     public let title: String
     public let contentURL: String
