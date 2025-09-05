@@ -52,35 +52,14 @@ public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
         .eraseToAnyPublisher()
     }
     
-    public func fetchNotices(by nttIds: [Int]) -> AnyPublisher<[Notice], any Error> {
-        guard let baseURL = baseURL else {
-            return Fail(error: NetworkError.invalidURL(message: "Invalid or missing 'Notice_URL' in resource."))
-                .eraseToAnyPublisher()
-        }
+    @available(*, deprecated)
+    public func fetchNotices(by nttIds: [Int]) -> AnyPublisher<[Notice], any Error> {        
+        let publishers = nttIds.map { fetchNotice(by: $0) }
         
-        let params: [String: Any] = [
-            "result": [
-                "resultCode": 0,
-                "resultMessage": "string",
-                "resultDescription": "string"
-            ],
-            "body": [
-                "nttIdList": nttIds
-            ]
-        ]
-        
-        return dataSource.request(
-            baseURL + "/sync",
-            method: .post,
-            parameters: params,
-            decoding: NoticeReponseDTO.self
-        )
-        .compactMap { [weak self] dto in
-            dto.body?.compactMap {
-                self?.createNotice($0)
-            }
-        }
-        .eraseToAnyPublisher()
+        return Publishers.MergeMany(publishers)
+            .collect()
+            .map { notices in notices.compactMap { $0 } }
+            .eraseToAnyPublisher()
     }
     
     public func fetchNotice(by nttId: Int) -> AnyPublisher<Notice?, any Error> {

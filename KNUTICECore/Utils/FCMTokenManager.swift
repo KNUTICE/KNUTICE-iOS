@@ -9,7 +9,7 @@ import Factory
 import FirebaseMessaging
 import Foundation
 
-public struct FCMTokenManager {
+public actor FCMTokenManager {
     //MARK: - Properies
     
     @Injected(\.remoteDataSource) private var dataSource
@@ -32,18 +32,20 @@ public struct FCMTokenManager {
         
         try Task.checkCancellation()
         
+        let resultInfo = [
+            "resultCode": 0,
+            "resultMessage": "string",
+            "resultDescription": "string"
+        ] as [String: any Sendable]
+        
         let params = [
-            "result": [
-                "resultCode": 0,
-                "resultMessage": "string",
-                "resultDescription": "string"
-            ],
+            "result": resultInfo,
             "body": [
                 "oldFcmToken": existingToken,
                 "newFcmToken": newToken,
                 "deviceType": "iOS"
             ]
-        ] as [String : Any]
+        ] as [String : any Sendable]
         
         try await dataSource.request(
             baseURL,

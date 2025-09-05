@@ -9,7 +9,11 @@ import RxSwift
 import Combine
 import Alamofire
 
-public protocol RemoteDataSource {
+// MARK: - RemoteDatSource
+
+public protocol RemoteDataSource: Sendable {
+    typealias DTORepresentable = Decodable & Sendable
+    
     /// Sends an HTTP request and decodes the response into the specified type.
     ///
     /// - Parameters:
@@ -30,7 +34,7 @@ public protocol RemoteDataSource {
         parameters: Parameters?,
         decoding type: T.Type,
         isInterceptable: Bool
-    ) async throws -> T where T: Decodable
+    ) async throws -> T where T: DTORepresentable
     
     /// Sends an HTTP request and publishes a decoded response of the specified type.
     ///
@@ -48,7 +52,7 @@ public protocol RemoteDataSource {
         method: HTTPMethod,
         parameters: Parameters?,
         decoding type: T.Type
-    ) -> AnyPublisher<T, any Error> where T: Decodable
+    ) -> AnyPublisher<T, any Error> where T: DTORepresentable
     
     /// Sends an HTTP request and emits a single decoded response of the specified type.
     ///
@@ -66,18 +70,20 @@ public protocol RemoteDataSource {
         method: HTTPMethod,
         parameters: Parameters?,
         decoding type: T.Type
-    ) -> Single<T> where T: Decodable
+    ) -> Single<T> where T: DTORepresentable
 }
 
 public extension RemoteDataSource {
     @discardableResult
-    func request<T: Decodable>(
+    func request<T>(
         _ url: String,
         method: HTTPMethod,
+        
+        
         parameters: Parameters? = nil,
         decoding type: T.Type,
         isInterceptable: Bool = false
-    ) async throws -> T {
+    ) async throws -> T where T: DTORepresentable {
         return try await self.request(url, method: method, parameters: parameters, decoding: type, isInterceptable: isInterceptable)
     }
     
@@ -86,7 +92,7 @@ public extension RemoteDataSource {
         method: HTTPMethod,
         parameters: Parameters? = nil,
         decoding type: T.Type
-    ) -> AnyPublisher<T, any Error> where T: Decodable {
+    ) -> AnyPublisher<T, any Error> where T: DTORepresentable {
         return request(url, method: method, parameters: parameters, decoding: type)
     }
     
@@ -95,12 +101,14 @@ public extension RemoteDataSource {
         method: HTTPMethod,
         parameters: Parameters? = nil,
         decoding type: T.Type
-    ) -> Single<T> where T: Decodable {
+    ) -> Single<T> where T: DTORepresentable {
         return request(url, method: method, parameters: parameters, decoding: type)
     }
 }
 
-public final class RemoteDataSourceImpl: RemoteDataSource {
+// MARK: - RemoteDataSourceImpl
+
+public final class RemoteDataSourceImpl: RemoteDataSource, Sendable {
     private let session: Session
     
     public init(session: Session = Session.default) {
@@ -113,7 +121,7 @@ public final class RemoteDataSourceImpl: RemoteDataSource {
         parameters: Parameters? = nil,
         decoding type: T.Type,
         isInterceptable: Bool = false
-    ) async throws -> T where T : Decodable {
+    ) async throws -> T where T : DTORepresentable {
         return try await session.request(
             url,
             method: method,
@@ -130,7 +138,7 @@ public final class RemoteDataSourceImpl: RemoteDataSource {
         method: HTTPMethod,
         parameters: Parameters? = nil,
         decoding type: T.Type
-    ) -> AnyPublisher<T, any Error> where T : Decodable {
+    ) -> AnyPublisher<T, any Error> where T : DTORepresentable {
         return session.request(
             url,
             method: method,
@@ -150,24 +158,9 @@ public final class RemoteDataSourceImpl: RemoteDataSource {
         method: HTTPMethod,
         parameters: Parameters? = nil,
         decoding type: T.Type
-    ) -> Single<T> where T : Decodable {
-        return Single<T>.create { observer in
-            self.session.request(
-                url,
-                method: method,
-                parameters: parameters,
-                encoding: JSONEncoding.default
-            )
-            .responseDecodable(of: type.self) { response in
-                switch response.result {
-                case .success(let dto):
-                    observer(.success(dto))
-                case .failure(let error):
-                    observer(.failure(error))
-                }
-            }
-            
-            return Disposables.create()
+    ) -> Single<T> where T : DTORepresentable {
+        return Single.create {
+            try await self.request(url, method: method, parameters: parameters, decoding: T.self)
         }
     }
 }
