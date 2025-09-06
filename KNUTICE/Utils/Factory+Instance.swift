@@ -17,11 +17,6 @@ extension Container {
     }
     
     //MARK: - Repositroy
-    var mainNoticeRepository: Factory<MainNoticeRepository> {
-        Factory(self) {
-            MainNoticeRepositoryImpl()
-        }
-    }
     
     var tokenRepository: Factory<TokenRepository> {
         Factory(self) {
@@ -66,6 +61,7 @@ extension Container {
     }
     
     //MARK: - Service
+    
     var reportService: Factory<ReportService> {
         Factory(self) {
             ReportServiceImpl()
@@ -102,9 +98,15 @@ extension Container {
         }
     }
     
+    var notieService: Factory<NoticeService> {
+        Factory(self) {
+            NoticeServiceImpl()
+        }
+    }
+    
     //MARK: - ViewModel
     var mainViewModel: Factory<MainTableViewModel> {
-        Factory(self) {
+        Factory(self) { @MainActor in
             MainTableViewModel()
         }
     }

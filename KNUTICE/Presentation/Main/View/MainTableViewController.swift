@@ -69,7 +69,13 @@ final class MainTableViewController: UIViewController {
         subscribeEntryTime()
         
         //API Call
-        viewModel.fetchNoticesWithCombine()
+        viewModel.fetchNotices()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        viewModel.task?.cancel()
     }
 }
 
