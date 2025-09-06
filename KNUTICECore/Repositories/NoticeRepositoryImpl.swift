@@ -5,14 +5,17 @@
 //  Created by 이정훈 on 5/22/24.
 //
 
-import RxSwift
 import Combine
-import Factory
+//import Factory
 import Foundation
 
 public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
-    @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
+    private let dataSource: RemoteDataSource
     private let baseURL: String? = Bundle.standard.noticeURL
+    
+    init(dataSource: RemoteDataSource) {
+        self.dataSource = dataSource
+    }
     
     public func fetchNotices(for category: NoticeCategory) -> AnyPublisher<[Notice], any Error> {
         guard let baseURL = baseURL else {

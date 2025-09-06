@@ -18,7 +18,7 @@ public extension Container {
     //MARK: - NoticeRepository
     var noticeRepository: Factory<NoticeRepository> {
         Factory(self) {
-            NoticeRepositoryImpl()
+            NoticeRepositoryImpl(dataSource: Container.shared.remoteDataSource())
         }
     }
 }
