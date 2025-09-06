@@ -12,11 +12,9 @@ import KNUTICECore
 
 protocol TabBarService {
     func fetchPushNotice() -> AnyPublisher<Notice?, any Error>
-    func fetchMainPopupContent() -> AnyPublisher<MainPopupContent?, any Error>
 }
 
 final class TabBarServiceImpl: TabBarService {
-    @Injected(\.mainPopupContentRepository) private var mainPopupContentRepository: MainPopupContentRepository
     @Injected(\.noticeRepository) private var noticeRepository: NoticeRepository
     
     func fetchPushNotice() -> AnyPublisher<Notice?, any Error> {
@@ -29,9 +27,5 @@ final class TabBarServiceImpl: TabBarService {
         
         return Fail(error: UserInfoError.nttIdNotFound(message: "nttId is not found"))
             .eraseToAnyPublisher()
-    }
-    
-    func fetchMainPopupContent() -> AnyPublisher<MainPopupContent?, any Error> {
-        return mainPopupContentRepository.fetchMainPopupContent()
     }
 }
