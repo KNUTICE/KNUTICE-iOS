@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Notice: Codable {
+public struct Notice: Codable, Sendable {
     public let id: Int    //nttId
     public let title: String    //제목
     public let contentUrl: String    //화면 전환 시 이동할 사이트 URL
