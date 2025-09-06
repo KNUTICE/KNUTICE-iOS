@@ -48,12 +48,6 @@ extension Container {
         }
     }
     
-    var mainPopupContentRepository: Factory<MainPopupContentRepository> {
-        Factory(self) {
-            MainPopupContentRepositoryImpl()
-        }
-    }
-    
     var TipRepository: Factory<TipRepository> {
         Factory(self) {
             TipRepositoryImpl()

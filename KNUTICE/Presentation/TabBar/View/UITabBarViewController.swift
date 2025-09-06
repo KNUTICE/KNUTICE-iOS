@@ -71,10 +71,6 @@ final class UITabBarViewController: UITabBarController {
         setUpTabBar()
         bind()
         viewModel.fetchPushNoticeIfExists()
-        
-        if UserDefaults.standard.double(forKey: "noShowPopupDate") < Date().timeIntervalSince1970 {
-            viewModel.fetchMainPopupContent()
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -109,20 +105,6 @@ extension UITabBarViewController {
     }
     
     func bind() {
-        viewModel.mainPopupContent
-            .delay(.seconds(1), scheduler: MainScheduler.instance)
-            .bind(onNext: { [weak self] in
-                if let popupContent = $0, let self = self {
-                    let bottomModal = BottomModal(content: popupContent)
-                    self.view.addSubview(bottomModal)
-                    bottomModal.setupLayout()
-                    UIView.animate(withDuration: 0.5) {
-                        bottomModal.alpha = 1
-                    }
-                }
-            })
-            .disposed(by: disposeBag)
-        
         viewModel.pushNotice
             .bind(onNext: { [weak self] pushNotice in
                 guard let pushNotice else { return }
