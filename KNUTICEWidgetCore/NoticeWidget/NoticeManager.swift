@@ -9,7 +9,7 @@ import Factory
 import Foundation
 import KNUTICECore
 
-public struct NoticeManager {
+public actor NoticeManager {
     @Injected(\.noticeRepository) private var repository
     
     public static let shared: NoticeManager = .init()
