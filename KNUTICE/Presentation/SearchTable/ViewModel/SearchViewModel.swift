@@ -12,7 +12,7 @@ import os
 import KNUTICECore
 
 @MainActor
-final class SearchViewModel: @MainActor NoticeSectionModelProvidable, @MainActor Searchable {
+final class SearchViewModel: NoticeSectionModelProvidable, Searchable {
     let notices: BehaviorRelay<[NoticeSectionModel]> = .init(value: [])
     let bookmarks: BehaviorRelay<[Bookmark]> = .init(value: [])
     let keyword: BehaviorRelay<String> = .init(value: "")
