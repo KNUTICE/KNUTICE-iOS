@@ -10,46 +10,7 @@ import Foundation
 import KNUTICECore
 import UserNotifications
 
-extension UNUserNotificationCenter {
-    /// 새로운 Bookmark 알림 생성
-    func registerLocalNotification(for bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
-        return Future { promise in
-            guard let date = bookmark.alarmDate else {
-                //알람이 설정되지 않은 경우 즉시 반환
-                promise(.success(()))
-                return
-            }
-            
-            Task {
-                let pendingNotificationRequests = await self.pendingNotificationRequests()
-                let insertionIndex = pendingNotificationRequests.rightInsertionIndex(of: date)
-                let content = self.createNotificationContent(body: bookmark.notice.title, badge: insertionIndex + 1)
-                let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)    //알림 날짜
-                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)    //알림 시점, 반복 여부 설정
-                let notificationRequest = UNNotificationRequest(
-                    identifier: String(bookmark.notice.id),
-                    content: content,
-                    trigger: trigger
-                )
-                
-                do {
-                    //새로운 NotificationRequest 추가
-                    try await self.add(notificationRequest)
-                    //기존 NotificationRequest Badge Count 1씩 증가
-                    try await self.modifyNotificationBadges(
-                        pendingNotificationRequests,
-                        startingAt: insertionIndex,
-                        by: +
-                    )
-                    promise(.success(()))
-                } catch {
-                    promise(.failure(error))
-                }
-            }
-        }
-        .eraseToAnyPublisher()
-    }
-    
+extension UNUserNotificationCenter {    
     func scheduleNotification(for bookmark: Bookmark) async throws {
         guard let date = bookmark.alarmDate else {
             //알람이 설정되지 않은 경우 즉시 반환

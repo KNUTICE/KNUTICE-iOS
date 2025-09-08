@@ -9,11 +9,14 @@ import RxSwift
 import Combine
 import Foundation
 import FirebaseMessaging
-import Factory
 import KNUTICECore
 
-final class TokenRepositoryImpl: TokenRepository {
-    @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
+final class TokenRepositoryImpl: TokenRepository {    
+    private let dataSource: RemoteDataSource
+    
+    init(dataSource: RemoteDataSource) {
+        self.dataSource = dataSource
+    }
     
     func registerToken(token: String) -> Observable<Bool> {
         do {
@@ -48,6 +51,8 @@ final class TokenRepositoryImpl: TokenRepository {
     
     func getFCMToken() -> AnyPublisher<String, any Error> {
         return Future { promise in
+            nonisolated(unsafe) let promise = promise
+            
             if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
                 //Firebase 10.4.0 SDK를 사용하는 UnitTest에서 iOS 16 Simulator와 Xcode 13, Apple Silicon HW를 만족하지 않으면 토큰을 사용할 수 없는 이슈
                 //UnitTest 환경에서 임의의 토큰 정보 반환
@@ -77,22 +82,24 @@ final class TokenRepositoryImpl: TokenRepository {
         return try await Messaging.messaging().token()
     }
     
-    private func makeRegisterTokenRequest(token: String) throws -> (endpoint: String, params: [String: Any]) {
+    private func makeRegisterTokenRequest(token: String) throws -> (endpoint: String, params: [String: any Sendable]) {
         guard let endpoint = Bundle.main.tokenURL else {
             throw NetworkError.invalidURL(message: "Invalid or missing 'Token_URL' in resource.")
         }
         
-        let params: [String: Any] = [
-            "result": [
-                "resultCode": 0,
-                "resultMessage": "string",
-                "resultDescription": "string"
-            ],
+        let resultInfo = [
+            "resultCode": 0,
+            "resultMessage": "string",
+            "resultDescription": "string"
+        ] as [String: any Sendable]
+        
+        let params: [String: any Sendable] = [
+            "result": resultInfo,
             "body": [
                 "fcmToken": token,
                 "deviceType": "iOS"
             ]
-        ]
+        ] as [String: any Sendable]
         
         return (endpoint, params)
     }

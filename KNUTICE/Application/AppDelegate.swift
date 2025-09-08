@@ -104,7 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
-extension AppDelegate: UNUserNotificationCenterDelegate {
+extension AppDelegate: @MainActor UNUserNotificationCenterDelegate {
     // MARK: - Foreground Notification Handling
     
     //알림을 터치하지 않아도 알림이 전달되면 호출

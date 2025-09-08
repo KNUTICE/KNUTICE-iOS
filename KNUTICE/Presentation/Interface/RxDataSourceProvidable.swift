@@ -16,6 +16,7 @@ protocol RxDataSourceProvidable: AnyObject {
 }
 
 extension RxDataSourceProvidable {
+    @MainActor
     func makeNoticeDataSource() -> RxCollectionViewSectionedReloadDataSource<NoticeSectionModel> {
         RxCollectionViewSectionedReloadDataSource<NoticeSectionModel>(configureCell: { [weak self] (dataSource, collectionView, indexPath, item) in
             guard let self else {

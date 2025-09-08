@@ -15,6 +15,7 @@ protocol CompositionalLayoutConfigurable {
 }
 
 extension CompositionalLayoutConfigurable {
+    @MainActor
     func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(UIDevice.current.userInterfaceIdiom == .phone ? 1.0 : 0.5),

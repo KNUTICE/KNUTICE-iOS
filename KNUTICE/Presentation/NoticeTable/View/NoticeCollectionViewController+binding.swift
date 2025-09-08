@@ -9,7 +9,7 @@ import UIKit
 import RxCocoa
 import RxDataSources
 
-extension NoticeCollectionViewController: RxDataSourceProvidable {
+extension NoticeCollectionViewController: @MainActor RxDataSourceProvidable {
     func bind() {        
         //MARK: - viewModel.notices
         viewModel.notices

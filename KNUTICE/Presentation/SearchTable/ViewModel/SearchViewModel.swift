@@ -11,11 +11,14 @@ import RxSwift
 import os
 import KNUTICECore
 
-final class SearchViewModel: NoticeSectionModelProvidable, Searchable {
+@MainActor
+final class SearchViewModel: @MainActor NoticeSectionModelProvidable, @MainActor Searchable {
     let notices: BehaviorRelay<[NoticeSectionModel]> = .init(value: [])
     let bookmarks: BehaviorRelay<[Bookmark]> = .init(value: [])
     let keyword: BehaviorRelay<String> = .init(value: "")
+    
     @Injected(\.searchService) private var searchService
+    
     private let disposeBag: DisposeBag = DisposeBag()
     private let logger: Logger = Logger()
     var tasks: [Task<Void, Never>] = []

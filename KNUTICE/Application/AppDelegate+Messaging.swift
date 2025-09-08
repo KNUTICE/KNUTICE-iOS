@@ -7,7 +7,7 @@
 
 import FirebaseMessaging
 
-extension AppDelegate: MessagingDelegate {
+extension AppDelegate: @MainActor MessagingDelegate {
     //FCM token 관련
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         // Note: This callback is fired at each app startup and whenever a new token is generated.

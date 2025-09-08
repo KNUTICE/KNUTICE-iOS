@@ -7,11 +7,14 @@
 
 import RxSwift
 import Foundation
-import Factory
 import KNUTICECore
 
 final class SearchRepositoryImpl: SearchRepository, NoticeCreatable {
-    @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
+    private let dataSource: RemoteDataSource
+    
+    init(dataSource: RemoteDataSource) {
+        self.dataSource = dataSource
+    }
     
     func search(keyword: String) -> Single<[Notice]> {
         guard let baseURL = Bundle.main.searchURL else {

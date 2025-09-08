@@ -9,7 +9,7 @@ import RxDataSources
 import RxSwift
 import SwiftUI
 
-extension SearchViewController: RxDataSourceProvidable {
+extension SearchViewController: @MainActor RxDataSourceProvidable {
     func bind() {
         searchBar.rx.text
             .debounce(.milliseconds(500), scheduler: MainScheduler.instance)    //0.5초 대기

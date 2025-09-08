@@ -13,12 +13,12 @@ import KNUTICECore
 typealias SearchResult = Result<([Notice], [Bookmark]), any Error>
 
 // MARK: - Protocol
-protocol SearchService {
+protocol SearchService: Actor {
     func search(with keyword: String) async -> SearchResult
 }
 
 // MARK: - implementation
-final class SearchServiceImpl: SearchService {
+actor SearchServiceImpl: SearchService {
     @Injected(\.searchRepository) private var searchRepository
     @Injected(\.bookmarkRepository) private var bookmarkRepository
     

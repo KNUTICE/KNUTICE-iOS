@@ -13,7 +13,7 @@ import KNUTICECore
 final class ReportRepositoryImpl: ReportRepository {
     @Injected(\.remoteDataSource) var dataSource: RemoteDataSource
     
-    func register(params: [String: Any]) -> AnyPublisher<Bool, any Error> {
+    func register(params: [String: any Sendable]) -> AnyPublisher<Bool, any Error> {
         guard let endpoint = Bundle.main.reportURL else {
             return Fail(error: NetworkError.invalidURL(message: "Invalid or missing report URL."))
                 .eraseToAnyPublisher()

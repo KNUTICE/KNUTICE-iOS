@@ -10,7 +10,7 @@ import Factory
 import Foundation
 import KNUTICECore
 
-final class TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
+actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
     
     func fetch() async -> Result<NotificationSubscription, Error> {
@@ -45,7 +45,7 @@ final class TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
         }
     }
     
-    func update(params: [String: Any]) async throws {
+    func update(params: [String: any Sendable]) async throws {
         try Task.checkCancellation()
         
         guard let endPoint = Bundle.main.notificationPermissionURL else {

@@ -20,7 +20,7 @@ extension Container {
     
     var tokenRepository: Factory<TokenRepository> {
         Factory(self) {
-            TokenRepositoryImpl()
+            TokenRepositoryImpl(dataSource: Container.shared.remoteDataSource())
         }
     }
     
@@ -32,7 +32,7 @@ extension Container {
     
     var searchRepository: Factory<SearchRepository> {
         Factory(self) {
-            SearchRepositoryImpl()
+            SearchRepositoryImpl(dataSource: Container.shared.remoteDataSource())
         }
     }
     
@@ -112,7 +112,7 @@ extension Container {
     }
     
     var searchCollectionViewModel: Factory<NoticeSectionModelProvidable> {
-        Factory(self) {
+        Factory(self) { @MainActor in
             SearchViewModel()
         }
     }
