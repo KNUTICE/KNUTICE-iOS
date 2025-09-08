@@ -10,7 +10,7 @@ import RxSwift
 import UIKit
 import SwiftUI
 
-final class SearchViewController: UIViewController, @MainActor CompositionalLayoutConfigurable {
+final class SearchViewController: UIViewController, CompositionalLayoutConfigurable {
     let segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(frame: .zero)
         control.insertSegment(withTitle: "공지", at: 0, animated: true)

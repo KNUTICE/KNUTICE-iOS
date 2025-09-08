@@ -9,7 +9,7 @@ import UIKit
 import SwiftUI
 import RxSwift
 
-final class NoticeCollectionViewController: UIViewController, @MainActor CompositionalLayoutConfigurable {
+final class NoticeCollectionViewController: UIViewController, CompositionalLayoutConfigurable {
     lazy var collectionView: UICollectionView = {
         let layout = createCompositionalLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)

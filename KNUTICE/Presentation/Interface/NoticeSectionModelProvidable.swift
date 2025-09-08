@@ -8,6 +8,7 @@
 import Foundation
 import RxRelay
 
+@MainActor
 protocol NoticeSectionModelProvidable {
     var notices: BehaviorRelay<[NoticeSectionModel]> { get }
 }
