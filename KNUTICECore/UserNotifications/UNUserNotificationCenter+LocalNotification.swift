@@ -1,17 +1,14 @@
 //
-//  UNUserNotificationCenter+LocalNotification.swift
-//  KNUTICE
+//  UNUserNotificationCenter+Badge.swift
+//  KNUTICECore
 //
-//  Created by 이정훈 on 1/18/25.
+//  Created by 이정훈 on 9/8/25.
 //
 
-import Combine
-import Foundation
-import KNUTICECore
 import UserNotifications
 
-extension UNUserNotificationCenter {    
-    func scheduleNotification(for bookmark: Bookmark) async throws {
+extension UNUserNotificationCenter {
+    public func scheduleNotification(for bookmark: Bookmark) async throws {
         guard let date = bookmark.alarmDate else {
             //알람이 설정되지 않은 경우 즉시 반환
             return
@@ -39,17 +36,7 @@ extension UNUserNotificationCenter {
         )
     }
     
-    private func createNotificationContent(body: String, badge: Int) -> UNMutableNotificationContent {
-        let content = UNMutableNotificationContent()
-        content.title = "북마크 알림"
-        content.body = body
-        content.sound = .default
-        content.badge = badge as NSNumber
-        
-        return content
-    }
-    
-    func updatePendingNotificationRequestBadges() async {
+    public func updatePendingNotificationRequestBadges() async {
         do {
             let requests = await pendingNotificationRequests()
             try await modifyNotificationBadges(requests, startingAt: 0, by: -)
@@ -79,12 +66,12 @@ extension UNUserNotificationCenter {
         }
     }
     
-    func removeNotificationRequest(with identifier: String) {
+    public func removeNotificationRequest(with identifier: String) {
         let identifiers: [String] = [identifier]
         self.removePendingNotificationRequests(withIdentifiers: identifiers)
     }
     
-    func removeNotificationRequest(withId id: Int) async throws {
+    public func removeNotificationRequest(withId id: Int) async throws {
         let pendingNotificationRequests = await self.pendingNotificationRequests()
         let pos = pendingNotificationRequests.firstIndex(of: .init(id))
         
@@ -93,6 +80,56 @@ extension UNUserNotificationCenter {
             try await self.modifyNotificationBadges(pendingNotificationRequests, startingAt: pos + 1, by: -)
             self.removeNotificationRequest(with: .init(id))
         }
+    }
+    
+    /// Remote Notification이 도착 후 Badge Count를 업데이트하는 메서드
+    func updatePendingNotificationsBadgeAfterDelivered() async {
+        let pendingNotificationRequests = await pendingNotificationRequests()
+        guard !pendingNotificationRequests.isEmpty else { return }
+        
+        let deliveredNotifications = await deliveredNotifications()
+        let count = deliveredNotifications.count + 1    //contentHandler가 호출될 때까지 count는 증가하지 않음
+        
+        pendingNotificationRequests.enumerated().forEach { (i, request) in
+            let content = createNotificationContent(body: request.content.body, badge: count + 1 + i)
+            let newRequest = UNNotificationRequest(
+                identifier: request.identifier,
+                content: content,
+                trigger: request.trigger
+            )
+            
+            self.add(newRequest)
+        }
+    }
+    
+    /// Foreground 상태 진입 시 스케줄 되어 있는 알림 Badge 재설정
+    public func updatePendingNotificationsAfterForeground() async {
+        let deliveredNotifications = await deliveredNotifications()
+        let count = deliveredNotifications.count
+        guard count > 0 else { return }    //전달된 알림이 없으면 바로 종료
+        
+        await pendingNotificationRequests().forEach { request in
+            if let badge = request.content.badge as? Int {
+                let content = createNotificationContent(body: request.content.body, badge: badge - count)
+                let newRequest = UNNotificationRequest(
+                    identifier: request.identifier,
+                    content: content,
+                    trigger: request.trigger
+                )
+                
+                self.add(newRequest)
+            }
+        }
+    }
+    
+    private func createNotificationContent(body: String, badge: Int) -> UNMutableNotificationContent {
+        let content = UNMutableNotificationContent()
+        content.title = "북마크 알림"
+        content.body = body
+        content.sound = .default
+        content.badge = badge as NSNumber
+        
+        return content
     }
 }
 
@@ -125,49 +162,5 @@ fileprivate extension Array where Element == UNNotificationRequest {
             }
         }
         return nil
-    }
-}
-
-public extension UNUserNotificationCenter {
-    /// Remote Notification이 도착 후 Badge Count를 업데이트하는 메서드
-    func updatePendingNotificationsBadgeAfterDelivered() async {
-        let pendingNotificationRequests = await pendingNotificationRequests()
-        guard !pendingNotificationRequests.isEmpty else { return }
-        
-        let deliveredNotifications = await deliveredNotifications()
-        let count = deliveredNotifications.count + 1    //contentHandler가 호출될 때까지 count는 증가하지 않음
-        
-        pendingNotificationRequests.enumerated().forEach { (i, request) in
-            let content = createNotificationContent(body: request.content.body, badge: count + 1 + i)
-            let newRequest = UNNotificationRequest(
-                identifier: request.identifier,
-                content: content,
-                trigger: request.trigger
-            )
-            
-            self.add(newRequest)
-        }
-    }
-}
-
-extension UNUserNotificationCenter {
-    /// Foreground 상태 진입 시 스케줄 되어 있는 알림 Badge 재설정
-    func updatePendingNotificationsAfterForeground() async {
-        let deliveredNotifications = await deliveredNotifications()
-        let count = deliveredNotifications.count
-        guard count > 0 else { return }    //전달된 알림이 없으면 바로 종료
-        
-        await pendingNotificationRequests().forEach { request in
-            if let badge = request.content.badge as? Int {
-                let content = createNotificationContent(body: request.content.body, badge: badge - count)
-                let newRequest = UNNotificationRequest(
-                    identifier: request.identifier,
-                    content: content,
-                    trigger: request.trigger
-                )
-                
-                self.add(newRequest)
-            }
-        }
     }
 }
