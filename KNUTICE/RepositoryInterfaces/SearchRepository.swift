@@ -8,7 +8,7 @@
 import KNUTICECore
 import RxSwift
 
-protocol SearchRepository {
+protocol SearchRepository: Sendable {
     func search(keyword: String) -> Single<[Notice]>
     func search(with keyword: String) async throws -> [Notice]
 }

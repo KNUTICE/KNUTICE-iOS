@@ -5,7 +5,7 @@
 //  Created by 이정훈 on 11/21/24.
 //
 
-protocol TopicSubscriptionRepository {
+protocol TopicSubscriptionRepository: Actor {
     func fetch() async -> Result<NotificationSubscription, Error>
-    func update(params: [String: Any]) async throws
+    func update(params: [String: any Sendable]) async throws
 }

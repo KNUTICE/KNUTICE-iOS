@@ -9,12 +9,12 @@ import Factory
 import Foundation
 import KNUTICECore
 
-protocol FCMTokenService {
+protocol FCMTokenService: Actor {
     @discardableResult
     func register(fcmToken: String) async throws -> Bool
 }
 
-final class FCMTokenServiceImpl: FCMTokenService {
+actor FCMTokenServiceImpl: FCMTokenService {
     @Injected(\.tokenRepository) private var repository
     
     @discardableResult

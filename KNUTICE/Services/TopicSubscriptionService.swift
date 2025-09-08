@@ -9,11 +9,11 @@ import Factory
 import Foundation
 import KNUTICECore
 
-protocol TopicSubscriptionService {
+protocol TopicSubscriptionService: Actor {
     func update(_ noticeName: NoticeCategory, to value: Bool) async -> Result<Void, Error>
 }
 
-final class TopicSubscriptionServiceImpl: TopicSubscriptionService {
+actor TopicSubscriptionServiceImpl: TopicSubscriptionService {
     @Injected(\.tokenRepository) private var tokenRepository
     @Injected(\.topicSubscriptionRepository) private var topicSubscriptionRepository
     
@@ -29,7 +29,7 @@ final class TopicSubscriptionServiceImpl: TopicSubscriptionService {
                 return .failure(TokenError.notFound)
             }
             
-            let params: [String: Any] = createParams(token: token, noticeName: noticeName.rawValue, isSubscribed: value)
+            let params = createParams(token: token, noticeName: noticeName.rawValue, isSubscribed: value)
             try await topicSubscriptionRepository.update(params: params)
             
             return .success(())
@@ -38,13 +38,9 @@ final class TopicSubscriptionServiceImpl: TopicSubscriptionService {
         }
     }
     
-    private func createParams(token: String, noticeName: String, isSubscribed: Bool) -> [String: Any] {
+    private func createParams(token: String, noticeName: String, isSubscribed: Bool) -> [String: any Sendable] {
         let params = [
-            "result": [
-                "resultCode": 0,
-                "resultMessage": "string",
-                "resultDescription": "string"
-              ],
+            "result": commonResultInfo,
               "body": [
                   "fcmToken": token,
                   "noticeName" : noticeName,

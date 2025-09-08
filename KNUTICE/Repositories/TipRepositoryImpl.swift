@@ -9,7 +9,7 @@ import Factory
 import Foundation
 import KNUTICECore
 
-final class TipRepositoryImpl: TipRepository {
+actor TipRepositoryImpl: TipRepository {
     @Injected(\.remoteDataSource) private var dataSource
     
     func fetchTips() async -> Result<[Tip]?, any Error> {
