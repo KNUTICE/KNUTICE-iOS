@@ -123,7 +123,7 @@ extension SearchViewController: UITableViewDelegate {
         if let viewModel = viewModel as? Searchable {
             let bookmark = viewModel.bookmarks.value[indexPath.row]
             let viewController = UIHostingController(
-                rootView: BookmarkDetailSwitchView(viewModel: BookmarkFormViewModel(bookmark: bookmark))
+                rootView: BookmarkDetailSwitchView(viewModel: BookmarkViewModel(bookmark: bookmark))
             )
             navigationController?.pushViewController(viewController, animated: true)
             tableView.deselectRow(at: indexPath, animated: true)

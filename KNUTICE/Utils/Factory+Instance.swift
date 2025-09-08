@@ -10,9 +10,9 @@ import Foundation
 import KNUTICECore
 
 extension Container {
-    var localBookmarkDataSource: Factory<LocalBookmarkDataSource> {
+    var bookmarkDataSource: Factory<BookmarkPersistenceStore> {
         Factory(self) {
-            LocalBookmarkDataSourceImpl.shared
+            BookmarkPersistenceStoreImpl.shared
         }
     }
     
@@ -118,7 +118,7 @@ extension Container {
     }
     
     var bookmarkTableViewModel: Factory<BookmarkTableViewModel> {
-        Factory(self) {
+        Factory(self) { @MainActor in
             BookmarkTableViewModel()
         }
     }

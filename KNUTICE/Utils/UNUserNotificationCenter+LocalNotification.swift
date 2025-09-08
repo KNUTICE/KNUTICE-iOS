@@ -50,6 +50,34 @@ extension UNUserNotificationCenter {
         .eraseToAnyPublisher()
     }
     
+    func scheduleNotification(for bookmark: Bookmark) async throws {
+        guard let date = bookmark.alarmDate else {
+            //알람이 설정되지 않은 경우 즉시 반환
+            return
+        }
+        
+        let pendingNotificationRequests = await self.pendingNotificationRequests()
+        let insertionIndex = pendingNotificationRequests.rightInsertionIndex(of: date)
+        let content = self.createNotificationContent(body: bookmark.notice.title, badge: insertionIndex + 1)
+        let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)    //알림 날짜
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)    //알림 시점, 반복 여부 설정
+        let notificationRequest = UNNotificationRequest(
+            identifier: String(bookmark.notice.id),
+            content: content,
+            trigger: trigger
+        )
+        
+        //새로운 NotificationRequest 추가
+        try await add(notificationRequest)
+        
+        //기존 NotificationRequest Badge Count 1씩 증가
+        try await modifyNotificationBadges(
+            pendingNotificationRequests,
+            startingAt: insertionIndex,
+            by: +
+        )
+    }
+    
     private func createNotificationContent(body: String, badge: Int) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
         content.title = "북마크 알림"
@@ -77,6 +105,7 @@ extension UNUserNotificationCenter {
         by operation: (Int, Int) -> Int
     ) async throws {
         guard index < requests.count else { return }
+        
         for request in requests[index...] {
             if let badge = request.content.badge as? Int {
                 let badge = operation(badge, 1)
@@ -96,25 +125,15 @@ extension UNUserNotificationCenter {
         self.removePendingNotificationRequests(withIdentifiers: identifiers)
     }
     
-    func removeNotificationRequest(from bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
-        return Future { promise in
-            Task {
-                let pendingNotificationRequests = await self.pendingNotificationRequests()
-                let pos = pendingNotificationRequests.firstIndex(of: .init(bookmark.notice.id))
-                if let pos {
-                    do {
-                        try await self.modifyNotificationBadges(pendingNotificationRequests, startingAt: pos + 1, by: -)    //남아 있는 NotificationRequest Badge 업데이트
-                        self.removeNotificationRequest(with: .init(bookmark.notice.id))
-                        promise(.success(()))
-                    } catch {
-                        promise(.failure(error))
-                    }
-                } else {
-                    promise(.success(()))    //존재하지 않는 객체는 삭제 필요 없음
-                }
-            }
+    func removeNotificationRequest(withId id: Int) async throws {
+        let pendingNotificationRequests = await self.pendingNotificationRequests()
+        let pos = pendingNotificationRequests.firstIndex(of: .init(id))
+        
+        if let pos {
+            // 남아 있는 NotificationRequest Badge 업데이트
+            try await self.modifyNotificationBadges(pendingNotificationRequests, startingAt: pos + 1, by: -)
+            self.removeNotificationRequest(with: .init(id))
         }
-        .eraseToAnyPublisher()
     }
 }
 

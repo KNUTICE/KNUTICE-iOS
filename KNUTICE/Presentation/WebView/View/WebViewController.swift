@@ -60,7 +60,7 @@ extension NoticeDetailWebViewController {
             self.dismiss(animated: true)
         }
         .environmentObject(
-            BookmarkFormViewModel(bookmark: Bookmark(notice: notice, memo: ""))
+            BookmarkViewModel(bookmark: Bookmark(notice: notice, memo: ""))
         )
         let viewController = UIHostingController(rootView: bookmarkForm)
         let navigationController = UINavigationController(rootViewController: viewController)
