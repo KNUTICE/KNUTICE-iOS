@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BookmarkDTO {
+struct BookmarkDTO : @unchecked Sendable {
     let notice: NoticeEntity?
     let details: String?
     let alarmDate: Date?

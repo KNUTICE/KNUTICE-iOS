@@ -14,11 +14,11 @@ struct BookmarkDetailSwitchView: View {
         case editView
     }
     
-    @StateObject private var viewModel: BookmarkFormViewModel
+    @StateObject private var viewModel: BookmarkViewModel
     @State private var selectedMode: BookmarkViewMode = .detailView
     @Environment(\.dismiss) private var dismiss
     
-    init(viewModel: BookmarkFormViewModel) {
+    init(viewModel: BookmarkViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     
@@ -39,6 +39,11 @@ struct BookmarkDetailSwitchView: View {
         }
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
+        .onDisappear {
+            viewModel.saveTask?.cancel()
+            viewModel.deleteTask?.cancel()
+            viewModel.updateTask?.cancel()
+        }
     }
 }
 
@@ -46,7 +51,7 @@ struct BookmarkDetailSwitchView: View {
 #Preview {
     NavigationStack {
         BookmarkDetailSwitchView(
-            viewModel: BookmarkFormViewModel(bookmark: Bookmark.sample)
+            viewModel: BookmarkViewModel(bookmark: Bookmark.sample)
         )
     }
 }

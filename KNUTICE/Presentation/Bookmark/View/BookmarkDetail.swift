@@ -9,7 +9,7 @@ import KNUTICECore
 import SwiftUI
 
 struct BookmarkDetail: View {
-    @EnvironmentObject private var viewModel: BookmarkFormViewModel
+    @EnvironmentObject private var viewModel: BookmarkViewModel
     @Environment(\.dismiss) private var dismiss
     @State private var isShowingWebView: Bool = false
     @Binding private var selectedMode: BookmarkDetailSwitchView.BookmarkViewMode
@@ -98,6 +98,11 @@ struct BookmarkDetail: View {
         } message: {
             Text(viewModel.alertMessage)
         }
+        .onDisappear {
+            viewModel.saveTask?.cancel()
+            viewModel.deleteTask?.cancel()
+            viewModel.updateTask?.cancel()
+        }
     }
 }
 
@@ -147,7 +152,7 @@ fileprivate struct UserMemoDetail: View {
 #Preview {
     NavigationStack {
         BookmarkDetail(selectedMode: .constant(.detailView))
-            .environmentObject(BookmarkFormViewModel(bookmark: Bookmark.sample))
+            .environmentObject(BookmarkViewModel(bookmark: Bookmark.sample))
     }
 }
 #endif

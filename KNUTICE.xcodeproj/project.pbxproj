@@ -23,7 +23,6 @@
 		8E3C85682E41C1380095852C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C85672E41C1380095852C /* WidgetKit.framework */; };
 		8E3C856A2E41C1380095852C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C85692E41C1380095852C /* SwiftUI.framework */; };
 		8E49F9132E69CBF100C5949C /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E49F9112E69CBF100C5949C /* NotificationService.swift */; };
-		8E49F9142E69CBF100C5949C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E49F90F2E69CBF100C5949C /* Info.plist */; };
 		8E49FA352E69CCA800C5949C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E49FA322E69CCA800C5949C /* LaunchScreen.storyboard */; };
 		8E49FA842E69CCA800C5949C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E49FA322E69CCA800C5949C /* LaunchScreen.storyboard */; };
 		8E65BF032DFBBECB00CEEF8F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E65BF002DFBBECB00CEEF8F /* GoogleService-Info.plist */; };
@@ -380,8 +379,7 @@
 		8E49F9682E69CC6F00C5949C /* RepositoryInterfaces */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = RepositoryInterfaces; sourceTree = "<group>"; };
 		8E49F97D2E69CC7600C5949C /* Model */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8E49F9882E69CC7600C5949C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8E49F9892E69CC7600C5949C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Model; sourceTree = "<group>"; };
 		8E49F9A32E69CC8F00C5949C /* Services */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Services; sourceTree = "<group>"; };
-		8E49FAD82E69CCB000C5949C /* BookmarkDetail */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = BookmarkDetail; sourceTree = "<group>"; };
-		8E49FAE52E69CCB300C5949C /* BookmarkForm */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = BookmarkForm; sourceTree = "<group>"; };
+		8E49FAE52E69CCB300C5949C /* Bookmark */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Bookmark; sourceTree = "<group>"; };
 		8E49FAF42E69CCB600C5949C /* BookmarkList */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = BookmarkList; sourceTree = "<group>"; };
 		8E49FB0A2E69CCB800C5949C /* Commons */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Commons; sourceTree = "<group>"; };
 		8E49FB192E69CCBB00C5949C /* Developer Tools */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Developer Tools"; sourceTree = "<group>"; };
@@ -576,8 +574,7 @@
 		8E49FA332E69CCA800C5949C /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				8E49FAD82E69CCB000C5949C /* BookmarkDetail */,
-				8E49FAE52E69CCB300C5949C /* BookmarkForm */,
+				8E49FAE52E69CCB300C5949C /* Bookmark */,
 				8E49FAF42E69CCB600C5949C /* BookmarkList */,
 				8E49FB0A2E69CCB800C5949C /* Commons */,
 				8E49FB192E69CCBB00C5949C /* Developer Tools */,
@@ -656,8 +653,7 @@
 				8E49F9682E69CC6F00C5949C /* RepositoryInterfaces */,
 				8E49F97D2E69CC7600C5949C /* Model */,
 				8E49F9A32E69CC8F00C5949C /* Services */,
-				8E49FAD82E69CCB000C5949C /* BookmarkDetail */,
-				8E49FAE52E69CCB300C5949C /* BookmarkForm */,
+				8E49FAE52E69CCB300C5949C /* Bookmark */,
 				8E49FAF42E69CCB600C5949C /* BookmarkList */,
 				8E49FB0A2E69CCB800C5949C /* Commons */,
 				8E49FB192E69CCBB00C5949C /* Developer Tools */,
@@ -734,8 +730,7 @@
 				8E49F9682E69CC6F00C5949C /* RepositoryInterfaces */,
 				8E49F97D2E69CC7600C5949C /* Model */,
 				8E49F9A32E69CC8F00C5949C /* Services */,
-				8E49FAD82E69CCB000C5949C /* BookmarkDetail */,
-				8E49FAE52E69CCB300C5949C /* BookmarkForm */,
+				8E49FAE52E69CCB300C5949C /* Bookmark */,
 				8E49FAF42E69CCB600C5949C /* BookmarkList */,
 				8E49FB0A2E69CCB800C5949C /* Commons */,
 				8E49FB192E69CCBB00C5949C /* Developer Tools */,
@@ -1037,7 +1032,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E49F9142E69CBF100C5949C /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

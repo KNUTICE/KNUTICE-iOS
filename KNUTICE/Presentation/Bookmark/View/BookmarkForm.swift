@@ -14,7 +14,7 @@ struct BookmarkForm: View {
         case update
     }
     
-    @EnvironmentObject private var viewModel: BookmarkFormViewModel
+    @EnvironmentObject private var viewModel: BookmarkViewModel
     
     private let formType: FormType
     private let dismissAction: () -> Void
@@ -172,7 +172,7 @@ fileprivate struct TextFieldContainerView: View {
 #Preview {
     NavigationStack {
         BookmarkForm(for: .create, dismissAction: {})
-            .environmentObject(BookmarkFormViewModel(bookmark: Bookmark.sample))
+            .environmentObject(BookmarkViewModel(bookmark: Bookmark.sample))
     }
 }
 #endif

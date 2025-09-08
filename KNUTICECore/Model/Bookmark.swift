@@ -8,7 +8,7 @@
 import Foundation
 import RxDataSources
 
-public struct Bookmark {
+public struct Bookmark: Sendable {
     public let notice: Notice
     public var memo: String
     public var alarmDate: Date?
@@ -44,7 +44,7 @@ public extension Bookmark {
 }
 #endif
 
-public struct BookmarkUpdate {
+public struct BookmarkUpdate: Sendable {
     public let bookmark: Bookmark
     public let createdAt: Date
     public let updatedAt: Date

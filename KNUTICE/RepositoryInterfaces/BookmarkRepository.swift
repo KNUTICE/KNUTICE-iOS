@@ -9,12 +9,18 @@ import Combine
 import Foundation
 import KNUTICECore
 
-protocol BookmarkRepository {
-    func save(bookmark: Bookmark) -> AnyPublisher<Void, any Error>
-    func read(page pageNum: Int, pageSize: Int, sortBy option: BookmarkSortOption) -> AnyPublisher<[Bookmark], any Error>
-    func fetchWhereTimestampsAreNil() -> AnyPublisher<[Bookmark], any Error>
-    func delete(by id: Int) -> AnyPublisher<Void, any Error>
-    func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error>
-    func update(_ updates: [BookmarkUpdate]) -> AnyPublisher<Void, any Error>
+protocol BookmarkRepository: Sendable {
+    func save(bookmark: Bookmark) async throws
+    
+    func fetch(page pageNum: Int, pageSize: Int, sortBy option: BookmarkSortOption) async throws -> [Bookmark]
+    
+    func fetchWhereTimestampsAreNil() async throws -> [Bookmark]
+    
+    func delete(by id: Int) async throws
+    
+    func update(_ bookmark: Bookmark) async throws
+    
+    func updateTimeStamp(_ update: BookmarkUpdate) async throws
+    
     func search(with keyword: String) async throws -> [Bookmark]
 }
