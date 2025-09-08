@@ -120,7 +120,9 @@ extension AppDelegate: @MainActor UNUserNotificationCenterDelegate {
         
         //Foreground 상태에서 Bookmark 알림 받는 경우, 남아 있는 Notification Request Badge 값 재설정
         //Foreground 상태에서 Remote 알림을 받는 경우 NotificationService에서 남아 있는 알림의 Badge 값을 증가 시킴
-        center.updatePendingNotificationRequestBadges() as Void
+        Task {
+            await center.updatePendingNotificationRequestBadges() as Void
+        }
     }
     
     // MARK: - Background Notification Handling

@@ -49,14 +49,12 @@ extension UNUserNotificationCenter {
         return content
     }
     
-    func updatePendingNotificationRequestBadges() {
-        Task {
-            do {
-                let requests = await pendingNotificationRequests()
-                try await modifyNotificationBadges(requests, startingAt: 0, by: -)
-            } catch {
-                print("UNUserNotificationCenter.updatePendingNotificationRequestsBadge Error: \(error)")
-            }
+    func updatePendingNotificationRequestBadges() async {
+        do {
+            let requests = await pendingNotificationRequests()
+            try await modifyNotificationBadges(requests, startingAt: 0, by: -)
+        } catch {
+            print("UNUserNotificationCenter.updatePendingNotificationRequestsBadge Error: \(error)")
         }
     }
     
