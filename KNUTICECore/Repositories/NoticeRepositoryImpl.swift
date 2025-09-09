@@ -25,10 +25,10 @@ public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
         return dataSource.request(
             baseURL + "?noticeName=\(category.rawValue)",
             method: .get,
-            decoding: NoticeReponseDTO.self
+            decoding: NoticeResponseDTO.self
         )
         .compactMap { [weak self] dto in
-            dto.body?.compactMap {
+            dto.data?.compactMap {
                 self?.createNotice($0)
             }
         }
@@ -44,10 +44,10 @@ public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
         return dataSource.request(
             baseURL + "?noticeName=\(category.rawValue)" + "&nttId=\(number)",
             method: .get,
-            decoding: NoticeReponseDTO.self
+            decoding: NoticeResponseDTO.self
         )
         .compactMap { [weak self] dto in
-            dto.body?.compactMap {
+            dto.data?.compactMap {
                 self?.createNotice($0)
             }
         }
@@ -76,7 +76,7 @@ public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
             decoding: SingleNoticeResponseDTO.self
         )
         .map { [weak self] dto in
-            return dto.body.flatMap {
+            return dto.data.flatMap {
                 self?.createNotice($0)
             }
         }
@@ -96,11 +96,11 @@ public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
             decoding: SingleNoticeResponseDTO.self
         )
         
-        guard let body = dto.body else {
+        guard let data = dto.data else {
             return nil
         }
         
-        return createNotice(body)
+        return createNotice(data)
     }
     
     public func fetchNotices(for category: NoticeCategory, size: Int = 20) async throws -> [Notice] {
@@ -113,9 +113,9 @@ public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
         let dto = try await dataSource.request(
             baseURL + "?noticeName=\(category.rawValue)" + "&size=\(size)",
             method: .get,
-            decoding: NoticeReponseDTO.self
+            decoding: NoticeResponseDTO.self
         )
-        let notices = dto.body?.compactMap {
+        let notices = dto.data?.compactMap {
             createNotice($0)
         } ?? []
         

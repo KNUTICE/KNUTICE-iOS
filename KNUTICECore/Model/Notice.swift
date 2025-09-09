@@ -15,8 +15,18 @@ public struct Notice: Codable, Sendable {
     public let uploadDate: String    //등록 날짜
     public let imageUrl: String?
     public let noticeCategory: NoticeCategory?
+    public let majorCategory: MajorCategory?
     
-    public init(id: Int, title: String, contentUrl: String, department: String, uploadDate: String, imageUrl: String?, noticeCategory: NoticeCategory?) {
+    public init(
+        id: Int,
+        title: String,
+        contentUrl: String,
+        department: String,
+        uploadDate: String,
+        imageUrl: String?,
+        noticeCategory: NoticeCategory? = nil,
+        majorCategory: MajorCategory? = nil
+    ) {
         self.id = id
         self.title = title
         self.contentUrl = contentUrl
@@ -24,6 +34,7 @@ public struct Notice: Codable, Sendable {
         self.uploadDate = uploadDate
         self.imageUrl = imageUrl
         self.noticeCategory = noticeCategory
+        self.majorCategory = majorCategory
     }
 }
 

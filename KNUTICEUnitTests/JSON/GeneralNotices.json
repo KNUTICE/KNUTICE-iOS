@@ -1,189 +1,187 @@
 {
-  "result": {
-    "resultCode": 200,
-    "resultMessage": "성공",
-    "resultDescription": "성공"
-  },
-  "body": [
+  "success": true,
+  "code": 200,
+  "message": null,
+  "data": [
     {
-      "nttId": 1077512,
-      "title": "2025학년도 1학기 학생증(NH 체크카드 학생증) 발급 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1077512",
-      "contentImage": null,
-      "departmentName": "학생과",
-      "registeredAt": "2025-02-23",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1082442,
+      "title": "교과/비교과 캡스톤디자인 운영안내 및 경진대회 설명회",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=oaml4mu0PaaatzeYKCb9RxesTJJ1EbpNKVhkXKWbxMNlXok2lKtpwL1wUfrelZZp.knut_servlet_homepage?nttId=1082442",
+      "contentImageUrl": "http://www.ut.ac.kr/namo/binary/images/000100/제목을_입력하세요_(2).png",
+      "department": "지역혁신전략실",
+      "registrationDate": "2025-09-08",
+      "topic": "GENERAL_NEWS"
     },
     {
-      "nttId": 1077430,
-      "title": "국립대학육성사업 방송 콘텐츠 시청 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1077430",
-      "contentImage": null,
-      "departmentName": "기획과",
-      "registeredAt": "2025-02-21",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1082401,
+      "title": "[졸업생특화프로그램사업] 잇다 제휴대학 개강이벤트 (졸업생, 지역청년도 참여 가능합니다)",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=UaBFSucuoCqFy3WhcpBt2OVIx0gOsrSYKx9Gq7Aav28mVkNYltAF95KWMAeRAL3J.knut_servlet_homepage?nttId=1082401&kind=&mno=sitemap_12&pageIndex=1&searchCnd=&searchWrd=",
+      "contentImageUrl": "http://www.ut.ac.kr/namo/binary/images/000100/%EC%9E%87%EB%8B%A4_%EC%A0%9C%ED%9C%B4%EB%8C%80%ED%95%99_%EC%9D%B4%EB%B2%A4%ED%8A%B8_%ED%8F%AC%EC%8A%A4%ED%84%B0.png",
+      "department": "대학일자리플러스센터",
+      "registrationDate": "2025-09-08",
+      "topic": "GENERAL_NEWS"
     },
     {
-      "nttId": 1077428,
-      "title": "2025학년도 정시 신입생 대상 온라인 글로컬 어학 세미나 개최",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1077428",
-      "contentImage": null,
-      "departmentName": "국제교류본부",
-      "registeredAt": "2025-02-21",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1082337,
+      "title": "[고용노동부/대전지방고용노동청청주치청] 청년층 직업지도'캡파 CAP@ 프로그램' 참여자 모집 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=xdi8ZFVItlwJEGuMapzmmPuXau5ubRDnfYnal1AoT92OajXclP15BjG79Wrn3bta.knut_servlet_homepage?nttId=1082337",
+      "contentImageUrl": null,
+      "department": "취업성공지원과",
+      "registrationDate": "2025-09-05",
+      "topic": "GENERAL_NEWS"
     },
     {
-      "nttId": 1077315,
-      "title": "박물관 사진 특별전 \"중원의 시간: 유적에 새겨진 역사\"",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1077315",
-      "contentImage": "https://www.ut.ac.kr/namo/binary/images/000096/중원문화_특별전_홍보.jpg",
-      "departmentName": "박물관",
-      "registeredAt": "2025-02-17",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1082335,
+      "title": "[고려사이버대학교] Match業(매치업) '빅데이터실무전문가'심화과정 수강 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=xdi8ZFVItlwJEGuMapzmmPuXau5ubRDnfYnal1AoT92OajXclP15BjG79Wrn3bta.knut_servlet_homepage?nttId=1082335",
+      "contentImageUrl": null,
+      "department": "취업성공지원과",
+      "registrationDate": "2025-09-05",
+      "topic": "GENERAL_NEWS"
     },
     {
-      "nttId": 1077210,
-      "title": "📢2025학년도 충북 PRIDE 공유대학 추가 학생모집 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1077210",
-      "contentImage": "https://www.ut.ac.kr/namo/binary/images/000096/충북_PRIDE_공유대학_참여학생_추가모집_포스터.jpg",
-      "departmentName": "정밀의료·의료기기사업단",
-      "registeredAt": "2025-02-12",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1082333,
+      "title": "[고려사이버대] 매치업(Match業) 빅데이터실무전문가 (기초) 과정 수강안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=Jd3GjcuSIcSQ4DN2hnAOlrdUSJaVKbtSf7hOo6UBXRTdtePdlqNYb7tT1OcFf2PO.knut_servlet_homepage?nttId=1082333",
+      "contentImageUrl": null,
+      "department": "취업성공지원과",
+      "registrationDate": "2025-09-05",
+      "topic": "GENERAL_NEWS"
     },
     {
-      "nttId": 1077187,
-      "title": "2025년 상반기 퇴직공무원(일반직)포상 추천 대상자 공개 검증 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1077187",
-      "contentImage": null,
-      "departmentName": "산학협력단",
-      "registeredAt": "2025-02-12",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1082296,
+      "title": "[커리어 드림로드] 자기이해와 진로탐색 특강 운영 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=FkSDcW5TOgC4ZdMLEV9J1iy7M1F9nLjs5cdG54hd01v9o7O6lh7SqSIDaGmoDJD2.knut_servlet_homepage?nttId=1082296&kind=&mno=sitemap_12&pageIndex=1&searchCnd=&searchWrd=",
+      "contentImageUrl": null,
+      "department": "대학일자리플러스센터",
+      "registrationDate": "2025-09-04",
+      "topic": "GENERAL_NEWS"
     },
     {
-      "nttId": 1077161,
-      "title": "2024학년도 의왕캠퍼스 학위수여식 행사 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1077161",
-      "contentImage": null,
-      "departmentName": "제4행정실",
-      "registeredAt": "2025-02-11",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1082250,
+      "title": "2025학년도 중앙도서관 학술전자정보 박람회 개최 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=177ypJidk2wk9flec1rDpkLbDMt7RhJuAXmO6ApASnOaGh2mlsVr2usvpD5GDFiA.knut_servlet_homepage?nttId=1082250&kind=&mno=sitemap_12&pageIndex=1&searchCnd=&searchWrd=",
+      "contentImageUrl": "http://www.ut.ac.kr/namo/binary/images/000100/3._포스터_2_1.jpg",
+      "department": "중앙도서관",
+      "registrationDate": "2025-09-03",
+      "topic": "GENERAL_NEWS"
     },
     {
-      "nttId": 1077118,
-      "title": "국립한국교통대학교 브랜드전략실 운영 규정 일부개정안 의견수렴",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1077118",
-      "contentImage": null,
-      "departmentName": "브랜드전략실",
-      "registeredAt": "2025-02-10",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1082150,
+      "title": "2025년도 산학협력단 서비스 만족도 조사 결과 및 후속조치 계획 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=SuwuI5Tzeka5qXEBmqltmg1OEqr5UBvGAjsAmMc7v3T0o8GPl3AR81DTQqtyiJ1B.knut_servlet_homepage?nttId=1082150",
+      "contentImageUrl": null,
+      "department": "산학협력단",
+      "registrationDate": "2025-09-02",
+      "topic": "GENERAL_NEWS"
     },
     {
-      "nttId": 1076944,
-      "title": "(한국항공대학교) 2024학년도 한국항공대학교 미래교육혁신원 성과포럼 개최 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1076944",
-      "contentImage": null,
-      "departmentName": "대학교육혁신원",
-      "registeredAt": "2025-02-04",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1082105,
+      "title": "📢2025년 충북 PRIDE 공유대학 표준현장실습 및 학생-기업 취업박람회 개최 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=SuwuI5Tzeka5qXEBmqltmg1OEqr5UBvGAjsAmMc7v3T0o8GPl3AR81DTQqtyiJ1B.knut_servlet_homepage?nttId=1082105&kind=&mno=sitemap_12&pageIndex=1&searchCnd=&searchWrd=",
+      "contentImageUrl": "http://www.ut.ac.kr/namo/binary/images/000100/20250901195313340_F3XOO67X.jpeg",
+      "department": "지역혁신전략실",
+      "registrationDate": "2025-09-01",
+      "topic": "GENERAL_NEWS"
     },
     {
-      "nttId": 1076940,
-      "title": "2025년 한국장애인고용공단 보조공학센터 체험형 청년인턴 채용공고 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1076940",
-      "contentImage": null,
-      "departmentName": "취업성공지원과",
-      "registeredAt": "2025-02-04",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1082095,
+      "title": "2025학년도 2학기 토익 금요특강 참여학생 모집 안내 (졸업자격인증제 대체인증 불가)",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=SuwuI5Tzeka5qXEBmqltmg1OEqr5UBvGAjsAmMc7v3T0o8GPl3AR81DTQqtyiJ1B.knut_servlet_homepage?nttId=1082095",
+      "contentImageUrl": null,
+      "department": "국제교류본부",
+      "registrationDate": "2025-09-01",
+      "topic": "GENERAL_NEWS"
     },
     {
-      "nttId": 1076880,
-      "title": "2025학년도 1학기 재학생 등록금 납부 관련 주요 Q&A",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1076880",
-      "contentImage": null,
-      "departmentName": "재무과",
-      "registeredAt": "2025-01-31",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1082061,
+      "title": "★ (취업성공지원과) 진로 및 취업상담 안내 ★",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=SuwuI5Tzeka5qXEBmqltmg1OEqr5UBvGAjsAmMc7v3T0o8GPl3AR81DTQqtyiJ1B.knut_servlet_homepage?nttId=1082061&kind=&mno=sitemap_12&pageIndex=1&searchCnd=&searchWrd=",
+      "contentImageUrl": "http://www.ut.ac.kr/namo/binary/images/000099/1.jpg",
+      "department": "취업성공지원과",
+      "registrationDate": "2025-09-01",
+      "topic": "GENERAL_NEWS"
     },
     {
-      "nttId": 1076879,
-      "title": "2025학년도 제1학기 대학(원)생 등록금 수납 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1076879",
-      "contentImage": null,
-      "departmentName": "재무과",
-      "registeredAt": "2025-01-31",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1082051,
+      "title": "2025년 생거진천 취업박람회 개최 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=SuwuI5Tzeka5qXEBmqltmg1OEqr5UBvGAjsAmMc7v3T0o8GPl3AR81DTQqtyiJ1B.knut_servlet_homepage?nttId=1082051",
+      "contentImageUrl": null,
+      "department": "취업성공지원과",
+      "registrationDate": "2025-09-01",
+      "topic": "GENERAL_NEWS"
     },
     {
-      "nttId": 1076848,
-      "title": "국립한국교통대학교 개교 120주년 캐치프레이즈 아이디어 공모전 수상작 선정결과 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1076848",
-      "contentImage": "https://www.ut.ac.kr/namo/binary/images/000096/홈페이지_포스터_1.png",
-      "departmentName": "브랜드전략실",
-      "registeredAt": "2025-01-24",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1082047,
+      "title": "[명지대학교 대학일자리플러스센터] 2025년 Career Festival 박람회 개최 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=SuwuI5Tzeka5qXEBmqltmg1OEqr5UBvGAjsAmMc7v3T0o8GPl3AR81DTQqtyiJ1B.knut_servlet_homepage?nttId=1082047",
+      "contentImageUrl": null,
+      "department": "취업성공지원과",
+      "registrationDate": "2025-09-01",
+      "topic": "GENERAL_NEWS"
     },
     {
-      "nttId": 1076760,
-      "title": "충주생활관 신(편)입생 모집 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1076760",
-      "contentImage": null,
-      "departmentName": "충주생활관",
-      "registeredAt": "2025-01-22",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1082015,
+      "title": "2025학년도 제2학기 대학(원)생 등록금 추가 수납 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=SuwuI5Tzeka5qXEBmqltmg1OEqr5UBvGAjsAmMc7v3T0o8GPl3AR81DTQqtyiJ1B.knut_servlet_homepage?nttId=1082015",
+      "contentImageUrl": null,
+      "department": "재무과",
+      "registrationDate": "2025-08-29",
+      "topic": "GENERAL_NEWS"
     },
     {
-      "nttId": 1076742,
-      "title": "제2025-6호 AI에듀테크융합교육원 연구원 신규채용 서류전형 합격자 및 면접시험 일정 공고",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1076742",
-      "contentImage": null,
-      "departmentName": "AI에듀테크융합교육원",
-      "registeredAt": "2025-01-21",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1082006,
+      "title": "2025학년도 2학기 학생증(NH 체크카드 학생증) 발급 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=SuwuI5Tzeka5qXEBmqltmg1OEqr5UBvGAjsAmMc7v3T0o8GPl3AR81DTQqtyiJ1B.knut_servlet_homepage?nttId=1082006&kind=&mno=sitemap_12&pageIndex=1&searchCnd=&searchWrd=",
+      "contentImageUrl": null,
+      "department": "학생과",
+      "registrationDate": "2025-08-29",
+      "topic": "GENERAL_NEWS"
     },
     {
-      "nttId": 1076736,
-      "title": "※ 2024학년도 2학기 진로탐색학점제 우수과정 선발 결과 안내 ※",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1076736",
-      "contentImage": null,
-      "departmentName": "취업성공지원과",
-      "registeredAt": "2025-01-21",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1082000,
+      "title": "[대학일자리플러스센터] 2025학년도 기업현직자가 들려주는 직무이야기 프로그램 참여자 모집 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=SuwuI5Tzeka5qXEBmqltmg1OEqr5UBvGAjsAmMc7v3T0o8GPl3AR81DTQqtyiJ1B.knut_servlet_homepage?nttId=1082000&kind=&mno=sitemap_12&pageIndex=1&searchCnd=&searchWrd=",
+      "contentImageUrl": null,
+      "department": "대학일자리플러스센터",
+      "registrationDate": "2025-08-29",
+      "topic": "GENERAL_NEWS"
     },
     {
-      "nttId": 1076731,
-      "title": "[창업지원교육센터] IDF 충주시민과 함께하는 하루 공예 교실 2월 (총 4회)",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1076731",
-      "contentImage": "https://www.ut.ac.kr/namo/binary/images/000096/포스터.png",
-      "departmentName": "창업지원교육센터",
-      "registeredAt": "2025-01-21",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1081925,
+      "title": "2025년 하반기 퇴직공무원(일반직) 포상 대상자 공개검증 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=SuwuI5Tzeka5qXEBmqltmg1OEqr5UBvGAjsAmMc7v3T0o8GPl3AR81DTQqtyiJ1B.knut_servlet_homepage?nttId=1081925",
+      "contentImageUrl": null,
+      "department": "총무과",
+      "registrationDate": "2025-08-27",
+      "topic": "GENERAL_NEWS"
     },
     {
-      "nttId": 1076721,
-      "title": "📢2025학년도 충북 PRIDE 공유대학 학생모집 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1076721",
-      "contentImage": "https://www.ut.ac.kr/namo/binary/images/000096/20250120151623700_X6UJ2X2A.png",
-      "departmentName": "정밀의료·의료기기사업단",
-      "registeredAt": "2025-01-20",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1081908,
+      "title": "[국립대학육성사업] 캠핑테이블 디자인 및 제작과정(UTRO+) 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=qxTda9VZKRUYtRMrmSCXAOHEu0Bl3IAWAevLbtJUv8vFRcu9l8jEx30Ojdit6ll1.knut_servlet_homepage?nttId=1081908",
+      "contentImageUrl": "http://www.ut.ac.kr/namo/binary/images/000099/캠핑테이블교육_키오스크.jpg",
+      "department": "창업지원교육센터",
+      "registrationDate": "2025-08-27",
+      "topic": "GENERAL_NEWS"
     },
     {
-      "nttId": 1076710,
-      "title": "❤️❤️2025학년도 1학기 평생교육원 수강생 모집 안내❤️❤️",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1076710",
-      "contentImage": null,
-      "departmentName": "평생교육원",
-      "registeredAt": "2025-01-20",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1081837,
+      "title": "[국립한국교통대학교 개교 120주년 기념] 인터뷰 대상자 추천 이벤트",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=qxTda9VZKRUYtRMrmSCXAOHEu0Bl3IAWAevLbtJUv8vFRcu9l8jEx30Ojdit6ll1.knut_servlet_homepage?nttId=1081837",
+      "contentImageUrl": null,
+      "department": "기획과",
+      "registrationDate": "2025-08-25",
+      "topic": "GENERAL_NEWS"
     },
     {
-      "nttId": 1076703,
-      "title": "[창업지원교육센터]IDF충주시민과 함께하는 하루 공예 교실 (2월) 총 4회 운영",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1076703",
-      "contentImage": "https://www.ut.ac.kr/namo/binary/images/000096/1737102542192.png",
-      "departmentName": "창업지원교육센터",
-      "registeredAt": "2025-01-17",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1081815,
+      "title": "2025학년도 2학기 분할납부(2차) 신청 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=qxTda9VZKRUYtRMrmSCXAOHEu0Bl3IAWAevLbtJUv8vFRcu9l8jEx30Ojdit6ll1.knut_servlet_homepage?nttId=1081815",
+      "contentImageUrl": null,
+      "department": "재무과",
+      "registrationDate": "2025-08-25",
+      "topic": "GENERAL_NEWS"
     }
   ]
 }

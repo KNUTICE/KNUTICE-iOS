@@ -49,7 +49,7 @@ final class MockSearchedNoticesAPITest: XCTestCase {
         let expectation = expectation(description: "fetch searched notices")
         
         //When
-        dataSource.request(endpoint + "?keyword=공지", method: .get, decoding: NoticeReponseDTO.self)
+        dataSource.request(endpoint + "?keyword=공지", method: .get, decoding: NoticeResponseDTO.self)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
@@ -59,8 +59,8 @@ final class MockSearchedNoticesAPITest: XCTestCase {
                 }
             }, receiveValue: {
                 //Then
-                XCTAssertEqual($0.result.resultCode, 200)
-                XCTAssertNotNil($0.body)
+                XCTAssertEqual($0.code, 200)
+                XCTAssertNotNil($0.data)
             })
             .store(in: &cancellables)
         
