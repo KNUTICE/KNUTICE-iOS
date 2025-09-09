@@ -1,5 +1,5 @@
 //
-//  GeneralNoticesTest.swift
+//  NoticesAPITests.swift
 //  KNUTICEUnitTests
 //
 //  Created by 이정훈 on 2/24/25.
@@ -12,7 +12,7 @@ import XCTest
 import KNUTICECore
 @testable import KNUTICE
 
-final class MockNoticesAPITests: XCTestCase {
+final class NoticesAPITests: XCTestCase {
     private var dataSource: RemoteDataSource!
     private var cancellables: Set<AnyCancellable>!
 
@@ -20,10 +20,13 @@ final class MockNoticesAPITests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         let configuration = URLSessionConfiguration.default
         configuration.protocolClasses = [MockURLProtocol.self]
+        
         let session = Session(configuration: configuration)
+        
         Container.shared.remoteDataSource.register {
             RemoteDataSourceImpl(session: session)
         }
+        
         dataSource = Container.shared.remoteDataSource()
         cancellables = []
     }
@@ -42,7 +45,7 @@ final class MockNoticesAPITests: XCTestCase {
         }
         
         let expectation = XCTestExpectation(description: "fetch general notices")
-        MockURLProtocol.setUpMockData(.fetchGeneralNoticesShouldSucceed)
+        MockURLProtocol.setUpMockData(.fetchGeneralNoticesShouldSucceed, for: URL(string: endpoint)!)
         
         //When
         dataSource.request(
@@ -75,7 +78,7 @@ final class MockNoticesAPITests: XCTestCase {
         }
         
         let expectation = XCTestExpectation(description: "fetch academic notices")
-        MockURLProtocol.setUpMockData(.fetchAcademicNoticesShouldSucceed)
+        MockURLProtocol.setUpMockData(.fetchAcademicNoticesShouldSucceed, for: URL(string: endpoint)!)
         
         //When
         dataSource.request(
@@ -108,7 +111,7 @@ final class MockNoticesAPITests: XCTestCase {
 
         
         let expectation = XCTestExpectation(description: "fetch scholarship notices")
-        MockURLProtocol.setUpMockData(.fetchScholarshipNoticesShouldSucceed)
+        MockURLProtocol.setUpMockData(.fetchScholarshipNoticesShouldSucceed, for: URL(string: endpoint)!)
         
         //When
         dataSource.request(
@@ -141,7 +144,7 @@ final class MockNoticesAPITests: XCTestCase {
         
         let expectation = XCTestExpectation(description: "fetch event notices")
         let endPoint = endpoint + "?noticeName=\(NoticeCategory.eventNotice.rawValue)"
-        MockURLProtocol.setUpMockData(.fetchEventNoticesShouldSucceed)
+        MockURLProtocol.setUpMockData(.fetchEventNoticesShouldSucceed, for: URL(string: endpoint)!)
         
         //When
         dataSource.request(endPoint, method: .get, decoding: NoticeReponseDTO.self)
@@ -169,7 +172,7 @@ final class MockNoticesAPITests: XCTestCase {
 
         
         let expectation = XCTestExpectation(description: "fetch event notices")
-        MockURLProtocol.setUpMockData(.fetchEmploymentNoticesShouldSucceed)
+        MockURLProtocol.setUpMockData(.fetchEmploymentNoticesShouldSucceed, for: URL(string: endpoint)!)
         
         //When
         dataSource.request(
@@ -185,7 +188,7 @@ final class MockNoticesAPITests: XCTestCase {
                 XCTFail("\(error)")
             }
         }, receiveValue: {
-            XCTAssertEqual($0.body?.count, 4)
+            XCTAssertEqual($0.body?.count, 20)
             XCTAssertEqual($0.result.resultCode, 200)
         })
         .store(in: &cancellables)
@@ -193,31 +196,23 @@ final class MockNoticesAPITests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
     
-    func test_fetchSingleNotice_returnNoticeDTO() {
+    func test_fetchSingleNotice_returnNoticeDTO() async throws {
         guard let endpoint = Bundle.main.noticeURL else {
             XCTFail("Failed to load noticeURL from Bundle.main. Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension.")
             return
         }
         
         let expectation = XCTestExpectation(description: "fetch single notice")
-        MockURLProtocol.setUpMockData(.fetchSingleNoticeShouldSucceed)
+        MockURLProtocol.setUpMockData(.fetchSingleNoticeShouldSucceed, for: URL(string: endpoint + "/1079970")!)
         
-        Task {
-            do {
-                let dto = try await dataSource.request(
-                    endpoint + "/noticeId",
-                    method: .get,
-                    decoding: SingleNoticeResponseDTO.self
-                )
-                
-                XCTAssertEqual(dto.body?.nttID, 1079970)
-            } catch {
-                XCTFail(error.localizedDescription)
-            }
-            
-            expectation.fulfill()
-        }
+        let dto = try await dataSource.request(
+            endpoint + "/1079970",
+            method: .get,
+            decoding: SingleNoticeResponseDTO.self
+        )
         
-        wait(for: [expectation], timeout: 1)
+        XCTAssertEqual(dto.body?.nttID, 1079970)
+        
+        expectation.fulfill()
     }
 }

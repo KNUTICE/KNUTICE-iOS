@@ -30,7 +30,7 @@ final class MainTableViewModel {
     private let logger: Logger = Logger()
     var task: Task<Void, Never>?
     
-    @Injected(\.notieService) private var noticeService
+    @Injected(\.noticeService) private var noticeService
     
     /// Fetches notices for the main view.
     ///

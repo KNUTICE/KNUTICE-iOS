@@ -39,7 +39,7 @@ final class TopicSubscriptionFetchAPITests: XCTestCase {
             return
         }
         
-        MockURLProtocol.setUpMockData(.fetchTopicSubscriptionsShouldSucceed)
+        MockURLProtocol.setUpMockData(.fetchTopicSubscriptionsShouldSucceed, for: URL(string: endpoint)!)
         
         //When
         let dto = try await dataSource.request(
@@ -68,18 +68,19 @@ final class TopicSubscriptionFetchAPITests: XCTestCase {
             return
         }
         
-        MockURLProtocol.setUpMockData(.postRequestShouldSucceed)
-        let params: [String: Any] = [
+        MockURLProtocol.setUpMockData(.postRequestShouldSucceed, for: URL(string: endpoint)!)
+        
+        let params: [String: any Sendable] = [
             "result": [
                 "resultCode": 0,
                 "resultMessage": "string",
                 "resultDescription": "string"
-            ],
+            ] as [String: any Sendable],
             "body": [
                 "fcmToken": "string",
                 "noticeName" : "GENERAL_NEWS",
                 "isSubscribed" : true
-            ]
+            ] as [String: any Sendable]
         ]
         
         //When

@@ -18,12 +18,11 @@ final class MainTableViewModelTest: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        let configuration = URLSessionConfiguration.default
-        configuration.protocolClasses = [MockURLProtocol.self]
-        let session = Session(configuration: configuration)
-        Container.shared.remoteDataSource.register {
-            RemoteDataSourceImpl(session: session)
+        
+        Container.shared.noticeRepository.register {
+            MockNoticeRepository()
         }
+        
         viewModel = Container.shared.mainViewModel()
         disposeBag = DisposeBag()
     }
@@ -34,10 +33,10 @@ final class MainTableViewModelTest: XCTestCase {
         disposeBag = nil
     }
     
+    @MainActor
     func testFetchTopThreeNotices_ReturnNotices() {
         //Given
         let expectation = expectation(description: "fetch top three notices")
-        MockURLProtocol.setUpMockData(.fetchTopThreeNoticesShouldSucceed)
         viewModel.noticesObservable
             .skip(2)
             .subscribe(onNext: {
@@ -52,7 +51,8 @@ final class MainTableViewModelTest: XCTestCase {
             .disposed(by: disposeBag)
         
         //When
-        viewModel.fetchNoticesWithCombine()
+        viewModel.fetchNotices()
+        
         wait(for: [expectation], timeout: 1)
     }
 

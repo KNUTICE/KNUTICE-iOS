@@ -20,13 +20,15 @@ final class MockSearchedNoticesAPITest: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         let configuration = URLSessionConfiguration.default
         configuration.protocolClasses = [MockURLProtocol.self]
+        
         let session = Session(configuration: configuration)
+        
         Container.shared.remoteDataSource.register {
             RemoteDataSourceImpl(session: session)
         }
+        
         dataSource = Container.shared.remoteDataSource()
         cancellables = []
-        MockURLProtocol.setUpMockData(.fetchSearchedNoticesShouldSucceed)
     }
 
     override func tearDownWithError() throws {
@@ -41,6 +43,8 @@ final class MockSearchedNoticesAPITest: XCTestCase {
             XCTFail("Failed to load searchURL from Bundle.main. Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension.")
             return
         }
+        
+        MockURLProtocol.setUpMockData(.fetchSearchedNoticesShouldSucceed, for: URL(string: endpoint + "?keyword=공지")!)
         
         let expectation = expectation(description: "fetch searched notices")
         

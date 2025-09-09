@@ -132,5 +132,37 @@ public extension Notice {
                    noticeCategory: .eventNotice)
         ]
     }
+    
+    static var employmentNoticesSampleData: [Notice] {
+        return [
+            Notice(
+                id: 1082403,
+                title: "[졸업생특화프로그램사업] 잇다 제휴대학 개강이벤트 (졸업생, 지역청년도 참여 가능합니다)",
+                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do?bbsId=BBSMSTR_000000000179&nttId=1082403",
+                department: "대학일자리플러스센터",
+                uploadDate: "2025-09-08",
+                imageUrl: nil,
+                noticeCategory: .employmentNotice
+            ),
+            Notice(
+                id: 1082336,
+                title: "[고용노동부/대전지방고용노동청청주치청] 청년층 직업지도'캡파 CAP@ 프로그램' 참여자 모집 안내",
+                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do?bbsId=BBSMSTR_000000000179&nttId=1082336",
+                department: "취업성공지원과",
+                uploadDate: "2025-09-05",
+                imageUrl: nil,
+                noticeCategory: .employmentNotice
+            ),
+            Notice(
+                id: 1082334,
+                title: "[고려사이버대학교] Match業(매치업) '빅데이터실무전문가'심화과정 수강 안내",
+                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do?bbsId=BBSMSTR_000000000179&nttId=1082334",
+                department: "취업성공지원과",
+                uploadDate: "2025-09-05",
+                imageUrl: nil,
+                noticeCategory: .employmentNotice
+            )
+        ]
+    }
 }
 #endif
