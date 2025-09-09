@@ -8,18 +8,19 @@
 import Foundation
 
 public protocol NoticeCreatable {
-    func createNotice(_ body: NoticeReponseBody) -> Notice
+    func createNotice(_ body: NoticeData) -> Notice
 }
 
 public extension NoticeCreatable {
-    func createNotice(_ body: NoticeReponseBody) -> Notice {
+    public func createNotice(_ data: NoticeData) -> Notice {
         return Notice(
-            id: body.nttID,
-            title: body.title,
-            contentUrl: body.contentURL,
-            department: body.departmentName,
-            uploadDate: body.registeredAt,
-            imageUrl: body.contentImage,
-            noticeCategory: NoticeCategory(rawValue: body.noticeName))
+            id: data.nttID,
+            title: data.title,
+            contentUrl: data.contentURL,
+            department: data.department,
+            uploadDate: data.registrationDate,
+            imageUrl: data.contentImageURL,
+            noticeCategory: NoticeCategory(rawValue: data.topic)
+        )
     }
 }

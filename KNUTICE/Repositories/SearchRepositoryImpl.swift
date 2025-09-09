@@ -24,10 +24,10 @@ final class SearchRepositoryImpl: SearchRepository, NoticeCreatable {
         return dataSource.request(
             baseURL + "?keyword=\(keyword)",
             method: .get,
-            decoding: NoticeReponseDTO.self
+            decoding: NoticeResponseDTO.self
         )
         .map { [weak self] dto in
-            return dto.body?.compactMap {
+            return dto.data?.compactMap {
                 self?.createNotice($0)
             } ?? []
         }
@@ -43,10 +43,10 @@ final class SearchRepositoryImpl: SearchRepository, NoticeCreatable {
         let dto = try await dataSource.request(
             baseURL + "?keyword=\(keyword)",
             method: .get,
-            decoding: NoticeReponseDTO.self
+            decoding: NoticeResponseDTO.self
         )
         
-        return dto.body?.compactMap {
+        return dto.data?.compactMap {
             createNotice($0)
         } ?? []
     }

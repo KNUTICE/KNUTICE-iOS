@@ -65,7 +65,7 @@ func fetchAllNoticeTypes() async throws {
         MockURLProtocol.setUpMockData(endpoint.mockType, for: endpoint.url)
     }
     
-    var dtos = [NoticeReponseDTO]()
+    var dtos = [NoticeResponseDTO]()
     
     try await withThrowingTaskGroup { group in
         for endpoint in endpoints {
@@ -73,7 +73,7 @@ func fetchAllNoticeTypes() async throws {
                 try await dataSource.request(
                     endpoint.url.absoluteString,
                     method: .get,
-                    decoding: NoticeReponseDTO.self
+                    decoding: NoticeResponseDTO.self
                 )
             }
         }
@@ -84,6 +84,6 @@ func fetchAllNoticeTypes() async throws {
     }
     
     for dto in dtos {
-        #expect(dto.body?.count == 20)
+        #expect(dto.data?.count == 20)
     }
 }
