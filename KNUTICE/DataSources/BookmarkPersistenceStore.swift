@@ -118,7 +118,7 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
             noticeEntity.uploadDate = bookmark.notice.uploadDate
             noticeEntity.contentUrl = bookmark.notice.contentUrl
             noticeEntity.imageUrl = bookmark.notice.imageUrl
-            noticeEntity.category = bookmark.notice.noticeCategory?.rawValue
+            noticeEntity.category = bookmark.notice.noticeCategory?.rawValue ?? bookmark.notice.majorCategory?.rawValue
             
             bookmarkEntity.bookmarkedNotice = noticeEntity
             
