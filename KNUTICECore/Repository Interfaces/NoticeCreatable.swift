@@ -12,7 +12,7 @@ public protocol NoticeCreatable {
 }
 
 public extension NoticeCreatable {
-    public func createNotice(_ data: NoticeData) -> Notice {
+    func createNotice(_ data: NoticeData) -> Notice {
         return Notice(
             id: data.nttID,
             title: data.title,
@@ -20,7 +20,8 @@ public extension NoticeCreatable {
             department: data.department,
             uploadDate: data.registrationDate,
             imageUrl: data.contentImageURL,
-            noticeCategory: NoticeCategory(rawValue: data.topic)
+            noticeCategory: NoticeCategory(rawValue: data.topic),
+            majorCategory: MajorCategory(rawValue: data.topic)
         )
     }
 }

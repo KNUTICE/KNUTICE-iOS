@@ -52,7 +52,8 @@ actor BookmarkRepositoryImpl: BookmarkRepository {
                 department: noticeEntity.department ?? "",
                 uploadDate: noticeEntity.uploadDate ?? "",
                 imageUrl: noticeEntity.imageUrl,
-                noticeCategory: NoticeCategory(rawValue: noticeEntity.category ?? "")
+                noticeCategory: NoticeCategory(rawValue: noticeEntity.category ?? ""),
+                majorCategory: MajorCategory(rawValue: noticeEntity.category ?? "")
             ),
             memo: dto.details ?? "",
             alarmDate: dto.alarmDate
