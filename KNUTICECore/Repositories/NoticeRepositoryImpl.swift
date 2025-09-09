@@ -6,7 +6,6 @@
 //
 
 import Combine
-//import Factory
 import Foundation
 
 public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
