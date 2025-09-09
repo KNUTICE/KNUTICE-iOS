@@ -92,7 +92,7 @@ extension Container {
         }
     }
     
-    var notieService: Factory<NoticeService> {
+    var noticeService: Factory<NoticeService> {
         Factory(self) {
             NoticeServiceImpl()
         }

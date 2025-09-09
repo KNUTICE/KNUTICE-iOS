@@ -11,11 +11,6 @@ enum RemoteServerError: Error {
     case invalidResponse(message: String)
 }
 
-enum NetworkError: Error {
-    case remoteServerError(message: String)
-    case invalidURL(message: String)
-}
-
 enum ExistingBookmarkError: Error {
     case alreadyExist(message: String)
 }

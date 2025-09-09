@@ -25,6 +25,11 @@
 		8E49F9132E69CBF100C5949C /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E49F9112E69CBF100C5949C /* NotificationService.swift */; };
 		8E49FA352E69CCA800C5949C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E49FA322E69CCA800C5949C /* LaunchScreen.storyboard */; };
 		8E49FA842E69CCA800C5949C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E49FA322E69CCA800C5949C /* LaunchScreen.storyboard */; };
+		8E63D8512E6F92E30041E7C7 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 8E63D8502E6F92E30041E7C7 /* RxRelay */; };
+		8E63D8532E6F930E0041E7C7 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 8E63D8522E6F930E0041E7C7 /* RxRelay */; };
+		8E63D8612E6FC4460041E7C7 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 8E63D8602E6FC4460041E7C7 /* Factory */; };
+		8E63D8632E6FC4550041E7C7 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 8E63D8622E6FC4550041E7C7 /* RxRelay */; };
+		8E63D8652E6FC4550041E7C7 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8E63D8642E6FC4550041E7C7 /* RxSwift */; };
 		8E65BF032DFBBECB00CEEF8F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E65BF002DFBBECB00CEEF8F /* GoogleService-Info.plist */; };
 		8E65BF112DFBC06C00CEEF8F /* GoogleService-Info-Dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E65BF102DFBC06C00CEEF8F /* GoogleService-Info-Dev.plist */; };
 		8E6898322CD61EF1005F0EEA /* NotificationService-dev.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8E68982B2CD61EF1005F0EEA /* NotificationService-dev.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -402,6 +407,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E63D8532E6F930E0041E7C7 /* RxRelay in Frameworks */,
 				8E8FC53D2E42F0FA002D560F /* KNUTICECore.framework in Frameworks */,
 				8EC732242DD5A6660038AD59 /* Kingfisher in Frameworks */,
 				8EC42A812E67D69500F1FF11 /* FirebaseMessaging in Frameworks */,
@@ -430,6 +436,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E63D8512E6F92E30041E7C7 /* RxRelay in Frameworks */,
 				8EC42A832E67D69E00F1FF11 /* FirebaseMessaging in Frameworks */,
 				8E72BCED2E430F3200107794 /* RxCocoa in Frameworks */,
 				8E72BCEF2E430F4400107794 /* RxSwift in Frameworks */,
@@ -478,6 +485,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E63D8652E6FC4550041E7C7 /* RxSwift in Frameworks */,
+				8E63D8632E6FC4550041E7C7 /* RxRelay in Frameworks */,
+				8E63D8612E6FC4460041E7C7 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1753,7 +1763,8 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KNUTICE.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KNUTICE";
 			};
@@ -1777,7 +1788,8 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KNUTICE.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KNUTICE";
 			};
@@ -2114,6 +2126,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8EC732162DD5A5B00038AD59 /* XCRemoteSwiftPackageReference "Factory" */;
 			productName = Factory;
+		};
+		8E63D8502E6F92E30041E7C7 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E3C85802E41ECB30095852C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		8E63D8522E6F930E0041E7C7 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E3C85802E41ECB30095852C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		8E63D8602E6FC4460041E7C7 /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8EC732162DD5A5B00038AD59 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
+		};
+		8E63D8622E6FC4550041E7C7 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E3C85802E41ECB30095852C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		8E63D8642E6FC4550041E7C7 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E3C85802E41ECB30095852C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
 		};
 		8E72BCE22E4305CA00107794 /* RxDataSources */ = {
 			isa = XCSwiftPackageProductDependency;
