@@ -16,42 +16,45 @@ public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
         self.dataSource = dataSource
     }
     
-    public func fetchNotices(for category: NoticeCategory) -> AnyPublisher<[Notice], any Error> {
+    public func fetchNotices<T>(
+        for category: T,
+        after nttId: Int? = nil,
+        size: Int = 20
+    ) -> AnyPublisher<[Notice], Error> where T: RawRepresentable, T.RawValue == String {
         guard let baseURL = baseURL else {
             return Fail(error: NetworkError.invalidURL(message: "Invalid or missing 'Notice_URL' in resource."))
                 .eraseToAnyPublisher()
         }
         
+        var endpoint = baseURL + "?topic=\(category.rawValue)"
+        endpoint += "&size=\(size)"
+        
+        if let nttId {
+            endpoint += "&nttId=\(nttId)"
+        }
+        
         return dataSource.request(
-            baseURL + "?noticeName=\(category.rawValue)",
+            endpoint,
             method: .get,
             decoding: NoticeResponseDTO.self
         )
-        .compactMap { [weak self] dto in
-            dto.data?.compactMap {
-                self?.createNotice($0)
-            }
+        .map { [weak self] dto in
+            dto.data?.compactMap { self?.createNotice($0) } ?? []
         }
         .eraseToAnyPublisher()
     }
     
-    public func fetchNotices(for category: NoticeCategory, after number: Int) -> AnyPublisher<[Notice], any Error> {
-        guard let baseURL = baseURL else {
-            return Fail(error: NetworkError.invalidURL(message: "Invalid or missing 'Notice_URL' in resource."))
-                .eraseToAnyPublisher()
+    public func fetchNotices<T>(
+        for category: T,
+        after nttId: Int? = nil,
+        size: Int = 20
+    ) async throws -> [Notice] where T: RawRepresentable, T.RawValue == String {
+        var fetchedNotices = [Notice]()
+        for try await notices in fetchNotices(for: category, after: nttId, size: size).values {
+            fetchedNotices = notices
         }
-        
-        return dataSource.request(
-            baseURL + "?noticeName=\(category.rawValue)" + "&nttId=\(number)",
-            method: .get,
-            decoding: NoticeResponseDTO.self
-        )
-        .compactMap { [weak self] dto in
-            dto.data?.compactMap {
-                self?.createNotice($0)
-            }
-        }
-        .eraseToAnyPublisher()
+
+        return fetchedNotices
     }
     
     @available(*, deprecated)
@@ -103,22 +106,4 @@ public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
         return createNotice(data)
     }
     
-    public func fetchNotices(for category: NoticeCategory, size: Int = 20) async throws -> [Notice] {
-        guard let baseURL = baseURL else {
-            throw NetworkError.invalidURL(message: "Invalid or missing 'Notice_URL' in resource.")
-        }
-        
-        try Task.checkCancellation()
-        
-        let dto = try await dataSource.request(
-            baseURL + "?noticeName=\(category.rawValue)" + "&size=\(size)",
-            method: .get,
-            decoding: NoticeResponseDTO.self
-        )
-        let notices = dto.data?.compactMap {
-            createNotice($0)
-        } ?? []
-        
-        return notices
-    }
 }
