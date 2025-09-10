@@ -26,8 +26,8 @@ final class ReportRepositoryImpl: ReportRepository {
             decoding: PostResponseDTO.self
         )
         .flatMap { dto -> AnyPublisher<Bool, any Error> in
-            guard dto.result.resultCode == 200 else {
-                return Fail(error: RemoteServerError.invalidResponse(message: dto.result.resultMessage))
+            guard dto.code == 200 else {
+                return Fail(error: RemoteServerError.invalidResponse(message: dto.message))
                     .eraseToAnyPublisher()
             }
             

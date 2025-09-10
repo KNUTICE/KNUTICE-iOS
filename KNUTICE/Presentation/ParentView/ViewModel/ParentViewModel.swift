@@ -76,7 +76,10 @@ final class ParentViewModel {
         task = Task {
             do {
                 try Task.checkCancellation()
-                shouldNavigateToMain = try await service.register(fcmToken: token)
+                
+                try await service.register(fcmToken: token)
+                
+                shouldNavigateToMain = true
                 
             } catch {
                 print(error)

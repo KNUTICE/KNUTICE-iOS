@@ -30,10 +30,10 @@ public extension Bundle {
     }
     
     var tokenURL: String? {
-            guard let resource, let url = resource["Token_URL"] as? String else {
-                return nil
-            }
-            
-            return url
+        guard let resource, let url = resource["Token_URL"] as? String else {
+            return nil
         }
+        
+        return url
+    }
 }

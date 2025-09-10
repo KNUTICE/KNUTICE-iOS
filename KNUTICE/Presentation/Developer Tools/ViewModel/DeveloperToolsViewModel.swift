@@ -7,23 +7,24 @@
 
 import Combine
 import Factory
+import KNUTICECore
 import os
 
+@MainActor
 final class DeveloperToolsViewModel: ObservableObject {
     @Published var fcmToken: String?
     
-    @Injected(\.tokenRepository) private var tokenRepository: TokenRepository
     private var cancellables: Set<AnyCancellable> = []
     private let logger = Logger(subsystem: "KNUTICE.DeveloperTools", category: "FCMToken")
     
     func fetchFCMToken() {
-        tokenRepository.getFCMToken()
-            .sink(receiveCompletion: { completion in
+        FCMTokenManager.shared.getToken()
+            .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                 case .finished:
-                    print("The request to fetch the FCM token has been completed")
+                    self?.logger.debug("The request to fetch the FCM token has been completed")
                 case .failure(let error):
-                    print("DeveloperToolsViewModel.fetchFCMToken() failed: \(error.localizedDescription)")
+                    self?.logger.error("DeveloperToolsViewModel.fetchFCMToken() failed: \(error.localizedDescription)")
                 }
             }, receiveValue: { [weak self] in
                 self?.fcmToken = $0

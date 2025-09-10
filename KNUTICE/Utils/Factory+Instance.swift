@@ -18,12 +18,6 @@ extension Container {
     
     //MARK: - Repositroy
     
-    var tokenRepository: Factory<TokenRepository> {
-        Factory(self) {
-            TokenRepositoryImpl(dataSource: Container.shared.remoteDataSource())
-        }
-    }
-    
     var reportRepository: Factory<ReportRepository> {
         Factory(self) {
             ReportRepositoryImpl()

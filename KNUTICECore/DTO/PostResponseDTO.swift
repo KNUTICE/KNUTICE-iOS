@@ -7,8 +7,10 @@
 
 import Foundation
 
-//MARK: - ReportResponseDTO
+// MARK: - PostResponseDTO
 public struct PostResponseDTO: Decodable, Sendable {
-    public let result: RequestResult
-    public let body: Bool?
+    public let success: Bool
+    public let code: Int
+    public let message: String
+    public let data: Bool
 }
