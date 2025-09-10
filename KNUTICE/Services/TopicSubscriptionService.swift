@@ -14,7 +14,6 @@ protocol TopicSubscriptionService: Actor {
 }
 
 actor TopicSubscriptionServiceImpl: TopicSubscriptionService {
-    @Injected(\.tokenRepository) private var tokenRepository
     @Injected(\.topicSubscriptionRepository) private var topicSubscriptionRepository
     
     func update(_ noticeName: NoticeCategory, to value: Bool) async -> Result<Void, any Error> {
@@ -23,7 +22,7 @@ actor TopicSubscriptionServiceImpl: TopicSubscriptionService {
         }
         
         do {
-            let token = try? await tokenRepository.getFCMToken()
+            let token = try? await FCMTokenManager.shared.getToken()
             
             guard let token else {
                 return .failure(TokenError.notFound)

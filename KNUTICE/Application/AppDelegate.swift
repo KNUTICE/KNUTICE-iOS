@@ -93,7 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if event == .tokenUpdate {
             Task {
                 do {
-                    try await FCMTokenManager.shared.uploadToken()
+                    try await FCMTokenManager.shared.updateToken()
                 } catch {
                     print(error)
                 }

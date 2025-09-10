@@ -14,47 +14,66 @@ import Alamofire
 public protocol RemoteDataSource: Sendable {
     typealias DTORepresentable = Decodable & Sendable
     
-    /// Sends an HTTP request and decodes the response into the specified type.
+    /// Sends an asynchronous HTTP request and decodes the response into a specified DTO type.
+    ///
+    /// This method wraps an Alamofire request into Swift Concurrency's `async/await` style,
+    /// handling JSON encoding, optional headers, and request interception when needed.
     ///
     /// - Parameters:
-    ///   - url: The endpoint URL as a `String`.
-    ///   - method: The HTTP method to use (e.g., `.get`, `.post`).
-    ///   - parameters: Optional request parameters as a `Parameters` dictionary (usually `[String: Any]`).
-    ///   - type: The expected `Decodable` type to decode the response into.
-    ///   - isInterceptable: A flag indicating whether the request should be intercepted (e.g., for authentication handling).
+    ///   - url: The endpoint URL string.
+    ///   - method: The HTTP method to use (e.g., `.get`, `.post`, `.patch`).
+    ///   - parameters: Optional request parameters to include in the body (JSON encoded).
+    ///   - headers: Optional custom HTTP headers.
+    ///   - type: The expected response type conforming to `DTORepresentable`.
+    ///   - isInterceptable: A Boolean indicating whether the request should use a `TokenInterceptor`
+    ///     to automatically attach an FCM token. Defaults to `false`.
     ///
-    /// - Returns: A decoded object of type `T`.
+    /// - Returns: A decoded object of the specified `DTORepresentable` type.
+    /// - Throws:
+    ///   - `NetworkError.invalidURL` if the provided URL is invalid.
+    ///   - Any error thrown during the network request or JSON decoding process.
     ///
-    /// - Throws: An error if the request fails or the response cannot be decoded.
-    ///
-    /// - Note: This is an asynchronous function and must be called with `await`.
+    @discardableResult
     func request<T>(
         _ url: String,
         method: HTTPMethod,
         parameters: Parameters?,
+        headers: HTTPHeaders?,
         decoding type: T.Type,
         isInterceptable: Bool
     ) async throws -> T where T: DTORepresentable
     
-    /// Sends an HTTP request and publishes a decoded response of the specified type.
+    /// Sends an HTTP request and publishes the decoded response as a Combine publisher.
+    ///
+    /// This method wraps an Alamofire request into a Combine `AnyPublisher`,
+    /// automatically handling JSON encoding, optional headers, and token interception if enabled.
     ///
     /// - Parameters:
-    ///   - url: The endpoint URL as a `String`.
-    ///   - method: The HTTP method to use (e.g., `.get`, `.post`).
-    ///   - parameters: Optional request parameters as a `Parameters` dictionary (usually `[String: Any]`).
-    ///   - type: The expected `Decodable` type to decode the response into.
+    ///   - url: The endpoint URL string.
+    ///   - method: The HTTP method to use (e.g., `.get`, `.post`, `.patch`).
+    ///   - parameters: Optional request parameters to include in the body (JSON encoded).
+    ///   - headers: Optional custom HTTP headers.
+    ///   - type: The expected response type conforming to `DTORepresentable`.
+    ///   - isInterceptable: A Boolean indicating whether the request should use a `TokenInterceptor`
+    ///     to automatically attach an FCM token. Defaults to `false`.
     ///
-    /// - Returns: An `AnyPublisher` that publishes a decoded object of type `T` or an `Error`.
+    /// - Returns: An `AnyPublisher` that publishes a decoded object of type `T` on success,
+    ///   or an `Error` if the request or decoding fails.
     ///
-    /// - Note: The publisher performs the network request and decoding. Subscribe on an appropriate thread and handle cancellation if needed.
     func request<T>(
         _ url: String,
         method: HTTPMethod,
         parameters: Parameters?,
-        decoding type: T.Type
+        headers: HTTPHeaders?,
+        decoding type: T.Type,
+        isInterceptable: Bool
     ) -> AnyPublisher<T, any Error> where T: DTORepresentable
     
     /// Sends an HTTP request and emits a single decoded response of the specified type.
+    ///
+    /// - Warning: **Deprecated**
+    ///   - This method is deprecated and may be removed in future versions.
+    ///   - Use `request(_:method:parameters:headers:decoding:isInterceptable:)` or other supported methods instead.
     ///
     /// - Parameters:
     ///   - url: The endpoint URL as a `String`.
@@ -65,6 +84,7 @@ public protocol RemoteDataSource: Sendable {
     /// - Returns: A `Single` that emits a decoded object of type `T` on success, or an error on failure.
     ///
     /// - Note: Use this method for one-time network requests that return a single value. The request is performed when subscribed to.
+    @available(*, deprecated)
     func request<T>(
         _ url: String,
         method: HTTPMethod,
@@ -78,22 +98,37 @@ public extension RemoteDataSource {
     func request<T>(
         _ url: String,
         method: HTTPMethod,
-        
-        
         parameters: Parameters? = nil,
+        headers: HTTPHeaders? = nil,
         decoding type: T.Type,
         isInterceptable: Bool = false
     ) async throws -> T where T: DTORepresentable {
-        return try await self.request(url, method: method, parameters: parameters, decoding: type, isInterceptable: isInterceptable)
+        return try await self.request(
+            url,
+            method: method,
+            parameters: parameters,
+            headers: headers,
+            decoding: type,
+            isInterceptable: isInterceptable
+        )
     }
     
     func request<T>(
         _ url: String,
         method: HTTPMethod,
         parameters: Parameters? = nil,
-        decoding type: T.Type
+        headers: HTTPHeaders? = nil,
+        decoding type: T.Type,
+        isInterceptable: Bool = false
     ) -> AnyPublisher<T, any Error> where T: DTORepresentable {
-        return request(url, method: method, parameters: parameters, decoding: type)
+        return request(
+            url,
+            method: method,
+            parameters: parameters,
+            headers: headers,
+            decoding: type,
+            isInterceptable: isInterceptable
+        )
     }
     
     func request<T>(
@@ -115,10 +150,12 @@ public final class RemoteDataSourceImpl: RemoteDataSource, Sendable {
         self.session = session
     }
     
+    @discardableResult
     public func request<T>(
         _ url: String,
         method: HTTPMethod,
         parameters: Parameters? = nil,
+        headers: HTTPHeaders? = nil,
         decoding type: T.Type,
         isInterceptable: Bool = false
     ) async throws -> T where T : DTORepresentable {
@@ -127,6 +164,7 @@ public final class RemoteDataSourceImpl: RemoteDataSource, Sendable {
             method: method,
             parameters: parameters,
             encoding: JSONEncoding.default,
+            headers: headers,
             interceptor: isInterceptable ? TokenInterceptor() : nil
         )
         .serializingDecodable(type)
@@ -137,13 +175,17 @@ public final class RemoteDataSourceImpl: RemoteDataSource, Sendable {
         _ url: String,
         method: HTTPMethod,
         parameters: Parameters? = nil,
-        decoding type: T.Type
+        headers: HTTPHeaders? = nil,
+        decoding type: T.Type,
+        isInterceptable: Bool = false
     ) -> AnyPublisher<T, any Error> where T : DTORepresentable {
         return session.request(
             url,
             method: method,
             parameters: parameters,
-            encoding: JSONEncoding.default
+            encoding: JSONEncoding.default,
+            headers: headers,
+            interceptor: isInterceptable ? TokenInterceptor() : nil
         )
         .publishDecodable(type: T.self)
         .value()
