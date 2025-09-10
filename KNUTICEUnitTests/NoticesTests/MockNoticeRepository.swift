@@ -10,42 +10,52 @@ import Foundation
 import KNUTICECore
 
 final class MockNoticeRepository: NoticeRepository {
-    func fetchNotices(for category: NoticeCategory) -> AnyPublisher<[Notice], any Error> {
+    func fetchNotices<T>(
+        for category: T,
+        after nttId: Int? = nil,
+        size: Int = 20
+    ) -> AnyPublisher<[Notice], Error> where T: RawRepresentable, T.RawValue == String {
         return Deferred {
-            if case .generalNotice = category {
-                return Just(Notice.generalNoticesSampleData)
-            } else if case .academicNotice = category {
-                return Just(Notice.academicNoticesSampleData)
-            } else if case .scholarshipNotice = category {
-                return Just(Notice.scholarshipNoticesSampleData)
-            } else if case .eventNotice = category {
-                return Just(Notice.eventNoticesSampleData)
+            if let category = category as? NoticeCategory {
+                if case .generalNotice = category {
+                    return Just(Notice.generalNoticesSampleData)
+                } else if case .academicNotice = category {
+                    return Just(Notice.academicNoticesSampleData)
+                } else if case .scholarshipNotice = category {
+                    return Just(Notice.scholarshipNoticesSampleData)
+                } else if case .eventNotice = category {
+                    return Just(Notice.eventNoticesSampleData)
+                } else {
+                    return Just(Notice.employmentNoticesSampleData)
+                }
             } else {
-                return Just(Notice.employmentNoticesSampleData)
+                return Just([])
             }
         }
         .setFailureType(to: Error.self)
         .eraseToAnyPublisher()
     }
     
-    func fetchNotices(for category: NoticeCategory, after number: Int) -> AnyPublisher<[Notice], any Error> {
-        return fetchNotices(for: category)
-    }
-    
-    func fetchNotices(for category: NoticeCategory, size: Int) async throws -> [Notice] {
-        let notices: [Notice]
+    func fetchNotices<T>(
+        for category: T,
+        after nttId: Int?,
+        size: Int
+    ) async throws -> [Notice] where T: RawRepresentable, T.RawValue == String {
+        var notices = [Notice]()
         
-        switch category {
-        case .generalNotice:
-            notices = Notice.generalNoticesSampleData
-        case .academicNotice:
-            notices = Notice.academicNoticesSampleData
-        case .scholarshipNotice:
-            notices = Notice.scholarshipNoticesSampleData
-        case .eventNotice:
-            notices = Notice.eventNoticesSampleData
-        case .employmentNotice:
-            notices = Notice.employmentNoticesSampleData
+        if let category = category as? NoticeCategory {
+            switch category {
+            case .generalNotice:
+                notices = Notice.generalNoticesSampleData
+            case .academicNotice:
+                notices = Notice.academicNoticesSampleData
+            case .scholarshipNotice:
+                notices = Notice.scholarshipNoticesSampleData
+            case .eventNotice:
+                notices = Notice.eventNoticesSampleData
+            case .employmentNotice:
+                notices = Notice.employmentNoticesSampleData
+            }
         }
         
         return Array(notices.prefix(size))
