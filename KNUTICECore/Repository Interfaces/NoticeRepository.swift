@@ -5,7 +5,6 @@
 //  Created by 이정훈 on 5/22/24.
 //
 
-import RxSwift
 import Combine
 
 public protocol NoticeRepository: Sendable {
