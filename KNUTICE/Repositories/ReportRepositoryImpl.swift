@@ -23,11 +23,12 @@ final class ReportRepositoryImpl: ReportRepository {
             endpoint,
             method: .post,
             parameters: params,
-            decoding: PostResponseDTO.self
+            decoding: PostResponseDTO.self,
+            isInterceptable: true
         )
         .flatMap { dto -> AnyPublisher<Bool, any Error> in
             guard dto.code == 200 else {
-                return Fail(error: RemoteServerError.invalidResponse(message: dto.message))
+                return Fail(error: RemoteServerError.invalidResponse(message: dto.message ?? ""))
                     .eraseToAnyPublisher()
             }
             

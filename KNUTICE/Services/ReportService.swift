@@ -25,24 +25,14 @@ final class ReportServiceImpl: ReportService, AppVersionProvidable {
                         .eraseToAnyPublisher()
                 }
                 
-                let params = self.createParams(content: content, device: device, token: token)
-                return self.reportRepository.register(params: params)
+                return self.reportRepository.register(
+                    params: [
+                        "content": content,
+                        "deviceName": device,
+                        "version": self.getAppVersion()
+                    ]
+                )
             }
             .eraseToAnyPublisher()
-    }
-    
-    private func createParams(content: String, device: String, token: String) -> [String: any Sendable] {
-        let params = [
-            "result": commonResultInfo,
-            "body": [
-                "fcmToken": token,
-                "content": content,
-                "clientType": "APP",
-                "deviceName": device,
-                "version": self.getAppVersion()
-            ]
-        ]
-        
-        return params
     }
 }
