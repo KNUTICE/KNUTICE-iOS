@@ -22,6 +22,11 @@ final class ParentViewController: UIViewController {
         addChildVC(loadingViewController)
         viewModel.subscribeToFCMToken()
         bind()
+        
+        #if DEBUG
+        // FIXME: Screen transition issue due to a device token generation bug in the Xcode 26 simulator
+        viewModel.shouldNavigateToMain = true
+        #endif
     }
     
     override func viewDidDisappear(_ animated: Bool) {
