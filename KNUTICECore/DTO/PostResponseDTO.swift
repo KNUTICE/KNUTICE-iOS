@@ -11,6 +11,6 @@ import Foundation
 public struct PostResponseDTO: Decodable, Sendable {
     public let success: Bool
     public let code: Int
-    public let message: String
+    public let message: String?
     public let data: Bool
 }
