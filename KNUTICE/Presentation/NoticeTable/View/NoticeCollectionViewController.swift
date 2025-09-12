@@ -8,8 +8,9 @@
 import UIKit
 import SwiftUI
 import RxSwift
+import KNUTICECore
 
-final class NoticeCollectionViewController: UIViewController, CompositionalLayoutConfigurable {
+final class NoticeCollectionViewController<Category>: UIViewController, CompositionalLayoutConfigurable, UICollectionViewDelegateFlowLayout where Category: RawRepresentable, Category.RawValue == String {
     lazy var collectionView: UICollectionView = {
         let layout = createCompositionalLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -31,7 +32,7 @@ final class NoticeCollectionViewController: UIViewController, CompositionalLayou
     private let navigationTitle: String
     let disposeBag = DisposeBag()
     
-    init(viewModel: NoticeCollectionViewModel, navigationTitle: String = "") {
+    init(viewModel: NoticeCollectionViewModel<Category>, navigationTitle: String = "") {
         self.viewModel = viewModel
         self.navigationTitle = navigationTitle
         super.init(nibName: nil, bundle: nil)
@@ -53,9 +54,7 @@ final class NoticeCollectionViewController: UIViewController, CompositionalLayou
             viewModel.fetchNotices()
         }
     }
-}
-
-extension NoticeCollectionViewController: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
@@ -68,7 +67,7 @@ extension NoticeCollectionViewController: UICollectionViewDelegateFlowLayout {
 #if DEBUG
 #Preview {
     NoticeCollectionViewController(
-        viewModel: NoticeCollectionViewModel(category: .generalNotice),
+        viewModel: NoticeCollectionViewModel(category: NoticeCategory.generalNotice),
         navigationTitle: "일반소식"
     )
     .makePreview()

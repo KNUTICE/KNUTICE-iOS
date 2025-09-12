@@ -12,7 +12,7 @@ import KNUTICECore
 import os
 import RxRelay
 
-final class NoticeCollectionViewModel: NoticeSectionModelProvidable, NoticeFetchable {
+final class NoticeCollectionViewModel<Category>: NoticeSectionModelProvidable, NoticeFetchable where Category: RawRepresentable, Category.RawValue == String {
     /// View와 바인딩할 데이터
     /// 서버에서 가져온 데이터를 해당 변수에 저장
     let notices: BehaviorRelay<[NoticeSectionModel]> = BehaviorRelay(value: [])
@@ -23,13 +23,13 @@ final class NoticeCollectionViewModel: NoticeSectionModelProvidable, NoticeFetch
     /// 새로고침 여부를 나타내는 변수
     let isRefreshing: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     /// 공지 카테고리를 나타내는 프로퍼티로, 공지의 종류를 구분하는 데 사용
-    private let category: NoticeCategory
+    private let category: Category
     /// Publisher 구독 메모리 관리를 위한 cancellable bag
     private var cancellables: Set<AnyCancellable> = []
     /// 콘솔 메시지 로깅을 위한 인스턴스
     private var logger: Logger = Logger()
     
-    init(category: NoticeCategory) {
+    init(category: Category) {
         self.category = category
     }
     
