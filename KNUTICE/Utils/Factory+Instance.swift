@@ -24,12 +24,6 @@ extension Container {
         }
     }
     
-    var searchRepository: Factory<SearchRepository> {
-        Factory(self) {
-            SearchRepositoryImpl(dataSource: Container.shared.remoteDataSource())
-        }
-    }
-    
     var topicSubscriptionRepository: Factory<TopicSubscriptionRepository> {
         Factory(self) {
             TopicSubscriptionRepositoryImpl()

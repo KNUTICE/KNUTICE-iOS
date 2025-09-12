@@ -16,21 +16,34 @@ public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
         self.dataSource = dataSource
     }
     
-    public func fetchNotices<T>(
-        for category: T,
+    public func fetchNotices(
+        for category: String? = nil,
+        keyword: String? = nil,
         after nttId: Int? = nil,
         size: Int = 20
-    ) -> AnyPublisher<[Notice], Error> where T: RawRepresentable, T.RawValue == String {
-        guard let baseURL = baseURL else {
+    ) -> AnyPublisher<[Notice], Error> {
+        guard let baseURL = baseURL, var components = URLComponents(string: baseURL) else {
             return Fail(error: NetworkError.invalidURL(message: "Invalid or missing 'Notice_URL' in resource."))
                 .eraseToAnyPublisher()
         }
         
-        var endpoint = baseURL + "?topic=\(category.rawValue)"
-        endpoint += "&size=\(size)"
+        var queryItems: [URLQueryItem] = [
+            URLQueryItem(name: "size", value: String(size))
+        ]
         
-        if let nttId {
-            endpoint += "&nttId=\(nttId)"
+        if let category {
+            queryItems.append(URLQueryItem(name: "topic", value: category))
+        }
+        
+        if let keyword {
+            queryItems.append(URLQueryItem(name: "keyword", value: keyword))
+        }
+        
+        components.queryItems = queryItems
+        
+        guard let endpoint = components.url?.absoluteString else {
+            return Fail(error: NetworkError.invalidURL(message: "Failed to build endpoint URL."))
+                        .eraseToAnyPublisher()
         }
         
         return dataSource.request(
@@ -44,13 +57,16 @@ public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
         .eraseToAnyPublisher()
     }
     
-    public func fetchNotices<T>(
-        for category: T,
+    public func fetchNotices(
+        for category: String? = nil,
+        keyword: String? = nil,
         after nttId: Int? = nil,
         size: Int = 20
-    ) async throws -> [Notice] where T: RawRepresentable, T.RawValue == String {
+    ) async throws -> [Notice] {
         var fetchedNotices = [Notice]()
-        for try await notices in fetchNotices(for: category, after: nttId, size: size).values {
+        let publisher = fetchNotices(for: category, keyword: keyword, after: nttId, size: size) as AnyPublisher<[Notice], any Error>
+        
+        for try await notices in publisher.values {
             fetchedNotices = notices
         }
 
@@ -87,23 +103,14 @@ public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
     }
     
     public func fetchNotice(by nttId: Int) async throws -> Notice? {
-        try Task.checkCancellation()
+        var notice: Notice?
+        let publisher = fetchNotice(by: nttId) as AnyPublisher<Notice?, any Error>
         
-        guard let baseURL = baseURL else {
-            throw NetworkError.invalidURL(message: "Invalid or missing 'Notice_URL' in resource.")
+        for try await result in publisher.values {
+            notice = result
         }
         
-        let dto =  try await dataSource.request(
-            baseURL + "/\(nttId)",
-            method: .get,
-            decoding: SingleNoticeResponseDTO.self
-        )
-        
-        guard let data = dto.data else {
-            return nil
-        }
-        
-        return createNotice(data)
+        return notice
     }
     
 }
