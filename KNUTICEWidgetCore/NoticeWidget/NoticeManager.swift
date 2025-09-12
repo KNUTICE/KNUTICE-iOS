@@ -18,7 +18,7 @@ public actor NoticeManager {
     
     public func fetchNotices(limit size: Int, category: NoticeCategory) async -> [Notice] {
         do {
-            let notices = try await repository.fetchNotices(for: category, size: size)
+            let notices = try await repository.fetchNotices(for: category.rawValue, size: size)
             
             return notices
         } catch {

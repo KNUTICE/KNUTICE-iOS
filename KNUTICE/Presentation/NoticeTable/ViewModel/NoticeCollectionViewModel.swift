@@ -42,7 +42,7 @@ final class NoticeCollectionViewModel: NoticeSectionModelProvidable, NoticeFetch
             self.isFetching.accept(true)
         }
         
-        repository.fetchNotices(for: category)
+        repository.fetchNotices(for: category.rawValue)
             .map {
                 NoticeSectionModel(items: $0)
             }
@@ -74,7 +74,7 @@ final class NoticeCollectionViewModel: NoticeSectionModelProvidable, NoticeFetch
         }
         
         isFetching.accept(true)
-        repository.fetchNotices(for: category, after: lastNumber)
+        repository.fetchNotices(for: category.rawValue, after: lastNumber)
             .map {
                 NoticeSectionModel(items: $0)
             }

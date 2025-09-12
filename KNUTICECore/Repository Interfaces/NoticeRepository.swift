@@ -8,51 +8,48 @@
 import Combine
 
 public protocol NoticeRepository: Sendable {
-    /// Fetches a list of notices for the specified category with optional pagination and size.
+    /// Fetches a list of notices from the server with optional filtering parameters.
+    ///
+    /// This method communicates with the remote `NoticeRepository` endpoint to retrieve
+    /// a list of `Notice` objects. You can filter the results by category, keyword,
+    /// and pagination options.
     ///
     /// - Parameters:
-    ///   - category: The category of notices to fetch. Must conform to `RawRepresentable` with `String` raw value (e.g., `NoticeCategory`, `MajorCategory`).
-    ///   - after: An optional notice ID to fetch notices after (for pagination). Defaults to `nil`.
-    ///   - size: The maximum number of notices to fetch. Defaults to `20`.
+    ///   - category: An optional string representing the notice category (e.g., `"event"`, `"academic"`).
+    ///   - keyword: An optional search keyword to filter notices.
+    ///   - nttId: An optional ID of the last notice fetched, used for pagination.
+    ///   - size: The number of notices to fetch per request. Defaults to `20`.
     ///
-    /// - Returns: An `AnyPublisher` that emits an array of `Notice` objects:
-    ///   - Contains the fetched notices if the request and decoding succeed.
-    ///   - Emits an empty array if no notices are returned.
-    ///   - Emits an `Error` if the request fails or decoding fails.
-    ///
-    /// - Note:
-    ///   - Internally, this method decodes the response into `NoticeResponseDTO` and converts it into `[Notice]`.
-    ///   - The publisher completes after emitting a single array of notices.
-    func fetchNotices<T>(
-        for category: T,
+    /// - Returns: A publisher that emits an array of `Notice` objects on success,
+    ///   or an `Error` if the request fails.
+    func fetchNotices(
+        for category: String?,
+        keyword: String?,
         after nttId: Int?,
         size: Int
-    ) -> AnyPublisher<[Notice], Error> where T: RawRepresentable, T.RawValue == String
+    ) -> AnyPublisher<[Notice], Error>
     
-    /// Asynchronously fetches a list of notices for a given category.
+    /// Fetches a list of notices asynchronously with optional filtering parameters.
+    ///
+    /// This method wraps the Combine-based `fetchNotices` publisher
+    /// and provides an async/await interface for convenience.
+    /// You can filter the results by category, keyword, and pagination options.
     ///
     /// - Parameters:
-    ///   - category: The notice category (must conform to `RawRepresentable` with `String` raw value)
-    ///   - nttId: The notice ID to start fetching after (optional)
-    ///   - size: The number of notices to fetch at once (default is 20)
+    ///   - category: An optional string representing the notice category (e.g., `"event"`, `"academic"`).
+    ///   - keyword: An optional search keyword to filter notices.
+    ///   - nttId: An optional ID of the last notice fetched, used for pagination.
+    ///   - size: The number of notices to fetch per request. Defaults to `20`.
     ///
-    /// - Returns: An array of `Notice` objects
-    /// - Throws: Throws an error if the network request fails or decoding fails
+    /// - Returns: An array of `Notice` objects fetched from the server.
     ///
-    /// **Example usage**:
-    /// ```swift
-    /// do {
-    ///     let notices = try await fetchNotices(for: .generalNotice, size: 10)
-    ///     print(notices)
-    /// } catch {
-    ///     print("Failed to fetch notices: \(error)")
-    /// }
-    /// ```
-    func fetchNotices<T>(
-        for category: T,
+    /// - Throws: An error if the request fails or if decoding the response is unsuccessful.
+    func fetchNotices(
+        for category: String?,
+        keyword: String?,
         after nttId: Int?,
         size: Int
-    ) async throws -> [Notice] where T: RawRepresentable, T.RawValue == String
+    ) async throws -> [Notice]
     
     /// Fetches multiple notices by their IDs.
     ///
@@ -104,19 +101,21 @@ public protocol NoticeRepository: Sendable {
 }
 
 public extension NoticeRepository {
-    func fetchNotices<T>(
-        for category: T,
+    func fetchNotices(
+        for category: String? = nil,
+        keyword: String? = nil,
         after nttId: Int? = nil,
         size: Int = 20
-    ) -> AnyPublisher<[Notice], Error> where T: RawRepresentable, T.RawValue == String {
-        return self.fetchNotices(for: category, after: nttId, size: size)
+    ) -> AnyPublisher<[Notice], Error> {
+        return self.fetchNotices(for: category, keyword: keyword, after: nttId, size: size)
     }
     
-    func fetchNotices<T>(
-        for category: T,
+    func fetchNotices(
+        for category: String? = nil,
+        keyword: String? = nil,
         after nttId: Int? = nil,
         size: Int = 20
-    ) async throws -> [Notice] where T: RawRepresentable, T.RawValue == String {
-        return try await self.fetchNotices(for: category, after: nttId, size: size)
+    ) async throws -> [Notice] {
+        return try await self.fetchNotices(for: category, keyword: keyword, after: nttId, size: size)
     }
 }

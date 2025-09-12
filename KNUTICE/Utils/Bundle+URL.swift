@@ -41,14 +41,6 @@ extension Bundle {
         return url
     }
     
-    var searchURL: String? {
-        guard let resource, let url = resource["Search_URL"] as? String else {
-            return nil
-        }
-        
-        return url
-    }
-    
     var notificationPermissionURL: String? {
         guard let resource, let url = resource["Notification_Permission_URL"] as? String else {
             return nil

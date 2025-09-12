@@ -39,7 +39,7 @@ actor NoticeServiceImpl: NoticeService {
                 group.addTask {
                     try Task.checkCancellation()
                     
-                    let notices = try await self.repository.fetchNotices(for: category, size: 3)
+                    let notices = try await self.repository.fetchNotices(for: category.rawValue, size: 3)
                     return (category, notices)
                 }
             }
