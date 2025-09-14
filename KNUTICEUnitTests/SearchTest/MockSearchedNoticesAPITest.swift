@@ -39,17 +39,19 @@ final class MockSearchedNoticesAPITest: XCTestCase {
 
     func test_fetchNotices_returnNoticeReponseDTO() {
         //Given
-        guard let endpoint = Bundle.main.searchURL else {
+        guard let baseURL = Bundle.main.noticeURL else {
             XCTFail("Failed to load searchURL from Bundle.main. Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension.")
             return
         }
         
-        MockURLProtocol.setUpMockData(.fetchSearchedNoticesShouldSucceed, for: URL(string: endpoint + "?keyword=공지")!)
+        let endpoint = baseURL + "?keyword=공지"
+        
+        MockURLProtocol.setUpMockData(.fetchSearchedNoticesShouldSucceed, for: URL(string: endpoint)!)
         
         let expectation = expectation(description: "fetch searched notices")
         
         //When
-        dataSource.request(endpoint + "?keyword=공지", method: .get, decoding: NoticeResponseDTO.self)
+        dataSource.request(endpoint, method: .get, decoding: NoticeResponseDTO.self)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:

@@ -38,8 +38,8 @@ func fetchTipDTO() async throws {
     let dto = try await dataSource.request(
         endpoint,
         method: .get,
-        decoding: TipDTO.self
+        decoding: TipResponseDTO.self
     )
     
-    #expect(dto.body?.count == 2)
+    #expect(dto.data?.count == 1)
 }
