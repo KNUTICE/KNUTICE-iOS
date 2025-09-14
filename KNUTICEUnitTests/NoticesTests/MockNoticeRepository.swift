@@ -10,13 +10,14 @@ import Foundation
 import KNUTICECore
 
 final class MockNoticeRepository: NoticeRepository {
-    func fetchNotices<T>(
-        for category: T,
+    func fetchNotices(
+        for category: String? = nil,
+        keyword: String? = nil,
         after nttId: Int? = nil,
         size: Int = 20
-    ) -> AnyPublisher<[Notice], Error> where T: RawRepresentable, T.RawValue == String {
+    ) -> AnyPublisher<[Notice], Error> {
         return Deferred {
-            if let category = category as? NoticeCategory {
+            if let category, let category = NoticeCategory(rawValue: category) {
                 if case .generalNotice = category {
                     return Just(Notice.generalNoticesSampleData)
                 } else if case .academicNotice = category {
@@ -36,26 +37,15 @@ final class MockNoticeRepository: NoticeRepository {
         .eraseToAnyPublisher()
     }
     
-    func fetchNotices<T>(
-        for category: T,
-        after nttId: Int?,
-        size: Int
-    ) async throws -> [Notice] where T: RawRepresentable, T.RawValue == String {
+    func fetchNotices(
+        for category: String? = nil,
+        keyword: String? = nil,
+        after nttId: Int? = nil,
+        size: Int = 20
+    ) async throws -> [Notice] {
         var notices = [Notice]()
-        
-        if let category = category as? NoticeCategory {
-            switch category {
-            case .generalNotice:
-                notices = Notice.generalNoticesSampleData
-            case .academicNotice:
-                notices = Notice.academicNoticesSampleData
-            case .scholarshipNotice:
-                notices = Notice.scholarshipNoticesSampleData
-            case .eventNotice:
-                notices = Notice.eventNoticesSampleData
-            case .employmentNotice:
-                notices = Notice.employmentNoticesSampleData
-            }
+        for try await result in fetchNotices(for: category, keyword: keyword, after: nttId, size: size).values {
+            notices = result
         }
         
         return Array(notices.prefix(size))

@@ -92,7 +92,7 @@ final class TopicSubscriptionFetchAPITests: XCTestCase {
         )
         
         //Then
-        XCTAssertTrue(dto.body == true)
+        XCTAssertTrue(dto.data == true)
     }
 
 }
