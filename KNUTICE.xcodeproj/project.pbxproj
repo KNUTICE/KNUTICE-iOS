@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8E0699AA2E014047008A5DCE /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 8E0699A92E014047008A5DCE /* RxDataSources */; };
 		8E0699AC2E01404B008A5DCE /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 8E0699AB2E01404B008A5DCE /* RxDataSources */; };
+		8E1000002E7696AE00C94F5A /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 8E10FFFF2E7696AE00C94F5A /* RxRelay */; };
+		8E1000022E76997B00C94F5A /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 8E1000012E76997B00C94F5A /* RxRelay */; };
 		8E1D70D42E4583E0007FD134 /* KNUTICEWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8E3C85662E41C1380095852C /* KNUTICEWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8E1D70D82E4583F5007FD134 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8E1D70D72E4583F5007FD134 /* RxSwift */; };
 		8E1D70DA2E458408007FD134 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 8E1D70D92E458408007FD134 /* RxCocoa */; };
@@ -406,6 +408,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E1000022E76997B00C94F5A /* RxRelay in Frameworks */,
 				8E8FC53D2E42F0FA002D560F /* KNUTICECore.framework in Frameworks */,
 				8EC732242DD5A6660038AD59 /* Kingfisher in Frameworks */,
 				8EC42A812E67D69500F1FF11 /* FirebaseMessaging in Frameworks */,
@@ -434,6 +437,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E1000002E7696AE00C94F5A /* RxRelay in Frameworks */,
 				8EC42A832E67D69E00F1FF11 /* FirebaseMessaging in Frameworks */,
 				8E72BCED2E430F3200107794 /* RxCocoa in Frameworks */,
 				8E72BCEF2E430F4400107794 /* RxSwift in Frameworks */,
@@ -2112,6 +2116,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8EC7321C2DD5A5DB0038AD59 /* XCRemoteSwiftPackageReference "RxDataSources" */;
 			productName = RxDataSources;
+		};
+		8E1000012E76997B00C94F5A /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E3C85802E41ECB30095852C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		8E10FFFF2E7696AE00C94F5A /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E3C85802E41ECB30095852C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
 		};
 		8E1D70D72E4583F5007FD134 /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
