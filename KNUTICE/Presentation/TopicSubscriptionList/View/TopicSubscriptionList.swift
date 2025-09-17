@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import KNUTICECore
 
 struct TopicSubscriptionList: View {
     @StateObject private var viewModel: TopicSubscriptionListViewModel
@@ -23,7 +24,7 @@ struct TopicSubscriptionList: View {
                             get: {
                                 viewModel.isGeneralNoticeNotificationSubscribed ?? false
                             }, set: {
-                                viewModel.update(key: .generalNotice, value: $0)
+                                viewModel.update(of: .notice, topic: NoticeCategory.generalNotice, isEnabled: $0)
                             }
                         ), label: {
                             Text("일반소식")
@@ -38,7 +39,7 @@ struct TopicSubscriptionList: View {
                             get: {
                                 viewModel.isAcademicNoticeNotificationSubscribed ?? false
                             }, set: {
-                                viewModel.update(key: .academicNotice, value: $0)
+                                viewModel.update(of: .notice, topic: NoticeCategory.academicNotice, isEnabled: $0)
                             }
                         ), label: {
                             Text("학사공지")
@@ -53,7 +54,7 @@ struct TopicSubscriptionList: View {
                             get: {
                                 viewModel.isScholarshipNoticeNotificationSubscribed ?? false
                             }, set: {
-                                viewModel.update(key: .scholarshipNotice, value: $0)
+                                viewModel.update(of: .notice, topic: NoticeCategory.scholarshipNotice, isEnabled: $0)
                             }
                         ), label: {
                             Text("장학안내")
@@ -68,7 +69,7 @@ struct TopicSubscriptionList: View {
                             get: {
                                 viewModel.isEventNoticeNotificationSubscribed ?? false
                             }, set: {
-                                viewModel.update(key: .eventNotice, value: $0)
+                                viewModel.update(of: .notice, topic: NoticeCategory.eventNotice, isEnabled: $0)
                             }
                         ), label: {
                             Text("행사안내")
@@ -83,7 +84,7 @@ struct TopicSubscriptionList: View {
                             get: {
                                 viewModel.isEmploymentNoticeNotificationSubscribed ?? false
                             }, set: {
-                                viewModel.update(key: .employmentNotice, value: $0)
+                                viewModel.update(of: .notice, topic: NoticeCategory.employmentNotice, isEnabled: $0)
                             }
                         ), label: {
                             Text("취업안내")
@@ -108,11 +109,6 @@ struct TopicSubscriptionList: View {
             } message: {
                 Text(viewModel.alertMessage)
             }
-//            .animation(.default, value: viewModel.isEtiquetteTimeActivate)
-//            .onAppear {
-//                viewModel.fetchEtiquetteTime()
-//                viewModel.bind()
-//            }
             
             if viewModel.isLoading {
                 SpinningIndicator()
