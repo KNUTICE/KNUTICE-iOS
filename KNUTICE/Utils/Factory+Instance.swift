@@ -62,12 +62,6 @@ extension Container {
         }
     }
     
-    var subscriptionService: Factory<TopicSubscriptionService> {
-        Factory(self) {
-            TopicSubscriptionServiceImpl()
-        }
-    }
-    
     var searchService: Factory<SearchService> {
         Factory(self) {
             SearchServiceImpl()

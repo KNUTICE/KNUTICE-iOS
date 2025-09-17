@@ -22,7 +22,6 @@ final class TopicSubscriptionListViewModel: ObservableObject {
     @Published var isShowingAlert: Bool = false
     
     @Injected(\.topicSubscriptionRepository) private var repository
-    @Injected(\.subscriptionService) private var subscriptionService
     private let logger = Logger()
     private var cancellables = Set<AnyCancellable>()
     private(set) var alertMessage: String = ""
@@ -40,51 +39,58 @@ final class TopicSubscriptionListViewModel: ObservableObject {
     }
     
     func fetchNotificationSubscriptions() async {
+        defer { isLoading = false }
+        
         isLoading = true
-        let result = await repository.fetch()
         
-        guard !Task.isCancelled else {
-            return
-        }
-        
-        isLoading = false
-        switch result {
-        case .success(let subscriptions):
-            isGeneralNoticeNotificationSubscribed = subscriptions.generalNotice
-            isAcademicNoticeNotificationSubscribed = subscriptions.academicNotice
-            isScholarshipNoticeNotificationSubscribed = subscriptions.scholarshipNotice
-            isEventNoticeNotificationSubscribed = subscriptions.eventNotice
-            isEmploymentNoticeNotificationSubscribed = subscriptions.employmentNotice
-        case .failure(let error):
+        do {
+            let subscriptions = try await repository.fetch(for: .notice)
+
+            for subscription in subscriptions {
+                guard case .notice(let topic) = subscription else { continue }
+                
+                switch topic {
+                case .generalNotice:
+                    isGeneralNoticeNotificationSubscribed = true
+                case .academicNotice:
+                    isAcademicNoticeNotificationSubscribed = true
+                case .scholarshipNotice:
+                    isScholarshipNoticeNotificationSubscribed = true
+                case .eventNotice:
+                    isEventNoticeNotificationSubscribed = true
+                case .employmentNotice:
+                    isEmploymentNoticeNotificationSubscribed = true
+                }
+            }
+        } catch {
             logger.log(level: .error, "NotificationListViewModel.fetchNotificationSubscriptions(): \(error.localizedDescription)")
         }
     }
     
-    func update(key: NoticeCategory, value: Bool) {
+    func update<T>(of type: TopicType, topic: T, isEnabled: Bool) where T: RawRepresentable & Sendable, T.RawValue == String {
         task = Task {
+            defer { isLoading = false }
+            
             isLoading = true
-            let result = await subscriptionService.update(key, to: value)
             
-            guard !Task.isCancelled else {
-                return
-            }
-            
-            isLoading = false
-            switch result {
-            case .success:
-                switch key {
-                case .generalNotice:
-                    isGeneralNoticeNotificationSubscribed = value
-                case .academicNotice:
-                    isAcademicNoticeNotificationSubscribed = value
-                case .scholarshipNotice:
-                    isScholarshipNoticeNotificationSubscribed = value
-                case .eventNotice:
-                    isEventNoticeNotificationSubscribed = value
-                case .employmentNotice:
-                    isEmploymentNoticeNotificationSubscribed = value
+            do {
+                try await repository.update(of: type, topic: topic, isEnabled: isEnabled)
+                
+                if let topic = topic as? NoticeCategory {
+                    switch topic {
+                    case .generalNotice:
+                        isGeneralNoticeNotificationSubscribed = isEnabled
+                    case .academicNotice:
+                        isAcademicNoticeNotificationSubscribed = isEnabled
+                    case .scholarshipNotice:
+                        isScholarshipNoticeNotificationSubscribed = isEnabled
+                    case .eventNotice:
+                        isEventNoticeNotificationSubscribed = isEnabled
+                    case .employmentNotice:
+                        isEmploymentNoticeNotificationSubscribed = isEnabled
+                    }
                 }
-            case .failure(let error):
+            } catch {
                 logger.log(level: .error, "NotificationListViewModel.update(key:value:): \(error.localizedDescription)")
             }
         }
