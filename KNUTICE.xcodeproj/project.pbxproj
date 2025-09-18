@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		8E0699AA2E014047008A5DCE /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 8E0699A92E014047008A5DCE /* RxDataSources */; };
 		8E0699AC2E01404B008A5DCE /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 8E0699AB2E01404B008A5DCE /* RxDataSources */; };
-		8E1000002E7696AE00C94F5A /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 8E10FFFF2E7696AE00C94F5A /* RxRelay */; };
-		8E1000022E76997B00C94F5A /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 8E1000012E76997B00C94F5A /* RxRelay */; };
 		8E1D70D42E4583E0007FD134 /* KNUTICEWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8E3C85662E41C1380095852C /* KNUTICEWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8E1D70D82E4583F5007FD134 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8E1D70D72E4583F5007FD134 /* RxSwift */; };
 		8E1D70DA2E458408007FD134 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 8E1D70D92E458408007FD134 /* RxCocoa */; };
@@ -30,8 +28,6 @@
 		8E63D8612E6FC4460041E7C7 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 8E63D8602E6FC4460041E7C7 /* Factory */; };
 		8E63D8632E6FC4550041E7C7 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 8E63D8622E6FC4550041E7C7 /* RxRelay */; };
 		8E63D8652E6FC4550041E7C7 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8E63D8642E6FC4550041E7C7 /* RxSwift */; };
-		8E65BF032DFBBECB00CEEF8F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E65BF002DFBBECB00CEEF8F /* GoogleService-Info.plist */; };
-		8E65BF112DFBC06C00CEEF8F /* GoogleService-Info-Dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E65BF102DFBC06C00CEEF8F /* GoogleService-Info-Dev.plist */; };
 		8E6898322CD61EF1005F0EEA /* NotificationService-dev.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8E68982B2CD61EF1005F0EEA /* NotificationService-dev.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8E72BCE32E4305CA00107794 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 8E72BCE22E4305CA00107794 /* RxDataSources */; };
 		8E72BCED2E430F3200107794 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 8E72BCEC2E430F3200107794 /* RxCocoa */; };
@@ -61,6 +57,8 @@
 		8EB90A372E45D7D200B3AEF6 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 8EB90A362E45D7D200B3AEF6 /* Factory */; };
 		8EC42A812E67D69500F1FF11 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8EC42A802E67D69500F1FF11 /* FirebaseMessaging */; };
 		8EC42A832E67D69E00F1FF11 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8EC42A822E67D69E00F1FF11 /* FirebaseMessaging */; };
+		8EC600F92E7B8A6E00C4C200 /* GoogleService-Info-Dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8EC600F82E7B8A6E00C4C200 /* GoogleService-Info-Dev.plist */; };
+		8EC600FB2E7B8F6400C4C200 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8EC600FA2E7B8F6400C4C200 /* GoogleService-Info.plist */; };
 		8EC732182DD5A5B00038AD59 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 8EC732172DD5A5B00038AD59 /* Factory */; };
 		8EC7321E2DD5A5DB0038AD59 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 8EC7321D2DD5A5DB0038AD59 /* RxDataSources */; };
 		8EC732242DD5A6660038AD59 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 8EC732232DD5A6660038AD59 /* Kingfisher */; };
@@ -273,12 +271,12 @@
 		8E49FA302E69CCA800C5949C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E49FA312E69CCA800C5949C /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		8E54C8462C5E63940070E689 /* KNUTICE.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KNUTICE.entitlements; sourceTree = "<group>"; };
-		8E65BF002DFBBECB00CEEF8F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		8E65BF102DFBC06C00CEEF8F /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
 		8E68982B2CD61EF1005F0EEA /* NotificationService-dev.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "NotificationService-dev.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E7945E42CA28F6900208662 /* KNUTICEUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KNUTICEUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KNUTICECore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EB6D1FD2C663627004E8AC2 /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EC600F82E7B8A6E00C4C200 /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
+		8EC600FA2E7B8F6400C4C200 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -408,7 +406,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E1000022E76997B00C94F5A /* RxRelay in Frameworks */,
 				8E8FC53D2E42F0FA002D560F /* KNUTICECore.framework in Frameworks */,
 				8EC732242DD5A6660038AD59 /* Kingfisher in Frameworks */,
 				8EC42A812E67D69500F1FF11 /* FirebaseMessaging in Frameworks */,
@@ -437,7 +434,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E1000002E7696AE00C94F5A /* RxRelay in Frameworks */,
 				8EC42A832E67D69E00F1FF11 /* FirebaseMessaging in Frameworks */,
 				8E72BCED2E430F3200107794 /* RxCocoa in Frameworks */,
 				8E72BCEF2E430F4400107794 /* RxSwift in Frameworks */,
@@ -552,8 +548,8 @@
 		5C8256402BE5CE1A0038D4C8 /* KNUTICE */ = {
 			isa = PBXGroup;
 			children = (
-				8E65BF002DFBBECB00CEEF8F /* GoogleService-Info.plist */,
-				8E65BF102DFBC06C00CEEF8F /* GoogleService-Info-Dev.plist */,
+				8EC600FA2E7B8F6400C4C200 /* GoogleService-Info.plist */,
+				8EC600F82E7B8A6E00C4C200 /* GoogleService-Info-Dev.plist */,
 				8E54C8462C5E63940070E689 /* KNUTICE.entitlements */,
 				8E49F9162E69CC2F00C5949C /* CoreData */,
 				8E49FC5F2E69CE5700C5949C /* Utils */,
@@ -981,8 +977,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EC600FB2E7B8F6400C4C200 /* GoogleService-Info.plist in Resources */,
 				8E49FA352E69CCA800C5949C /* LaunchScreen.storyboard in Resources */,
-				8E65BF032DFBBECB00CEEF8F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -997,8 +993,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EC600F92E7B8A6E00C4C200 /* GoogleService-Info-Dev.plist in Resources */,
 				8E49FA842E69CCA800C5949C /* LaunchScreen.storyboard in Resources */,
-				8E65BF112DFBC06C00CEEF8F /* GoogleService-Info-Dev.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2116,16 +2112,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8EC7321C2DD5A5DB0038AD59 /* XCRemoteSwiftPackageReference "RxDataSources" */;
 			productName = RxDataSources;
-		};
-		8E1000012E76997B00C94F5A /* RxRelay */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8E3C85802E41ECB30095852C /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxRelay;
-		};
-		8E10FFFF2E7696AE00C94F5A /* RxRelay */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8E3C85802E41ECB30095852C /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxRelay;
 		};
 		8E1D70D72E4583F5007FD134 /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
