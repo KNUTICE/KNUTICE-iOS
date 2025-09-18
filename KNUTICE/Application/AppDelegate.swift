@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
         #endif
         
-        if let fileopts = FirebaseOptions(contentsOfFile: filePath!) {
+        if let filePath, let fileopts = FirebaseOptions(contentsOfFile: filePath) {
             FirebaseApp.configure(options: fileopts)
         }
         
