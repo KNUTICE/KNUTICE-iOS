@@ -11,18 +11,18 @@ import WebKit
 @available(iOS 26, *)
 @MainActor
 @Observable
-final class WebContentViewModel {
+class WebContentViewModel {
     let webPage: WebPage = WebPage()
     
     @ObservationIgnored
-    private let contentURL: String
+    private let contentURL: String?
     
-    init(contentURL: String) {
+    init(contentURL: String?) {
         self.contentURL = contentURL
     }
     
     func load() {
-        guard let url = URL(string: contentURL) else { return }
+        guard let contentURL, let url = URL(string: contentURL) else { return }
         
         webPage.load(URLRequest(url: url))
     }
