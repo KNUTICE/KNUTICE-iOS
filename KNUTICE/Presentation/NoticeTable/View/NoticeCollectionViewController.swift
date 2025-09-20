@@ -59,7 +59,18 @@ final class NoticeCollectionViewController<Category>: UIViewController, Composit
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        let viewController = NoticeDetailViewController(notice: viewModel.notices.value[0].items[indexPath.row])
+        let viewController: UIViewController
+        let notice = viewModel.notices.value[0].items[indexPath.row]
+        
+        if #available(iOS 26, *) {
+            viewController = UIHostingController(
+                rootView: NoticeDetailView()
+                    .environment(NoticeDetailViewModel(notice: notice))
+            )
+        } else {
+            viewController = NoticeDetailViewController(notice: viewModel.notices.value[0].items[indexPath.row])
+        }
+        
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
