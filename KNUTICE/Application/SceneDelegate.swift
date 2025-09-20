@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 5/4/24.
 //
 
+import SwiftUI
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -84,9 +85,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return
         }
         
-        let viewController = NoticeContentViewController(
-            viewModel: NoticeContentViewModel(nttId: nttId)
-        )
+        let viewController: UIViewController
+        
+        if #available(iOS 26, *) {
+            viewController = UIHostingController(
+                rootView: NoticeDetailView()
+                    .environment(NoticeDetailViewModel(noticeId: nttId))
+            )
+        } else {
+            viewController = NoticeContentViewController(
+                viewModel: NoticeContentViewModel(nttId: nttId)
+            )
+        }
+            
         
         if delayIfNeeded {
             // cold start 시 rootViewController 세팅이 끝나기 전에 push 하면 Loading 화면에서 멈춤
