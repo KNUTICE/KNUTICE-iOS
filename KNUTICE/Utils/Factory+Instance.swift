@@ -56,9 +56,9 @@ extension Container {
         }
     }
     
-    var tabBarService: Factory<TabBarService> {
+    var pushNoticeService: Factory<PushNoticeService> {
         Factory(self) {
-            TabBarServiceImpl()
+            PushNoticeServiceImpl()
         }
     }
     
