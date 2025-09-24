@@ -22,14 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScen = (scene as? UIWindowScene) else { return }
         
         self.window = UIWindow(windowScene: windowScen)
-        
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            let viewContoller = UINavigationController(rootViewController: ParentViewController())
-            self.window?.rootViewController = viewContoller
-        } else {
-            self.window?.rootViewController = ParentViewController()
-        }
-        
+        self.window?.rootViewController = UINavigationController(rootViewController: ParentViewController())
         self.window?.makeKeyAndVisible()
         
         // Handle deep link from cold start (widget, url, etc.)
@@ -80,44 +73,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func handleDeepLink(_ url: URL, delayIfNeeded: Bool = false) {
-        guard let nttId = getNoticeId(from: url),
-              let navigationController = window?.rootViewController as? UINavigationController else {
-            return
-        }
-        
-        let viewController: UIViewController
-        
-        if #available(iOS 26, *) {
-            viewController = UIHostingController(
-                rootView: NoticeDetailView()
-                    .environment(NoticeDetailViewModel(noticeId: nttId))
-            )
-        } else {
-            viewController = NoticeContentViewController(
-                viewModel: NoticeContentViewModel(nttId: nttId)
-            )
-        }
-            
-        
-        if delayIfNeeded {
-            // cold start 시 rootViewController 세팅이 끝나기 전에 push 하면 Loading 화면에서 멈춤
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                navigationController.pushViewController(viewController, animated: true)
+        Task { @MainActor [weak self] in
+            guard let nttId = await DeepLinkManager.shared.extractNttId(from: url),
+                  let navigationController = self?.window?.rootViewController as? UINavigationController else {
+                return
             }
-        } else {
+            
+            let viewController: UIViewController
+            
+            if #available(iOS 26, *) {
+                viewController = UIHostingController(
+                    rootView: NoticeDetailView()
+                        .environment(NoticeDetailViewModel(noticeId: nttId))
+                )
+            } else {
+                viewController = NoticeContentViewController(
+                    viewModel: NoticeContentViewModel(nttId: nttId)
+                )
+            }
+            
+            if delayIfNeeded {
+                // cold start 시 rootViewController 세팅이 끝나기 전에 push 하면 Loading 화면에서 멈춤
+                try? await Task.sleep(nanoseconds: 500_000_000)
+            }
+            
             navigationController.pushViewController(viewController, animated: true)
         }
     }
     
-    private func getNoticeId(from url: URL) -> Int? {
-        if let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-           let queryItem = components.queryItems,
-           let id = queryItem.first(where: { $0.name == "nttId" })?.value,
-           let nttId = Int(id) {
-            
-            return nttId
-        }
-        
-        return nil
-    }
 }
+
