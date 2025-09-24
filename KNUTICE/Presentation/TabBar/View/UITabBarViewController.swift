@@ -5,10 +5,10 @@
 //  Created by 이정훈 on 1/4/25.
 //
 
+import Combine
 import KNUTICECore
 import UIKit
 import SwiftUI
-import RxSwift
 
 final class UITabBarViewController: UITabBarController {
     private let mainViewController: UIViewController = {
@@ -49,7 +49,7 @@ final class UITabBarViewController: UITabBarController {
         return viewController
     }()
     let viewModel: TabBarViewModel
-    let disposeBag: DisposeBag = .init()
+    var cancellables: Set<AnyCancellable> = []
     
     init(viewModel: TabBarViewModel) {
         self.viewModel = viewModel
@@ -70,7 +70,6 @@ final class UITabBarViewController: UITabBarController {
         
         setUpTabBar()
         bind()
-        viewModel.fetchPushNoticeIfExists()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -104,25 +103,6 @@ extension UITabBarViewController {
         }
     }
     
-    func bind() {
-        viewModel.pushNotice
-            .bind(onNext: { [weak self] pushNotice in
-                guard let pushNotice else { return }
-                
-                DispatchQueue.main.async {
-                    self?.navigationController?.popToRootViewController(animated: true)
-                    self?.navigationController?.pushViewController(NoticeDetailViewController(notice: pushNotice), animated: true)
-                }
-            })
-            .disposed(by: disposeBag)
-        
-        NotificationCenter.default.rx
-            .notification(UIApplication.willEnterForegroundNotification)
-            .bind { [weak self] _ in
-                self?.viewModel.fetchPushNoticeIfExists()
-            }
-            .disposed(by: disposeBag)
-    }
 }
 
 

@@ -8,7 +8,7 @@
 import Foundation
 
 enum UserDefaultsKeys: String {
-    case pushNotice
+    case userInfo
     case isBadgeResetRequired
     case etiquetteTimeStart
     case etiquetteTimeEnd

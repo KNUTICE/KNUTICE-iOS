@@ -8,34 +8,34 @@
 import UserNotifications
 
 extension UNUserNotificationCenter {
+    /// 새로운 알림 추가
     public func scheduleNotification(for bookmark: Bookmark) async throws {
-        guard let date = bookmark.alarmDate else {
-            //알람이 설정되지 않은 경우 즉시 반환
-            return
-        }
+        // 알람이 설정되지 않은 경우 즉시 반환
+        guard let date = bookmark.alarmDate else { return }
         
-        let pendingNotificationRequests = await self.pendingNotificationRequests()
-        let insertionIndex = pendingNotificationRequests.rightInsertionIndex(of: date)
-        let content = self.createNotificationContent(body: bookmark.notice.title, badge: insertionIndex + 1)
-        let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)    //알림 날짜
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)    //알림 시점, 반복 여부 설정
-        let notificationRequest = UNNotificationRequest(
-            identifier: String(bookmark.notice.id),
-            content: content,
-            trigger: trigger
+        let pending = await self.pendingNotificationRequests()
+        let insertionIndex = pending.rightInsertionIndex(of: date)
+        
+        let request = makeNotificationRequest(
+            id: String(bookmark.notice.id),
+            body: bookmark.notice.title,
+            badge: insertionIndex + 1,
+            date: date,
+            deeplink: "knutice://bookmark?nttId=\(bookmark.notice.id)"
         )
         
-        //새로운 NotificationRequest 추가
-        try await add(notificationRequest)
+        // 새로운 NotificationRequest 추가
+        try await add(request)
         
-        //기존 NotificationRequest Badge Count 1씩 증가
+        // 기존 NotificationRequest Badge Count 1씩 증가
         try await modifyNotificationBadges(
-            pendingNotificationRequests,
+            pending,
             startingAt: insertionIndex,
             by: +
         )
     }
     
+    /// 스케줄링 되어 있는 알림의 badge를 1씩 감소
     public func updatePendingNotificationRequestBadges() async {
         do {
             let requests = await pendingNotificationRequests()
@@ -45,6 +45,7 @@ extension UNUserNotificationCenter {
         }
     }
     
+    /// 알림 아이콘 badge를 1씩 감소
     private func modifyNotificationBadges(
         _ requests: [UNNotificationRequest],
         startingAt index: Int,
@@ -55,22 +56,14 @@ extension UNUserNotificationCenter {
         for request in requests[index...] {
             if let badge = request.content.badge as? Int {
                 let badge = operation(badge, 1)
-                let newContent = createNotificationContent(body: request.content.body, badge: badge)
-                let newRequest = UNNotificationRequest(
-                    identifier: request.identifier,
-                    content: newContent,
-                    trigger: request.trigger
-                )
+                let newRequest = cloneRequest(from: request, badge: badge)
+                
                 try await add(newRequest)
             }
         }
     }
     
-    public func removeNotificationRequest(with identifier: String) {
-        let identifiers: [String] = [identifier]
-        self.removePendingNotificationRequests(withIdentifiers: identifiers)
-    }
-    
+    /// 식별자를 통한 스케줄링 되어 있는 알림 삭제
     public func removeNotificationRequest(withId id: Int) async throws {
         let pendingNotificationRequests = await self.pendingNotificationRequests()
         let pos = pendingNotificationRequests.firstIndex(of: .init(id))
@@ -78,7 +71,9 @@ extension UNUserNotificationCenter {
         if let pos {
             // 남아 있는 NotificationRequest Badge 업데이트
             try await self.modifyNotificationBadges(pendingNotificationRequests, startingAt: pos + 1, by: -)
-            self.removeNotificationRequest(with: .init(id))
+            
+            let identifiers: [String] = [String(id)]
+            self.removePendingNotificationRequests(withIdentifiers: identifiers)
         }
     }
     
@@ -91,12 +86,7 @@ extension UNUserNotificationCenter {
         let count = deliveredNotifications.count + 1    //contentHandler가 호출될 때까지 count는 증가하지 않음
         
         pendingNotificationRequests.enumerated().forEach { (i, request) in
-            let content = createNotificationContent(body: request.content.body, badge: count + 1 + i)
-            let newRequest = UNNotificationRequest(
-                identifier: request.identifier,
-                content: content,
-                trigger: request.trigger
-            )
+            let newRequest = cloneRequest(from: request, badge: count + 1 + i)
             
             self.add(newRequest)
         }
@@ -110,26 +100,53 @@ extension UNUserNotificationCenter {
         
         await pendingNotificationRequests().forEach { request in
             if let badge = request.content.badge as? Int {
-                let content = createNotificationContent(body: request.content.body, badge: badge - count)
-                let newRequest = UNNotificationRequest(
-                    identifier: request.identifier,
-                    content: content,
-                    trigger: request.trigger
-                )
+                let newRequest = cloneRequest(from: request, badge: badge - count)
                 
                 self.add(newRequest)
             }
         }
     }
     
-    private func createNotificationContent(body: String, badge: Int) -> UNMutableNotificationContent {
+    private func makeNotificationRequest(
+        id: String,
+        body: String,
+        badge: Int,
+        date: Date,
+        deeplink: String? = nil
+    ) -> UNNotificationRequest {
+        var userInfo: [AnyHashable: Any]? = nil
+        
+        if let deeplink {
+            userInfo = ["deeplink": deeplink]
+        }
+        
+        let content = makeNotificationContent(body: body, badge: badge, userInfo: userInfo)
+        let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+        return UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+    }
+    
+    private func makeNotificationContent(
+        body: String,
+        badge: Int,
+        userInfo: [AnyHashable: Any]? = nil
+    ) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
         content.title = "북마크 알림"
         content.body = body
         content.sound = .default
         content.badge = badge as NSNumber
         
+        if let userInfo {
+            content.userInfo = userInfo
+        }
+        
         return content
+    }
+    
+    private func cloneRequest(from request: UNNotificationRequest, badge: Int) -> UNNotificationRequest {
+        let content = makeNotificationContent(body: request.content.body, badge: badge, userInfo: request.content.userInfo)
+        return UNNotificationRequest(identifier: request.identifier, content: content, trigger: request.trigger)
     }
 }
 
