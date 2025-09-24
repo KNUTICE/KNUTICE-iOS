@@ -56,9 +56,9 @@ extension Container {
         }
     }
     
-    var pushNoticeService: Factory<PushNoticeService> {
+    var pushNoticeService: Factory<DeepLinkService> {
         Factory(self) {
-            PushNoticeServiceImpl()
+            DeepLinkServiceImpl()
         }
     }
     

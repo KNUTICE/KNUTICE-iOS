@@ -130,6 +130,6 @@ extension AppDelegate: @MainActor UNUserNotificationCenterDelegate {
     }
     
     private func set(userInfo: [AnyHashable : Any]) {
-        UserDefaults.standard.set(userInfo, forKey: UserDefaultsKeys.pushNotice.rawValue)
+        UserDefaults.standard.set(userInfo, forKey: UserDefaultsKeys.userInfo.rawValue)
     }
 }

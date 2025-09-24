@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import KNUTICECore
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -65,7 +66,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
+    
+    /// Handles deep link navigation when the app is opened via a URL context.
+    ///
+    /// - Parameters:
+    ///   - scene: The scene object associated with the app’s UI.
+    ///   - URLContexts: A set of URL contexts that contain the URL used to open the app.
+    ///                  Typically includes only one context with the incoming deep link URL.
+    ///
+    /// This method extracts the first URL from `URLContexts` and passes it to `handleDeepLink(_:)`
+    /// to perform the actual navigation logic.
+    /// Example: myapp://notice?nttId=123 will route the user to the notice detail screen.
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         guard let url = URLContexts.first?.url else { return }
         
@@ -74,30 +85,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func handleDeepLink(_ url: URL, delayIfNeeded: Bool = false) {
         Task { @MainActor [weak self] in
-            guard let nttId = await DeepLinkManager.shared.extractNttId(from: url),
-                  let navigationController = self?.window?.rootViewController as? UINavigationController else {
-                return
-            }
-            
-            let viewController: UIViewController
-            
-            if #available(iOS 26, *) {
-                viewController = UIHostingController(
-                    rootView: NoticeDetailView()
-                        .environment(NoticeDetailViewModel(noticeId: nttId))
-                )
-            } else {
-                viewController = NoticeContentViewController(
-                    viewModel: NoticeContentViewModel(nttId: nttId)
-                )
-            }
-            
             if delayIfNeeded {
                 // cold start 시 rootViewController 세팅이 끝나기 전에 push 하면 Loading 화면에서 멈춤
                 try? await Task.sleep(nanoseconds: 500_000_000)
             }
             
-            navigationController.pushViewController(viewController, animated: true)
+            let deepLink = await DeepLinkManager.shared.parse(url)
+            
+            if let navigationController = self?.window?.rootViewController as? UINavigationController,
+               case .notice(let nttId, _) = deepLink {
+                let viewController: UIViewController
+                
+                if #available(iOS 26, *) {
+                    viewController = UIHostingController(
+                        rootView: NoticeDetailView()
+                            .environment(NoticeDetailViewModel(noticeId: nttId))
+                    )
+                } else {
+                    viewController = NoticeContentViewController(
+                        viewModel: NoticeContentViewModel(nttId: nttId)
+                    )
+                }
+                
+                navigationController.pushViewController(viewController, animated: true)
+            }
         }
     }
     
