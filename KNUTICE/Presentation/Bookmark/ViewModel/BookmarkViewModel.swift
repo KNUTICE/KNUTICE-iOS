@@ -15,22 +15,30 @@ final class BookmarkViewModel: ObservableObject, BookmarkListRefreshable {
     @Published var isAlarmOn: Bool
     @Published var isShowingAlert: Bool = false
     @Published var isLoading: Bool = false
-    @Published var bookmark: Bookmark
+    @Published var bookmark: Bookmark?
     
     @Injected(\.bookmarkService) private var service: BookmarkService
     
-    private(set)var alertMessage: String = ""
+    private let nttId: Int?
+    private(set) var alertMessage: String = ""
     private(set) var saveTask: Task<Void, Never>?
     private(set) var updateTask: Task<Void, Never>?
     private(set) var deleteTask: Task<Void, Never>?
     private let logger: Logger = Logger()
     
-    init(bookmark: Bookmark) {
+    init(bookmark: Bookmark?, nttId: Int? = nil) {
+        self.nttId = nttId
         self.bookmark = bookmark
-        self.isAlarmOn = bookmark.alarmDate != nil
+        self.isAlarmOn = bookmark?.alarmDate != nil
     }
     
-    func save() {        
+    convenience init(nttId: Int) {
+        self.init(bookmark: nil, nttId: nttId)
+    }
+    
+    func save() {
+        guard let bookmark else { return }
+        
         isLoading = true
         saveTask?.cancel()
         saveTask = Task {
@@ -59,6 +67,8 @@ final class BookmarkViewModel: ObservableObject, BookmarkListRefreshable {
     }
     
     func update() {
+        guard let bookmark else { return }
+        
         isLoading = true
         updateTask?.cancel()
         updateTask = Task {
@@ -78,7 +88,9 @@ final class BookmarkViewModel: ObservableObject, BookmarkListRefreshable {
     }
     
     func delete() {
-        isLoading = true        
+        guard let bookmark else { return }
+        
+        isLoading = true
         deleteTask?.cancel()
         deleteTask = Task {
             defer {
@@ -94,6 +106,22 @@ final class BookmarkViewModel: ObservableObject, BookmarkListRefreshable {
                 logger.error("BookmarkDetailViewModel.delete(by:): \(error.localizedDescription)")
                 alertMessage = "삭제를 실패 했어요."
             }
+        }
+    }
+    
+    func fetchBookmark() async {
+        guard let nttId else { return }
+        
+        isLoading = true
+        
+        defer { isLoading = false }
+        
+        do {
+            let bookmark = try await service.fetch(id: nttId)
+            self.bookmark = bookmark
+            self.isAlarmOn = bookmark?.alarmDate != nil
+        } catch {
+            logger.error("BookmarkDetailViewModel.fetchBookmark(): \(error.localizedDescription)")
         }
     }
 }
