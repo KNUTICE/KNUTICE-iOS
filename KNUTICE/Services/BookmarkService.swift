@@ -90,6 +90,16 @@ protocol BookmarkService: Actor {
     /// - Note: `Deferred` is used so that the entire Combine chain is created
     ///         lazily—only when someone subscribes.
     func fetchBookmarks(page: Int, pageSize: Int, sortBy option: BookmarkSortOption) async throws -> [Bookmark]
+    
+    /// Fetches a single bookmark by its identifier.
+    ///
+    /// Asynchronously queries the repository for a `Bookmark` whose identity matches 
+    /// the given `id`. If no matching bookmark exists, this method returns `nil`.
+    ///
+    /// - Parameter id: The unique identifier of the bookmark to retrieve.
+    /// - Returns: The matching `Bookmark` if found; otherwise, `nil`.
+    /// - Throws: An error if the underlying repository read fails.
+    func fetch(id: Int) async throws -> Bookmark?
 }
 
 extension BookmarkService {
@@ -186,6 +196,10 @@ actor BookmarkServiceImpl: BookmarkService {
         return try await bookmarkRepository.fetch(page: page, pageSize: pageSize, sortBy: option)
     }
     
+    func fetch(id: Int) async throws -> Bookmark? {
+        return try await bookmarkRepository.fetch(id: id)
+    }
+    
 }
 
 fileprivate extension String {
@@ -197,3 +211,4 @@ fileprivate extension String {
         return dateFormatter.date(from: self)
     }
 }
+

@@ -10,7 +10,7 @@ import Foundation
 import KNUTICECore
 import UserNotifications
 
-actor BookmarkRepositoryImpl: BookmarkRepository {
+actor BookmarkRepositoryImpl: BookmarkRepository, BookmarkCreatable {
     @Injected(\.bookmarkDataSource) private var dataSource
     
     func save(bookmark: Bookmark) async throws {
@@ -39,27 +39,6 @@ actor BookmarkRepositoryImpl: BookmarkRepository {
         }
     }
     
-    private func createBookMark(from dto: BookmarkDTO) -> Bookmark? {
-        guard let noticeEntity = dto.notice else {
-            return nil
-        }
-        
-        return Bookmark(
-            notice: Notice(
-                id: Int(noticeEntity.id),
-                title: noticeEntity.title ?? "",
-                contentUrl: noticeEntity.contentUrl ?? "",
-                department: noticeEntity.department ?? "",
-                uploadDate: noticeEntity.uploadDate ?? "",
-                imageUrl: noticeEntity.imageUrl,
-                noticeCategory: NoticeCategory(rawValue: noticeEntity.category ?? ""),
-                majorCategory: MajorCategory(rawValue: noticeEntity.category ?? "")
-            ),
-            memo: dto.details ?? "",
-            alarmDate: dto.alarmDate
-        )
-    }
-    
     func delete(by id: Int) async throws {
         try await dataSource.delete(by: id)
     }
@@ -79,6 +58,16 @@ actor BookmarkRepositoryImpl: BookmarkRepository {
         
         return dtos.compactMap { dto in
             createBookMark(from: dto)
+        }
+    }
+    
+    func fetch(id: Int) async throws -> Bookmark? {
+        try Task.checkCancellation()
+        
+        let dto = try await dataSource.fetch(withId: id)
+        
+        return dto.flatMap {
+            createBookMark(from: $0)
         }
     }
 }

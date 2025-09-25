@@ -52,6 +52,14 @@ protocol BookmarkPersistenceStore: Sendable {
     /// - Throws: An error if the fetch request fails.
     func fetch(keyword: String) async throws -> [BookmarkDTO]
     
+    /// Fetches a bookmark by its unique identifier.
+    ///
+    /// - Parameter id: The unique identifier of the bookmark to fetch.
+    /// - Returns: A `BookmarkDTO` object if found, otherwise `nil`.
+    /// - Throws: An error if the task is cancelled or the fetch operation fails.
+    /// - Note: Internally fetches `BookmarkEntity` objects and converts them into DTOs.
+    func fetch(withId id: Int) async throws -> BookmarkDTO?
+    
     /// Deletes all bookmarks associated with the specified notice ID.
     ///
     /// - Parameter id: The ID of the notice whose bookmarks should be deleted.
@@ -145,7 +153,7 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
     func isDuplication(id: Int) async throws -> Bool {
         try Task.checkCancellation()
         
-        let entities = try await fetch(withId: id)
+        let entities: [BookmarkEntity] = try await fetch(withId: id)
         
         return !entities.isEmpty
     }
@@ -168,6 +176,14 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
         )
         
         return createBookmarkDTOs(from: entities)
+    }
+    
+    func fetch(withId id: Int) async throws -> BookmarkDTO? {
+        try Task.checkCancellation()
+        
+        let entities: [BookmarkEntity] = try await fetch(withId: id)
+        
+        return createBookmarkDTOs(from: entities).first
     }
     
     private func fetch(withId id: Int) async throws -> [BookmarkEntity] {
@@ -211,7 +227,7 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
         try Task.checkCancellation()
         
         let context = backgroundContext
-        let entities = try await fetch(withId: id)
+        let entities: [BookmarkEntity] = try await fetch(withId: id)
         
         try await context.perform(schedule: .enqueued) {
             entities.forEach {
@@ -230,7 +246,7 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
         try Task.checkCancellation()
         
         let context = backgroundContext
-        let entities = try await fetch(withId: bookmark.notice.id)
+        let entities: [BookmarkEntity] = try await fetch(withId: bookmark.notice.id)
         
         try await context.perform(schedule: .enqueued) {   
             entities.forEach {
@@ -248,7 +264,7 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
     func updateTimeStamp(_ update: BookmarkUpdate) async throws {
         try Task.checkCancellation()
         
-        let entities = try await fetch(withId: update.bookmark.notice.id)
+        let entities: [BookmarkEntity] = try await fetch(withId: update.bookmark.notice.id)
         
         for entity in entities {
             entity.createdAt = update.createdAt

@@ -15,14 +15,13 @@ extension UITabBarViewController {
             .sink(receiveValue: { [weak self] deepLink in
                 guard let deepLink else { return }
                 
-                print(deepLink)
-                
                 let viewController: UIViewController
                 
                 switch deepLink {
                 case .bookmark(let nttId):
-                    // TODO: Bookmark 딥링크 구현
-                    return
+                    viewController = UIHostingController(
+                        rootView: BookmarkDetailSwitchView(viewModel: BookmarkViewModel(nttId: nttId))
+                    )
                 case .meal:
                     // TODO: 학식 알림 딥링크 구현
                     return

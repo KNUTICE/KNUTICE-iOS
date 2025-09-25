@@ -20,67 +20,68 @@ struct BookmarkDetail: View {
     
     var body: some View {
         ZStack {
-            ScrollView {
-                NoticeHeader(notice: viewModel.bookmark.notice)
-                
-                AlarmDetail(alarmDate: viewModel.bookmark.alarmDate)
-                
-                UserMemoDetail(userMemo: viewModel.bookmark.memo)
-                
-                Button {
-                    isShowingWebView = true
-                } label: {
-                    Text("공지사항 이동")
-                        .padding([.top, .bottom])
-                        .foregroundStyle(.white)
-                        .frame(maxWidth: .infinity)
-                        .background(.accent2)
-                        .cornerRadius(20)
-                }
-                .padding([.leading, .trailing])
-                .padding(.top)
-            }
-            .background(.primaryBackground)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Menu {
-                        Section {
-                            Button {
-                                withAnimation(.easeInOut) {
-                                    selectedMode = .editView
-                                }
-                            } label: {
-                                Text("수정")
-                            }
-                        }
-                        
-                        Section {
-                            Button(role: .destructive) {
-                                viewModel.delete()
-                            } label: {
-                                Text("삭제")
-                                    .foregroundStyle(.red)
-                            }
-                        }
+            if let bookmark = viewModel.bookmark {
+                ScrollView {
+                    NoticeHeader(notice: bookmark.notice)
+                    
+                    AlarmDetail(alarmDate: bookmark.alarmDate)
+                    
+                    UserMemoDetail(userMemo: bookmark.memo)
+                    
+                    Button {
+                        isShowingWebView = true
                     } label: {
-                        Text("편집")
+                        Text("공지사항 이동")
+                            .padding([.top, .bottom])
+                            .foregroundStyle(.white)
+                            .frame(maxWidth: .infinity)
+                            .background(.accent2)
+                            .cornerRadius(20)
+                    }
+                    .padding([.top, .leading, .trailing])
+                }
+                .background(.primaryBackground)
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Menu {
+                            Section {
+                                Button {
+                                    withAnimation(.easeInOut) {
+                                        selectedMode = .editView
+                                    }
+                                } label: {
+                                    Text("수정")
+                                }
+                            }
+                            
+                            Section {
+                                Button(role: .destructive) {
+                                    viewModel.delete()
+                                } label: {
+                                    Text("삭제")
+                                        .foregroundStyle(.red)
+                                }
+                            }
+                        } label: {
+                            Text("편집")
+                        }
                     }
                 }
-            }
-            .fullScreenCover(isPresented: $isShowingWebView) {
-                NavigationStack {
-                    NoticeWebVCWrapper(notice: viewModel.bookmark.notice)
-                        .edgesIgnoringSafeArea(.bottom)
-                        .toolbar {
-                            ToolbarItem(placement: .topBarLeading) {
-                                Button {
-                                    isShowingWebView = false
-                                } label: {
-                                    Image(systemName: "xmark")
+                .fullScreenCover(isPresented: $isShowingWebView) {
+                    NavigationStack {
+                        NoticeWebVCWrapper(notice: bookmark.notice)
+                            .edgesIgnoringSafeArea(.bottom)
+                            .toolbar {
+                                ToolbarItem(placement: .topBarLeading) {
+                                    Button {
+                                        isShowingWebView = false
+                                    } label: {
+                                        Image(systemName: "xmark")
+                                    }
                                 }
                             }
-                        }
-                        .background(.detailViewBackground)
+                            .background(.detailViewBackground)
+                    }
                 }
             }
             
@@ -102,6 +103,11 @@ struct BookmarkDetail: View {
             viewModel.saveTask?.cancel()
             viewModel.deleteTask?.cancel()
             viewModel.updateTask?.cancel()
+        }
+        .task {
+            if viewModel.bookmark == nil {
+                await viewModel.fetchBookmark()
+            }
         }
     }
 }

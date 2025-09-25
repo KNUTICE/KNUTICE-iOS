@@ -26,35 +26,46 @@ struct BookmarkForm: View {
     
     var body: some View {
         ZStack {
-            ScrollView {
-                NoticeHeader(notice: viewModel.bookmark.notice)
-                
-                AlarmPickerContainerView(
-                    isAlarmOn: Binding(
-                        get: {
-                            return viewModel.isAlarmOn
-                        },
-                        set: {
-                            if $0 {
-                                viewModel.bookmark.alarmDate = Date()
-                            } else {
-                                viewModel.bookmark.alarmDate = nil
-                            }
-                            
-                            viewModel.isAlarmOn = $0
-                        }
-                    ),
-                    alarmDate: Binding(
-                        get: {
-                            return viewModel.bookmark.alarmDate ?? Date()
-                        },
-                        set: {
-                            viewModel.bookmark.alarmDate = $0
-                        }
-                    )
-                )
-                
-                TextFieldContainerView(memo: $viewModel.bookmark.memo)
+            Group {
+                if let bookmark = viewModel.bookmark {
+                    ScrollView {
+                        NoticeHeader(notice: bookmark.notice)
+                        
+                        AlarmPickerContainerView(
+                            isAlarmOn: Binding(
+                                get: {
+                                    return viewModel.isAlarmOn
+                                },
+                                set: {
+                                    if $0 {
+                                        viewModel.bookmark?.alarmDate = Date()
+                                    } else {
+                                        viewModel.bookmark?.alarmDate = nil
+                                    }
+                                    
+                                    viewModel.isAlarmOn = $0
+                                }
+                            ),
+                            alarmDate: Binding(
+                                get: {
+                                    return viewModel.bookmark?.alarmDate ?? Date()
+                                },
+                                set: {
+                                    viewModel.bookmark?.alarmDate = $0
+                                }
+                            )
+                        )
+                        
+                        TextFieldContainerView(
+                            memo: Binding(
+                                get: { viewModel.bookmark?.memo ?? "" },
+                                set: { viewModel.bookmark?.memo = $0 }
+                            )
+                        )
+                    }
+                } else {
+                    EmptyView()
+                }
             }
             .animation(.easeInOut, value: viewModel.isAlarmOn)
             .navigationTitle("북마크")
@@ -162,7 +173,6 @@ fileprivate struct TextFieldContainerView: View {
         }
         .padding()
         .background(colorScheme == .light ? .white : .mainCellBackground)
-        
         .cornerRadius(20)
         .padding()
     }
