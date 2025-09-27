@@ -399,6 +399,7 @@
 		8E49FBBD2E69CCE400C5949C /* WebView */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = WebView; sourceTree = "<group>"; };
 		8E49FC322E69CD5400C5949C /* Main */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Main; sourceTree = "<group>"; };
 		8E49FC5F2E69CE5700C5949C /* Utils */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8E49FC802E69CE5700C5949C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8E49FC812E69CE5700C5949C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Utils; sourceTree = "<group>"; };
+		8E9600752E84DA2B00D508D9 /* Major Notice */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Major Notice"; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -579,6 +580,7 @@
 		8E49FA332E69CCA800C5949C /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				8E9600752E84DA2B00D508D9 /* Major Notice */,
 				8E49FAE52E69CCB300C5949C /* Bookmark */,
 				8E49FAF42E69CCB600C5949C /* BookmarkList */,
 				8E49FB0A2E69CCB800C5949C /* Commons */,
@@ -676,6 +678,7 @@
 				8E49FBBD2E69CCE400C5949C /* WebView */,
 				8E49FC322E69CD5400C5949C /* Main */,
 				8E49FC5F2E69CE5700C5949C /* Utils */,
+				8E9600752E84DA2B00D508D9 /* Major Notice */,
 			);
 			name = KNUTICE;
 			productName = KNUTICE;
@@ -753,6 +756,7 @@
 				8E49FBBD2E69CCE400C5949C /* WebView */,
 				8E49FC322E69CD5400C5949C /* Main */,
 				8E49FC5F2E69CE5700C5949C /* Utils */,
+				8E9600752E84DA2B00D508D9 /* Major Notice */,
 			);
 			name = "KNUTICE-dev";
 			productName = KNUTICE;

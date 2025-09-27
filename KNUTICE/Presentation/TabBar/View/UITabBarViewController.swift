@@ -23,6 +23,14 @@ final class UITabBarViewController: UITabBarController {
         
         return viewController
     }()
+    private let majorNoticeViewController: UIViewController = {
+       let viewController = MajorNoticeCollectionViewController()
+        viewController.tabBarItem.image = UIImage(systemName: "graduationcap")
+        viewController.tabBarItem.selectedImage = UIImage(systemName: "graduationcap.fill")
+        viewController.tabBarItem.title = "학과소식"
+        
+        return viewController
+    }()
     private let bookmarkViewController: UIViewController = {
         let viewController = BookmarkTableViewController()
         viewController.tabBarItem.image = UIImage(systemName: "bookmark")
@@ -37,16 +45,24 @@ final class UITabBarViewController: UITabBarController {
     }()
     private let searchViewController: UIViewController = {
         let viewController = SearchViewController()
-        viewController.tabBarItem.image = UIImage(systemName: "magnifyingglass")
-        if UIDevice.current.userInterfaceIdiom  == .phone {
-            viewController.tabBarItem.title = "검색"
-        }
         
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            return UINavigationController(rootViewController: viewController)
+        if #available(iOS 26, *) {
+            viewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
+            
+            return viewController
+        } else {
+            viewController.tabBarItem.image = UIImage(systemName: "magnifyingglass")
+            
+            if UIDevice.current.userInterfaceIdiom  == .phone {
+                viewController.tabBarItem.title = "검색"
+            }
+            
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                return UINavigationController(rootViewController: viewController)
+            }
+            
+            return viewController
         }
-        
-        return viewController
     }()
     let viewModel: TabBarViewModel
     var cancellables: Set<AnyCancellable> = []
@@ -86,10 +102,13 @@ extension UITabBarViewController {
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = appearance
         
-        if #available(iOS 18, *) {
+        if #available(iOS 18, *), UIDevice.current.userInterfaceIdiom == .pad {
             tabs = [
                 UITab(title: "홈", image: UIImage(systemName: "house.fill"), identifier: "Tabs.main") { _ in
                     self.mainViewController
+                },
+                UITab(title: "학과소식", image: UIImage(systemName: "graduationcap.fill"), identifier: "Tabs.majorNotice") { _ in
+                    self.majorNoticeViewController
                 },
                 UITab(title: "북마크", image: UIImage(systemName: "bookmark.fill"), identifier: "Tabs.bookmark") { _ in
                     self.bookmarkViewController
@@ -99,7 +118,7 @@ extension UITabBarViewController {
                 }
             ]
         } else {
-            setViewControllers([mainViewController, bookmarkViewController, searchViewController], animated: true)
+            setViewControllers([mainViewController, majorNoticeViewController, bookmarkViewController, searchViewController], animated: true)
         }
     }
     
