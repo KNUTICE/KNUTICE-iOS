@@ -10,7 +10,7 @@ import SwiftUI
 import RxSwift
 import KNUTICECore
 
-final class NoticeCollectionViewController<Category>: UIViewController, CompositionalLayoutConfigurable, UICollectionViewDelegateFlowLayout where Category: RawRepresentable, Category.RawValue == String {
+final class NoticeCollectionViewController<Category>: UIViewController, CompositionalLayoutConfigurable, UICollectionViewDelegateFlowLayout, NoticeNavigatable where Category: RawRepresentable, Category.RawValue == String {
     lazy var collectionView: UICollectionView = {
         let layout = createCompositionalLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -60,19 +60,8 @@ final class NoticeCollectionViewController<Category>: UIViewController, Composit
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        let viewController: UIViewController
         let notice = viewModel.notices.value[0].items[indexPath.row]
-        
-        if #available(iOS 26, *) {
-            viewController = UIHostingController(
-                rootView: NoticeDetailView()
-                    .environment(NoticeDetailViewModel(notice: notice))
-            )
-        } else {
-            viewController = NoticeDetailViewController(notice: viewModel.notices.value[0].items[indexPath.row])
-        }
-        
-        navigationController?.pushViewController(viewController, animated: true)
+        navigateToDetail(of: notice)
     }
 }
 

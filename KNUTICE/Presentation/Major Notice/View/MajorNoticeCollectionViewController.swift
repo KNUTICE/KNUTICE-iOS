@@ -11,7 +11,7 @@ import RxSwift
 import SwiftUI
 import UIKit
 
-final class MajorNoticeCollectionViewController: UIViewController, CompositionalLayoutConfigurable, UICollectionViewDelegateFlowLayout, RxDataSourceProvidable {
+final class MajorNoticeCollectionViewController: UIViewController, CompositionalLayoutConfigurable,  RxDataSourceProvidable, NoticeNavigatable {
     let viewModel: NoticeSectionModelProvidable = MajorNoticeCollectionViewModel()
     
     lazy var titleButton: UIButton = {
@@ -111,6 +111,16 @@ final class MajorNoticeCollectionViewController: UIViewController, Compositional
         }
     }
 
+}
+
+extension MajorNoticeCollectionViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        let notice = viewModel.notices.value[0].items[indexPath.row]
+        navigateToDetail(of: notice)
+    }
 }
 
 #if DEBUG
