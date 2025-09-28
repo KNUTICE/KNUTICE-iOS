@@ -10,22 +10,7 @@ import RxCocoa
 import RxDataSources
 
 extension NoticeCollectionViewController: RxDataSourceProvidable {
-    func bind() {        
-        //MARK: - viewModel.notices
-        viewModel.notices
-            .skip(1)    //초기값은 무시
-            .do(onNext: { [weak self] _ in
-                guard let self else { return }
-                collectionView.backgroundView = nil
-                
-                if let viewModel = self.viewModel as? NoticeFetchable, viewModel.isRefreshing.value == false {
-                    let offset = self.collectionView.contentOffset
-                    self.collectionView.setContentOffset(offset, animated: false)
-                }
-            })
-            .bind(to: collectionView.rx.items(dataSource: makeNoticeDataSource()))
-            .disposed(by: disposeBag)
-        
+    func bind() {                
         //MARK: - collectionView.rx.willDisplayCell
         collectionView.rx.willDisplayCell
             .bind(with: self) { owner, cell in

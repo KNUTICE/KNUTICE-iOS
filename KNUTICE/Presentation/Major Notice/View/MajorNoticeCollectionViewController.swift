@@ -11,7 +11,7 @@ import RxSwift
 import SwiftUI
 import UIKit
 
-final class MajorNoticeCollectionViewController: UIViewController, CompositionalLayoutConfigurable, UICollectionViewDelegateFlowLayout {
+final class MajorNoticeCollectionViewController: UIViewController, CompositionalLayoutConfigurable, UICollectionViewDelegateFlowLayout, RxDataSourceProvidable {
     let viewModel: NoticeSectionModelProvidable = MajorNoticeCollectionViewModel()
     
     lazy var titleButton: UIButton = {
@@ -69,6 +69,7 @@ final class MajorNoticeCollectionViewController: UIViewController, Compositional
         view.backgroundColor = .primaryBackground
         setupLayout()
         bind()
+        bindNotices()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
