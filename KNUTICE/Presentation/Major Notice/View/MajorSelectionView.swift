@@ -35,12 +35,23 @@ struct MajorSelectionView: View {
                         }
                     } header: {
                         Text(college.localizedDescription)
+                            .font(.title3)
+                            .bold()
                     }
                 }
             }
             .listStyle(.plain)
             .navigationTitle("학과선택")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
+                }
+            }
         }
     }
 }
