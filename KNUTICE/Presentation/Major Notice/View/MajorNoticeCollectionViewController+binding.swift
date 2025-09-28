@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension MajorNoticeCollectionViewController: RxDataSourceProvidable {    
+extension MajorNoticeCollectionViewController {    
     func bind() {
         if let viewModel = viewModel as? MajorNoticeCollectionViewModel {
             viewModel.$selectedMajor
@@ -21,20 +21,5 @@ extension MajorNoticeCollectionViewController: RxDataSourceProvidable {
                 })
                 .store(in: &cancellables)
         }
-        
-        viewModel.notices
-            .skip(1)    //초기값은 무시
-            .do(onNext: { [weak self] _ in
-                guard let self else { return }
-                
-                collectionView.backgroundView = nil
-                
-                if let viewModel = self.viewModel as? NoticeFetchable, viewModel.isRefreshing.value == false {
-                    let offset = self.collectionView.contentOffset
-                    self.collectionView.setContentOffset(offset, animated: false)
-                }
-            })
-            .bind(to: collectionView.rx.items(dataSource: makeNoticeDataSource()))
-            .disposed(by: disposeBag)
     }
 }

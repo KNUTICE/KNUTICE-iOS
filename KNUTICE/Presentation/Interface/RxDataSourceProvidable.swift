@@ -5,19 +5,21 @@
 //  Created by 이정훈 on 6/19/25.
 //
 
-import UIKit
 import RxDataSources
+import RxSwift
+import UIKit
 
 @MainActor
 protocol RxDataSourceProvidable: AnyObject {
     var collectionView: UICollectionView { get }
     var viewModel: NoticeSectionModelProvidable { get }
+    var disposeBag: DisposeBag { get }
     
-    func makeNoticeDataSource() -> RxCollectionViewSectionedReloadDataSource<NoticeSectionModel>
+    func bindNotices()
 }
 
 extension RxDataSourceProvidable {
-    func makeNoticeDataSource() -> RxCollectionViewSectionedReloadDataSource<NoticeSectionModel> {
+    private func makeNoticeDataSource() -> RxCollectionViewSectionedReloadDataSource<NoticeSectionModel> {
         RxCollectionViewSectionedReloadDataSource<NoticeSectionModel>(configureCell: { [weak self] (dataSource, collectionView, indexPath, item) in
             guard let self else {
                 return UICollectionViewCell()
@@ -53,5 +55,22 @@ extension RxDataSourceProvidable {
             cell.configure(with: item)
             return cell
         })
+    }
+    
+    func bindNotices() {
+        viewModel.notices
+            .skip(1)
+            .do(onNext: { [weak self] _ in
+                guard let self else { return }
+                
+                collectionView.backgroundView = nil
+                
+                if let viewModel = self.viewModel as? NoticeFetchable, viewModel.isRefreshing.value == false {
+                    let offset = self.collectionView.contentOffset
+                    self.collectionView.setContentOffset(offset, animated: false)
+                }
+            })
+            .bind(to: collectionView.rx.items(dataSource: makeNoticeDataSource()))
+            .disposed(by: disposeBag)
     }
 }

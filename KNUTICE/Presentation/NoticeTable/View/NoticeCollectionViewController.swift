@@ -49,6 +49,7 @@ final class NoticeCollectionViewController<Category>: UIViewController, Composit
         setUpLayout()
         setUpNavigationBar(title: navigationTitle)
         bind()
+        bindNotices()
         
         if let viewModel = viewModel as? NoticeFetchable {
             viewModel.fetchNotices()
