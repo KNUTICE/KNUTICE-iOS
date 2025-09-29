@@ -11,7 +11,6 @@ import Foundation
 import KNUTICECore
 import os
 import RxRelay
-import RxSwift
 
 class NoticeCollectionViewModel<Category>: NoticeSectionModelProvidable, NoticeFetchable where Category: RawRepresentable, Category.RawValue == String {
     /// View와 바인딩할 데이터
@@ -100,7 +99,6 @@ extension NoticeCollectionViewModel {
                     self?.logger.error("NoticeCollectionViewModel error: \(error.localizedDescription)")
                 }
             }, receiveValue: { [weak self] notices in
-                print(notices.items)
                 guard let self else { return }
                 
                 switch update {
