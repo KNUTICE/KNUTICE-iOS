@@ -10,7 +10,7 @@ import RxSwift
 import UIKit
 
 @MainActor
-protocol RxDataSourceProvidable: AnyObject {
+protocol RxDataSourceBindable: AnyObject {
     var collectionView: UICollectionView { get }
     var viewModel: NoticeSectionModelProvidable { get }
     var disposeBag: DisposeBag { get }
@@ -18,7 +18,24 @@ protocol RxDataSourceProvidable: AnyObject {
     func bindNotices()
 }
 
-extension RxDataSourceProvidable {
+extension RxDataSourceBindable {
+    func bindNotices() {
+        viewModel.notices
+            .skip(1)
+            .do(onNext: { [weak self] _ in
+                guard let self else { return }
+                
+                collectionView.backgroundView = nil
+                
+                if let viewModel = self.viewModel as? NoticeFetchable, viewModel.isRefreshing.value == false {
+                    let offset = self.collectionView.contentOffset
+                    self.collectionView.setContentOffset(offset, animated: false)
+                }
+            })
+            .bind(to: collectionView.rx.items(dataSource: makeNoticeDataSource()))
+            .disposed(by: disposeBag)
+    }
+    
     private func makeNoticeDataSource() -> RxCollectionViewSectionedReloadDataSource<NoticeSectionModel> {
         RxCollectionViewSectionedReloadDataSource<NoticeSectionModel>(configureCell: { [weak self] (dataSource, collectionView, indexPath, item) in
             guard let self else {
@@ -57,20 +74,4 @@ extension RxDataSourceProvidable {
         })
     }
     
-    func bindNotices() {
-        viewModel.notices
-            .skip(1)
-            .do(onNext: { [weak self] _ in
-                guard let self else { return }
-                
-                collectionView.backgroundView = nil
-                
-                if let viewModel = self.viewModel as? NoticeFetchable, viewModel.isRefreshing.value == false {
-                    let offset = self.collectionView.contentOffset
-                    self.collectionView.setContentOffset(offset, animated: false)
-                }
-            })
-            .bind(to: collectionView.rx.items(dataSource: makeNoticeDataSource()))
-            .disposed(by: disposeBag)
-    }
 }

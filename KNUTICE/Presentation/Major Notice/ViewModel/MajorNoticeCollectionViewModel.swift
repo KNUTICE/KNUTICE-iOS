@@ -12,31 +12,13 @@ import KNUTICECore
 import RxRelay
 
 @MainActor
-final class MajorNoticeCollectionViewModel: ObservableObject, NoticeSectionModelProvidable {
+final class MajorNoticeCollectionViewModel: NoticeCollectionViewModel<MajorCategory>, ObservableObject {
     @Published var selectedMajor: MajorCategory?
-    let notices: BehaviorRelay<[NoticeSectionModel]> = .init(value: [])
-    
-    @Injected(\.noticeRepository) private var repository
-    private(set) var task: Task<Void, Never>?
-    
+
     init() {
         let majorStr = UserDefaults.standard.string(forKey: UserDefaultsKeys.selectedMajor.rawValue)
+        selectedMajor = MajorCategory(rawValue: majorStr ?? "")
         
-        if let majorStr {
-            selectedMajor = MajorCategory(rawValue: majorStr)
-        }
-    }
-    
-    func fetchNotices() {
-        task = Task {
-            do {
-                let notices = try await repository.fetchNotices(for: selectedMajor?.rawValue)
-                let noticeSectionModel = NoticeSectionModel(items: notices)
-                
-                self.notices.accept([noticeSectionModel])
-            } catch {
-                print(error)
-            }
-        }
+        super.init(category: MajorCategory(rawValue: majorStr ?? ""))
     }
 }

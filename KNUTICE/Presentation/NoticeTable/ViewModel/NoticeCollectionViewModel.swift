@@ -11,8 +11,9 @@ import Foundation
 import KNUTICECore
 import os
 import RxRelay
+import RxSwift
 
-final class NoticeCollectionViewModel<Category>: NoticeSectionModelProvidable, NoticeFetchable where Category: RawRepresentable, Category.RawValue == String {
+class NoticeCollectionViewModel<Category>: NoticeSectionModelProvidable, NoticeFetchable where Category: RawRepresentable, Category.RawValue == String {
     /// View와 바인딩할 데이터
     /// 서버에서 가져온 데이터를 해당 변수에 저장
     let notices: BehaviorRelay<[NoticeSectionModel]> = BehaviorRelay(value: [])
@@ -22,20 +23,27 @@ final class NoticeCollectionViewModel<Category>: NoticeSectionModelProvidable, N
     let isFetching: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     /// 새로고침 여부를 나타내는 변수
     let isRefreshing: BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    /// 공지 카테고리를 나타내는 프로퍼티로, 공지의 종류를 구분하는 데 사용
-    private let category: Category
+    /// 선택된 공지 종류
+    /// 외부에서 변경되면 최신 값으로 공지를 가져오도록 사용
+    private var category: Category? {
+        didSet {
+            fetchNotices()
+        }
+    }
     /// Publisher 구독 메모리 관리를 위한 cancellable bag
     private var cancellables: Set<AnyCancellable> = []
     /// 콘솔 메시지 로깅을 위한 인스턴스
     private var logger: Logger = Logger()
     
-    init(category: Category) {
+    init(category: Category?) {
         self.category = category
     }
     
     /// 서버에 `category`에 대한 공지사항 데이터 요청하고,
     /// 전달 받은 데이터는 `notices`에 업데이트
     func fetchNotices(isRefreshing: Bool = false) {
+        guard let category = category else { return }
+        
         if isRefreshing {
             self.isRefreshing.accept(true)
         } else {
@@ -66,10 +74,17 @@ final class NoticeCollectionViewModel<Category>: NoticeSectionModelProvidable, N
             .store(in: &cancellables)
     }
     
+    /// 외부에서 선택된 공지 카테고리 업데이트
+    func updateSelectedMajor(_ category: Category?) {
+        self.category = category
+    }
+    
     /// 무한 스크롤 구현을 위해 다음 페이지 공지사항 요청하고,
     /// 전달 받은 데이터는 `notices`에 추가 후 업데이트
     func fetchNextPage() {
-        guard let lastNumber = notices.value.first?.items.last?.id else {
+        guard let category = category,
+              let lastNumber = notices.value.first?.items.last?.id,
+              notices.value.count >= 20 else {
             return
         }
         

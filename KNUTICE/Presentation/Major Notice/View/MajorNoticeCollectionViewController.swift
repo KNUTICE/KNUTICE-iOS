@@ -11,9 +11,7 @@ import RxSwift
 import SwiftUI
 import UIKit
 
-final class MajorNoticeCollectionViewController: UIViewController, CompositionalLayoutConfigurable,  RxDataSourceProvidable, NoticeNavigatable {
-    let viewModel: NoticeSectionModelProvidable = MajorNoticeCollectionViewModel()
-    
+final class MajorNoticeCollectionViewController: NoticeCollectionViewController<MajorCategory> {    
     lazy var titleButton: UIButton = {
         var config = UIButton.Configuration.plain()
         config.title = "학과명"
@@ -44,43 +42,15 @@ final class MajorNoticeCollectionViewController: UIViewController, Compositional
         
         return stackView
     }()
-    lazy var collectionView: UICollectionView = {
-        let layout = createCompositionalLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.delegate = self
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(NoticeCollectionViewCell.self, forCellWithReuseIdentifier: NoticeCollectionViewCell.reuseIdentifier)
-        collectionView.register(NoticeCollectionViewCellWithThumbnail.self, forCellWithReuseIdentifier: NoticeCollectionViewCellWithThumbnail.reuseIdentifier)
-//        let loadingIndicator = UIActivityIndicatorView(style: .large)
-//        loadingIndicator.startAnimating()
-//        collectionView.backgroundView = loadingIndicator
-        collectionView.refreshControl = refreshControl
-        collectionView.backgroundColor = .primaryBackground
-        
-        return collectionView
-    }()
-    let refreshControl: UIRefreshControl = UIRefreshControl()
     var cancellables: Set<AnyCancellable> = []
-    let disposeBag: DisposeBag = .init()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .primaryBackground
-        setupLayout()
-        bind()
-        bindNotices()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        if let viewModel = viewModel as? MajorNoticeCollectionViewModel {
-            viewModel.task?.cancel()
-        }
-    }
-    
-    private func setupLayout() {
+    override func setupLayout() {
         view.addSubview(stackView)
         stackView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
@@ -95,6 +65,28 @@ final class MajorNoticeCollectionViewController: UIViewController, Compositional
         }
     }
     
+    override func bind() {
+        super.bind()
+        
+        if let viewModel = viewModel as? MajorNoticeCollectionViewModel {
+            viewModel.$selectedMajor
+                .sink(receiveValue: { [weak self] in
+                    self?.titleButton.configuration?.title = $0?.localizedDescription ?? "학과명"
+                    
+                    if let selectedMajor = $0 {
+                        // 공지 카테고리를 수정하면 프로퍼티 옵저버에 의해 자동으로 데이터 업데이드
+                        viewModel.updateSelectedMajor(selectedMajor)
+                        // UserDefaults에 새로 선택된 공지 카테고리 저장
+                        UserDefaults.standard.set(selectedMajor.rawValue, forKey: UserDefaultsKeys.selectedMajor.rawValue)
+                    }
+                })
+                .store(in: &cancellables)
+        }
+    }
+
+}
+
+extension MajorNoticeCollectionViewController {
     @objc private func didTapTitleButton(_ sender: UIButton) {
         if let viewModel = viewModel as? MajorNoticeCollectionViewModel {
             let viewController = UIHostingController(
@@ -110,22 +102,11 @@ final class MajorNoticeCollectionViewController: UIViewController, Compositional
             present(viewController, animated: true)
         }
     }
-
-}
-
-extension MajorNoticeCollectionViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(
-        _ collectionView: UICollectionView,
-        didSelectItemAt indexPath: IndexPath
-    ) {
-        let notice = viewModel.notices.value[0].items[indexPath.row]
-        navigateToDetail(of: notice)
-    }
 }
 
 #if DEBUG
 #Preview {
-    MajorNoticeCollectionViewController()
+    MajorNoticeCollectionViewController(viewModel: MajorNoticeCollectionViewModel())
         .makePreview()
         .ignoresSafeArea()
 }
