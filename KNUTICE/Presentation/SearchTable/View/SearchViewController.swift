@@ -84,7 +84,6 @@ final class SearchViewController: UIViewController, CompositionalLayoutConfigura
         view.backgroundColor = .primaryBackground
         setupLayout()
         bind()
-        bindNotices()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

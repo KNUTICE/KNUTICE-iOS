@@ -10,7 +10,7 @@ import SwiftUI
 import RxSwift
 import KNUTICECore
 
-final class NoticeCollectionViewController<Category>: UIViewController, CompositionalLayoutConfigurable, UICollectionViewDelegateFlowLayout, NoticeNavigatable where Category: RawRepresentable, Category.RawValue == String {
+class NoticeCollectionViewController<Category>: UIViewController, UICollectionViewDelegateFlowLayout, CompositionalLayoutConfigurable, RxDataSourceBindable where Category: RawRepresentable, Category.RawValue == String {
     lazy var collectionView: UICollectionView = {
         let layout = createCompositionalLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -46,12 +46,11 @@ final class NoticeCollectionViewController<Category>: UIViewController, Composit
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        setUpLayout()
+        setupLayout()
         setUpNavigationBar(title: navigationTitle)
         bind()
-        bindNotices()
         
-        if let viewModel = viewModel as? NoticeFetchable {
+        if let viewModel = viewModel as? NoticeFetchable, Category.self == NoticeCategory.self {
             viewModel.fetchNotices()
         }
     }
@@ -61,7 +60,68 @@ final class NoticeCollectionViewController<Category>: UIViewController, Composit
         didSelectItemAt indexPath: IndexPath
     ) {
         let notice = viewModel.notices.value[0].items[indexPath.row]
-        navigateToDetail(of: notice)
+        let viewController: UIViewController
+        
+        if #available(iOS 26, *) {
+            viewController = UIHostingController(
+                rootView: NoticeDetailView()
+                    .environment(NoticeDetailViewModel(notice: notice))
+            )
+        } else {
+            viewController = NoticeDetailViewController(notice: notice)
+        }
+        
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func setupLayout() {
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    func bind() {
+        bindNotices()
+        bindWillDisplayCell()
+        bindRefreshing()
+        bindRefreshControl()
+    }
+    
+    private func bindWillDisplayCell() {
+        collectionView.rx.willDisplayCell
+            .bind(with: self) { owner, cell in
+                let (_, indexPath) = cell
+                
+                if let viewModel = owner.viewModel as? NoticeFetchable,
+                   let count = owner.viewModel.notices.value.first?.items.count,
+                   indexPath.item == count - 1 {
+                    viewModel.fetchNextPage()
+                }
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindRefreshing() {
+        guard let viewModel = viewModel as? NoticeFetchable else { return }
+        viewModel.isRefreshing
+            .bind(to: refreshControl.rx.isRefreshing)
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindRefreshControl() {
+        refreshControl.rx.controlEvent(.valueChanged)
+            .bind(onNext: { [weak self] in
+                if let viewModel = self?.viewModel as? NoticeFetchable {
+                    viewModel.fetchNotices(isRefreshing: true)
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func setUpNavigationBar(title: String) {
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.title = title
     }
 }
 
@@ -74,3 +134,4 @@ final class NoticeCollectionViewController<Category>: UIViewController, Composit
     .makePreview()
 }
 #endif
+
