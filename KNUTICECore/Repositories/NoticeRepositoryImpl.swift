@@ -39,6 +39,10 @@ public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
             queryItems.append(URLQueryItem(name: "keyword", value: keyword))
         }
         
+        if let nttId {
+            queryItems.append(URLQueryItem(name: "nttId", value: String(nttId)))
+        }
+        
         components.queryItems = queryItems
         
         guard let endpoint = components.url?.absoluteString else {
