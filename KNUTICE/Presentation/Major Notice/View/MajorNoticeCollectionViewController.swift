@@ -48,6 +48,10 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
         super.viewDidLoad()
         
         view.backgroundColor = .primaryBackground
+        
+        if let viewModel = viewModel as? MajorNoticeCollectionViewModel {
+            viewModel.bindSelectedMajor()
+        }
     }
     
     override func setupLayout() {
@@ -72,13 +76,6 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
             viewModel.$selectedMajor
                 .sink(receiveValue: { [weak self] in
                     self?.titleButton.configuration?.title = $0?.localizedDescription ?? "학과명"
-                    
-                    if let selectedMajor = $0 {
-                        // 공지 카테고리를 수정하면 프로퍼티 옵저버에 의해 자동으로 데이터 업데이드
-                        viewModel.updateSelectedMajor(selectedMajor)
-                        // UserDefaults에 새로 선택된 공지 카테고리 저장
-                        UserDefaults.standard.set(selectedMajor.rawValue, forKey: UserDefaultsKeys.selectedMajor.rawValue)
-                    }
                 })
                 .store(in: &cancellables)
         }
