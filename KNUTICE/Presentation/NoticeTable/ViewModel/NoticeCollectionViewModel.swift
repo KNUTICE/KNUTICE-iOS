@@ -44,16 +44,47 @@ class NoticeCollectionViewModel<Category>: NoticeSectionModelProvidable, NoticeF
     func fetchNotices(isRefreshing: Bool = false) {
         guard let category = category else { return }
         
+        requestNotices(category: category, isRefreshing: isRefreshing, update: .replace)
+    }
+    
+    /// 외부에서 선택된 공지 카테고리 업데이트
+    func updateSelectedMajor(_ category: Category?) {
+        self.category = category
+    }
+    
+    /// 무한 스크롤 구현을 위해 다음 페이지 공지사항 요청하고,
+    /// 전달 받은 데이터는 `notices`에 추가 후 업데이트
+    func fetchNextPage() {
+        guard let category = category,
+              let lastNum = notices.value.first?.items.last?.id,
+              let count = notices.value.first?.items.count, count >= 20 else {
+            return
+        }
+        
+        requestNotices(category: category, after: lastNum, update: .append)
+    }
+}
+
+extension NoticeCollectionViewModel {
+    private enum UpdateStrategy {
+        case replace
+        case append
+    }
+
+    private func requestNotices(
+        category: Category,
+        after: Int? = nil,
+        isRefreshing: Bool = false,
+        update: UpdateStrategy
+    ) {
         if isRefreshing {
             self.isRefreshing.accept(true)
         } else {
             self.isFetching.accept(true)
         }
         
-        repository.fetchNotices(for: category.rawValue)
-            .map {
-                NoticeSectionModel(items: $0)
-            }
+        repository.fetchNotices(for: category.rawValue, after: after)
+            .map { NoticeSectionModel(items: $0) }
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 if isRefreshing {
@@ -66,50 +97,22 @@ class NoticeCollectionViewModel<Category>: NoticeSectionModelProvidable, NoticeF
                 case .finished:
                     self?.logger.info("Successfully fetched Notices")
                 case .failure(let error):
-                    self?.logger.error("NoticeCollectionViewModel.fetchNotices() error: \(error.localizedDescription)")
+                    self?.logger.error("NoticeCollectionViewModel error: \(error.localizedDescription)")
                 }
-            }, receiveValue: { [weak self] in
-                self?.notices.accept([$0])
-            })
-            .store(in: &cancellables)
-    }
-    
-    /// 외부에서 선택된 공지 카테고리 업데이트
-    func updateSelectedMajor(_ category: Category?) {
-        self.category = category
-    }
-    
-    /// 무한 스크롤 구현을 위해 다음 페이지 공지사항 요청하고,
-    /// 전달 받은 데이터는 `notices`에 추가 후 업데이트
-    func fetchNextPage() {
-        guard let category = category,
-              let lastNumber = notices.value.first?.items.last?.id,
-              notices.value.count >= 20 else {
-            return
-        }
-        
-        isFetching.accept(true)
-        repository.fetchNotices(for: category.rawValue, after: lastNumber)
-            .map {
-                NoticeSectionModel(items: $0)
-            }
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
-                self?.isFetching.accept(false)
+            }, receiveValue: { [weak self] notices in
+                print(notices.items)
+                guard let self else { return }
                 
-                switch completion {
-                case .finished:
-                    self?.logger.info( "Successfully fetched next page")
-                case .failure(let error):
-                    self?.logger.error("NoticeCollectionViewModel.fetchNextPage() error: \(error.localizedDescription)")
+                switch update {
+                case .replace:
+                    self.notices.accept([notices])
+                case .append:
+                    var current = self.notices.value.first
+                    current?.items.append(contentsOf: notices.items)
+                    if let current {
+                        self.notices.accept([current])
+                    }
                 }
-            }, receiveValue: { [weak self] in
-                var currentValues = self?.notices.value.first
-                currentValues?.items.append(contentsOf: $0.items)
-                
-                guard let currentValues else { return }
-                
-                self?.notices.accept([currentValues])
             })
             .store(in: &cancellables)
     }
