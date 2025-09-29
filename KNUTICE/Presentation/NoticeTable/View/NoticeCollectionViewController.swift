@@ -10,12 +10,13 @@ import SwiftUI
 import RxSwift
 import KNUTICECore
 
-class NoticeCollectionViewController<Category>: UIViewController, UICollectionViewDelegateFlowLayout, CompositionalLayoutConfigurable, RxDataSourceBindable where Category: RawRepresentable, Category.RawValue == String {
+typealias NoticeCollectionViewConfigurable = UICollectionViewDelegateFlowLayout & CompositionalLayoutConfigurable & RxDataSourceBindable
+
+class NoticeCollectionViewController<Category>: UIViewController, NoticeCollectionViewConfigurable where Category: RawRepresentable, Category.RawValue == String {
     lazy var collectionView: UICollectionView = {
         let layout = createCompositionalLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.delegate = self
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(NoticeCollectionViewCell.self, forCellWithReuseIdentifier: NoticeCollectionViewCell.reuseIdentifier)
         collectionView.register(NoticeCollectionViewCellWithThumbnail.self, forCellWithReuseIdentifier: NoticeCollectionViewCellWithThumbnail.reuseIdentifier)
         let loadingIndicator = UIActivityIndicatorView(style: .large)
