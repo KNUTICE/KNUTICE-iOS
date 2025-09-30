@@ -27,8 +27,8 @@ final class ReportRepositoryImpl: ReportRepository {
             isInterceptable: true
         )
         .flatMap { dto -> AnyPublisher<Bool, any Error> in
-            guard dto.code == 200 else {
-                return Fail(error: RemoteServerError.invalidResponse(message: dto.message ?? ""))
+            guard dto.metaData.code == 200 else {
+                return Fail(error: RemoteServerError.invalidResponse(message: dto.metaData.message ?? ""))
                     .eraseToAnyPublisher()
             }
             
