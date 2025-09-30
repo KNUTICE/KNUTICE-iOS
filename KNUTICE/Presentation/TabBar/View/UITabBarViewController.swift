@@ -24,7 +24,10 @@ final class UITabBarViewController: UITabBarController {
         return viewController
     }()
     private let majorNoticeViewController: UIViewController = {
-       let viewController = MajorNoticeCollectionViewController(viewModel: MajorNoticeCollectionViewModel())
+        let majorStr = UserDefaults.standard.string(forKey: UserDefaultsKeys.selectedMajor.rawValue)
+        let viewController = MajorNoticeCollectionViewController(
+            viewModel: NoticeCollectionViewModel(category: MajorCategory(rawValue: majorStr ?? ""))
+        )
         viewController.tabBarItem.image = UIImage(systemName: "graduationcap")
         viewController.tabBarItem.selectedImage = UIImage(systemName: "graduationcap.fill")
         viewController.tabBarItem.title = "학과소식"
