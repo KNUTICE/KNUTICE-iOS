@@ -6,16 +6,15 @@
 //
 
 import Foundation
+import KNUTICECore
 
 // MARK: - TopicSubscribtionResponseDTO
-struct TopicSubscriptionResponseDTO: Codable {
-    let success: Bool
-    let code: Int
-    let message: String
+struct TopicSubscriptionResponseDTO: Decodable {
+    let metaData: MetaData
     let data: TopicSubscriptionData
 }
 
 // MARK: - TopicSubscriptionData
-struct TopicSubscriptionData: Codable {
+struct TopicSubscriptionData: Decodable {
     let subscribedTopics: [String]
 }

@@ -9,8 +9,6 @@ import Foundation
 
 // MARK: - PostResponseDTO
 public struct PostResponseDTO: Decodable, Sendable {
-    public let success: Bool
-    public let code: Int
-    public let message: String?
+    public let metaData: MetaData
     public let data: Bool
 }
