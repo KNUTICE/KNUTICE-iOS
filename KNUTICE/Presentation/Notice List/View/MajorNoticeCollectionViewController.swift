@@ -33,8 +33,22 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
         
         return button
     }()
+    lazy var settingBtn: UIButton = {
+        let configuration = UIImage.SymbolConfiguration(textStyle: .title2)
+        let gearImage = UIImage(systemName: "gearshape", withConfiguration: configuration)?
+            .withRenderingMode(.alwaysTemplate)
+        let selectedGearImage = UIImage(systemName: "gearshape", withConfiguration: configuration)?
+            .withRenderingMode(.alwaysOriginal)
+            .withTintColor(.lightGray)
+        let button = UIButton()
+        button.setImage(gearImage, for: .normal)
+        button.setImage(selectedGearImage, for: .highlighted)
+        button.addTarget(self, action: #selector(navigateToSetting(_:)), for: .touchUpInside)
+        
+        return button
+    }()
     lazy var stackView: UIView = {
-        let stackView = UIStackView(arrangedSubviews: [titleButton])
+        let stackView = UIStackView(arrangedSubviews: [titleButton, settingBtn])
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.distribution = .fill
@@ -58,7 +72,8 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
         view.addSubview(stackView)
         stackView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).offset(16)
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(16)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-16)
             make.height.equalTo(44)
         }
         
@@ -98,6 +113,11 @@ extension MajorNoticeCollectionViewController {
             
             present(viewController, animated: true)
         }
+    }
+    
+    @objc func navigateToSetting(_ sender: UIButton) {
+        let viewController = UIHostingController(rootView: SettingView())
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
