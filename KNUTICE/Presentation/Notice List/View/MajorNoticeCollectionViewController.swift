@@ -49,8 +49,8 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
         
         view.backgroundColor = .primaryBackground
         
-        if let viewModel = viewModel as? MajorNoticeCollectionViewModel {
-            viewModel.bindSelectedMajor()
+        if let viewModel = viewModel as? NoticeCollectionViewModel<MajorCategory> {
+            viewModel.bindWithCategory()
         }
     }
     
@@ -72,8 +72,8 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
     override func bind() {
         super.bind()
         
-        if let viewModel = viewModel as? MajorNoticeCollectionViewModel {
-            viewModel.$selectedMajor
+        if let viewModel = viewModel as? NoticeCollectionViewModel<MajorCategory> {
+            viewModel.$category
                 .sink(receiveValue: { [weak self] in
                     self?.titleButton.configuration?.title = $0?.localizedDescription ?? "학과명"
                 })
@@ -85,7 +85,7 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
 
 extension MajorNoticeCollectionViewController {
     @objc private func didTapTitleButton(_ sender: UIButton) {
-        if let viewModel = viewModel as? MajorNoticeCollectionViewModel {
+        if let viewModel = viewModel as? NoticeCollectionViewModel<MajorCategory> {
             let viewController = UIHostingController(
                 rootView: MajorSelectionView()
                     .environmentObject(viewModel)
@@ -103,7 +103,7 @@ extension MajorNoticeCollectionViewController {
 
 #if DEBUG
 #Preview {
-    MajorNoticeCollectionViewController(viewModel: MajorNoticeCollectionViewModel())
+    MajorNoticeCollectionViewController(viewModel: NoticeCollectionViewModel(category: MajorCategory.computerScience))
         .makePreview()
         .ignoresSafeArea()
 }

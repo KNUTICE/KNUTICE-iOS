@@ -9,7 +9,7 @@ import KNUTICECore
 import SwiftUI
 
 struct MajorSelectionView: View {
-    @EnvironmentObject private var viewModel: MajorNoticeCollectionViewModel
+    @EnvironmentObject private var viewModel: NoticeCollectionViewModel<MajorCategory>
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -19,7 +19,7 @@ struct MajorSelectionView: View {
                     Section {
                         ForEach(college.majors, id: \.self) { major in
                             Button {
-                                viewModel.selectedMajor = major
+                                viewModel.category = major
                                 dismiss()
                             } label: {
                                 HStack {
@@ -27,7 +27,7 @@ struct MajorSelectionView: View {
                                     
                                     Image(systemName: "checkmark.circle.fill")
                                         .foregroundStyle(.accent2)
-                                        .opacity(viewModel.selectedMajor == major ? 1 : 0)
+                                        .opacity(viewModel.category == major ? 1 : 0)
                                         .frame(maxWidth: .infinity, alignment: .trailing)
                                 }
                             }
@@ -58,5 +58,5 @@ struct MajorSelectionView: View {
 
 #Preview {
     MajorSelectionView()
-        .environmentObject(MajorNoticeCollectionViewModel())
+        .environmentObject(NoticeCollectionViewModel(category: MajorCategory.computerScience))
 }

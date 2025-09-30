@@ -12,7 +12,10 @@ import KNUTICECore
 import os
 import RxRelay
 
-class NoticeCollectionViewModel<Category>: NoticeSectionModelProvidable, NoticeFetchable where Category: RawRepresentable, Category.RawValue == String {
+typealias NoticeCollectionViewModelProtocol = ObservableObject & NoticeSectionModelProvidable & NoticeFetchable
+
+@MainActor
+final class NoticeCollectionViewModel<Category>: NoticeCollectionViewModelProtocol where Category: RawRepresentable, Category.RawValue == String {
     /// View와 바인딩할 데이터
     /// 서버에서 가져온 데이터를 해당 변수에 저장
     let notices: BehaviorRelay<[NoticeSectionModel]> = BehaviorRelay(value: [])
@@ -24,11 +27,7 @@ class NoticeCollectionViewModel<Category>: NoticeSectionModelProvidable, NoticeF
     let isRefreshing: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     /// 선택된 공지 종류
     /// 외부에서 변경되면 최신 값으로 공지를 가져오도록 사용
-    private var category: Category? {
-        didSet {
-            fetchNotices()
-        }
-    }
+    @Published var category: Category?
     /// Publisher 구독 메모리 관리를 위한 cancellable bag
     private var cancellables: Set<AnyCancellable> = []
     /// 콘솔 메시지 로깅을 위한 인스턴스
@@ -46,11 +45,6 @@ class NoticeCollectionViewModel<Category>: NoticeSectionModelProvidable, NoticeF
         requestNotices(category: category, isRefreshing: isRefreshing, update: .replace)
     }
     
-    /// 외부에서 선택된 공지 카테고리 업데이트
-    func updateSelectedMajor(_ category: Category?) {
-        self.category = category
-    }
-    
     /// 무한 스크롤 구현을 위해 다음 페이지 공지사항 요청하고,
     /// 전달 받은 데이터는 `notices`에 추가 후 업데이트
     func fetchNextPage() {
@@ -61,6 +55,21 @@ class NoticeCollectionViewModel<Category>: NoticeSectionModelProvidable, NoticeF
         }
         
         requestNotices(category: category, after: lastNum, update: .append)
+    }
+    
+    // FIXME: Publisher 방출 값과 fetchNotices(isRefreshing:)에서 사용하는 category의 값 불일치로 딜레이 추가
+    func bindWithCategory() {
+        $category
+            .delay(for: .seconds(0.1), scheduler: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let category = $0 else { return }
+                
+                // 새로운 공지 서버에서 가져오기
+                self?.fetchNotices()
+                // UserDefaults에 새로 선택된 공지 카테고리 저장
+                UserDefaults.standard.set(category.rawValue, forKey: UserDefaultsKeys.selectedMajor.rawValue)
+            })
+            .store(in: &cancellables)
     }
 }
 
@@ -99,19 +108,18 @@ extension NoticeCollectionViewModel {
                     self?.logger.error("NoticeCollectionViewModel error: \(error.localizedDescription)")
                 }
             }, receiveValue: { [weak self] notices in
-                guard let self else { return }
-                
                 switch update {
                 case .replace:
-                    self.notices.accept([notices])
+                    self?.notices.accept([notices])
                 case .append:
-                    var current = self.notices.value.first
+                    var current = self?.notices.value.first
                     current?.items.append(contentsOf: notices.items)
                     if let current {
-                        self.notices.accept([current])
+                        self?.notices.accept([current])
                     }
                 }
             })
             .store(in: &cancellables)
     }
 }
+
