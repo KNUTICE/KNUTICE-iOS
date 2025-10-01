@@ -18,6 +18,7 @@ final class TopicSubscriptionListViewModel: ObservableObject {
     @Published var isScholarshipNoticeNotificationSubscribed: Bool?
     @Published var isEventNoticeNotificationSubscribed: Bool?
     @Published var isEmploymentNoticeNotificationSubscribed: Bool?
+    @Published var isMajorNoticeNotificationSubscribed: Bool?
     @Published var isLoading: Bool = false
     @Published var isShowingAlert: Bool = false
     
@@ -26,17 +27,6 @@ final class TopicSubscriptionListViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private(set) var alertMessage: String = ""
     private(set) var task: Task<Void, Never>?
-    
-    var isAllDataLoaded: Bool {
-        let data = [
-            isGeneralNoticeNotificationSubscribed,
-            isAcademicNoticeNotificationSubscribed,
-            isScholarshipNoticeNotificationSubscribed,
-            isEventNoticeNotificationSubscribed
-        ]
-        
-        return data.allSatisfy { $0 != nil }
-    }
     
     func fetchNotificationSubscriptions() async {
         defer { isLoading = false }
@@ -62,6 +52,8 @@ final class TopicSubscriptionListViewModel: ObservableObject {
                     isEmploymentNoticeNotificationSubscribed = true
                 }
             }
+            
+            isMajorNoticeNotificationSubscribed = UserDefaults.standard.bool(forKey: UserDefaultsKeys.isMajorNotificationSubscribed.rawValue)
         } catch {
             logger.log(level: .error, "NotificationListViewModel.fetchNotificationSubscriptions(): \(error.localizedDescription)")
         }
@@ -89,6 +81,9 @@ final class TopicSubscriptionListViewModel: ObservableObject {
                     case .employmentNotice:
                         isEmploymentNoticeNotificationSubscribed = isEnabled
                     }
+                } else if let _ = topic as? MajorCategory {
+                    isMajorNoticeNotificationSubscribed = isEnabled
+                    UserDefaults.standard.set(isEnabled, forKey: UserDefaultsKeys.isMajorNotificationSubscribed.rawValue)
                 }
             } catch {
                 logger.log(level: .error, "NotificationListViewModel.update(key:value:): \(error.localizedDescription)")
