@@ -15,12 +15,12 @@ import RxRelay
 typealias NoticeCollectionViewModelProtocol = ObservableObject & NoticeSectionModelProvidable & NoticeFetchable
 
 @MainActor
-final class NoticeCollectionViewModel<Category>: NoticeCollectionViewModelProtocol where Category: RawRepresentable, Category.RawValue == String {
+final class NoticeCollectionViewModel<Category>: NoticeCollectionViewModelProtocol where Category: RawRepresentable & Sendable, Category.RawValue == String {
     /// View와 바인딩할 데이터
     /// 서버에서 가져온 데이터를 해당 변수에 저장
     let notices: BehaviorRelay<[NoticeSectionModel]> = BehaviorRelay(value: [])
     /// 공지사항 데이터 요청을 위한 `NoticeRepository` 인스턴스
-    @Injected(\.noticeRepository) private var repository
+    @Injected(\.fetchNoticeUseCase) private var fetchNoticeUseCase
     /// 서버와 통신 중임을 나타내는 변수
     let isFetching: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     /// 새로고침 여부를 나타내는 변수
@@ -30,6 +30,7 @@ final class NoticeCollectionViewModel<Category>: NoticeCollectionViewModelProtoc
     @Published var category: Category?
     /// Publisher 구독 메모리 관리를 위한 cancellable bag
     private var cancellables: Set<AnyCancellable> = []
+    private(set) var task: Task<Void, Never>?
     /// 콘솔 메시지 로깅을 위한 인스턴스
     private var logger: Logger = Logger()
     
@@ -66,8 +67,6 @@ final class NoticeCollectionViewModel<Category>: NoticeCollectionViewModelProtoc
                 
                 // 새로운 공지 서버에서 가져오기
                 self?.fetchNotices()
-                // UserDefaults에 새로 선택된 공지 카테고리 저장
-                UserDefaults.standard.set(category.rawValue, forKey: UserDefaultsKeys.selectedMajor.rawValue)
             })
             .store(in: &cancellables)
     }
@@ -81,7 +80,7 @@ extension NoticeCollectionViewModel {
 
     private func requestNotices(
         category: Category,
-        after: Int? = nil,
+        after nttId: Int? = nil,
         isRefreshing: Bool = false,
         update: UpdateStrategy
     ) {
@@ -91,35 +90,34 @@ extension NoticeCollectionViewModel {
             self.isFetching.accept(true)
         }
         
-        repository.fetchNotices(for: category.rawValue, after: after)
-            .map { NoticeSectionModel(items: $0) }
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
+        task = Task {
+            defer {
                 if isRefreshing {
-                    self?.isRefreshing.accept(false)
+                    self.isRefreshing.accept(false)
                 } else {
-                    self?.isFetching.accept(false)
+                    self.isFetching.accept(false)
                 }
+            }
+            
+            do {
+                let notices = try await fetchNoticeUseCase.execute(category: category, after: nttId)
+                let sectionModel = NoticeSectionModel(items: notices)
                 
-                switch completion {
-                case .finished:
-                    self?.logger.info("Successfully fetched Notices")
-                case .failure(let error):
-                    self?.logger.error("NoticeCollectionViewModel error: \(error.localizedDescription)")
-                }
-            }, receiveValue: { [weak self] notices in
                 switch update {
                 case .replace:
-                    self?.notices.accept([notices])
+                    self.notices.accept([sectionModel])
                 case .append:
-                    var current = self?.notices.value.first
-                    current?.items.append(contentsOf: notices.items)
+                    var current = self.notices.value.first
+                    current?.items.append(contentsOf: sectionModel.items)
                     if let current {
-                        self?.notices.accept([current])
+                        self.notices.accept([current])
                     }
                 }
-            })
-            .store(in: &cancellables)
+            } catch {
+                logger.error("NoticeCollectionViewModel error: \(error.localizedDescription)")
+            }
+        }
     }
+    
 }
 
