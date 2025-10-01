@@ -12,7 +12,7 @@ import KNUTICECore
 
 typealias NoticeCollectionViewConfigurable = UICollectionViewDelegateFlowLayout & CompositionalLayoutConfigurable & RxDataSourceBindable
 
-class NoticeCollectionViewController<Category>: UIViewController, NoticeCollectionViewConfigurable where Category: RawRepresentable, Category.RawValue == String {
+class NoticeCollectionViewController<Category>: UIViewController, NoticeCollectionViewConfigurable where Category: RawRepresentable & Sendable, Category.RawValue == String {
     lazy var collectionView: UICollectionView = {
         let layout = createCompositionalLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)

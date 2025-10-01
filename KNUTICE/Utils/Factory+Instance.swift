@@ -80,6 +80,12 @@ extension Container {
         }
     }
     
+    var fetchNoticeUseCase: Factory<FetchNoticeUseCase> {
+        Factory(self) {
+            FetchNoticeUseCaseImpl()
+        }
+    }
+    
     //MARK: - ViewModel
     var mainViewModel: Factory<MainTableViewModel> {
         Factory(self) { @MainActor in
