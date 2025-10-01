@@ -36,7 +36,7 @@ extension RxDataSourceBindable {
             .disposed(by: disposeBag)
     }
     
-    private func makeNoticeDataSource() -> RxCollectionViewSectionedReloadDataSource<NoticeSectionModel> {
+    func makeNoticeDataSource() -> RxCollectionViewSectionedReloadDataSource<NoticeSectionModel> {
         RxCollectionViewSectionedReloadDataSource<NoticeSectionModel>(configureCell: { [weak self] (dataSource, collectionView, indexPath, item) in
             guard let self else {
                 return UICollectionViewCell()

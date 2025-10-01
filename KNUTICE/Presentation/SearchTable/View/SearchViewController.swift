@@ -11,7 +11,7 @@ import UIKit
 import SwiftUI
 
 final class SearchViewController: UIViewController, CompositionalLayoutConfigurable {
-    let segmentedControl: UISegmentedControl = {
+    lazy var segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(frame: .zero)
         control.insertSegment(withTitle: "공지", at: 0, animated: true)
         control.insertSegment(withTitle: "북마크", at: 1, animated: true)

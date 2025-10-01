@@ -16,6 +16,23 @@ extension SearchViewController: RxDataSourceBindable {
         bindSearchBar()
         bindBookmarks()
     }
+    
+    func bindNotices() {
+        viewModel.notices
+            .observe(on: MainScheduler.instance)
+            .do { [weak self] in
+                if let text = self?.searchBar.text, !text.isEmpty,
+                   let result = $0.first, result.items.isEmpty == true {
+                    self?.collectionView.backgroundView = UIHostingController(rootView: ResultNotFoundView()).view
+                } else if let text = self?.searchBar.text, text.isEmpty {
+                    self?.collectionView.backgroundView = UIHostingController(rootView: SearchViewBackground(style: .notice)).view
+                } else {
+                    self?.collectionView.backgroundView = nil
+                }
+            }
+            .bind(to: collectionView.rx.items(dataSource: makeNoticeDataSource()))
+            .disposed(by: disposeBag)
+    }
 
     // MARK: - Private Bindings
     private func bindSearchBar() {
