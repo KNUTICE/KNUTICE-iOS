@@ -27,7 +27,6 @@ final class MainTableViewController: UIViewController {
         
         return tableView
     }()
-    let navigationBar = UIView(frame: .zero)
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -50,6 +49,14 @@ final class MainTableViewController: UIViewController {
         button.addTarget(self, action: #selector(navigateToSetting(_:)), for: .touchUpInside)
         
         return button
+    }()
+    lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, settingBtn])
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        
+        return stackView
     }()
     let tipView = UIHostingController(rootView: TipBannerView().environmentObject(TipBannerViewModel())).view
     let refreshControl = UIRefreshControl()
