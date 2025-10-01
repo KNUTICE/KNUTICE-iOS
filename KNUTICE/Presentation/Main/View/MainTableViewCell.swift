@@ -29,7 +29,11 @@ class MainTableViewCell: UITableViewCell {
     let cellBackgroundView: UIView = {
         let backgroundView = UIView()
         backgroundView.backgroundColor = .mainCellBackground
-        backgroundView.layer.cornerRadius = 10
+        if #available(iOS 26, *) {
+            backgroundView.layer.cornerRadius = 25
+        } else {
+            backgroundView.layer.cornerRadius = 10
+        }
         
         return backgroundView
     }()
