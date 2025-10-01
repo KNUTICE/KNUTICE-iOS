@@ -28,8 +28,8 @@ final class UITabBarViewController: UITabBarController {
         let viewController = MajorNoticeCollectionViewController(
             viewModel: NoticeCollectionViewModel(category: MajorCategory(rawValue: majorStr ?? ""))
         )
-        viewController.tabBarItem.image = UIImage(systemName: "graduationcap")
-        viewController.tabBarItem.selectedImage = UIImage(systemName: "graduationcap.fill")
+        viewController.tabBarItem.image = UIImage(systemName: "globe")
+        viewController.tabBarItem.selectedImage = UIImage(systemName: "globe.fill")
         viewController.tabBarItem.title = "학과소식"
         
         return viewController
@@ -110,7 +110,7 @@ extension UITabBarViewController {
                 UITab(title: "홈", image: UIImage(systemName: "house.fill"), identifier: "Tabs.main") { _ in
                     self.mainViewController
                 },
-                UITab(title: "학과소식", image: UIImage(systemName: "graduationcap.fill"), identifier: "Tabs.majorNotice") { _ in
+                UITab(title: "학과소식", image: UIImage(systemName: "globe.fill"), identifier: "Tabs.majorNotice") { _ in
                     self.majorNoticeViewController
                 },
                 UITab(title: "북마크", image: UIImage(systemName: "bookmark.fill"), identifier: "Tabs.bookmark") { _ in
