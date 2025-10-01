@@ -16,10 +16,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        // 학과 소식 알림 구독 기본값(최초 실행 시 true) 설정
+        initializeMajorNotificationSubscriptionStatus()
+        
         // FCM 세팅
         setFCM(application)
         
         return true
+    }
+    
+    private func initializeMajorNotificationSubscriptionStatus() {
+        let key = UserDefaultsKeys.isMajorNotificationSubscribed.rawValue
+        
+        if UserDefaults.standard.object(forKey: key) == nil {
+            UserDefaults.standard.set(true, forKey: key)
+        }
     }
     
     private func setFCM(_ application: UIApplication) {
@@ -107,15 +118,14 @@ extension AppDelegate: @MainActor UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.list, .banner, .sound])
         
-        //전달된 모든 알림 객체 삭제
-        /*
-         삭제하지 않으면 리모트 알림 Badge 값 불일치
-         ex: Foreground에서 리모트 알림 받은 후, Background 상태에서 Badge 불일치
-         */
+        
+        // 전달된 모든 알림 객체 삭제
+        // 삭제하지 않으면 리모트 알림 Badge 값 불일치
+        // ex: Foreground에서 리모트 알림 받은 후, Background 상태에서 Badge 불일치
         center.removeAllDeliveredNotifications()
         
-        //Foreground 상태에서 Bookmark 알림 받는 경우, 남아 있는 Notification Request Badge 값 재설정
-        //Foreground 상태에서 Remote 알림을 받는 경우 NotificationService에서 남아 있는 알림의 Badge 값을 증가 시킴
+        // Foreground 상태에서 Bookmark 알림 받는 경우, 남아 있는 Notification Request Badge 값 재설정
+        // Foreground 상태에서 Remote 알림을 받는 경우 NotificationService에서 남아 있는 알림의 Badge 값을 증가 시킴
         Task {
             await center.updatePendingNotificationRequestBadges() as Void
         }
@@ -133,3 +143,4 @@ extension AppDelegate: @MainActor UNUserNotificationCenterDelegate {
         UserDefaults.standard.set(userInfo, forKey: UserDefaultsKeys.userInfo.rawValue)
     }
 }
+
