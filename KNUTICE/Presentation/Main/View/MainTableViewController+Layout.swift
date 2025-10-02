@@ -17,6 +17,7 @@ extension MainTableViewController {
                 make.top.equalTo(view.safeAreaLayoutGuide)
                 make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(16)
                 make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-16)
+                make.height.equalTo(44)
             }
         }
         
