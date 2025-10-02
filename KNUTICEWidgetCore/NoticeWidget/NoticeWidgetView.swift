@@ -67,12 +67,3 @@ public struct KNUTICEWidget<T: SelectNoticeCategoryIntentInterface>: Widget {
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
 }
-
-#if DEBUG
-#Preview(as: .systemSmall) {
-    KNUTICEWidget<TestSelectNoticeCategoryIntent>(kind: "")
-} timeline: {
-    SimpleEntry(date: .now, configuration: nil, notices: [Notice.generalNoticesSampleData.first!])
-    SimpleEntry(date: .now, configuration: nil, notices: [Notice.academicNoticesSampleData.first!])
-}
-#endif

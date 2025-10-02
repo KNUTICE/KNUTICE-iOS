@@ -10,7 +10,7 @@ import Foundation
 import KNUTICECore
 import KNUTICEWidgetCore
 
-enum NoticeCategoryIntent: String, AppEnum, NoticeCategoryMappable {
+enum NoticeCategoryIntent: String, AppEnum, CaseIterable, NoticeCategoryMappable {
     case generalNotice = "일반소식"
     case academicNotice = "학사공지"
     case scholarshipNotice = "장학안내"
@@ -19,14 +19,27 @@ enum NoticeCategoryIntent: String, AppEnum, NoticeCategoryMappable {
     
     static let typeDisplayRepresentation: TypeDisplayRepresentation = "공지 카테고리"
         
-    static var caseDisplayRepresentations: [NoticeCategoryIntent: DisplayRepresentation] {
-        [
-            .generalNotice: "일반소식",
-            .academicNotice: "학사공지",
-            .scholarshipNotice: "장학안내",
-            .eventNotice: "행사안내",
-            .employmentNotice: "취업안내"
-        ]
+    static let caseDisplayRepresentations: [NoticeCategoryIntent: DisplayRepresentation] = [
+        .generalNotice: "일반소식",
+        .academicNotice: "학사공지",
+        .scholarshipNotice: "장학안내",
+        .eventNotice: "행사안내",
+        .employmentNotice: "취업안내"
+    ]
+    
+    var toNoticeCategory: NoticeCategory {
+        switch self {
+        case .generalNotice:
+            NoticeCategory.generalNotice
+        case .academicNotice:
+            NoticeCategory.academicNotice
+        case .scholarshipNotice:
+            NoticeCategory.scholarshipNotice
+        case .eventNotice:
+            NoticeCategory.eventNotice
+        case .employmentNotice:
+            NoticeCategory.employmentNotice
+        }
     }
 }
 
