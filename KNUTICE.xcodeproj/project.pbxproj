@@ -362,13 +362,20 @@
 			);
 			target = 8E68982A2CD61EF1005F0EEA /* NotificationService-dev */;
 		};
+		8E6196B22E8DF7040084CB58 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 8E8FC5342E42F0FA002D560F /* KNUTICECore */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		8E1D8C2A2E682D6E00E8F0EC /* KNUTICEWidget-dev */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8E1D8C372E682D7000E8F0EC /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "KNUTICEWidget-dev"; sourceTree = "<group>"; };
 		8E3C437A2E66D8D900EA711B /* KNUTICEWidgetCore */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = KNUTICEWidgetCore; sourceTree = "<group>"; };
 		8E3FBEFB2E694E950008425E /* KNUTICEWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8E3FBF002E694E950008425E /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = KNUTICEWidget; sourceTree = "<group>"; };
-		8E3FBF182E694EAB0008425E /* KNUTICECore */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = KNUTICECore; sourceTree = "<group>"; };
+		8E3FBF182E694EAB0008425E /* KNUTICECore */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8E6196B22E8DF7040084CB58 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = KNUTICECore; sourceTree = "<group>"; };
 		8E3FBF482E694EB40008425E /* KNUTICEUnitTests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8E3FBF6A2E694EB40008425E /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = KNUTICEUnitTests; sourceTree = "<group>"; };
 		8E3FBF6F2E694EC40008425E /* NotificationService-dev */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8E3FBF712E694EC40008425E /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "NotificationService-dev"; sourceTree = "<group>"; };
 		8E3FBF732E694EE80008425E /* ci_scripts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ci_scripts; sourceTree = "<group>"; };
@@ -1812,6 +1819,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KNUTICECore/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1852,6 +1860,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KNUTICECore/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
