@@ -7,3 +7,4 @@ KNUTICECore/Resources/ServiceInfo.plist
 # macOS
 .DS_Store
 .DS_Store?
+**/.DS_Store
