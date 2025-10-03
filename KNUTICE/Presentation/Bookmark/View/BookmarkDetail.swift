@@ -69,18 +69,25 @@ struct BookmarkDetail: View {
                 }
                 .fullScreenCover(isPresented: $isShowingWebView) {
                     NavigationStack {
-                        NoticeWebVCWrapper(notice: bookmark.notice)
-                            .edgesIgnoringSafeArea(.bottom)
-                            .toolbar {
-                                ToolbarItem(placement: .topBarLeading) {
-                                    Button {
-                                        isShowingWebView = false
-                                    } label: {
-                                        Image(systemName: "xmark")
-                                    }
+                        Group {
+                            if #available(iOS 26, *) {
+                                NoticeDetailView()
+                                    .environment(NoticeDetailViewModel(notice: bookmark.notice))
+                            } else {
+                                NoticeWebVCWrapper(notice: bookmark.notice)
+                                    .edgesIgnoringSafeArea(.bottom)
+                                    .background(.detailViewBackground)
+                            }
+                        }
+                        .toolbar {
+                            ToolbarItem(placement: .topBarLeading) {
+                                Button {
+                                    isShowingWebView = false
+                                } label: {
+                                    Image(systemName: "xmark")
                                 }
                             }
-                            .background(.detailViewBackground)
+                        }
                     }
                 }
             }
