@@ -27,12 +27,12 @@
 		<key>KNUTICEWidget-devExtension.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>6</integer>
 		</dict>
 		<key>KNUTICEWidgetCore.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>6</integer>
+			<integer>8</integer>
 		</dict>
 		<key>KNUTICEWidgetExtension.xcscheme_^#shared#^_</key>
 		<dict>
