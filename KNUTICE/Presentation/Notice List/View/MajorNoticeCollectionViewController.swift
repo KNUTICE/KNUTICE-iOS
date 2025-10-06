@@ -25,7 +25,7 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             makeMajorSelectionButton()
-            makeSettingBarButtonItem()
+            setSettingBarButtonItem()
         }
     }
     

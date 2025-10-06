@@ -92,7 +92,7 @@ extension BookmarkTableViewController: ThirdTabNavigationItemConfigurable, Setti
                 if UIDevice.current.userInterfaceIdiom == .pad {
                     self.makeBookmarkTitleBarItem()
                     self.navigationItem.rightBarButtonItems = [
-                        self.createSettingBarButtonItem(),
+                        self.getSettingBarButtonItem(),
                         self.makeSortMenuButton(selectedOption: value)
                     ]
                 }

@@ -75,7 +75,7 @@ extension UITabBarViewController {
             .dropFirst()
             .sink(receiveValue: { [weak self] sortOption in
                 // 선택된 정렬 옵션으로 UI 업데이트
-                self?.makeThirdTabNavigationItems(selectedOption: sortOption)
+                self?.setThirdTabNavigationItems(selectedOption: sortOption)
                 
                 // 선택된 정렬 조건으로 리스트를 업데이트 하기 위해 BookmarkTableViewController로 전달
                 NotificationCenter.default.post(

@@ -13,7 +13,7 @@ import SwiftUI
 @objc protocol FirstTabNavigationItemConfigurable {}
 
 extension FirstTabNavigationItemConfigurable where Self: UIViewController {
-    func makeTitleBarButtonItem() {
+    func setTitleBarButtonItem() {
         let titleLabel = UILabel()
         titleLabel.text = "KNUTICE"
         titleLabel.font = UIFont.font(for: .title2, weight: .heavy)

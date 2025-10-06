@@ -96,7 +96,7 @@ final class UITabBarViewController: UITabBarController, NavigationItemConfigurab
         bind()
         
         if UIDevice.current.userInterfaceIdiom == .phone {
-            makeFirstTabNavigationItems()
+            setFirstTabNavigationItems()
         }
     }
 }
@@ -105,12 +105,12 @@ extension UITabBarViewController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if UIDevice.current.userInterfaceIdiom == .phone {
             switch viewController {
-            case is MajorNoticeCollectionViewController:
-                makeSecondTabNavigationItems()
-            case is BookmarkTableViewController:
-                makeThirdTabNavigationItems(selectedOption: viewModel.bookmarkSortOption)
             case is MainTableViewController:
-                makeFirstTabNavigationItems()
+                setFirstTabNavigationItems()
+            case is MajorNoticeCollectionViewController:
+                setSecondTabNavigationItems()
+            case is BookmarkTableViewController:
+                setThirdTabNavigationItems(selectedOption: viewModel.bookmarkSortOption)
             default:
                 removeAllNavigationItems()
             }
@@ -140,24 +140,24 @@ extension UITabBarViewController {
 }
 
 extension UITabBarViewController {
-    func makeFirstTabNavigationItems() {
+    func setFirstTabNavigationItems() {
         // Bookmark의 rightBarButtonItems 제거
         navigationItem.rightBarButtonItems = nil
-        makeTitleBarButtonItem()
-        makeSettingBarButtonItem()
+        setTitleBarButtonItem()
+        setSettingBarButtonItem()
     }
     
-    func makeSecondTabNavigationItems() {
+    func setSecondTabNavigationItems() {
         // Bookmark의 rightBarButtonItems 제거
         navigationItem.rightBarButtonItems = nil
         makeMajorSelectionButton()
-        makeSettingBarButtonItem()
+        setSettingBarButtonItem()
     }
     
-    func makeThirdTabNavigationItems(selectedOption sortOption: BookmarkSortOption) {
+    func setThirdTabNavigationItems(selectedOption sortOption: BookmarkSortOption) {
         makeBookmarkTitleBarItem()
         navigationItem.rightBarButtonItems = [
-            createSettingBarButtonItem(),
+            getSettingBarButtonItem(),
             makeSortMenuButton(selectedOption: sortOption)
         ]
     }

@@ -43,8 +43,8 @@ final class MainTableViewController: UIViewController, FirstTabNavigationItemCon
         subscribeEntryTime()
         
         if UIDevice.current.userInterfaceIdiom == .pad {
-            makeTitleBarButtonItem()
-            makeSettingBarButtonItem()
+            setTitleBarButtonItem()
+            setSettingBarButtonItem()
         }
         
         //API Call
