@@ -15,18 +15,18 @@ import SwiftUI
 }
 
 extension SettingButtonConfigurable where Self: UIViewController {
-    func makeSettingBarButtonItem() {
-        navigationItem.rightBarButtonItem = createSettingBarButtonItem()
+    func setSettingBarButtonItem() {
+        navigationItem.rightBarButtonItem = getSettingBarButtonItem()
     }
 
-    func createSettingBarButtonItem() -> UIBarButtonItem {
-        makeBarButtonItem(
+    func getSettingBarButtonItem() -> UIBarButtonItem {
+        createBarButtonItem(
             imageSystemName: "gearshape",
             action: #selector(navigateToSetting(_:))
         )
     }
 
-    private func makeBarButtonItem(imageSystemName: String, action: Selector) -> UIBarButtonItem {
+    private func createBarButtonItem(imageSystemName: String, action: Selector) -> UIBarButtonItem {
         UIBarButtonItem(
             image: UIImage(systemName: imageSystemName),
             style: .plain,
