@@ -11,33 +11,12 @@ import SwiftUI
 //MARK: - Layout
 extension MainTableViewController {
     func setupLayout() {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            view.addSubview(stackView)
-            stackView.snp.makeConstraints { make in
-                make.top.equalTo(view.safeAreaLayoutGuide)
-                make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(16)
-                make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-16)
-                make.height.equalTo(44)
-            }
-        }
-        
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
-            if UIDevice.current.userInterfaceIdiom == .phone {
-                make.top.equalTo(stackView.snp.bottom)
-                make.leading.trailing.bottom.equalToSuperview()
-            } else {
-                make.edges.equalToSuperview()
-            }
+            make.edges.equalToSuperview()
         }
         
         tableView.tableHeaderView = tipView
-    }
-    
-    func createNavigationItems() {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(customView: settingBtn)
-        }
     }
     
     func createSectionHeader(for section: Int) -> UIView {

@@ -4,9 +4,10 @@
 //
 //  Created by 이정훈 on 3/11/25.
 //
-
 import Combine
 import Foundation
+import KNUTICECore
+import UIKit
 
 extension ParentViewController {
     func bind() {
@@ -29,8 +30,22 @@ extension ParentViewController {
             $0.removeFromParent()
         }
         
-        //새로운 View Controller 삽입
-        let tabBarViewController = UITabBarViewController(viewModel: TabBarViewModel())
-        addChildVC(tabBarViewController)
+        let majorStr = UserDefaults.standard.string(forKey: UserDefaultsKeys.selectedMajor.rawValue)
+        let majorCategory = MajorCategory(rawValue: majorStr ?? "")
+        let viewController: UIViewController
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            viewController = UITabBarViewController(
+                viewModel: TabBarViewModel(category: majorCategory)
+            )
+        } else {
+            //새로운 View Controller 삽입
+            viewController = UINavigationController(
+                rootViewController: UITabBarViewController(
+                    viewModel: TabBarViewModel(category: majorCategory)
+                )
+            )
+        }
+        addChildVC(viewController)
     }
 }

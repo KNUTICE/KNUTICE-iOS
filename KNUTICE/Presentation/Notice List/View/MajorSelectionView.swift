@@ -8,8 +8,8 @@
 import KNUTICECore
 import SwiftUI
 
-struct MajorSelectionView: View {
-    @EnvironmentObject private var viewModel: NoticeCollectionViewModel<MajorCategory>
+struct MajorSelectionView<T>: View where T: ObservableObject & MajorCategoryProvidable {
+    @EnvironmentObject private var viewModel: T
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -19,16 +19,23 @@ struct MajorSelectionView: View {
                     Section {
                         ForEach(college.majors, id: \.self) { major in
                             Button {
-                                viewModel.category = major
+                                // FIXME: Unify ViewModel types
+                                if let viewModel = viewModel as? NoticeCollectionViewModel<MajorCategory> {
+                                    viewModel.category = major
+                                } else if let viewModel = viewModel as? TabBarViewModel {
+                                    viewModel.category = major
+                                }
+                                
                                 dismiss()
                             } label: {
                                 HStack {
                                     Text(major.localizedDescription)
                                     
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .foregroundStyle(.accent2)
-                                        .opacity(viewModel.category == major ? 1 : 0)
-                                        .frame(maxWidth: .infinity, alignment: .trailing)
+                                    if let selectedCategory = viewModel.category as? MajorCategory, selectedCategory == major {
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .foregroundStyle(.accent2)
+                                            .frame(maxWidth: .infinity, alignment: .trailing)
+                                    }
                                 }
                             }
                             .listRowSeparator(.hidden)
@@ -57,6 +64,6 @@ struct MajorSelectionView: View {
 }
 
 #Preview {
-    MajorSelectionView()
-        .environmentObject(NoticeCollectionViewModel(category: MajorCategory.computerScience))
+    MajorSelectionView<TabBarViewModel>()
+        .environmentObject(TabBarViewModel(category: .computerScience))
 }

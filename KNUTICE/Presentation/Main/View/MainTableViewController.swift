@@ -11,10 +11,9 @@ import RxSwift
 import SwiftUI
 import Factory
 
-final class MainTableViewController: UIViewController {
+final class MainTableViewController: UIViewController, FirstTabNavigationItemConfigurable, SettingButtonConfigurable {
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
         tableView.sectionHeaderTopPadding = 15    //header padding
         tableView.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.reuseIdentifier)
@@ -26,37 +25,6 @@ final class MainTableViewController: UIViewController {
         tableView.refreshControl = refreshControl
         
         return tableView
-    }()
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "KNUTICE"
-        label.font = UIFont.systemFont(ofSize: 22, weight: .heavy)
-        
-        return label
-    }()
-    lazy var settingBtn: UIButton = {
-        let configuration = UIImage.SymbolConfiguration(textStyle: .title2)
-        let gearImage = UIImage(systemName: "gearshape", withConfiguration: configuration)?
-            .withRenderingMode(.alwaysTemplate)
-        let selectedGearImage = UIImage(systemName: "gearshape", withConfiguration: configuration)?
-            .withRenderingMode(.alwaysOriginal)
-            .withTintColor(.lightGray)
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(gearImage, for: .normal)
-        button.setImage(selectedGearImage, for: .highlighted)
-        button.addTarget(self, action: #selector(navigateToSetting(_:)), for: .touchUpInside)
-        
-        return button
-    }()
-    lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [titleLabel, settingBtn])
-        stackView.axis = .horizontal
-        stackView.alignment = .center
-        stackView.distribution = .fill
-        
-        return stackView
     }()
     let tipView = UIHostingController(rootView: TipBannerView().environmentObject(TipBannerViewModel())).view
     let refreshControl = UIRefreshControl()
@@ -70,10 +38,14 @@ final class MainTableViewController: UIViewController {
         
         view.backgroundColor = .primaryBackground
         setupLayout()
-        createNavigationItems()
         bind()
         recordEntryTime()
         subscribeEntryTime()
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            makeTitleBarButtonItem()
+            makeSettingBarButtonItem()
+        }
         
         //API Call
         viewModel.fetchNotices()
@@ -83,6 +55,20 @@ final class MainTableViewController: UIViewController {
         super.viewDidDisappear(animated)
         
         viewModel.task?.cancel()
+    }
+    
+    @objc func navigateToSetting(_ sender: UIButton) {
+        let viewController = UIHostingController(rootView: SettingView())
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @objc func setupSettingButtonToRightBarItem() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "gearshape"),
+            style: .plain,
+            target: self,
+            action: #selector(navigateToSetting(_:))
+        )
     }
 }
 
@@ -141,3 +127,4 @@ struct Preview: PreviewProvider {
     }
 }
 #endif
+

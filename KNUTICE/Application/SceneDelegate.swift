@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScen = (scene as? UIWindowScene) else { return }
         
         self.window = UIWindow(windowScene: windowScen)
-        self.window?.rootViewController = UINavigationController(rootViewController: ParentViewController())
+        self.window?.rootViewController = ParentViewController()
         self.window?.makeKeyAndVisible()
         
         // Handle deep link from cold start (widget, url, etc.)

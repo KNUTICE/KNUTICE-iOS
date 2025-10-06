@@ -12,7 +12,7 @@ import KNUTICECore
 import os
 import RxRelay
 
-typealias NoticeCollectionViewModelProtocol = ObservableObject & NoticeSectionModelProvidable & NoticeFetchable
+typealias NoticeCollectionViewModelProtocol = ObservableObject & NoticeSectionModelProvidable & NoticeFetchable & MajorCategoryProvidable
 
 @MainActor
 final class NoticeCollectionViewModel<Category>: NoticeCollectionViewModelProtocol where Category: RawRepresentable & Sendable, Category.RawValue == String {
@@ -62,9 +62,7 @@ final class NoticeCollectionViewModel<Category>: NoticeCollectionViewModelProtoc
     func bindWithCategory() {
         $category
             .delay(for: .seconds(0.1), scheduler: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] in
-                guard let category = $0 else { return }
-                
+            .sink(receiveValue: { [weak self] _ in
                 // 새로운 공지 서버에서 가져오기
                 self?.fetchNotices()
             })
