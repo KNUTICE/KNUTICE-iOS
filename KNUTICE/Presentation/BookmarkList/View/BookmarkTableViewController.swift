@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 5/27/25.
 //
 
+import Combine
 import Factory
 import UIKit
 import SwiftUI
@@ -24,47 +25,12 @@ final class BookmarkTableViewController: UIViewController {
         
         return tableView
     }()
-    let navigationBar = UIView(frame: .zero)
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "북마크"
-        label.font = UIFont.systemFont(ofSize: 22, weight: .heavy)
-        
-        return label
-    }()
-    lazy var settingBtn: UIButton = {
-        let configuration = UIImage.SymbolConfiguration(textStyle: .title2)
-        let gearImage = UIImage(systemName: "gearshape", withConfiguration: configuration)?
-            .withRenderingMode(.alwaysTemplate)
-        let selectedGearImage = UIImage(systemName: "gearshape", withConfiguration: configuration)?
-            .withRenderingMode(.alwaysOriginal)
-            .withTintColor(.lightGray)
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(gearImage, for: .normal)
-        button.setImage(selectedGearImage, for: .highlighted)
-        button.addTarget(self, action: #selector(navigateToSetting(_:)), for: .touchUpInside)
-        
-        return button
-    }()
-    let menuBtn: UIButton = {
-        let configuration = UIImage.SymbolConfiguration(textStyle: .title2)
-        let upAndDownImage = UIImage(systemName: "arrow.up.arrow.down.circle", withConfiguration: configuration)?
-            .withRenderingMode(.alwaysTemplate)
-        let selectedUpAndDownImage = UIImage(systemName: "arrow.up.arrow.down.circle", withConfiguration: configuration)?
-            .withRenderingMode(.alwaysOriginal)
-            .withTintColor(.lightGray)
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.showsMenuAsPrimaryAction = true
-        button.setImage(upAndDownImage, for: .normal)
-        button.setImage(selectedUpAndDownImage, for: .highlighted)
-        
-        return button
-    }()
-    @Injected(\.bookmarkTableViewModel) var viewModel
+    @Injected(\.bookmarkTableViewModel) var viewModel: BookmarkTableViewModel
+    var sortedBookmarkViewModel: BookmarkSortOptionProvidable {
+        return viewModel
+    }
     let disposeBag: DisposeBag = .init()
+    var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +38,6 @@ final class BookmarkTableViewController: UIViewController {
         view.backgroundColor = .primaryBackground
         setUpLayout()
         bind()
-        createNavigationItems()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -81,6 +46,11 @@ final class BookmarkTableViewController: UIViewController {
         viewModel.fetchTask?.cancel()
         viewModel.deleteTask?.cancel()
         viewModel.reloadTask?.cancel()
+    }
+    
+    @objc func navigateToSetting(_ sender: UIButton) {
+        let viewController = UIHostingController(rootView: SettingView())
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
@@ -92,13 +62,6 @@ extension BookmarkTableViewController: UITableViewDelegate {
         )
         navigationController?.pushViewController(viewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-}
-
-extension BookmarkTableViewController {
-    @objc func navigateToSetting(_ sender: UIButton) {
-        let viewController = UIHostingController(rootView: SettingView())
-        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 

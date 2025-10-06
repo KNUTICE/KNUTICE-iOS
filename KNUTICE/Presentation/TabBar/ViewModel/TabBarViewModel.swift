@@ -7,12 +7,22 @@
 
 import Combine
 import Factory
+import Foundation
 import KNUTICECore
 import os
 
 @MainActor
-final class TabBarViewModel: ObservableObject {
+final class TabBarViewModel: ObservableObject, MajorCategoryProvidable, BookmarkSortOptionProvidable {
+    @Published var category: MajorCategory? = nil
     @Published var deepLink: DeepLink? = nil
+    @Published var bookmarkSortOption: BookmarkSortOption = {
+        let value = UserDefaults.standard.string(forKey: UserDefaultsKeys.bookmarkSortOption.rawValue) ?? ""
+        return BookmarkSortOption(rawValue: value) ?? .createdAtDescending
+    }()
+    
+    init(category: MajorCategory?) {
+        self.category = category
+    }
     
     @Injected(\.pushNoticeService) private var service: DeepLinkService
     private let logger: Logger = Logger()

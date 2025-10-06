@@ -75,10 +75,4 @@ extension MainTableViewController {
         
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
-    //MARK: - Setting Button Action
-    @objc func navigateToSetting(_ sender: UIButton) {
-        let viewController = UIHostingController(rootView: SettingView())
-        navigationController?.pushViewController(viewController, animated: true)
-    }
 }

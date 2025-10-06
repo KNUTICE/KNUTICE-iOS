@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 5/27/25.
 //
 
+import Combine
 import Factory
 import Foundation
 import KNUTICECore
@@ -13,13 +14,12 @@ import RxSwift
 import os
 
 @MainActor
-final class BookmarkTableViewModel {
+final class BookmarkTableViewModel: BookmarkSortOptionProvidable {
     let bookmarks: BehaviorRelay<[BookmarkSectionModel]> = .init(value: [])
     let isRefreshing: BehaviorRelay<Bool> = .init(value: false)
-    
-    let sortOption: BehaviorRelay<BookmarkSortOption> = {
-        let value = UserDefaults.standard.string(forKey: UserDefaultsKeys.bookmarkSortOption.rawValue) ?? "createdAtDescending"
-        return BehaviorRelay(value: BookmarkSortOption(rawValue: value) ?? .createdAtDescending)
+    @Published var bookmarkSortOption: BookmarkSortOption = {
+        let value = UserDefaults.standard.string(forKey: UserDefaultsKeys.bookmarkSortOption.rawValue) ?? ""
+        return BookmarkSortOption(rawValue: value) ?? .createdAtDescending
     }()
     
     @Injected(\.bookmarkService) private var bookmarkService
@@ -38,7 +38,7 @@ final class BookmarkTableViewModel {
         fetchTask?.cancel()
         fetchTask = Task {
             do {
-                let fetchedBookmarks = try await bookmarkService.fetchBookmarks(page: bookmarks.value.count / 20, sortBy: sortOption.value)
+                let fetchedBookmarks = try await bookmarkService.fetchBookmarks(page: bookmarks.value.count / 20, sortBy: bookmarkSortOption)
                 let bookmarkSectionModels = fetchedBookmarks.map {
                     BookmarkSectionModel(items: [$0])
                 }
@@ -62,7 +62,7 @@ final class BookmarkTableViewModel {
                 let fetchedBookmarks = try await bookmarkService.fetchBookmarks(
                     page: 0,
                     pageSize: preserveCount ? bookmarks.value.count : 20,
-                    sortBy: sortOption.value
+                    sortBy: bookmarkSortOption
                 )
                 let bookmarkSectionModels = fetchedBookmarks.map {
                     BookmarkSectionModel(items: [$0])
@@ -84,7 +84,7 @@ final class BookmarkTableViewModel {
                 let fetchedBookmarks = try await bookmarkService.delete(
                     bookmark: bookmark,
                     reloadCount: bookmarks.value.count - 1,
-                    sortBy: sortOption.value
+                    sortBy: bookmarkSortOption
                 )
                 let bookmarkSectionModels = fetchedBookmarks.map {
                     BookmarkSectionModel(items: [$0])

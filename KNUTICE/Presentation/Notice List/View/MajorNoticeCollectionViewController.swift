@@ -11,51 +11,7 @@ import RxSwift
 import SwiftUI
 import UIKit
 
-final class MajorNoticeCollectionViewController: NoticeCollectionViewController<MajorCategory> {    
-    lazy var titleButton: UIButton = {
-        var config = UIButton.Configuration.plain()
-        config.title = "학과명"
-        config.image = UIImage(systemName: "chevron.right")
-        config.imagePlacement = .trailing
-        config.imagePadding = 3
-        config.contentInsets = .zero
-        config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-            var outgoing = incoming
-            outgoing.font = UIFont.systemFont(ofSize: 22, weight: .bold)
-            return outgoing
-        }
-        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 12, weight: .bold)
-        
-        let button = UIButton(type: .system)
-        button.configuration = config
-        button.contentHorizontalAlignment = .leading
-        button.addTarget(self, action: #selector(didTapTitleButton(_:)), for: .touchUpInside)
-        
-        return button
-    }()
-    lazy var settingBtn: UIButton = {
-        let configuration = UIImage.SymbolConfiguration(textStyle: .title2)
-        let gearImage = UIImage(systemName: "gearshape", withConfiguration: configuration)?
-            .withRenderingMode(.alwaysTemplate)
-        let selectedGearImage = UIImage(systemName: "gearshape", withConfiguration: configuration)?
-            .withRenderingMode(.alwaysOriginal)
-            .withTintColor(.lightGray)
-        let button = UIButton()
-        button.setImage(gearImage, for: .normal)
-        button.setImage(selectedGearImage, for: .highlighted)
-        button.addTarget(self, action: #selector(navigateToSetting(_:)), for: .touchUpInside)
-        
-        return button
-    }()
-    lazy var stackView: UIView = {
-        let stackView = UIStackView(arrangedSubviews: [titleButton, settingBtn])
-        stackView.axis = .horizontal
-        stackView.alignment = .center
-        stackView.distribution = .fill
-        stackView.backgroundColor = .primaryBackground
-        
-        return stackView
-    }()
+final class MajorNoticeCollectionViewController: NoticeCollectionViewController<MajorCategory>, SettingButtonConfigurable, SecondTabNavigationItemConfigurable {
     var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
@@ -66,21 +22,17 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
         if let viewModel = viewModel as? NoticeCollectionViewModel<MajorCategory> {
             viewModel.bindWithCategory()
         }
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            makeMajorSelectionButton()
+            makeSettingBarButtonItem()
+        }
     }
     
     override func setupLayout() {
-        view.addSubview(stackView)
-        stackView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(16)
-            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-16)
-            make.height.equalTo(44)
-        }
-        
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
-            make.leading.bottom.trailing.equalToSuperview()
-            make.top.equalTo(stackView.snp.bottom)
+            make.edges.equalToSuperview()
         }
     }
     
@@ -90,34 +42,42 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
         if let viewModel = viewModel as? NoticeCollectionViewModel<MajorCategory> {
             viewModel.$category
                 .sink(receiveValue: { [weak self] in
-                    self?.titleButton.configuration?.title = $0?.localizedDescription ?? "학과명"
+                    self?.makeMajorSelectionButton(withTitle: $0?.localizedDescription)
                 })
                 .store(in: &cancellables)
         }
-    }
-
-}
-
-extension MajorNoticeCollectionViewController {
-    @objc private func didTapTitleButton(_ sender: UIButton) {
-        if let viewModel = viewModel as? NoticeCollectionViewModel<MajorCategory> {
-            let viewController = UIHostingController(
-                rootView: MajorSelectionView()
-                    .environmentObject(viewModel)
-            )
-            viewController.modalPresentationStyle = .pageSheet
-            
-            if let sheet = viewController.sheetPresentationController {
-                sheet.detents = [.medium()]
-            }
-            
-            present(viewController, animated: true)
+        
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            NotificationCenter.default.publisher(for: .majorSelectionDidChange)
+                .sink(receiveValue: { [weak self] notification in
+                    if let viewModel = self?.viewModel as? NoticeCollectionViewModel<MajorCategory>,
+                       let category = notification.userInfo?["selectedMajor"] as? MajorCategory {
+                        viewModel.category = category
+                    }
+                })
+                .store(in: &cancellables)
         }
     }
     
     @objc func navigateToSetting(_ sender: UIButton) {
         let viewController = UIHostingController(rootView: SettingView())
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @objc func didTapMajorSelectionButton(_ sender: UIButton) {
+        guard let viewModel = viewModel as? NoticeCollectionViewModel<MajorCategory> else { return }
+        
+        let viewController = UIHostingController(
+            rootView: MajorSelectionView<NoticeCollectionViewModel<MajorCategory>>()
+                .environmentObject(viewModel)
+        )
+        viewController.modalPresentationStyle = .pageSheet
+        
+        if let sheet = viewController.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        
+        present(viewController, animated: true)
     }
 }
 

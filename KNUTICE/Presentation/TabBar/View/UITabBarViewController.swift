@@ -10,7 +10,9 @@ import KNUTICECore
 import UIKit
 import SwiftUI
 
-final class UITabBarViewController: UITabBarController {
+typealias NavigationItemConfigurable = FirstTabNavigationItemConfigurable & SecondTabNavigationItemConfigurable & SettingButtonConfigurable & ThirdTabNavigationItemConfigurable
+
+final class UITabBarViewController: UITabBarController, NavigationItemConfigurable {
     private let mainViewController: UIViewController = {
         let viewController = MainTableViewController()
         viewController.tabBarItem.image = UIImage(systemName: "house")
@@ -31,6 +33,10 @@ final class UITabBarViewController: UITabBarController {
         viewController.tabBarItem.image = UIImage(systemName: "globe")
         viewController.tabBarItem.selectedImage = UIImage(systemName: "globe.fill")
         viewController.tabBarItem.title = "학과소식"
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return UINavigationController(rootViewController: viewController)
+        }
         
         return viewController
     }()
@@ -68,6 +74,9 @@ final class UITabBarViewController: UITabBarController {
         }
     }()
     let viewModel: TabBarViewModel
+    var sortedBookmarkViewModel: BookmarkSortOptionProvidable {
+        return viewModel
+    }
     var cancellables: Set<AnyCancellable> = []
     
     init(viewModel: TabBarViewModel) {
@@ -79,21 +88,84 @@ final class UITabBarViewController: UITabBarController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        delegate = self
         setUpTabBar()
         bind()
+        
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            makeFirstTabNavigationItems()
+        }
+    }
+}
+
+extension UITabBarViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            switch viewController {
+            case is MajorNoticeCollectionViewController:
+                makeSecondTabNavigationItems()
+            case is BookmarkTableViewController:
+                makeThirdTabNavigationItems(selectedOption: viewModel.bookmarkSortOption)
+            case is MainTableViewController:
+                makeFirstTabNavigationItems()
+            default:
+                removeAllNavigationItems()
+            }
+        }
+    }
+}
+
+extension UITabBarViewController {
+    @objc func navigateToSetting(_ sender: UIButton) {
+        let viewController = UIHostingController(rootView: SettingView())
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    @objc func didTapMajorSelectionButton(_ sender: UIButton) {
+        let viewController = UIHostingController(
+            rootView: MajorSelectionView<TabBarViewModel>()
+                .environmentObject(viewModel)
+        )
+        viewController.modalPresentationStyle = .pageSheet
+        
+        if let sheet = viewController.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        
+        present(viewController, animated: true)
+    }
+}
+
+extension UITabBarViewController {
+    func makeFirstTabNavigationItems() {
+        // Bookmark의 rightBarButtonItems 제거
+        navigationItem.rightBarButtonItems = nil
+        makeTitleBarButtonItem()
+        makeSettingBarButtonItem()
+    }
+    
+    func makeSecondTabNavigationItems() {
+        // Bookmark의 rightBarButtonItems 제거
+        navigationItem.rightBarButtonItems = nil
+        makeMajorSelectionButton()
+        makeSettingBarButtonItem()
+    }
+    
+    func makeThirdTabNavigationItems(selectedOption sortOption: BookmarkSortOption) {
+        makeBookmarkTitleBarItem()
+        navigationItem.rightBarButtonItems = [
+            createSettingBarButtonItem(),
+            makeSortMenuButton(selectedOption: sortOption)
+        ]
+    }
+    
+    func removeAllNavigationItems() {
+        navigationItem.leftBarButtonItem = nil
+        navigationItem.rightBarButtonItem = nil
+        navigationItem.rightBarButtonItems = nil
     }
 }
 
@@ -124,16 +196,18 @@ extension UITabBarViewController {
             setViewControllers([mainViewController, majorNoticeViewController, bookmarkViewController, searchViewController], animated: true)
         }
     }
-    
 }
 
 
 #if DEBUG
 struct UITabBarViewControllerPreview: PreviewProvider {
     static var previews: some View {
-        UINavigationController(rootViewController: UITabBarViewController(viewModel: TabBarViewModel()))
-            .makePreview()
-            .edgesIgnoringSafeArea(.all)
+        UINavigationController(rootViewController: UITabBarViewController(
+            viewModel: TabBarViewModel(category: .computerScience))
+        )
+        .makePreview()
+        .edgesIgnoringSafeArea(.all)
     }
 }
 #endif
+

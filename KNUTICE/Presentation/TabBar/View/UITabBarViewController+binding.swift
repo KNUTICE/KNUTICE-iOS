@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Foundation
 import SwiftUI
 import UIKit
 
@@ -51,6 +52,37 @@ extension UITabBarViewController {
             .sink(receiveValue: { [weak self] _ in
                 // FIXME: 중복 호출 문제 수정
                 self?.viewModel.fetchDeepLinkIfExists()
+            })
+            .store(in: &cancellables)
+        
+        viewModel.$category
+            .sink(receiveValue: { [weak self] category in
+                guard let category else { return }
+                
+                // 버튼 타이틀 변경
+                self?.makeMajorSelectionButton(withTitle: category.localizedDescription)
+                
+                // 선택 된 전공 MajorNoticeCollectionViewController로 전달
+                NotificationCenter.default.post(
+                    name: Notification.Name.majorSelectionDidChange,
+                    object: self,
+                    userInfo: ["selectedMajor": category]
+                )
+            })
+            .store(in: &cancellables)
+        
+        viewModel.$bookmarkSortOption
+            .dropFirst()
+            .sink(receiveValue: { [weak self] sortOption in
+                // 선택된 정렬 옵션으로 UI 업데이트
+                self?.makeThirdTabNavigationItems(selectedOption: sortOption)
+                
+                // 선택된 정렬 조건으로 리스트를 업데이트 하기 위해 BookmarkTableViewController로 전달
+                NotificationCenter.default.post(
+                    name: Notification.Name.bookmarkSortOptionDidChange,
+                    object: self,
+                    userInfo: ["bookmarkSortOption": sortOption]
+                )
             })
             .store(in: &cancellables)
     }
