@@ -42,14 +42,14 @@ public struct Provider<T: SelectNoticeCategoryIntentInterface>: AppIntentTimelin
         }()
         
         for i in 0..<(notices.count - maxCount + 1) {
-            let entryDate = Calendar.current.date(byAdding: .second, value: i * 10, to: currentDate)!
+            let entryDate = Calendar.current.date(byAdding: .minute, value: i * 3, to: currentDate)!
             let subNotices = Array(notices[i..<i + maxCount])
             entries.append(SimpleEntry(date: entryDate, configuration: configuration, notices: subNotices))
         }
         
-        // 마지막 엔트리의 date + 1분 후에 새로 로드
+        // 마지막 엔트리의 date + 15분 후에 새로 로드
         if let lastDate = entries.last?.date,
-           let refreshDate = Calendar.current.date(byAdding: .second, value: 10, to: lastDate) {
+           let refreshDate = Calendar.current.date(byAdding: .minute, value: 15, to: lastDate) {
             return Timeline(entries: entries, policy: .after(refreshDate))
         }
         
