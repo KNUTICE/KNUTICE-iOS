@@ -25,21 +25,20 @@ public struct NoticeWidgetEntryView<T: SelectNoticeCategoryIntentInterface> : Vi
             }
             
             ForEach(entry.notices, id: \.id) { notice in
-                if let url = URL(string: "widget://notice?nttId=\(notice.id)") {
-                    Link(destination: url) {
+                Group {
+                    if let url = URL(string: "widget://notice?nttId=\(notice.id)") {
+                        Link(destination: url) {
+                            Text(notice.title)
+                        }
+                    } else {
+                        // URL 생성 실패 시 fallback
                         Text(notice.title)
-                            .font(.subheadline)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .lineLimit(1)
                     }
-                } else {
-                    // URL 생성 실패 시 fallback
-                    Text(notice.title)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .lineLimit(1)
                 }
+                .font(.subheadline)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .lineLimit(family != .systemSmall ? 1 : nil)
+                .padding([.top, .bottom], family == .systemLarge ? 10 : 0)
             }
         }
         .frame(maxHeight: .infinity, alignment: .top)
