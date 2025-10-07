@@ -1,5 +1,5 @@
 //
-//  SearchedNoticesMockTest.swift
+//  SearchingNoticesAPITest.swift
 //  KNUTICEUnitTests
 //
 //  Created by 이정훈 on 3/3/25.
@@ -12,7 +12,7 @@ import XCTest
 import KNUTICECore
 @testable import KNUTICE
 
-final class MockSearchedNoticesAPITest: XCTestCase {
+final class SearchingNoticesAPITest: XCTestCase {
     private var dataSource: RemoteDataSource!
     private var cancellables: Set<AnyCancellable>!
 
@@ -39,7 +39,7 @@ final class MockSearchedNoticesAPITest: XCTestCase {
 
     func test_fetchNotices_returnNoticeReponseDTO() {
         //Given
-        guard let baseURL = Bundle.main.noticeURL else {
+        guard let baseURL = Bundle.standard.noticeURL else {
             XCTFail("Failed to load searchURL from Bundle.main. Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension.")
             return
         }
@@ -61,7 +61,7 @@ final class MockSearchedNoticesAPITest: XCTestCase {
                 }
             }, receiveValue: {
                 //Then
-                XCTAssertEqual($0.code, 200)
+                XCTAssertEqual($0.metaData.code, 200)
                 XCTAssertNotNil($0.data)
             })
             .store(in: &cancellables)

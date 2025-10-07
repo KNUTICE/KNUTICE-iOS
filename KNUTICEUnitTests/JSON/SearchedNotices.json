@@ -1,63 +1,189 @@
 {
-  "result": {
-    "resultCode": 200,
-    "resultMessage": "성공",
-    "resultDescription": "성공"
+  "metaData": {
+    "success": true,
+    "code": 200,
+    "message": null
   },
-  "body": [
+  "data": [
     {
-      "nttId": 1076692,
-      "title": "2025년도 전국 지역인재 7급 수습직원 선발시험 추천대상자 최종 선발 결과 공지",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1076692",
-      "contentImage": null,
-      "departmentName": "취업성공지원과",
-      "registeredAt": "2025-01-17",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1083116,
+      "title": "[취업성공지원과]2025 해외취업역량강화위한 어학과정(토익,토익스피킹) 운영 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000390/selectBoardArticle.do;jsessionid=uBp6PWvayXWsCfdWDDkVd2aVWwuUNiJY0vOS56yd9KYKNZapl3rQ0i5K1uvV5108.knut_servlet_homepage?nttId=1083116",
+      "contentImageUrl": null,
+      "department": "한국어문학과",
+      "registrationDate": "2025-09-30",
+      "topic": "KOREAN_LANGUAGE_AND_LITERATURE"
     },
     {
-      "nttId": 1076189,
-      "title": "★취업성공지원과 진로 및 취업상담 안내 ★",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1076189",
-      "contentImage": "https://www.ut.ac.kr/namo/binary/images/000096/001.png",
-      "departmentName": "취업성공지원과",
-      "registeredAt": "2024-12-31",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1083115,
+      "title": "[취업성공지원과]2025학년도 현직자 직무부트캠프 참가학생 모집",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000390/selectBoardArticle.do;jsessionid=uBp6PWvayXWsCfdWDDkVd2aVWwuUNiJY0vOS56yd9KYKNZapl3rQ0i5K1uvV5108.knut_servlet_homepage?nttId=1083115",
+      "contentImageUrl": null,
+      "department": "한국어문학과",
+      "registrationDate": "2025-09-30",
+      "topic": "KOREAN_LANGUAGE_AND_LITERATURE"
     },
     {
-      "nttId": 1075700,
-      "title": "[중앙도서관] 도서관 내 분실물 확인 및 처리 공지",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1075700",
-      "contentImage": null,
-      "departmentName": "중앙도서관",
-      "registeredAt": "2024-12-16",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1083060,
+      "title": "[취업성공지원과]2025학년도 기업분석 콘테스트 운영 및 모집안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000390/selectBoardArticle.do;jsessionid=uVQXzaIiOhhPmfqJocsta29p48Uj9WY2MUh1SjjKybWDXEuAlzVuaKlSAw7COAE8.knut_servlet_homepage?nttId=1083060",
+      "contentImageUrl": null,
+      "department": "한국어문학과",
+      "registrationDate": "2025-09-29",
+      "topic": "KOREAN_LANGUAGE_AND_LITERATURE"
     },
     {
-      "nttId": 1074815,
-      "title": "🧡 취업성공지원과 맞춤형 진로·취업 상담 서비스 안내 💛",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?bbsId=BBSMSTR_000000000059&nttId=1074815",
-      "contentImage": "https://www.ut.ac.kr/namo/images/emoticon/11.gif",
-      "departmentName": "취업성공지원과",
-      "registeredAt": "2024-11-04",
-      "noticeName": "GENERAL_NEWS"
+      "nttId": 1083007,
+      "title": "2025학년도 2학기 졸업작품 발표 계획 공지",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000352/selectBoardArticle.do;jsessionid=uo2pPzatGYwo5tm6TUGalAZyOWLsspaYqujY0yx8NeLe1SdxlO3y41PrPkiBugP5.knut_servlet_homepage?nttId=1083007",
+      "contentImageUrl": null,
+      "department": "컴퓨터공학과",
+      "registrationDate": "2025-09-25",
+      "topic": "COMPUTER_ENGINEERING"
     },
     {
-      "nttId": 1073576,
-      "title": "자율주행 인공지능 챌린지 참여",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do?bbsId=BBSMSTR_000000000061&nttId=1073576",
-      "contentImage": null,
-      "departmentName": "학생과",
-      "registeredAt": "2024-09-12",
-      "noticeName": "EVENT_NEWS"
+      "nttId": 1082786,
+      "title": "[취업성공지원과]2025-3차 대학일자리개발원 진로·취업 Festival 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000390/selectBoardArticle.do;jsessionid=12WzHS70X4pBo24NrADzhLdz93W2z4gP1joaj5Qdm10Guw9mlqtfMZbvSQu1YoeJ.knut_servlet_homepage?nttId=1082786",
+      "contentImageUrl": null,
+      "department": "한국어문학과",
+      "registrationDate": "2025-09-16",
+      "topic": "KOREAN_LANGUAGE_AND_LITERATURE"
     },
     {
-      "nttId": 1072329,
-      "title": "제 2회 인공지능(AI) 신약개발 경진대회 'JUMP AI (.py) 2024' 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do?bbsId=BBSMSTR_000000000061&nttId=1072329&bbsTyCode=&bbsAttrbCode=&mno=sitemap_12&kind=&pageIndex=1",
-      "contentImage": null,
-      "departmentName": "학생과",
-      "registeredAt": "2024-08-09",
-      "noticeName": "EVENT_NEWS"
+      "nttId": 1082744,
+      "title": "졸업요건 및 관련규정 공지",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000478/selectBoardArticle.do;jsessionid=uW4tuSvegIOYaQlxmF1qdeXE4EmfdNX23G5JqOaydGDzi6kml0LLbnru82TAndn4.knut_servlet_homepage?nttId=1082744",
+      "contentImageUrl": null,
+      "department": "스포츠산업학과",
+      "registrationDate": "2025-09-15",
+      "topic": "SPORTS_INDUSTRY"
+    },
+    {
+      "nttId": 1082652,
+      "title": "[취업성공지원과]2025-2차 캠퍼스리크루팅[(주)메타바이오메드] 모집",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000390/selectBoardArticle.do;jsessionid=uOPom41wBWHSJ7Pa3muz4eYNFFYaF1cEEu3UXtEIjpHYw2wLlfb0xVJGnuFYWGxb.knut_servlet_homepage?nttId=1082652",
+      "contentImageUrl": null,
+      "department": "한국어문학과",
+      "registrationDate": "2025-09-11",
+      "topic": "KOREAN_LANGUAGE_AND_LITERATURE"
+    },
+    {
+      "nttId": 1082651,
+      "title": "[취업성공지원과]2025 GA4(구글애널리틱스4) 자격과정생 모집",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000390/selectBoardArticle.do;jsessionid=uOPom41wBWHSJ7Pa3muz4eYNFFYaF1cEEu3UXtEIjpHYw2wLlfb0xVJGnuFYWGxb.knut_servlet_homepage?nttId=1082651",
+      "contentImageUrl": null,
+      "department": "한국어문학과",
+      "registrationDate": "2025-09-11",
+      "topic": "KOREAN_LANGUAGE_AND_LITERATURE"
+    },
+    {
+      "nttId": 1082393,
+      "title": "[취업성공지원과]2025학년도 진로 및 직업탐색 특강 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000390/selectBoardArticle.do;jsessionid=u6a2v53Oc9p0emMF8iaGGn3Ai83tfBqIKUVX9yAFIO0d3YbPloMBa2ddkbiN3KKH.knut_servlet_homepage?nttId=1082393",
+      "contentImageUrl": null,
+      "department": "한국어문학과",
+      "registrationDate": "2025-09-08",
+      "topic": "KOREAN_LANGUAGE_AND_LITERATURE"
+    },
+    {
+      "nttId": 1082096,
+      "title": "[취업성공지원과]2025 단과대·캠퍼스별 진로·취업상담 신청 및 참여 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000390/selectBoardArticle.do;jsessionid=uAdliUAshz89qKs1tfekMsNLcFg10aocA3DpbXZa1eNhpxBPl4LB5DYeW9Ze2Ewg.knut_servlet_homepage?nttId=1082096",
+      "contentImageUrl": null,
+      "department": "한국어문학과",
+      "registrationDate": "2025-09-01",
+      "topic": "KOREAN_LANGUAGE_AND_LITERATURE"
+    },
+    {
+      "nttId": 1082061,
+      "title": "★ (취업성공지원과) 진로 및 취업상담 안내 ★",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=SuwuI5Tzeka5qXEBmqltmg1OEqr5UBvGAjsAmMc7v3T0o8GPl3AR81DTQqtyiJ1B.knut_servlet_homepage?nttId=1082061&kind=&mno=sitemap_12&pageIndex=1&searchCnd=&searchWrd=",
+      "contentImageUrl": "http://www.ut.ac.kr/namo/binary/images/000099/1.jpg",
+      "department": "취업성공지원과",
+      "registrationDate": "2025-09-01",
+      "topic": "GENERAL_NEWS"
+    },
+    {
+      "nttId": 1081698,
+      "title": "「산림과학기술과 인공지능(AI)이 함께 찾는 해답」 아이디어 공모전 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=QJsTIAScLaeWcYHXm7FNvB0A23NX0YSPAHmlDA6xa4Z0YW1rlIhiC14F2SHB21e2.knut_servlet_homepage?nttId=1081698",
+      "contentImageUrl": null,
+      "department": "학생과",
+      "registrationDate": "2025-08-19",
+      "topic": "EVENT_NEWS"
+    },
+    {
+      "nttId": 1080847,
+      "title": "[경기도경제과학진흥원] 「2025년 구글클라우드 인공지능(AI) 전문인력 양성과정 (GCP 기반 AI 서비스 프로젝트 개발 과정)」안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=Qxp2gmohPU11mjFtmRmRcuhJPTUpU00aA6LSB7HP6bJwuhG9lTgwHKpoYddbXlQ1.knut_servlet_homepage?nttId=1080847",
+      "contentImageUrl": null,
+      "department": "취업성공지원과",
+      "registrationDate": "2025-07-17",
+      "topic": "GENERAL_NEWS"
+    },
+    {
+      "nttId": 1080846,
+      "title": "[경기도경제과학진흥원] 「2025년 구글클라우드 인공지능(AI) 전문인력 양성과정 (GCP 기반 AI 서비스 프로젝트 개발 과정)」안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=ZRdqvdfOx6jUdggbhN1unPsJTYNP5aOKAQKK9aeaHno1l6yxl1rAAkdvXmcpke2S.knut_servlet_homepage?nttId=1080846",
+      "contentImageUrl": null,
+      "department": "취업성공지원과",
+      "registrationDate": "2025-07-17",
+      "topic": "EMPLOYMENT_NEWS"
+    },
+    {
+      "nttId": 1080218,
+      "title": "(공지)국립한국교통대학교 개인정보 처리방침 변경 알림",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000446/selectBoardArticle.do;jsessionid=uSwSTIlZ9EJpkaYat3WMvW9egEGT5sn6AhnkLcaypIGB2ETolI57A6mFxVm5WtKJ.knut_servlet_homepage?nttId=1080218",
+      "contentImageUrl": null,
+      "department": "융합경영학과",
+      "registrationDate": "2025-06-23",
+      "topic": "CONVERGENCE_MANAGEMENT"
+    },
+    {
+      "nttId": 1080216,
+      "title": "(공지)취업관련 학교제공 채용정보 게시 중단 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000446/selectBoardArticle.do;jsessionid=uSwSTIlZ9EJpkaYat3WMvW9egEGT5sn6AhnkLcaypIGB2ETolI57A6mFxVm5WtKJ.knut_servlet_homepage?nttId=1080216",
+      "contentImageUrl": null,
+      "department": "융합경영학과",
+      "registrationDate": "2025-06-23",
+      "topic": "CONVERGENCE_MANAGEMENT"
+    },
+    {
+      "nttId": 1080050,
+      "title": "[경기도경제과학진흥원]2025년엔비디아 인공지능(AI) 전문인력 양성(A) 교육신청 안내(NVIDIA 고성능 GPU 기반 LLM 서비스 프로젝트 개발과정",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=r65tqK3KNkYvJGQ7hiJGigUiguyfxSs7ApY1gTFpuRI5CdPklaOBKc8cU1kKLwGQ.knut_servlet_homepage?nttId=1080050",
+      "contentImageUrl": null,
+      "department": "취업성공지원과",
+      "registrationDate": "2025-06-16",
+      "topic": "EMPLOYMENT_NEWS"
+    },
+    {
+      "nttId": 1080049,
+      "title": "[경기도경제과학진흥원]2025년 AWS 인공지능(AI) 전문인력 양성(AWS AI커리어 점프업(Jump-up) 교육신청 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=r65tqK3KNkYvJGQ7hiJGigUiguyfxSs7ApY1gTFpuRI5CdPklaOBKc8cU1kKLwGQ.knut_servlet_homepage?nttId=1080049",
+      "contentImageUrl": null,
+      "department": "취업성공지원과",
+      "registrationDate": "2025-06-16",
+      "topic": "EMPLOYMENT_NEWS"
+    },
+    {
+      "nttId": 1080048,
+      "title": "[경기도경제과학진흥원]2025년 인공지능 리터러시 교육 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=r65tqK3KNkYvJGQ7hiJGigUiguyfxSs7ApY1gTFpuRI5CdPklaOBKc8cU1kKLwGQ.knut_servlet_homepage?nttId=1080048",
+      "contentImageUrl": null,
+      "department": "취업성공지원과",
+      "registrationDate": "2025-06-16",
+      "topic": "EMPLOYMENT_NEWS"
+    },
+    {
+      "nttId": 1079701,
+      "title": "★(취업성공지원과)2025학년도 진로 및 취업상담 운영 안내★",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=Mfv7hG9taNZ3XGynmlOjJ7aV6UJHgcl3ARThchzhwpfkBhxElaNU4yKKY0TfxHCn.knut_servlet_homepage?nttId=1079701",
+      "contentImageUrl": null,
+      "department": "취업성공지원과",
+      "registrationDate": "2025-05-29",
+      "topic": "GENERAL_NEWS"
     }
   ]
 }

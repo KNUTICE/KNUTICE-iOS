@@ -34,7 +34,7 @@ final class TopicSubscriptionFetchAPITests: XCTestCase {
     
     func test_fetchTopicSubscriptionsStatus_returnsNotificationSubscriptionDTO() async throws {
         //Given
-        guard let endpoint = Bundle.main.notificationPermissionURL else {
+        guard let endpoint = Bundle.main.topicSubscriptionURL else {
             XCTFail("Failed to load notificationPermissionURL from Bundle.main. Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension.")
             return
         }
@@ -45,16 +45,10 @@ final class TopicSubscriptionFetchAPITests: XCTestCase {
         let dto = try await dataSource.request(
             endpoint,
             method: .get,
-            decoding: NotificationSubscriptionDTO.self
+            decoding: TopicSubscriptionResponseDTO.self
         )
-        let result = [
-            dto.body.generalNewsTopic,
-            dto.body.academicNewsTopic,
-            dto.body.scholarshipNewsTopic,
-            dto.body.eventNewsTopic,
-            dto.body.employmentNewsTopic
-        ].allSatisfy {
-            $0 == true
+        let result = dto.data.subscribedTopics.allSatisfy {
+            ["GENERAL_NEWS", "SCHOLARSHIP_NEWS", "EVENT_NEWS", "ACADEMIC_NEWS", "EMPLOYMENT_NEWS"].contains($0)
         }
         
         //Then
@@ -63,30 +57,22 @@ final class TopicSubscriptionFetchAPITests: XCTestCase {
     
     func test_updateTopicSubscription_returnsSuccessDTO() async throws {
         //Given
-        guard let endpoint = Bundle.main.notificationPermissionURL else {
+        guard let endpoint = Bundle.main.topicSubscriptionURL else {
             XCTFail("Failed to load notificationPermissionURL from Bundle.main. Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension.")
             return
         }
         
         MockURLProtocol.setUpMockData(.postRequestShouldSucceed, for: URL(string: endpoint)!)
         
-        let params: [String: any Sendable] = [
-            "result": [
-                "resultCode": 0,
-                "resultMessage": "string",
-                "resultDescription": "string"
-            ] as [String: any Sendable],
-            "body": [
-                "fcmToken": "string",
-                "noticeName" : "GENERAL_NEWS",
-                "isSubscribed" : true
-            ] as [String: any Sendable]
-        ]
+        let params = [
+            "topic": "GENERAL_NEWS",
+            "enabled": true
+        ] as [String: any Sendable]
         
         //When
         let dto = try await dataSource.request(
             endpoint,
-            method: .post,
+            method: .patch,
             parameters: params,
             decoding: PostResponseDTO.self
         )

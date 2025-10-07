@@ -1,8 +1,8 @@
 {
-    "result": {
-        "resultCode": 200,
-        "resultMessage": "성공",
-        "resultDescription": "성공"
-    },
-    "body": true
+  "metaData": {
+    "success": true,
+    "code": 200,
+    "message": null
+  },
+  "data": true
 }

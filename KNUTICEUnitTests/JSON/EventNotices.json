@@ -1,187 +1,189 @@
 {
-  "success": true,
-  "code": 200,
-  "message": null,
-  "data": [
-    {
-      "nttId": 1082465,
-      "title": "[비엔날레 연계]「2025 한글진흥 국제포럼 예술로 살아나는 문자」 참여 신청 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=qOPdiJvrrXp2IVYg49HQFQBTUmf471faKsQpaNrzLhggh9wslyMekVF6MVEzK1hn.knut_servlet_homepage?nttId=1082465",
-      "contentImageUrl": null,
-      "department": "학생과",
-      "registrationDate": "2025-09-08",
-      "topic": "EVENT_NEWS"
+    "metaData": {
+        "success": true,
+        "code": 200,
+        "message": null
     },
-    {
-      "nttId": 1082377,
-      "title": "‘시티파크, 빛의 정원’, 「충북도청 아나몰픽 미디어아트 공모 전」 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=UN4PMKFdzaHmf3lIqcLey3GV3cXnF4uiF33L7eVaft57ZKJulW3NbGrona1E1sZI.knut_servlet_homepage?nttId=1082377",
-      "contentImageUrl": null,
-      "department": "학생과",
-      "registrationDate": "2025-09-07",
-      "topic": "EVENT_NEWS"
-    },
-    {
-      "nttId": 1082376,
-      "title": "미래내일일경험 사업 고립(은둔)청년 자립 지원을 위한 잡택트(Jobtact) 2기 캠프 참여자 모집",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=gTkgKaJfyNn8o11NsaViapWC2EjI6ZIuFhWJfubamZ1xkAsDlYl2klsmZSH11GuV.knut_servlet_homepage?nttId=1082376",
-      "contentImageUrl": null,
-      "department": "학생과",
-      "registrationDate": "2025-09-07",
-      "topic": "EVENT_NEWS"
-    },
-    {
-      "nttId": 1082375,
-      "title": "「나라키움 대학생주택」 2025년 2학기(9~12월) 추가 모집 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=gTkgKaJfyNn8o11NsaViapWC2EjI6ZIuFhWJfubamZ1xkAsDlYl2klsmZSH11GuV.knut_servlet_homepage?nttId=1082375",
-      "contentImageUrl": null,
-      "department": "학생과",
-      "registrationDate": "2025-09-07",
-      "topic": "EVENT_NEWS"
-    },
-    {
-      "nttId": 1082374,
-      "title": "[글로컬대학30] 2025 부산교육대학교 제4회 KREON BUSAN EDU FORUM 개최(9. 25.) 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=gTkgKaJfyNn8o11NsaViapWC2EjI6ZIuFhWJfubamZ1xkAsDlYl2klsmZSH11GuV.knut_servlet_homepage?nttId=1082374",
-      "contentImageUrl": null,
-      "department": "학생과",
-      "registrationDate": "2025-09-07",
-      "topic": "EVENT_NEWS"
-    },
-    {
-      "nttId": 1082373,
-      "title": "BIXPO 2025「KEPCO 발명기술혁신대전」참가 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=qaXyXWVUHhlqpTcRrrx1D1dco7nndfA4FKGZoO3k12V1mJWVlCLm1JL4I84PSDt2.knut_servlet_homepage?nttId=1082373",
-      "contentImageUrl": null,
-      "department": "학생과",
-      "registrationDate": "2025-09-07",
-      "topic": "EVENT_NEWS"
-    },
-    {
-      "nttId": 1082372,
-      "title": "2025년 체육관련 규제개선 아이디어 공모전",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=qaXyXWVUHhlqpTcRrrx1D1dco7nndfA4FKGZoO3k12V1mJWVlCLm1JL4I84PSDt2.knut_servlet_homepage?nttId=1082372",
-      "contentImageUrl": null,
-      "department": "학생과",
-      "registrationDate": "2025-09-07",
-      "topic": "EVENT_NEWS"
-    },
-    {
-      "nttId": 1082371,
-      "title": "2025년 공직박람회 개최 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=qaXyXWVUHhlqpTcRrrx1D1dco7nndfA4FKGZoO3k12V1mJWVlCLm1JL4I84PSDt2.knut_servlet_homepage?nttId=1082371",
-      "contentImageUrl": null,
-      "department": "학생과",
-      "registrationDate": "2025-09-07",
-      "topic": "EVENT_NEWS"
-    },
-    {
-      "nttId": 1082370,
-      "title": "충주시 체류형 대학생 단체 여행 지원사업 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=qaXyXWVUHhlqpTcRrrx1D1dco7nndfA4FKGZoO3k12V1mJWVlCLm1JL4I84PSDt2.knut_servlet_homepage?nttId=1082370",
-      "contentImageUrl": null,
-      "department": "학생과",
-      "registrationDate": "2025-09-07",
-      "topic": "EVENT_NEWS"
-    },
-    {
-      "nttId": 1082368,
-      "title": "제 목 제17회 가람시조문학신인상 공모 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=ssXRklMjInoFHtT41pb1GhS9fij4GJI8FZudeO4KsCbTPvStlFhoOryHe0H34jrn.knut_servlet_homepage?nttId=1082368",
-      "contentImageUrl": null,
-      "department": "학생과",
-      "registrationDate": "2025-09-07",
-      "topic": "EVENT_NEWS"
-    },
-    {
-      "nttId": 1082367,
-      "title": "2025년 제5회 영천 청년의 날 청춘콘서트 행사 개최",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=ssXRklMjInoFHtT41pb1GhS9fij4GJI8FZudeO4KsCbTPvStlFhoOryHe0H34jrn.knut_servlet_homepage?nttId=1082367",
-      "contentImageUrl": null,
-      "department": "학생과",
-      "registrationDate": "2025-09-07",
-      "topic": "EVENT_NEWS"
-    },
-    {
-      "nttId": 1082366,
-      "title": "「2025년 학생 애니메이션 어워즈 in 순천」작품 모집",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=ssXRklMjInoFHtT41pb1GhS9fij4GJI8FZudeO4KsCbTPvStlFhoOryHe0H34jrn.knut_servlet_homepage?nttId=1082366",
-      "contentImageUrl": null,
-      "department": "학생과",
-      "registrationDate": "2025-09-07",
-      "topic": "EVENT_NEWS"
-    },
-    {
-      "nttId": 1082365,
-      "title": "「2025년 경기도 경제지식 숏폼 공모전」",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=ssXRklMjInoFHtT41pb1GhS9fij4GJI8FZudeO4KsCbTPvStlFhoOryHe0H34jrn.knut_servlet_homepage?nttId=1082365",
-      "contentImageUrl": null,
-      "department": "학생과",
-      "registrationDate": "2025-09-07",
-      "topic": "EVENT_NEWS"
-    },
-    {
-      "nttId": 1082364,
-      "title": "2025 제2회 KWO 청년 안보 스피치 대회 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=Zckclbiin4M3trRDP9mXjTv1tXD6uSSMF3virMy7hWFNL0HSl6fRyQyIDGfzBzoC.knut_servlet_homepage?nttId=1082364",
-      "contentImageUrl": null,
-      "department": "학생과",
-      "registrationDate": "2025-09-07",
-      "topic": "EVENT_NEWS"
-    },
-    {
-      "nttId": 1082363,
-      "title": "「2025 에듀테크 코리아 페어」 개최 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=Zckclbiin4M3trRDP9mXjTv1tXD6uSSMF3virMy7hWFNL0HSl6fRyQyIDGfzBzoC.knut_servlet_homepage?nttId=1082363",
-      "contentImageUrl": null,
-      "department": "학생과",
-      "registrationDate": "2025-09-07",
-      "topic": "EVENT_NEWS"
-    },
-    {
-      "nttId": 1082362,
-      "title": "「2025 제10회 순천의 맛! 전국음식경연대회」참가자 모집",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=Zckclbiin4M3trRDP9mXjTv1tXD6uSSMF3virMy7hWFNL0HSl6fRyQyIDGfzBzoC.knut_servlet_homepage?nttId=1082362",
-      "contentImageUrl": null,
-      "department": "학생과",
-      "registrationDate": "2025-09-07",
-      "topic": "EVENT_NEWS"
-    },
-    {
-      "nttId": 1082216,
-      "title": "「제4회 대구콘텐츠페어(DCCF)」개최 및 참관 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=S5Fm9O7io4MEd2bymTb9uRTJfPQ7JkMMAeEdrhoVqL9AavajlkX4sGnLj7JFxgAl.knut_servlet_homepage?nttId=1082216",
-      "contentImageUrl": null,
-      "department": "학생과",
-      "registrationDate": "2025-09-02",
-      "topic": "EVENT_NEWS"
-    },
-    {
-      "nttId": 1082215,
-      "title": "「내 가족 생명 살리는 부산 고향사랑기부 이벤트」 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=S5Fm9O7io4MEd2bymTb9uRTJfPQ7JkMMAeEdrhoVqL9AavajlkX4sGnLj7JFxgAl.knut_servlet_homepage?nttId=1082215",
-      "contentImageUrl": null,
-      "department": "학생과",
-      "registrationDate": "2025-09-02",
-      "topic": "EVENT_NEWS"
-    },
-    {
-      "nttId": 1082214,
-      "title": "2026대구마라톤 홍보 및 마스터즈 부문 참가모집 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=S5Fm9O7io4MEd2bymTb9uRTJfPQ7JkMMAeEdrhoVqL9AavajlkX4sGnLj7JFxgAl.knut_servlet_homepage?nttId=1082214",
-      "contentImageUrl": null,
-      "department": "학생과",
-      "registrationDate": "2025-09-02",
-      "topic": "EVENT_NEWS"
-    },
-    {
-      "nttId": 1082213,
-      "title": "2025년 \"해양환경 지식나눔\" 온라인 라이브 특강 개설 안내 (9월)",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=S5Fm9O7io4MEd2bymTb9uRTJfPQ7JkMMAeEdrhoVqL9AavajlkX4sGnLj7JFxgAl.knut_servlet_homepage?nttId=1082213",
-      "contentImageUrl": null,
-      "department": "학생과",
-      "registrationDate": "2025-09-02",
-      "topic": "EVENT_NEWS"
-    }
-  ]
+    "data": [
+        {
+            "nttId": 1082465,
+            "title": "[비엔날레 연계]「2025 한글진흥 국제포럼 예술로 살아나는 문자」 참여 신청 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=qOPdiJvrrXp2IVYg49HQFQBTUmf471faKsQpaNrzLhggh9wslyMekVF6MVEzK1hn.knut_servlet_homepage?nttId=1082465",
+            "contentImageUrl": null,
+            "department": "학생과",
+            "registrationDate": "2025-09-08",
+            "topic": "EVENT_NEWS"
+        },
+        {
+            "nttId": 1082377,
+            "title": "‘시티파크, 빛의 정원’, 「충북도청 아나몰픽 미디어아트 공모 전」 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=UN4PMKFdzaHmf3lIqcLey3GV3cXnF4uiF33L7eVaft57ZKJulW3NbGrona1E1sZI.knut_servlet_homepage?nttId=1082377",
+            "contentImageUrl": null,
+            "department": "학생과",
+            "registrationDate": "2025-09-07",
+            "topic": "EVENT_NEWS"
+        },
+        {
+            "nttId": 1082376,
+            "title": "미래내일일경험 사업 고립(은둔)청년 자립 지원을 위한 잡택트(Jobtact) 2기 캠프 참여자 모집",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=gTkgKaJfyNn8o11NsaViapWC2EjI6ZIuFhWJfubamZ1xkAsDlYl2klsmZSH11GuV.knut_servlet_homepage?nttId=1082376",
+            "contentImageUrl": null,
+            "department": "학생과",
+            "registrationDate": "2025-09-07",
+            "topic": "EVENT_NEWS"
+        },
+        {
+            "nttId": 1082375,
+            "title": "「나라키움 대학생주택」 2025년 2학기(9~12월) 추가 모집 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=gTkgKaJfyNn8o11NsaViapWC2EjI6ZIuFhWJfubamZ1xkAsDlYl2klsmZSH11GuV.knut_servlet_homepage?nttId=1082375",
+            "contentImageUrl": null,
+            "department": "학생과",
+            "registrationDate": "2025-09-07",
+            "topic": "EVENT_NEWS"
+        },
+        {
+            "nttId": 1082374,
+            "title": "[글로컬대학30] 2025 부산교육대학교 제4회 KREON BUSAN EDU FORUM 개최(9. 25.) 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=gTkgKaJfyNn8o11NsaViapWC2EjI6ZIuFhWJfubamZ1xkAsDlYl2klsmZSH11GuV.knut_servlet_homepage?nttId=1082374",
+            "contentImageUrl": null,
+            "department": "학생과",
+            "registrationDate": "2025-09-07",
+            "topic": "EVENT_NEWS"
+        },
+        {
+            "nttId": 1082373,
+            "title": "BIXPO 2025「KEPCO 발명기술혁신대전」참가 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=qaXyXWVUHhlqpTcRrrx1D1dco7nndfA4FKGZoO3k12V1mJWVlCLm1JL4I84PSDt2.knut_servlet_homepage?nttId=1082373",
+            "contentImageUrl": null,
+            "department": "학생과",
+            "registrationDate": "2025-09-07",
+            "topic": "EVENT_NEWS"
+        },
+        {
+            "nttId": 1082372,
+            "title": "2025년 체육관련 규제개선 아이디어 공모전",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=qaXyXWVUHhlqpTcRrrx1D1dco7nndfA4FKGZoO3k12V1mJWVlCLm1JL4I84PSDt2.knut_servlet_homepage?nttId=1082372",
+            "contentImageUrl": null,
+            "department": "학생과",
+            "registrationDate": "2025-09-07",
+            "topic": "EVENT_NEWS"
+        },
+        {
+            "nttId": 1082371,
+            "title": "2025년 공직박람회 개최 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=qaXyXWVUHhlqpTcRrrx1D1dco7nndfA4FKGZoO3k12V1mJWVlCLm1JL4I84PSDt2.knut_servlet_homepage?nttId=1082371",
+            "contentImageUrl": null,
+            "department": "학생과",
+            "registrationDate": "2025-09-07",
+            "topic": "EVENT_NEWS"
+        },
+        {
+            "nttId": 1082370,
+            "title": "충주시 체류형 대학생 단체 여행 지원사업 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=qaXyXWVUHhlqpTcRrrx1D1dco7nndfA4FKGZoO3k12V1mJWVlCLm1JL4I84PSDt2.knut_servlet_homepage?nttId=1082370",
+            "contentImageUrl": null,
+            "department": "학생과",
+            "registrationDate": "2025-09-07",
+            "topic": "EVENT_NEWS"
+        },
+        {
+            "nttId": 1082368,
+            "title": "제 목 제17회 가람시조문학신인상 공모 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=ssXRklMjInoFHtT41pb1GhS9fij4GJI8FZudeO4KsCbTPvStlFhoOryHe0H34jrn.knut_servlet_homepage?nttId=1082368",
+            "contentImageUrl": null,
+            "department": "학생과",
+            "registrationDate": "2025-09-07",
+            "topic": "EVENT_NEWS"
+        },
+        {
+            "nttId": 1082367,
+            "title": "2025년 제5회 영천 청년의 날 청춘콘서트 행사 개최",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=ssXRklMjInoFHtT41pb1GhS9fij4GJI8FZudeO4KsCbTPvStlFhoOryHe0H34jrn.knut_servlet_homepage?nttId=1082367",
+            "contentImageUrl": null,
+            "department": "학생과",
+            "registrationDate": "2025-09-07",
+            "topic": "EVENT_NEWS"
+        },
+        {
+            "nttId": 1082366,
+            "title": "「2025년 학생 애니메이션 어워즈 in 순천」작품 모집",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=ssXRklMjInoFHtT41pb1GhS9fij4GJI8FZudeO4KsCbTPvStlFhoOryHe0H34jrn.knut_servlet_homepage?nttId=1082366",
+            "contentImageUrl": null,
+            "department": "학생과",
+            "registrationDate": "2025-09-07",
+            "topic": "EVENT_NEWS"
+        },
+        {
+            "nttId": 1082365,
+            "title": "「2025년 경기도 경제지식 숏폼 공모전」",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=ssXRklMjInoFHtT41pb1GhS9fij4GJI8FZudeO4KsCbTPvStlFhoOryHe0H34jrn.knut_servlet_homepage?nttId=1082365",
+            "contentImageUrl": null,
+            "department": "학생과",
+            "registrationDate": "2025-09-07",
+            "topic": "EVENT_NEWS"
+        },
+        {
+            "nttId": 1082364,
+            "title": "2025 제2회 KWO 청년 안보 스피치 대회 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=Zckclbiin4M3trRDP9mXjTv1tXD6uSSMF3virMy7hWFNL0HSl6fRyQyIDGfzBzoC.knut_servlet_homepage?nttId=1082364",
+            "contentImageUrl": null,
+            "department": "학생과",
+            "registrationDate": "2025-09-07",
+            "topic": "EVENT_NEWS"
+        },
+        {
+            "nttId": 1082363,
+            "title": "「2025 에듀테크 코리아 페어」 개최 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=Zckclbiin4M3trRDP9mXjTv1tXD6uSSMF3virMy7hWFNL0HSl6fRyQyIDGfzBzoC.knut_servlet_homepage?nttId=1082363",
+            "contentImageUrl": null,
+            "department": "학생과",
+            "registrationDate": "2025-09-07",
+            "topic": "EVENT_NEWS"
+        },
+        {
+            "nttId": 1082362,
+            "title": "「2025 제10회 순천의 맛! 전국음식경연대회」참가자 모집",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=Zckclbiin4M3trRDP9mXjTv1tXD6uSSMF3virMy7hWFNL0HSl6fRyQyIDGfzBzoC.knut_servlet_homepage?nttId=1082362",
+            "contentImageUrl": null,
+            "department": "학생과",
+            "registrationDate": "2025-09-07",
+            "topic": "EVENT_NEWS"
+        },
+        {
+            "nttId": 1082216,
+            "title": "「제4회 대구콘텐츠페어(DCCF)」개최 및 참관 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=S5Fm9O7io4MEd2bymTb9uRTJfPQ7JkMMAeEdrhoVqL9AavajlkX4sGnLj7JFxgAl.knut_servlet_homepage?nttId=1082216",
+            "contentImageUrl": null,
+            "department": "학생과",
+            "registrationDate": "2025-09-02",
+            "topic": "EVENT_NEWS"
+        },
+        {
+            "nttId": 1082215,
+            "title": "「내 가족 생명 살리는 부산 고향사랑기부 이벤트」 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=S5Fm9O7io4MEd2bymTb9uRTJfPQ7JkMMAeEdrhoVqL9AavajlkX4sGnLj7JFxgAl.knut_servlet_homepage?nttId=1082215",
+            "contentImageUrl": null,
+            "department": "학생과",
+            "registrationDate": "2025-09-02",
+            "topic": "EVENT_NEWS"
+        },
+        {
+            "nttId": 1082214,
+            "title": "2026대구마라톤 홍보 및 마스터즈 부문 참가모집 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=S5Fm9O7io4MEd2bymTb9uRTJfPQ7JkMMAeEdrhoVqL9AavajlkX4sGnLj7JFxgAl.knut_servlet_homepage?nttId=1082214",
+            "contentImageUrl": null,
+            "department": "학생과",
+            "registrationDate": "2025-09-02",
+            "topic": "EVENT_NEWS"
+        },
+        {
+            "nttId": 1082213,
+            "title": "2025년 \"해양환경 지식나눔\" 온라인 라이브 특강 개설 안내 (9월)",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do;jsessionid=S5Fm9O7io4MEd2bymTb9uRTJfPQ7JkMMAeEdrhoVqL9AavajlkX4sGnLj7JFxgAl.knut_servlet_homepage?nttId=1082213",
+            "contentImageUrl": null,
+            "department": "학생과",
+            "registrationDate": "2025-09-02",
+            "topic": "EVENT_NEWS"
+        }
+    ]
 }
