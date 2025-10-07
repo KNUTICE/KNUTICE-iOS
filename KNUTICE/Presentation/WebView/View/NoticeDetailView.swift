@@ -74,6 +74,7 @@ struct NoticeDetailView: View {
                 ShareLink(item: url)
             }
         }
+        .toolbar(.visible)    // iPadOS에서 네비게이션 바 표시
     }
 }
 

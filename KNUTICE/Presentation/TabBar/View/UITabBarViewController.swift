@@ -99,6 +99,16 @@ final class UITabBarViewController: UITabBarController, NavigationItemConfigurab
             setFirstTabNavigationItems()
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        print("here")
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            navigationController?.setNavigationBarHidden(true, animated: true)
+        }
+    }
 }
 
 extension UITabBarViewController: UITabBarControllerDelegate {
