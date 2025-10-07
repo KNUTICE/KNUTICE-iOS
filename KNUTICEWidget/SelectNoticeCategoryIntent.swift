@@ -19,14 +19,13 @@ enum NoticeCategoryIntent: String, AppEnum, NoticeCategoryMappable {
     
     static let typeDisplayRepresentation: TypeDisplayRepresentation = "공지 카테고리"
         
-    static var caseDisplayRepresentations: [NoticeCategoryIntent: DisplayRepresentation] {
-        var result = [NoticeCategoryIntent: DisplayRepresentation]()
-        allCases.forEach {
-            result[$0] = DisplayRepresentation(stringLiteral: $0.rawValue)
-        }
-        
-        return result
-    }
+    static let caseDisplayRepresentations: [NoticeCategoryIntent: DisplayRepresentation] = [
+        .generalNotice: "일반소식",
+        .academicNotice: "학사공지",
+        .scholarshipNotice: "장학안내",
+        .eventNotice: "행사안내",
+        .employmentNotice: "취업안내"
+    ]
     
     var toNoticeCategory: NoticeCategory {
         switch self {
