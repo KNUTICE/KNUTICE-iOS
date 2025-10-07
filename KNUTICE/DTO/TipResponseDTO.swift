@@ -10,9 +10,7 @@ import KNUTICECore
 
 // MARK: - TipResponseDTO
 struct TipResponseDTO: Decodable, Sendable {
-    let success: Bool
-    let code: Int
-    let message: String?
+    let metaData: MetaData
     let data: [TipData]?
 }
 

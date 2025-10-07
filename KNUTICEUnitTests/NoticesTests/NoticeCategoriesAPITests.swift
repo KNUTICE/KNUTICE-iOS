@@ -25,7 +25,7 @@ func fetchAllNoticeTypes() async throws {
     
     let dataSource = Container.shared.remoteDataSource()
     
-    guard let baseURL = Bundle.main.noticeURL else {
+    guard let baseURL = Bundle.standard.noticeURL else {
         throw NetworkError.invalidURL(
             message: "Failed to load noticeURL from Bundle.main. Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension."
         )

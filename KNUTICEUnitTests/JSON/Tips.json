@@ -1,14 +1,16 @@
 {
-  "success": true,
-  "code": 200,
-  "message": null,
-  "data": [
-    {
-      "tipId": "68b88bf80eda2c2a3c48e82a",
-      "title": "string",
-      "url": "string",
-      "deviceType": "iOS",
-      "createdAt": "2025-09-04T03:42:00.929"
-    }
-  ]
+    "metaData": {
+        "success": true,
+        "code": 200,
+        "message": null
+    },
+    "data": [
+        {
+            "tipId": "68b88bf80eda2c2a3c48e82a",
+            "title": "string",
+            "url": "string",
+            "deviceType": "iOS",
+            "createdAt": "2025-09-04T03:42:00.929"
+        }
+    ]
 }
