@@ -32,6 +32,14 @@ final class NoticeContentViewController: NoticeWebViewController {
         viewModel.fetch()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            navigationController?.setNavigationBarHidden(false, animated: true)    // iPadOS에서 네비게이션 바 표시
+        }
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         

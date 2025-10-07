@@ -95,7 +95,9 @@ final class SearchViewController: UIViewController, CompositionalLayoutConfigura
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        navigationController?.setNavigationBarHidden(false, animated: false)
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            navigationController?.setNavigationBarHidden(false, animated: false)
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
