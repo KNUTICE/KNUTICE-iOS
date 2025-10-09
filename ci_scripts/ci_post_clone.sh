@@ -32,8 +32,11 @@ EOF
 
 echo "KNUTICE/Application/ServiceInfo.plist 생성 완료"
 
+# 경로가 없을 경우 생성
+mkdir -p "/Volumes/workspace/repository/KNUTICECore/Resources"
+
 # KNUTICECore/Resources/ServiceInfo.plist 생성
-echo "환경변수 참조 KNUTICE/Application/ServiceInfo.plist 생성"
+echo "환경변수 참조 KNUTICECore/Resources/ServiceInfo.plist 생성"
 
 cat <<EOF > "/Volumes/workspace/repository/KNUTICECore/Resources/ServiceInfo.plist"
 <?xml version="1.0" encoding="UTF-8"?>
@@ -48,7 +51,7 @@ cat <<EOF > "/Volumes/workspace/repository/KNUTICECore/Resources/ServiceInfo.pli
 </plist>
 EOF
 
-echo "KNUTICE/Application/ServiceInfo.plist 생성 완료"
+echo "KNUTICECore/Resources/ServiceInfo.plist 생성 완료"
 
 # Boolean 값 변환
 convert_bool() {
