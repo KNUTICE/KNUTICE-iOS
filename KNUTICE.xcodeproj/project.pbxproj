@@ -287,6 +287,13 @@
 			);
 			target = 8E1D8C262E682D6E00E8F0EC /* KNUTICEWidget-devExtension */;
 		};
+		8E3A68BA2E974F1F00C39902 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 8E8FC5342E42F0FA002D560F /* KNUTICECore */;
+		};
 		8E3FBF002E694E950008425E /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -368,7 +375,7 @@
 		8E1D8C2A2E682D6E00E8F0EC /* KNUTICEWidget-dev */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8E1D8C372E682D7000E8F0EC /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "KNUTICEWidget-dev"; sourceTree = "<group>"; };
 		8E3C437A2E66D8D900EA711B /* KNUTICEWidgetCore */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = KNUTICEWidgetCore; sourceTree = "<group>"; };
 		8E3FBEFB2E694E950008425E /* KNUTICEWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8E3FBF002E694E950008425E /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = KNUTICEWidget; sourceTree = "<group>"; };
-		8E3FBF182E694EAB0008425E /* KNUTICECore */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = KNUTICECore; sourceTree = "<group>"; };
+		8E3FBF182E694EAB0008425E /* KNUTICECore */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8E3A68BA2E974F1F00C39902 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = KNUTICECore; sourceTree = "<group>"; };
 		8E3FBF482E694EB40008425E /* KNUTICEUnitTests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8E3FBF6A2E694EB40008425E /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = KNUTICEUnitTests; sourceTree = "<group>"; };
 		8E3FBF6F2E694EC40008425E /* NotificationService-dev */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8E3FBF712E694EC40008425E /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "NotificationService-dev"; sourceTree = "<group>"; };
 		8E3FBF732E694EE80008425E /* ci_scripts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ci_scripts; sourceTree = "<group>"; };
