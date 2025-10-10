@@ -18,7 +18,7 @@ extension Bundle {
     }
     
     var openSourceURL: String {
-        guard let resource, let url = resource["OpenSourceLicenseURL"] as? String else {
+        guard let url = resource?["OpenSourceLicenseURL"] as? String else {
             return ""
         }
         
@@ -26,7 +26,7 @@ extension Bundle {
     }
     
     var tokenURL: String? {
-        guard let resource, let url = resource["Token_URL"] as? String else {
+        guard let url = resource?["Token_URL"] as? String else {
             return nil
         }
         
@@ -34,7 +34,7 @@ extension Bundle {
     }
     
     var reportURL: String? {
-        guard let resource, let url = resource["Report_URL"] as? String else {
+        guard let url = resource?["Report_URL"] as? String else {
             return nil
         }
         
@@ -42,7 +42,7 @@ extension Bundle {
     }
     
     var topicSubscriptionURL: String? {
-        guard let resource, let url = resource["TopicSubscription_URL"] as? String else {
+        guard let url = resource?["TopicSubscription_URL"] as? String else {
             return nil
         }
         
@@ -50,7 +50,7 @@ extension Bundle {
     }
     
     var mainPopupContentURL: String? {
-        guard let resource, let url = resource["Main_Popup_URL"] as? String else {
+        guard let url = resource?["Main_Popup_URL"] as? String else {
             return nil
         }
         
@@ -58,7 +58,7 @@ extension Bundle {
     }
     
     var defaultThumbnailURL: String {
-        guard let resource, let url = resource["DefaultThumbnail_URL"] as? String else {
+        guard let url = resource?["DefaultThumbnail_URL"] as? String else {
             return ""
         }
         
@@ -66,7 +66,7 @@ extension Bundle {
     }
     
     var tipURL: String? {
-        guard let resource, let url = resource["TipURL"] as? String else {
+        guard let url = resource?["TipURL"] as? String else {
             return nil
         }
         
