@@ -6,28 +6,20 @@
 #  Created by 이정훈 on 8/8/24.
 #
 
-# ServiceInfo.plist 변수 변경
-echo "환경변수 참조 ServiceInfo.plist 생성"
+# KNUTICE/Application/ServiceInfo.plist 생성
+echo "환경변수 참조 KNUTICE/Application/ServiceInfo.plist 생성"
 
 cat <<EOF > "/Volumes/workspace/repository/KNUTICE/Application/ServiceInfo.plist"
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>Notice_URL</key>
-    <string>${Notice_URL}</string>
     <key>Report_URL</key>
     <string>${Report_URL}</string>
-    <key>Token_URL</key>
-    <string>${Token_URL}</string>
     <key>OpenSourceLicenseURL</key>
     <string>${OpenSourceLicenseURL}</string>
-    <key>Search_URL</key>
-    <string>${Search_URL}</string>
-    <key>Notification_Permission_URL</key>
-    <string>${Notification_Permission_URL}</string>
-    <key>Main_Popup_URL</key>
-    <string>${Main_Popup_URL}</string>
+    <key>TopicSubscription_URL</key>
+    <string>${TopicSubscription_URL}</string>
     <key>DefaultThumbnail_URL</key>
     <string>${DefaultThumbnail_URL}</string>
     <key>Beta_Version</key>
@@ -38,7 +30,28 @@ cat <<EOF > "/Volumes/workspace/repository/KNUTICE/Application/ServiceInfo.plist
 </plist>
 EOF
 
-echo "ServiceInfo.plist 생성 완료"
+echo "KNUTICE/Application/ServiceInfo.plist 생성 완료"
+
+# 경로가 없을 경우 생성
+mkdir -p "/Volumes/workspace/repository/KNUTICECore/Resources"
+
+# KNUTICECore/Resources/ServiceInfo.plist 생성
+echo "환경변수 참조 KNUTICECore/Resources/ServiceInfo.plist 생성"
+
+cat <<EOF > "/Volumes/workspace/repository/KNUTICECore/Resources/ServiceInfo.plist"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Token_URL</key>
+    <string>${Token_URL}</string>
+    <key>Notice_URL</key>
+    <string>${Notice_URL}</string>
+</dict>
+</plist>
+EOF
+
+echo "KNUTICECore/Resources/ServiceInfo.plist 생성 완료"
 
 # Boolean 값 변환
 convert_bool() {

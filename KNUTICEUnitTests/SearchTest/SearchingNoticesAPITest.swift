@@ -1,0 +1,72 @@
+//
+//  SearchingNoticesAPITest.swift
+//  KNUTICEUnitTests
+//
+//  Created by 이정훈 on 3/3/25.
+//
+
+import Alamofire
+import Combine
+import Factory
+import XCTest
+import KNUTICECore
+@testable import KNUTICE
+
+final class SearchingNoticesAPITest: XCTestCase {
+    private var dataSource: RemoteDataSource!
+    private var cancellables: Set<AnyCancellable>!
+
+    override func setUpWithError() throws {
+        // Put setup code here. This method is called before the invocation of each test method in the class.
+        let configuration = URLSessionConfiguration.default
+        configuration.protocolClasses = [MockURLProtocol.self]
+        
+        let session = Session(configuration: configuration)
+        
+        Container.shared.remoteDataSource.register {
+            RemoteDataSourceImpl(session: session)
+        }
+        
+        dataSource = Container.shared.remoteDataSource()
+        cancellables = []
+    }
+
+    override func tearDownWithError() throws {
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        dataSource = nil
+        cancellables = nil
+    }
+
+    func test_fetchNotices_returnNoticeReponseDTO() {
+        //Given
+        guard let baseURL = Bundle.standard.noticeURL else {
+            XCTFail("Failed to load searchURL from Bundle.main. Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension.")
+            return
+        }
+        
+        let endpoint = baseURL + "?keyword=공지"
+        
+        MockURLProtocol.setUpMockData(.fetchSearchedNoticesShouldSucceed, for: URL(string: endpoint)!)
+        
+        let expectation = expectation(description: "fetch searched notices")
+        
+        //When
+        dataSource.request(endpoint, method: .get, decoding: NoticeResponseDTO.self)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    expectation.fulfill()
+                case .failure(let error):
+                    XCTFail("\(error)")
+                }
+            }, receiveValue: {
+                //Then
+                XCTAssertEqual($0.metaData.code, 200)
+                XCTAssertNotNil($0.data)
+            })
+            .store(in: &cancellables)
+        
+        wait(for: [expectation], timeout: 1)
+    }
+
+}

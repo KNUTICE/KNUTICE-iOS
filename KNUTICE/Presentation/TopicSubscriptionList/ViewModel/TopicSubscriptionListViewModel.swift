@@ -8,6 +8,7 @@
 import Combine
 import Factory
 import Foundation
+import KNUTICECore
 import os
 
 @MainActor
@@ -17,76 +18,74 @@ final class TopicSubscriptionListViewModel: ObservableObject {
     @Published var isScholarshipNoticeNotificationSubscribed: Bool?
     @Published var isEventNoticeNotificationSubscribed: Bool?
     @Published var isEmploymentNoticeNotificationSubscribed: Bool?
-//    @Published var isEtiquetteTimeActivate: Bool = false
-//    @Published var etiquetteTimeStart: Date?
-//    @Published var etiquetteTimeEnd: Date?
+    @Published var isMajorNoticeNotificationSubscribed: Bool?
     @Published var isLoading: Bool = false
     @Published var isShowingAlert: Bool = false
     
     @Injected(\.topicSubscriptionRepository) private var repository
-    @Injected(\.subscriptionService) private var subscriptionService
     private let logger = Logger()
     private var cancellables = Set<AnyCancellable>()
     private(set) var alertMessage: String = ""
     private(set) var task: Task<Void, Never>?
     
-    var isAllDataLoaded: Bool {
-        let data = [
-            isGeneralNoticeNotificationSubscribed,
-            isAcademicNoticeNotificationSubscribed,
-            isScholarshipNoticeNotificationSubscribed,
-            isEventNoticeNotificationSubscribed
-        ]
-        
-        return data.allSatisfy { $0 != nil }
-    }
-    
     func fetchNotificationSubscriptions() async {
+        defer { isLoading = false }
+        
         isLoading = true
-        let result = await repository.fetch()
         
-        guard !Task.isCancelled else {
-            return
-        }
-        
-        isLoading = false
-        switch result {
-        case .success(let subscriptions):
-            isGeneralNoticeNotificationSubscribed = subscriptions.generalNotice
-            isAcademicNoticeNotificationSubscribed = subscriptions.academicNotice
-            isScholarshipNoticeNotificationSubscribed = subscriptions.scholarshipNotice
-            isEventNoticeNotificationSubscribed = subscriptions.eventNotice
-            isEmploymentNoticeNotificationSubscribed = subscriptions.employmentNotice
-        case .failure(let error):
+        do {
+            let subscriptions = try await repository.fetch(for: .notice)
+
+            for subscription in subscriptions {
+                guard case .notice(let topic) = subscription else { continue }
+                
+                switch topic {
+                case .generalNotice:
+                    isGeneralNoticeNotificationSubscribed = true
+                case .academicNotice:
+                    isAcademicNoticeNotificationSubscribed = true
+                case .scholarshipNotice:
+                    isScholarshipNoticeNotificationSubscribed = true
+                case .eventNotice:
+                    isEventNoticeNotificationSubscribed = true
+                case .employmentNotice:
+                    isEmploymentNoticeNotificationSubscribed = true
+                }
+            }
+            
+            isMajorNoticeNotificationSubscribed = UserDefaults.standard.bool(forKey: UserDefaultsKeys.isMajorNotificationSubscribed.rawValue)
+        } catch {
             logger.log(level: .error, "NotificationListViewModel.fetchNotificationSubscriptions(): \(error.localizedDescription)")
         }
     }
     
-    func update(key: NoticeCategory, value: Bool) {
+    func update<T>(of type: TopicType, topic: T, isEnabled: Bool) where T: RawRepresentable & Sendable, T.RawValue == String {
         task = Task {
+            defer { isLoading = false }
+            
             isLoading = true
-            let result = await subscriptionService.update(key, to: value)
             
-            guard !Task.isCancelled else {
-                return
-            }
-            
-            isLoading = false
-            switch result {
-            case .success:
-                switch key {
-                case .generalNotice:
-                    isGeneralNoticeNotificationSubscribed = value
-                case .academicNotice:
-                    isAcademicNoticeNotificationSubscribed = value
-                case .scholarshipNotice:
-                    isScholarshipNoticeNotificationSubscribed = value
-                case .eventNotice:
-                    isEventNoticeNotificationSubscribed = value
-                case .employmentNotice:
-                    isEmploymentNoticeNotificationSubscribed = value
+            do {
+                try await repository.update(of: type, topic: topic, isEnabled: isEnabled)
+                
+                if let topic = topic as? NoticeCategory {
+                    switch topic {
+                    case .generalNotice:
+                        isGeneralNoticeNotificationSubscribed = isEnabled
+                    case .academicNotice:
+                        isAcademicNoticeNotificationSubscribed = isEnabled
+                    case .scholarshipNotice:
+                        isScholarshipNoticeNotificationSubscribed = isEnabled
+                    case .eventNotice:
+                        isEventNoticeNotificationSubscribed = isEnabled
+                    case .employmentNotice:
+                        isEmploymentNoticeNotificationSubscribed = isEnabled
+                    }
+                } else if let _ = topic as? MajorCategory {
+                    isMajorNoticeNotificationSubscribed = isEnabled
+                    UserDefaults.standard.set(isEnabled, forKey: UserDefaultsKeys.isMajorNotificationSubscribed.rawValue)
                 }
-            case .failure(let error):
+            } catch {
                 logger.log(level: .error, "NotificationListViewModel.update(key:value:): \(error.localizedDescription)")
             }
         }
@@ -100,52 +99,4 @@ final class TopicSubscriptionListViewModel: ObservableObject {
         }
         isShowingAlert = true
     }
-    
-//    func fetchEtiquetteTime() {
-//        if let etiquetteTimeStart = UserDefaults.shared.object(forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue) as? Date,
-//           let etiquetteTimeEnd = UserDefaults.shared.object(forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue) as? Date {
-//            self.isEtiquetteTimeActivate = true
-//            self.etiquetteTimeStart = etiquetteTimeStart
-//            self.etiquetteTimeEnd = etiquetteTimeEnd
-//        }
-//    }
-    
-//    func bind() {
-//        $isEtiquetteTimeActivate
-//            .dropFirst()
-//            .removeDuplicates()
-//            .sink(receiveValue: { [weak self] in
-//                guard let self else { return }
-//                
-//                if $0 == true {
-//                    self.etiquetteTimeStart = UserDefaults.shared.object(forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue) as? Date ?? Date.tenPM
-//                    self.etiquetteTimeEnd = UserDefaults.shared.object(forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue) as? Date ?? Date.eightAM
-//                } else {
-//                    self.etiquetteTimeStart = nil
-//                    UserDefaults.shared.removeObject(forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue)
-//                    
-//                    self.etiquetteTimeEnd = nil
-//                    UserDefaults.shared.removeObject(forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue)
-//                }
-//            })
-//            .store(in: &cancellables)
-//        
-//        $etiquetteTimeStart
-//            .removeDuplicates()
-//            .sink(receiveValue: {
-//                if let date = $0 {
-//                    UserDefaults.shared.set(date, forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue)
-//                }
-//            })
-//            .store(in: &cancellables)
-//        
-//        $etiquetteTimeEnd
-//            .removeDuplicates()
-//            .sink(receiveValue: {
-//                if let date = $0 {
-//                    UserDefaults.shared.set(date, forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue)
-//                }
-//            })
-//            .store(in: &cancellables)
-//    }
 }

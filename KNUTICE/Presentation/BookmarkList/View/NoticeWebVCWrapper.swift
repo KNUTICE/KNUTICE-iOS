@@ -5,13 +5,14 @@
 //  Created by 이정훈 on 1/12/25.
 //
 
+import KNUTICECore
 import SwiftUI
 
 struct NoticeWebVCWrapper: UIViewControllerRepresentable {
     private let viewController: UIViewController
     
     init(notice: Notice) {
-        self.viewController = WebViewController(notice: notice)
+        self.viewController = NoticeDetailViewController(notice: notice)
     }
     
     func makeUIViewController(context: Context) -> some UIViewController {

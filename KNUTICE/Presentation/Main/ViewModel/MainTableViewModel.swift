@@ -7,63 +7,85 @@
 
 import RxSwift
 import RxRelay
-import Combine
 import Factory
 import os
 
+@MainActor
 final class MainTableViewModel {
     private let notices = BehaviorRelay<[SectionOfNotice]>(value: [])
+    private let isLoading = BehaviorRelay<Bool>(value: false)
+    
     var noticesObservable: Observable<[SectionOfNotice]> {
         return notices.asObservable()
     }
+    
     var cellValues: [SectionOfNotice] {
         return notices.value
     }
-    private let isLoading = BehaviorRelay<Bool>(value: false)
+    
     var isLoadingObservable: Observable<Bool> {
         return isLoading.asObservable()
     }
-    @Injected(\.mainNoticeRepository) private var repository: MainNoticeRepository
-    private let disposeBag = DisposeBag()
-    private var cancellables: Set<AnyCancellable> = []
-    private let logger: Logger = Logger()
     
-    ///Fetch Notices with Combine
-    func fetchNoticesWithCombine() {
-        repository.fetch()
-            .merge(with: repository.fetchTempData())
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
-                switch completion {
-                case .finished:
-                    self?.logger.debug("Successfully fetched main notice")
-                case .failure(let error):
-                    self?.logger.debug("MainViewModel.fetchNoticesWithCombine() error : \(error.localizedDescription)")
-                }
-            }, receiveValue: { [weak self] in
-                self?.notices.accept($0)
-            })
-            .store(in: &cancellables)
+    private let logger: Logger = Logger()
+    var task: Task<Void, Never>?
+    
+    @Injected(\.noticeService) private var noticeService
+    
+    /// Fetches notices for the main view.
+    ///
+    /// This method first provides mock skeleton sections to update the UI immediately,
+    /// then asynchronously fetches the actual top three notices for each category.
+    /// When the real data arrives, it replaces the mock sections in `notices`.
+    ///
+    /// - Note: Errors during fetching are logged but do not prevent the UI
+    ///         from showing skeleton placeholders.
+    func fetchNotices() {
+        task = Task {
+            // Fetch mock data first (for skeleton loading state)
+            let mockSections = await noticeService.fetchMockNotices().map { $0.toSectionOfNotice }
+            notices.accept(mockSections)
+            
+            do {
+                // Fetch actual top 3 notices per category
+                let fetchedSections = try await noticeService.fetchTopThreeNotices().map { $0.toSectionOfNotice }
+                notices.accept(fetchedSections)
+            } catch {
+                logger.error("MainTableViewModel.fetchNoticesWithCombine() error : \(error.localizedDescription)")
+            }
+        }
     }
     
-    ///Refresh Notices with Combine
-    func refreshNoticesWithCombine() {
+    /// Refreshes the notices for the main view.
+    ///
+    /// This method sets the `isLoading` state to true, waits for a short delay (0.5 seconds)
+    /// to simulate network latency or allow UI animations, then fetches the actual top three
+    /// notices per category. Once the fetch is complete, it updates the `notices` property
+    /// and resets the `isLoading` state.
+    ///
+    /// - Note: Any errors during fetching are logged but do not prevent `isLoading` from being reset.
+    func refreshNotices() {
         isLoading.accept(true)
-        
-        repository.fetch()
-            .delay(for: 0.5, scheduler: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
-                self?.isLoading.accept(false)
+        task = Task {
+            defer { isLoading.accept(false) }
+            
+            do {
+                try await Task.sleep(nanoseconds: 500_000_000)
                 
-                switch completion {
-                case .finished:
-                    self?.logger.debug("Successfully refreshed main notice")
-                case .failure(let error):
-                    self?.logger.error("MainViewModel.refreshNoticesWithCombine error : \(error.localizedDescription)")
-                }
-            }, receiveValue: { [weak self] in
-                self?.notices.accept($0)
-            })
-            .store(in: &cancellables)
+                let fetchedSections = try await noticeService.fetchTopThreeNotices().map { $0.toSectionOfNotice }
+                notices.accept(fetchedSections)
+            } catch {
+                logger.error("MainTableViewModel.refreshNotices() error : \(error.localizedDescription)")
+            }
+        }
+    }
+}
+
+fileprivate extension MainSectionNotice {
+    var toSectionOfNotice: SectionOfNotice {
+        SectionOfNotice(
+            header: self.header,
+            items: self.items
+        )
     }
 }

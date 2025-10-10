@@ -8,19 +8,25 @@
 import Combine
 import Factory
 import Foundation
+import KNUTICECore
 import RxRelay
 import RxSwift
 import os
 
-final class BookmarkTableViewModel {
+@MainActor
+final class BookmarkTableViewModel: BookmarkSortOptionProvidable {
     let bookmarks: BehaviorRelay<[BookmarkSectionModel]> = .init(value: [])
     let isRefreshing: BehaviorRelay<Bool> = .init(value: false)
-    let sortOption: BehaviorRelay<BookmarkSortOption> = {
-        let value = UserDefaults.standard.string(forKey: UserDefaultsKeys.bookmarkSortOption.rawValue) ?? "createdAtDescending"
-        return BehaviorRelay(value: BookmarkSortOption(rawValue: value) ?? .createdAtDescending)
+    @Published var bookmarkSortOption: BookmarkSortOption = {
+        let value = UserDefaults.standard.string(forKey: UserDefaultsKeys.bookmarkSortOption.rawValue) ?? ""
+        return BookmarkSortOption(rawValue: value) ?? .createdAtDescending
     }()
+    
     @Injected(\.bookmarkService) private var bookmarkService
-    private var cancellables: Set<AnyCancellable> = []
+    
+    private(set) var fetchTask: Task<Void, Never>?
+    private(set) var reloadTask: Task<Void, Never>?
+    private(set) var deleteTask: Task<Void, Never>?
     private let logger: Logger = Logger()
     
     func fetchBookmarks() {
@@ -29,68 +35,65 @@ final class BookmarkTableViewModel {
             return
         }
         
-        bookmarkService.fetchBookmarks(page: bookmarks.value.count / 20, sortBy: sortOption.value)
-            .map { bookmarks in
-                bookmarks.map {
+        fetchTask?.cancel()
+        fetchTask = Task {
+            do {
+                let fetchedBookmarks = try await bookmarkService.fetchBookmarks(page: bookmarks.value.count / 20, sortBy: bookmarkSortOption)
+                let bookmarkSectionModels = fetchedBookmarks.map {
                     BookmarkSectionModel(items: [$0])
                 }
+                let value = bookmarks.value
+                
+                bookmarks.accept(value + bookmarkSectionModels)
+            } catch {
+                logger.error("BookmarkTableViewModel.fetchBookmarks() error : \(error.localizedDescription)")
             }
-            .sink(receiveCompletion: { [weak self] completion in
-                switch completion {
-                case .finished:
-                    self?.logger.info("BookmarkTableViewModel.fetchBookmarks() completed fetching bookmarks successfully")
-                case .failure(let error):
-                    self?.logger.error("BookmarkTableViewModel.fetchBookmarks() error : \(error.localizedDescription)")
-                }
-            }, receiveValue: { [weak self] bookmarks in
-                let value = self?.bookmarks.value ?? []
-                self?.bookmarks.accept(value + bookmarks)
-            })
-            .store(in: &cancellables)
+        }
     }
     
     func reloadData(preserveCount: Bool = false) {
         isRefreshing.accept(true)
-        bookmarkService.fetchBookmarks(page: 0, pageSize: preserveCount ? bookmarks.value.count : 20, sortBy: sortOption.value)
-            .map { bookmarks in
-                bookmarks.map {
+        
+        reloadTask?.cancel()
+        reloadTask = Task {
+            defer { isRefreshing.accept(false) }
+            
+            do {
+                let fetchedBookmarks = try await bookmarkService.fetchBookmarks(
+                    page: 0,
+                    pageSize: preserveCount ? bookmarks.value.count : 20,
+                    sortBy: bookmarkSortOption
+                )
+                let bookmarkSectionModels = fetchedBookmarks.map {
                     BookmarkSectionModel(items: [$0])
                 }
-            }
-            .delay(for: .milliseconds(300), scheduler: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
-                self?.isRefreshing.accept(false)
                 
-                switch completion {
-                case .finished:
-                    self?.logger.info("BookmarkTableViewModel.reloadData() successfully fetched bookmarks.")
-                case .failure(let error):
-                    self?.logger.error("BookmarkTableViewModel.reloadData() error : \(error.localizedDescription)")
-                }
-            }, receiveValue: { [weak self] bookmarks in
-                self?.bookmarks.accept(bookmarks)
-            })
-            .store(in: &cancellables)
+                try await Task.sleep(nanoseconds: 300_000_000)
+                
+                bookmarks.accept(bookmarkSectionModels)
+            } catch {
+                logger.error("BookmarkTableViewModel.reloadData(preserveCount:) error : \(error.localizedDescription)")
+            }
+        }
     }
     
     func delete(bookmark: Bookmark) {
-        bookmarkService.delete(bookmark: bookmark, reloadCount: bookmarks.value.count, sortBy: sortOption.value)
-            .map { bookmarks in
-                bookmarks.map {
+        deleteTask?.cancel()
+        deleteTask = Task {
+            do {
+                let fetchedBookmarks = try await bookmarkService.delete(
+                    bookmark: bookmark,
+                    reloadCount: bookmarks.value.count - 1,
+                    sortBy: bookmarkSortOption
+                )
+                let bookmarkSectionModels = fetchedBookmarks.map {
                     BookmarkSectionModel(items: [$0])
                 }
+                
+                bookmarks.accept(bookmarkSectionModels)
+            } catch {
+                logger.error("BookmarkTableViewModel.delete(withId:) error : \(error.localizedDescription)")
             }
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
-                switch completion {
-                case .finished:
-                    self?.logger.info("BookmarkTableViewModel.delete(bookmark:) ")
-                case .failure(let error):
-                    self?.logger.error("BookmarkTableViewModel.delete(bookmark:) error : \(error.localizedDescription)")
-                }
-            }, receiveValue: { [weak self] bookmarks in
-                self?.bookmarks.accept(bookmarks)
-            })
-            .store(in: &cancellables)
+        }
     }
 }

@@ -37,6 +37,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "5C82563D2BE5CE1A0038D4C8"
+            BuildableName = "KNUTICE.app"
+            BlueprintName = "KNUTICE"
+            ReferencedContainer = "container:KNUTICE.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

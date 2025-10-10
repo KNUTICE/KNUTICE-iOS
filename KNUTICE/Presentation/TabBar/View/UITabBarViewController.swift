@@ -5,16 +5,34 @@
 //  Created by 이정훈 on 1/4/25.
 //
 
+import Combine
+import KNUTICECore
 import UIKit
 import SwiftUI
-import RxSwift
 
-final class UITabBarViewController: UITabBarController {
+typealias NavigationItemConfigurable = FirstTabNavigationItemConfigurable & SecondTabNavigationItemConfigurable & SettingButtonConfigurable & ThirdTabNavigationItemConfigurable
+
+final class UITabBarViewController: UITabBarController, NavigationItemConfigurable {
     private let mainViewController: UIViewController = {
         let viewController = MainTableViewController()
         viewController.tabBarItem.image = UIImage(systemName: "house")
         viewController.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
         viewController.tabBarItem.title = "홈"
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return UINavigationController(rootViewController: viewController)
+        }
+        
+        return viewController
+    }()
+    private let majorNoticeViewController: UIViewController = {
+        let majorStr = UserDefaults.standard.string(forKey: UserDefaultsKeys.selectedMajor.rawValue)
+        let viewController = MajorNoticeCollectionViewController(
+            viewModel: NoticeCollectionViewModel(category: MajorCategory(rawValue: majorStr ?? ""))
+        )
+        viewController.tabBarItem.image = UIImage(systemName: "globe")
+        viewController.tabBarItem.selectedImage = UIImage(systemName: "globe.fill")
+        viewController.tabBarItem.title = "학과소식"
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             return UINavigationController(rootViewController: viewController)
@@ -35,20 +53,31 @@ final class UITabBarViewController: UITabBarController {
         return viewController
     }()
     private let searchViewController: UIViewController = {
-        let viewController = SearchCollectionViewController()
-        viewController.tabBarItem.image = UIImage(systemName: "magnifyingglass")
-        if UIDevice.current.userInterfaceIdiom  == .phone {
-            viewController.tabBarItem.title = "검색"
-        }
+        let viewController = SearchViewController()
         
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            return UINavigationController(rootViewController: viewController)
+        if #available(iOS 26, *) {
+            viewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
+            
+            return viewController
+        } else {
+            viewController.tabBarItem.image = UIImage(systemName: "magnifyingglass")
+            
+            if UIDevice.current.userInterfaceIdiom  == .phone {
+                viewController.tabBarItem.title = "검색"
+            }
+            
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                return UINavigationController(rootViewController: viewController)
+            }
+            
+            return viewController
         }
-        
-        return viewController
     }()
     let viewModel: TabBarViewModel
-    let disposeBag: DisposeBag = .init()
+    var sortedBookmarkViewModel: BookmarkSortOptionProvidable {
+        return viewModel
+    }
+    var cancellables: Set<AnyCancellable> = []
     
     init(viewModel: TabBarViewModel) {
         self.viewModel = viewModel
@@ -59,26 +88,94 @@ final class UITabBarViewController: UITabBarController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        delegate = self
         setUpTabBar()
         bind()
-        viewModel.fetchPushNoticeIfExists()
         
-        if UserDefaults.standard.double(forKey: "noShowPopupDate") < Date().timeIntervalSince1970 {
-            viewModel.fetchMainPopupContent()
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            setFirstTabNavigationItems()
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        print("here")
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            navigationController?.setNavigationBarHidden(true, animated: true)
+        }
+    }
+}
+
+extension UITabBarViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            switch viewController {
+            case is MainTableViewController:
+                setFirstTabNavigationItems()
+            case is MajorNoticeCollectionViewController:
+                setSecondTabNavigationItems()
+            case is BookmarkTableViewController:
+                setThirdTabNavigationItems(selectedOption: viewModel.bookmarkSortOption)
+            default:
+                removeAllNavigationItems()
+            }
+        }
+    }
+}
+
+extension UITabBarViewController {
+    @objc func navigateToSetting(_ sender: UIButton) {
+        let viewController = UIHostingController(rootView: SettingView())
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @objc func didTapMajorSelectionButton(_ sender: UIButton) {
+        let viewController = UIHostingController(
+            rootView: MajorSelectionView<TabBarViewModel>()
+                .environmentObject(viewModel)
+        )
+        viewController.modalPresentationStyle = .pageSheet
+        
+        if let sheet = viewController.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        
+        present(viewController, animated: true)
+    }
+}
+
+extension UITabBarViewController {
+    func setFirstTabNavigationItems() {
+        // Bookmark의 rightBarButtonItems 제거
+        navigationItem.rightBarButtonItems = nil
+        setTitleBarButtonItem()
+        setSettingBarButtonItem()
+    }
+    
+    func setSecondTabNavigationItems() {
+        // Bookmark의 rightBarButtonItems 제거
+        navigationItem.rightBarButtonItems = nil
+        makeMajorSelectionButton()
+        setSettingBarButtonItem()
+    }
+    
+    func setThirdTabNavigationItems(selectedOption sortOption: BookmarkSortOption) {
+        makeBookmarkTitleBarItem()
+        navigationItem.rightBarButtonItems = [
+            getSettingBarButtonItem(),
+            makeSortMenuButton(selectedOption: sortOption)
+        ]
+    }
+    
+    func removeAllNavigationItems() {
+        navigationItem.leftBarButtonItem = nil
+        navigationItem.rightBarButtonItem = nil
+        navigationItem.rightBarButtonItems = nil
     }
 }
 
@@ -90,10 +187,13 @@ extension UITabBarViewController {
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = appearance
         
-        if #available(iOS 18, *) {
+        if #available(iOS 18, *), UIDevice.current.userInterfaceIdiom == .pad {
             tabs = [
                 UITab(title: "홈", image: UIImage(systemName: "house.fill"), identifier: "Tabs.main") { _ in
                     self.mainViewController
+                },
+                UITab(title: "학과소식", image: UIImage(systemName: "globe.fill"), identifier: "Tabs.majorNotice") { _ in
+                    self.majorNoticeViewController
                 },
                 UITab(title: "북마크", image: UIImage(systemName: "bookmark.fill"), identifier: "Tabs.bookmark") { _ in
                     self.bookmarkViewController
@@ -103,42 +203,8 @@ extension UITabBarViewController {
                 }
             ]
         } else {
-            setViewControllers([mainViewController, bookmarkViewController, searchViewController], animated: true)
+            setViewControllers([mainViewController, majorNoticeViewController, bookmarkViewController, searchViewController], animated: true)
         }
-    }
-    
-    func bind() {
-        viewModel.mainPopupContent
-            .delay(.seconds(1), scheduler: MainScheduler.instance)
-            .bind(onNext: { [weak self] in
-                if let popupContent = $0, let self = self {
-                    let bottomModal = BottomModal(content: popupContent)
-                    self.view.addSubview(bottomModal)
-                    bottomModal.setupLayout()
-                    UIView.animate(withDuration: 0.5) {
-                        bottomModal.alpha = 1
-                    }
-                }
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.pushNotice
-            .bind(onNext: { [weak self] pushNotice in
-                guard let pushNotice else { return }
-                
-                DispatchQueue.main.async {
-                    self?.navigationController?.popToRootViewController(animated: true)
-                    self?.navigationController?.pushViewController(WebViewController(notice: pushNotice), animated: true)
-                }
-            })
-            .disposed(by: disposeBag)
-        
-        NotificationCenter.default.rx
-            .notification(UIApplication.willEnterForegroundNotification)
-            .bind { [weak self] _ in
-                self?.viewModel.fetchPushNoticeIfExists()
-            }
-            .disposed(by: disposeBag)
     }
 }
 
@@ -146,9 +212,12 @@ extension UITabBarViewController {
 #if DEBUG
 struct UITabBarViewControllerPreview: PreviewProvider {
     static var previews: some View {
-        UINavigationController(rootViewController: UITabBarViewController(viewModel: TabBarViewModel()))
-            .makePreview()
-            .edgesIgnoringSafeArea(.all)
+        UINavigationController(rootViewController: UITabBarViewController(
+            viewModel: TabBarViewModel(category: .computerScience))
+        )
+        .makePreview()
+        .edgesIgnoringSafeArea(.all)
     }
 }
 #endif
+

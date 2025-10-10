@@ -16,6 +16,7 @@ final class TipBannerViewModel: ObservableObject {
     @Published var selectedIndex: Int = 0
     
     @Injected(\.TipRepository) private var repository
+    
     private let logger: Logger = Logger()
     var selectedURL: String = ""
     var task: Task<Void, Never>?
