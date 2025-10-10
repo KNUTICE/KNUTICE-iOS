@@ -22,7 +22,7 @@ public extension Bundle {
     }
     
     var noticeURL: String? {
-        guard let resource, let url = resource["Notice_URL"] as? String else {
+        guard let url = resource?["Notice_URL"] as? String else {
             return nil
         }
         
@@ -30,7 +30,7 @@ public extension Bundle {
     }
     
     var tokenURL: String? {
-        guard let resource, let url = resource["Token_URL"] as? String else {
+        guard let url = resource?["Token_URL"] as? String else {
             return nil
         }
         
