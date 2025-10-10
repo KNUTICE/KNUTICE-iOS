@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import KNUTICECore
 
 struct TopicSubscriptionList: View {
     @StateObject private var viewModel: TopicSubscriptionListViewModel
@@ -23,74 +24,91 @@ struct TopicSubscriptionList: View {
                             get: {
                                 viewModel.isGeneralNoticeNotificationSubscribed ?? false
                             }, set: {
-                                viewModel.update(key: .generalNotice, value: $0)
+                                viewModel.update(of: .notice, topic: NoticeCategory.generalNotice, isEnabled: $0)
                             }
                         ), label: {
-                            Text("일반소식")
+                            ToggleCaption(
+                                title: "일반소식",
+                                caption: "학교의 주요 공지와 관련된 다양한 소식을 알려드려요."
+                            )
                         })
-                } footer: {
-                    Text("학교의 주요 공지와 관련된 다양한 소식을 알려드려요.")
-                }
-                
-                Section {
+                    
                     Toggle(
                         isOn: Binding(
                             get: {
                                 viewModel.isAcademicNoticeNotificationSubscribed ?? false
                             }, set: {
-                                viewModel.update(key: .academicNotice, value: $0)
+                                viewModel.update(of: .notice, topic: NoticeCategory.academicNotice, isEnabled: $0)
                             }
                         ), label: {
-                            Text("학사공지")
+                            ToggleCaption(
+                                title: "학사공지",
+                                caption: "수강, 성적, 졸업 등 학사 운영과 관련된 다양한 소식을 알려드려요."
+                            )
                         })
-                } footer: {
-                    Text("수강, 성적, 졸업 등 학사 운영과 관련된 다양한 소식을 알려드려요.")
-                }
-                
-                Section {
+                    
                     Toggle(
                         isOn: Binding(
                             get: {
                                 viewModel.isScholarshipNoticeNotificationSubscribed ?? false
                             }, set: {
-                                viewModel.update(key: .scholarshipNotice, value: $0)
+                                viewModel.update(of: .notice, topic: NoticeCategory.scholarshipNotice, isEnabled: $0)
                             }
                         ), label: {
-                            Text("장학안내")
+                            ToggleCaption(
+                                title: "장학안내",
+                                caption: "장학금의 신청 자격, 절차, 일정 등과 관련된 다양한 소식을 알려드려요."
+                            )
                         })
-                } footer: {
-                    Text("장학금의 신청 자격, 절차, 일정 등과 관련된 다양한 소식을 알려드려요.")
-                }
-                
-                Section {
+                    
                     Toggle(
                         isOn: Binding(
                             get: {
                                 viewModel.isEventNoticeNotificationSubscribed ?? false
                             }, set: {
-                                viewModel.update(key: .eventNotice, value: $0)
+                                viewModel.update(of: .notice, topic: NoticeCategory.eventNotice, isEnabled: $0)
                             }
                         ), label: {
-                            Text("행사안내")
+                            ToggleCaption(
+                                title: "행사안내",
+                                caption: "학교에서 진행되는 각종 교육, 문화, 진로와 관련된 다양한 소식을 알려드려요."
+                            )
                         })
-                } footer: {
-                    Text("학교에서 진행되는 각종 교육, 문화, 진로와 관련된 다양한 소식을 알려드려요.")
+                    
+                    Toggle(
+                        isOn: Binding(
+                            get: {
+                                viewModel.isEmploymentNoticeNotificationSubscribed ?? false
+                            }, set: {
+                                viewModel.update(of: .notice, topic: NoticeCategory.employmentNotice, isEnabled: $0)
+                            }
+                        ), label: {
+                            ToggleCaption(
+                                title: "취업안내",
+                                caption: "채용 정보, 취업 지원 프로그램, 진로 상담 등 학생들의 진로 설계를 돕기 위한 소식을 알려드려요."
+                            )
+                        }
+                    )
                 }
                 
                 Section {
                     Toggle(
                         isOn: Binding(
                             get: {
-                                viewModel.isEmploymentNoticeNotificationSubscribed ?? false
+                                viewModel.isMajorNoticeNotificationSubscribed ?? false
                             }, set: {
-                                viewModel.update(key: .employmentNotice, value: $0)
-                            }
-                        ), label: {
-                            Text("취업안내")
-                        }
-                    )
-                } footer: {
-                    Text("채용 정보, 취업 지원 프로그램, 진로 상담 등 학생들의 진로 설계를 돕기 위한 소식을 알려드려요.")
+                                let majorStr = UserDefaults.standard.string(forKey: UserDefaultsKeys.selectedMajor.rawValue)
+                                
+                                if let majorStr, let selectedMajor = MajorCategory(rawValue: majorStr) {
+                                    viewModel.update(of: .major, topic: selectedMajor, isEnabled: $0)
+                                }
+                            }),
+                        label: {
+                            ToggleCaption(
+                                title: "학과소식",
+                                caption: "학과 소식은 학과의 최신 소식을 알려드려요.\n학과를 변경하고 싶으시면 두 번째 탭에서 원하는 학과를 선택해 주세요."
+                            )
+                    })
                 }
             }
             .background(.primaryBackground)
@@ -108,15 +126,24 @@ struct TopicSubscriptionList: View {
             } message: {
                 Text(viewModel.alertMessage)
             }
-//            .animation(.default, value: viewModel.isEtiquetteTimeActivate)
-//            .onAppear {
-//                viewModel.fetchEtiquetteTime()
-//                viewModel.bind()
-//            }
             
-            if viewModel.isLoading {
-                SpinningIndicator()
-            }
+            SpinningIndicator()
+                .opacity(viewModel.isLoading ? 1 : 0)
+        }
+    }
+}
+
+fileprivate struct ToggleCaption: View {
+    let title: String
+    let caption: String
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text(title)
+            
+            Text(caption)
+                .font(.caption)
+                .foregroundStyle(.gray)
         }
     }
 }

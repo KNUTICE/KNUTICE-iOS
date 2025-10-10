@@ -11,10 +11,9 @@ import RxSwift
 import SwiftUI
 import Factory
 
-final class MainTableViewController: UIViewController {
+final class MainTableViewController: UIViewController, FirstTabNavigationItemConfigurable, SettingButtonConfigurable {
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
         tableView.sectionHeaderTopPadding = 15    //header padding
         tableView.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.reuseIdentifier)
@@ -26,30 +25,6 @@ final class MainTableViewController: UIViewController {
         tableView.refreshControl = refreshControl
         
         return tableView
-    }()
-    let navigationBar = UIView(frame: .zero)
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "KNUTICE"
-        label.font = UIFont.systemFont(ofSize: 22, weight: .heavy)
-        
-        return label
-    }()
-    lazy var settingBtn: UIButton = {
-        let configuration = UIImage.SymbolConfiguration(textStyle: .title2)
-        let gearImage = UIImage(systemName: "gearshape", withConfiguration: configuration)?
-            .withRenderingMode(.alwaysTemplate)
-        let selectedGearImage = UIImage(systemName: "gearshape", withConfiguration: configuration)?
-            .withRenderingMode(.alwaysOriginal)
-            .withTintColor(.lightGray)
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(gearImage, for: .normal)
-        button.setImage(selectedGearImage, for: .highlighted)
-        button.addTarget(self, action: #selector(navigateToSetting(_:)), for: .touchUpInside)
-        
-        return button
     }()
     let tipView = UIHostingController(rootView: TipBannerView().environmentObject(TipBannerViewModel())).view
     let refreshControl = UIRefreshControl()
@@ -63,41 +38,37 @@ final class MainTableViewController: UIViewController {
         
         view.backgroundColor = .primaryBackground
         setupLayout()
-        createNavigationItems()
         bind()
         recordEntryTime()
         subscribeEntryTime()
         
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            setTitleBarButtonItem()
+            setSettingBarButtonItem()
+        }
+        
         //API Call
-        viewModel.fetchNoticesWithCombine()
+        viewModel.fetchNotices()
     }
     
-    func createNormalBellIcon() -> UIImage? {
-        let configuration: UIImage.SymbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title2)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         
-        if UserDefaults.shared.bool(forKey: UserDefaultsKeys.hasNewPendingNotice.rawValue) {
-            let paletteStyleConfig = UIImage.SymbolConfiguration(paletteColors: [.red, .black])
-            configuration.applying(paletteStyleConfig)
-            return UIImage(systemName: "bell.badge", withConfiguration: configuration)?
-                .withRenderingMode(.alwaysOriginal)
-        }
-        
-        return UIImage(systemName: "bell", withConfiguration: configuration)?
-            .withRenderingMode(.alwaysTemplate)
+        viewModel.task?.cancel()
     }
     
-    func createHighlightedBellIcon() -> UIImage? {
-        let configuration = UIImage.SymbolConfiguration(textStyle: .title2)
-        
-        if UserDefaults.shared.bool(forKey: UserDefaultsKeys.hasNewPendingNotice.rawValue) {
-            return UIImage(systemName: "bell.badge", withConfiguration: configuration)?
-                .withRenderingMode(.alwaysOriginal)
-                .withTintColor(.lightGray)
-        }
-        
-        return UIImage(systemName: "bell", withConfiguration: configuration)?
-            .withRenderingMode(.alwaysOriginal)
-            .withTintColor(.lightGray)
+    @objc func navigateToSetting(_ sender: UIButton) {
+        let viewController = UIHostingController(rootView: SettingView())
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @objc func setupSettingButtonToRightBarItem() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "gearshape"),
+            style: .plain,
+            target: self,
+            action: #selector(navigateToSetting(_:))
+        )
     }
 }
 
@@ -124,9 +95,24 @@ extension MainTableViewController: UITableViewDelegate {
     
     //MARK: - Cell이 선택 되었을 때 해당 공지사항 웹 페이지로 이동
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let viewController = WebViewController(notice: viewModel.cellValues[indexPath.section].items[indexPath.row].notice)
+        let viewController: UIViewController
+        let notice = viewModel.cellValues[indexPath.section].items[indexPath.row].notice
+        
+        if #available(iOS 26, *) {
+            viewController = UIHostingController(
+                rootView: NoticeDetailView()
+                    .environment(NoticeDetailViewModel(notice: notice))
+            )
+        } else {
+            viewController = NoticeDetailViewController(
+                notice: notice
+            )
+        }
+        
+        // 화면 이동
         navigationController?.pushViewController(viewController, animated: true)
         
+        // 선택된 Cell 초기화
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -141,3 +127,4 @@ struct Preview: PreviewProvider {
     }
 }
 #endif
+

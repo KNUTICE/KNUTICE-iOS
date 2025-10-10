@@ -1,14 +1,16 @@
 {
-    "result": {
-        "resultCode": 200,
-        "resultMessage": "성공",
-        "resultDescription": "성공"
-    },
-    "body": {
-        "generalNewsTopic": true,
-        "scholarshipNewsTopic": true,
-        "eventNewsTopic": true,
-        "academicNewsTopic": true,
-        "employmentNewsTopic": true
-    }
+  "metaData": {
+    "success": true,
+    "code": 200,
+    "message": "토픽 조회 성공"
+  },
+  "data": {
+    "subscribedTopics": [
+      "GENERAL_NEWS",
+      "SCHOLARSHIP_NEWS",
+      "EVENT_NEWS",
+      "ACADEMIC_NEWS",
+      "EMPLOYMENT_NEWS"
+    ]
+  }
 }

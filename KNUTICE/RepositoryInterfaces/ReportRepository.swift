@@ -8,5 +8,5 @@
 import Combine
 
 protocol ReportRepository {
-    func register(params: [String: Any]) -> AnyPublisher<Bool, any Error>
+    func register(params: [String: any Sendable]) -> AnyPublisher<Bool, any Error>
 }

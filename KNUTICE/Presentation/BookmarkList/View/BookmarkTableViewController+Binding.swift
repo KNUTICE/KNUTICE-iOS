@@ -11,7 +11,7 @@ import RxDataSources
 import RxSwift
 import UIKit
 
-extension BookmarkTableViewController {
+extension BookmarkTableViewController: ThirdTabNavigationItemConfigurable, SettingButtonConfigurable {
     func bind() {
         let dataSource = RxTableViewSectionedAnimatedDataSource<BookmarkSectionModel>(
             animationConfiguration: AnimationConfiguration(deleteAnimation: .top)
@@ -85,38 +85,29 @@ extension BookmarkTableViewController {
             }
             .disposed(by: disposeBag)
         
-        viewModel.sortOption
-            .bind(with: self) { owner, value in
-                owner.menuBtn.menu = owner.makeSortMenu(selectedOption: value)
-                owner.viewModel.reloadData()
-            }
-            .disposed(by: disposeBag)
+        viewModel.$bookmarkSortOption
+            .sink(receiveValue: { [weak self] value in
+                guard let self else { return }
+                
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    self.makeBookmarkTitleBarItem()
+                    self.navigationItem.rightBarButtonItems = [
+                        self.getSettingBarButtonItem(),
+                        self.makeSortMenuButton(selectedOption: value)
+                    ]
+                }
+                
+                viewModel.reloadData()
+            })
+            .store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name.bookmarkSortOptionDidChange)
+            .sink(receiveValue: { [weak self] notification in
+                if let bookmarkSortOption = notification.userInfo?["bookmarkSortOption"] as? BookmarkSortOption {
+                    self?.viewModel.bookmarkSortOption = bookmarkSortOption
+                }
+            })
+            .store(in: &cancellables)
     }
     
-    private func makeSortMenu(selectedOption: BookmarkSortOption) -> UIMenu {
-        func makeAction(title: String, option: BookmarkSortOption) -> UIAction {
-            return UIAction(
-                title: title,
-                image: selectedOption == option ? UIImage(systemName: "checkmark") : nil,
-                handler: { [weak self] _ in
-                    UserDefaults.standard.set(option.rawValue, forKey: UserDefaultsKeys.bookmarkSortOption.rawValue)
-                    self?.viewModel.sortOption.accept(option)
-                }
-            )
-        }
-        
-        let actions = [
-            makeAction(title: "오래된 생성일", option: .createdAtAscending),
-            makeAction(title: "최근 생성일", option: .createdAtDescending),
-            makeAction(title: "오래된 수정일", option: .updatedAtAscending),
-            makeAction(title: "최근 수정일", option: .updatedAtDescending)
-        ]
-        
-        return UIMenu(
-            title: "북마크 정렬",
-            identifier: nil,
-            options: .displayInline,
-            children: actions
-        )
-    }
 }
