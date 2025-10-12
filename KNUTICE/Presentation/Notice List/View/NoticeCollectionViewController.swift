@@ -30,6 +30,9 @@ class NoticeCollectionViewController<Category>: UIViewController, NoticeCollecti
     let refreshControl: UIRefreshControl = UIRefreshControl()
     private let currentColumnCount: CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 1 : 2
     let viewModel: NoticeSectionModelProvidable
+    private var fetchableViewModel: NoticeFetchable? {
+        return viewModel as? NoticeFetchable
+    }
     private let navigationTitle: String
     let disposeBag = DisposeBag()
     
@@ -51,8 +54,8 @@ class NoticeCollectionViewController<Category>: UIViewController, NoticeCollecti
         setUpNavigationBar(title: navigationTitle)
         bind()
         
-        if let viewModel = viewModel as? NoticeFetchable, Category.self == NoticeCategory.self {
-            viewModel.fetchNotices()
+        if Category.self == NoticeCategory.self {
+            fetchableViewModel?.fetchNotices()
         }
     }
     
@@ -94,29 +97,25 @@ class NoticeCollectionViewController<Category>: UIViewController, NoticeCollecti
             .bind(with: self) { owner, cell in
                 let (_, indexPath) = cell
                 
-                if let viewModel = owner.viewModel as? NoticeFetchable,
-                   let count = owner.viewModel.notices.value.first?.items.count,
+                if let count = owner.viewModel.notices.value.first?.items.count,
                    indexPath.item == count - 1 {
-                    viewModel.fetchNextPage()
+                    owner.fetchableViewModel?.fetchNextPage()
                 }
             }
             .disposed(by: disposeBag)
     }
     
     private func bindRefreshing() {
-        guard let viewModel = viewModel as? NoticeFetchable else { return }
-        viewModel.isRefreshing
+        fetchableViewModel?.isRefreshing
             .bind(to: refreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)
     }
     
     private func bindRefreshControl() {
         refreshControl.rx.controlEvent(.valueChanged)
-            .bind(onNext: { [weak self] in
-                if let viewModel = self?.viewModel as? NoticeFetchable {
-                    viewModel.fetchNotices(isRefreshing: true)
-                }
-            })
+            .bind(with: self) { owner, _ in
+                owner.fetchableViewModel?.fetchNotices(isRefreshing: true)
+            }
             .disposed(by: disposeBag)
     }
     
