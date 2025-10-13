@@ -59,21 +59,22 @@ class NoticeCollectionViewController<Category>: UIViewController, NoticeCollecti
         }
     }
     
+    // FIXME: macOS(Designed for iPad)에서 NoticeDetailView 충돌 이슈
     func collectionView(
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
         let notice = viewModel.notices.value[0].items[indexPath.row]
-        let viewController: UIViewController
+        let viewController = NoticeDetailViewController(notice: notice)
         
-        if #available(iOS 26, *) {
-            viewController = UIHostingController(
-                rootView: NoticeDetailView()
-                    .environment(NoticeDetailViewModel(notice: notice))
-            )
-        } else {
-            viewController = NoticeDetailViewController(notice: notice)
-        }
+//        if #available(iOS 26, *) {
+//            viewController = UIHostingController(
+//                rootView: NoticeDetailView()
+//                    .environment(NoticeDetailViewModel(notice: notice))
+//            )
+//        } else {
+//            viewController = NoticeDetailViewController(notice: notice)
+//        }
         
         navigationController?.pushViewController(viewController, animated: true)
     }

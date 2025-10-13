@@ -69,15 +69,19 @@ struct BookmarkDetail: View {
                 }
                 .fullScreenCover(isPresented: $isShowingWebView) {
                     NavigationStack {
+                        // FIXME: macOS(Designed for iPad)에서 NoticeDetailView 충돌 이슈
                         Group {
-                            if #available(iOS 26, *) {
-                                NoticeDetailView()
-                                    .environment(NoticeDetailViewModel(notice: bookmark.notice))
-                            } else {
-                                NoticeWebVCWrapper(notice: bookmark.notice)
-                                    .edgesIgnoringSafeArea(.bottom)
-                                    .background(.detailViewBackground)
-                            }
+//                            if #available(iOS 26, *) {
+//                                NoticeDetailView()
+//                                    .environment(NoticeDetailViewModel(notice: bookmark.notice))
+//                            } else {
+//                                NoticeWebVCWrapper(notice: bookmark.notice)
+//                                    .edgesIgnoringSafeArea(.bottom)
+//                                    .background(.detailViewBackground)
+//                            }
+                            NoticeWebVCWrapper(notice: bookmark.notice)
+                                .edgesIgnoringSafeArea(.bottom)
+                                .background(.detailViewBackground)
                         }
                         .toolbar {
                             ToolbarItem(placement: .topBarLeading) {
