@@ -72,19 +72,19 @@ final class MainTableViewController: UIViewController, FirstTabNavigationItemCon
     }
 }
 
-//MARK: - UITableView delegate method
+// MARK: - UITableView delegate method
 extension MainTableViewController: UITableViewDelegate {
-    //MARK: - Custom cell header
+    // MARK: - Custom cell header
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return createSectionHeader(for: section)
     }
     
-    //MARK: - Section height
+    // MARK: - Section height
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
     
-    //MARK: - Remove separator from last cell
+    // MARK: - Remove separator from last cell
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: cell.bounds.size.width)
@@ -93,21 +93,23 @@ extension MainTableViewController: UITableViewDelegate {
         }
     }
     
-    //MARK: - Cell이 선택 되었을 때 해당 공지사항 웹 페이지로 이동
+    // MARK: - Cell이 선택 되었을 때 해당 공지사항 웹 페이지로 이동
+    // FIXME: macOS(Designed for iPad)에서 NoticeDetailView 충돌 이슈
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let viewController: UIViewController
         let notice = viewModel.cellValues[indexPath.section].items[indexPath.row].notice
         
-        if #available(iOS 26, *) {
-            viewController = UIHostingController(
-                rootView: NoticeDetailView()
-                    .environment(NoticeDetailViewModel(notice: notice))
-            )
-        } else {
-            viewController = NoticeDetailViewController(
-                notice: notice
-            )
-        }
+//        if #available(iOS 26, *) {
+//            viewController = UIHostingController(
+//                rootView: NoticeDetailView()
+//                    .environment(NoticeDetailViewModel(notice: notice))
+//            )
+//        } else {
+//            viewController = NoticeDetailViewController(
+//                notice: notice
+//            )
+//        }
+        
+        let viewController = NoticeDetailViewController(notice: notice)
         
         // 화면 이동
         navigationController?.pushViewController(viewController, animated: true)
