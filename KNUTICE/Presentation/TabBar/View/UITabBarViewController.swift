@@ -103,8 +103,6 @@ final class UITabBarViewController: UITabBarController, NavigationItemConfigurab
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        print("here")
-        
         if UIDevice.current.userInterfaceIdiom == .pad {
             navigationController?.setNavigationBarHidden(true, animated: true)
         }
