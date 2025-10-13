@@ -30,6 +30,6 @@ extension ParentViewController {
         )
         
         //새로운 View Controller 삽입
-        navigationController?.setViewControllers([viewController], animated: true)
+        navigationController?.setViewControllers([viewController], animated: false)
     }
 }
