@@ -95,7 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didReceiveRemoteNotification userInfo: [AnyHashable : Any],
         fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
     ) {
-        guard let value = userInfo["event"],
+        guard let value = userInfo[UserInfoKeys.notificationEvent.rawValue],
               let eventName = value as? String,
               let event = SilentPushEvent(rawValue: eventName) else {
             return

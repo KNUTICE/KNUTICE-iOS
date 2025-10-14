@@ -70,7 +70,7 @@ extension UITabBarViewController {
                 NotificationCenter.default.post(
                     name: Notification.Name.majorSelectionDidChange,
                     object: self,
-                    userInfo: ["selectedMajor": category]
+                    userInfo: [UserInfoKeys.selectedMajor.rawValue: category]
                 )
             })
             .store(in: &cancellables)
@@ -85,7 +85,7 @@ extension UITabBarViewController {
                 NotificationCenter.default.post(
                     name: Notification.Name.bookmarkSortOptionDidChange,
                     object: self,
-                    userInfo: ["bookmarkSortOption": sortOption]
+                    userInfo: [UserInfoKeys.bookmarkSortOption.rawValue: sortOption]
                 )
             })
             .store(in: &cancellables)

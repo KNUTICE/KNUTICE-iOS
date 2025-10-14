@@ -42,7 +42,7 @@ final class ParentViewModel {
     func subscribeToFCMToken() {
         NotificationCenter.default.publisher(for: .fcmToken)
             .sink(receiveValue: { [weak self] notification in
-                guard let fcmToken = notification.userInfo?["token"] as? String else {
+                guard let fcmToken = notification.userInfo?[UserInfoKeys.fcmToken.rawValue] as? String else {
                     return
                 }
                 
@@ -82,6 +82,15 @@ final class ParentViewModel {
         }
     }
     
+    /// Subscribes to notification authorization status updates and handles navigation after authorization.
+    ///
+    /// This method listens for `.didCompleteNotificationAuthorizationRequest` notifications
+    /// posted to `NotificationCenter`. When authorization is completed, it waits for 3 seconds.
+    /// If no FCM token has been received within that time, it triggers navigation to the main screen
+    /// by setting `shouldNavigateToMain` to `true`.
+    ///
+    /// - Note: The subscription is stored in the `cancellables` set to manage its lifecycle.
+    /// - Important: Uses `Task.sleep` for delay handling on the main actor.
     func subscribeToNotificationAuthorizationStatus() {
         NotificationCenter.default.publisher(for: .didCompleteNotificationAuthorizationRequest)
             .receive(on: DispatchQueue.main)
@@ -92,6 +101,7 @@ final class ParentViewModel {
                 
                 if isCompleted {
                     // 알림 권한 확인 후, 3초 후에도 토큰이 전달되지 않으면 화면 전환
+                    // TODO: 경고 Alert 표시 후 메인 뷰로 이동하도록 변경
                     self?.navigationFallbackTask = Task {
                         try? await Task.sleep(nanoseconds: 3_000_000_000)
                         if self?.shouldNavigateToMain == false {

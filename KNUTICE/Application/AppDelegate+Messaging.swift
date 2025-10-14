@@ -17,7 +17,7 @@ extension AppDelegate: @MainActor MessagingDelegate {
         guard let fcmToken else { return }
         
         // 토큰 갱신 이벤트를 NotificationCenter로 전파
-        let dataDic: [String: String] = ["token": fcmToken]
+        let dataDic: [String: String] = [UserInfoKeys.fcmToken.rawValue: fcmToken]
         NotificationCenter.default.post(
             name: Notification.Name.fcmToken,
             object: nil,

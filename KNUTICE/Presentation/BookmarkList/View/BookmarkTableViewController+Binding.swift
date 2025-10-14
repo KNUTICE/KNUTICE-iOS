@@ -103,7 +103,7 @@ extension BookmarkTableViewController: ThirdTabNavigationItemConfigurable, Setti
         
         NotificationCenter.default.publisher(for: Notification.Name.bookmarkSortOptionDidChange)
             .sink(receiveValue: { [weak self] notification in
-                if let bookmarkSortOption = notification.userInfo?["bookmarkSortOption"] as? BookmarkSortOption {
+                if let bookmarkSortOption = notification.userInfo?[UserInfoKeys.bookmarkSortOption.rawValue] as? BookmarkSortOption {
                     self?.viewModel.bookmarkSortOption = bookmarkSortOption
                 }
             })

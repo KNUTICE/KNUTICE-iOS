@@ -51,7 +51,7 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
             NotificationCenter.default.publisher(for: .majorSelectionDidChange)
                 .sink(receiveValue: { [weak self] notification in
                     if let viewModel = self?.viewModel as? NoticeCollectionViewModel<MajorCategory>,
-                       let category = notification.userInfo?["selectedMajor"] as? MajorCategory {
+                       let category = notification.userInfo?[UserInfoKeys.selectedMajor] as? MajorCategory {
                         viewModel.category = category
                     }
                 })
