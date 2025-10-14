@@ -24,15 +24,16 @@
 		8E63D8612E6FC4460041E7C7 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 8E63D8602E6FC4460041E7C7 /* Factory */; };
 		8E63D8632E6FC4550041E7C7 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 8E63D8622E6FC4550041E7C7 /* RxRelay */; };
 		8E63D8652E6FC4550041E7C7 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8E63D8642E6FC4550041E7C7 /* RxSwift */; };
-		8E67CFEC2E9DD1CF005CBBA0 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
-		8E67CFEF2E9DD1D4005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; };
-		8E67CFF22E9DD219005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; };
 		8E67CFFB2E9E0FAF005CBBA0 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
 		8E67CFFC2E9E0FAF005CBBA0 /* KNUTICECore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8E67CFFE2E9E1052005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; };
 		8E67CFFF2E9E1052005CBBA0 /* KNUTICEWidgetCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8E67D0022E9E1059005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; };
 		8E67D0032E9E1059005CBBA0 /* KNUTICEWidgetCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8E67D0062E9E1530005CBBA0 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
+		8E67D00A2E9E1530005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; };
+		8E67D00E2E9E15F3005CBBA0 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
+		8E67D0122E9E15F3005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; };
 		8E6898322CD61EF1005F0EEA /* NotificationService-dev.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8E68982B2CD61EF1005F0EEA /* NotificationService-dev.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8E72BCE32E4305CA00107794 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 8E72BCE22E4305CA00107794 /* RxDataSources */; };
 		8E72BCED2E430F3200107794 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 8E72BCEC2E430F3200107794 /* RxCocoa */; };
@@ -42,10 +43,8 @@
 		8E7C68042E67B5AD00341B01 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 8E7C68032E67B5AD00341B01 /* Factory */; };
 		8E7C680D2E67BEA400341B01 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8E7C680C2E67BEA400341B01 /* FirebaseMessaging */; };
 		8E7C68102E67C4B400341B01 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
-		8E7C68112E67C4B400341B01 /* KNUTICECore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8E7C68132E67C4D100341B01 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
 		8E7C68162E67C4D400341B01 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
-		8E7C68412E67D1FF00341B01 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
 		8E8FC53D2E42F0FA002D560F /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
 		8E8FC53E2E42F0FA002D560F /* KNUTICECore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8E8FC5562E42F293002D560F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8E8FC5552E42F293002D560F /* Alamofire */; };
@@ -84,27 +83,6 @@
 			remoteGlobalIDString = 8E1D8C262E682D6E00E8F0EC;
 			remoteInfo = "KNUTICEWidget-devExtension";
 		};
-		8E1D8C412E6832BD00E8F0EC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8E3C43782E66D8D900EA711B;
-			remoteInfo = KNUTICEWidgetCore;
-		};
-		8E1D8C462E684BFC00E8F0EC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8E8FC5342E42F0FA002D560F;
-			remoteInfo = KNUTICECore;
-		};
-		8E3C43882E66D98400EA711B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8E3C43782E66D8D900EA711B;
-			remoteInfo = KNUTICEWidgetCore;
-		};
 		8E67D0002E9E1052005CBBA0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
@@ -113,6 +91,34 @@
 			remoteInfo = KNUTICEWidgetCore;
 		};
 		8E67D0042E9E1059005CBBA0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E3C43782E66D8D900EA711B;
+			remoteInfo = KNUTICEWidgetCore;
+		};
+		8E67D0082E9E1530005CBBA0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E8FC5342E42F0FA002D560F;
+			remoteInfo = KNUTICECore;
+		};
+		8E67D00C2E9E1530005CBBA0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E3C43782E66D8D900EA711B;
+			remoteInfo = KNUTICEWidgetCore;
+		};
+		8E67D0102E9E15F3005CBBA0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E8FC5342E42F0FA002D560F;
+			remoteInfo = KNUTICECore;
+		};
+		8E67D0142E9E15F3005CBBA0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
 			proxyType = 1;
@@ -176,26 +182,6 @@
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8E67CFF12E9DD1D4005CBBA0 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8E67CFF42E9DD21A005CBBA0 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8E67CFFD2E9E0FAF005CBBA0 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -214,7 +200,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8E7C68112E67C4B400341B01 /* KNUTICECore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,10 +404,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E67CFEC2E9DD1CF005CBBA0 /* KNUTICECore.framework in Frameworks */,
 				8E1D8C292E682D6E00E8F0EC /* SwiftUI.framework in Frameworks */,
+				8E67D00E2E9E15F3005CBBA0 /* KNUTICECore.framework in Frameworks */,
 				8E1D8C492E684CF800E8F0EC /* Factory in Frameworks */,
-				8E67CFEF2E9DD1D4005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */,
+				8E67D0122E9E15F3005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */,
 				8E1D8C282E682D6E00E8F0EC /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -459,10 +444,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E7C68412E67D1FF00341B01 /* KNUTICECore.framework in Frameworks */,
 				8E3C856A2E41C1380095852C /* SwiftUI.framework in Frameworks */,
+				8E67D0062E9E1530005CBBA0 /* KNUTICECore.framework in Frameworks */,
 				8E3C85682E41C1380095852C /* WidgetKit.framework in Frameworks */,
-				8E67CFF22E9DD219005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */,
+				8E67D00A2E9E1530005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */,
 				8EB90A372E45D7D200B3AEF6 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -690,13 +675,12 @@
 				8E1D8C232E682D6E00E8F0EC /* Sources */,
 				8E1D8C242E682D6E00E8F0EC /* Frameworks */,
 				8E1D8C252E682D6E00E8F0EC /* Resources */,
-				8E67CFF12E9DD1D4005CBBA0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				8E1D8C422E6832BD00E8F0EC /* PBXTargetDependency */,
-				8E1D8C472E684BFC00E8F0EC /* PBXTargetDependency */,
+				8E67D0112E9E15F3005CBBA0 /* PBXTargetDependency */,
+				8E67D0152E9E15F3005CBBA0 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				8E1D8C2A2E682D6E00E8F0EC /* KNUTICEWidget-dev */,
@@ -797,12 +781,12 @@
 				8E3C85622E41C1380095852C /* Sources */,
 				8E3C85632E41C1380095852C /* Frameworks */,
 				8E3C85642E41C1380095852C /* Resources */,
-				8E67CFF42E9DD21A005CBBA0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				8E3C43892E66D98400EA711B /* PBXTargetDependency */,
+				8E67D0092E9E1530005CBBA0 /* PBXTargetDependency */,
+				8E67D00D2E9E1530005CBBA0 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				8E3FBEFB2E694E950008425E /* KNUTICEWidget */,
@@ -1121,21 +1105,6 @@
 			target = 8E1D8C262E682D6E00E8F0EC /* KNUTICEWidget-devExtension */;
 			targetProxy = 8E1D8C342E682D7000E8F0EC /* PBXContainerItemProxy */;
 		};
-		8E1D8C422E6832BD00E8F0EC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8E3C43782E66D8D900EA711B /* KNUTICEWidgetCore */;
-			targetProxy = 8E1D8C412E6832BD00E8F0EC /* PBXContainerItemProxy */;
-		};
-		8E1D8C472E684BFC00E8F0EC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8E8FC5342E42F0FA002D560F /* KNUTICECore */;
-			targetProxy = 8E1D8C462E684BFC00E8F0EC /* PBXContainerItemProxy */;
-		};
-		8E3C43892E66D98400EA711B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8E3C43782E66D8D900EA711B /* KNUTICEWidgetCore */;
-			targetProxy = 8E3C43882E66D98400EA711B /* PBXContainerItemProxy */;
-		};
 		8E67D0012E9E1052005CBBA0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8E3C43782E66D8D900EA711B /* KNUTICEWidgetCore */;
@@ -1145,6 +1114,26 @@
 			isa = PBXTargetDependency;
 			target = 8E3C43782E66D8D900EA711B /* KNUTICEWidgetCore */;
 			targetProxy = 8E67D0042E9E1059005CBBA0 /* PBXContainerItemProxy */;
+		};
+		8E67D0092E9E1530005CBBA0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E8FC5342E42F0FA002D560F /* KNUTICECore */;
+			targetProxy = 8E67D0082E9E1530005CBBA0 /* PBXContainerItemProxy */;
+		};
+		8E67D00D2E9E1530005CBBA0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E3C43782E66D8D900EA711B /* KNUTICEWidgetCore */;
+			targetProxy = 8E67D00C2E9E1530005CBBA0 /* PBXContainerItemProxy */;
+		};
+		8E67D0112E9E15F3005CBBA0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E8FC5342E42F0FA002D560F /* KNUTICECore */;
+			targetProxy = 8E67D0102E9E15F3005CBBA0 /* PBXContainerItemProxy */;
+		};
+		8E67D0152E9E15F3005CBBA0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E3C43782E66D8D900EA711B /* KNUTICEWidgetCore */;
+			targetProxy = 8E67D0142E9E15F3005CBBA0 /* PBXContainerItemProxy */;
 		};
 		8E6898312CD61EF1005F0EEA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
