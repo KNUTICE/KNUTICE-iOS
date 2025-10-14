@@ -21,6 +21,7 @@ final class ParentViewController: UIViewController {
         let loadingViewController = storyboard.instantiateViewController(identifier: "VC1")
         addChildVC(loadingViewController)
         viewModel.subscribeToFCMToken()
+        viewModel.subscribeToNotificationAuthorizationStatus()
         bind()
     }
     

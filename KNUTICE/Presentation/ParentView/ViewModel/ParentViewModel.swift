@@ -32,16 +32,13 @@ final class ParentViewModel {
     
     //MARK: - Methods
     
-    /// Subscribes to FCM token notifications and handles token registration.
+    /// Subscribes to FCM token update notifications and registers the new token when received.
     ///
-    /// This method listens for `.fcmToken` notifications posted via `NotificationCenter`.
-    /// When a token is received, it calls `register(token:)` to register it with the server.
+    /// This method listens for `.fcmToken` notifications posted to `NotificationCenter`.
+    /// When a notification is received, it extracts the token string from the `userInfo`
+    /// dictionary and calls `register(token:)` to register it.
     ///
-    /// Additionally, a fallback mechanism is implemented: if no token is received within 3 seconds,
-    /// `shouldNavigateToMain` is set to `true` to allow navigation to the main screen.
-    ///
-    /// - Note: Uses Combine to store the subscription in `cancellables` and `[weak self]`
-    ///         to avoid retain cycles.
+    /// - Note: The subscription is stored in the `cancellables` set to manage its lifecycle.
     func subscribeToFCMToken() {
         NotificationCenter.default.publisher(for: .fcmToken)
             .sink(receiveValue: { [weak self] notification in
@@ -52,14 +49,6 @@ final class ParentViewModel {
                 self?.register(token: fcmToken)
             })
             .store(in: &cancellables)
-        
-        // fallback: 3초 후에도 토큰이 전달되지 않으면 화면 전환
-        navigationFallbackTask = Task {
-            try? await Task.sleep(nanoseconds: 3_000_000_000)
-            if !shouldNavigateToMain {
-                shouldNavigateToMain = true
-            }
-        }
     }
     
     /// Registers the given FCM token with the server asynchronously.
@@ -92,4 +81,26 @@ final class ParentViewModel {
             }
         }
     }
+    
+    func subscribeToNotificationAuthorizationStatus() {
+        NotificationCenter.default.publisher(for: .didCompleteNotificationAuthorizationRequest)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] notification in
+                let key = UserInfoKeys.isNotificationAuthorizationCompleted.rawValue
+                
+                guard let isCompleted = notification.userInfo?[key] as? Bool else { return }
+                
+                if isCompleted {
+                    // 알림 권한 확인 후, 3초 후에도 토큰이 전달되지 않으면 화면 전환
+                    self?.navigationFallbackTask = Task {
+                        try? await Task.sleep(nanoseconds: 3_000_000_000)
+                        if self?.shouldNavigateToMain == false {
+                            self?.shouldNavigateToMain = true
+                        }
+                    }
+                }
+            })
+            .store(in: &cancellables)
+    }
+    
 }
