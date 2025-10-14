@@ -15,8 +15,6 @@
 		8E1D8C282E682D6E00E8F0EC /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C85672E41C1380095852C /* WidgetKit.framework */; };
 		8E1D8C292E682D6E00E8F0EC /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C85692E41C1380095852C /* SwiftUI.framework */; };
 		8E1D8C362E682D7000E8F0EC /* KNUTICEWidget-devExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8E1D8C272E682D6E00E8F0EC /* KNUTICEWidget-devExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		8E1D8C3F2E6832BD00E8F0EC /* KNUTICEWidgetCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; };
-		8E1D8C442E684BFC00E8F0EC /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
 		8E1D8C492E684CF800E8F0EC /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 8E1D8C482E684CF800E8F0EC /* Factory */; };
 		8E3C85682E41C1380095852C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C85672E41C1380095852C /* WidgetKit.framework */; };
 		8E3C856A2E41C1380095852C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C85692E41C1380095852C /* SwiftUI.framework */; };
@@ -26,6 +24,11 @@
 		8E63D8612E6FC4460041E7C7 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 8E63D8602E6FC4460041E7C7 /* Factory */; };
 		8E63D8632E6FC4550041E7C7 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 8E63D8622E6FC4550041E7C7 /* RxRelay */; };
 		8E63D8652E6FC4550041E7C7 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8E63D8642E6FC4550041E7C7 /* RxSwift */; };
+		8E67CFEC2E9DD1CF005CBBA0 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
+		8E67CFEF2E9DD1D4005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; };
+		8E67CFF02E9DD1D4005CBBA0 /* KNUTICEWidgetCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8E67CFF22E9DD219005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; };
+		8E67CFF32E9DD219005CBBA0 /* KNUTICEWidgetCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8E6898322CD61EF1005F0EEA /* NotificationService-dev.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8E68982B2CD61EF1005F0EEA /* NotificationService-dev.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8E72BCE32E4305CA00107794 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 8E72BCE22E4305CA00107794 /* RxDataSources */; };
 		8E72BCED2E430F3200107794 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 8E72BCEC2E430F3200107794 /* RxCocoa */; };
@@ -41,7 +44,6 @@
 		8E7C68132E67C4D100341B01 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
 		8E7C68162E67C4D400341B01 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
 		8E7C68412E67D1FF00341B01 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
-		8E7C68442E67D20000341B01 /* KNUTICEWidgetCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; };
 		8E8FC53D2E42F0FA002D560F /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
 		8E8FC53E2E42F0FA002D560F /* KNUTICECore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8E8FC5562E42F293002D560F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8E8FC5552E42F293002D560F /* Alamofire */; };
@@ -156,6 +158,28 @@
 				8E6898322CD61EF1005F0EEA /* NotificationService-dev.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E67CFF12E9DD1D4005CBBA0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8E67CFF02E9DD1D4005CBBA0 /* KNUTICEWidgetCore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E67CFF42E9DD21A005CBBA0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8E67CFF32E9DD219005CBBA0 /* KNUTICEWidgetCore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8E72BCF22E430FC700107794 /* Embed Frameworks */ = {
@@ -378,10 +402,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E67CFEC2E9DD1CF005CBBA0 /* KNUTICECore.framework in Frameworks */,
 				8E1D8C292E682D6E00E8F0EC /* SwiftUI.framework in Frameworks */,
 				8E1D8C492E684CF800E8F0EC /* Factory in Frameworks */,
-				8E1D8C442E684BFC00E8F0EC /* KNUTICECore.framework in Frameworks */,
-				8E1D8C3F2E6832BD00E8F0EC /* KNUTICEWidgetCore.framework in Frameworks */,
+				8E67CFEF2E9DD1D4005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */,
 				8E1D8C282E682D6E00E8F0EC /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -420,7 +444,7 @@
 				8E7C68412E67D1FF00341B01 /* KNUTICECore.framework in Frameworks */,
 				8E3C856A2E41C1380095852C /* SwiftUI.framework in Frameworks */,
 				8E3C85682E41C1380095852C /* WidgetKit.framework in Frameworks */,
-				8E7C68442E67D20000341B01 /* KNUTICEWidgetCore.framework in Frameworks */,
+				8E67CFF22E9DD219005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */,
 				8EB90A372E45D7D200B3AEF6 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -647,6 +671,7 @@
 				8E1D8C232E682D6E00E8F0EC /* Sources */,
 				8E1D8C242E682D6E00E8F0EC /* Frameworks */,
 				8E1D8C252E682D6E00E8F0EC /* Resources */,
+				8E67CFF12E9DD1D4005CBBA0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -752,6 +777,7 @@
 				8E3C85622E41C1380095852C /* Sources */,
 				8E3C85632E41C1380095852C /* Frameworks */,
 				8E3C85642E41C1380095852C /* Resources */,
+				8E67CFF42E9DD21A005CBBA0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
