@@ -26,15 +26,17 @@
 		8E63D8652E6FC4550041E7C7 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8E63D8642E6FC4550041E7C7 /* RxSwift */; };
 		8E67CFEC2E9DD1CF005CBBA0 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
 		8E67CFEF2E9DD1D4005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; };
-		8E67CFF02E9DD1D4005CBBA0 /* KNUTICEWidgetCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8E67CFF22E9DD219005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; };
-		8E67CFF32E9DD219005CBBA0 /* KNUTICEWidgetCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8E67CFFB2E9E0FAF005CBBA0 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
+		8E67CFFC2E9E0FAF005CBBA0 /* KNUTICECore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8E67CFFE2E9E1052005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; };
+		8E67CFFF2E9E1052005CBBA0 /* KNUTICEWidgetCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8E67D0022E9E1059005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; };
+		8E67D0032E9E1059005CBBA0 /* KNUTICEWidgetCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8E6898322CD61EF1005F0EEA /* NotificationService-dev.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8E68982B2CD61EF1005F0EEA /* NotificationService-dev.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8E72BCE32E4305CA00107794 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 8E72BCE22E4305CA00107794 /* RxDataSources */; };
 		8E72BCED2E430F3200107794 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 8E72BCEC2E430F3200107794 /* RxCocoa */; };
 		8E72BCEF2E430F4400107794 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8E72BCEE2E430F4400107794 /* RxSwift */; };
-		8E72BCF02E430FC700107794 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
-		8E72BCF12E430FC700107794 /* KNUTICECore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8E7C67FD2E67B3F100341B01 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 8E7C67FC2E67B3F100341B01 /* RxCocoa */; };
 		8E7C67FF2E67B41900341B01 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8E7C67FE2E67B41900341B01 /* FirebaseMessaging */; };
 		8E7C68042E67B5AD00341B01 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 8E7C68032E67B5AD00341B01 /* Factory */; };
@@ -97,6 +99,20 @@
 			remoteInfo = KNUTICECore;
 		};
 		8E3C43882E66D98400EA711B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E3C43782E66D8D900EA711B;
+			remoteInfo = KNUTICEWidgetCore;
+		};
+		8E67D0002E9E1052005CBBA0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E3C43782E66D8D900EA711B;
+			remoteInfo = KNUTICEWidgetCore;
+		};
+		8E67D0042E9E1059005CBBA0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
 			proxyType = 1;
@@ -166,7 +182,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8E67CFF02E9DD1D4005CBBA0 /* KNUTICEWidgetCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -177,18 +192,18 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8E67CFF32E9DD219005CBBA0 /* KNUTICEWidgetCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8E72BCF22E430FC700107794 /* Embed Frameworks */ = {
+		8E67CFFD2E9E0FAF005CBBA0 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8E72BCF12E430FC700107794 /* KNUTICECore.framework in Embed Frameworks */,
+				8E67CFFC2E9E0FAF005CBBA0 /* KNUTICECore.framework in Embed Frameworks */,
+				8E67CFFF2E9E1052005CBBA0 /* KNUTICEWidgetCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -211,6 +226,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				8E8FC53E2E42F0FA002D560F /* KNUTICECore.framework in Embed Frameworks */,
+				8E67D0032E9E1059005CBBA0 /* KNUTICEWidgetCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,6 +405,7 @@
 				8E8FC53D2E42F0FA002D560F /* KNUTICECore.framework in Frameworks */,
 				8EC732242DD5A6660038AD59 /* Kingfisher in Frameworks */,
 				8EC42A812E67D69500F1FF11 /* FirebaseMessaging in Frameworks */,
+				8E67D0022E9E1059005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */,
 				8EC7322A2DD5A6A80038AD59 /* SnapKit in Frameworks */,
 				8EC732272DD5A6900038AD59 /* SkeletonView in Frameworks */,
 				8EC7321E2DD5A5DB0038AD59 /* RxDataSources in Frameworks */,
@@ -414,13 +431,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E67CFFB2E9E0FAF005CBBA0 /* KNUTICECore.framework in Frameworks */,
 				8EC42A832E67D69E00F1FF11 /* FirebaseMessaging in Frameworks */,
 				8E72BCED2E430F3200107794 /* RxCocoa in Frameworks */,
+				8E67CFFE2E9E1052005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */,
 				8E72BCEF2E430F4400107794 /* RxSwift in Frameworks */,
 				8EC732392DD5A97E0038AD59 /* Kingfisher in Frameworks */,
 				8EC7323D2DD5A97E0038AD59 /* SnapKit in Frameworks */,
 				8EC7323B2DD5A97E0038AD59 /* SkeletonView in Frameworks */,
-				8E72BCF02E430FC700107794 /* KNUTICECore.framework in Frameworks */,
 				8EC732332DD5A94C0038AD59 /* RxDataSources in Frameworks */,
 				8EC7322F2DD5A9440038AD59 /* Factory in Frameworks */,
 			);
@@ -627,6 +645,7 @@
 				8EB6D2032C663627004E8AC2 /* PBXTargetDependency */,
 				8E8FC53C2E42F0FA002D560F /* PBXTargetDependency */,
 				8E1D70D62E4583E0007FD134 /* PBXTargetDependency */,
+				8E67D0052E9E1059005CBBA0 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				8E3FBF732E694EE80008425E /* ci_scripts */,
@@ -698,13 +717,14 @@
 				8E2051382CD4F32F00D87C6A /* Frameworks */,
 				8E20513A2CD4F32F00D87C6A /* Resources */,
 				8E2051412CD4F32F00D87C6A /* Embed Foundation Extensions */,
-				8E72BCF22E430FC700107794 /* Embed Frameworks */,
+				8E67CFFD2E9E0FAF005CBBA0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				8E6898312CD61EF1005F0EEA /* PBXTargetDependency */,
 				8E1D8C352E682D7000E8F0EC /* PBXTargetDependency */,
+				8E67D0012E9E1052005CBBA0 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				8E3FBF732E694EE80008425E /* ci_scripts */,
@@ -1115,6 +1135,16 @@
 			isa = PBXTargetDependency;
 			target = 8E3C43782E66D8D900EA711B /* KNUTICEWidgetCore */;
 			targetProxy = 8E3C43882E66D98400EA711B /* PBXContainerItemProxy */;
+		};
+		8E67D0012E9E1052005CBBA0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E3C43782E66D8D900EA711B /* KNUTICEWidgetCore */;
+			targetProxy = 8E67D0002E9E1052005CBBA0 /* PBXContainerItemProxy */;
+		};
+		8E67D0052E9E1059005CBBA0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E3C43782E66D8D900EA711B /* KNUTICEWidgetCore */;
+			targetProxy = 8E67D0042E9E1059005CBBA0 /* PBXContainerItemProxy */;
 		};
 		8E6898312CD61EF1005F0EEA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
