@@ -53,6 +53,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // 앱을 APNs를 통해 알림을 받도록 설정
             DispatchQueue.main.async {
                 UIApplication.shared.registerForRemoteNotifications()
+                
+                NotificationCenter.default.post(
+                    name: .didCompleteNotificationAuthorizationRequest,
+                    object: nil,
+                    userInfo: [UserInfoKeys.isNotificationAuthorizationCompleted.rawValue: true]
+                )
             }
         }
         

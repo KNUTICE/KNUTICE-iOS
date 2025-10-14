@@ -14,4 +14,5 @@ extension Notification.Name {
     static let hasTipData = Notification.Name("hasTipData")
     static let majorSelectionDidChange = Notification.Name("majorSelectionDidChange")
     static let bookmarkSortOptionDidChange = Notification.Name("bookmarkSortOptionDidChange")
+    static let didCompleteNotificationAuthorizationRequest = Notification.Name("didCompleteNotificationAuthorizationRequest")
 }
