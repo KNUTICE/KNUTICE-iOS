@@ -23,8 +23,8 @@ extension ParentViewController {
     
     
     func switchViewController() {
-        let majorStr = UserDefaults.standard.string(forKey: UserDefaultsKeys.selectedMajor.rawValue)
-        let majorCategory = MajorCategory(rawValue: majorStr ?? "")
+        let majorStr = UserDefaults.shared?.string(forKey: UserDefaultsKeys.selectedMajor.rawValue) ?? ""
+        let majorCategory = MajorCategory(rawValue: majorStr)
         let viewController = UITabBarViewController(
             viewModel: TabBarViewModel(category: majorCategory)
         )

@@ -16,7 +16,7 @@ import UIKit
 
 extension SecondTabNavigationItemConfigurable where Self: UIViewController {
     func makeMajorSelectionButton(withTitle title: String? = nil) {
-        let majorStr = UserDefaults.standard.string(forKey: UserDefaultsKeys.selectedMajor.rawValue) ?? ""
+        let majorStr = UserDefaults.shared?.string(forKey: UserDefaultsKeys.selectedMajor.rawValue) ?? ""
         let selectedMajor = MajorCategory(rawValue: majorStr)
         var config = UIButton.Configuration.plain()
         config.title = title ?? selectedMajor?.localizedDescription ?? "학과명"

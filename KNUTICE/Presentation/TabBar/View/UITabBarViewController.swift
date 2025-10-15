@@ -26,9 +26,9 @@ final class UITabBarViewController: UITabBarController, NavigationItemConfigurab
         return viewController
     }()
     private let majorNoticeViewController: UIViewController = {
-        let majorStr = UserDefaults.standard.string(forKey: UserDefaultsKeys.selectedMajor.rawValue)
+        let majorStr = UserDefaults.shared?.string(forKey: UserDefaultsKeys.selectedMajor.rawValue) ?? ""
         let viewController = MajorNoticeCollectionViewController(
-            viewModel: NoticeCollectionViewModel(category: MajorCategory(rawValue: majorStr ?? ""))
+            viewModel: NoticeCollectionViewModel(category: MajorCategory(rawValue: majorStr))
         )
         viewController.tabBarItem.image = UIImage(systemName: "globe")
         viewController.tabBarItem.selectedImage = UIImage(systemName: "globe.fill")
