@@ -51,7 +51,7 @@ actor FetchNoticeUseCaseImpl: FetchNoticeUseCase {
             }
             
             // UserDefaultsKeys.selectedMajor 업데이트
-            UserDefaults.standard.set(category.rawValue, forKey: UserDefaultsKeys.selectedMajor.rawValue)
+            UserDefaults.shared?.set(category.rawValue, forKey: UserDefaultsKeys.selectedMajor.rawValue)
         }
         
         // 서버에서 선택된 공지 데이터 가져오기
@@ -62,7 +62,7 @@ actor FetchNoticeUseCaseImpl: FetchNoticeUseCase {
     
     private func updateSubscription(of category: MajorCategory) async throws {
         try await withThrowingTaskGroup(of: Void.self) { group in
-            if let majorStr = UserDefaults.standard.string(forKey: UserDefaultsKeys.selectedMajor.rawValue),
+            if let majorStr = UserDefaults.shared?.string(forKey: UserDefaultsKeys.selectedMajor.rawValue),
                let storedMajorCategory = MajorCategory(rawValue: majorStr),
                category != storedMajorCategory {
                 group.addTask {

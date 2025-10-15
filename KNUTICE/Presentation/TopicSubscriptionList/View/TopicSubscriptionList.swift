@@ -97,9 +97,8 @@ struct TopicSubscriptionList: View {
                             get: {
                                 viewModel.isMajorNoticeNotificationSubscribed ?? false
                             }, set: {
-                                let majorStr = UserDefaults.standard.string(forKey: UserDefaultsKeys.selectedMajor.rawValue)
-                                
-                                if let majorStr, let selectedMajor = MajorCategory(rawValue: majorStr) {
+                                if let majorStr = UserDefaults.shared?.string(forKey: UserDefaultsKeys.selectedMajor.rawValue),
+                                   let selectedMajor = MajorCategory(rawValue: majorStr) {
                                     viewModel.update(of: .major, topic: selectedMajor, isEnabled: $0)
                                 }
                             }),
