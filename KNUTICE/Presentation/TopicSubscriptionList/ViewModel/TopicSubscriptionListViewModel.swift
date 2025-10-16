@@ -21,6 +21,7 @@ final class TopicSubscriptionListViewModel: ObservableObject {
     @Published var isMajorNoticeNotificationSubscribed: Bool?
     @Published var isLoading: Bool = false
     @Published var isShowingAlert: Bool = false
+    @Published var isShowingFCMTokenErrorAlert: Bool = false
     
     @Injected(\.topicSubscriptionRepository) private var repository
     private let logger = Logger()
@@ -55,6 +56,20 @@ final class TopicSubscriptionListViewModel: ObservableObject {
             
             isMajorNoticeNotificationSubscribed = UserDefaults.standard.bool(forKey: UserDefaultsKeys.isMajorNotificationSubscribed.rawValue)
         } catch {
+            guard let error = error.asAFError else {
+                logger.log(level: .error, "NotificationListViewModel.fetchNotificationSubscriptions(): \(error.localizedDescription)")
+                return
+            }
+            
+            switch error {
+            case .requestAdaptationFailed(let underlyingError):
+                if let _ = underlyingError as? KNUTICECore.TokenError {
+                    isShowingFCMTokenErrorAlert = true
+                }
+            default:
+                break
+            }
+            
             logger.log(level: .error, "NotificationListViewModel.fetchNotificationSubscriptions(): \(error.localizedDescription)")
         }
     }
