@@ -10,6 +10,7 @@ import KNUTICECore
 
 struct TopicSubscriptionList: View {
     @StateObject private var viewModel: TopicSubscriptionListViewModel
+    @Environment(\.dismiss) private var dismiss
     
     init(viewModel: TopicSubscriptionListViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -124,6 +125,13 @@ struct TopicSubscriptionList: View {
                 Button("확인") {}
             } message: {
                 Text(viewModel.alertMessage)
+            }
+            .alert("알림", isPresented: $viewModel.isShowingFCMTokenErrorAlert) {
+                Button("확인") {
+                    dismiss()
+                }
+            } message: {
+                Text("현재 서비스를 이용할 수 없습니다.\n잠시 후에 다시 시도해 주세요.")
             }
             
             SpinningIndicator()

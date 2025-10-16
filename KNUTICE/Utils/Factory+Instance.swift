@@ -44,12 +44,6 @@ extension Container {
     
     //MARK: - Service
     
-    var reportService: Factory<ReportService> {
-        Factory(self) {
-            ReportServiceImpl()
-        }
-    }
-    
     var bookmarkService: Factory<BookmarkService> {
         Factory(self) {
             BookmarkServiceImpl()

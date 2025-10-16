@@ -19,7 +19,7 @@ public struct TokenInterceptor: RequestInterceptor, @unchecked Sendable {
                 urlRequest.headers.add(name: "fcmToken", value: token)
                 completion(.success(urlRequest))
             } catch {
-                completion(.failure(error))
+                completion(.failure(TokenError.notFound))
             }
         }
     }

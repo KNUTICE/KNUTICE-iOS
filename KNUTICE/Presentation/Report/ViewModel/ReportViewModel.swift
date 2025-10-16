@@ -10,7 +10,7 @@ import Foundation
 import Factory
 import KNUTICECore
 
-final class ReportViewModel: ObservableObject {
+final class ReportViewModel: ObservableObject, AppVersionProvidable {
     enum AlertType {
         case success
         case failure
@@ -22,7 +22,7 @@ final class ReportViewModel: ObservableObject {
     @Published var isShowingAlert: Bool = false
     @Published var isLoading: Bool = false
     
-    @Injected(\.reportService) private var reportService: ReportService
+    @Injected(\.reportRepository) private var reportRepository
     private var cancellables = Set<AnyCancellable>()
     private(set) var alertType: AlertType = .none
     private(set) var alertMessage: String = ""
@@ -35,8 +35,14 @@ final class ReportViewModel: ObservableObject {
             return
         }
         
+        let params = [
+            "content": content,
+            "deviceName": device,
+            "version": self.getAppVersion()
+        ]
+        
         isLoading.toggle()
-        reportService.report(content: content, device: device)
+        reportRepository.register(params: params)
             .sink(receiveCompletion: { [weak self] completion in
                 self?.isLoading.toggle()
                 switch completion {
