@@ -15,4 +15,5 @@ extension Notification.Name {
     static let majorSelectionDidChange = Notification.Name("majorSelectionDidChange")
     static let bookmarkSortOptionDidChange = Notification.Name("bookmarkSortOptionDidChange")
     static let didCompleteNotificationAuthorizationRequest = Notification.Name("didCompleteNotificationAuthorizationRequest")
+    static let didFinishLoading = Notification.Name("didFinishLoading")
 }

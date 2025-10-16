@@ -5,13 +5,16 @@
 //  Created by 이정훈 on 5/4/24.
 //
 
+import Combine
+import KNUTICECore
 import SwiftUI
 import UIKit
-import KNUTICECore
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    private var pendingDeepLinkURL: URL?
+    private var cancellables: Set<AnyCancellable> = []
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -26,10 +29,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.rootViewController = UINavigationController(rootViewController: ParentViewController())
         self.window?.makeKeyAndVisible()
         
+        // Observe the loading completion event to handle pending deep link navigation
+        subscribeToDidFinishLoading()
+        
         // Handle deep link from cold start (widget, url, etc.)
         guard let url = connectionOptions.urlContexts.first?.url else { return }
         
-        handleDeepLink(url, delayIfNeeded: true)
+        // Stored for deep link navigation after entering the main screen.
+        pendingDeepLinkURL = url
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -84,13 +91,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     // FIXME: macOS(Designed for iPad)에서 NoticeDetailView 충돌 이슈
-    private func handleDeepLink(_ url: URL, delayIfNeeded: Bool = false) {
-        Task { @MainActor [weak self] in
-            if delayIfNeeded {
-                // cold start 시 rootViewController 세팅이 끝나기 전에 push 하면 Loading 화면에서 멈춤
-                try? await Task.sleep(nanoseconds: 500_000_000)
-            }
-            
+    private func handleDeepLink(_ url: URL) {
+        Task { @MainActor [weak self] in            
             let deepLink = await DeepLinkManager.shared.parse(url)
             
             if let navigationController = self?.window?.rootViewController as? UINavigationController,
@@ -115,5 +117,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
     
+    /// Subscribes to the `.didFinishLoading` notification to handle pending deep links after the loading process completes.
+    ///
+    /// This method observes the `Notification.Name.didFinishLoading` event emitted when the
+    /// initial loading or splash process finishes. Once the notification is received,
+    /// it checks if a pending deep link URL exists (`pendingDeepLinkURL`) and navigates to
+    /// the corresponding destination using `handleDeepLink(_:)`.
+    ///
+    /// The subscription is stored in `cancellables` to manage its lifecycle properly.
+    ///
+    /// - Note: This ensures that deep link navigation occurs only after the app’s root
+    ///   view hierarchy has been fully initialized, preventing navigation from being blocked
+    ///   on the loading screen.
+    private func subscribeToDidFinishLoading() {
+        NotificationCenter.default.publisher(for: Notification.Name.didFinishLoading)
+            .sink(receiveValue: { [weak self] _ in
+                guard let url = self?.pendingDeepLinkURL else { return }
+                
+                self?.handleDeepLink(url)
+            })
+            .store(in: &cancellables)
+    }
 }
 
