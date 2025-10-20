@@ -19,10 +19,6 @@ class NoticeCollectionViewController<Category>: UIViewController, NoticeCollecti
         collectionView.delegate = self
         collectionView.register(NoticeCollectionViewCell.self, forCellWithReuseIdentifier: NoticeCollectionViewCell.reuseIdentifier)
         collectionView.register(NoticeCollectionViewCellWithThumbnail.self, forCellWithReuseIdentifier: NoticeCollectionViewCellWithThumbnail.reuseIdentifier)
-        let loadingIndicator = UIActivityIndicatorView(style: .large)
-        loadingIndicator.startAnimating()
-        collectionView.backgroundView = loadingIndicator
-        collectionView.refreshControl = refreshControl
         collectionView.backgroundColor = .primaryBackground
         
         return collectionView
@@ -51,6 +47,7 @@ class NoticeCollectionViewController<Category>: UIViewController, NoticeCollecti
 
         // Do any additional setup after loading the view.
         setupLayout()
+        setupBackground()
         setUpNavigationBar(title: navigationTitle)
         bind()
         
@@ -84,6 +81,13 @@ class NoticeCollectionViewController<Category>: UIViewController, NoticeCollecti
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+    }
+    
+    func setupBackground() {
+        let loadingIndicator = UIActivityIndicatorView(style: .large)
+        loadingIndicator.startAnimating()
+        collectionView.backgroundView = loadingIndicator
+        collectionView.refreshControl = refreshControl
     }
     
     func bind() {

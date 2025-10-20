@@ -19,7 +19,7 @@ extension SecondTabNavigationItemConfigurable where Self: UIViewController {
         let majorStr = UserDefaults.shared?.string(forKey: UserDefaultsKeys.selectedMajor.rawValue) ?? ""
         let selectedMajor = MajorCategory(rawValue: majorStr)
         var config = UIButton.Configuration.plain()
-        config.title = title ?? selectedMajor?.localizedDescription ?? "학과명"
+        config.title = title ?? selectedMajor?.localizedDescription ?? "학과 선택"
         config.image = UIImage(systemName: "chevron.right")
         config.imagePlacement = .trailing
         config.imagePadding = 3

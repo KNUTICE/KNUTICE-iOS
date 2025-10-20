@@ -12,16 +12,16 @@ import SwiftUI
 import UIKit
 
 final class MajorNoticeCollectionViewController: NoticeCollectionViewController<MajorCategory>, SettingButtonConfigurable, SecondTabNavigationItemConfigurable {
+    private var majorNoticeViewModel: NoticeCollectionViewModel<MajorCategory>? {
+        return viewModel as? NoticeCollectionViewModel<MajorCategory>
+    }
     var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .primaryBackground
-        
-        if let viewModel = viewModel as? NoticeCollectionViewModel<MajorCategory> {
-            viewModel.bindWithCategory()
-        }
+        majorNoticeViewModel?.bindWithCategory()
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             makeMajorSelectionButton()
@@ -31,21 +31,24 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
     
     override func setupLayout() {
         view.addSubview(collectionView)
+        
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
     
+    override func setupBackground() {
+        collectionView.backgroundView = UIHostingController(rootView: MajorNoticeBackgroundView()).view
+    }
+    
     override func bind() {
         super.bind()
         
-        if let viewModel = viewModel as? NoticeCollectionViewModel<MajorCategory> {
-            viewModel.$category
-                .sink(receiveValue: { [weak self] in
-                    self?.makeMajorSelectionButton(withTitle: $0?.localizedDescription)
-                })
-                .store(in: &cancellables)
-        }
+        majorNoticeViewModel?.$category
+            .sink(receiveValue: { [weak self] in
+                self?.makeMajorSelectionButton(withTitle: $0?.localizedDescription)
+            })
+            .store(in: &cancellables)
         
         if UIDevice.current.userInterfaceIdiom == .phone {
             NotificationCenter.default.publisher(for: .majorSelectionDidChange)
