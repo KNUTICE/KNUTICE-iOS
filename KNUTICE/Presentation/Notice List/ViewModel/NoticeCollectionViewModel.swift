@@ -63,6 +63,8 @@ final class NoticeCollectionViewModel<Category>: NoticeCollectionViewModelProtoc
         $category
             .delay(for: .seconds(0.1), scheduler: DispatchQueue.main)
             .sink(receiveValue: { [weak self] _ in
+                // 기존 데이터 초기화
+                self?.notices.accept([])
                 // 새로운 공지 서버에서 가져오기
                 self?.fetchNotices()
             })

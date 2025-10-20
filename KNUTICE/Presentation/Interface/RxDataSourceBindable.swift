@@ -22,8 +22,8 @@ extension RxDataSourceBindable {
     func bindNotices() {
         viewModel.notices
             .skip(1)
-            .do(onNext: { [weak self] _ in
-                guard let self else { return }
+            .do(onNext: { [weak self] notices in
+                guard let self, !notices.isEmpty else { return }
                 
                 collectionView.backgroundView = nil
                 
