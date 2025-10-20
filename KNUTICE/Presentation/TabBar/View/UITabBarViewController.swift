@@ -129,8 +129,13 @@ extension UITabBarViewController: UITabBarControllerDelegate {
 extension UITabBarViewController {    
     @objc func didTapMajorSelectionButton(_ sender: UIButton) {
         let viewController = UIHostingController(
-            rootView: MajorSelectionView<TabBarViewModel>()
-                .environmentObject(viewModel)
+            rootView: MajorSelectionView(selectedCategory: Binding(
+                get: {
+                    self.viewModel.category
+                },
+                set: {
+                    self.viewModel.category = $0
+                }))
         )
         viewController.modalPresentationStyle = .pageSheet
         

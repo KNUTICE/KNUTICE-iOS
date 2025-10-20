@@ -66,8 +66,13 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
         guard let viewModel = viewModel as? NoticeCollectionViewModel<MajorCategory> else { return }
         
         let viewController = UIHostingController(
-            rootView: MajorSelectionView<NoticeCollectionViewModel<MajorCategory>>()
-                .environmentObject(viewModel)
+            rootView: MajorSelectionView(selectedCategory: Binding(
+                get: {
+                    viewModel.category
+                },
+                set: {
+                    viewModel.category = $0
+                }))
         )
         viewController.modalPresentationStyle = .pageSheet
         
