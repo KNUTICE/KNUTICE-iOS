@@ -12,7 +12,7 @@ import KNUTICECore
 import os
 
 @MainActor
-final class TabBarViewModel: ObservableObject, MajorCategoryProvidable, BookmarkSortOptionProvidable {
+final class TabBarViewModel: MajorCategoryProvidable, BookmarkSortOptionProvidable {
     @Published var category: MajorCategory? = nil
     @Published var deepLink: DeepLink? = nil
     @Published var bookmarkSortOption: BookmarkSortOption = {

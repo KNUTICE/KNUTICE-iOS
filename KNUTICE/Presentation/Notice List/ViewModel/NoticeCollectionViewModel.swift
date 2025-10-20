@@ -12,7 +12,7 @@ import KNUTICECore
 import os
 import RxRelay
 
-typealias NoticeCollectionViewModelProtocol = ObservableObject & NoticeSectionModelProvidable & NoticeFetchable & MajorCategoryProvidable
+typealias NoticeCollectionViewModelProtocol = NoticeSectionModelProvidable & NoticeFetchable & MajorCategoryProvidable
 
 @MainActor
 final class NoticeCollectionViewModel<Category>: NoticeCollectionViewModelProtocol where Category: RawRepresentable & Sendable, Category.RawValue == String {
