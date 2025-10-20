@@ -62,11 +62,6 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
         }
     }
     
-    @objc func navigateToSetting(_ sender: UIButton) {
-        let viewController = UIHostingController(rootView: SettingView())
-        navigationController?.pushViewController(viewController, animated: true)
-    }
-    
     @objc func didTapMajorSelectionButton(_ sender: UIButton) {
         guard let viewModel = viewModel as? NoticeCollectionViewModel<MajorCategory> else { return }
         

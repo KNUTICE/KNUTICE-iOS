@@ -43,4 +43,5 @@ extension SecondTabNavigationItemConfigurable where Self: UIViewController {
             navigationItem.leftBarButtonItem?.hidesSharedBackground = true
         }
     }
+
 }

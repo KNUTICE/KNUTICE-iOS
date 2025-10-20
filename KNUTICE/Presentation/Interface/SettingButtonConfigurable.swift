@@ -10,28 +10,22 @@ import UIKit
 import SwiftUI
 
 @MainActor
-@objc protocol SettingButtonConfigurable: AnyObject {
-    @objc func navigateToSetting(_ sender: UIButton)
+protocol SettingButtonConfigurable: AnyObject {
+    func setSettingBarButtonItem()
 }
 
 extension SettingButtonConfigurable where Self: UIViewController {
-    func setSettingBarButtonItem() {
-        navigationItem.rightBarButtonItem = getSettingBarButtonItem()
-    }
-
-    func getSettingBarButtonItem() -> UIBarButtonItem {
-        createBarButtonItem(
-            imageSystemName: "gearshape",
-            action: #selector(navigateToSetting(_:))
-        )
-    }
-
-    private func createBarButtonItem(imageSystemName: String, action: Selector) -> UIBarButtonItem {
+    var settingBarButtonItem: UIBarButtonItem {
         UIBarButtonItem(
-            image: UIImage(systemName: imageSystemName),
-            style: .plain,
-            target: self,
-            action: action
-        )
+            image: UIImage(systemName: "gearshape"),
+            primaryAction: UIAction { [weak self] _ in
+                let viewController = UIHostingController(rootView: SettingView())
+                self?.navigationController?.pushViewController(viewController, animated: true)
+        })
     }
+    
+    func setSettingBarButtonItem() {
+        navigationItem.rightBarButtonItem = settingBarButtonItem
+    }
+    
 }

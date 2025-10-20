@@ -56,20 +56,7 @@ final class MainTableViewController: UIViewController, FirstTabNavigationItemCon
         
         viewModel.task?.cancel()
     }
-    
-    @objc func navigateToSetting(_ sender: UIButton) {
-        let viewController = UIHostingController(rootView: SettingView())
-        navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    @objc func setupSettingButtonToRightBarItem() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "gearshape"),
-            style: .plain,
-            target: self,
-            action: #selector(navigateToSetting(_:))
-        )
-    }
+
 }
 
 // MARK: - UITableView delegate method
