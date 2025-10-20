@@ -126,12 +126,7 @@ extension UITabBarViewController: UITabBarControllerDelegate {
     }
 }
 
-extension UITabBarViewController {
-    @objc func navigateToSetting(_ sender: UIButton) {
-        let viewController = UIHostingController(rootView: SettingView())
-        navigationController?.pushViewController(viewController, animated: true)
-    }
-    
+extension UITabBarViewController {    
     @objc func didTapMajorSelectionButton(_ sender: UIButton) {
         let viewController = UIHostingController(
             rootView: MajorSelectionView<TabBarViewModel>()
@@ -165,7 +160,7 @@ extension UITabBarViewController {
     func setThirdTabNavigationItems(selectedOption sortOption: BookmarkSortOption) {
         makeBookmarkTitleBarItem()
         navigationItem.rightBarButtonItems = [
-            getSettingBarButtonItem(),
+            settingBarButtonItem,
             makeSortMenuButton(selectedOption: sortOption)
         ]
     }
