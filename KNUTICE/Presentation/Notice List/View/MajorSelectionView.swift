@@ -8,8 +8,8 @@
 import KNUTICECore
 import SwiftUI
 
-struct MajorSelectionView<T>: View where T: ObservableObject & MajorCategoryProvidable {
-    @EnvironmentObject private var viewModel: T
+struct MajorSelectionView: View {
+    @Binding var selectedCategory: MajorCategory?
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -19,23 +19,16 @@ struct MajorSelectionView<T>: View where T: ObservableObject & MajorCategoryProv
                     Section {
                         ForEach(college.majors, id: \.self) { major in
                             Button {
-                                // FIXME: Unify ViewModel types
-                                if let viewModel = viewModel as? NoticeCollectionViewModel<MajorCategory> {
-                                    viewModel.category = major
-                                } else if let viewModel = viewModel as? TabBarViewModel {
-                                    viewModel.category = major
-                                }
-                                
+                                selectedCategory = major
                                 dismiss()
                             } label: {
                                 HStack {
                                     Text(major.localizedDescription)
                                     
-                                    if let selectedCategory = viewModel.category as? MajorCategory, selectedCategory == major {
-                                        Image(systemName: "checkmark.circle.fill")
-                                            .foregroundStyle(.accent2)
-                                            .frame(maxWidth: .infinity, alignment: .trailing)
-                                    }
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .foregroundStyle(.accent2)
+                                        .frame(maxWidth: .infinity, alignment: .trailing)
+                                        .opacity(selectedCategory == major ? 1 : 0)
                                 }
                             }
                             .listRowSeparator(.hidden)
@@ -64,6 +57,10 @@ struct MajorSelectionView<T>: View where T: ObservableObject & MajorCategoryProv
 }
 
 #Preview {
-    MajorSelectionView<TabBarViewModel>()
-        .environmentObject(TabBarViewModel(category: .computerScience))
+    MajorSelectionView(selectedCategory: Binding(
+        get: {
+            return .computerScience
+        }, set: { _ in
+            
+        }))
 }
