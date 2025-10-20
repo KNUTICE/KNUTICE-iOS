@@ -19,6 +19,7 @@ class NoticeCollectionViewController<Category>: UIViewController, NoticeCollecti
         collectionView.delegate = self
         collectionView.register(NoticeCollectionViewCell.self, forCellWithReuseIdentifier: NoticeCollectionViewCell.reuseIdentifier)
         collectionView.register(NoticeCollectionViewCellWithThumbnail.self, forCellWithReuseIdentifier: NoticeCollectionViewCellWithThumbnail.reuseIdentifier)
+        collectionView.refreshControl = refreshControl
         collectionView.backgroundColor = .primaryBackground
         
         return collectionView
@@ -87,7 +88,6 @@ class NoticeCollectionViewController<Category>: UIViewController, NoticeCollecti
         let loadingIndicator = UIActivityIndicatorView(style: .large)
         loadingIndicator.startAnimating()
         collectionView.backgroundView = loadingIndicator
-        collectionView.refreshControl = refreshControl
     }
     
     func bind() {
