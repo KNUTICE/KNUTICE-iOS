@@ -44,22 +44,45 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
     override func bind() {
         super.bind()
         
+        bindCategoryTitle()
+        bindMajorSelectionNotificationIfNeeded()
+        bindFetchingState()
+    }
+
+    private func bindCategoryTitle() {
         majorNoticeViewModel?.$category
-            .sink(receiveValue: { [weak self] in
-                self?.makeMajorSelectionButton(withTitle: $0?.localizedDescription)
-            })
+            .sink { [weak self] category in
+                self?.makeMajorSelectionButton(withTitle: category?.localizedDescription)
+            }
             .store(in: &cancellables)
+    }
+
+    private func bindMajorSelectionNotificationIfNeeded() {
+        guard UIDevice.current.userInterfaceIdiom == .phone else { return }
         
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            NotificationCenter.default.publisher(for: .majorSelectionDidChange)
-                .sink(receiveValue: { [weak self] notification in
-                    if let viewModel = self?.viewModel as? NoticeCollectionViewModel<MajorCategory>,
-                       let category = notification.userInfo?[UserInfoKeys.selectedMajor] as? MajorCategory {
-                        viewModel.category = category
-                    }
-                })
-                .store(in: &cancellables)
-        }
+        NotificationCenter.default.publisher(for: .majorSelectionDidChange)
+            .sink { [weak self] notification in
+                guard
+                    let self,
+                    let viewModel = self.viewModel as? NoticeCollectionViewModel<MajorCategory>,
+                    let category = notification.userInfo?[UserInfoKeys.selectedMajor] as? MajorCategory
+                else { return }
+                
+                viewModel.category = category
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func bindFetchingState() {
+        majorNoticeViewModel?.isFetching
+            .subscribe(onNext: { [weak self] isFetching in
+                if isFetching {
+                    let loadingIndicator = UIActivityIndicatorView(style: .large)
+                    loadingIndicator.startAnimating()
+                    self?.collectionView.backgroundView = loadingIndicator
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     @objc func didTapMajorSelectionButton(_ sender: UIButton) {
