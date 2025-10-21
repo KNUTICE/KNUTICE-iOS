@@ -44,6 +44,7 @@ struct BookmarkDetailSwitchView: View {
             viewModel.deleteTask?.cancel()
             viewModel.updateTask?.cancel()
         }
+        .toolbar(.visible)
     }
 }
 
