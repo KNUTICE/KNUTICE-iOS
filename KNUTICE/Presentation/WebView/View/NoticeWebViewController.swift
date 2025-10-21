@@ -25,19 +25,28 @@ class NoticeWebViewController: UIViewController {
         
         return webView
     }()
-    lazy var bookmarkBtn: UIButton = {
-        let button = UIButton(frame: .zero)
+    lazy var bookmarkButton: UIButton = {
+        let button = UIButton(type: .system)
+        
+        // MARK: - Configure symbol image
         let plusImage = UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate)
         button.setImage(plusImage, for: .normal)
-        button.setImage(plusImage, for: .highlighted)
         button.tintColor = .white
-        button.backgroundColor = .accent2
+        
+        // MARK: - Base appearance
         button.layer.cornerRadius = 25
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.3
         button.layer.shadowRadius = 7
-        button.layer.shadowOffset = CGSize(width: 0, height: 0)
+        button.layer.shadowOffset = .zero
         button.addTarget(self, action: #selector(openBookmarkForm(_:)), for: .touchUpInside)
+        
+        // MARK: - Style
+        if #available(iOS 26, *) {
+            button.configuration = .glass()
+        } else {
+            button.backgroundColor = .accent2
+        }
         
         return button
     }()
@@ -60,8 +69,8 @@ class NoticeWebViewController: UIViewController {
         }
         
         //bookmarkBtn
-        view.addSubview(bookmarkBtn)
-        bookmarkBtn.snp.makeConstraints { make in
+        view.addSubview(bookmarkButton)
+        bookmarkButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(UIDevice.current.userInterfaceIdiom == .phone ? -50 : -100)
             make.trailing.equalToSuperview().offset(-20)
             make.width.height.equalTo(50)
