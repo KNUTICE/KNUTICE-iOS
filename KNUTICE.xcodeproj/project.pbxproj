@@ -66,6 +66,7 @@
 		8EC732392DD5A97E0038AD59 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 8EC732382DD5A97E0038AD59 /* Kingfisher */; };
 		8EC7323B2DD5A97E0038AD59 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 8EC7323A2DD5A97E0038AD59 /* SkeletonView */; };
 		8EC7323D2DD5A97E0038AD59 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8EC7323C2DD5A97E0038AD59 /* SnapKit */; };
+		8ECCCD402EA7026200F24E0C /* SkeletonUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8ECCCD3F2EA7026200F24E0C /* SkeletonUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -435,6 +436,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8ECCCD402EA7026200F24E0C /* SkeletonUI in Frameworks */,
 				8E7C68042E67B5AD00341B01 /* Factory in Frameworks */,
 				8E7C68102E67C4B400341B01 /* KNUTICECore.framework in Frameworks */,
 				8E7C67FF2E67B41900341B01 /* FirebaseMessaging in Frameworks */,
@@ -773,6 +775,7 @@
 				8E7C67FC2E67B3F100341B01 /* RxCocoa */,
 				8E7C67FE2E67B41900341B01 /* FirebaseMessaging */,
 				8E7C68032E67B5AD00341B01 /* Factory */,
+				8ECCCD3F2EA7026200F24E0C /* SkeletonUI */,
 			);
 			productName = KNUTICEWidgetCore;
 			productReference = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */;
@@ -943,6 +946,7 @@
 				8EC732252DD5A6900038AD59 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 				8EC732282DD5A6A80038AD59 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				8E3C85802E41ECB30095852C /* XCRemoteSwiftPackageReference "RxSwift" */,
+				8ECCCD3E2EA7026200F24E0C /* XCRemoteSwiftPackageReference "SkeletonUI" */,
 			);
 			productRefGroup = 5C82563F2BE5CE1A0038D4C8 /* Products */;
 			projectDirPath = "";
@@ -2112,6 +2116,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		8ECCCD3E2EA7026200F24E0C /* XCRemoteSwiftPackageReference "SkeletonUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CSolanaM/SkeletonUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2269,6 +2281,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8EC732282DD5A6A80038AD59 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		8ECCCD3F2EA7026200F24E0C /* SkeletonUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8ECCCD3E2EA7026200F24E0C /* XCRemoteSwiftPackageReference "SkeletonUI" */;
+			productName = SkeletonUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

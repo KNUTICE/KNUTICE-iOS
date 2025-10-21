@@ -7,6 +7,7 @@
 
 import KNUTICECore
 import WidgetKit
+import SkeletonUI
 import SwiftUI
 
 public struct NoticeWidgetEntryView<T: SelectNoticeCategoryIntentInterface> : View {
@@ -19,10 +20,16 @@ public struct NoticeWidgetEntryView<T: SelectNoticeCategoryIntentInterface> : Vi
 
     public var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            if let title = entry.configuration?.category.rawValue as? String {
-                Text(title)
-                    .font(.headline)
+            Group {
+                if let title = entry.configuration?.category.rawValue as? String {
+                    Text(title)
+                        .font(.headline)
+                } else {
+                    Text("")
+                }
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .skeleton(with: entry.isPlaceholder, size: CGSize(width: 80, height: 10), shape: .rectangle)
             
             ForEach(entry.notices, id: \.id) { notice in
                 Group {
@@ -38,6 +45,7 @@ public struct NoticeWidgetEntryView<T: SelectNoticeCategoryIntentInterface> : Vi
                 .font(.subheadline)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .lineLimit(family != .systemSmall ? 1 : nil)
+                .skeleton(with: entry.isPlaceholder, shape: .rectangle)
                 .padding([.top, .bottom], family == .systemLarge ? 10 : 0)
             }
         }
@@ -66,3 +74,7 @@ public struct KNUTICEWidget<T: SelectNoticeCategoryIntentInterface>: Widget {
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
 }
+
+//#Preview {
+//    KNUTICEWidget<SelectNoticeCategoryIntent>()
+//}
