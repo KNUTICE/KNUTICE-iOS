@@ -8,27 +8,43 @@
 import SwiftUI
 
 struct SpinningIndicator: View {
-    @State private var degree: Int = 270
-    @State private var spinnerLength: Double = 0.6
+    @State private var rotation: Double = 0
+    @State private var trimEnd: CGFloat = 0.6
+    @State private var isAnimating = false
     
     var body: some View {
         ZStack {
-            Color.black
-                .opacity(0.3)
+            Color.black.opacity(0.3)
                 .ignoresSafeArea()
             
             Circle()
-                .trim(from: 0.0, to: spinnerLength)
-                .stroke(.white, style: StrokeStyle(lineWidth: 5.0, lineCap: .round, lineJoin: .round))
-                .animation(Animation.easeIn(duration: 1).repeatForever(autoreverses: true), value: degree)
-                .frame(width: 40,height: 40)
-                .rotationEffect(Angle(degrees: Double(degree)))
-                .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false), value: degree)
-                .onAppear{
-                    degree = 270 + 360
-                    spinnerLength = 0
+                .trim(from: 0.0, to: trimEnd)
+                .stroke(
+                    Color.white,
+                    style: StrokeStyle(lineWidth: 5, lineCap: .round)
+                )
+                .frame(width: 50, height: 50)
+                .rotationEffect(.degrees(rotation))
+                .onAppear {
+                    startAnimation()
                 }
                 .offset(y: -34)
+        }
+    }
+    
+    private func startAnimation() {
+        guard !isAnimating else { return }
+        
+        isAnimating = true
+        
+        // 회전 애니메이션
+        withAnimation(.linear(duration: 1).repeatForever(autoreverses: false)) {
+            rotation = 360
+        }
+        
+        // 트림 길이 애니메이션
+        withAnimation(.easeInOut(duration: 1).repeatForever(autoreverses: true)) {
+            trimEnd = 0.9
         }
     }
 }
