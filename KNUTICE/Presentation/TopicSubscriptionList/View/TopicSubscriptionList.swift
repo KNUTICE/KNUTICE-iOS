@@ -23,7 +23,7 @@ struct TopicSubscriptionList: View {
                     Toggle(
                         isOn: Binding(
                             get: {
-                                viewModel.isGeneralNoticeNotificationSubscribed ?? false
+                                viewModel.noticeSubscriptionStates[.generalNotice, default: false]
                             },
                             set: {
                                 viewModel.update(of: .notice, topic: NoticeCategory.generalNotice, isEnabled: $0)
@@ -40,7 +40,7 @@ struct TopicSubscriptionList: View {
                     Toggle(
                         isOn: Binding(
                             get: {
-                                viewModel.isAcademicNoticeNotificationSubscribed ?? false
+                                viewModel.noticeSubscriptionStates[.academicNotice, default: false]
                             },
                             set: {
                                 viewModel.update(of: .notice, topic: NoticeCategory.academicNotice, isEnabled: $0)
@@ -57,7 +57,7 @@ struct TopicSubscriptionList: View {
                     Toggle(
                         isOn: Binding(
                             get: {
-                                viewModel.isScholarshipNoticeNotificationSubscribed ?? false
+                                viewModel.noticeSubscriptionStates[.scholarshipNotice, default: false]
                             },
                             set: {
                                 viewModel.update(of: .notice, topic: NoticeCategory.scholarshipNotice, isEnabled: $0)
@@ -74,7 +74,7 @@ struct TopicSubscriptionList: View {
                     Toggle(
                         isOn: Binding(
                             get: {
-                                viewModel.isEventNoticeNotificationSubscribed ?? false
+                                viewModel.noticeSubscriptionStates[.eventNotice, default: false]
                             },
                             set: {
                                 viewModel.update(of: .notice, topic: NoticeCategory.eventNotice, isEnabled: $0)
@@ -90,7 +90,7 @@ struct TopicSubscriptionList: View {
                     Toggle(
                         isOn: Binding(
                             get: {
-                                viewModel.isEmploymentNoticeNotificationSubscribed ?? false
+                                viewModel.noticeSubscriptionStates[.employmentNotice, default: false]
                             },
                             set: {
                                 viewModel.update(of: .notice, topic: NoticeCategory.employmentNotice, isEnabled: $0)

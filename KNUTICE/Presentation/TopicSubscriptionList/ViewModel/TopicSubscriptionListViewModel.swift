@@ -13,11 +13,7 @@ import os
 
 @MainActor
 final class TopicSubscriptionListViewModel: ObservableObject {
-    @Published var isGeneralNoticeNotificationSubscribed: Bool?
-    @Published var isAcademicNoticeNotificationSubscribed: Bool?
-    @Published var isScholarshipNoticeNotificationSubscribed: Bool?
-    @Published var isEventNoticeNotificationSubscribed: Bool?
-    @Published var isEmploymentNoticeNotificationSubscribed: Bool?
+    @Published var noticeSubscriptionStates: [NoticeCategory: Bool] = [:]
     @Published var isMajorNoticeNotificationSubscribed: Bool?
     @Published var isLoading: Bool = false
     @Published var isShowingAlert: Bool = false
@@ -35,25 +31,16 @@ final class TopicSubscriptionListViewModel: ObservableObject {
         isLoading = true
         
         do {
+            // 각 공지 카테고리 별 구독 여부
             let subscriptions = try await repository.fetch(for: .notice)
 
             for subscription in subscriptions {
                 guard case .notice(let topic) = subscription else { continue }
                 
-                switch topic {
-                case .generalNotice:
-                    isGeneralNoticeNotificationSubscribed = true
-                case .academicNotice:
-                    isAcademicNoticeNotificationSubscribed = true
-                case .scholarshipNotice:
-                    isScholarshipNoticeNotificationSubscribed = true
-                case .eventNotice:
-                    isEventNoticeNotificationSubscribed = true
-                case .employmentNotice:
-                    isEmploymentNoticeNotificationSubscribed = true
-                }
+                noticeSubscriptionStates[topic] = true
             }
             
+            // 학과 소식 구독 여부
             isMajorNoticeNotificationSubscribed = UserDefaults.standard.bool(forKey: UserDefaultsKeys.isMajorNotificationSubscribed.rawValue)
         } catch {
             guard let error = error.asAFError else {
@@ -99,19 +86,7 @@ final class TopicSubscriptionListViewModel: ObservableObject {
         guard let topic else { return }
 
         try await repository.update(of: .notice, topic: topic, isEnabled: isEnabled)
-        
-        switch topic {
-        case .generalNotice:
-            isGeneralNoticeNotificationSubscribed = isEnabled
-        case .academicNotice:
-            isAcademicNoticeNotificationSubscribed = isEnabled
-        case .scholarshipNotice:
-            isScholarshipNoticeNotificationSubscribed = isEnabled
-        case .eventNotice:
-            isEventNoticeNotificationSubscribed = isEnabled
-        case .employmentNotice:
-            isEmploymentNoticeNotificationSubscribed = isEnabled
-        }
+        noticeSubscriptionStates[topic] = isEnabled
     }
     
     private func handleMajorUpdate(isEnabled: Bool) async throws {
