@@ -24,49 +24,59 @@ struct TopicSubscriptionList: View {
                         isOn: Binding(
                             get: {
                                 viewModel.isGeneralNoticeNotificationSubscribed ?? false
-                            }, set: {
+                            },
+                            set: {
                                 viewModel.update(of: .notice, topic: NoticeCategory.generalNotice, isEnabled: $0)
                             }
-                        ), label: {
+                        ),
+                        label: {
                             ToggleCaption(
                                 title: "일반소식",
                                 caption: "학교의 주요 공지와 관련된 다양한 소식을 알려드려요."
                             )
-                        })
+                        }
+                    )
                     
                     Toggle(
                         isOn: Binding(
                             get: {
                                 viewModel.isAcademicNoticeNotificationSubscribed ?? false
-                            }, set: {
+                            },
+                            set: {
                                 viewModel.update(of: .notice, topic: NoticeCategory.academicNotice, isEnabled: $0)
                             }
-                        ), label: {
+                        ),
+                        label: {
                             ToggleCaption(
                                 title: "학사공지",
                                 caption: "수강, 성적, 졸업 등 학사 운영과 관련된 다양한 소식을 알려드려요."
                             )
-                        })
+                        }
+                    )
                     
                     Toggle(
                         isOn: Binding(
                             get: {
                                 viewModel.isScholarshipNoticeNotificationSubscribed ?? false
-                            }, set: {
+                            },
+                            set: {
                                 viewModel.update(of: .notice, topic: NoticeCategory.scholarshipNotice, isEnabled: $0)
                             }
-                        ), label: {
+                        ),
+                        label: {
                             ToggleCaption(
                                 title: "장학안내",
                                 caption: "장학금의 신청 자격, 절차, 일정 등과 관련된 다양한 소식을 알려드려요."
                             )
-                        })
+                        }
+                    )
                     
                     Toggle(
                         isOn: Binding(
                             get: {
                                 viewModel.isEventNoticeNotificationSubscribed ?? false
-                            }, set: {
+                            },
+                            set: {
                                 viewModel.update(of: .notice, topic: NoticeCategory.eventNotice, isEnabled: $0)
                             }
                         ), label: {
@@ -74,13 +84,15 @@ struct TopicSubscriptionList: View {
                                 title: "행사안내",
                                 caption: "학교에서 진행되는 각종 교육, 문화, 진로와 관련된 다양한 소식을 알려드려요."
                             )
-                        })
+                        }
+                    )
                     
                     Toggle(
                         isOn: Binding(
                             get: {
                                 viewModel.isEmploymentNoticeNotificationSubscribed ?? false
-                            }, set: {
+                            },
+                            set: {
                                 viewModel.update(of: .notice, topic: NoticeCategory.employmentNotice, isEnabled: $0)
                             }
                         ), label: {
@@ -97,18 +109,18 @@ struct TopicSubscriptionList: View {
                         isOn: Binding(
                             get: {
                                 viewModel.isMajorNoticeNotificationSubscribed ?? false
-                            }, set: {
-                                if let majorStr = UserDefaults.shared?.string(forKey: UserDefaultsKeys.selectedMajor.rawValue),
-                                   let selectedMajor = MajorCategory(rawValue: majorStr) {
-                                    viewModel.update(of: .major, topic: selectedMajor, isEnabled: $0)
-                                }
-                            }),
+                            },
+                            set: {
+                                viewModel.update(of: .major, topic: nil, isEnabled: $0)
+                            }
+                        ),
                         label: {
                             ToggleCaption(
                                 title: "학과소식",
-                                caption: "학과 소식은 학과의 최신 소식을 알려드려요.\n학과를 변경하고 싶으시면 두 번째 탭에서 원하는 학과를 선택해 주세요."
+                                caption: "각 학과의 최신 소식을 알려드려요.\n알림 받을 학과를 변경하려면 두 번째 탭에서 원하는 학과를 선택해 주세요."
                             )
-                    })
+                        }
+                    )
                 }
             }
             .background(.primaryBackground)

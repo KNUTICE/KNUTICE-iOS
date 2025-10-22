@@ -74,36 +74,59 @@ final class TopicSubscriptionListViewModel: ObservableObject {
         }
     }
     
-    func update<T>(of type: TopicType, topic: T, isEnabled: Bool) where T: RawRepresentable & Sendable, T.RawValue == String {
+    func update(of type: TopicType, topic: NoticeCategory?, isEnabled: Bool) {
         task = Task {
             defer { isLoading = false }
-            
             isLoading = true
             
             do {
-                try await repository.update(of: type, topic: topic, isEnabled: isEnabled)
-                
-                if let topic = topic as? NoticeCategory {
-                    switch topic {
-                    case .generalNotice:
-                        isGeneralNoticeNotificationSubscribed = isEnabled
-                    case .academicNotice:
-                        isAcademicNoticeNotificationSubscribed = isEnabled
-                    case .scholarshipNotice:
-                        isScholarshipNoticeNotificationSubscribed = isEnabled
-                    case .eventNotice:
-                        isEventNoticeNotificationSubscribed = isEnabled
-                    case .employmentNotice:
-                        isEmploymentNoticeNotificationSubscribed = isEnabled
-                    }
-                } else if let _ = topic as? MajorCategory {
-                    isMajorNoticeNotificationSubscribed = isEnabled
-                    UserDefaults.standard.set(isEnabled, forKey: UserDefaultsKeys.isMajorNotificationSubscribed.rawValue)
+                switch type {
+                case .notice:
+                    try await handleNoticeUpdate(topic: topic, isEnabled: isEnabled)
+                case .major:
+                    try await handleMajorUpdate(isEnabled: isEnabled)
+                default:
+                    // TODO: .meal 알림 설정 처리
+                    break
                 }
             } catch {
-                logger.log(level: .error, "NotificationListViewModel.update(key:value:): \(error.localizedDescription)")
+                logger.log(level: .error, "NotificationListViewModel.update(of:type:): \(error.localizedDescription)")
             }
         }
+    }
+    
+    private func handleNoticeUpdate(topic: NoticeCategory?, isEnabled: Bool) async throws {
+        guard let topic else { return }
+
+        try await repository.update(of: .notice, topic: topic, isEnabled: isEnabled)
+        
+        switch topic {
+        case .generalNotice:
+            isGeneralNoticeNotificationSubscribed = isEnabled
+        case .academicNotice:
+            isAcademicNoticeNotificationSubscribed = isEnabled
+        case .scholarshipNotice:
+            isScholarshipNoticeNotificationSubscribed = isEnabled
+        case .eventNotice:
+            isEventNoticeNotificationSubscribed = isEnabled
+        case .employmentNotice:
+            isEmploymentNoticeNotificationSubscribed = isEnabled
+        }
+    }
+    
+    private func handleMajorUpdate(isEnabled: Bool) async throws {
+        guard let majorStr = UserDefaults.shared?.string(forKey: UserDefaultsKeys.selectedMajor.rawValue),
+              let selectedMajor = MajorCategory(rawValue: majorStr) else {
+            // 전공 선택이 없을 때는 로컬 업데이트만
+            isMajorNoticeNotificationSubscribed = isEnabled
+            UserDefaults.standard.set(isEnabled, forKey: UserDefaultsKeys.isMajorNotificationSubscribed.rawValue)
+            return
+        }
+        
+        try await repository.update(of: .major, topic: selectedMajor, isEnabled: isEnabled)
+        
+        isMajorNoticeNotificationSubscribed = isEnabled
+        UserDefaults.standard.set(isEnabled, forKey: UserDefaultsKeys.isMajorNotificationSubscribed.rawValue)
     }
     
     private func handleError(with error: Error) {
@@ -114,4 +137,5 @@ final class TopicSubscriptionListViewModel: ObservableObject {
         }
         isShowingAlert = true
     }
+    
 }
