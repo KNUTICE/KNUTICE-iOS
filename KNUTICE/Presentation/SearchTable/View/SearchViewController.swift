@@ -127,7 +127,11 @@ final class SearchViewController: UIViewController, CompositionalLayoutConfigura
 
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let viewController = NoticeDetailViewController(notice: viewModel.notices.value[0].items[indexPath.row])
+        let viewController = NoticeContentViewController(
+            viewModel: NoticeContentViewModel(
+                notice: viewModel.notices.value[0].items[indexPath.row]
+            )
+        )
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

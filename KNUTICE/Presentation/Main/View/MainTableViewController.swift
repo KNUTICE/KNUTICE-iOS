@@ -81,22 +81,11 @@ extension MainTableViewController: UITableViewDelegate {
     }
     
     // MARK: - Cell이 선택 되었을 때 해당 공지사항 웹 페이지로 이동
-    // FIXME: macOS(Designed for iPad)에서 NoticeDetailView 충돌 이슈
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let notice = viewModel.cellValues[indexPath.section].items[indexPath.row].notice
-        
-//        if #available(iOS 26, *) {
-//            viewController = UIHostingController(
-//                rootView: NoticeDetailView()
-//                    .environment(NoticeDetailViewModel(notice: notice))
-//            )
-//        } else {
-//            viewController = NoticeDetailViewController(
-//                notice: notice
-//            )
-//        }
-        
-        let viewController = NoticeDetailViewController(notice: notice)
+        let viewController = NoticeContentViewController(
+            viewModel: NoticeContentViewModel(notice: notice)
+        )
         
         // 화면 이동
         navigationController?.pushViewController(viewController, animated: true)
