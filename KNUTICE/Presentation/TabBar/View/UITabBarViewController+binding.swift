@@ -11,7 +11,6 @@ import SwiftUI
 import UIKit
 
 extension UITabBarViewController {
-    // FIXME: macOS(Designed for iPad)에서 NoticeDetailView 충돌 이슈
     func bind() {
         viewModel.$deepLink
             .sink(receiveValue: { [weak self] deepLink in
@@ -31,16 +30,6 @@ extension UITabBarViewController {
                     viewController = NoticeContentViewController(
                         viewModel: NoticeContentViewModel(nttId: nttId)
                     )
-//                    if #available(iOS 26, *) {
-//                        viewController = UIHostingController(
-//                            rootView: NoticeDetailView()
-//                                .environment(NoticeDetailViewModel(noticeId: nttId))
-//                        )
-//                    } else {
-//                        viewController = NoticeContentViewController(
-//                            viewModel: NoticeContentViewModel(nttId: nttId)
-//                        )
-//                    }
                 case .unknown:
                     return
                 }

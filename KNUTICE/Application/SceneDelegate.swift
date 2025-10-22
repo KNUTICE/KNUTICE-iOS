@@ -90,7 +90,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         handleDeepLink(url)
     }
     
-    // FIXME: macOS(Designed for iPad)에서 NoticeDetailView 충돌 이슈
     private func handleDeepLink(_ url: URL) {
         Task { @MainActor [weak self] in            
             let deepLink = await DeepLinkManager.shared.parse(url)
@@ -100,18 +99,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 let viewController = NoticeContentViewController(
                     viewModel: NoticeContentViewModel(nttId: nttId)
                 )
-                
-//                if #available(iOS 26, *) {
-//                    viewController = UIHostingController(
-//                        rootView: NoticeDetailView()
-//                            .environment(NoticeDetailViewModel(noticeId: nttId))
-//                    )
-//                } else {
-//                    viewController = NoticeContentViewController(
-//                        viewModel: NoticeContentViewModel(nttId: nttId)
-//                    )
-//                }
-                
                 navigationController.pushViewController(viewController, animated: true)
             }
         }

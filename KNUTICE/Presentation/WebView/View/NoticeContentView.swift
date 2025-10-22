@@ -1,5 +1,5 @@
 //
-//  NoticeWebVCWrapper.swift
+//  NoticeContentView.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 1/12/25.
@@ -8,11 +8,13 @@
 import KNUTICECore
 import SwiftUI
 
-struct NoticeWebVCWrapper: UIViewControllerRepresentable {
+struct NoticeContentView: UIViewControllerRepresentable {
     private let viewController: UIViewController
     
     init(notice: Notice) {
-        self.viewController = NoticeDetailViewController(notice: notice)
+        self.viewController = NoticeContentViewController(
+            viewModel: NoticeContentViewModel(notice: notice)
+        )
     }
     
     func makeUIViewController(context: Context) -> some UIViewController {
@@ -24,6 +26,6 @@ struct NoticeWebVCWrapper: UIViewControllerRepresentable {
 
 #if DEBUG
 #Preview {
-    NoticeWebVCWrapper(notice: Notice.generalNoticesSampleData[0])
+    NoticeContentView(notice: Notice.generalNoticesSampleData[0])
 }
 #endif
