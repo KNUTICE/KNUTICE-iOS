@@ -42,7 +42,7 @@ public struct NoticeWidgetEntryView<T: SelectNoticeCategoryIntentInterface> : Vi
                         Text(notice.title)
                     }
                 }
-                .font(.subheadline)
+                .font(family == .systemMedium ? .footnote : .subheadline)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .lineLimit(family != .systemSmall ? 1 : nil)
                 .skeleton(with: entry.isPlaceholder, shape: .rectangle)
