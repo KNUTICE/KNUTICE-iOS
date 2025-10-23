@@ -6,6 +6,8 @@
 //
 
 import Combine
+import KNUTICECore
+import SwiftUI
 import UIKit
 import WebKit
 
@@ -41,7 +43,19 @@ final class NoticeContentViewController: UIViewController {
         button.layer.shadowOffset = .zero
         
         // MARK: - Interaction
-        button.addTarget(self, action: #selector(openBookmarkForm(_:)), for: .touchUpInside)
+        button.addAction(UIAction { [weak self] _ in
+            guard let notice = self?.viewModel.notice else { return }
+            
+            let bookmarkForm = BookmarkForm(for: .create) { self?.dismiss(animated: true) }
+                .environmentObject(
+                    BookmarkViewModel(bookmark: Bookmark(notice: notice, memo: ""))
+                )
+            let viewController = UIHostingController(rootView: bookmarkForm)
+            let navigationController = UINavigationController(rootViewController: viewController)
+            navigationController.modalPresentationStyle = .pageSheet
+            
+            self?.present(navigationController, animated: true, completion: nil)
+        }, for: .touchUpInside)
         
         // MARK: - Style (iOS version specific)
         if #available(iOS 26.0, *) {
@@ -119,6 +133,28 @@ final class NoticeContentViewController: UIViewController {
         }
     }
     
+    func setupNavigationBar() {
+        //NavigationItem
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "square.and.arrow.up"),
+            primaryAction: UIAction { [weak self] _ in
+                guard let notice = self?.viewModel.notice else { return }
+                        
+                let shareText = notice.contentUrl
+                let shareObject = [shareText]
+                let activityViewController = UIActivityViewController(activityItems : shareObject, applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = self?.view
+                activityViewController.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, arrayReturnedItems: [Any]?, error: Error?) in
+                    if completed {
+                        self?.showCompletionAlert()
+                    }
+                }
+                
+                self?.present(activityViewController, animated: true, completion: nil)
+            }
+        )
+    }
+    
     func showCompletionAlert() {
         let alert = UIAlertController(title: "알림", message: "공유를 완료했어요.", preferredStyle: .actionSheet)
         let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
@@ -167,26 +203,5 @@ extension NoticeContentViewController: WKNavigationDelegate {
         
         return nil
     }
-}
-
-extension NoticeContentViewController {
-    @objc func openBookmarkForm(_ sender: UIButton) {
-        fatalError("openBookmarkForm(_:) must be overridden by subclass")
-    }
-}
-
-extension NoticeContentViewController {
-    func setupNavigationBar() {
-        //NavigationItem
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "square.and.arrow.up"),
-            style: .plain,
-            target: self,
-            action: #selector(openSharePanel)
-        )
-    }
     
-    @objc func openSharePanel() {
-        fatalError("openBookmarkForm(_:) must be overridden by subclass")
-    }
 }
