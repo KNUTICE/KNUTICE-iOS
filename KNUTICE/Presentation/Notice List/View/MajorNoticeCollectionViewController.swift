@@ -21,7 +21,6 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
         super.viewDidLoad()
         
         view.backgroundColor = .primaryBackground
-        majorNoticeViewModel?.bindWithCategory()
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             makeMajorSelectionButton()
@@ -44,15 +43,21 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
     override func bind() {
         super.bind()
         
-        bindCategoryTitle()
+        bindCategory()
         bindMajorSelectionNotificationIfNeeded()
         bindFetchingState()
     }
 
-    private func bindCategoryTitle() {
+    private func bindCategory() {
         majorNoticeViewModel?.$category
+            .compactMap { $0 }
             .sink { [weak self] category in
-                self?.makeMajorSelectionButton(withTitle: category?.localizedDescription)
+                // 버튼 타이틀 수정
+                self?.makeMajorSelectionButton(withTitle: category.localizedDescription)
+                // 기존 데이터 초기화
+                self?.majorNoticeViewModel?.notices.accept([])
+                // 새로운 공지 서버에서 가져오기
+                self?.majorNoticeViewModel?.requestNotices(category: category, update: .replace)
             }
             .store(in: &cancellables)
     }
@@ -62,10 +67,9 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
         
         NotificationCenter.default.publisher(for: .majorSelectionDidChange)
             .sink { [weak self] notification in
-                guard
-                    let self,
-                    let viewModel = self.viewModel as? NoticeCollectionViewModel<MajorCategory>,
-                    let category = notification.userInfo?[UserInfoKeys.selectedMajor] as? MajorCategory
+                guard let self,
+                      let viewModel = self.viewModel as? NoticeCollectionViewModel<MajorCategory>,
+                      let category = notification.userInfo?[UserInfoKeys.selectedMajor] as? MajorCategory
                 else { return }
                 
                 viewModel.category = category
