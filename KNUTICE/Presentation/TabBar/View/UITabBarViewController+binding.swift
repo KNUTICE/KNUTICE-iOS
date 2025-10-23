@@ -59,7 +59,7 @@ extension UITabBarViewController {
                 NotificationCenter.default.post(
                     name: Notification.Name.majorSelectionDidChange,
                     object: self,
-                    userInfo: [UserInfoKeys.selectedMajor.rawValue: category]
+                    userInfo: [UserInfoKeys.selectedMajor: category]
                 )
             })
             .store(in: &cancellables)

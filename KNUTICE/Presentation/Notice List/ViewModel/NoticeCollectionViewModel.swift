@@ -58,37 +58,15 @@ final class NoticeCollectionViewModel<Category>: NoticeCollectionViewModelProtoc
         requestNotices(category: category, after: lastNum, update: .append)
     }
     
-    /// `category` 값의 변화를 감지하여 공지 데이터를 자동으로 갱신합니다.
-    ///
-    /// - Description:
-    ///   `@Published`로 선언된 `category`가 변경될 때마다 Combine의 `sink`를 통해
-    ///   해당 카테고리의 공지 데이터를 새로 요청합니다.
-    ///   이전 데이터를 초기화한 뒤, `requestNotices(category:update:)`를 호출하여
-    ///   최신 공지 목록을 `notices`에 업데이트합니다.
-    ///
-    /// - Note:
-    ///   `compactMap`을 사용해 `nil` 값은 무시하며,
-    ///   전달받은 `category` 값을 직접 사용하여 비동기 타이밍 문제를 방지합니다.
-    func bindWithCategory() {
-        $category
-            .compactMap { $0 }    // nil인 경우 제외
-            .sink(receiveValue: { [weak self] category in
-                // 기존 데이터 초기화
-                self?.notices.accept([])
-                // 새로운 공지 서버에서 가져오기
-                self?.requestNotices(category: category, update: .replace)
-            })
-            .store(in: &cancellables)
-    }
 }
 
 extension NoticeCollectionViewModel {
-    private enum UpdateStrategy {
+    enum UpdateStrategy {
         case replace
         case append
     }
 
-    private func requestNotices(
+    func requestNotices(
         category: Category,
         after nttId: Int? = nil,
         isRefreshing: Bool = false,
