@@ -11,8 +11,10 @@ import UIKit
 
 @MainActor
 protocol RxDataSourceBindable: AnyObject {
+    associatedtype T: NoticeSectionModelProvidable
+    
     var collectionView: UICollectionView { get }
-    var viewModel: NoticeSectionModelProvidable { get }
+    var viewModel: T { get }
     var disposeBag: DisposeBag { get }
     
     func bindNotices()

@@ -12,9 +12,6 @@ import SwiftUI
 import UIKit
 
 final class MajorNoticeCollectionViewController: NoticeCollectionViewController<MajorCategory>, SettingButtonConfigurable, SecondTabNavigationItemConfigurable {
-    private var majorNoticeViewModel: NoticeCollectionViewModel<MajorCategory>? {
-        return viewModel as? NoticeCollectionViewModel<MajorCategory>
-    }
     var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
@@ -49,15 +46,15 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
     }
 
     private func bindCategory() {
-        majorNoticeViewModel?.$category
+        viewModel.$category
             .compactMap { $0 }
             .sink { [weak self] category in
                 // 버튼 타이틀 수정
                 self?.makeMajorSelectionButton(withTitle: category.localizedDescription)
                 // 기존 데이터 초기화
-                self?.majorNoticeViewModel?.notices.accept([])
+                self?.viewModel.notices.accept([])
                 // 새로운 공지 서버에서 가져오기
-                self?.majorNoticeViewModel?.requestNotices(category: category, update: .replace)
+                self?.viewModel.requestNotices(category: category, update: .replace)
             }
             .store(in: &cancellables)
     }
@@ -67,10 +64,7 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
         
         NotificationCenter.default.publisher(for: .majorSelectionDidChange)
             .sink { [weak self] notification in
-                guard let self,
-                      let viewModel = self.viewModel as? NoticeCollectionViewModel<MajorCategory>,
-                      let category = notification.userInfo?[UserInfoKeys.selectedMajor] as? MajorCategory
-                else { return }
+                guard let self, let category = notification.userInfo?[UserInfoKeys.selectedMajor] as? MajorCategory else { return }
                 
                 viewModel.category = category
             }
@@ -78,7 +72,7 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
     }
     
     private func bindFetchingState() {
-        majorNoticeViewModel?.isFetching
+        viewModel.isFetching
             .subscribe(onNext: { [weak self] isFetching in
                 if isFetching {
                     let loadingIndicator = UIActivityIndicatorView(style: .large)
@@ -90,15 +84,13 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
     }
     
     @objc func didTapMajorSelectionButton(_ sender: UIButton) {
-        guard let viewModel = viewModel as? NoticeCollectionViewModel<MajorCategory> else { return }
-        
         let viewController = UIHostingController(
             rootView: MajorSelectionView(selectedCategory: Binding(
                 get: {
-                    viewModel.category
+                    self.viewModel.category
                 },
                 set: {
-                    viewModel.category = $0
+                    self.viewModel.category = $0
                 }))
         )
         viewController.modalPresentationStyle = .pageSheet
