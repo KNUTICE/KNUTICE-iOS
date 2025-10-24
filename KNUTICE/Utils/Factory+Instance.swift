@@ -93,7 +93,7 @@ extension Container {
         }
     }
     
-    var searchCollectionViewModel: Factory<NoticeSectionModelProvidable> {
+    var searchCollectionViewModel: Factory<SearchViewModel> {
         Factory(self) { @MainActor in
             SearchViewModel()
         }

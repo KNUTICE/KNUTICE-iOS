@@ -25,18 +25,15 @@ class NoticeCollectionViewController<Category>: UIViewController, NoticeCollecti
         return collectionView
     }()
     let refreshControl: UIRefreshControl = UIRefreshControl()
-    private let currentColumnCount: CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 1 : 2
-    let viewModel: NoticeSectionModelProvidable
-    private var fetchableViewModel: NoticeFetchable? {
-        return viewModel as? NoticeFetchable
-    }
-    private let navigationTitle: String
+    let viewModel: NoticeCollectionViewModel<Category>
     let disposeBag = DisposeBag()
+    private let currentColumnCount: CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 1 : 2
     
     init(viewModel: NoticeCollectionViewModel<Category>, navigationTitle: String = "") {
         self.viewModel = viewModel
-        self.navigationTitle = navigationTitle
         super.init(nibName: nil, bundle: nil)
+        
+        setupNavigationBar(title: navigationTitle)
     }
     
     required init?(coder: NSCoder) {
@@ -47,14 +44,14 @@ class NoticeCollectionViewController<Category>: UIViewController, NoticeCollecti
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        // Set up
         setupLayout()
         setupBackground()
-        setUpNavigationBar(title: navigationTitle)
         bind()
         
-        if Category.self == NoticeCategory.self {
-            fetchableViewModel?.fetchNotices()
-        }
+        // Fetch Data
+        viewModel.fetchNotices()
     }
     
     func collectionView(
@@ -95,14 +92,14 @@ class NoticeCollectionViewController<Category>: UIViewController, NoticeCollecti
                 
                 if let count = owner.viewModel.notices.value.first?.items.count,
                    indexPath.item == count - 1 {
-                    owner.fetchableViewModel?.fetchNextPage()
+                    owner.viewModel.fetchNextPage()
                 }
             }
             .disposed(by: disposeBag)
     }
     
     private func bindRefreshing() {
-        fetchableViewModel?.isRefreshing
+        viewModel.isRefreshing
             .bind(to: refreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)
     }
@@ -110,12 +107,12 @@ class NoticeCollectionViewController<Category>: UIViewController, NoticeCollecti
     private func bindRefreshControl() {
         refreshControl.rx.controlEvent(.valueChanged)
             .bind(with: self) { owner, _ in
-                owner.fetchableViewModel?.fetchNotices(isRefreshing: true)
+                owner.viewModel.fetchNotices(isRefreshing: true)
             }
             .disposed(by: disposeBag)
     }
     
-    func setUpNavigationBar(title: String) {
+    func setupNavigationBar(title: String) {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = title
     }

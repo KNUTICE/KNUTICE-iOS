@@ -40,16 +40,14 @@ extension SearchViewController: RxDataSourceBindable {
             .debounce(.milliseconds(500), scheduler: MainScheduler.instance)    // 0.5초 대기
             .distinctUntilChanged()    // 동일한 값은 무시
             .bind(with: self) { owner, keyword in
-                if let viewModel = owner.viewModel as? Searchable, let keyword {
-                    viewModel.search(with: keyword)
+                if let keyword {
+                    owner.viewModel.search(with: keyword)
                 }
             }
             .disposed(by: disposeBag)
     }
 
     private func bindBookmarks() {
-        guard let viewModel = viewModel as? Searchable else { return }
-
         viewModel.bookmarks
             .observe(on: MainScheduler.instance)
             .do(onNext: { [weak self] items in
