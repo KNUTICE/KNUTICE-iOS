@@ -30,8 +30,8 @@ final class UITabBarViewController: UITabBarController, NavigationItemConfigurab
         let viewController = MajorNoticeCollectionViewController(
             viewModel: NoticeCollectionViewModel(category: MajorCategory(rawValue: majorStr))
         )
-        viewController.tabBarItem.image = UIImage(systemName: "globe")
-        viewController.tabBarItem.selectedImage = UIImage(systemName: "globe.fill")
+        viewController.tabBarItem.image = UIImage(systemName: "graduationcap")
+        viewController.tabBarItem.selectedImage = UIImage(systemName: "graduationcap.fill")
         viewController.tabBarItem.title = "학과소식"
         
         if UIDevice.current.userInterfaceIdiom == .pad {
