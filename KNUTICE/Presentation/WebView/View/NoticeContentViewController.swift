@@ -114,8 +114,7 @@ final class NoticeContentViewController: UIViewController {
         //webView
         view.addSubview(webView)
         webView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            make.leading.trailing.bottom.equalToSuperview()
+            make.edges.equalToSuperview()
         }
         
         //bookmarkButton
