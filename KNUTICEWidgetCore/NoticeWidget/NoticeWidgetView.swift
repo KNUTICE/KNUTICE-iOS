@@ -19,38 +19,81 @@ public struct NoticeWidgetEntryView<T: SelectNoticeCategoryIntentInterface> : Vi
     }
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            Group {
-                if let title = entry.configuration?.category.rawValue as? String {
-                    Text(title)
-                        .font(.headline)
-                } else {
-                    Text("")
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .skeleton(with: entry.isPlaceholder, size: CGSize(width: 80, height: 10), shape: .rectangle)
-            
-            ForEach(entry.notices, id: \.id) { notice in
-                Group {
-                    if let url = URL(string: "widget://notice?nttId=\(notice.id)") {
-                        Link(destination: url) {
-                            Text(notice.title)
-                        }
-                    } else {
-                        // URL 생성 실패 시 fallback
-                        Text(notice.title)
+        GeometryReader { geometry in
+            VStack(alignment: .leading, spacing: 0) {
+                CategoryTitleView(title: entry.configuration?.category.rawValue as? String, isPlaceholder: entry.isPlaceholder)
+                    .padding(.bottom, 10)
+                
+                ForEach(entry.notices, id: \.id) { notice in
+                    VStack(alignment: .leading, spacing: 0) {
+                        NoticeRowView(
+                            notice: notice,
+                            family: family,
+                            isPlaceholder: entry.isPlaceholder
+                        )
+                        Spacer(minLength: 0)
                     }
+                    .frame(height: geometry.size.height / CGFloat(entry.notices.count) - 5)
                 }
-                .font(family == .systemMedium ? .footnote : .subheadline)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .lineLimit(family != .systemSmall ? 1 : nil)
-                .skeleton(with: entry.isPlaceholder, shape: .rectangle)
-                .padding([.top, .bottom], family == .systemLarge ? 10 : 0)
             }
         }
-        .frame(maxHeight: .infinity, alignment: .top)
     }
+    
+}
+
+// MARK: - Category Title View
+fileprivate struct CategoryTitleView: View {
+    let title: String?
+    let isPlaceholder: Bool
+    
+    var body: some View {
+        Text(title ?? "")
+            .font(.subheadline)
+            .bold()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .skeleton(
+                with: isPlaceholder,
+                size: CGSize(width: 80, height: 10),
+                shape: .rectangle
+            )
+    }
+    
+}
+
+// MARK: - Notice Row View
+fileprivate struct NoticeRowView: View {
+    let notice: Notice
+    let family: WidgetFamily
+    let isPlaceholder: Bool
+    
+    var body: some View {
+        Group {
+            if let url = URL(string: "widget://notice?nttId=\(notice.id)") {
+                Link(destination: url) {
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text(notice.title)
+                        HStack(spacing: 5) {
+                            if family != .systemSmall {
+                                Text("[" + notice.department + "]")
+                            }
+                            
+                            Text(notice.uploadDate)
+                        }
+                        .font(.system(size: 10))
+                        .foregroundStyle(.gray)
+                    }
+                }
+            } else {
+                Text(notice.title)
+            }
+        }
+        .font(.caption)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .lineLimit(family == .systemSmall ? 4 : 1)
+        .padding(.vertical, family == .systemLarge ? 10 : 0)
+        .skeleton(with: isPlaceholder, shape: .rectangle)
+    }
+    
 }
 
 public struct KNUTICEWidget<T: SelectNoticeCategoryIntentInterface>: Widget {
@@ -73,8 +116,5 @@ public struct KNUTICEWidget<T: SelectNoticeCategoryIntentInterface>: Widget {
         .description("최신 공지를 한 눈에 확인하세요.")
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
+    
 }
-
-//#Preview {
-//    KNUTICEWidget<SelectNoticeCategoryIntent>()
-//}

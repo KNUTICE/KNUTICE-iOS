@@ -11,6 +11,20 @@ import WidgetKit
 public struct Provider<T: SelectNoticeCategoryIntentInterface>: AppIntentTimelineProvider {
     public init() {}
     
+    /// Determines the number of notices to display based on the widget family (size).
+    /// - Parameter context: The current widget context provided by WidgetKit.
+    /// - Returns: The number of notices to show in the widget depending on its size.
+    private func getContentCount(in context: Context) -> Int {
+        switch context.family {
+        case .systemLarge:
+            return 4
+        case .systemMedium:
+            return 2
+        default:
+            return 1
+        }
+    }
+    
     /// Provides a placeholder entry for the widget display.
     ///
     /// This method is called when the widget is in a loading state or shown
@@ -22,111 +36,60 @@ public struct Provider<T: SelectNoticeCategoryIntentInterface>: AppIntentTimelin
     ///
     /// The number of mock notices varies by widget family:
     /// - `.systemSmall`: 1 item
-    /// - `.systemMedium`: 3 items
-    /// - `.systemLarge`: 5 items
+    /// - `.systemMedium`: 2 items
+    /// - `.systemLarge`: 4 items
     public func placeholder(in context: Context) -> SimpleEntry {
-        let noticeCount: Int = {
-            switch context.family {
-            case .systemLarge:
-                return 5
-            case .systemMedium:
-                return 3
-            default:
-                return 1
-            }
-        }()
-        
         return SimpleEntry(
             date: Date(),
             configuration: nil,
-            notices: Notice.mock(count: noticeCount),
+            notices: Notice.mock(count: getContentCount(in: context)),
             isPlaceholder: true
         )
     }
     
-    /// Provides a snapshot entry for the widget, typically used in the widget gallery
-    /// or when the system needs a quick preview.
-    ///
+    /// Provides a snapshot of the widget's content for preview purposes.
+    /// This is typically used to display the widget in the widget gallery or during a quick refresh.
     /// - Parameters:
-    ///   - configuration: The current App Intent configuration selected by the user.
-    ///   - context: The environment context in which the widget is running.
-    /// - Returns: A `SimpleEntry` containing sample notice data.
+    ///   - configuration: The user-selected widget configuration (e.g., category).
+    ///   - context: The current widget context provided by WidgetKit.
+    /// - Returns: A `SimpleEntry` representing the current state of the widget.
     public func snapshot(for configuration: T, in context: Context) async -> SimpleEntry {
-        let noticeCount: Int = {
-            switch context.family {
-            case .systemLarge:
-                return 5
-            case .systemMedium:
-                return 3
-            default:
-                return 1
-            }
-        }()
-        let notices = await fetchData(limit: noticeCount, category: configuration.category.toNoticeCategory)
+        guard !Task.isCancelled else {
+            return SimpleEntry(date: Date(), configuration: configuration, notices: [], isPlaceholder: false)
+        }
+        
+        let notices = await NoticeManager.shared.fetchNotices(limit: getContentCount(in: context), category: configuration.category.toNoticeCategory)
         
         return SimpleEntry(date: Date(), configuration: configuration, notices: notices, isPlaceholder: false)
     }
     
-    /// Generates a timeline of entries for the widget.
-    ///
-    /// This method is responsible for providing a series of timeline entries
-    /// that determine what the widget displays over time. It fetches the latest
-    /// notice data and creates entries at fixed intervals, ensuring that
-    /// the widget content stays up to date.
-    ///
+    /// Generates a timeline for the widget based on the provided configuration.
     /// - Parameters:
-    ///   - configuration: The current App Intent configuration that specifies the selected notice category.
-    ///   - context: The widget rendering context, which includes the current widget family.
-    /// - Returns: A `Timeline` containing multiple `SimpleEntry` instances scheduled for future updates.
-    ///
-    /// The number of notices per entry varies by widget size:
-    /// - `.systemSmall`: 1 item
-    /// - `.systemMedium`: 3 items
-    /// - `.systemLarge`: 5 items
-    ///
-    /// The timeline refreshes automatically **15 minutes after the last entry**.
-    ///
-    /// - Note: If the task is cancelled or no entries are available, the method
-    ///   returns an empty timeline with a `.never` policy.
+    ///   - configuration: The user-selected widget configuration (category, etc.).
+    ///   - context: The current widget context provided by WidgetKit.
+    /// - Returns: A `Timeline` containing a single `SimpleEntry` and a refresh policy.
     public func timeline(for configuration: T, in context: Context) async -> Timeline<SimpleEntry> {
         guard !Task.isCancelled else {
             return Timeline(entries: [], policy: .never)
         }
         
-        var entries: [SimpleEntry] = []
-        let currentDate = Date()
-        let notices = await fetchData(limit: 5, category: configuration.category.toNoticeCategory)
-
-        let maxCount = {
-            switch context.family {
-            case .systemMedium:
-                return 3
-            case .systemLarge:
-                return 5
-            default:
-                return 1
-            }
-        }()
+        let notices = await NoticeManager.shared.fetchNotices(limit: getContentCount(in: context), category: configuration.category.toNoticeCategory)
+        let entries: [SimpleEntry] = [
+            SimpleEntry(
+                date: Date(),
+                configuration: configuration,
+                notices: notices,
+                isPlaceholder: false
+            )
+        ]
         
-        for i in 0..<(notices.count - maxCount + 1) {
-            let entryDate = Calendar.current.date(byAdding: .minute, value: i * 3, to: currentDate)!
-            let subNotices = Array(notices[i..<i + maxCount])
-            entries.append(SimpleEntry(date: entryDate, configuration: configuration, notices: subNotices, isPlaceholder: false))
+        guard let refreshDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date()) else {
+            return Timeline(entries: entries, policy: .never)
         }
         
-        // 마지막 엔트리의 date + 15분 후에 새로 로드
-        if let lastDate = entries.last?.date,
-           let refreshDate = Calendar.current.date(byAdding: .minute, value: 15, to: lastDate) {
-            return Timeline(entries: entries, policy: .after(refreshDate))
-        }
-        
-        // entries가 비었을 경우 대비
-        return Timeline(entries: entries, policy: .never)
+        return Timeline(entries: entries, policy: .after(refreshDate))
     }
     
-    private func fetchData(limit count: Int, category: NoticeCategory) async -> [Notice] {
-        return await NoticeManager.shared.fetchNotices(limit: count, category: category)
-    }
 }
 
 public struct SimpleEntry: TimelineEntry {
