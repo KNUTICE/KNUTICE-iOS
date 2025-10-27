@@ -12,14 +12,14 @@ import os
 
 @MainActor
 final class MainTableViewModel {
-    private let notices = BehaviorRelay<[SectionOfNotice]>(value: [])
+    private let notices = BehaviorRelay<[MainNoticeSectionModel]>(value: [])
     private let isLoading = BehaviorRelay<Bool>(value: false)
     
-    var noticesObservable: Observable<[SectionOfNotice]> {
+    var noticesObservable: Observable<[MainNoticeSectionModel]> {
         return notices.asObservable()
     }
     
-    var cellValues: [SectionOfNotice] {
+    var cellValues: [MainNoticeSectionModel] {
         return notices.value
     }
     
@@ -82,8 +82,8 @@ final class MainTableViewModel {
 }
 
 fileprivate extension MainSectionNotice {
-    var toSectionOfNotice: SectionOfNotice {
-        SectionOfNotice(
+    var toSectionOfNotice: MainNoticeSectionModel {
+        MainNoticeSectionModel(
             header: self.header,
             items: self.items
         )
