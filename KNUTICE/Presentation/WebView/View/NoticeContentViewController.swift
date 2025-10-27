@@ -177,15 +177,29 @@ extension NoticeContentViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         activityIndicator.isHidden = true
         
-        webView.evaluateJavaScript(
+        let javaScriptString =
             """
             document.documentElement.style.webkitUserSelect='none';
             document.documentElement.style.webkitTouchCallout='none';
-            document.getElementById(\"header\").style.display='none';
-            document.getElementById(\"footer\").style.display='none';
-            document.getElementById(\"remote\").style.display='none';
+            
+            if (document.getElementById("header")) document.getElementById("header").style.display='none';
+            if (document.getElementById("footer")) document.getElementById("footer").style.display='none';
+            if (document.getElementById("remote")) document.getElementById("remote").style.display='none';
+            if (document.getElementById("foot_layout")) document.getElementById("foot_layout").style.display='none';
+            if (document.getElementById("location")) document.getElementById("location").style.display='none';
+            if (document.getElementById("snb")) document.getElementById("snb").style.display='none';
+            if (document.getElementById("point")) document.getElementById("point").style.display='none';
+            
+            document.querySelectorAll(".board_butt").forEach(el => {
+                el.style.display = 'none';
+            });
+            document.querySelectorAll(".layout h1").forEach(el => {
+                if (el.textContent.includes("학사정보")) {
+                    el.style.display = "none";
+                }
+            });
             """
-        ) { (res, error) -> Void in
+        webView.evaluateJavaScript(javaScriptString) { (res, error) -> Void in
             //로딩 완료 후 webView 활성화
             webView.isHidden = false
             
