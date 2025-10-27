@@ -112,7 +112,7 @@ class NoticeCollectionViewController<Category>: UIViewController, NoticeCollecti
             .disposed(by: disposeBag)
     }
     
-    func setupNavigationBar(title: String) {
+    private func setupNavigationBar(title: String) {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = title
     }

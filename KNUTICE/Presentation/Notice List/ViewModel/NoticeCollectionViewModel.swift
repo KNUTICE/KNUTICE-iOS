@@ -41,7 +41,12 @@ final class NoticeCollectionViewModel<Category>: NoticeCollectionViewModelProtoc
     /// 서버에 `category`에 대한 공지사항 데이터 요청하고,
     /// 전달 받은 데이터는 `notices`에 업데이트
     func fetchNotices(isRefreshing: Bool = false) {
-        guard let category = category else { return }
+        guard let category = category else {
+            if isRefreshing {
+                self.isRefreshing.accept(false)
+            }
+            return
+        }
         
         requestNotices(category: category, isRefreshing: isRefreshing, update: .replace)
     }
@@ -88,6 +93,11 @@ extension NoticeCollectionViewModel {
             }
             
             do {
+                // 새로고침 시 UI 개선을 위한 약간의 지연
+                if isRefreshing {
+                    try await Task.sleep(nanoseconds: 500_000_000)
+                }
+                
                 let notices = try await fetchNoticeUseCase.execute(category: category, after: nttId)
                 let sectionModel = NoticeSectionModel(items: notices)
                 
