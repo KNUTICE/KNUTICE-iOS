@@ -245,8 +245,6 @@
 		8E49FA302E69CCA800C5949C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E49FA312E69CCA800C5949C /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		8E68982B2CD61EF1005F0EEA /* NotificationService-dev.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "NotificationService-dev.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E6C62822E9F83EE00834C0C /* KNUTICEWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KNUTICEWidgetExtension.entitlements; sourceTree = "<group>"; };
-		8E6C62882E9F8AB700834C0C /* KNUTICEWidget-devExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "KNUTICEWidget-devExtension.entitlements"; sourceTree = "<group>"; };
 		8E7945E42CA28F6900208662 /* KNUTICEUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KNUTICEUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KNUTICECore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EB6D1FD2C663627004E8AC2 /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -501,8 +499,6 @@
 		5C8256352BE5CE1A0038D4C8 = {
 			isa = PBXGroup;
 			children = (
-				8E6C62822E9F83EE00834C0C /* KNUTICEWidgetExtension.entitlements */,
-				8E6C62882E9F8AB700834C0C /* KNUTICEWidget-devExtension.entitlements */,
 				8E3FBF732E694EE80008425E /* ci_scripts */,
 				5C8256402BE5CE1A0038D4C8 /* KNUTICE */,
 				8E49F9122E69CBF100C5949C /* NotificationService */,
@@ -1396,7 +1392,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = "KNUTICEWidget-devExtension.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "KNUTICEWidget-dev/KNUTICEWidget-devExtension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1430,7 +1426,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = "KNUTICEWidget-devExtension.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "KNUTICEWidget-dev/KNUTICEWidget-devExtension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1630,7 +1626,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = KNUTICEWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = KNUTICEWidget/KNUTICEWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QHK65XFL8U;
@@ -1663,7 +1659,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = KNUTICEWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = KNUTICEWidget/KNUTICEWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QHK65XFL8U;
