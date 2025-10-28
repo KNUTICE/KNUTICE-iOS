@@ -7,9 +7,9 @@
 #
 
 # KNUTICE/Application/ServiceInfo.plist 생성
-echo "환경변수 참조 KNUTICE/Application/ServiceInfo.plist 생성"
+echo "환경변수 참조 KNUTICE/Resources/ServiceInfo.plist 생성"
 
-cat <<EOF > "/Volumes/workspace/repository/KNUTICE/Application/ServiceInfo.plist"
+cat <<EOF > "/Volumes/workspace/repository/KNUTICE/Resources/ServiceInfo.plist"
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -30,7 +30,7 @@ cat <<EOF > "/Volumes/workspace/repository/KNUTICE/Application/ServiceInfo.plist
 </plist>
 EOF
 
-echo "KNUTICE/Application/ServiceInfo.plist 생성 완료"
+echo "KNUTICE/Resources/ServiceInfo.plist 생성 완료"
 
 # 경로가 없을 경우 생성
 mkdir -p "/Volumes/workspace/repository/KNUTICECore/Resources"
