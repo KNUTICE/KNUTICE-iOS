@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum MajorCategory: String, Codable, CaseIterable, Sendable {
+public enum MajorCategory: String, CategoryProtocol {
     
     // ---------- 융합기술대학 ----------
     case mechanicalEngineering = "MECHANICAL_ENGINEERING"

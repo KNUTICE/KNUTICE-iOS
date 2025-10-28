@@ -11,7 +11,7 @@ import RxSwift
 import SwiftUI
 import UIKit
 
-final class MajorNoticeCollectionViewController: NoticeCollectionViewController<MajorCategory>, SettingButtonConfigurable, SecondTabNavigationItemConfigurable {
+final class MajorNoticeCollectionViewController: NoticeCollectionViewController, SettingButtonConfigurable, SecondTabNavigationItemConfigurable {
     var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
@@ -87,7 +87,11 @@ final class MajorNoticeCollectionViewController: NoticeCollectionViewController<
         let viewController = UIHostingController(
             rootView: MajorSelectionView(selectedCategory: Binding(
                 get: {
-                    self.viewModel.category
+                    guard let category = self.viewModel.category as? MajorCategory else {
+                        return nil
+                    }
+                    
+                    return category
                 },
                 set: {
                     self.viewModel.category = $0
