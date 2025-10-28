@@ -298,22 +298,6 @@
 			);
 			target = 8E68982A2CD61EF1005F0EEA /* NotificationService-dev */;
 		};
-		8E49F92D2E69CC6300C5949C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"Info-Dev.plist",
-				Info.plist,
-			);
-			target = 5C82563D2BE5CE1A0038D4C8 /* KNUTICE */;
-		};
-		8E49F92E2E69CC6300C5949C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"Info-Dev.plist",
-				Info.plist,
-			);
-			target = 8E2050F72CD4F32F00D87C6A /* KNUTICE-dev */;
-		};
 		8E49F9882E69CC7600C5949C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -342,6 +326,22 @@
 			);
 			target = 8E68982A2CD61EF1005F0EEA /* NotificationService-dev */;
 		};
+		8EA380312EB057CD00DF3923 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Info-Dev.plist",
+				Info.plist,
+			);
+			target = 5C82563D2BE5CE1A0038D4C8 /* KNUTICE */;
+		};
+		8EA380322EB057CD00DF3923 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Info-Dev.plist",
+				Info.plist,
+			);
+			target = 8E2050F72CD4F32F00D87C6A /* KNUTICE-dev */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -353,8 +353,8 @@
 		8E3FBF6F2E694EC40008425E /* NotificationService-dev */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8E3FBF712E694EC40008425E /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "NotificationService-dev"; sourceTree = "<group>"; };
 		8E3FBF732E694EE80008425E /* ci_scripts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ci_scripts; sourceTree = "<group>"; };
 		8E49F9162E69CC2F00C5949C /* CoreData */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CoreData; sourceTree = "<group>"; };
-		8E49F9202E69CC6300C5949C /* Application */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8E49F92D2E69CC6300C5949C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8E49F92E2E69CC6300C5949C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Application; sourceTree = "<group>"; };
-		8E49F9302E69CC6600C5949C /* Resources */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Resources; sourceTree = "<group>"; };
+		8E49F9202E69CC6300C5949C /* Application */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Application; sourceTree = "<group>"; };
+		8E49F9302E69CC6600C5949C /* Resources */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8EA380312EB057CD00DF3923 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8EA380322EB057CD00DF3923 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Resources; sourceTree = "<group>"; };
 		8E49F9342E69CC6800C5949C /* DataSources */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DataSources; sourceTree = "<group>"; };
 		8E49F93C2E69CC6B00C5949C /* DTO */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DTO; sourceTree = "<group>"; };
 		8E49F94F2E69CC6D00C5949C /* Repositories */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Repositories; sourceTree = "<group>"; };
@@ -1318,7 +1318,7 @@
 				DEVELOPMENT_TEAM = QHK65XFL8U;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = KNUTICE/Application/Info.plist;
+				INFOPLIST_FILE = KNUTICE/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = KNUTICE;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
@@ -1358,7 +1358,7 @@
 				DEVELOPMENT_TEAM = QHK65XFL8U;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = KNUTICE/Application/Info.plist;
+				INFOPLIST_FILE = KNUTICE/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = KNUTICE;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
@@ -1467,7 +1467,7 @@
 				DEVELOPMENT_TEAM = QHK65XFL8U;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "KNUTICE/Application/Info-Dev.plist";
+				INFOPLIST_FILE = "KNUTICE/Resources/Info-Dev.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "KNUTICE beta";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
@@ -1510,7 +1510,7 @@
 				DEVELOPMENT_TEAM = QHK65XFL8U;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "KNUTICE/Application/Info-Dev.plist";
+				INFOPLIST_FILE = "KNUTICE/Resources/Info-Dev.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "KNUTICE beta";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
