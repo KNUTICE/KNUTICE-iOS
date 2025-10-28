@@ -132,7 +132,7 @@ final class NoticeContentViewController: UIViewController {
         }
     }
     
-    func setupNavigationBar() {
+    private func setupNavigationBar() {
         //NavigationItem
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "square.and.arrow.up"),
@@ -154,7 +154,7 @@ final class NoticeContentViewController: UIViewController {
         )
     }
     
-    func showCompletionAlert() {
+    private func showCompletionAlert() {
         let alert = UIAlertController(title: "알림", message: "공유를 완료했어요.", preferredStyle: .actionSheet)
         let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
         alert.addAction(okButton)
