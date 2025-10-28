@@ -15,7 +15,7 @@ final class NoticeCollectionViewCellWithThumbnail: UICollectionViewCell {
     }
     let titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.font = .preferredFont(forTextStyle: .footnote)
         label.textColor = .accent
         label.translatesAutoresizingMaskIntoConstraints = false
         

@@ -14,7 +14,7 @@ class MainTableViewCell: UITableViewCell {
     }
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.font = .preferredFont(forTextStyle: .footnote)
         label.textColor = .accent
         
         return label
