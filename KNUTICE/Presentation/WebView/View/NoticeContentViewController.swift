@@ -194,7 +194,7 @@ extension NoticeContentViewController: WKNavigationDelegate {
                 el.style.display = 'none';
             });
             document.querySelectorAll(".layout h1").forEach(el => {
-                if (el.textContent.includes("학사정보")) {
+                if (el.textContent.includes("학사정보") || el.textContent.includes("커뮤니티")) {
                     el.style.display = "none";
                 }
             });
