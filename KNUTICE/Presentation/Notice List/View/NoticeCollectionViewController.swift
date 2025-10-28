@@ -12,7 +12,7 @@ import KNUTICECore
 
 typealias NoticeCollectionViewConfigurable = UICollectionViewDelegateFlowLayout & CompositionalLayoutConfigurable & RxDataSourceBindable
 
-class NoticeCollectionViewController<Category>: UIViewController, NoticeCollectionViewConfigurable where Category: RawRepresentable & Sendable, Category.RawValue == String {
+class NoticeCollectionViewController: UIViewController, NoticeCollectionViewConfigurable {
     lazy var collectionView: UICollectionView = {
         let layout = createCompositionalLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -25,11 +25,11 @@ class NoticeCollectionViewController<Category>: UIViewController, NoticeCollecti
         return collectionView
     }()
     let refreshControl: UIRefreshControl = UIRefreshControl()
-    let viewModel: NoticeCollectionViewModel<Category>
+    let viewModel: NoticeCollectionViewModel
     let disposeBag = DisposeBag()
     private let currentColumnCount: CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 1 : 2
     
-    init(viewModel: NoticeCollectionViewModel<Category>, navigationTitle: String = "") {
+    init(viewModel: NoticeCollectionViewModel, navigationTitle: String = "") {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         

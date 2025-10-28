@@ -12,29 +12,27 @@ import KNUTICECore
 import os
 import RxRelay
 
-typealias NoticeCollectionViewModelProtocol = NoticeSectionModelProvidable & NoticeFetchable & MajorCategoryProvidable
-
 @MainActor
-final class NoticeCollectionViewModel<Category>: NoticeCollectionViewModelProtocol where Category: RawRepresentable & Sendable, Category.RawValue == String {
+final class NoticeCollectionViewModel: NoticeSectionModelProvidable & NoticeFetchable {
     /// View와 바인딩할 데이터
     /// 서버에서 가져온 데이터를 해당 변수에 저장
     let notices: BehaviorRelay<[NoticeSectionModel]> = BehaviorRelay(value: [])
-    /// 공지사항 데이터 요청을 위한 `NoticeRepository` 인스턴스
-    @Injected(\.fetchNoticeUseCase) private var fetchNoticeUseCase
     /// 서버와 통신 중임을 나타내는 변수
     let isFetching: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     /// 새로고침 여부를 나타내는 변수
     let isRefreshing: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    /// 공지사항 데이터 요청을 위한 `NoticeRepository` 인스턴스
+    @Injected(\.fetchNoticeUseCase) private var fetchNoticeUseCase
     /// 선택된 공지 종류
     /// 외부에서 변경되면 최신 값으로 공지를 가져오도록 사용
-    @Published var category: Category?
+    @Published var category: (any CategoryProtocol)?
     /// Publisher 구독 메모리 관리를 위한 cancellable bag
     private var cancellables: Set<AnyCancellable> = []
-    private(set) var task: Task<Void, Never>?
     /// 콘솔 메시지 로깅을 위한 인스턴스
     private var logger: Logger = Logger()
+    private(set) var task: Task<Void, Never>?
     
-    init(category: Category?) {
+    init(category: (any CategoryProtocol)?) {
         self.category = category
     }
     
@@ -72,7 +70,7 @@ extension NoticeCollectionViewModel {
     }
 
     func requestNotices(
-        category: Category,
+        category: any CategoryProtocol,
         after nttId: Int? = nil,
         isRefreshing: Bool = false,
         update: UpdateStrategy
@@ -118,4 +116,3 @@ extension NoticeCollectionViewModel {
     }
     
 }
-
