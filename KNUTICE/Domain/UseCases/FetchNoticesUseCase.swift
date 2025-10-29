@@ -1,5 +1,5 @@
 //
-//  FetchNoticeUseCase.swift
+//  FetchNoticesUseCase.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 10/1/25.
@@ -10,7 +10,7 @@ import Factory
 import Foundation
 import KNUTICECore
 
-protocol FetchNoticeUseCase: Actor {
+protocol FetchNoticesUseCase: Actor {
     /// Executes a notice fetch request and updates topic subscription status
     /// when the selected category is a `MajorCategory`.
     ///
@@ -28,20 +28,20 @@ protocol FetchNoticeUseCase: Actor {
     ///     subscription and disables the previously stored one.
     ///   - Updates the value of `UserDefaultsKeys.selectedMajor` with the
     ///     newly selected category.
-    func execute<T>(category: T, after nttId: Int?) async throws -> [Notice] where T: RawRepresentable & Sendable, T.RawValue == String
+    func execute(category: some CategoryProtocol, after nttId: Int?) async throws -> [Notice]
 }
 
-extension FetchNoticeUseCase {
-    func execute<T>(category: T, after nttId: Int? = nil) async throws -> [Notice] where T: RawRepresentable & Sendable, T.RawValue == String {
+extension FetchNoticesUseCase {
+    func execute(category: some CategoryProtocol, after nttId: Int? = nil) async throws -> [Notice] {
         try await self.execute(category: category, after: nttId)
     }
 }
 
-actor FetchNoticeUseCaseImpl: FetchNoticeUseCase {
+actor FetchNoticesUseCaseImpl: FetchNoticesUseCase {
     @Injected(\.noticeRepository) private var noticeRepository
     @Injected(\.topicSubscriptionRepository) private var topicSubscriptionRepository
     
-    func execute<T>(category: T, after nttId: Int?) async throws -> [Notice] where T : RawRepresentable & Sendable, T.RawValue == String {
+    func execute(category: some CategoryProtocol, after nttId: Int?) async throws -> [Notice] {
         try Task.checkCancellation()
         
         // 서버에서 가져올 공지 데이터가 학과 소식이면서, 사용자가 학과 소식 알림을 허용한 경우
