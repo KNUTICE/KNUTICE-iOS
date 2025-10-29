@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 73;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -298,20 +298,6 @@
 			);
 			target = 8E68982A2CD61EF1005F0EEA /* NotificationService-dev */;
 		};
-		8E49F9882E69CC7600C5949C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Tip.swift,
-			);
-			target = 8EB6D1FC2C663627004E8AC2 /* NotificationService */;
-		};
-		8E49F9892E69CC7600C5949C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Tip.swift,
-			);
-			target = 8E68982A2CD61EF1005F0EEA /* NotificationService-dev */;
-		};
 		8E49FC802E69CE5700C5949C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -325,6 +311,34 @@
 				UserDefaultsKeys.swift,
 			);
 			target = 8E68982A2CD61EF1005F0EEA /* NotificationService-dev */;
+		};
+		8E5178412EB1D482000FBCFB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Model/Tip.swift,
+			);
+			target = 8EB6D1FC2C663627004E8AC2 /* NotificationService */;
+		};
+		8E5178422EB1D482000FBCFB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Model/Tip.swift,
+			);
+			target = 8E68982A2CD61EF1005F0EEA /* NotificationService-dev */;
+		};
+		8E5178662EB1D4AB000FBCFB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				CoreData/Bookmark.xcdatamodeld,
+			);
+			target = 5C82563D2BE5CE1A0038D4C8 /* KNUTICE */;
+		};
+		8E5178682EB1D4AB000FBCFB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				CoreData/Bookmark.xcdatamodeld,
+			);
+			target = 8E2050F72CD4F32F00D87C6A /* KNUTICE-dev */;
 		};
 		8EA380312EB057CD00DF3923 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -344,6 +358,23 @@
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		8E5178672EB1D4AB000FBCFB /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 5C82563A2BE5CE1A0038D4C8 /* Sources */;
+			membershipExceptions = (
+				CoreData/Bookmark.xcdatamodeld,
+			);
+		};
+		8E5178692EB1D4AB000FBCFB /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 8E2050FB2CD4F32F00D87C6A /* Sources */;
+			membershipExceptions = (
+				CoreData/Bookmark.xcdatamodeld,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		8E1D8C2A2E682D6E00E8F0EC /* KNUTICEWidget-dev */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8E1D8C372E682D7000E8F0EC /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "KNUTICEWidget-dev"; sourceTree = "<group>"; };
 		8E3C437A2E66D8D900EA711B /* KNUTICEWidgetCore */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = KNUTICEWidgetCore; sourceTree = "<group>"; };
@@ -352,15 +383,9 @@
 		8E3FBF482E694EB40008425E /* KNUTICEUnitTests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8E3FBF6A2E694EB40008425E /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = KNUTICEUnitTests; sourceTree = "<group>"; };
 		8E3FBF6F2E694EC40008425E /* NotificationService-dev */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8E3FBF712E694EC40008425E /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "NotificationService-dev"; sourceTree = "<group>"; };
 		8E3FBF732E694EE80008425E /* ci_scripts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ci_scripts; sourceTree = "<group>"; };
-		8E49F9162E69CC2F00C5949C /* CoreData */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CoreData; sourceTree = "<group>"; };
 		8E49F9202E69CC6300C5949C /* Application */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Application; sourceTree = "<group>"; };
 		8E49F9302E69CC6600C5949C /* Resources */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8EA380312EB057CD00DF3923 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8EA380322EB057CD00DF3923 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Resources; sourceTree = "<group>"; };
-		8E49F9342E69CC6800C5949C /* DataSources */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DataSources; sourceTree = "<group>"; };
-		8E49F93C2E69CC6B00C5949C /* DTO */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DTO; sourceTree = "<group>"; };
 		8E49F94F2E69CC6D00C5949C /* Repositories */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Repositories; sourceTree = "<group>"; };
-		8E49F9682E69CC6F00C5949C /* RepositoryInterfaces */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = RepositoryInterfaces; sourceTree = "<group>"; };
-		8E49F97D2E69CC7600C5949C /* Model */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8E49F9882E69CC7600C5949C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8E49F9892E69CC7600C5949C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Model; sourceTree = "<group>"; };
-		8E49F9A32E69CC8F00C5949C /* Services */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Services; sourceTree = "<group>"; };
 		8E49FAE52E69CCB300C5949C /* Bookmark */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Bookmark; sourceTree = "<group>"; };
 		8E49FAF42E69CCB600C5949C /* BookmarkList */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = BookmarkList; sourceTree = "<group>"; };
 		8E49FB0A2E69CCB800C5949C /* Commons */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Commons; sourceTree = "<group>"; };
@@ -379,7 +404,8 @@
 		8E49FBBD2E69CCE400C5949C /* WebView */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = WebView; sourceTree = "<group>"; };
 		8E49FC322E69CD5400C5949C /* Main */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Main; sourceTree = "<group>"; };
 		8E49FC5F2E69CE5700C5949C /* Utils */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8E49FC802E69CE5700C5949C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8E49FC812E69CE5700C5949C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Utils; sourceTree = "<group>"; };
-		8EDEF2372E8CC5260094FE6E /* UseCases */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = UseCases; sourceTree = "<group>"; };
+		8E5178272EB1D47A000FBCFB /* Domain */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8E5178412EB1D482000FBCFB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8E5178422EB1D482000FBCFB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Domain; sourceTree = "<group>"; };
+		8E5178602EB1D496000FBCFB /* Data */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8E5178662EB1D4AB000FBCFB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8E5178672EB1D4AB000FBCFB /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */, 8E5178682EB1D4AB000FBCFB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8E5178692EB1D4AB000FBCFB /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Data; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -534,17 +560,12 @@
 			children = (
 				8EC600FA2E7B8F6400C4C200 /* GoogleService-Info.plist */,
 				8EC600F82E7B8A6E00C4C200 /* GoogleService-Info-Dev.plist */,
-				8E49F9162E69CC2F00C5949C /* CoreData */,
+				8E5178602EB1D496000FBCFB /* Data */,
+				8E5178272EB1D47A000FBCFB /* Domain */,
 				8E49FC5F2E69CE5700C5949C /* Utils */,
 				8E49F9202E69CC6300C5949C /* Application */,
 				8E49F9302E69CC6600C5949C /* Resources */,
-				8E49F9342E69CC6800C5949C /* DataSources */,
-				8E49F93C2E69CC6B00C5949C /* DTO */,
 				8E49F94F2E69CC6D00C5949C /* Repositories */,
-				8E49F9682E69CC6F00C5949C /* RepositoryInterfaces */,
-				8E49F97D2E69CC7600C5949C /* Model */,
-				8E49F9A32E69CC8F00C5949C /* Services */,
-				8EDEF2372E8CC5260094FE6E /* UseCases */,
 				8E49FA332E69CCA800C5949C /* Presentation */,
 			);
 			path = KNUTICE;
@@ -634,15 +655,9 @@
 			);
 			fileSystemSynchronizedGroups = (
 				8E3FBF732E694EE80008425E /* ci_scripts */,
-				8E49F9162E69CC2F00C5949C /* CoreData */,
 				8E49F9202E69CC6300C5949C /* Application */,
 				8E49F9302E69CC6600C5949C /* Resources */,
-				8E49F9342E69CC6800C5949C /* DataSources */,
-				8E49F93C2E69CC6B00C5949C /* DTO */,
 				8E49F94F2E69CC6D00C5949C /* Repositories */,
-				8E49F9682E69CC6F00C5949C /* RepositoryInterfaces */,
-				8E49F97D2E69CC7600C5949C /* Model */,
-				8E49F9A32E69CC8F00C5949C /* Services */,
 				8E49FAE52E69CCB300C5949C /* Bookmark */,
 				8E49FAF42E69CCB600C5949C /* BookmarkList */,
 				8E49FB0A2E69CCB800C5949C /* Commons */,
@@ -661,7 +676,8 @@
 				8E49FBBD2E69CCE400C5949C /* WebView */,
 				8E49FC322E69CD5400C5949C /* Main */,
 				8E49FC5F2E69CE5700C5949C /* Utils */,
-				8EDEF2372E8CC5260094FE6E /* UseCases */,
+				8E5178272EB1D47A000FBCFB /* Domain */,
+				8E5178602EB1D496000FBCFB /* Data */,
 			);
 			name = KNUTICE;
 			productName = KNUTICE;
@@ -712,15 +728,9 @@
 			);
 			fileSystemSynchronizedGroups = (
 				8E3FBF732E694EE80008425E /* ci_scripts */,
-				8E49F9162E69CC2F00C5949C /* CoreData */,
 				8E49F9202E69CC6300C5949C /* Application */,
 				8E49F9302E69CC6600C5949C /* Resources */,
-				8E49F9342E69CC6800C5949C /* DataSources */,
-				8E49F93C2E69CC6B00C5949C /* DTO */,
 				8E49F94F2E69CC6D00C5949C /* Repositories */,
-				8E49F9682E69CC6F00C5949C /* RepositoryInterfaces */,
-				8E49F97D2E69CC7600C5949C /* Model */,
-				8E49F9A32E69CC8F00C5949C /* Services */,
 				8E49FAE52E69CCB300C5949C /* Bookmark */,
 				8E49FAF42E69CCB600C5949C /* BookmarkList */,
 				8E49FB0A2E69CCB800C5949C /* Commons */,
@@ -739,7 +749,8 @@
 				8E49FBBD2E69CCE400C5949C /* WebView */,
 				8E49FC322E69CD5400C5949C /* Main */,
 				8E49FC5F2E69CE5700C5949C /* Utils */,
-				8EDEF2372E8CC5260094FE6E /* UseCases */,
+				8E5178272EB1D47A000FBCFB /* Domain */,
+				8E5178602EB1D496000FBCFB /* Data */,
 			);
 			name = "KNUTICE-dev";
 			productName = KNUTICE;
@@ -923,7 +934,6 @@
 				};
 			};
 			buildConfigurationList = 5C8256392BE5CE1A0038D4C8 /* Build configuration list for PBXProject "KNUTICE" */;
-			compatibilityVersion = "Xcode 15.3";
 			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -942,6 +952,7 @@
 				8E3C85802E41ECB30095852C /* XCRemoteSwiftPackageReference "RxSwift" */,
 				8ECCCD3E2EA7026200F24E0C /* XCRemoteSwiftPackageReference "SkeletonUI" */,
 			);
+			preferredProjectObjectVersion = 63;
 			productRefGroup = 5C82563F2BE5CE1A0038D4C8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
