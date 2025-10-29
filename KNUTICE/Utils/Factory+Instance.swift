@@ -68,15 +68,15 @@ extension Container {
         }
     }
     
-    var noticeService: Factory<NoticeService> {
-        Factory(self) {
-            NoticeServiceImpl()
-        }
-    }
-    
     var fetchNoticeUseCase: Factory<FetchNoticesUseCase> {
         Factory(self) {
             FetchNoticesUseCaseImpl()
+        }
+    }
+    
+    var fetchTopThreeNoticesUseCase: Factory<FetchTopThreeNoticesUseCase> {
+        Factory(self) {
+            FetchTopThreeNoticesUseCaseImpl(repository: Container.shared.noticeRepository())
         }
     }
     
