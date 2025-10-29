@@ -74,9 +74,9 @@ extension Container {
         }
     }
     
-    var fetchNoticeUseCase: Factory<FetchNoticeUseCase> {
+    var fetchNoticeUseCase: Factory<FetchNoticesUseCase> {
         Factory(self) {
-            FetchNoticeUseCaseImpl()
+            FetchNoticesUseCaseImpl()
         }
     }
     
