@@ -17,7 +17,7 @@ final class SearchViewModel: NoticeSectionModelProvidable, Searchable {
     let bookmarks: BehaviorRelay<[Bookmark]> = .init(value: [])
     let keyword: BehaviorRelay<String> = .init(value: "")
     
-    @Injected(\.searchService) private var searchService
+    @Injected(\.searchNoticeAndBookmarkUseCase) private var searchNoticeAndBookmarkUseCase
     
     private let disposeBag: DisposeBag = DisposeBag()
     private let logger: Logger = Logger()
@@ -31,7 +31,7 @@ final class SearchViewModel: NoticeSectionModelProvidable, Searchable {
         }
         
         let task = Task {
-            let result = await searchService.search(with: keyword)
+            let result = await searchNoticeAndBookmarkUseCase.execute(with: keyword)
             
             switch result {
             case .success((let notices, let bookmarks)):
