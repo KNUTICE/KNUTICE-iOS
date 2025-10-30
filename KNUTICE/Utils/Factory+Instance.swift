@@ -56,12 +56,6 @@ extension Container {
         }
     }
     
-    var searchService: Factory<SearchService> {
-        Factory(self) {
-            SearchServiceImpl()
-        }
-    }
-    
     var fcmTokenService: Factory<FCMTokenService> {
         Factory(self) {
             FCMTokenServiceImpl()
@@ -77,6 +71,24 @@ extension Container {
     var fetchTopThreeNoticesUseCase: Factory<FetchTopThreeNoticesUseCase> {
         Factory(self) {
             FetchTopThreeNoticesUseCaseImpl(repository: Container.shared.noticeRepository())
+        }
+    }
+    
+    var searchNoticesUseCase: Factory<SearchNoticesUseCase> {
+        Factory(self) {
+            SearchNoticesUseCaseImpl()
+        }
+    }
+    
+    var searchBookmarksUseCase: Factory<SearchBookmarksUseCase> {
+        Factory(self) {
+            SearchBookmarksUseCaseImpl()
+        }
+    }
+    
+    var searchNoticeAndBookmarkUseCase: Factory<SearchNoticeAndBookmarkUseCase> {
+        Factory(self) {
+            SearchNoticeAndBookmarkUseCaseImpl()
         }
     }
     
