@@ -11,6 +11,7 @@ struct EmptyBookmarkView: View {
     var body: some View {
         ZStack {
             Color.primaryBackground
+                .ignoresSafeArea(.all)
             
             VStack(spacing: 20) {
                 Image("Bookmark_3D")

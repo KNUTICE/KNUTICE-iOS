@@ -5,80 +5,69 @@
 //  Created by 이정훈 on 1/10/25.
 //
 
-import Combine
-import UserNotifications
 import Factory
 import Foundation
+import KNUTICECore
+import UserNotifications
 
-final class BookmarkRepositoryImpl: BookmarkRepository {
-    @Injected(\.localBookmarkDataSource) private var dataSource: LocalBookmarkDataSource
+actor BookmarkRepositoryImpl: BookmarkRepository, BookmarkCreatable {
+    @Injected(\.bookmarkDataSource) private var dataSource
     
-    func save(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
-        return dataSource.isDuplication(id: bookmark.notice.id)
-            .flatMap { isExist -> AnyPublisher<Void, any Error> in
-                guard !isExist else {
-                    return Fail(error: ExistingBookmarkError.alreadyExist(message: "이미 존재하는 북마크에요."))
-                        .eraseToAnyPublisher()
-                }
-                
-                return self.dataSource.save(bookmark)
-            }
-            .eraseToAnyPublisher()
-    }
-    
-    func read(
-        page pageNum: Int,
-        pageSize: Int,
-        sortBy option: BookmarkSortOption
-    ) -> AnyPublisher<[Bookmark], any Error> {
-        return dataSource.fetch(page: pageNum, pageSize: pageSize, sortBy: option)
-            .map { [weak self] in
-                $0.compactMap { dto in
-                    self?.createBookMark(from: dto)
-                }
-            }
-            .eraseToAnyPublisher()
-    }
-    
-    func fetchWhereTimestampsAreNil() -> AnyPublisher<[Bookmark], any Error> {
-        return dataSource.fetchItemsWhereTimestampsAreNil()
-            .map { [weak self] in
-                $0.compactMap { dto in
-                    self?.createBookMark(from: dto)
-                }
-            }
-            .eraseToAnyPublisher()
-    }
-    
-    private func createBookMark(from dto: BookmarkDTO) -> Bookmark? {
-        guard let noticeEntity = dto.notice else {
-            return nil
+    func save(bookmark: Bookmark) async throws {
+        let isExist = try await dataSource.isDuplication(id: bookmark.notice.id)
+        
+        guard !isExist else {
+            throw ExistingBookmarkError.alreadyExist(message: "이미 존재하는 북마크에요.")
         }
         
-        return Bookmark(
-            notice: Notice(
-                id: Int(noticeEntity.id),
-                title: noticeEntity.title ?? "",
-                contentUrl: noticeEntity.contentUrl ?? "",
-                department: noticeEntity.department ?? "",
-                uploadDate: noticeEntity.uploadDate ?? "",
-                imageUrl: noticeEntity.imageUrl,
-                noticeCategory: NoticeCategory(rawValue: noticeEntity.category ?? "")
-            ),
-            memo: dto.details ?? "",
-            alarmDate: dto.alarmDate
-        )
+        try await dataSource.save(bookmark)
     }
     
-    func delete(by id: Int) -> AnyPublisher<Void, any Error> {
-        return dataSource.delete(id: id)
+    func fetch(page pageNum: Int, pageSize: Int, sortBy option: BookmarkSortOption) async throws -> [Bookmark] {
+        let dto = try await dataSource.fetch(page: pageNum, pageSize: pageSize, sortBy: option)
+        
+        return dto.compactMap {
+            createBookMark(from: $0)
+        }
     }
     
-    func update(bookmark: Bookmark) -> AnyPublisher<Void, any Error> {
-        return dataSource.update(bookmark: bookmark)
+    func fetchWhereTimestampsAreNil() async throws -> [Bookmark] {
+        let dto = try await dataSource.fetchItemsWhereTimestampsAreNil()
+        
+        return dto.compactMap {
+            createBookMark(from: $0)
+        }
     }
     
-    func update(_ updates: [BookmarkUpdate]) -> AnyPublisher<Void, any Error> {
-        return dataSource.update(updates)
+    func delete(by id: Int) async throws {
+        try await dataSource.delete(by: id)
+    }
+    
+    func update(_ bookmark: Bookmark) async throws {
+        try await dataSource.update(bookmark: bookmark)
+    }
+    
+    func updateTimeStamp(_ update: BookmarkUpdate) async throws {
+        try await dataSource.updateTimeStamp(update)
+    }
+    
+    func search(with keyword: String) async throws -> [Bookmark] {
+        try Task.checkCancellation()
+        
+        let dtos = try await dataSource.fetch(keyword: keyword)
+        
+        return dtos.compactMap { dto in
+            createBookMark(from: dto)
+        }
+    }
+    
+    func fetch(id: Int) async throws -> Bookmark? {
+        try Task.checkCancellation()
+        
+        let dto = try await dataSource.fetch(withId: id)
+        
+        return dto.flatMap {
+            createBookMark(from: $0)
+        }
     }
 }

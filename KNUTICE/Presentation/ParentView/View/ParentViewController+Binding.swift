@@ -4,9 +4,10 @@
 //
 //  Created by 이정훈 on 3/11/25.
 //
-
 import Combine
 import Foundation
+import KNUTICECore
+import UIKit
 
 extension ParentViewController {
     func bind() {
@@ -22,15 +23,17 @@ extension ParentViewController {
     
     
     func switchViewController() {
-        //이전 View Controller 제거
-        children.forEach {
-            $0.willMove(toParent: nil)
-            $0.view.removeFromSuperview()
-            $0.removeFromParent()
-        }
+        let majorStr = UserDefaults.shared?.string(forKey: UserDefaultsKeys.selectedMajor.rawValue) ?? ""
+        let majorCategory = MajorCategory(rawValue: majorStr)
+        let viewController = UITabBarViewController(
+            viewModel: TabBarViewModel(category: majorCategory)
+        )
         
         //새로운 View Controller 삽입
-        let tabBarViewController = UITabBarViewController(viewModel: TabBarViewModel())
-        addChildVC(tabBarViewController)
+        navigationController?.setViewControllers([viewController], animated: false)
+        
+        // 메인 화면의 진입을 알리기 위한 Notification 전송
+        // 딥링크 Cold Start 시, 메인 화면 이동이 완료된 후 딥링크 이동
+        NotificationCenter.default.post(name: Notification.Name.didFinishLoading, object: nil)
     }
 }

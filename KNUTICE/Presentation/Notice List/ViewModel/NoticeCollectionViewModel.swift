@@ -1,0 +1,118 @@
+//
+//  NoticeCollectionViewModel.swift
+//  KNUTICE
+//
+//  Created by 이정훈 on 5/14/25.
+//
+
+import Combine
+import Factory
+import Foundation
+import KNUTICECore
+import os
+import RxRelay
+
+@MainActor
+final class NoticeCollectionViewModel: NoticeSectionModelProvidable & NoticeFetchable {
+    /// View와 바인딩할 데이터
+    /// 서버에서 가져온 데이터를 해당 변수에 저장
+    let notices: BehaviorRelay<[NoticeSectionModel]> = BehaviorRelay(value: [])
+    /// 서버와 통신 중임을 나타내는 변수
+    let isFetching: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    /// 새로고침 여부를 나타내는 변수
+    let isRefreshing: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    /// 공지사항 데이터 요청을 위한 `NoticeRepository` 인스턴스
+    @Injected(\.fetchNoticeUseCase) private var fetchNoticeUseCase
+    /// 선택된 공지 종류
+    /// 외부에서 변경되면 최신 값으로 공지를 가져오도록 사용
+    @Published var category: (any CategoryProtocol)?
+    /// Publisher 구독 메모리 관리를 위한 cancellable bag
+    private var cancellables: Set<AnyCancellable> = []
+    /// 콘솔 메시지 로깅을 위한 인스턴스
+    private var logger: Logger = Logger()
+    private(set) var task: Task<Void, Never>?
+    
+    init(category: (any CategoryProtocol)?) {
+        self.category = category
+    }
+    
+    /// 서버에 `category`에 대한 공지사항 데이터 요청하고,
+    /// 전달 받은 데이터는 `notices`에 업데이트
+    func fetchNotices(isRefreshing: Bool = false) {
+        guard let category = category else {
+            if isRefreshing {
+                self.isRefreshing.accept(false)
+            }
+            return
+        }
+        
+        requestNotices(category: category, isRefreshing: isRefreshing, update: .replace)
+    }
+    
+    /// 무한 스크롤 구현을 위해 다음 페이지 공지사항 요청하고,
+    /// 전달 받은 데이터는 `notices`에 추가 후 업데이트
+    func fetchNextPage() {
+        guard let category = category,
+              let lastNum = notices.value.first?.items.last?.id,
+              let count = notices.value.first?.items.count, count >= 20 else {
+            return
+        }
+        
+        requestNotices(category: category, after: lastNum, update: .append)
+    }
+    
+}
+
+extension NoticeCollectionViewModel {
+    enum UpdateStrategy {
+        case replace
+        case append
+    }
+
+    func requestNotices(
+        category: any CategoryProtocol,
+        after nttId: Int? = nil,
+        isRefreshing: Bool = false,
+        update: UpdateStrategy
+    ) {
+        if isRefreshing {
+            self.isRefreshing.accept(true)
+        } else {
+            self.isFetching.accept(true)
+        }
+        
+        task = Task {
+            defer {
+                if isRefreshing {
+                    self.isRefreshing.accept(false)
+                } else {
+                    self.isFetching.accept(false)
+                }
+            }
+            
+            do {
+                // 새로고침 시 UI 개선을 위한 약간의 지연
+                if isRefreshing {
+                    try await Task.sleep(nanoseconds: 500_000_000)
+                }
+                
+                let notices = try await fetchNoticeUseCase.execute(category: category, after: nttId)
+                let sectionModel = NoticeSectionModel(items: notices)
+                
+                switch update {
+                case .replace:
+                    self.notices.accept([sectionModel])
+                case .append:
+                    var current = self.notices.value.first
+                    current?.items.append(contentsOf: sectionModel.items)
+                    if let current {
+                        self.notices.accept([current])
+                    }
+                }
+            } catch {
+                logger.error("NoticeCollectionViewModel error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+}

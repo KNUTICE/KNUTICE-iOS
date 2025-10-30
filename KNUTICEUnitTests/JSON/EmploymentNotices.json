@@ -1,45 +1,189 @@
 {
-  "result": {
-    "resultCode": 200,
-    "resultMessage": "성공",
-    "resultDescription": "성공"
-  },
-  "body": [
-    {
-      "nttId": 1079388,
-      "title": "2025 청주채용박람회",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do?bbsId=BBSMSTR_000000000179&nttId=1079388",
-      "contentImage": null,
-      "departmentName": "취업성공지원과",
-      "registeredAt": "2025-05-16",
-      "noticeName": "EMPLOYMENT_NEWS"
+    "metaData": {
+        "success": true,
+        "code": 200,
+        "message": null
     },
-    {
-      "nttId": 1079366,
-      "title": "2025학년도 (기취업 졸업생) 역량강화 프로그램 참여자 모집 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do?bbsId=BBSMSTR_000000000179&nttId=1079366",
-      "contentImage": null,
-      "departmentName": "대학일자리플러스센터",
-      "registeredAt": "2025-05-15",
-      "noticeName": "EMPLOYMENT_NEWS"
-    },
-    {
-      "nttId": 1079317,
-      "title": "2025년 국민취업지원제도 홍보(출장상담) 안내",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do?bbsId=BBSMSTR_000000000179&nttId=1079317",
-      "contentImage": null,
-      "departmentName": "대학일자리플러스센터",
-      "registeredAt": "2025-05-13",
-      "noticeName": "EMPLOYMENT_NEWS"
-    },
-    {
-      "nttId": 1079262,
-      "title": "▣ 2025학년도 2학기 진로탐색학점제 (CONNECT 프로젝트) 운영 및 모집 안내 ▣",
-      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do?bbsId=BBSMSTR_000000000179&nttId=1079262",
-      "contentImage": null,
-      "departmentName": "취업성공지원과",
-      "registeredAt": "2025-05-09",
-      "noticeName": "EMPLOYMENT_NEWS"
-    }
-  ]
+    "data": [
+        {
+            "nttId": 1082403,
+            "title": "[졸업생특화프로그램사업] 잇다 제휴대학 개강이벤트 (졸업생, 지역청년도 참여 가능합니다)",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=UkOKBe3dPmpxFeeacq2o7fNdblDilFN1Kv83WhRZghSQdpJoldgD986tWo4wa09M.knut_servlet_homepage?nttId=1082403&kind=&mno=sitemap_12&pageIndex=1&searchCnd=&searchWrd=",
+            "contentImageUrl": null,
+            "department": "대학일자리플러스센터",
+            "registrationDate": "2025-09-08",
+            "topic": "EMPLOYMENT_NEWS"
+        },
+        {
+            "nttId": 1082336,
+            "title": "[고용노동부/대전지방고용노동청청주치청] 청년층 직업지도'캡파 CAP@ 프로그램' 참여자 모집 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=xlGVPjZ7R4nZI7MEac8ECIEdXze5ZDgcflNrqP1NBLYtMKLUlEK87SRP1tlaopaY.knut_servlet_homepage?nttId=1082336",
+            "contentImageUrl": null,
+            "department": "취업성공지원과",
+            "registrationDate": "2025-09-05",
+            "topic": "EMPLOYMENT_NEWS"
+        },
+        {
+            "nttId": 1082334,
+            "title": "[고려사이버대학교] Match業(매치업) '빅데이터실무전문가'심화과정 수강 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=xlGVPjZ7R4nZI7MEac8ECIEdXze5ZDgcflNrqP1NBLYtMKLUlEK87SRP1tlaopaY.knut_servlet_homepage?nttId=1082334",
+            "contentImageUrl": null,
+            "department": "취업성공지원과",
+            "registrationDate": "2025-09-05",
+            "topic": "EMPLOYMENT_NEWS"
+        },
+        {
+            "nttId": 1082332,
+            "title": "[고려사이버대학교] Match業(매치업) '빅데이터실무전문가'기초과정 수강 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=JvTXyPMBZTJRq4lzha4ea2f7yZt662h6frtdgDpOxn3wTarzlHl1qwZz0FSVzpGH.knut_servlet_homepage?nttId=1082332",
+            "contentImageUrl": null,
+            "department": "취업성공지원과",
+            "registrationDate": "2025-09-05",
+            "topic": "EMPLOYMENT_NEWS"
+        },
+        {
+            "nttId": 1082297,
+            "title": "[커리어 드림로드] 자기이해와 진로탐색 특강 운영 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=FMoHr3cLV1wlWrrzEsjPmVq0RY8MGaJH5wai8vXQ60hJ3pxGlQ549sbn6w19l9Rt.knut_servlet_homepage?nttId=1082297&kind=&mno=sitemap_12&pageIndex=1&searchCnd=&searchWrd=",
+            "contentImageUrl": null,
+            "department": "대학일자리플러스센터",
+            "registrationDate": "2025-09-04",
+            "topic": "EMPLOYMENT_NEWS"
+        },
+        {
+            "nttId": 1082144,
+            "title": "[현대엔지비] 2025 매치업 무료 온라인 특강(신에너지자동차, 지능형 자동차 분야)",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=RhVpASX7P8hiLGuohOXpaDYNSITZrI4VAsiJJ1PFkUeLmY9kleJLeFFLt3yxAXe6.knut_servlet_homepage?nttId=1082144",
+            "contentImageUrl": null,
+            "department": "대학일자리플러스센터",
+            "registrationDate": "2025-09-02",
+            "topic": "EMPLOYMENT_NEWS"
+        },
+        {
+            "nttId": 1082049,
+            "title": "2025년 생거진천 취업박람회 개최 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=RhVpASX7P8hiLGuohOXpaDYNSITZrI4VAsiJJ1PFkUeLmY9kleJLeFFLt3yxAXe6.knut_servlet_homepage?nttId=1082049",
+            "contentImageUrl": null,
+            "department": "취업성공지원과",
+            "registrationDate": "2025-09-01",
+            "topic": "EMPLOYMENT_NEWS"
+        },
+        {
+            "nttId": 1082046,
+            "title": "[명지대학교 대학일자리플러스센터] 2025년 Career Festival 박람회 개최 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=RhVpASX7P8hiLGuohOXpaDYNSITZrI4VAsiJJ1PFkUeLmY9kleJLeFFLt3yxAXe6.knut_servlet_homepage?nttId=1082046",
+            "contentImageUrl": null,
+            "department": "대학일자리플러스센터",
+            "registrationDate": "2025-09-01",
+            "topic": "EMPLOYMENT_NEWS"
+        },
+        {
+            "nttId": 1081999,
+            "title": "[대학일자리플러스센터][2025년 기업현직자가 들려주는 직무이야기] 프로그램 참여자 모집 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=RhVpASX7P8hiLGuohOXpaDYNSITZrI4VAsiJJ1PFkUeLmY9kleJLeFFLt3yxAXe6.knut_servlet_homepage?nttId=1081999&kind=&mno=sitemap_12&pageIndex=1&searchCnd=&searchWrd=",
+            "contentImageUrl": null,
+            "department": "대학일자리플러스센터",
+            "registrationDate": "2025-08-29",
+            "topic": "EMPLOYMENT_NEWS"
+        },
+        {
+            "nttId": 1081753,
+            "title": "[한남대학교] 데이터 분석 파이썬 기초과정 참여자 모집 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=RhVpASX7P8hiLGuohOXpaDYNSITZrI4VAsiJJ1PFkUeLmY9kleJLeFFLt3yxAXe6.knut_servlet_homepage?nttId=1081753",
+            "contentImageUrl": null,
+            "department": "취업성공지원과",
+            "registrationDate": "2025-08-21",
+            "topic": "EMPLOYMENT_NEWS"
+        },
+        {
+            "nttId": 1081751,
+            "title": "[한국장애인고용공단 일산직업능력개발원] 교원임용 준비과정 훈련생 모집 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=RhVpASX7P8hiLGuohOXpaDYNSITZrI4VAsiJJ1PFkUeLmY9kleJLeFFLt3yxAXe6.knut_servlet_homepage?nttId=1081751",
+            "contentImageUrl": null,
+            "department": "취업성공지원과",
+            "registrationDate": "2025-08-21",
+            "topic": "EMPLOYMENT_NEWS"
+        },
+        {
+            "nttId": 1081749,
+            "title": "[한남대학교 ] 2025년 청년 취업지원 프로젝트 참여자 모집안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=RhVpASX7P8hiLGuohOXpaDYNSITZrI4VAsiJJ1PFkUeLmY9kleJLeFFLt3yxAXe6.knut_servlet_homepage?nttId=1081749",
+            "contentImageUrl": null,
+            "department": "취업성공지원과",
+            "registrationDate": "2025-08-21",
+            "topic": "EMPLOYMENT_NEWS"
+        },
+        {
+            "nttId": 1081718,
+            "title": "Energy Job 콘서트(부제: ENERGY JOB GO! 일자리 잡고!) 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=RhVpASX7P8hiLGuohOXpaDYNSITZrI4VAsiJJ1PFkUeLmY9kleJLeFFLt3yxAXe6.knut_servlet_homepage?nttId=1081718",
+            "contentImageUrl": null,
+            "department": "대학일자리플러스센터",
+            "registrationDate": "2025-08-20",
+            "topic": "EMPLOYMENT_NEWS"
+        },
+        {
+            "nttId": 1081706,
+            "title": "[한국전력기술(주)] 정규직 채용 관련 채용설명회&상담회",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=RhVpASX7P8hiLGuohOXpaDYNSITZrI4VAsiJJ1PFkUeLmY9kleJLeFFLt3yxAXe6.knut_servlet_homepage?nttId=1081706",
+            "contentImageUrl": null,
+            "department": "취업성공지원과",
+            "registrationDate": "2025-08-20",
+            "topic": "EMPLOYMENT_NEWS"
+        },
+        {
+            "nttId": 1081704,
+            "title": "「2025년 충청권 공공기관 지역인재 합동채용설명회」",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=RhVpASX7P8hiLGuohOXpaDYNSITZrI4VAsiJJ1PFkUeLmY9kleJLeFFLt3yxAXe6.knut_servlet_homepage?nttId=1081704",
+            "contentImageUrl": null,
+            "department": "대학일자리플러스센터",
+            "registrationDate": "2025-08-20",
+            "topic": "EMPLOYMENT_NEWS"
+        },
+        {
+            "nttId": 1081702,
+            "title": "[서울교육대학교] 어린이 영어교육 전문가 과정 교육생 모집 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=RpQ4ESh95Gznm4Jshh74rktLaF42YFhHA6e4QR1YdDLNTl6ilF0dvCNg5zujzsIg.knut_servlet_homepage?nttId=1081702",
+            "contentImageUrl": null,
+            "department": "취업성공지원과",
+            "registrationDate": "2025-08-20",
+            "topic": "EMPLOYMENT_NEWS"
+        },
+        {
+            "nttId": 1081647,
+            "title": "[졸업생 특화프로그램 PICK ME UP] 프로그램 기획 공모전(기간 연장)",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=RhVpASX7P8hiLGuohOXpaDYNSITZrI4VAsiJJ1PFkUeLmY9kleJLeFFLt3yxAXe6.knut_servlet_homepage?nttId=1081647&kind=&mno=sitemap_12&pageIndex=1&searchCnd=&searchWrd=",
+            "contentImageUrl": null,
+            "department": "대학일자리플러스센터",
+            "registrationDate": "2025-08-18",
+            "topic": "EMPLOYMENT_NEWS"
+        },
+        {
+            "nttId": 1081559,
+            "title": "[고용노동부청주지청] 청년층 직업지도 캡파 CAP@ 프로그램 9월 대면 참여자 모집",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=RpQ4ESh95Gznm4Jshh74rktLaF42YFhHA6e4QR1YdDLNTl6ilF0dvCNg5zujzsIg.knut_servlet_homepage?nttId=1081559",
+            "contentImageUrl": null,
+            "department": "취업성공지원과",
+            "registrationDate": "2025-08-14",
+            "topic": "EMPLOYMENT_NEWS"
+        },
+        {
+            "nttId": 1081308,
+            "title": "[한국산업인력공단] 2025년 해외일경험 2차 온라인 토크콘서트 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=RpQ4ESh95Gznm4Jshh74rktLaF42YFhHA6e4QR1YdDLNTl6ilF0dvCNg5zujzsIg.knut_servlet_homepage?nttId=1081308",
+            "contentImageUrl": null,
+            "department": "취업성공지원과",
+            "registrationDate": "2025-08-05",
+            "topic": "EMPLOYMENT_NEWS"
+        },
+        {
+            "nttId": 1081307,
+            "title": "[한국임업진흥원] 「2025 청년 산림창업가 시너지캠프」참여자 모집 안내",
+            "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do;jsessionid=RpQ4ESh95Gznm4Jshh74rktLaF42YFhHA6e4QR1YdDLNTl6ilF0dvCNg5zujzsIg.knut_servlet_homepage?nttId=1081307",
+            "contentImageUrl": null,
+            "department": "취업성공지원과",
+            "registrationDate": "2025-08-05",
+            "topic": "EMPLOYMENT_NEWS"
+        }
+    ]
 }

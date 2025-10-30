@@ -7,45 +7,35 @@
 
 import Combine
 import Factory
-import RxRelay
+import Foundation
+import KNUTICECore
 import os
 
-final class TabBarViewModel {
-    let mainPopupContent: BehaviorRelay<MainPopupContent?> = .init(value: nil)
-    let pushNotice: BehaviorRelay<Notice?> = .init(value: nil)
+@MainActor
+final class TabBarViewModel: BookmarkSortOptionProvidable {
+    @Published var category: MajorCategory? = nil
+    @Published var deepLink: DeepLink? = nil
+    @Published var bookmarkSortOption: BookmarkSortOption = {
+        let value = UserDefaults.standard.string(forKey: UserDefaultsKeys.bookmarkSortOption.rawValue) ?? ""
+        return BookmarkSortOption(rawValue: value) ?? .createdAtDescending
+    }()
     
-    @Injected(\.tabBarService) private var service: TabBarService
-    private var cancellables: Set<AnyCancellable> = []
+    init(category: MajorCategory?) {
+        self.category = category
+    }
+    
+    @Injected(\.pushNoticeService) private var service: DeepLinkService
     private let logger: Logger = Logger()
+    private(set) var task: Task<Void, Never>?
     
-    func fetchMainPopupContent() {
-        service.fetchMainPopupContent()
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] completion in
-                switch completion {
-                case .finished:
-                    self?.logger.debug("Successfully fetched a mainPopupContent")
-                case .failure(let error):
-                    self?.logger.error("TabBarViewModel.fetchMainPopupContent(): Failed to fetch a mainPopupContent: \(error)")
-                }
-            } receiveValue: { [weak self] in
-                self?.mainPopupContent.accept($0)
+    func fetchDeepLinkIfExists() {
+        task = Task {
+            do {
+                self.deepLink = try await service.fetchDeepLink()
+            } catch {
+                logger.error("TabBarViewModel.fetchPushNotice() error: \(error)")
             }
-            .store(in: &cancellables)
+        }
     }
     
-    func fetchPushNoticeIfExists() {
-        service.fetchPushNotice()
-            .sink(receiveCompletion: { [weak self] completion in
-                switch completion {
-                case .finished:
-                    self?.logger.debug("Successfully fetched a PushNotice")
-                case .failure(let error):
-                    self?.logger.error("TabBarViewModel.fetchPushNotice() error: \(error)")
-                }
-            }, receiveValue: { [weak self] in
-                self?.pushNotice.accept($0)
-            })
-            .store(in: &cancellables)
-    }
 }

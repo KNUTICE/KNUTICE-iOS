@@ -17,7 +17,7 @@ extension MainTableViewController: EntryTimeRecordable {
                 //마지막 App 진입 시간과 30분 이상 차이나면 새로고침
                 if let time = self?.timeIntervalSinceLastEntry(), time >= 1800 {
                     self?.recordEntryTime()
-                    self?.viewModel.fetchNoticesWithCombine()
+                    self?.viewModel.fetchNotices()
                 }
             })
             .store(in: &cancellables)

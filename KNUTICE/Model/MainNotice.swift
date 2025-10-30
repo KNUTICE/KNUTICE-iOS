@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KNUTICECore
 
 struct MainNotice {
     enum PresentationType {
@@ -15,4 +16,9 @@ struct MainNotice {
     
     let presentationType: PresentationType
     let notice: Notice
+}
+
+struct MainSectionNotice {
+    let header: String
+    let items: [MainNotice]
 }

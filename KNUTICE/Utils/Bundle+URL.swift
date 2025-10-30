@@ -2,7 +2,7 @@
 //  Bundle+URL.swift
 //  KNUTICE
 //
-//  Created by 이정훈 on 5/22/24.
+//  Created by 이정훈 on 8/8/25.
 //
 
 import Foundation
@@ -17,16 +17,8 @@ extension Bundle {
         return resource
     }
     
-    var noticeURL: String? {        
-        guard let resource, let url = resource["Notice_URL"] as? String else {
-            return nil
-        }
-        
-        return url
-    }
-    
     var openSourceURL: String {
-        guard let resource, let url = resource["OpenSourceLicenseURL"] as? String else {
+        guard let url = resource?["OpenSourceLicenseURL"] as? String else {
             return ""
         }
         
@@ -34,7 +26,7 @@ extension Bundle {
     }
     
     var tokenURL: String? {
-        guard let resource, let url = resource["Token_URL"] as? String else {
+        guard let url = resource?["Token_URL"] as? String else {
             return nil
         }
         
@@ -42,23 +34,15 @@ extension Bundle {
     }
     
     var reportURL: String? {
-        guard let resource, let url = resource["Report_URL"] as? String else {
+        guard let url = resource?["Report_URL"] as? String else {
             return nil
         }
         
         return url
     }
     
-    var searchURL: String? {
-        guard let resource, let url = resource["Search_URL"] as? String else {
-            return nil
-        }
-        
-        return url
-    }
-    
-    var notificationPermissionURL: String? {
-        guard let resource, let url = resource["Notification_Permission_URL"] as? String else {
+    var topicSubscriptionURL: String? {
+        guard let url = resource?["TopicSubscription_URL"] as? String else {
             return nil
         }
         
@@ -66,7 +50,7 @@ extension Bundle {
     }
     
     var mainPopupContentURL: String? {
-        guard let resource, let url = resource["Main_Popup_URL"] as? String else {
+        guard let url = resource?["Main_Popup_URL"] as? String else {
             return nil
         }
         
@@ -74,7 +58,7 @@ extension Bundle {
     }
     
     var defaultThumbnailURL: String {
-        guard let resource, let url = resource["DefaultThumbnail_URL"] as? String else {
+        guard let url = resource?["DefaultThumbnail_URL"] as? String else {
             return ""
         }
         
@@ -82,7 +66,7 @@ extension Bundle {
     }
     
     var tipURL: String? {
-        guard let resource, let url = resource["TipURL"] as? String else {
+        guard let url = resource?["TipURL"] as? String else {
             return nil
         }
         

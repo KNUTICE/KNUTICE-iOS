@@ -8,12 +8,10 @@
 import Foundation
 
 enum UserDefaultsKeys: String {
-    case pushNotice
-    case isBadgeResetRequired
-    case etiquetteTimeStart
-    case etiquetteTimeEnd
-    case hasNewPendingNotice
+    case userInfo
     case bookmarkSortOption
     case isBookmarkTimestampUpdated
     case entryTime
+    case selectedMajor
+    case isMajorNotificationSubscribed
 }

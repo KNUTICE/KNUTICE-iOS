@@ -6,7 +6,13 @@
 //
 
 import Foundation
+import RxRelay
+import KNUTICECore
 
+@MainActor
 protocol Searchable {
-    func search(_ keyword: String)
+    var bookmarks: BehaviorRelay<[Bookmark]> { get }
+    var tasks: [Task<Void, Never>] { get }
+    
+    func search(with keyword: String)
 }

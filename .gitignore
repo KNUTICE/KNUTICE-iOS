@@ -1,7 +1,11 @@
 GoogleService-Info.plist
 GoogleService-Info-Dev.plist
+ServiceInfo.plist
+KNUTICECore/Resources/ServiceInfo.plist
 *.xcuserstate
 
 # macOS
 .DS_Store
 .DS_Store?
+**/.DS_Store
+KNUTICE/Resources/ServiceInfo.plist

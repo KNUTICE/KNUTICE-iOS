@@ -8,88 +8,100 @@
 import Combine
 import Factory
 import Foundation
+import KNUTICECore
 import os
 
 @MainActor
 final class TopicSubscriptionListViewModel: ObservableObject {
-    @Published var isGeneralNoticeNotificationSubscribed: Bool?
-    @Published var isAcademicNoticeNotificationSubscribed: Bool?
-    @Published var isScholarshipNoticeNotificationSubscribed: Bool?
-    @Published var isEventNoticeNotificationSubscribed: Bool?
-    @Published var isEmploymentNoticeNotificationSubscribed: Bool?
-//    @Published var isEtiquetteTimeActivate: Bool = false
-//    @Published var etiquetteTimeStart: Date?
-//    @Published var etiquetteTimeEnd: Date?
+    @Published var noticeSubscriptionStates: [NoticeCategory: Bool] = [:]
+    @Published var isMajorNoticeNotificationSubscribed: Bool?
     @Published var isLoading: Bool = false
     @Published var isShowingAlert: Bool = false
+    @Published var isShowingFCMTokenErrorAlert: Bool = false
     
     @Injected(\.topicSubscriptionRepository) private var repository
-    @Injected(\.subscriptionService) private var subscriptionService
     private let logger = Logger()
     private var cancellables = Set<AnyCancellable>()
     private(set) var alertMessage: String = ""
     private(set) var task: Task<Void, Never>?
     
-    var isAllDataLoaded: Bool {
-        let data = [
-            isGeneralNoticeNotificationSubscribed,
-            isAcademicNoticeNotificationSubscribed,
-            isScholarshipNoticeNotificationSubscribed,
-            isEventNoticeNotificationSubscribed
-        ]
-        
-        return data.allSatisfy { $0 != nil }
-    }
-    
     func fetchNotificationSubscriptions() async {
+        defer { isLoading = false }
+        
         isLoading = true
-        let result = await repository.fetch()
         
-        guard !Task.isCancelled else {
-            return
-        }
-        
-        isLoading = false
-        switch result {
-        case .success(let subscriptions):
-            isGeneralNoticeNotificationSubscribed = subscriptions.generalNotice
-            isAcademicNoticeNotificationSubscribed = subscriptions.academicNotice
-            isScholarshipNoticeNotificationSubscribed = subscriptions.scholarshipNotice
-            isEventNoticeNotificationSubscribed = subscriptions.eventNotice
-            isEmploymentNoticeNotificationSubscribed = subscriptions.employmentNotice
-        case .failure(let error):
+        do {
+            // 각 공지 카테고리 별 구독 여부
+            let subscriptions = try await repository.fetch(for: .notice)
+
+            for subscription in subscriptions {
+                guard case .notice(let topic) = subscription else { continue }
+                
+                noticeSubscriptionStates[topic] = true
+            }
+            
+            // 학과 소식 구독 여부
+            isMajorNoticeNotificationSubscribed = UserDefaults.standard.bool(forKey: UserDefaultsKeys.isMajorNotificationSubscribed.rawValue)
+        } catch {
+            guard let error = error.asAFError else {
+                logger.log(level: .error, "NotificationListViewModel.fetchNotificationSubscriptions(): \(error.localizedDescription)")
+                return
+            }
+            
+            switch error {
+            case .requestAdaptationFailed(let underlyingError):
+                if let _ = underlyingError as? KNUTICECore.TokenError {
+                    isShowingFCMTokenErrorAlert = true
+                }
+            default:
+                break
+            }
+            
             logger.log(level: .error, "NotificationListViewModel.fetchNotificationSubscriptions(): \(error.localizedDescription)")
         }
     }
     
-    func update(key: NoticeCategory, value: Bool) {
+    func update(of type: TopicType, topic: NoticeCategory?, isEnabled: Bool) {
         task = Task {
+            defer { isLoading = false }
             isLoading = true
-            let result = await subscriptionService.update(key, to: value)
             
-            guard !Task.isCancelled else {
-                return
-            }
-            
-            isLoading = false
-            switch result {
-            case .success:
-                switch key {
-                case .generalNotice:
-                    isGeneralNoticeNotificationSubscribed = value
-                case .academicNotice:
-                    isAcademicNoticeNotificationSubscribed = value
-                case .scholarshipNotice:
-                    isScholarshipNoticeNotificationSubscribed = value
-                case .eventNotice:
-                    isEventNoticeNotificationSubscribed = value
-                case .employmentNotice:
-                    isEmploymentNoticeNotificationSubscribed = value
+            do {
+                switch type {
+                case .notice:
+                    try await handleNoticeUpdate(topic: topic, isEnabled: isEnabled)
+                case .major:
+                    try await handleMajorUpdate(isEnabled: isEnabled)
+                default:
+                    // TODO: .meal 알림 설정 처리
+                    break
                 }
-            case .failure(let error):
-                logger.log(level: .error, "NotificationListViewModel.update(key:value:): \(error.localizedDescription)")
+            } catch {
+                logger.log(level: .error, "NotificationListViewModel.update(of:type:): \(error.localizedDescription)")
             }
         }
+    }
+    
+    private func handleNoticeUpdate(topic: NoticeCategory?, isEnabled: Bool) async throws {
+        guard let topic else { return }
+
+        try await repository.update(of: .notice, topic: topic, isEnabled: isEnabled)
+        noticeSubscriptionStates[topic] = isEnabled
+    }
+    
+    private func handleMajorUpdate(isEnabled: Bool) async throws {
+        guard let majorStr = UserDefaults.shared?.string(forKey: UserDefaultsKeys.selectedMajor.rawValue),
+              let selectedMajor = MajorCategory(rawValue: majorStr) else {
+            // 전공 선택이 없을 때는 로컬 업데이트만
+            isMajorNoticeNotificationSubscribed = isEnabled
+            UserDefaults.standard.set(isEnabled, forKey: UserDefaultsKeys.isMajorNotificationSubscribed.rawValue)
+            return
+        }
+        
+        try await repository.update(of: .major, topic: selectedMajor, isEnabled: isEnabled)
+        
+        isMajorNoticeNotificationSubscribed = isEnabled
+        UserDefaults.standard.set(isEnabled, forKey: UserDefaultsKeys.isMajorNotificationSubscribed.rawValue)
     }
     
     private func handleError(with error: Error) {
@@ -101,51 +113,4 @@ final class TopicSubscriptionListViewModel: ObservableObject {
         isShowingAlert = true
     }
     
-//    func fetchEtiquetteTime() {
-//        if let etiquetteTimeStart = UserDefaults.shared.object(forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue) as? Date,
-//           let etiquetteTimeEnd = UserDefaults.shared.object(forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue) as? Date {
-//            self.isEtiquetteTimeActivate = true
-//            self.etiquetteTimeStart = etiquetteTimeStart
-//            self.etiquetteTimeEnd = etiquetteTimeEnd
-//        }
-//    }
-    
-//    func bind() {
-//        $isEtiquetteTimeActivate
-//            .dropFirst()
-//            .removeDuplicates()
-//            .sink(receiveValue: { [weak self] in
-//                guard let self else { return }
-//                
-//                if $0 == true {
-//                    self.etiquetteTimeStart = UserDefaults.shared.object(forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue) as? Date ?? Date.tenPM
-//                    self.etiquetteTimeEnd = UserDefaults.shared.object(forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue) as? Date ?? Date.eightAM
-//                } else {
-//                    self.etiquetteTimeStart = nil
-//                    UserDefaults.shared.removeObject(forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue)
-//                    
-//                    self.etiquetteTimeEnd = nil
-//                    UserDefaults.shared.removeObject(forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue)
-//                }
-//            })
-//            .store(in: &cancellables)
-//        
-//        $etiquetteTimeStart
-//            .removeDuplicates()
-//            .sink(receiveValue: {
-//                if let date = $0 {
-//                    UserDefaults.shared.set(date, forKey: UserDefaultsKeys.etiquetteTimeStart.rawValue)
-//                }
-//            })
-//            .store(in: &cancellables)
-//        
-//        $etiquetteTimeEnd
-//            .removeDuplicates()
-//            .sink(receiveValue: {
-//                if let date = $0 {
-//                    UserDefaults.shared.set(date, forKey: UserDefaultsKeys.etiquetteTimeEnd.rawValue)
-//                }
-//            })
-//            .store(in: &cancellables)
-//    }
 }
