@@ -12,7 +12,7 @@ import UIKit
 //MARK: - Binding
 extension MainTableViewController {
     func bind() {
-        let dataSource = RxTableViewSectionedReloadDataSource<SectionOfNotice>(configureCell: { dataSource, tableView, indexPath, item -> UITableViewCell in
+        let dataSource = RxTableViewSectionedReloadDataSource<MainNoticeSectionModel>(configureCell: { dataSource, tableView, indexPath, item -> UITableViewCell in
             if item.presentationType == .actual {
                 let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.reuseIdentifier, for: indexPath) as! MainTableViewCell
                 cell.configure(with: item)
@@ -39,7 +39,7 @@ extension MainTableViewController {
         //RefreshControl의 valueChanged 이벤트 관찰 후 수행할 작업
         refreshControl.rx.controlEvent(.valueChanged)
             .bind(with: self) { owner, _ in
-                owner.viewModel.refreshNoticesWithCombine()
+                owner.viewModel.refreshNotices()
             }
             .disposed(by: disposeBag)
         

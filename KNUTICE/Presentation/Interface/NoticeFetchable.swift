@@ -8,6 +8,7 @@
 import RxRelay
 import RxSwift
 
+@MainActor
 protocol NoticeFetchable {
     var isFetching: BehaviorRelay<Bool> { get }
     var isRefreshing: BehaviorRelay<Bool> { get }

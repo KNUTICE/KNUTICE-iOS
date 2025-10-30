@@ -7,23 +7,20 @@
 
 import Factory
 import Foundation
+import KNUTICECore
 
-protocol FCMTokenService {
-    @discardableResult
-    func register(fcmToken: String) async throws -> Bool
+protocol FCMTokenService: Actor {
+    func register(fcmToken: String) async throws
 }
 
-final class FCMTokenServiceImpl: FCMTokenService {
-    @Injected(\.tokenRepository) private var repository
-    
-    @discardableResult
-    func register(fcmToken: String) async throws -> Bool {
-        try await repository.register(token: fcmToken)
+actor FCMTokenServiceImpl: FCMTokenService {
+    func register(fcmToken: String) async throws {
+        try Task.checkCancellation()
         
-        if Task.isCancelled {
-            return false
-        }
+        // KNUTICE 서버에 토큰 업로드
+        try await FCMTokenManager.shared.register()
         
-        return await FCMTokenKeychainManager.shared.save(fcmToken: fcmToken)
+        // KNUTICE 서버에 저장된 토큰을 Keychain에 저장
+        await FCMTokenKeychainManager.shared.save(fcmToken: fcmToken)
     }
 }

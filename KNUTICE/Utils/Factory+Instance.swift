@@ -7,49 +7,20 @@
 
 import Factory
 import Foundation
+import KNUTICECore
 
 extension Container {
-    //MARK: - RemoteDataSource
-    var remoteDataSource: Factory<RemoteDataSource> {
+    var bookmarkDataSource: Factory<BookmarkPersistenceStore> {
         Factory(self) {
-            RemoteDataSourceImpl()
-        }
-    }
-    
-    var localBookmarkDataSource: Factory<LocalBookmarkDataSource> {
-        Factory(self) {
-            LocalBookmarkDataSourceImpl.shared
+            BookmarkPersistenceStoreImpl.shared
         }
     }
     
     //MARK: - Repositroy
-    var mainNoticeRepository: Factory<MainNoticeRepository> {
-        Factory(self) {
-            MainNoticeRepositoryImpl()
-        }
-    }
-    
-    var noticeRepository: Factory<NoticeRepository> {
-        Factory(self) {
-            NoticeRepositoryImpl()
-        }
-    }
-    
-    var tokenRepository: Factory<TokenRepository> {
-        Factory(self) {
-            TokenRepositoryImpl()
-        }
-    }
     
     var reportRepository: Factory<ReportRepository> {
         Factory(self) {
             ReportRepositoryImpl()
-        }
-    }
-    
-    var searchRepository: Factory<SearchRepository> {
-        Factory(self) {
-            SearchRepositoryImpl()
         }
     }
     
@@ -65,12 +36,6 @@ extension Container {
         }
     }
     
-    var mainPopupContentRepository: Factory<MainPopupContentRepository> {
-        Factory(self) {
-            MainPopupContentRepositoryImpl()
-        }
-    }
-    
     var TipRepository: Factory<TipRepository> {
         Factory(self) {
             TipRepositoryImpl()
@@ -78,11 +43,6 @@ extension Container {
     }
     
     //MARK: - Service
-    var reportService: Factory<ReportService> {
-        Factory(self) {
-            ReportServiceImpl()
-        }
-    }
     
     var bookmarkService: Factory<BookmarkService> {
         Factory(self) {
@@ -90,15 +50,15 @@ extension Container {
         }
     }
     
-    var tabBarService: Factory<TabBarService> {
+    var pushNoticeService: Factory<DeepLinkService> {
         Factory(self) {
-            TabBarServiceImpl()
+            DeepLinkServiceImpl()
         }
     }
     
-    var subscriptionService: Factory<TopicSubscriptionService> {
+    var searchService: Factory<SearchService> {
         Factory(self) {
-            TopicSubscriptionServiceImpl()
+            SearchServiceImpl()
         }
     }
     
@@ -108,9 +68,21 @@ extension Container {
         }
     }
     
+    var noticeService: Factory<NoticeService> {
+        Factory(self) {
+            NoticeServiceImpl()
+        }
+    }
+    
+    var fetchNoticeUseCase: Factory<FetchNoticeUseCase> {
+        Factory(self) {
+            FetchNoticeUseCaseImpl()
+        }
+    }
+    
     //MARK: - ViewModel
     var mainViewModel: Factory<MainTableViewModel> {
-        Factory(self) {
+        Factory(self) { @MainActor in
             MainTableViewModel()
         }
     }
@@ -121,14 +93,14 @@ extension Container {
         }
     }
     
-    var searchCollectionViewModel: Factory<NoticeSectionModelProvidable> {
-        Factory(self) {
-            SearchCollectionViewModel()
+    var searchCollectionViewModel: Factory<SearchViewModel> {
+        Factory(self) { @MainActor in
+            SearchViewModel()
         }
     }
     
     var bookmarkTableViewModel: Factory<BookmarkTableViewModel> {
-        Factory(self) {
+        Factory(self) { @MainActor in
             BookmarkTableViewModel()
         }
     }

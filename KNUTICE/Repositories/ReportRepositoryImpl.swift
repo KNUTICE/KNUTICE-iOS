@@ -8,11 +8,12 @@
 import Combine
 import Foundation
 import Factory
+import KNUTICECore
 
 final class ReportRepositoryImpl: ReportRepository {
     @Injected(\.remoteDataSource) var dataSource: RemoteDataSource
     
-    func register(params: [String: Any]) -> AnyPublisher<Bool, any Error> {
+    func register(params: [String: any Sendable]) -> AnyPublisher<Bool, any Error> {
         guard let endpoint = Bundle.main.reportURL else {
             return Fail(error: NetworkError.invalidURL(message: "Invalid or missing report URL."))
                 .eraseToAnyPublisher()
@@ -22,11 +23,12 @@ final class ReportRepositoryImpl: ReportRepository {
             endpoint,
             method: .post,
             parameters: params,
-            decoding: PostResponseDTO.self
+            decoding: PostResponseDTO.self,
+            isInterceptable: true
         )
         .flatMap { dto -> AnyPublisher<Bool, any Error> in
-            guard dto.result.resultCode == 200 else {
-                return Fail(error: RemoteServerError.invalidResponse(message: dto.result.resultMessage))
+            guard dto.metaData.code == 200 else {
+                return Fail(error: RemoteServerError.invalidResponse(message: dto.metaData.message ?? ""))
                     .eraseToAnyPublisher()
             }
             

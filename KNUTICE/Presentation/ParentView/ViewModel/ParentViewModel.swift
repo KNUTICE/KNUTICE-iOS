@@ -26,28 +26,23 @@ final class ParentViewModel {
     
     /// The currently running async task for FCM token registration or related work.
     /// Cancelling or overwriting this task will stop the in-progress operation.
-    var task: Task<Void, Never>?
+    var tokenUploadTask: Task<Void, Never>?
+    
+    var navigationFallbackTask: Task<Void, Never>?
     
     //MARK: - Methods
     
-    /// Subscribes to FCM token update notifications and registers the token with the server.
+    /// Subscribes to FCM token update notifications and registers the new token when received.
     ///
-    /// This method listens for `.fcmToken` notifications posted via `NotificationCenter`.
-    /// When a notification is received, it attempts to extract the `"token"` value from the `userInfo`
-    /// dictionary and sends it to the `register(token:)` method for server registration.
+    /// This method listens for `.fcmToken` notifications posted to `NotificationCenter`.
+    /// When a notification is received, it extracts the token string from the `userInfo`
+    /// dictionary and calls `register(token:)` to register it.
     ///
-    /// - Note:
-    ///   - The `userInfo` dictionary of the `.fcmToken` notification must contain a `"token"` key with a `String` value.
-    ///   - Uses a Combine `AnyCancellable` to store the subscription, which will be released when the instance is deallocated.
-    ///   - `[weak self]` is used in the subscription closure to avoid retain cycles.
-    ///
-    /// - SeeAlso:
-    ///   - `register(token:)` for the actual token registration implementation.
-    ///   - `.fcmToken` for the notification definition.
+    /// - Note: The subscription is stored in the `cancellables` set to manage its lifecycle.
     func subscribeToFCMToken() {
         NotificationCenter.default.publisher(for: .fcmToken)
             .sink(receiveValue: { [weak self] notification in
-                guard let fcmToken = notification.userInfo?["token"] as? String else {
+                guard let fcmToken = notification.userInfo?[UserInfoKeys.fcmToken.rawValue] as? String else {
                     return
                 }
                 
@@ -73,14 +68,49 @@ final class ParentViewModel {
     /// - SeeAlso:
     ///   - `service.register(fcmToken:)` for the actual network registration request.
     private func register(token: String) {        
-        task = Task {
+        tokenUploadTask = Task {
             do {
                 try Task.checkCancellation()
-                shouldNavigateToMain = try await service.register(fcmToken: token)
+                
+                try await service.register(fcmToken: token)
+                
+                shouldNavigateToMain = true
                 
             } catch {
                 print(error)
             }
         }
     }
+    
+    /// Subscribes to notification authorization status updates and handles navigation after authorization.
+    ///
+    /// This method listens for `.didCompleteNotificationAuthorizationRequest` notifications
+    /// posted to `NotificationCenter`. When authorization is completed, it waits for 3 seconds.
+    /// If no FCM token has been received within that time, it triggers navigation to the main screen
+    /// by setting `shouldNavigateToMain` to `true`.
+    ///
+    /// - Note: The subscription is stored in the `cancellables` set to manage its lifecycle.
+    /// - Important: Uses `Task.sleep` for delay handling on the main actor.
+    func subscribeToNotificationAuthorizationStatus() {
+        NotificationCenter.default.publisher(for: .didCompleteNotificationAuthorizationRequest)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] notification in
+                let key = UserInfoKeys.isNotificationAuthorizationCompleted.rawValue
+                
+                guard let isCompleted = notification.userInfo?[key] as? Bool else { return }
+                
+                if isCompleted {
+                    // 알림 권한 확인 후, 3초 후에도 토큰이 전달되지 않으면 화면 전환
+                    // TODO: 경고 Alert 표시 후 메인 뷰로 이동하도록 변경
+                    self?.navigationFallbackTask = Task {
+                        try? await Task.sleep(nanoseconds: 3_000_000_000)
+                        if self?.shouldNavigateToMain == false {
+                            self?.shouldNavigateToMain = true
+                        }
+                    }
+                }
+            })
+            .store(in: &cancellables)
+    }
+    
 }
