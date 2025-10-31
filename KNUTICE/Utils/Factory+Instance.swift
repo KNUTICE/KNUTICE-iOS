@@ -56,12 +56,6 @@ extension Container {
         }
     }
     
-    var fcmTokenService: Factory<FCMTokenService> {
-        Factory(self) {
-            FCMTokenServiceImpl()
-        }
-    }
-    
     var fetchNoticeUseCase: Factory<FetchNoticesUseCase> {
         Factory(self) {
             FetchNoticesUseCaseImpl()
@@ -89,6 +83,12 @@ extension Container {
     var searchNoticeAndBookmarkUseCase: Factory<SearchNoticeAndBookmarkUseCase> {
         Factory(self) {
             SearchNoticeAndBookmarkUseCaseImpl()
+        }
+    }
+    
+    var registerFCMTokenUseCase: Factory<RegisterFCMTokenUseCase> {
+        Factory(self) {
+            RegisterFCMTokenUseCaseImpl()
         }
     }
     

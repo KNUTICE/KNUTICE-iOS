@@ -18,7 +18,7 @@ final class ParentViewModel {
     @Published var shouldNavigateToMain: Bool = false
     
     /// The injected service responsible for handling FCM token registration and management.
-    @Injected(\.fcmTokenService) private var service
+    @Injected(\.registerFCMTokenUseCase) private var registerFCMTokenUseCase
     
     /// A set of Combine cancellables used to store subscriptions for automatic cancellation
     /// when the owning instance is deallocated.
@@ -72,7 +72,7 @@ final class ParentViewModel {
             do {
                 try Task.checkCancellation()
                 
-                try await service.register(fcmToken: token)
+                try await registerFCMTokenUseCase.execute(token: token)
                 
                 shouldNavigateToMain = true
                 
