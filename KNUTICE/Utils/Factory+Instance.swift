@@ -50,12 +50,6 @@ extension Container {
         }
     }
     
-    var pushNoticeService: Factory<DeepLinkService> {
-        Factory(self) {
-            DeepLinkServiceImpl()
-        }
-    }
-    
     var fetchNoticeUseCase: Factory<FetchNoticesUseCase> {
         Factory(self) {
             FetchNoticesUseCaseImpl()
@@ -89,6 +83,12 @@ extension Container {
     var registerFCMTokenUseCase: Factory<RegisterFCMTokenUseCase> {
         Factory(self) {
             RegisterFCMTokenUseCaseImpl()
+        }
+    }
+    
+    var fetchStoredDeepLinkUseCase: Factory<FetchStoredDeepLinkUseCase> {
+        Factory(self) {
+            FetchStoredDeepLinkUseCaseImpl()
         }
     }
     
