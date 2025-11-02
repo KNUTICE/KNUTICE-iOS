@@ -13,4 +13,5 @@ enum UserInfoKeys : String {
     case bookmarkSortOption
     case selectedMajor
     case fcmToken = "token"
+    case deepLink = "deeplink"
 }
