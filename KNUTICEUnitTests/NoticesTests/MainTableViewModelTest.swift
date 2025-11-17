@@ -37,8 +37,10 @@ final class MainTableViewModelTest: XCTestCase {
     func testFetchTopThreeNotices_ReturnNotices() {
         //Given
         let expectation = expectation(description: "fetch top three notices")
+        
         viewModel.noticesObservable
             .skip(1)
+            .take(1)
             .subscribe(onNext: {
                 //Then
                 XCTAssertEqual($0[0].items.count, 3)
