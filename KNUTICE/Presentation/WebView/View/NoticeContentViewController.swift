@@ -22,6 +22,7 @@ final class NoticeContentViewController: UIViewController {
     private lazy var webView: WKWebView = {
         let webView = WKWebView(frame: .zero)
         webView.navigationDelegate = self
+        webView.uiDelegate = self
         webView.allowsBackForwardNavigationGestures = false
         webView.configuration.defaultWebpagePreferences.allowsContentJavaScript = true
         webView.isHidden = true
@@ -209,7 +210,15 @@ extension NoticeContentViewController: WKNavigationDelegate {
         }
     }
     
-    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+}
+
+extension NoticeContentViewController: WKUIDelegate {
+    func webView(
+        _ webView: WKWebView,
+        createWebViewWith configuration: WKWebViewConfiguration,
+        for navigationAction: WKNavigationAction,
+        windowFeatures: WKWindowFeatures
+    ) -> WKWebView? {
         if let aString = URL(string:(navigationAction.request.url?.absoluteString ?? "")) {
             UIApplication.shared.open(aString, options:[:]) { _ in }
         }
