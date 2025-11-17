@@ -22,7 +22,8 @@ final class BookmarkTableViewModel: BookmarkSortOptionProvidable {
         return BookmarkSortOption(rawValue: value) ?? .createdAtDescending
     }()
     
-    @Injected(\.bookmarkService) private var bookmarkService
+    @Injected(\.fetchBookmarksUseCase) private var fetchBookmarksUseCase
+    @Injected(\.refreshBookmarkAfterDeletionUseCase) private var refreshBookmarkAfterDeletionUseCase
     
     private(set) var fetchTask: Task<Void, Never>?
     private(set) var reloadTask: Task<Void, Never>?
@@ -38,7 +39,7 @@ final class BookmarkTableViewModel: BookmarkSortOptionProvidable {
         fetchTask?.cancel()
         fetchTask = Task {
             do {
-                let fetchedBookmarks = try await bookmarkService.fetchBookmarks(page: bookmarks.value.count / 20, sortBy: bookmarkSortOption)
+                let fetchedBookmarks = try await fetchBookmarksUseCase.execute(page: bookmarks.value.count / 20, sortBy: bookmarkSortOption)
                 let bookmarkSectionModels = fetchedBookmarks.map {
                     BookmarkSectionModel(items: [$0])
                 }
@@ -59,7 +60,7 @@ final class BookmarkTableViewModel: BookmarkSortOptionProvidable {
             defer { isRefreshing.accept(false) }
             
             do {
-                let fetchedBookmarks = try await bookmarkService.fetchBookmarks(
+                let fetchedBookmarks = try await fetchBookmarksUseCase.execute(
                     page: 0,
                     pageSize: preserveCount ? bookmarks.value.count : 20,
                     sortBy: bookmarkSortOption
@@ -81,8 +82,8 @@ final class BookmarkTableViewModel: BookmarkSortOptionProvidable {
         deleteTask?.cancel()
         deleteTask = Task {
             do {
-                let fetchedBookmarks = try await bookmarkService.delete(
-                    bookmark: bookmark,
+                let fetchedBookmarks = try await refreshBookmarkAfterDeletionUseCase.execute(
+                    deletion: bookmark,
                     reloadCount: bookmarks.value.count - 1,
                     sortBy: bookmarkSortOption
                 )
