@@ -17,7 +17,10 @@ final class BookmarkViewModel: ObservableObject, BookmarkListRefreshable {
     @Published var isLoading: Bool = false
     @Published var bookmark: Bookmark?
     
-    @Injected(\.bookmarkService) private var service: BookmarkService
+    @Injected(\.fetchBookmarksUseCase) private var fetchBookmarksUseCase
+    @Injected(\.saveBookmarkUseCase) private var saveBookmarkUseCase
+    @Injected(\.updateBookmarkUseCase) private var updateBookmarkUseCase
+    @Injected(\.deleteBookmarkUseCase) private var deleteBookmarkUseCase
     
     private let nttId: Int?
     private(set) var alertMessage: String = ""
@@ -48,7 +51,7 @@ final class BookmarkViewModel: ObservableObject, BookmarkListRefreshable {
             }
             
             do {
-                try await service.save(bookmark: bookmark)
+                try await saveBookmarkUseCase.execute(bookmark)
                 
                 alertMessage = "북마크 저장이 완료 되었어요."
             } catch {
@@ -78,7 +81,7 @@ final class BookmarkViewModel: ObservableObject, BookmarkListRefreshable {
             }
             
             do {
-                try await service.update(bookmark: bookmark)
+                try await updateBookmarkUseCase.execute(for: bookmark)
                 
                 alertMessage = "저장을 완료했어요."
             } catch {
@@ -99,7 +102,7 @@ final class BookmarkViewModel: ObservableObject, BookmarkListRefreshable {
             }
             
             do {
-                try await service.delete(bookmark: bookmark)
+                try await deleteBookmarkUseCase.execute(for: bookmark)
                 
                 alertMessage = "삭제를 완료 했어요."
             } catch {
@@ -117,7 +120,7 @@ final class BookmarkViewModel: ObservableObject, BookmarkListRefreshable {
         defer { isLoading = false }
         
         do {
-            let bookmark = try await service.fetch(id: nttId)
+            let bookmark = try await fetchBookmarksUseCase.execute(for: nttId)
             self.bookmark = bookmark
             self.isAlarmOn = bookmark?.alarmDate != nil
         } catch {

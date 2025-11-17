@@ -42,13 +42,7 @@ extension Container {
         }
     }
     
-    //MARK: - Service
-    
-    var bookmarkService: Factory<BookmarkService> {
-        Factory(self) {
-            BookmarkServiceImpl()
-        }
-    }
+    //MARK: - UseCases
     
     var fetchNoticeUseCase: Factory<FetchNoticesUseCase> {
         Factory(self) {
@@ -89,6 +83,36 @@ extension Container {
     var fetchStoredDeepLinkUseCase: Factory<FetchStoredDeepLinkUseCase> {
         Factory(self) {
             FetchStoredDeepLinkUseCaseImpl()
+        }
+    }
+    
+    var saveBookmarkUseCase: Factory<SaveBookmarkUseCase> {
+        Factory(self) {
+            SaveBookmarkUseCaseImpl()
+        }
+    }
+    
+    var deleteBookmarkUseCase: Factory<DeleteBookmarkUseCase> {
+        Factory(self) {
+            DeleteBookmarkUseCaseImpl()
+        }
+    }
+    
+    var refreshBookmarkAfterDeletionUseCase: Factory<RefreshBookmarkAfterDeletionUseCase> {
+        Factory(self) {
+            RefreshBookmarkAfterDeletionUseCaseImpl()
+        }
+    }
+    
+    var updateBookmarkUseCase: Factory<UpdateBookmarkUseCase> {
+        Factory(self) {
+            UpdateBookmarkUseCaseImpl()
+        }
+    }
+    
+    var fetchBookmarksUseCase: Factory<FetchBookmarksUseCase> {
+        Factory(self) {
+            FetchBookmarksUseCaseImpl()
         }
     }
     
