@@ -42,41 +42,77 @@ extension Container {
         }
     }
     
-    //MARK: - Service
+    //MARK: - UseCases
     
-    var bookmarkService: Factory<BookmarkService> {
+    var fetchNoticeUseCase: Factory<FetchNoticesUseCase> {
         Factory(self) {
-            BookmarkServiceImpl()
+            FetchNoticesUseCaseImpl()
         }
     }
     
-    var pushNoticeService: Factory<DeepLinkService> {
+    var fetchTopThreeNoticesUseCase: Factory<FetchTopThreeNoticesUseCase> {
         Factory(self) {
-            DeepLinkServiceImpl()
+            FetchTopThreeNoticesUseCaseImpl(repository: Container.shared.noticeRepository())
         }
     }
     
-    var searchService: Factory<SearchService> {
+    var searchNoticesUseCase: Factory<SearchNoticesUseCase> {
         Factory(self) {
-            SearchServiceImpl()
+            SearchNoticesUseCaseImpl()
         }
     }
     
-    var fcmTokenService: Factory<FCMTokenService> {
+    var searchBookmarksUseCase: Factory<SearchBookmarksUseCase> {
         Factory(self) {
-            FCMTokenServiceImpl()
+            SearchBookmarksUseCaseImpl()
         }
     }
     
-    var noticeService: Factory<NoticeService> {
+    var searchNoticeAndBookmarkUseCase: Factory<SearchNoticeAndBookmarkUseCase> {
         Factory(self) {
-            NoticeServiceImpl()
+            SearchNoticeAndBookmarkUseCaseImpl()
         }
     }
     
-    var fetchNoticeUseCase: Factory<FetchNoticeUseCase> {
+    var registerFCMTokenUseCase: Factory<RegisterFCMTokenUseCase> {
         Factory(self) {
-            FetchNoticeUseCaseImpl()
+            RegisterFCMTokenUseCaseImpl()
+        }
+    }
+    
+    var fetchStoredDeepLinkUseCase: Factory<FetchStoredDeepLinkUseCase> {
+        Factory(self) {
+            FetchStoredDeepLinkUseCaseImpl()
+        }
+    }
+    
+    var saveBookmarkUseCase: Factory<SaveBookmarkUseCase> {
+        Factory(self) {
+            SaveBookmarkUseCaseImpl()
+        }
+    }
+    
+    var deleteBookmarkUseCase: Factory<DeleteBookmarkUseCase> {
+        Factory(self) {
+            DeleteBookmarkUseCaseImpl()
+        }
+    }
+    
+    var refreshBookmarkAfterDeletionUseCase: Factory<RefreshBookmarkAfterDeletionUseCase> {
+        Factory(self) {
+            RefreshBookmarkAfterDeletionUseCaseImpl()
+        }
+    }
+    
+    var updateBookmarkUseCase: Factory<UpdateBookmarkUseCase> {
+        Factory(self) {
+            UpdateBookmarkUseCaseImpl()
+        }
+    }
+    
+    var fetchBookmarksUseCase: Factory<FetchBookmarksUseCase> {
+        Factory(self) {
+            FetchBookmarksUseCaseImpl()
         }
     }
     

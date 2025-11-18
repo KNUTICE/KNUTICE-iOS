@@ -24,14 +24,14 @@ final class TabBarViewModel: BookmarkSortOptionProvidable {
         self.category = category
     }
     
-    @Injected(\.pushNoticeService) private var service: DeepLinkService
+    @Injected(\.fetchStoredDeepLinkUseCase) private var fetchStoredDeepLinkUseCase
     private let logger: Logger = Logger()
     private(set) var task: Task<Void, Never>?
     
     func fetchDeepLinkIfExists() {
         task = Task {
             do {
-                self.deepLink = try await service.fetchDeepLink()
+                self.deepLink = try await fetchStoredDeepLinkUseCase.execute()
             } catch {
                 logger.error("TabBarViewModel.fetchPushNotice() error: \(error)")
             }

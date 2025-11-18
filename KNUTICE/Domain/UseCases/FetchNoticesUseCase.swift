@@ -1,5 +1,5 @@
 //
-//  FetchNoticeUseCase.swift
+//  FetchNoticesUseCase.swift
 //  KNUTICE
 //
 //  Created by 이정훈 on 10/1/25.
@@ -10,38 +10,35 @@ import Factory
 import Foundation
 import KNUTICECore
 
-protocol FetchNoticeUseCase: Actor {
-    /// Executes a notice fetch request and updates topic subscription status
-    /// when the selected category is a `MajorCategory`.
+protocol FetchNoticesUseCase: Actor {
+    /// Fetches notices for the specified category and updates related user settings if necessary.
+    ///
+    /// This method performs the following tasks:
+    /// - Checks for task cancellation.
+    /// - If the category is a `MajorCategory` and the user has enabled major notifications,
+    ///   updates the user’s subscription information accordingly.
+    /// - Updates the user’s selected major category in `UserDefaults`.
+    /// - Fetches notice data from the server for the specified category.
     ///
     /// - Parameters:
-    ///   - category: The category of notices to fetch. Must conform to
-    ///     `RawRepresentable & Sendable` with a `String` raw value.
-    ///   - nttId: The reference notice ID to fetch notices after. Pass `nil`
-    ///     to fetch from the beginning.
+    ///   - category: The notice category to fetch, conforming to `CategoryProtocol`.
+    ///   - nttId: The ID of the last fetched notice, used for pagination. Pass `nil` to fetch the latest notices.
     /// - Returns: An array of `Notice` objects fetched from the server.
-    /// - Throws:
-    ///   - `CancellationError` if the task is cancelled.
-    ///   - Any error thrown during the network or repository operations.
-    /// - Note:
-    ///   - If the category is a `MajorCategory`, the method enables the new
-    ///     subscription and disables the previously stored one.
-    ///   - Updates the value of `UserDefaultsKeys.selectedMajor` with the
-    ///     newly selected category.
-    func execute<T>(category: T, after nttId: Int?) async throws -> [Notice] where T: RawRepresentable & Sendable, T.RawValue == String
+    /// - Throws: An error if the task is cancelled, the subscription update fails, or fetching notices from the repository fails.
+    func execute(category: some CategoryProtocol, after nttId: Int?) async throws -> [Notice]
 }
 
-extension FetchNoticeUseCase {
-    func execute<T>(category: T, after nttId: Int? = nil) async throws -> [Notice] where T: RawRepresentable & Sendable, T.RawValue == String {
+extension FetchNoticesUseCase {
+    func execute(category: some CategoryProtocol, after nttId: Int? = nil) async throws -> [Notice] {
         try await self.execute(category: category, after: nttId)
     }
 }
 
-actor FetchNoticeUseCaseImpl: FetchNoticeUseCase {
+actor FetchNoticesUseCaseImpl: FetchNoticesUseCase {
     @Injected(\.noticeRepository) private var noticeRepository
     @Injected(\.topicSubscriptionRepository) private var topicSubscriptionRepository
     
-    func execute<T>(category: T, after nttId: Int?) async throws -> [Notice] where T : RawRepresentable & Sendable, T.RawValue == String {
+    func execute(category: some CategoryProtocol, after nttId: Int?) async throws -> [Notice] {
         try Task.checkCancellation()
         
         // 서버에서 가져올 공지 데이터가 학과 소식이면서, 사용자가 학과 소식 알림을 허용한 경우

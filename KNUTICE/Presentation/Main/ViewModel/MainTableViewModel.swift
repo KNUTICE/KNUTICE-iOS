@@ -5,9 +5,11 @@
 //  Created by 이정훈 on 5/11/24.
 //
 
+import Combine
 import RxSwift
 import RxRelay
 import Factory
+import Foundation
 import os
 
 @MainActor
@@ -28,10 +30,11 @@ final class MainTableViewModel {
     }
     
     private let logger: Logger = Logger()
-    var task: Task<Void, Never>?
+    private var cancellables: Set<AnyCancellable> = []
     
-    @Injected(\.noticeService) private var noticeService
+    @Injected(\.fetchTopThreeNoticesUseCase) private var fetchTopThreeNoticesUseCase
     
+    // TODO: 스레드 스위칭 수정
     /// Fetches notices for the main view.
     ///
     /// This method first provides mock skeleton sections to update the UI immediately,
@@ -40,49 +43,32 @@ final class MainTableViewModel {
     ///
     /// - Note: Errors during fetching are logged but do not prevent the UI
     ///         from showing skeleton placeholders.
-    func fetchNotices() {
-        task = Task {
-            // Fetch mock data first (for skeleton loading state)
-            let mockSections = await noticeService.fetchMockNotices().map { $0.toSectionOfNotice }
-            notices.accept(mockSections)
-            
-            do {
-                // Fetch actual top 3 notices per category
-                let fetchedSections = try await noticeService.fetchTopThreeNotices().map { $0.toSectionOfNotice }
-                notices.accept(fetchedSections)
-            } catch {
-                logger.error("MainTableViewModel.fetchNoticesWithCombine() error : \(error.localizedDescription)")
-            }
-        }
+    func fetchNotices(isRefresh: Bool = false) {
+        if isRefresh { isLoading.accept(true) }
+        
+        fetchTopThreeNoticesUseCase.execute(isRefresh: isRefresh)
+            .map { notices in notices.map { $0.toSectionModel } }
+            .delay(for: isRefresh ? 0.5 : 0, scheduler: DispatchQueue.global())
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                if isRefresh { self?.isLoading.accept(false) }
+                
+                switch completion {
+                case .finished:
+                    self?.logger.info("MainTableViewModel.fetchNotices() completed successfully — notices fetched and updated.")
+                case .failure(let error):
+                    self?.logger.error("MainTableViewModel.fetchNotices() error : \(error.localizedDescription)")
+                }
+            }, receiveValue: { [weak self] notices in
+                self?.notices.accept(notices)
+            })
+            .store(in: &cancellables)
     }
     
-    /// Refreshes the notices for the main view.
-    ///
-    /// This method sets the `isLoading` state to true, waits for a short delay (0.5 seconds)
-    /// to simulate network latency or allow UI animations, then fetches the actual top three
-    /// notices per category. Once the fetch is complete, it updates the `notices` property
-    /// and resets the `isLoading` state.
-    ///
-    /// - Note: Any errors during fetching are logged but do not prevent `isLoading` from being reset.
-    func refreshNotices() {
-        isLoading.accept(true)
-        task = Task {
-            defer { isLoading.accept(false) }
-            
-            do {
-                try await Task.sleep(nanoseconds: 500_000_000)
-                
-                let fetchedSections = try await noticeService.fetchTopThreeNotices().map { $0.toSectionOfNotice }
-                notices.accept(fetchedSections)
-            } catch {
-                logger.error("MainTableViewModel.refreshNotices() error : \(error.localizedDescription)")
-            }
-        }
-    }
 }
 
 fileprivate extension MainSectionNotice {
-    var toSectionOfNotice: MainNoticeSectionModel {
+    var toSectionModel: MainNoticeSectionModel {
         MainNoticeSectionModel(
             header: self.header,
             items: self.items

@@ -43,7 +43,7 @@ extension UITabBarViewController {
         
         NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
             .sink(receiveValue: { [weak self] _ in
-                // FIXME: 중복 호출 문제 수정
+                // FIXME: 중복 호출 문제 수정, Cold Start에서는 호출되지 않음
                 self?.viewModel.fetchDeepLinkIfExists()
             })
             .store(in: &cancellables)
