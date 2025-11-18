@@ -19,8 +19,8 @@ final class MainTableViewModelTest: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
-        Container.shared.noticeRepository.register {
-            MockNoticeRepository()
+        Container.shared.fetchTopThreeNoticesUseCase.register {
+            FetchTopThreeNoticesUseCaseImpl(repository: MockNoticeRepository())
         }
         
         viewModel = Container.shared.mainViewModel()
@@ -37,8 +37,10 @@ final class MainTableViewModelTest: XCTestCase {
     func testFetchTopThreeNotices_ReturnNotices() {
         //Given
         let expectation = expectation(description: "fetch top three notices")
+        
         viewModel.noticesObservable
-            .skip(2)
+            .skip(1)
+            .take(1)
             .subscribe(onNext: {
                 //Then
                 XCTAssertEqual($0[0].items.count, 3)

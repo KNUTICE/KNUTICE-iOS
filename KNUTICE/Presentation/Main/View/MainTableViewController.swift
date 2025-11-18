@@ -50,12 +50,6 @@ final class MainTableViewController: UIViewController, FirstTabNavigationItemCon
         //API Call
         viewModel.fetchNotices()
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        viewModel.task?.cancel()
-    }
 
 }
 

@@ -95,6 +95,10 @@ final class UITabBarViewController: UITabBarController, NavigationItemConfigurab
         setUpTabBar()
         bind()
         
+        // UIApplication.willEnterForegroundNotification은 Cold Start에서 값을 전달하지 않기 때문에
+        // UITabBarViewController가 로드 될 때, 전달된 딥링크가 존재하는지 확인
+        viewModel.fetchDeepLinkIfExists()
+        
         if UIDevice.current.userInterfaceIdiom == .phone {
             setFirstTabNavigationItems()
         }
