@@ -18,7 +18,7 @@ protocol BookmarkPersistenceStore: Sendable {
     ///
     /// - Parameter bookmark: The `Bookmark` domain model to be saved.
     /// - Throws: An error if the context fails to save changes.
-    func save(_ bookmark: Bookmark) async throws
+    func save(_ dto: BookmarkDTO) async throws
     
     /// Fetches a paginated list of bookmarks from the persistent store.
     ///
@@ -106,7 +106,7 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
     
     // MARK: - Save
     
-    func save(_ bookmark: Bookmark) async throws {
+    func save(_ dto: BookmarkDTO) async throws {
         let context = backgroundContext
         
         try Task.checkCancellation()
@@ -114,19 +114,19 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
         try await context.perform(schedule: .enqueued) {
             // BookmarkEntity
             let bookmarkEntity = BookmarkEntity(context: context)
-            bookmarkEntity.memo = bookmark.memo
-            bookmarkEntity.alarmDate = bookmark.alarmDate
+            bookmarkEntity.memo = dto.memo
+            bookmarkEntity.alarmDate = dto.alarmDate
             bookmarkEntity.createdAt = Date()
             
             // NoticeEntity
             let noticeEntity = NoticeEntity(context: context)
-            noticeEntity.id = Int64(bookmark.notice.id)
-            noticeEntity.title = bookmark.notice.title
-            noticeEntity.department = bookmark.notice.department
-            noticeEntity.uploadDate = bookmark.notice.uploadDate
-            noticeEntity.contentUrl = bookmark.notice.contentUrl
-            noticeEntity.imageUrl = bookmark.notice.imageUrl
-            noticeEntity.category = bookmark.notice.noticeCategory?.rawValue ?? bookmark.notice.majorCategory?.rawValue
+            noticeEntity.id = Int64(dto.noticeData.nttID)
+            noticeEntity.title = dto.noticeData.title
+            noticeEntity.department = dto.noticeData.department
+            noticeEntity.uploadDate = dto.noticeData.registrationDate
+            noticeEntity.contentUrl = dto.noticeData.contentURL
+            noticeEntity.imageUrl = dto.noticeData.contentImageURL
+            noticeEntity.category = dto.noticeData.topic
             
             bookmarkEntity.bookmarkedNotice = noticeEntity
             
@@ -214,9 +214,9 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
     private func createBookmarkDTOs(from entities: [BookmarkEntity]) -> [BookmarkDTO] {
         entities.map {
             return BookmarkDTO(
-                notice: $0.bookmarkedNotice,
-                details: $0.memo,
-                alarmDate: $0.alarmDate
+                noticeData: $0.noticeData,
+                memo: $0.memo,
+                alarmData: $0.alarmDate
             )
         }
     }
@@ -300,4 +300,17 @@ fileprivate extension BookmarkSortOption {
 
 extension NSPredicate: @unchecked @retroactive Sendable {}
 extension NSSortDescriptor: @unchecked @retroactive Sendable {}
-extension BookmarkEntity: @unchecked Sendable {}
+extension BookmarkEntity: @unchecked Sendable {
+    var noticeData: NoticeData {
+        let noticeEntity = bookmarkedNotice
+        return NoticeData(
+            nttID: Int(noticeEntity?.id ?? 0),
+            title: noticeEntity?.title ?? "",
+            contentURL: noticeEntity?.contentUrl ?? "",
+            contentImageURL: noticeEntity?.imageUrl ?? "",
+            department: noticeEntity?.department ?? "",
+            registrationDate: noticeEntity?.uploadDate ?? "",
+            topic: noticeEntity?.category ?? ""
+        )
+    }
+}
