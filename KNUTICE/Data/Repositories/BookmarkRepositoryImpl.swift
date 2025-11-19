@@ -70,7 +70,7 @@ actor BookmarkRepositoryImpl: BookmarkRepository {
         return dto.flatMap { $0.asEntity }
     }
     
-    // MARK: Delete
+    // MARK: - Delete
     
     /// Deletes a bookmark by ID.
     /// No entity mapping is needed for delete operations.
