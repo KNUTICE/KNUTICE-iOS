@@ -32,7 +32,7 @@ extension Container {
     
     var bookmarkRepository: Factory<BookmarkRepository> {
         Factory(self) {
-            BookmarkRepositoryImpl()
+            BookmarkRepositoryImpl.shared
         }
     }
     
@@ -113,6 +113,12 @@ extension Container {
     var fetchBookmarksUseCase: Factory<FetchBookmarksUseCase> {
         Factory(self) {
             FetchBookmarksUseCaseImpl()
+        }
+    }
+    
+    var provideReloadEventPublisherUseCase: Factory<ProvideReloadEventPublisherUseCase> {
+        Factory(self) {
+            ProvideReloadEventPublisherUseCaseImpl()
         }
     }
     

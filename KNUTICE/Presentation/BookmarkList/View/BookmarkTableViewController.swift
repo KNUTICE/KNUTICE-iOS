@@ -38,6 +38,7 @@ final class BookmarkTableViewController: UIViewController {
         view.backgroundColor = .primaryBackground
         setUpLayout()
         bind()
+        viewModel.observePublisher()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
