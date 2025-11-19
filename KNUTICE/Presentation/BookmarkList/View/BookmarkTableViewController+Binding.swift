@@ -64,18 +64,6 @@ extension BookmarkTableViewController: ThirdTabNavigationItemConfigurable, Setti
             .bind(to: refreshController.rx.isRefreshing)
             .disposed(by: disposeBag)
         
-        NotificationCenter.default.rx.notification(.bookmarkRefresh)
-            .bind(with: self) { owner, _ in
-                owner.viewModel.reloadData()
-            }
-            .disposed(by: disposeBag)
-        
-        NotificationCenter.default.rx.notification(.bookmarkReload)
-            .bind(with: self) { owner, _ in
-                owner.viewModel.reloadData(preserveCount: true)
-            }
-            .disposed(by: disposeBag)
-        
         tableView.rx.willDisplayCell
             .subscribe(on: MainScheduler.instance)
             .bind(with: self) { owner, cell in

@@ -23,12 +23,28 @@ final class BookmarkTableViewModel: BookmarkSortOptionProvidable {
     }()
     
     @Injected(\.fetchBookmarksUseCase) private var fetchBookmarksUseCase
+    @Injected(\.provideReloadEventPublisherUseCase) private var provideReloadEventPublisherUseCase
     @Injected(\.refreshBookmarkAfterDeletionUseCase) private var refreshBookmarkAfterDeletionUseCase
     
     private(set) var fetchTask: Task<Void, Never>?
     private(set) var reloadTask: Task<Void, Never>?
     private(set) var deleteTask: Task<Void, Never>?
+    private var cancellables: Set<AnyCancellable> = []
     private let logger: Logger = Logger()
+    
+    func observePublisher() {
+        provideReloadEventPublisherUseCase.eventPublisher
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] event in
+                switch event {
+                case .normal:
+                    self?.reloadData()
+                case .preserveCount:
+                    self?.reloadData(preserveCount: true)
+                }
+            })
+            .store(in: &cancellables)
+    }
     
     func fetchBookmarks() {
         guard bookmarks.value.count % 20 == 0 else {

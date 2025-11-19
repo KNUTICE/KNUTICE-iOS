@@ -5,13 +5,34 @@
 //  Created by 이정훈 on 1/10/25.
 //
 
+@preconcurrency import Combine
 import Factory
 import Foundation
 import KNUTICECore
 import UserNotifications
 
 actor BookmarkRepositoryImpl: BookmarkRepository {
+    /// A public-facing publisher that emits `ReloadEvent` to notify observers
+    /// when bookmark data has been modified.
+    ///
+    /// Marked as `nonisolated` to avoid actor isolation constraints for
+    /// Combine pipelines on the main thread or background threads.
+    nonisolated var eventPublisher: AnyPublisher<ReloadEvent, Never> {
+        eventTrigger.eraseToAnyPublisher()
+    }
+    
+    /// Internal subject used to send reload events.
+    ///
+    /// This property is also `nonisolated` so Combine can interact with it
+    /// outside the actor’s isolation boundary.
+    private nonisolated let eventTrigger: PassthroughSubject<ReloadEvent, Never> = .init()
+    
+    /// Shared singleton instance providing a single source of truth.
+    static let shared: BookmarkRepositoryImpl = .init()
+    
     @Injected(\.bookmarkDataSource) private var dataSource
+    
+    private init() {}
     
     // MARK: - Create
     
@@ -30,6 +51,7 @@ actor BookmarkRepositoryImpl: BookmarkRepository {
         }
         
         try await dataSource.save(bookmark.asDTO)
+        eventTrigger.send(.normal)
     }
     
     // MARK: - Read
@@ -76,6 +98,7 @@ actor BookmarkRepositoryImpl: BookmarkRepository {
     /// No entity mapping is needed for delete operations.
     func delete(by id: Int) async throws {
         try await dataSource.delete(by: id)
+        eventTrigger.send(.normal)
     }
     
     // MARK: - Update
@@ -84,6 +107,7 @@ actor BookmarkRepositoryImpl: BookmarkRepository {
     /// Since updates involve domain rules, the domain entity is passed directly.
     func update(_ bookmark: Bookmark) async throws {
         try await dataSource.update(bookmark: bookmark)
+        eventTrigger.send(.preserveCount)
     }
     
     /// Updates the timestamp-related values of a bookmark record.
