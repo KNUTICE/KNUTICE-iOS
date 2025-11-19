@@ -25,30 +25,3 @@ protocol BookmarkRepository: Sendable {
     
     func fetch(id: Int) async throws -> Bookmark?
 }
-
-protocol BookmarkCreatable {
-    func createBookMark(from dto: BookmarkDTO) -> Bookmark?
-}
-
-extension BookmarkCreatable {
-    func createBookMark(from dto: BookmarkDTO) -> Bookmark? {
-        guard let noticeEntity = dto.notice else {
-            return nil
-        }
-        
-        return Bookmark(
-            notice: Notice(
-                id: Int(noticeEntity.id),
-                title: noticeEntity.title ?? "",
-                contentUrl: noticeEntity.contentUrl ?? "",
-                department: noticeEntity.department ?? "",
-                uploadDate: noticeEntity.uploadDate ?? "",
-                imageUrl: noticeEntity.imageUrl,
-                noticeCategory: NoticeCategory(rawValue: noticeEntity.category ?? ""),
-                majorCategory: MajorCategory(rawValue: noticeEntity.category ?? "")
-            ),
-            memo: dto.details ?? "",
-            alarmDate: dto.alarmDate
-        )
-    }
-}
