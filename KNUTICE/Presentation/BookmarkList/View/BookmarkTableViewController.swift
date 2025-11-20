@@ -21,7 +21,7 @@ final class BookmarkTableViewController: UIViewController {
         tableView.sectionHeaderHeight = 0
         tableView.delegate = self
         tableView.refreshControl = refreshController
-        tableView.register(BookmarkTableViewCell.self, forCellReuseIdentifier: BookmarkTableViewCell.reuseIdentifier)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: BookmarkListRow.reuseIdentifier)
         
         return tableView
     }()
