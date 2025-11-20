@@ -98,12 +98,6 @@ extension Container {
         }
     }
     
-    var refreshBookmarkAfterDeletionUseCase: Factory<RefreshBookmarkAfterDeletionUseCase> {
-        Factory(self) {
-            RefreshBookmarkAfterDeletionUseCaseImpl()
-        }
-    }
-    
     var updateBookmarkUseCase: Factory<UpdateBookmarkUseCase> {
         Factory(self) {
             UpdateBookmarkUseCaseImpl()
