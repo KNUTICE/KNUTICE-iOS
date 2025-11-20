@@ -8,6 +8,7 @@
 import KNUTICECore
 import UIKit
 
+@available(*, deprecated)
 final class BookmarkTableViewCell: UITableViewCell {
     static let reuseIdentifier = "BookmarkTableViewCell"
     let titleLabel: UILabel = {
