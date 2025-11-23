@@ -32,7 +32,7 @@ extension Container {
     
     var bookmarkRepository: Factory<BookmarkRepository> {
         Factory(self) {
-            BookmarkRepositoryImpl()
+            BookmarkRepositoryImpl.shared
         }
     }
     
@@ -98,12 +98,6 @@ extension Container {
         }
     }
     
-    var refreshBookmarkAfterDeletionUseCase: Factory<RefreshBookmarkAfterDeletionUseCase> {
-        Factory(self) {
-            RefreshBookmarkAfterDeletionUseCaseImpl()
-        }
-    }
-    
     var updateBookmarkUseCase: Factory<UpdateBookmarkUseCase> {
         Factory(self) {
             UpdateBookmarkUseCaseImpl()
@@ -113,6 +107,12 @@ extension Container {
     var fetchBookmarksUseCase: Factory<FetchBookmarksUseCase> {
         Factory(self) {
             FetchBookmarksUseCaseImpl()
+        }
+    }
+    
+    var provideReloadEventPublisherUseCase: Factory<ProvideReloadEventPublisherUseCase> {
+        Factory(self) {
+            ProvideReloadEventPublisherUseCaseImpl()
         }
     }
     
