@@ -91,7 +91,6 @@ struct BookmarkDetail: View {
         }
         .alert("알림", isPresented: $viewModel.isShowingAlert) {
             Button {
-                viewModel.sendRefreshNotification()
                 dismiss()
             } label: {
                 Text("확인")

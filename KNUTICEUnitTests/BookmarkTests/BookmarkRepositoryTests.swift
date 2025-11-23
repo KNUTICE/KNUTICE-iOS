@@ -14,7 +14,7 @@ struct BookmarkRepositoryTests {
     private var repository: BookmarkRepository
     
     init() {
-        repository = BookmarkRepositoryImpl()
+        repository = BookmarkRepositoryImpl.shared
     }
 
     @Test(arguments: [
