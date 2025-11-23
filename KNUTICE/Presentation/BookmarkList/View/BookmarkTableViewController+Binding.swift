@@ -13,11 +13,20 @@ import UIKit
 
 extension BookmarkTableViewController: ThirdTabNavigationItemConfigurable, SettingButtonConfigurable {
     func bind() {
+        bindTableView()
+        bindDeleteAction()
+        bindRefreshControl()
+        bindPagination()
+        bindSortOption()
+        bindSortOptionNotification()
+    }
+    
+    private func bindTableView() {
         let dataSource = RxTableViewSectionedAnimatedDataSource<BookmarkSectionModel>(
             animationConfiguration: AnimationConfiguration(deleteAnimation: .top)
         ) { data, tableView, indexPath, item in
-            let cell = tableView.dequeueReusableCell(withIdentifier: BookmarkTableViewCell.reuseIdentifier, for: indexPath) as! BookmarkTableViewCell
-            cell.configure(item)
+            let cell = tableView.dequeueReusableCell(withIdentifier: BookmarkListRow.reuseIdentifier, for: indexPath)
+            cell.contentConfiguration = UIHostingConfiguration { BookmarkListRow(bookmark: item) }
             
             return cell
         }
@@ -36,24 +45,32 @@ extension BookmarkTableViewController: ThirdTabNavigationItemConfigurable, Setti
             })
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
-        
+    }
+    
+    private func bindDeleteAction() {
         tableView.rx.itemDeleted
             .observe(on: MainScheduler.instance)
             .bind(with: self) { owner, indexPath in
                 let sections = owner.viewModel.bookmarks.value
                 let bookmark = sections[indexPath.section].items[0]
-                let alert = UIAlertController(title: "북마크를 삭제할까요?", message: bookmark.notice.title, preferredStyle: .alert)
-                let delete = UIAlertAction(title: "삭제", style: .destructive) { _ in
-                    owner.viewModel.delete(bookmark: bookmark)
-                }
-                let cancel = UIAlertAction(title: "취소", style: .default)
                 
-                alert.addAction(cancel)
-                alert.addAction(delete)
-                owner.present(alert, animated: true, completion: nil)
+                let alert = UIAlertController(
+                    title: "북마크를 삭제할까요?",
+                    message: bookmark.notice.title,
+                    preferredStyle: .alert
+                )
+                
+                alert.addAction(UIAlertAction(title: "취소", style: .default))
+                alert.addAction(UIAlertAction(title: "삭제", style: .destructive) { _ in
+                    owner.viewModel.delete(bookmark: bookmark)
+                })
+                
+                owner.present(alert, animated: true)
             }
             .disposed(by: disposeBag)
-        
+    }
+    
+    private func bindRefreshControl() {
         refreshController.rx.controlEvent(.valueChanged)
             .bind(with: self) { owner, _ in
                 owner.viewModel.reloadData()
@@ -63,19 +80,9 @@ extension BookmarkTableViewController: ThirdTabNavigationItemConfigurable, Setti
         viewModel.isRefreshing
             .bind(to: refreshController.rx.isRefreshing)
             .disposed(by: disposeBag)
-        
-        NotificationCenter.default.rx.notification(.bookmarkRefresh)
-            .bind(with: self) { owner, _ in
-                owner.viewModel.reloadData()
-            }
-            .disposed(by: disposeBag)
-        
-        NotificationCenter.default.rx.notification(.bookmarkReload)
-            .bind(with: self) { owner, _ in
-                owner.viewModel.reloadData(preserveCount: true)
-            }
-            .disposed(by: disposeBag)
-        
+    }
+    
+    private func bindPagination() {
         tableView.rx.willDisplayCell
             .subscribe(on: MainScheduler.instance)
             .bind(with: self) { owner, cell in
@@ -84,9 +91,11 @@ extension BookmarkTableViewController: ThirdTabNavigationItemConfigurable, Setti
                 }
             }
             .disposed(by: disposeBag)
-        
+    }
+    
+    private func bindSortOption() {
         viewModel.$bookmarkSortOption
-            .sink(receiveValue: { [weak self] value in
+            .sink { [weak self] value in
                 guard let self else { return }
                 
                 if UIDevice.current.userInterfaceIdiom == .pad {
@@ -96,17 +105,20 @@ extension BookmarkTableViewController: ThirdTabNavigationItemConfigurable, Setti
                         self.makeSortMenuButton(selectedOption: value)
                     ]
                 }
-                
-                viewModel.reloadData()
-            })
+                self.viewModel.reloadData()
+            }
             .store(in: &cancellables)
-        
-        NotificationCenter.default.publisher(for: Notification.Name.bookmarkSortOptionDidChange)
-            .sink(receiveValue: { [weak self] notification in
-                if let bookmarkSortOption = notification.userInfo?[UserInfoKeys.bookmarkSortOption.rawValue] as? BookmarkSortOption {
-                    self?.viewModel.bookmarkSortOption = bookmarkSortOption
-                }
-            })
+    }
+    
+    private func bindSortOptionNotification() {
+        NotificationCenter.default.publisher(for: .bookmarkSortOptionDidChange)
+            .sink { [weak self] notification in
+                guard
+                    let option = notification.userInfo?[UserInfoKeys.bookmarkSortOption.rawValue] as? BookmarkSortOption
+                else { return }
+                
+                self?.viewModel.bookmarkSortOption = option
+            }
             .store(in: &cancellables)
     }
     
