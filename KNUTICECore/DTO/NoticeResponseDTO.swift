@@ -18,7 +18,7 @@ public struct SingleNoticeResponseDTO: Decodable, Sendable {
     public let data: NoticeData?
 }
 
-// MARK: - Datum
+// MARK: - NoticeData
 public struct NoticeData: Decodable, Sendable {
     public let nttID: Int
     public let title: String
@@ -33,5 +33,15 @@ public struct NoticeData: Decodable, Sendable {
         case contentURL = "contentUrl"
         case contentImageURL = "contentImageUrl"
         case department, registrationDate, topic
+    }
+    
+    public init(nttID: Int, title: String, contentURL: String, contentImageURL: String?, department: String, registrationDate: String, topic: String) {
+        self.nttID = nttID
+        self.title = title
+        self.contentURL = contentURL
+        self.contentImageURL = contentImageURL
+        self.department = department
+        self.registrationDate = registrationDate
+        self.topic = topic
     }
 }

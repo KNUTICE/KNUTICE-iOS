@@ -11,7 +11,7 @@ import KNUTICECore
 import os
 
 @MainActor
-final class BookmarkViewModel: ObservableObject, BookmarkListRefreshable {
+final class BookmarkViewModel: ObservableObject {
     @Published var isAlarmOn: Bool
     @Published var isShowingAlert: Bool = false
     @Published var isLoading: Bool = false
