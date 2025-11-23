@@ -22,7 +22,7 @@ public actor FCMTokenManager {
     //MARK: - Methods
     
     public func updateToken() async throws {
-        guard let endpoint = Bundle.main.tokenURL else {
+        guard let endpoint = Bundle.standard.tokenURL else {
             throw NetworkError.invalidURL(message: "Invalid or missing 'Token_URL' in resource.")
         }
         
