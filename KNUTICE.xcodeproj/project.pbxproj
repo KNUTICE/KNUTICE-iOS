@@ -26,10 +26,6 @@
 		8E63D8652E6FC4550041E7C7 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8E63D8642E6FC4550041E7C7 /* RxSwift */; };
 		8E67CFFB2E9E0FAF005CBBA0 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
 		8E67CFFC2E9E0FAF005CBBA0 /* KNUTICECore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8E67CFFE2E9E1052005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; };
-		8E67CFFF2E9E1052005CBBA0 /* KNUTICEWidgetCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8E67D0022E9E1059005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; };
-		8E67D0032E9E1059005CBBA0 /* KNUTICEWidgetCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8E67D0062E9E1530005CBBA0 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
 		8E67D00A2E9E1530005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3C43792E66D8D900EA711B /* KNUTICEWidgetCore.framework */; };
 		8E67D00E2E9E15F3005CBBA0 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
@@ -83,20 +79,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8E1D8C262E682D6E00E8F0EC;
 			remoteInfo = "KNUTICEWidget-devExtension";
-		};
-		8E67D0002E9E1052005CBBA0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8E3C43782E66D8D900EA711B;
-			remoteInfo = KNUTICEWidgetCore;
-		};
-		8E67D0042E9E1059005CBBA0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5C8256362BE5CE1A0038D4C8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8E3C43782E66D8D900EA711B;
-			remoteInfo = KNUTICEWidgetCore;
 		};
 		8E67D0082E9E1530005CBBA0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -190,7 +172,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				8E67CFFC2E9E0FAF005CBBA0 /* KNUTICECore.framework in Embed Frameworks */,
-				8E67CFFF2E9E1052005CBBA0 /* KNUTICEWidgetCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,7 +193,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				8E8FC53E2E42F0FA002D560F /* KNUTICECore.framework in Embed Frameworks */,
-				8E67D0032E9E1059005CBBA0 /* KNUTICEWidgetCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,7 +364,6 @@
 				8E8FC53D2E42F0FA002D560F /* KNUTICECore.framework in Frameworks */,
 				8EC732242DD5A6660038AD59 /* Kingfisher in Frameworks */,
 				8EC42A812E67D69500F1FF11 /* FirebaseMessaging in Frameworks */,
-				8E67D0022E9E1059005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */,
 				8EC7322A2DD5A6A80038AD59 /* SnapKit in Frameworks */,
 				8EC732272DD5A6900038AD59 /* SkeletonView in Frameworks */,
 				8EC7321E2DD5A5DB0038AD59 /* RxDataSources in Frameworks */,
@@ -413,7 +392,6 @@
 				8E67CFFB2E9E0FAF005CBBA0 /* KNUTICECore.framework in Frameworks */,
 				8EC42A832E67D69E00F1FF11 /* FirebaseMessaging in Frameworks */,
 				8E72BCED2E430F3200107794 /* RxCocoa in Frameworks */,
-				8E67CFFE2E9E1052005CBBA0 /* KNUTICEWidgetCore.framework in Frameworks */,
 				8E72BCEF2E430F4400107794 /* RxSwift in Frameworks */,
 				8EC732392DD5A97E0038AD59 /* Kingfisher in Frameworks */,
 				8EC7323D2DD5A97E0038AD59 /* SnapKit in Frameworks */,
@@ -618,7 +596,6 @@
 				8EB6D2032C663627004E8AC2 /* PBXTargetDependency */,
 				8E8FC53C2E42F0FA002D560F /* PBXTargetDependency */,
 				8E1D70D62E4583E0007FD134 /* PBXTargetDependency */,
-				8E67D0052E9E1059005CBBA0 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				8E3FBF732E694EE80008425E /* ci_scripts */,
@@ -690,7 +667,6 @@
 			dependencies = (
 				8E6898312CD61EF1005F0EEA /* PBXTargetDependency */,
 				8E1D8C352E682D7000E8F0EC /* PBXTargetDependency */,
-				8E67D0012E9E1052005CBBA0 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				8E3FBF732E694EE80008425E /* ci_scripts */,
@@ -1083,16 +1059,6 @@
 			target = 8E1D8C262E682D6E00E8F0EC /* KNUTICEWidget-devExtension */;
 			targetProxy = 8E1D8C342E682D7000E8F0EC /* PBXContainerItemProxy */;
 		};
-		8E67D0012E9E1052005CBBA0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8E3C43782E66D8D900EA711B /* KNUTICEWidgetCore */;
-			targetProxy = 8E67D0002E9E1052005CBBA0 /* PBXContainerItemProxy */;
-		};
-		8E67D0052E9E1059005CBBA0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8E3C43782E66D8D900EA711B /* KNUTICEWidgetCore */;
-			targetProxy = 8E67D0042E9E1059005CBBA0 /* PBXContainerItemProxy */;
-		};
 		8E67D0092E9E1530005CBBA0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8E8FC5342E42F0FA002D560F /* KNUTICECore */;
@@ -1309,7 +1275,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.2;
+				MARKETING_VERSION = 1.6.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1349,7 +1315,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.2;
+				MARKETING_VERSION = 1.6.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1383,7 +1349,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.6.2;
+				MARKETING_VERSION = 1.6.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fx.KNUTICE.developer.KNUTICEWidget-dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1417,7 +1383,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.6.2;
+				MARKETING_VERSION = 1.6.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fx.KNUTICE.developer.KNUTICEWidget-dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1458,7 +1424,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.2;
+				MARKETING_VERSION = 1.6.3;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DDEV";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE.developer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1501,7 +1467,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.2;
+				MARKETING_VERSION = 1.6.3;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DDEV";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE.developer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1537,6 +1503,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
@@ -1577,6 +1544,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
@@ -1616,7 +1584,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.6.2;
+				MARKETING_VERSION = 1.6.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE.KNUTICEWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1649,7 +1617,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.6.2;
+				MARKETING_VERSION = 1.6.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE.KNUTICEWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1681,7 +1649,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.6.2;
+				MARKETING_VERSION = 1.6.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE.developer.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1714,7 +1682,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.6.2;
+				MARKETING_VERSION = 1.6.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE.developer.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1879,7 +1847,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.6.2;
+				MARKETING_VERSION = 1.6.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1911,7 +1879,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.6.2;
+				MARKETING_VERSION = 1.6.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fx.KNUTICE.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
