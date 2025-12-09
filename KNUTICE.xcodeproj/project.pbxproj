@@ -46,6 +46,8 @@
 		8E8FC5562E42F293002D560F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8E8FC5552E42F293002D560F /* Alamofire */; };
 		8E8FC5582E42F29C002D560F /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8E8FC5572E42F29C002D560F /* RxSwift */; };
 		8E8FC55F2E42F378002D560F /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 8E8FC55E2E42F378002D560F /* Factory */; };
+		8EA3F9ED2EE7AFA600C73BFF /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 8EA3F9EC2EE7AFA600C73BFF /* ComposableArchitecture */; };
+		8EA3F9EF2EE7AFBC00C73BFF /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 8EA3F9EE2EE7AFBC00C73BFF /* ComposableArchitecture */; };
 		8EB6D2042C663627004E8AC2 /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8EB6D1FD2C663627004E8AC2 /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8EB90A372E45D7D200B3AEF6 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 8EB90A362E45D7D200B3AEF6 /* Factory */; };
 		8EC42A812E67D69500F1FF11 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8EC42A802E67D69500F1FF11 /* FirebaseMessaging */; };
@@ -361,6 +363,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EA3F9ED2EE7AFA600C73BFF /* ComposableArchitecture in Frameworks */,
 				8E8FC53D2E42F0FA002D560F /* KNUTICECore.framework in Frameworks */,
 				8EC732242DD5A6660038AD59 /* Kingfisher in Frameworks */,
 				8EC42A812E67D69500F1FF11 /* FirebaseMessaging in Frameworks */,
@@ -389,6 +392,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EA3F9EF2EE7AFBC00C73BFF /* ComposableArchitecture in Frameworks */,
 				8E67CFFB2E9E0FAF005CBBA0 /* KNUTICECore.framework in Frameworks */,
 				8EC42A832E67D69E00F1FF11 /* FirebaseMessaging in Frameworks */,
 				8E72BCED2E430F3200107794 /* RxCocoa in Frameworks */,
@@ -893,6 +897,7 @@
 				8EC732282DD5A6A80038AD59 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				8E3C85802E41ECB30095852C /* XCRemoteSwiftPackageReference "RxSwift" */,
 				8ECCCD3E2EA7026200F24E0C /* XCRemoteSwiftPackageReference "SkeletonUI" */,
+				8EA3F9EB2EE7AFA600C73BFF /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			productRefGroup = 5C82563F2BE5CE1A0038D4C8 /* Products */;
 			projectDirPath = "";
@@ -1998,6 +2003,14 @@
 				minimumVersion = 6.9.0;
 			};
 		};
+		8EA3F9EB2EE7AFA600C73BFF /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.23.1;
+			};
+		};
 		8EC732162DD5A5B00038AD59 /* XCRemoteSwiftPackageReference "Factory" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmlongco/Factory";
@@ -2154,6 +2167,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8EC732162DD5A5B00038AD59 /* XCRemoteSwiftPackageReference "Factory" */;
 			productName = Factory;
+		};
+		8EA3F9EC2EE7AFA600C73BFF /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8EA3F9EB2EE7AFA600C73BFF /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		8EA3F9EE2EE7AFBC00C73BFF /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8EA3F9EB2EE7AFA600C73BFF /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
 		};
 		8EB90A362E45D7D200B3AEF6 /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;
