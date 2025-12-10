@@ -51,12 +51,20 @@ struct TopicSubscriptionList: View {
                     
                     Section {
                         Toggle(
-                            "학과소식",
                             isOn: ViewStore(store, observe: { $0 }).binding(
                                 get: { $0.isMajorNoticeNotificationSubscribed },
                                 send: { .toggleMajor($0) }
                             )
-                        )
+                        ) {
+                            ToggleCaption(
+                                title: "학과소식",
+                                caption: """
+                                    각 학과의 최신 소식을 알려드려요.
+                                    알림 받을 학과를 변경하려면 두 번째 탭에서 원하는 학과를 선택해주세요.
+                                    """
+                            )
+                        }
+                        .tint(.accent2)
                     }
                 }
                 
@@ -111,6 +119,7 @@ struct TopicSubscriptionList: View {
             ) {
                 ToggleCaption(title: title, caption: caption)
             }
+            .tint(.accent2)
         }
     }
 }
