@@ -21,6 +21,7 @@ struct TopicSubscriptionListFeature: Reducer {
     }
     
     // MARK: - Action
+    @CasePathable
     enum Action {
         case onAppear
         case onDisappear
@@ -35,6 +36,7 @@ struct TopicSubscriptionListFeature: Reducer {
         case setLoading(Bool)
         case showAlert(String)
         case showFCMTokenErrorAlert(Bool)
+        case setMajorNotificationSubscribed(Bool)
     }
     
     // MARK: - Dependency
@@ -47,15 +49,17 @@ struct TopicSubscriptionListFeature: Reducer {
         switch action {
         case .onAppear:
             // 서버에서 공지 구독 목록을 가져오는 비동기 네트워크 요청 시작
-            state.isLoading = true
-            
             return .run { send in
+                await send(.setLoading(true))
+                
                 do {
                     let list = try await repository.fetch(for: .notice)
                     await send(.subscriptionsResponse(.success(list)))
                 } catch {
                     await send(.subscriptionsResponse(.failure(error)))
                 }
+                
+                await send(.setLoading(false))
             }
             .cancellable(id: CancelID.fetch, cancelInFlight: true)
             
@@ -65,25 +69,20 @@ struct TopicSubscriptionListFeature: Reducer {
             
         case .subscriptionsResponse(.success(let subscriptions)):
             // 서버에서 받은 구독 결과를 UI 상태(State)에 반영
-            state.isLoading = false
-            
             for subscription in subscriptions {
                 if case .notice(let topic) = subscription {
                     state.noticeSubscriptionStates[topic] = true
                 }
             }
             
-            let isSubscribed = UserDefaults.standard.bool(
+            state.isMajorNoticeNotificationSubscribed = UserDefaults.standard.bool(
                 forKey: UserDefaultsKeys.isMajorNotificationSubscribed.rawValue
             )
-            state.isMajorNoticeNotificationSubscribed = isSubscribed
             
             return .none
             
         case .subscriptionsResponse(.failure(let error)):
             // 네트워크 실패를 Alert 또는 FCM 오류 상태로 변환하여 UI에 전달
-            state.isLoading = false
-            
             if let afError = error.asAFError,
                case .requestAdaptationFailed(let underlying) = afError,
                underlying is KNUTICECore.TokenError {
@@ -98,20 +97,21 @@ struct TopicSubscriptionListFeature: Reducer {
             
         case .toggleNotice(let topic, let isEnabled):
             // 공지 구독 상태 변경을 서버에 반영하는 비동기 업데이트 요청 수행
-            state.isLoading = true
-            
             return .run { send in
+                await send(.setLoading(true))
+                
                 do {
                     try await repository.update(
                         of: .notice,
                         topic: topic,
                         isEnabled: isEnabled
                     )
-                    await send(.setLoading(false))
                     await send(.toggleNoticeState(topic, isEnabled))
                 } catch {
                     await send(.showAlert("알림 상태를 변경할 수 없어요."))
                 }
+                
+                await send(.setLoading(false))
             }
             .cancellable(id: CancelID.update, cancelInFlight: true)
             
@@ -122,20 +122,21 @@ struct TopicSubscriptionListFeature: Reducer {
             
         case let .toggleMajor(isEnabled):
             // 학과 구독 상태를 서버에 저장하는 비동기 네트워크 요청 수행
-            state.isLoading = true
-            
             return .run { send in
-                if let majorStr = UserDefaults.standard.string(forKey: UserDefaultsKeys.selectedMajor.rawValue),
+                await send(.setLoading(true))
+                
+                if let majorStr = UserDefaults.shared?.string(forKey: UserDefaultsKeys.selectedMajor.rawValue),
                    let major = MajorCategory(rawValue: majorStr) {
                     try await repository.update(
                         of: .major,
                         topic: major,
                         isEnabled: isEnabled
                     )
+                    await send(.toggleMajorState(isEnabled))
+                    await send(.setMajorNotificationSubscribed(isEnabled))
                 }
                 
                 await send(.setLoading(false))
-                await send(.toggleMajorState(isEnabled))
             }
             .cancellable(id: CancelID.update, cancelInFlight: true)
             
@@ -157,6 +158,10 @@ struct TopicSubscriptionListFeature: Reducer {
         case .showFCMTokenErrorAlert(let value):
             // FCM 토큰 오류 발생 여부를 Alert 상태로 제어
             state.isShowingFCMTokenErrorAlert = value
+            return .none
+            
+        case let .setMajorNotificationSubscribed(isEnabled):
+            UserDefaults.standard.set(isEnabled, forKey: UserDefaultsKeys.isMajorNotificationSubscribed.rawValue)
             return .none
         }
     }
