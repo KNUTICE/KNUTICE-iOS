@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum TopicType: String {
+public enum TopicType: String, Sendable {
     case notice
     case major
     case meal

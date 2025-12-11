@@ -44,7 +44,7 @@ actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
         }
     }
     
-    func update<T>(of type: TopicType, topic: T, isEnabled: Bool) async throws where T: RawRepresentable, T.RawValue == String {
+    func update(of type: TopicType, topic: any CategoryProtocol, isEnabled: Bool) async throws {
         try Task.checkCancellation()
         
         guard let baseURL = Bundle.main.topicSubscriptionURL else {
