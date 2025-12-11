@@ -40,7 +40,8 @@ struct TopicSubscriptionListFeature: Reducer {
     }
     
     // MARK: - Dependency
-    @Dependency(\.topicSubscriptionRepository) var repository
+    @Dependency(\.fetchTopicSubscriptionUseCase) var fetchTopicSubscriptionUseCase
+    @Dependency(\.updateTopicSubscriptionUseCase) var updateTopicSubscriptionUseCase
     
     enum CancelID { case fetch, update }
     
@@ -53,7 +54,7 @@ struct TopicSubscriptionListFeature: Reducer {
                 await send(.setLoading(true))
                 
                 do {
-                    let list = try await repository.fetch(for: .notice)
+                    let list = try await fetchTopicSubscriptionUseCase.execute(for: .notice)
                     await send(.subscriptionsResponse(.success(list)))
                 } catch {
                     await send(.subscriptionsResponse(.failure(error)))
@@ -101,7 +102,7 @@ struct TopicSubscriptionListFeature: Reducer {
                 await send(.setLoading(true))
                 
                 do {
-                    try await repository.update(
+                    try await updateTopicSubscriptionUseCase.execute(
                         of: .notice,
                         topic: topic,
                         isEnabled: isEnabled
@@ -127,7 +128,7 @@ struct TopicSubscriptionListFeature: Reducer {
                 
                 if let majorStr = UserDefaults.shared?.string(forKey: UserDefaultsKeys.selectedMajor.rawValue),
                    let major = MajorCategory(rawValue: majorStr) {
-                    try await repository.update(
+                    try await updateTopicSubscriptionUseCase.execute(
                         of: .major,
                         topic: major,
                         isEnabled: isEnabled

@@ -8,13 +8,22 @@
 import ComposableArchitecture
 import Foundation
 
-extension DependencyValues {
-    var topicSubscriptionRepository: TopicSubscriptionRepository {
-        get { self[TopicSubscriptionRepositoryKey.self] }
-        set { self[TopicSubscriptionRepositoryKey.self] = newValue }
+extension DependencyValues {    
+    var fetchTopicSubscriptionUseCase: FetchTopicSubscriptionsUseCase {
+        get { self[FetchTopicSubscriptionUseCaseKey.self] }
+        set { self[FetchTopicSubscriptionUseCaseKey.self] = newValue }
+    }
+    
+    var updateTopicSubscriptionUseCase: UpdateTopicSubscriptionUseCase {
+        get { self[UpdateTopicSubscriptionUseCaseKey.self] }
+        set { self[UpdateTopicSubscriptionUseCaseKey.self] = newValue }
     }
 }
 
-private enum TopicSubscriptionRepositoryKey: DependencyKey {
-    static let liveValue: TopicSubscriptionRepository = TopicSubscriptionRepositoryImpl()
+fileprivate enum FetchTopicSubscriptionUseCaseKey: DependencyKey {
+    static let liveValue: FetchTopicSubscriptionsUseCase = FetchTopicSubscriptionsUseCaseImpl()
+}
+
+fileprivate enum UpdateTopicSubscriptionUseCaseKey: DependencyKey {
+    static let liveValue: UpdateTopicSubscriptionUseCase = UpdateTopicSubscriptionUseCaseImpl()
 }
