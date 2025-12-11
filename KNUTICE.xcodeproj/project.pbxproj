@@ -22,8 +22,6 @@
 		8E49FA352E69CCA800C5949C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E49FA322E69CCA800C5949C /* LaunchScreen.storyboard */; };
 		8E49FA842E69CCA800C5949C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E49FA322E69CCA800C5949C /* LaunchScreen.storyboard */; };
 		8E63D8612E6FC4460041E7C7 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 8E63D8602E6FC4460041E7C7 /* Factory */; };
-		8E63D8632E6FC4550041E7C7 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 8E63D8622E6FC4550041E7C7 /* RxRelay */; };
-		8E63D8652E6FC4550041E7C7 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8E63D8642E6FC4550041E7C7 /* RxSwift */; };
 		8E67CFFB2E9E0FAF005CBBA0 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
 		8E67CFFC2E9E0FAF005CBBA0 /* KNUTICECore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8E67D0062E9E1530005CBBA0 /* KNUTICECore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8FC5352E42F0FA002D560F /* KNUTICECore.framework */; };
@@ -48,6 +46,8 @@
 		8E8FC55F2E42F378002D560F /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 8E8FC55E2E42F378002D560F /* Factory */; };
 		8EA3F9ED2EE7AFA600C73BFF /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 8EA3F9EC2EE7AFA600C73BFF /* ComposableArchitecture */; };
 		8EA3F9EF2EE7AFBC00C73BFF /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 8EA3F9EE2EE7AFBC00C73BFF /* ComposableArchitecture */; };
+		8EA3FA0E2EE8FEB000C73BFF /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8EA3FA0D2EE8FEB000C73BFF /* RxSwift */; };
+		8EA3FA102EE8FF3C00C73BFF /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 8EA3FA0F2EE8FF3C00C73BFF /* RxCocoa */; };
 		8EB6D2042C663627004E8AC2 /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8EB6D1FD2C663627004E8AC2 /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8EB90A372E45D7D200B3AEF6 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 8EB90A362E45D7D200B3AEF6 /* Factory */; };
 		8EC42A812E67D69500F1FF11 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8EC42A802E67D69500F1FF11 /* FirebaseMessaging */; };
@@ -442,8 +442,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E63D8652E6FC4550041E7C7 /* RxSwift in Frameworks */,
-				8E63D8632E6FC4550041E7C7 /* RxRelay in Frameworks */,
+				8EA3FA102EE8FF3C00C73BFF /* RxCocoa in Frameworks */,
+				8EA3FA0E2EE8FEB000C73BFF /* RxSwift in Frameworks */,
 				8E63D8612E6FC4460041E7C7 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2108,16 +2108,6 @@
 			package = 8EC732162DD5A5B00038AD59 /* XCRemoteSwiftPackageReference "Factory" */;
 			productName = Factory;
 		};
-		8E63D8622E6FC4550041E7C7 /* RxRelay */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8E3C85802E41ECB30095852C /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxRelay;
-		};
-		8E63D8642E6FC4550041E7C7 /* RxSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8E3C85802E41ECB30095852C /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxSwift;
-		};
 		8E72BCE22E4305CA00107794 /* RxDataSources */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8EC7321C2DD5A5DB0038AD59 /* XCRemoteSwiftPackageReference "RxDataSources" */;
@@ -2177,6 +2167,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8EA3F9EB2EE7AFA600C73BFF /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		8EA3FA0D2EE8FEB000C73BFF /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E3C85802E41ECB30095852C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		8EA3FA0F2EE8FF3C00C73BFF /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E3C85802E41ECB30095852C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
 		};
 		8EB90A362E45D7D200B3AEF6 /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;
