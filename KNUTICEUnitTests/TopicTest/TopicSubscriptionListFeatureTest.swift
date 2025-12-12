@@ -18,7 +18,8 @@ final class TopicSubscriptionListFeatureTests: XCTestCase {
         ) {
             TopicSubscriptionListFeature()
         } withDependencies: {
-            $0.topicSubscriptionRepository = MockTopicSubscriptionRepository()
+            $0.fetchTopicSubscriptionUseCase = MockFetchTopicSubscriptionUseCase()
+            $0.updateTopicSubscriptionUseCase = MockUpdateTopicSubscriptionUseCase()
         }
     }
 
