@@ -18,6 +18,11 @@ extension DependencyValues {
         get { self[UpdateTopicSubscriptionUseCaseKey.self] }
         set { self[UpdateTopicSubscriptionUseCaseKey.self] = newValue }
     }
+    
+    var submitReportUseCase: SubmitReportUseCase {
+        get { self[SubmitReportUseCaseKey.self] }
+        set { self[SubmitReportUseCaseKey.self] = newValue }
+    }
 }
 
 fileprivate enum FetchTopicSubscriptionUseCaseKey: DependencyKey {
@@ -26,4 +31,8 @@ fileprivate enum FetchTopicSubscriptionUseCaseKey: DependencyKey {
 
 fileprivate enum UpdateTopicSubscriptionUseCaseKey: DependencyKey {
     static let liveValue: UpdateTopicSubscriptionUseCase = UpdateTopicSubscriptionUseCaseImpl()
+}
+
+fileprivate enum SubmitReportUseCaseKey: DependencyKey {
+    static let liveValue: SubmitReportUseCase = SubmitReportUseCaseImpl()
 }

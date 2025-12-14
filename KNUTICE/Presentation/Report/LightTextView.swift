@@ -49,6 +49,7 @@ struct LightTextView: UIViewRepresentable {
     
     class Coordinator: NSObject, UITextViewDelegate {
         private var parent: LightTextView
+        private let characterLimit = 500
         
         init(parent: LightTextView) {
             self.parent = parent
@@ -56,6 +57,20 @@ struct LightTextView: UIViewRepresentable {
         
         func textViewDidChange(_ textView: UITextView) {
             parent.text = textView.text
+        }
+        
+        func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+            // 현재 텍스트 가져오기
+            let currentText = textView.text ?? ""
+            
+            // 변경하려는 범위(NSRange)를 Swift의 Range로 변환
+            guard let stringRange = Range(range, in: currentText) else { return false }
+            
+            // 변경 후의 텍스트가 어떻게 될지 미리 계산
+            let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
+            
+            // 계산된 텍스트가 제한 글자 수 이하일 때만 true 반환 (입력 허용)
+            return updatedText.count <= characterLimit
         }
         
         @objc func doneButtonTapped() {

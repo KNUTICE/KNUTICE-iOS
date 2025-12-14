@@ -68,7 +68,11 @@ struct SettingView: View {
         .navigationBarTitleDisplayMode(.inline)
         .fullScreenCover(isPresented: $isShowingReport) {
             NavigationView {
-                ReportView(viewModel: Container.shared.reportViewModel())
+                ReportView(
+                    store: Store(initialState: ReportFeature.State()) {
+                        ReportFeature()
+                    }
+                )
             }
         }
     }

@@ -123,12 +123,6 @@ extension Container {
         }
     }
     
-    var reportViewModel: Factory<ReportViewModel> {
-        Factory(self) {
-            ReportViewModel()
-        }
-    }
-    
     var searchCollectionViewModel: Factory<SearchViewModel> {
         Factory(self) { @MainActor in
             SearchViewModel()
