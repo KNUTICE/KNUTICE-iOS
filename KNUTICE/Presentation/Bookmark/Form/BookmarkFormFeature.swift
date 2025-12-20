@@ -68,7 +68,7 @@ struct BookmarkFormFeature {
                 
             case .cancelButtonTapped:
                 if case .update = state.formType {
-                    return .send(.delegate(.cancel))
+                    return .send(.delegate(.switchToDetailMode))
                 } else {
                     state.shouldDismiss = true
                     return .none
