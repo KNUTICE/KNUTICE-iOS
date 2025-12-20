@@ -20,9 +20,8 @@ extension UITabBarViewController {
                 
                 switch deepLink {
                 case .bookmark(let nttId):
-                    viewController = UIHostingController(
-                        rootView: BookmarkDetailSwitchView(viewModel: BookmarkViewModel(nttId: nttId))
-                    )
+                    //TODO: nttId를 통해 북마크 View 이동 개발
+                    return
                 case .meal:
                     // TODO: 학식 알림 딥링크 구현
                     return

@@ -23,6 +23,21 @@ extension DependencyValues {
         get { self[SubmitReportUseCaseKey.self] }
         set { self[SubmitReportUseCaseKey.self] = newValue }
     }
+    
+    var deleteBookmarkUseCase: DeleteBookmarkUseCase {
+        get { self[DeleteBookmarkUseCaseKey.self] }
+        set { self[DeleteBookmarkUseCaseKey.self] = newValue }
+    }
+    
+    var saveBookmarkUseCase: SaveBookmarkUseCase {
+        get { self[SaveBookmarkUseCaseKey.self] }
+        set { self[SaveBookmarkUseCaseKey.self] = newValue }
+    }
+    
+    var updateBookmarkUseCase: UpdateBookmarkUseCase {
+        get { self[UpdateBookmarkUseCaseKey.self] }
+        set { self[UpdateBookmarkUseCaseKey.self] = newValue }
+    }
 }
 
 fileprivate enum FetchTopicSubscriptionUseCaseKey: DependencyKey {
@@ -35,4 +50,16 @@ fileprivate enum UpdateTopicSubscriptionUseCaseKey: DependencyKey {
 
 fileprivate enum SubmitReportUseCaseKey: DependencyKey {
     static let liveValue: SubmitReportUseCase = SubmitReportUseCaseImpl()
+}
+
+fileprivate enum DeleteBookmarkUseCaseKey: DependencyKey {
+    static let liveValue: DeleteBookmarkUseCase = DeleteBookmarkUseCaseImpl()
+}
+
+fileprivate enum SaveBookmarkUseCaseKey: DependencyKey {
+    static let liveValue: SaveBookmarkUseCase = SaveBookmarkUseCaseImpl()
+}
+
+fileprivate enum UpdateBookmarkUseCaseKey: DependencyKey {
+    static let liveValue: UpdateBookmarkUseCase = UpdateBookmarkUseCaseImpl()
 }
