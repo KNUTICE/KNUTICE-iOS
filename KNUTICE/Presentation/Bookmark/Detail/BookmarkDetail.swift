@@ -5,31 +5,27 @@
 //  Created by 이정훈 on 1/10/25.
 //
 
+import ComposableArchitecture
 import KNUTICECore
 import SwiftUI
 
 struct BookmarkDetail: View {
-    @EnvironmentObject private var viewModel: BookmarkViewModel
-    @Environment(\.dismiss) private var dismiss
-    @State private var isShowingWebView: Bool = false
-    @Binding private var selectedMode: BookmarkDetailSwitchView.BookmarkViewMode
+    @Perception.Bindable var store: StoreOf<BookmarkDetailFeature>
     
-    init(selectedMode: Binding<BookmarkDetailSwitchView.BookmarkViewMode>) {
-        _selectedMode = selectedMode
-    }
+    let dismissAction: () -> Void
     
     var body: some View {
-        ZStack {
-            if let bookmark = viewModel.bookmark {
+        WithPerceptionTracking {
+            ZStack {
                 ScrollView {
-                    NoticeHeader(notice: bookmark.notice)
+                    NoticeHeader(notice: store.bookmark.notice)
                     
-                    AlarmDetail(alarmDate: bookmark.alarmDate)
+                    AlarmDetail(alarmDate: store.bookmark.alarmDate)
                     
-                    UserMemoDetail(userMemo: bookmark.memo)
+                    UserMemoDetail(userMemo: store.bookmark.memo)
                     
                     Button {
-                        isShowingWebView = true
+                        store.send(.toggleWebView(true))
                     } label: {
                         Text("공지사항 이동")
                             .padding([.top, .bottom])
@@ -46,9 +42,7 @@ struct BookmarkDetail: View {
                         Menu {
                             Section {
                                 Button {
-                                    withAnimation(.easeInOut) {
-                                        selectedMode = .editView
-                                    }
+                                    store.send(.editButtonTapped)
                                 } label: {
                                     Text("수정")
                                 }
@@ -56,7 +50,7 @@ struct BookmarkDetail: View {
                             
                             Section {
                                 Button(role: .destructive) {
-                                    viewModel.delete()
+                                    store.send(.deleteButtonTapped)
                                 } label: {
                                     Text("삭제")
                                         .foregroundStyle(.red)
@@ -67,15 +61,15 @@ struct BookmarkDetail: View {
                         }
                     }
                 }
-                .fullScreenCover(isPresented: $isShowingWebView) {
+                .fullScreenCover(isPresented: $store.isShowingWebView) {
                     NavigationStack {
-                        NoticeContentView(notice: bookmark.notice)
+                        NoticeContentView(notice: store.bookmark.notice)
                             .edgesIgnoringSafeArea(.bottom)
                             .background(.detailViewBackground)
                             .toolbar {
                                 ToolbarItem(placement: .topBarLeading) {
                                     Button {
-                                        isShowingWebView = false
+                                        store.send(.toggleWebView(false))
                                     } label: {
                                         Image(systemName: "xmark")
                                     }
@@ -83,29 +77,10 @@ struct BookmarkDetail: View {
                             }
                     }
                 }
-            }
-            
-            if viewModel.isLoading {
-                SpinningIndicator()
-            }
-        }
-        .alert("알림", isPresented: $viewModel.isShowingAlert) {
-            Button {
-                dismiss()
-            } label: {
-                Text("확인")
-            }
-        } message: {
-            Text(viewModel.alertMessage)
-        }
-        .onDisappear {
-            viewModel.saveTask?.cancel()
-            viewModel.deleteTask?.cancel()
-            viewModel.updateTask?.cancel()
-        }
-        .task {
-            if viewModel.bookmark == nil {
-                await viewModel.fetchBookmark()
+                .alert($store.scope(state: \.alert, action: \.alert))
+                .onChange(of: store.shouldDismiss) { shouldDismiss in
+                    if shouldDismiss { dismissAction() }
+                }
             }
         }
     }
@@ -156,8 +131,13 @@ fileprivate struct UserMemoDetail: View {
 #if DEBUG
 #Preview {
     NavigationStack {
-        BookmarkDetail(selectedMode: .constant(.detailView))
-            .environmentObject(BookmarkViewModel(bookmark: Bookmark.sample))
+        BookmarkDetail(
+            store: Store(initialState: BookmarkDetailFeature.State(bookmark: Bookmark.sample)) {
+                BookmarkDetailFeature()
+            }
+        ) {
+            // Something to do
+        }
     }
 }
 #endif
