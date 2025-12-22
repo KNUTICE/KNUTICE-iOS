@@ -20,41 +20,38 @@ struct BookmarkForm: View {
                 
                 AlarmPickerContainerView(
                     isAlarmOn: $store.isAlarmOn,
-                    alarmDate: Binding(
-                        get: { store.bookmark.alarmDate ?? Date() },
-                        set: { store.bookmark.alarmDate = $0 }
-                    )
+                    alarmDate: $store.bookmark.alarmDate
                 )
                 
                 TextFieldContainerView(memo: $store.bookmark.memo)
             }
-        }
-        .navigationTitle("북마크")
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden()
-        .background(.primaryBackground)
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    store.send(.cancelButtonTapped)
-                } label: {
-                    Text("취소")
+            .navigationTitle("북마크")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden()
+            .background(.primaryBackground)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        store.send(.cancelButtonTapped)
+                    } label: {
+                        Text("취소")
+                    }
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        store.send(.saveButtonTapped)
+                    } label: {
+                        Text("저장")
+                    }
+                    .foregroundStyle(.accent2)
                 }
             }
-            
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    store.send(.saveButtonTapped)
-                } label: {
-                    Text("저장")
-                }
-                .foregroundStyle(.accent2)
+            .background(.detailViewBackground)
+            .alert($store.scope(state: \.alert, action: \.alert))
+            .onChange(of: store.shouldDismiss) { shouldDismiss in
+                if shouldDismiss { dismissAction() }
             }
-        }
-        .background(.detailViewBackground)
-        .alert($store.scope(state: \.alert, action: \.alert))
-        .onChange(of: store.shouldDismiss) { shouldDismiss in
-            if shouldDismiss { dismissAction() }
         }
     }
 }
@@ -62,7 +59,7 @@ struct BookmarkForm: View {
 fileprivate struct AlarmPickerContainerView: View {
     @Environment(\.colorScheme) private var colorScheme
     @Binding var isAlarmOn: Bool
-    @Binding var alarmDate: Date
+    @Binding var alarmDate: Date?
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -82,7 +79,10 @@ fileprivate struct AlarmPickerContainerView: View {
                 
                 DatePicker(
                     "알림 시간",
-                    selection: $alarmDate,
+                    selection: Binding(
+                        get: { alarmDate ?? Date() },
+                        set: { alarmDate = $0 }
+                    ),
                     displayedComponents: [.date, .hourAndMinute]
                 )
                 .font(.subheadline)

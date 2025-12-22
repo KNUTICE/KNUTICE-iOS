@@ -10,7 +10,7 @@ import KNUTICECore
 import SwiftUI
 
 struct BookmarkContainerView: View {
-    @Perception.Bindable var store: StoreOf<BookmarkContainerFeature>
+    let store: StoreOf<BookmarkContainerFeature>
     
     let dismissAction: () -> Void
     
