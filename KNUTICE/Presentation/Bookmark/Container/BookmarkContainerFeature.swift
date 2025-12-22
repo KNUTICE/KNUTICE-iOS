@@ -24,7 +24,8 @@ struct BookmarkContainerFeature {
     }
     
     enum CancelID {
-        case task
+        case deleteBookmark
+        case saveBookmark
     }
     
     @Dependency(\.deleteBookmarkUseCase) private var deleteBookmarkUseCase
@@ -50,7 +51,7 @@ struct BookmarkContainerFeature {
                 } catch: { error, send in
                     await send(.detail(.deleteBookmarkResponse(.failure(error))))
                 }
-                .cancellable(id: CancelID.task)
+                .cancellable(id: CancelID.deleteBookmark)
                 
             case let .edit(.delegate(.save(bookmark))):
                 return .run { send in
@@ -59,7 +60,7 @@ struct BookmarkContainerFeature {
                 } catch: { error, send in
                     await send(.edit(.saveBookmarkResponse(.failure(error))))
                 }
-                .cancellable(id: CancelID.task)
+                .cancellable(id: CancelID.saveBookmark)
                 
             case .edit(.delegate(.switchToDetailMode)):
                 guard case let .edit(bookmarkState) = state else { return .none }
@@ -74,7 +75,10 @@ struct BookmarkContainerFeature {
                 return .none
                 
             case .disappear:
-                return .cancel(id: CancelID.task)
+                return .merge(
+                    .cancel(id: CancelID.deleteBookmark),
+                    .cancel(id: CancelID.saveBookmark)
+                )
                 
             default:
                 return .none

@@ -98,6 +98,9 @@ struct ReportView: View {
                     dismiss()
                 }
             }
+            .onDisappear {
+                store.send(.disappear)
+            }
         }
     }
 }
