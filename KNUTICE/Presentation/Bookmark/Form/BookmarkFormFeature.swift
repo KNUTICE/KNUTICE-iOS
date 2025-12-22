@@ -36,6 +36,7 @@ struct BookmarkFormFeature {
         case delegate(Delegate)
         case alert(PresentationAction<Alert>)
         case saveBookmarkResponse(Result<Void, any Error>)
+        case disappear
         
         enum Delegate {
             case save(Bookmark)
@@ -45,6 +46,10 @@ struct BookmarkFormFeature {
         enum Alert {
             case saveCompleted
         }
+    }
+    
+    enum CancelID {
+        case saveBookmark
     }
     
     @Dependency(\.saveBookmarkUseCase) private var saveBookmarkUseCase
@@ -64,6 +69,7 @@ struct BookmarkFormFeature {
                     } catch: { error, send in
                         await send(.saveBookmarkResponse(.failure(error)))
                     }
+                    .cancellable(id: CancelID.saveBookmark, cancelInFlight: true)
                 }
                 
             case .cancelButtonTapped:
@@ -114,6 +120,9 @@ struct BookmarkFormFeature {
                     }
                 }
                 return .none
+                
+            case .disappear:
+                return .cancel(id: CancelID.saveBookmark)
             }
         }
         .ifLet(\.$alert, action: \.alert)

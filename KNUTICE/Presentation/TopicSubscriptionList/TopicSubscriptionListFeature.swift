@@ -66,7 +66,10 @@ struct TopicSubscriptionListFeature: Reducer {
             
         case .onDisappear:
             // 화면이 사라질 때 진행 중이던 구독 조회 네트워크 요청 취소
-            return .cancel(id: CancelID.fetch)
+            return .merge(
+                .cancel(id: CancelID.fetch),
+                .cancel(id: CancelID.update)
+            )
             
         case .subscriptionsResponse(.success(let subscriptions)):
             // 서버에서 받은 구독 결과를 UI 상태(State)에 반영

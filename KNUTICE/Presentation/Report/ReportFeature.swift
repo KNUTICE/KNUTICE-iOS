@@ -32,9 +32,15 @@ struct ReportFeature {
         // Navigation/Presentation Actions
         case alert(PresentationAction<Alert>)
         
+        case disappear
+        
         enum Alert: Equatable {
             case reportSubmitted
         }
+    }
+    
+    enum CancelID {
+        case submitReport
     }
     
     @Dependency(\.submitReportUseCase) private var submitReportUseCase
@@ -60,6 +66,7 @@ struct ReportFeature {
                         await send(.submitResponse(.failure(error)))
                     }
                 }
+                .cancellable(id: CancelID.submitReport, cancelInFlight: true)
                 
             // MARK: - Internal Actions
             case .submitResponse(.success):
@@ -91,6 +98,9 @@ struct ReportFeature {
                 
             case .alert:
                 return .none
+                
+            case .disappear:
+                return .cancel(id: CancelID.submitReport)
             }
         }
         .ifLet(\.$alert, action: \.alert)
