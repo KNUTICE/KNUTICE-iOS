@@ -12,7 +12,7 @@ import KNUTICECore
 struct BookmarkContainerFeature {
         
     @ObservableState
-    enum State {
+    enum State: Equatable {
         case detail(BookmarkDetailFeature.State)
         case edit(BookmarkFormFeature.State)
     }

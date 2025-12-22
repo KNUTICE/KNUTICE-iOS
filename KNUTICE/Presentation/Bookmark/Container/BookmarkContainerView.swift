@@ -11,11 +11,10 @@ import SwiftUI
 
 struct BookmarkContainerView: View {
     let store: StoreOf<BookmarkContainerFeature>
-    
     let dismissAction: () -> Void
     
     var body: some View {
-        Group {
+        ZStack {
             if case .detail = store.state, let detailStore = store.scope(state: \.detail, action: \.detail) {
                 BookmarkDetail(store: detailStore, dismissAction: dismissAction)
             } else if case .edit = store.state, let formStore = store.scope(state: \.edit, action: \.edit) {
@@ -30,6 +29,7 @@ struct BookmarkContainerView: View {
         .onDisappear {
             store.send(.disappear)
         }
+        .animation(.easeInOut, value: store.state)
     }
 }
 
