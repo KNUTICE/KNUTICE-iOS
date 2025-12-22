@@ -17,6 +17,7 @@ struct BookmarkListRow: View {
         VStack(alignment: .leading, spacing: 10) {
             Text(bookmark.notice.title)
                 .font(.footnote)
+                .lineLimit(1)
             
             HStack(spacing: 5) {
                 Image(systemName: "alarm")
