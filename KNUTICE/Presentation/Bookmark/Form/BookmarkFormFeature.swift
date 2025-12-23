@@ -39,6 +39,7 @@ struct BookmarkFormFeature {
         case saveBookmarkResponse(Result<Void, any Error>)
         case disappear
         
+        @CasePathable
         enum Delegate {
             case save(Bookmark)
             case switchToDetailMode(Bookmark)

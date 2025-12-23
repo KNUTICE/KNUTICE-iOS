@@ -28,6 +28,7 @@ struct BookmarkDetailFeature {
         case deleteBookmarkResponse(Result<Void, any Error>)
         case alert(PresentationAction<Alert>)
         
+        @CasePathable
         enum Delegate {
             case switchToEditMode
             case deleteBookmark
