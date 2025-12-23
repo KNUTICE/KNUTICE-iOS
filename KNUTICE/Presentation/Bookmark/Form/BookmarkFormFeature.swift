@@ -20,6 +20,7 @@ struct BookmarkFormFeature {
         
         @Presents var alert: AlertState<Action.Alert>?
         var bookmark: Bookmark
+        let original: Bookmark
         var shouldDismiss: Bool = false
         let formType: FormType
                 
@@ -40,7 +41,7 @@ struct BookmarkFormFeature {
         
         enum Delegate {
             case save(Bookmark)
-            case switchToDetailMode
+            case switchToDetailMode(Bookmark)
         }
         
         enum Alert {
@@ -74,7 +75,7 @@ struct BookmarkFormFeature {
                 
             case .cancelButtonTapped:
                 if case .update = state.formType {
-                    return .send(.delegate(.switchToDetailMode))
+                    return .send(.delegate(.switchToDetailMode(state.original)))
                 } else {
                     state.shouldDismiss = true
                     return .none

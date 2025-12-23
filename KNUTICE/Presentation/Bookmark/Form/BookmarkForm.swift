@@ -123,7 +123,13 @@ fileprivate struct TextFieldContainerView: View {
 #Preview {
     NavigationStack {
         BookmarkForm(
-            store: Store(initialState: BookmarkFormFeature.State(bookmark: Bookmark.sample, formType: .create)) {
+            store: Store(
+                initialState: BookmarkFormFeature.State(
+                    bookmark: Bookmark.sample,
+                    original: Bookmark.sample,
+                    formType: .create
+                )
+            ) {
                 BookmarkFormFeature()
             }
         ) {
