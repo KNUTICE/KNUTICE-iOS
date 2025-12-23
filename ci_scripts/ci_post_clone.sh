@@ -133,3 +133,6 @@ cat <<EOF > "/Volumes/workspace/repository/KNUTICE/GoogleService-Info-Dev.plist"
 </plist>
 EOF
 echo "환경변수 참조 GoogleService-Info-Dev.plist file 생성완료"
+
+# Xcode의 Swift 매크로 무결성 검증 비활성화
+defaults write com.apple.dt.Xcode IDESkipMacroFingerprintValidation -bool YES
