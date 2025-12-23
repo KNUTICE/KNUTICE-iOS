@@ -38,7 +38,7 @@ struct BookmarkContainerFeature {
                 guard case let .detail(bookmarkState) = state else { return .none }
                 
                 state = .edit(
-                    BookmarkFormFeature.State(bookmark: bookmarkState.bookmark, formType: .update)
+                    BookmarkFormFeature.State(bookmark: bookmarkState.bookmark, original: bookmarkState.bookmark, formType: .update)
                 )
                 return .none
                 
@@ -62,11 +62,11 @@ struct BookmarkContainerFeature {
                 }
                 .cancellable(id: CancelID.saveBookmark)
                 
-            case .edit(.delegate(.switchToDetailMode)):
-                guard case let .edit(bookmarkState) = state else { return .none }
+            case let .edit(.delegate(.switchToDetailMode(bookmark))):
+                guard case .edit(_) = state else { return .none }
                 
                 state = .detail(
-                    BookmarkDetailFeature.State(bookmark: bookmarkState.bookmark)
+                    BookmarkDetailFeature.State(bookmark: bookmark)
                 )
                 
                 return .none

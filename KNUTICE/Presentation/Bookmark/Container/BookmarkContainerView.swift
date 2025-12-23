@@ -19,7 +19,9 @@ struct BookmarkContainerView: View {
                 BookmarkDetail(store: detailStore, dismissAction: dismissAction)
             } else if case .edit = store.state, let formStore = store.scope(state: \.edit, action: \.edit) {
                 BookmarkForm(store: formStore) {
-                    store.send(.edit(.delegate(.switchToDetailMode)))
+                    if case let .edit(bookmarkState) = store.state {
+                        store.send(.edit(.delegate(.switchToDetailMode(bookmarkState.bookmark))))
+                    }
                 }
             }
         }

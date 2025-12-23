@@ -50,7 +50,7 @@ final class NoticeContentViewController: UIViewController {
             
             let bookmark = Bookmark(notice: notice, memo: "")
             let rootView = BookmarkForm(
-                store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, formType: .create) ) {
+                store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
                     BookmarkFormFeature()
                 }
             ) {
