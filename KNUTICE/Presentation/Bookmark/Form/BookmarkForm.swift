@@ -48,6 +48,7 @@ struct BookmarkForm: View {
                 }
             }
             .background(.detailViewBackground)
+            .animation(.easeInOut, value: store.state.isAlarmOn)
             .alert($store.scope(state: \.alert, action: \.alert))
             .onChange(of: store.shouldDismiss) { shouldDismiss in
                 if shouldDismiss { dismissAction() }
