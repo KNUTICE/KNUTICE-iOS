@@ -37,13 +37,20 @@ struct BookmarkContainerView: View {
 
 #if DEBUG
 #Preview {
-    NavigationStack {
-        BookmarkContainerView(
-            store: Store(
-                initialState: BookmarkContainerFeature.State.detail(BookmarkDetailFeature.State(bookmark: Bookmark.sample))) {
-                    BookmarkContainerFeature()
-                }
+    var bookmarkDetailStore: StoreOf<BookmarkContainerFeature> {
+        Store(
+            initialState: BookmarkContainerFeature.State.detail(
+                BookmarkDetailFeature.State(
+                    bookmark: Bookmark.sample,
+                    nttId: Bookmark.sample.identity)
+            )
         ) {
+            BookmarkContainerFeature()
+        }
+    }
+    
+    NavigationStack {
+        BookmarkContainerView(store: bookmarkDetailStore) {
             // Dismiss Action
         }
     }

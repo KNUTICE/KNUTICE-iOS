@@ -56,7 +56,7 @@ extension BookmarkTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let bookmark = viewModel.bookmarks.value[indexPath.section].items[0]
         let store = Store(
-            initialState: BookmarkContainerFeature.State.detail(BookmarkDetailFeature.State(bookmark: bookmark)),
+            initialState: BookmarkContainerFeature.State.detail(BookmarkDetailFeature.State(bookmark: bookmark, nttId: bookmark.identity)),
             reducer: { BookmarkContainerFeature() }
         )
 

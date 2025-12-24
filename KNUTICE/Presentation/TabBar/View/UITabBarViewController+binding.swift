@@ -6,6 +6,7 @@
 //
 
 import Combine
+import ComposableArchitecture
 import Foundation
 import SwiftUI
 import UIKit
@@ -13,6 +14,7 @@ import UIKit
 extension UITabBarViewController {
     func bind() {
         viewModel.$deepLink
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] deepLink in
                 guard let deepLink else { return }
                 
@@ -20,8 +22,16 @@ extension UITabBarViewController {
                 
                 switch deepLink {
                 case .bookmark(let nttId):
-                    //TODO: nttId를 통해 북마크 View 이동 개발
-                    return
+                    let store = Store(
+                        initialState: BookmarkContainerFeature.State.detail(BookmarkDetailFeature.State(nttId: nttId)),
+                        reducer: { BookmarkContainerFeature() }
+                    )
+                    let rootView = BookmarkContainerView(
+                        store: store
+                    ) { [weak self] in
+                        self?.navigationController?.popViewController(animated: true)
+                    }
+                    viewController = UIHostingController(rootView: rootView)
                 case .meal:
                     // TODO: 학식 알림 딥링크 구현
                     return
@@ -33,10 +43,8 @@ extension UITabBarViewController {
                     return
                 }
                 
-                DispatchQueue.main.async {
-                    self?.navigationController?.popToRootViewController(animated: true)
-                    self?.navigationController?.pushViewController(viewController, animated: true)
-                }
+                self?.navigationController?.popToRootViewController(animated: true)
+                self?.navigationController?.pushViewController(viewController, animated: true)
             })
             .store(in: &cancellables)
         
