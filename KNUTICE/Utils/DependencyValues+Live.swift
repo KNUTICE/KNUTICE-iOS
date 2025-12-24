@@ -38,6 +38,11 @@ extension DependencyValues {
         get { self[UpdateBookmarkUseCaseKey.self] }
         set { self[UpdateBookmarkUseCaseKey.self] = newValue }
     }
+    
+    var fetchBookmarkUseCase: FetchBookmarksUseCase {
+        get { self[FetchBookmarkUseCaseKey.self] }
+        set { self[FetchBookmarkUseCaseKey.self] = newValue }
+    }
 }
 
 fileprivate enum FetchTopicSubscriptionUseCaseKey: DependencyKey {
@@ -62,4 +67,8 @@ fileprivate enum SaveBookmarkUseCaseKey: DependencyKey {
 
 fileprivate enum UpdateBookmarkUseCaseKey: DependencyKey {
     static let liveValue: UpdateBookmarkUseCase = UpdateBookmarkUseCaseImpl()
+}
+
+fileprivate enum FetchBookmarkUseCaseKey: DependencyKey {
+    static let liveValue: FetchBookmarksUseCase = FetchBookmarksUseCaseImpl()
 }

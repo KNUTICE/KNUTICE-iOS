@@ -35,17 +35,17 @@ struct BookmarkContainerFeature {
         Reduce { state, action in
             switch action {
             case .detail(.delegate(.switchToEditMode)):
-                guard case let .detail(bookmarkState) = state else { return .none }
+                guard case let .detail(bookmarkState) = state, let bookmark = bookmarkState.bookmark else { return .none }
                 
                 state = .edit(
-                    BookmarkFormFeature.State(bookmark: bookmarkState.bookmark, original: bookmarkState.bookmark, formType: .update)
+                    BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .update)
                 )
                 return .none
                 
             case .detail(.delegate(.deleteBookmark)):
                 return .run { [state] send in
-                    if case let .detail(detailState) = state {
-                        try await deleteBookmarkUseCase.execute(for: detailState.bookmark)
+                    if case let .detail(detailState) = state, let bookmark = detailState.bookmark {
+                        try await deleteBookmarkUseCase.execute(for: bookmark)
                         await send(.detail(.deleteBookmarkResponse(.success(()))))
                     }
                 } catch: { error, send in
@@ -66,7 +66,7 @@ struct BookmarkContainerFeature {
                 guard case .edit(_) = state else { return .none }
                 
                 state = .detail(
-                    BookmarkDetailFeature.State(bookmark: bookmark)
+                    BookmarkDetailFeature.State(bookmark: bookmark, nttId: bookmark.identity)
                 )
                 
                 return .none

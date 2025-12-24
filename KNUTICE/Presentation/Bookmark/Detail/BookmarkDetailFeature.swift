@@ -14,7 +14,8 @@ struct BookmarkDetailFeature {
     @ObservableState
     struct State: Equatable {
         @Presents var alert: AlertState<Action.Alert>?
-        let bookmark: Bookmark
+        var bookmark: Bookmark?
+        let nttId: Int
         var isShowingWebView: Bool = false
         var shouldDismiss: Bool = false
     }
@@ -27,6 +28,9 @@ struct BookmarkDetailFeature {
         case delegate(Delegate)
         case deleteBookmarkResponse(Result<Void, any Error>)
         case alert(PresentationAction<Alert>)
+        case onAppear
+        case onDisappear
+        case bookmarkResponse(Result<Bookmark?, any Error>)
         
         @CasePathable
         enum Delegate {
@@ -38,6 +42,12 @@ struct BookmarkDetailFeature {
             case confirmDeletion
         }
     }
+    
+    enum CancelID {
+        case fetchBookmark
+    }
+    
+    @Dependency(\.fetchBookmarkUseCase) private var fetchBookmarkUseCase
     
     var body: some ReducerOf<Self> {
         BindingReducer()
@@ -86,6 +96,29 @@ struct BookmarkDetailFeature {
                 
             case .alert:
                 return .none
+                
+            case let .bookmarkResponse(.success(bookmark)):
+                state.bookmark = bookmark
+                return .none
+                
+            case .bookmarkResponse(.failure(_)):
+                return .none
+                
+            case .onAppear:
+                guard let _ = state.bookmark else {
+                    return .run { [id = state.nttId] send in
+                        let bookmark = try await fetchBookmarkUseCase.execute(for: id)
+                        await send(.bookmarkResponse(.success(bookmark)))
+                    } catch: { error, send in
+                        await send(.bookmarkResponse(.failure(error)))
+                    }
+                    .cancellable(id: CancelID.fetchBookmark)
+                }
+                
+                return .none
+                
+            case .onDisappear:
+                return .cancel(id: CancelID.fetchBookmark)
             }
         }
         .ifLet(\.$alert, action: \.alert)
