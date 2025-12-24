@@ -30,7 +30,7 @@ final class BookmarkContainerFeatureTests: XCTestCase {
     func testTransition_DetailToEdit() async {
         let store = TestStore(
             initialState: BookmarkContainerFeature.State.detail(
-                BookmarkDetailFeature.State(bookmark: mockBookmark)
+                BookmarkDetailFeature.State(bookmark: mockBookmark, nttId: mockBookmark.identity)
             )
         ) {
             BookmarkContainerFeature()
@@ -71,7 +71,7 @@ final class BookmarkContainerFeatureTests: XCTestCase {
         await store.send(\.edit.delegate.switchToDetailMode, updatedBookmark) {
             // State가 .detail로 변경되고, 전달받은 updatedBookmark를 표시해야 함
             $0 = .detail(
-                BookmarkDetailFeature.State(bookmark: updatedBookmark)
+                BookmarkDetailFeature.State(bookmark: updatedBookmark, nttId: updatedBookmark.identity)
             )
         }
     }
@@ -79,7 +79,7 @@ final class BookmarkContainerFeatureTests: XCTestCase {
     func testDeleteBookmarkFlow_Success() async {
         let store = TestStore(
             initialState: BookmarkContainerFeature.State.detail(
-                BookmarkDetailFeature.State(bookmark: mockBookmark)
+                BookmarkDetailFeature.State(bookmark: mockBookmark, nttId: mockBookmark.identity)
             )
         ) {
             BookmarkContainerFeature()
@@ -117,7 +117,7 @@ final class BookmarkContainerFeatureTests: XCTestCase {
         
         let store = TestStore(
             initialState: BookmarkContainerFeature.State.detail(
-                BookmarkDetailFeature.State(bookmark: mockBookmark)
+                BookmarkDetailFeature.State(bookmark: mockBookmark, nttId: mockBookmark.identity)
             )
         ) {
             BookmarkContainerFeature()

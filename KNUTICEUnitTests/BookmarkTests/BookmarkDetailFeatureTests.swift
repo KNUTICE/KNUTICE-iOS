@@ -30,7 +30,7 @@ final class BookmarkDetailFeatureTests: XCTestCase {
     // 웹뷰 토글 테스트
     func testToggleWebView() async {
         let store = TestStore(
-            initialState: BookmarkDetailFeature.State(bookmark: mockBookmark)
+            initialState: BookmarkDetailFeature.State(bookmark: mockBookmark, nttId: mockBookmark.identity)
         ) {
             BookmarkDetailFeature()
         }
@@ -49,7 +49,7 @@ final class BookmarkDetailFeatureTests: XCTestCase {
     // 수정 버튼 탭 (Delegate 전달 확인)
     func testEditButtonTapped() async {
         let store = TestStore(
-            initialState: BookmarkDetailFeature.State(bookmark: mockBookmark)
+            initialState: BookmarkDetailFeature.State(bookmark: mockBookmark, nttId: mockBookmark.identity)
         ) {
             BookmarkDetailFeature()
         }
@@ -61,7 +61,7 @@ final class BookmarkDetailFeatureTests: XCTestCase {
     // 삭제 버튼 탭 (Delegate 전달 확인)
     func testDeleteButtonTapped() async {
         let store = TestStore(
-            initialState: BookmarkDetailFeature.State(bookmark: mockBookmark)
+            initialState: BookmarkDetailFeature.State(bookmark: mockBookmark, nttId: mockBookmark.identity)
         ) {
             BookmarkDetailFeature()
         }
@@ -73,7 +73,7 @@ final class BookmarkDetailFeatureTests: XCTestCase {
     // 삭제 성공 테스트 (Alert 표시 -> 확인 -> Dismiss)
     func testDeleteBookmarkSuccess() async {
         let store = TestStore(
-            initialState: BookmarkDetailFeature.State(bookmark: mockBookmark)
+            initialState: BookmarkDetailFeature.State(bookmark: mockBookmark, nttId: mockBookmark.identity)
         ) {
             BookmarkDetailFeature()
         }
@@ -101,7 +101,7 @@ final class BookmarkDetailFeatureTests: XCTestCase {
     // 삭제 실패 테스트 (에러 Alert 표시)
     func testDeleteBookmarkFailure() async {
         let store = TestStore(
-            initialState: BookmarkDetailFeature.State(bookmark: mockBookmark)
+            initialState: BookmarkDetailFeature.State(bookmark: mockBookmark, nttId: mockBookmark.identity)
         ) {
             BookmarkDetailFeature()
         }
