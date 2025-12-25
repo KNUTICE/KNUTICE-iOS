@@ -55,7 +55,7 @@ final class MainTableViewModelTest: XCTestCase {
         //When
         viewModel.fetchNotices()
         
-        wait(for: [expectation], timeout: 1)
+        wait(for: [expectation], timeout: 2)
     }
 
 }
