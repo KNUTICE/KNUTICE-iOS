@@ -87,11 +87,11 @@ struct BookmarkDetail: View {
                 SpinningIndicator()
             }
         }
-        .onAppear {
-            store.send(.onAppear)
-        }
+        .onAppear { store.send(.onAppear) }
         .onDisappear {
-            store.send(.onDisappear)
+            if store.bookmark == nil {
+                store.send(.onDisappear)
+            }
         }
     }
 }
