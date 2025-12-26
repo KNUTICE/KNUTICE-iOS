@@ -34,28 +34,42 @@ final class MainTableViewModelTest: XCTestCase {
     }
     
     @MainActor
-    func testFetchTopThreeNotices_ReturnNotices() {
-        //Given
-        let expectation = expectation(description: "fetch top three notices")
+    func test_fetchNotices_emitActualNotices() {
+        // Given
+        let expectation = expectation(description: "actual notices emitted")
         
         viewModel.noticesObservable
-            .skip(1)
+            .filter { sections in
+                // 실제 데이터 조건:
+                // - 섹션이 모두 존재
+                // - 각 섹션에 아이템 3개
+                sections.count == NoticeCategory.allCases.count &&
+                sections.allSatisfy { $0.items.count == 3 }
+            }
             .take(1)
-            .subscribe(onNext: {
-                //Then
-                XCTAssertEqual($0[0].items.count, 3)
-                XCTAssertEqual($0[1].items.count, 3)
-                XCTAssertEqual($0[2].items.count, 3)
-                XCTAssertEqual($0[3].items.count, 3)
-                XCTAssertEqual($0[4].items.count, 3)
+            .subscribe(onNext: { sections in
+                // Then
+                XCTAssertEqual(sections.count, NoticeCategory.allCases.count)
+                
+                sections.forEach { section in
+                    XCTAssertEqual(section.items.count, 3)
+                    
+                    // skeleton이 아닌 실제 데이터인지 확인
+                    XCTAssertTrue(
+                        section.items.allSatisfy {
+                            $0.presentationType == .actual
+                        }
+                    )
+                }
+                
                 expectation.fulfill()
             })
             .disposed(by: disposeBag)
         
-        //When
+        // When
         viewModel.fetchNotices()
         
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: 1.0)
     }
 
 }
