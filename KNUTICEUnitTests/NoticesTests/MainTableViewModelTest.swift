@@ -43,10 +43,11 @@ final class MainTableViewModelTest: XCTestCase {
                 // 실제 데이터 조건:
                 // - 섹션이 모두 존재
                 // - 각 섹션에 아이템 3개
+                // - presentationType이 .actual인지 확인
                 sections.count == NoticeCategory.allCases.count &&
-                sections.allSatisfy { $0.items.count == 3 }
+                sections.allSatisfy { $0.items.count == 3 } &&
+                sections.allSatisfy { $0.items.allSatisfy { $0.presentationType == .actual } }
             }
-            .take(1)
             .subscribe(onNext: { sections in
                 // Then
                 XCTAssertEqual(sections.count, NoticeCategory.allCases.count)
@@ -68,7 +69,6 @@ final class MainTableViewModelTest: XCTestCase {
         
         // When
         viewModel.fetchNotices()
-        
         wait(for: [expectation], timeout: 1.0)
     }
 
