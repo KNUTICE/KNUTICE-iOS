@@ -63,14 +63,14 @@ actor FetchNoticesUseCaseImpl: FetchNoticesUseCase {
                let storedMajorCategory = MajorCategory(rawValue: majorStr),
                category != storedMajorCategory {
                 group.addTask {
-                    // 새로 선택된 학과 공지 알림 활성화
-                    try await self.topicSubscriptionRepository.update(of: .major, topic: category, isEnabled: true)
-                }
-                
-                group.addTask {
                     // 이전 선택된 학과 알림 비활성화
                     try await self.topicSubscriptionRepository.update(of: .major, topic: storedMajorCategory, isEnabled: false)
                 }
+            }
+            
+            group.addTask {
+                // 새로 선택된 학과 공지 알림 활성화
+                try await self.topicSubscriptionRepository.update(of: .major, topic: category, isEnabled: true)
             }
             
             try await group.waitForAll()

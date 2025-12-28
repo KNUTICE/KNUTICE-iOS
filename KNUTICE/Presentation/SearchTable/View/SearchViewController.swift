@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 6/19/25.
 //
 
+import ComposableArchitecture
 import Factory
 import RxSwift
 import UIKit
@@ -137,9 +138,18 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let bookmark = viewModel.bookmarks.value[indexPath.row]
-        let viewController = UIHostingController(
-            rootView: BookmarkDetailSwitchView(viewModel: BookmarkViewModel(bookmark: bookmark))
+        let store = Store(
+            initialState: BookmarkContainerFeature.State.detail(BookmarkDetailFeature.State(bookmark: bookmark, nttId: bookmark.identity)),
+            reducer: { BookmarkContainerFeature() }
         )
+
+        let rootView = BookmarkContainerView(
+            store: store,
+            dismissAction: { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }
+        )
+        let viewController = UIHostingController(rootView: rootView)
         navigationController?.pushViewController(viewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
