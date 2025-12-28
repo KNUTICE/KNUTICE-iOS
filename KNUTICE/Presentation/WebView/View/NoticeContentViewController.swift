@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 8/21/25.
 //
 
+import ComposableArchitecture
 import Combine
 import KNUTICECore
 import SwiftUI
@@ -47,11 +48,15 @@ final class NoticeContentViewController: UIViewController {
         button.addAction(UIAction { [weak self] _ in
             guard let notice = self?.viewModel.notice else { return }
             
-            let bookmarkForm = BookmarkForm(for: .create) { self?.dismiss(animated: true) }
-                .environmentObject(
-                    BookmarkViewModel(bookmark: Bookmark(notice: notice, memo: ""))
-                )
-            let viewController = UIHostingController(rootView: bookmarkForm)
+            let bookmark = Bookmark(notice: notice, memo: "")
+            let rootView = BookmarkForm(
+                store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
+                    BookmarkFormFeature()
+                }
+            ) {
+                self?.dismiss(animated: true)
+            }
+            let viewController = UIHostingController(rootView: rootView)
             let navigationController = UINavigationController(rootViewController: viewController)
             navigationController.modalPresentationStyle = .pageSheet
             

@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 5/27/25.
 //
 
+import ComposableArchitecture
 import Combine
 import Factory
 import UIKit
@@ -54,9 +55,18 @@ final class BookmarkTableViewController: UIViewController {
 extension BookmarkTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let bookmark = viewModel.bookmarks.value[indexPath.section].items[0]
-        let viewController = UIHostingController(
-            rootView: BookmarkDetailSwitchView(viewModel: BookmarkViewModel(bookmark: bookmark))
+        let store = Store(
+            initialState: BookmarkContainerFeature.State.detail(BookmarkDetailFeature.State(bookmark: bookmark, nttId: bookmark.identity)),
+            reducer: { BookmarkContainerFeature() }
         )
+
+        let rootView = BookmarkContainerView(
+            store: store,
+            dismissAction: { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }
+        )
+        let viewController = UIHostingController(rootView: rootView)
         navigationController?.pushViewController(viewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
