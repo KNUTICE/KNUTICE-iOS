@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 7/5/24.
 //
 
+import ComposableArchitecture
 import SwiftUI
 import Combine
 import Factory
@@ -17,7 +18,11 @@ struct SettingView: View {
         ScrollView {
             ContentSection("알림") {
                 NavigationLink {
-                    TopicSubscriptionList(viewModel: TopicSubscriptionListViewModel())
+                    TopicSubscriptionList(
+                        store: Store(initialState: TopicSubscriptionListFeature.State()) {
+                            TopicSubscriptionListFeature()
+                        }
+                    )
                 } label: {
                     NavigationIndicator(title: "서비스 알림")
                 }
@@ -63,7 +68,11 @@ struct SettingView: View {
         .navigationBarTitleDisplayMode(.inline)
         .fullScreenCover(isPresented: $isShowingReport) {
             NavigationView {
-                ReportView(viewModel: Container.shared.reportViewModel())
+                ReportView(
+                    store: Store(initialState: ReportFeature.State()) {
+                        ReportFeature()
+                    }
+                )
             }
         }
     }

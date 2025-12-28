@@ -11,11 +11,6 @@ final class MockURLProtocol: URLProtocol {
     private static let syncQueue = DispatchQueue(label: "MockURLProtocol.syncQueue")
     nonisolated(unsafe) private static var mockFileNames = [URL: String]()
     
-    private var mockFileName: String? {
-        guard let url = request.url else { return nil }
-        return Self.syncQueue.sync { Self.mockFileNames[url] }
-    }
-    
     lazy var session: URLSession = {
         let configuration: URLSessionConfiguration = URLSessionConfiguration.ephemeral
         return URLSession(configuration: configuration)
@@ -39,22 +34,49 @@ final class MockURLProtocol: URLProtocol {
     }
     
     override func startLoading() {
-        guard let fileName = mockFileName,
-              let fileURL = Bundle.main.url(forResource: fileName, withExtension: "json"),
-              let mockData = try? Data(contentsOf: fileURL) else {
+        // URL 확인
+        guard let url = request.url else {
+            client?.urlProtocol(self, didFailWithError: URLError(.badURL))
+            return
+        }
+        
+        // Mock 파일 이름 조회
+        let mockFileName = Self.syncQueue.sync { Self.mockFileNames[url] }
+        
+        guard let fileName = mockFileName else {
+            // 등록되지 않은 URL 요청인 경우 에러 처리
             client?.urlProtocol(self, didFailWithError: URLError(.fileDoesNotExist))
             return
         }
         
+        // JSON 데이터 로드
+        let bundle = Bundle(for: MockURLProtocol.self)
+        
+        guard let fileURL = bundle.url(forResource: fileName, withExtension: "json") else {
+            print("🚨 MockURLProtocol Error: JSON file named '\(fileName)' not found in bundle.")
+            client?.urlProtocol(self, didFailWithError: URLError(.fileDoesNotExist))
+            return
+        }
+        
+        guard let mockData = try? Data(contentsOf: fileURL) else {
+            print("🚨 MockURLProtocol Error: Unable to load data from '\(fileName)'.")
+            client?.urlProtocol(self, didFailWithError: URLError(.cannotDecodeContentData))
+            return
+        }
+        
+        let response = HTTPURLResponse(
+            url: url,
+            statusCode: 200,
+            httpVersion: nil,
+            headerFields: ["Content-Type": "application/json"]
+        )!
+        
         //요청에 대한 응답 객체를 생성했음을 알림
-        client?.urlProtocol(self, didReceive: HTTPURLResponse(), cacheStoragePolicy: .notAllowed)
+        client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
         //Mock Data를 정상적으로 로드했음을 알림
         client?.urlProtocol(self, didLoad: mockData)
         //네트워크 요청이 완료되었음을 알림
         client?.urlProtocolDidFinishLoading(self)
-        
-        activeTask = session.dataTask(with: request.urlRequest!)
-        activeTask?.cancel()
     }
     
     override func stopLoading() {
@@ -74,29 +96,40 @@ extension MockURLProtocol {
         case postRequestShouldSucceed
         case fetchSingleNoticeShouldSucceed
         case fetchTipsShouldSucceed
+        case submitReportShouldSucceed
         
         var jsonFileName: String {
             switch self {
             case .fetchGeneralNoticesShouldSucceed:
                 return "GeneralNotices"
+                
             case .fetchAcademicNoticesShouldSucceed:
                 return "AcademicNotices"
+                
             case .fetchScholarshipNoticesShouldSucceed:
                 return "ScholarshipNotices"
+                
             case .fetchEventNoticesShouldSucceed:
                 return "EventNotices"
+                
             case .fetchEmploymentNoticesShouldSucceed:
                 return "EmploymentNotices"
+                
             case .fetchSearchedNoticesShouldSucceed:
                 return "SearchedNotices"
+                
             case .fetchTopicSubscriptionsShouldSucceed:
                 return "TopicSubscriptionsStatus"
-            case .postRequestShouldSucceed:
+                
+            case .postRequestShouldSucceed, .submitReportShouldSucceed:
                 return "PostRequestSuccess"
+                
             case .fetchSingleNoticeShouldSucceed:
                 return "SingleNotice"
+                
             case .fetchTipsShouldSucceed:
                 return "Tips"
+                
             }
         }
     }
