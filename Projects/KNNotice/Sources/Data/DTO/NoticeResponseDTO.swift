@@ -1,0 +1,48 @@
+//
+//  NoticeResponseDTO.swift
+//  KNUTICE
+//
+//  Created by 이정훈 on 5/22/24.
+//
+
+import Foundation
+import KNUtility
+
+// MARK: - NoticeReponseDTO
+public struct NoticeResponseDTO: Decodable, Sendable {
+    public let metaData: MetaData
+    public let data: [NoticeData]?
+}
+
+public struct SingleNoticeResponseDTO: Decodable, Sendable {
+    public let metaData: MetaData
+    public let data: NoticeData?
+}
+
+// MARK: - NoticeData
+public struct NoticeData: Decodable, Sendable {
+    public let nttID: Int
+    public let title: String
+    public let contentURL: String
+    public let contentImageURL: String?
+    public let department, registrationDate: String
+    public let topic: String
+
+    enum CodingKeys: String, CodingKey {
+        case nttID = "nttId"
+        case title
+        case contentURL = "contentUrl"
+        case contentImageURL = "contentImageUrl"
+        case department, registrationDate, topic
+    }
+    
+    public init(nttID: Int, title: String, contentURL: String, contentImageURL: String?, department: String, registrationDate: String, topic: String) {
+        self.nttID = nttID
+        self.title = title
+        self.contentURL = contentURL
+        self.contentImageURL = contentImageURL
+        self.department = department
+        self.registrationDate = registrationDate
+        self.topic = topic
+    }
+}

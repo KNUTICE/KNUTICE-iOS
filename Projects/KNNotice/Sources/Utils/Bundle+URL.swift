@@ -1,0 +1,40 @@
+//
+//  Bundle+URL.swift
+//  KNUTICE
+//
+//  Created by 이정훈 on 5/22/24.
+//
+
+import Foundation
+
+public extension Bundle {
+    static var standard: Bundle {
+        return Bundle(for: NoticeRepositoryImpl.self)
+    }
+    
+    var resource: NSDictionary? {
+        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
+              let resource = NSDictionary(contentsOfFile: file) else {
+            return nil
+        }
+        
+        return resource
+    }
+    
+    var noticeURL: String? {
+        guard let url = resource?["Notice_URL"] as? String else {
+            return nil
+        }
+        
+        return url
+    }
+    
+    var topicSubscriptionURL: String? {
+        guard let url = resource?["TopicSubscription_URL"] as? String else {
+            return nil
+        }
+        
+        return url
+    }
+    
+}
