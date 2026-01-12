@@ -15,10 +15,26 @@ let project = Project(
                         "UIColorName": "",
                         "UIImageName": "",
                     ],
+                    "UIBackgroundModes": [
+                        "remote-notification"
+                    ],
+                    "UILaunchStoryboardName": "LaunchScreen.storyboard",
+                    "UIApplicationSceneManifest": [
+                        "UIApplicationSupportsMultipleScenes": false,
+                        "UISceneConfigurations": [
+                            "UIWindowSceneSessionRoleApplication": [
+                                [
+                                    "UISceneConfigurationName": "Default Configuration",
+                                    "UISceneDelegateClassName": "$(PRODUCT_MODULE_NAME).SceneDelegate"
+                                ],
+                            ]
+                        ]
+                    ],
                 ]
             ),
             sources: ["Sources/**"],
             resources: ["Resources/**"],
+            entitlements: .file(path: "KNUTICE.entitlements"),
             dependencies: [
                 .project(target: "KNNotice", path: "../KNNotice"),
                 .project(target: "KNBookmark", path: "../KNBookmark"),
