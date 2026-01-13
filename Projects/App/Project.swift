@@ -30,6 +30,7 @@ let project = Project(
                             ]
                         ]
                     ],
+                    "CFBundleShortVersionString": "1.7.0"
                 ]
             ),
             sources: ["Sources/**"],
