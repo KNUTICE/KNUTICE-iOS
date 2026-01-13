@@ -9,30 +9,28 @@ let project = Project(
             product: .app,
             bundleId: "com.fx.KNUTICE",
             deploymentTargets: .iOS("17.0"),
-            infoPlist: .extendingDefault(
-                with: [
-                    "UILaunchScreen": [
-                        "UIColorName": "",
-                        "UIImageName": "",
-                    ],
-                    "UIBackgroundModes": [
-                        "remote-notification"
-                    ],
-                    "UILaunchStoryboardName": "LaunchScreen.storyboard",
-                    "UIApplicationSceneManifest": [
-                        "UIApplicationSupportsMultipleScenes": false,
-                        "UISceneConfigurations": [
-                            "UIWindowSceneSessionRoleApplication": [
-                                [
-                                    "UISceneConfigurationName": "Default Configuration",
-                                    "UISceneDelegateClassName": "$(PRODUCT_MODULE_NAME).SceneDelegate"
-                                ],
-                            ]
+            infoPlist: .extendingDefault(with: [
+                "UILaunchScreen": [
+                    "UIColorName": "",
+                    "UIImageName": "",
+                ],
+                "UIBackgroundModes": [
+                    "remote-notification"
+                ],
+                "UILaunchStoryboardName": "LaunchScreen.storyboard",
+                "UIApplicationSceneManifest": [
+                    "UIApplicationSupportsMultipleScenes": false,
+                    "UISceneConfigurations": [
+                        "UIWindowSceneSessionRoleApplication": [
+                            [
+                                "UISceneConfigurationName": "Default Configuration",
+                                "UISceneDelegateClassName": "$(PRODUCT_MODULE_NAME).SceneDelegate"
+                            ],
                         ]
-                    ],
-                    "CFBundleShortVersionString": "1.7.0"
-                ]
-            ),
+                    ]
+                ],
+                "CFBundleShortVersionString": "1.7.0"
+            ]),
             sources: ["Sources/**"],
             resources: ["Resources/**"],
             entitlements: .file(path: "KNUTICE.entitlements"),
@@ -57,5 +55,22 @@ let project = Project(
                 ]
             )
         ),
+        .target(
+            name: "NotificationService",
+            destinations: .iOS,
+            product: .appExtension,
+            bundleId: "com.fx.KNUTICE.NotificationService",
+            infoPlist: .extendingDefault(with: [
+                "CFBundleDisplayName": "$(PRODUCT_NAME)",
+                "NSExtension": [
+                    "NSExtensionPointIdentifier": "com.apple.usernotifications.service",
+                    "NSExtensionPrincipalClass": "$(PRODUCT_MODULE_NAME).NotificationService",
+                ],
+            ]),
+            sources: ["NotificationService/**"],
+            dependencies: [
+                .project(target: "KNNotification", path: "../KNNotification")
+            ]
+        )
     ]
 )
