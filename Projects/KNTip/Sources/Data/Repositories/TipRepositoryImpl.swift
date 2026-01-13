@@ -13,7 +13,7 @@ actor TipRepositoryImpl: TipRepository {
     @Injected(\.remoteDataSource) private var dataSource
     
     func fetchTips() async -> Result<[Tip]?, any Error> {
-        guard let baseURL = Bundle.main.tipURL else {
+        guard let baseURL = Bundle.module.tipURL else {
             return .failure(NetworkError.invalidURL(message: "The tip API URL is missing or invalid."))
         }
         

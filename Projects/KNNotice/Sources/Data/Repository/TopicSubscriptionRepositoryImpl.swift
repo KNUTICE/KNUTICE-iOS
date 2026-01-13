@@ -12,11 +12,12 @@ import KNUtility
 
 actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
+    private let baseURL: String? = Bundle.module.topicSubscriptionURL
     
     func fetch(for type: TopicType) async throws -> [TopicSubscriptionKey] {
         try Task.checkCancellation()
         
-        guard let baseURL = Bundle.main.topicSubscriptionURL else {
+        guard let baseURL else {
             throw NetworkError.invalidURL(message: "The Topic subscription API URL is missing or invalid.")
         }
         
@@ -48,7 +49,7 @@ actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
     func update(of type: TopicType, topic: any CategoryProtocol, isEnabled: Bool) async throws {
         try Task.checkCancellation()
         
-        guard let baseURL = Bundle.main.topicSubscriptionURL else {
+        guard let baseURL else {
             throw NetworkError.invalidURL(message: "The Topic subscription API URL is missing or invalid.")
         }
         

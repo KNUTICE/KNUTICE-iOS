@@ -16,6 +16,7 @@ public actor FCMTokenManager {
     //MARK: - Properies
     
     @Injected(\.remoteDataSource) private var dataSource
+    private let baseURL: String? = Bundle.module.tokenURL
     
     public static let shared: FCMTokenManager = .init()
     
@@ -24,7 +25,7 @@ public actor FCMTokenManager {
     //MARK: - Methods
     
     public func updateToken() async throws {
-        guard let endpoint = Bundle.standard.tokenURL else {
+        guard let endpoint = baseURL else {
             throw NetworkError.invalidURL(message: "Invalid or missing 'Token_URL' in resource.")
         }
         
@@ -51,7 +52,7 @@ public actor FCMTokenManager {
     }
     
     public func register() async throws {
-        guard let endpoint = Bundle.standard.tokenURL else {
+        guard let endpoint = baseURL else {
             throw NetworkError.invalidURL(message: "Invalid or missing 'Token_URL' in resource.")
         }
         

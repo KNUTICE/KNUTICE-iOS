@@ -16,7 +16,7 @@ actor ReportRepositoryImpl: ReportRepository {
     @Injected(\.remoteDataSource) var dataSource: RemoteDataSource
     
     func register(params: [String : any Sendable]) async throws {
-        guard let endpoint = Bundle.main.reportURL else {
+        guard let endpoint = Bundle.module.reportURL else {
             throw NetworkError.invalidURL(message: "Invalid or missing report URL.")
         }
         

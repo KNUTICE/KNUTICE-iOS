@@ -8,10 +8,6 @@
 import Foundation
 
 public extension Bundle {
-    static var standard: Bundle {
-        return Bundle(for: NoticeRepositoryImpl.self)
-    }
-    
     var resource: NSDictionary? {
         guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
               let resource = NSDictionary(contentsOfFile: file) else {

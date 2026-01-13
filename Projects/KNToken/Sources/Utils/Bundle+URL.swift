@@ -7,11 +7,7 @@
 
 import Foundation
 
-extension Bundle {
-    static var standard: Bundle {
-        return Bundle(for: FCMTokenManager.self)
-    }
-    
+extension Bundle {    
     private var resource: NSDictionary? {
         guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
               let resource = NSDictionary(contentsOfFile: file) else {
