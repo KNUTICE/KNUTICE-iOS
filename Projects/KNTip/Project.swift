@@ -18,6 +18,18 @@ let project = Project(
                 .project(target: "KNNetwork", path: "../KNNetwork"),
                 .external(name: "Factory")
             ]
-        )
+        ),
+        .target(
+            name: "KNTipTests",
+            destinations: .iOS,
+            product: .unitTests,
+            bundleId: "com.fx.KNTip.tests",
+            deploymentTargets: .iOS("17.0"),
+            infoPlist: .default,
+            sources: ["KNTipTests/**"],
+            dependencies: [
+                .project(target: "KNTip", path: "../KNTip"),
+            ]
+        ),
     ]
 )
