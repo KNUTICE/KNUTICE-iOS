@@ -8,9 +8,9 @@
 import Factory
 import KNBookmark
 import KNNotice
-import os
 import RxRelay
 import RxSwift
+import os
 
 @MainActor
 final class SearchViewModel: NoticeSectionModelProvidable, Searchable {

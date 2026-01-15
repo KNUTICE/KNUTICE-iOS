@@ -6,10 +6,11 @@
 //
 
 import Combine
-import UIKit
+import Factory
+import KNNotice
 import RxSwift
 import SwiftUI
-import Factory
+import UIKit
 
 final class MainTableViewController: UIViewController, FirstTabNavigationItemConfigurable, SettingButtonConfigurable {
     lazy var tableView: UITableView = {

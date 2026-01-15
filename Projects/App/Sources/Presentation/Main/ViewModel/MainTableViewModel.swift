@@ -8,10 +8,10 @@
 import Combine
 import Factory
 import Foundation
-import os
 import KNNotice
 import RxSwift
 import RxRelay
+import os
 
 @MainActor
 final class MainTableViewModel {

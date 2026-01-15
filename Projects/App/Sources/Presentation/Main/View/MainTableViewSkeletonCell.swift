@@ -6,8 +6,8 @@
 //
 
 import KNNotice
-import UIKit
 import SkeletonView
+import UIKit
 
 final class MainTableViewSkeletonCell: MainTableViewCell {
     override class var reuseIdentifier: String {

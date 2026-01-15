@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 5/19/24.
 //
 
+import KNNotice
 import RxSwift
 import RxDataSources
 import UIKit

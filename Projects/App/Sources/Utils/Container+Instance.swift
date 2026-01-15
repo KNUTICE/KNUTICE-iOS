@@ -7,6 +7,7 @@
 
 import Factory
 import KNTip
+import KNNotice
 
 extension Container {
     var fetchTipUseCase: Factory<FetchTipUseCase> {
