@@ -13,7 +13,9 @@ let project = Project(
             infoPlist: .extendingDefault(with: infoPlist),
             sources: ["Sources/**"],
             resources: ["Resources/**"],
-            dependencies: []
+            dependencies: [
+                .external(name: "FirebaseMessaging")
+            ]
         )
     ]
 )

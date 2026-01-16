@@ -16,7 +16,7 @@ let project = Project(
                 .external(name: "Alamofire"),
                 .external(name: "RxSwift"),
                 .external(name: "Factory"),
-                .external(name: "FirebaseMessaging")
+                .external(name: "FirebaseMessaging"),
             ]
         )
     ]

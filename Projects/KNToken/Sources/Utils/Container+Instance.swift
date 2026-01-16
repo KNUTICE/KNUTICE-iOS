@@ -13,4 +13,10 @@ public extension Container {
             RegisterFCMTokenUseCaseImpl()
         }
     }
+    
+    var updateFCMTokenUseCase: Factory<UpdateFCMTokenUseCase> {
+        Factory(self) {
+            UpdateFCMTokenUseCaseImpl()
+        }
+    }
 }

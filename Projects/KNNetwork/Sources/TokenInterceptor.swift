@@ -7,7 +7,7 @@
 
 import Alamofire
 import Foundation
-import FirebaseMessaging
+import KNUtility
 
 struct TokenInterceptor: RequestInterceptor, @unchecked Sendable {
     public func adapt(
@@ -19,8 +19,7 @@ struct TokenInterceptor: RequestInterceptor, @unchecked Sendable {
             var urlRequest = urlRequest
             
             do {
-                let token = try await Messaging.messaging().token()
-                
+                let token = try await FCMTokenManager.shared.getToken()
                 urlRequest.headers.add(name: "fcmToken", value: token)
                 completion(.success(urlRequest))
             } catch {

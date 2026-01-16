@@ -7,7 +7,7 @@
 
 import Combine
 import Factory
-import KNToken
+import KNUtility
 import os
 
 @MainActor

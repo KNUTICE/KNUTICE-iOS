@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Factory
 import FirebaseCore
 import FirebaseMessaging
 import KNUtility
@@ -102,7 +103,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if event == .tokenUpdate {
             Task {
                 do {
-                    try await FCMTokenManager.shared.updateToken()
+                    let updateFCMTokenUseCase = Container.shared.updateFCMTokenUseCase()
+                    try await updateFCMTokenUseCase.execute()
                 } catch {
                     print(error)
                 }

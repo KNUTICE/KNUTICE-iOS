@@ -11,11 +11,6 @@ public final class MockURLProtocol: URLProtocol {
     private static let syncQueue = DispatchQueue(label: "MockURLProtocol.syncQueue")
     nonisolated(unsafe) private static var mockFileNames = [URL: String]()
     
-    lazy var session: URLSession = {
-        let configuration: URLSessionConfiguration = URLSessionConfiguration.ephemeral
-        return URLSession(configuration: configuration)
-    }()
-    
     var activeTask: URLSessionTask?
     
     //파라미터로 전달된 Request를 처리할 수 있는지 여부
