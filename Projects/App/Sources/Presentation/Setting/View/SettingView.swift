@@ -17,7 +17,7 @@ struct SettingView: View {
     
     var body: some View {
         ScrollView {
-            ContentSection("알림") {
+            ContentSection(title: "알림") {
                 NavigationLink {
                     TopicSubscriptionList(
                         store: Store(initialState: TopicSubscriptionListFeature.State()) {
@@ -29,7 +29,7 @@ struct SettingView: View {
                 }
             }
             
-            ContentSection("지원") {
+            ContentSection(title: "지원") {
                 Button {
                     isShowingReport.toggle()
                 } label: {
@@ -37,7 +37,7 @@ struct SettingView: View {
                 }
             }
             
-            ContentSection("앱 정보") {
+            ContentSection(title: "앱 정보") {
                 NavigationLink {
                     AppVersionView(viewModel: AppVersionViewModel())
                 } label: {
@@ -81,12 +81,7 @@ struct SettingView: View {
 
 fileprivate struct ContentSection<Content: View>: View {
     let title: String
-    let content: () -> Content
-    
-    init(_ title: String, @ViewBuilder content: @escaping () -> Content) {
-        self.title = title
-        self.content = content
-    }
+    @ViewBuilder let content: Content
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -94,7 +89,7 @@ fileprivate struct ContentSection<Content: View>: View {
                 .bold()
                 .padding(.bottom)
             
-            content()
+            content
         }
         .padding()
         .background(KNUTICEAsset.mainCellBackground.swiftUIColor)
