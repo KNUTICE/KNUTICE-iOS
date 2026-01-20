@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum BookmarkSortOption: String {
+public enum BookmarkSortOption: String, Sendable {
     case createdAtAscending
     case createdAtDescending
     case updatedAtAscending

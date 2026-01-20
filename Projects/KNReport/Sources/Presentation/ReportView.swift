@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import KNDesignSystem
 import SwiftUI
 
 public struct ReportView: View {
@@ -76,7 +77,7 @@ public struct ReportView: View {
             .navigationTitle("고객센터")
             .navigationBarTitleDisplayMode(.inline)
             .preferredColorScheme(.light)
-//            .background(KNUTICEAsset.reportBackground.swiftUIColor)
+            .background(KNDesignSystemAsset.reportBackground.swiftUIColor)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
