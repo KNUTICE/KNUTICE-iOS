@@ -8,18 +8,20 @@
 import ComposableArchitecture
 
 @Reducer
-struct ReportFeature {
+public struct ReportFeature {
     
     @ObservableState
-    struct State: Equatable {
+    public struct State: Equatable {
         @Presents var alert: AlertState<Action.Alert>?
         var content: String = ""
         var isLoading: Bool = false
         var shouldDismiss: Bool = false
+        
+        public init() {}
     }
 
     @CasePathable
-    enum Action: BindableAction {
+    public enum Action: BindableAction {
         // Binding Actions
         case binding(BindingAction<State>)
         
@@ -34,7 +36,7 @@ struct ReportFeature {
         
         case disappear
         
-        enum Alert: Equatable {
+        public enum Alert: Equatable {
             case reportSubmitted
         }
     }
@@ -44,8 +46,10 @@ struct ReportFeature {
     }
     
     @Dependency(\.submitReportUseCase) private var submitReportUseCase
+    
+    public init() {}
 
-    var body: some Reducer<State, Action> {
+    public var body: some Reducer<State, Action> {
         BindingReducer()
         
         Reduce { state, action in

@@ -22,11 +22,6 @@ extension DependencyValues {
         set { self[UpdateTopicSubscriptionUseCaseKey.self] = newValue }
     }
     
-    var submitReportUseCase: SubmitReportUseCase {
-        get { self[SubmitReportUseCaseKey.self] }
-        set { self[SubmitReportUseCaseKey.self] = newValue }
-    }
-    
     var deleteBookmarkUseCase: DeleteBookmarkUseCase {
         get { self[DeleteBookmarkUseCaseKey.self] }
         set { self[DeleteBookmarkUseCaseKey.self] = newValue }
@@ -54,10 +49,6 @@ fileprivate enum FetchTopicSubscriptionUseCaseKey: DependencyKey {
 
 fileprivate enum UpdateTopicSubscriptionUseCaseKey: DependencyKey {
     static let liveValue: UpdateTopicSubscriptionUseCase = UpdateTopicSubscriptionUseCaseImpl()
-}
-
-fileprivate enum SubmitReportUseCaseKey: DependencyKey {
-    static let liveValue: SubmitReportUseCase = SubmitReportUseCaseImpl()
 }
 
 fileprivate enum DeleteBookmarkUseCaseKey: DependencyKey {

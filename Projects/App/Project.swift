@@ -51,7 +51,9 @@ let project = Project(
             ],
             settings: .settings(
                 base: [
-                    "OTHER_LDFLAGS": ["-all_load", "-ObjC"]
+                    "OTHER_LDFLAGS": ["-all_load", "-ObjC"],
+                    "SWIFT_VERSION": "6.0",
+                    "SWIFT_STRICT_CONCURRENCY": "complete",
                 ]
             )
         ),

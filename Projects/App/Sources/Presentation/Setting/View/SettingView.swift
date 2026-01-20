@@ -5,10 +5,11 @@
 //  Created by 이정훈 on 7/5/24.
 //
 
-import ComposableArchitecture
-import SwiftUI
 import Combine
+import ComposableArchitecture
+import KNReport
 import Factory
+import SwiftUI
 
 struct SettingView: View {
     @State private var isShowingReport: Bool = false

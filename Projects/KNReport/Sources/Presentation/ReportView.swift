@@ -8,12 +8,16 @@
 import ComposableArchitecture
 import SwiftUI
 
-struct ReportView: View {
+public struct ReportView: View {
     @FocusState private var focused: Bool
     @Environment(\.dismiss) private var dismiss
     @Bindable var store: StoreOf<ReportFeature>
+    
+    public init(store: StoreOf<ReportFeature>) {
+        self.store = store
+    }
 
-    var body: some View {
+    public var body: some View {
         ZStack {
             ScrollView {
                 VStack(alignment: .leading) {
@@ -54,7 +58,7 @@ struct ReportView: View {
                     
                     Button {
                         focused = false
-                        store.send(.submitButtonTapped(device: UIDevice.current.modelIdnetifier))
+                        store.send(.submitButtonTapped(device: UIDevice.current.modelIdentifier))
                     } label: {
                         Text("제출하기")
                             .bold()
@@ -72,7 +76,7 @@ struct ReportView: View {
             .navigationTitle("고객센터")
             .navigationBarTitleDisplayMode(.inline)
             .preferredColorScheme(.light)
-            .background(KNUTICEAsset.reportBackground.swiftUIColor)
+//            .background(KNUTICEAsset.reportBackground.swiftUIColor)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {

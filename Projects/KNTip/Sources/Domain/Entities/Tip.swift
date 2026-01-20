@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Tip: Identifiable {
+public struct Tip: Identifiable, Sendable {
     public let id: String
     public let title: String
     public let contentURL: String

@@ -16,6 +16,7 @@ let project = Project(
             dependencies: [
                 .project(target: "KNNetwork", path: "../KNNetwork"),
                 .project(target: "KNUtility", path: "../KNUtility"),
+                .external(name: "ComposableArchitecture")
             ]
         ),
         .target(

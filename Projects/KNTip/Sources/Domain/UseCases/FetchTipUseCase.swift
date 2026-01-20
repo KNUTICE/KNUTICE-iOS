@@ -7,7 +7,7 @@
 
 import Factory
 
-public protocol FetchTipUseCase {
+public protocol FetchTipUseCase: Actor {
     func execute() async -> Result<[Tip]?, any Error>
 }
 
