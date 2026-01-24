@@ -5,7 +5,6 @@
 //  Created by 이정훈 on 5/11/24.
 //
 
-import KNNotice
 import RxDataSources
 
 struct MainNoticeSectionModel {

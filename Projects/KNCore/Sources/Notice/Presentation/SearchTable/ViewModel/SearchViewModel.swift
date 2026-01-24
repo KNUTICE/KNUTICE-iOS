@@ -6,7 +6,6 @@
 //
 
 import Factory
-import KNNotice
 import RxRelay
 import RxSwift
 import os

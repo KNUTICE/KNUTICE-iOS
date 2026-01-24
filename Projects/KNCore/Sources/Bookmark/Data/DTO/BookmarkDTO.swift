@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import KNNotice
 
 struct BookmarkDTO: Sendable {
     let noticeData: NoticeData

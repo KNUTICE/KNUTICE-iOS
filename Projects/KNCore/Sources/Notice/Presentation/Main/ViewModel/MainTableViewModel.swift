@@ -8,7 +8,6 @@
 import Combine
 import Factory
 import Foundation
-import KNNotice
 import RxSwift
 import RxRelay
 import os

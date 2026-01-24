@@ -7,7 +7,6 @@
 
 import Factory
 import Foundation
-import KNNotice
 
 public protocol SearchNoticeAndBookmarkUseCase: Actor {
     typealias SearchResult = Result<([Notice], [Bookmark]), any Error>

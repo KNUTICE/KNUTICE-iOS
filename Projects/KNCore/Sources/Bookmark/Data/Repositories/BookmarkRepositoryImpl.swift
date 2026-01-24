@@ -8,7 +8,6 @@
 @preconcurrency import Combine
 import Factory
 import Foundation
-import KNNotice
 import UserNotifications
 
 actor BookmarkRepositoryImpl: BookmarkRepository {

@@ -7,7 +7,6 @@
 
 import CoreData
 import Foundation
-import KNNotice
 
 protocol BookmarkPersistenceStore: Sendable {
     /// Saves a `Bookmark` into the persistent store.

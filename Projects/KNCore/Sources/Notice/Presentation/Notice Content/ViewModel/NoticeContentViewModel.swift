@@ -8,7 +8,6 @@
 import Combine
 import Factory
 import Foundation
-import KNNotice
 
 @MainActor
 public final class NoticeContentViewModel {

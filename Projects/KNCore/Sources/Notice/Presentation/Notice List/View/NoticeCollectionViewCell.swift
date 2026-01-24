@@ -7,7 +7,6 @@
 
 import UIKit
 import KNDesignSystem
-import KNNotice
 
 final class NoticeCollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "NoticeCollectionViewCell"

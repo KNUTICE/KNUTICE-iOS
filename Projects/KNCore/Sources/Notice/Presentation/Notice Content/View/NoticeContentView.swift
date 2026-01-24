@@ -5,7 +5,6 @@
 //  Created by 이정훈 on 1/12/25.
 //
 
-import KNNotice
 import SwiftUI
 
 struct NoticeContentView: UIViewControllerRepresentable {
