@@ -8,6 +8,7 @@
 import Combine
 import ComposableArchitecture
 import Foundation
+import KNCore
 import KNUtility
 import SwiftUI
 import UIKit

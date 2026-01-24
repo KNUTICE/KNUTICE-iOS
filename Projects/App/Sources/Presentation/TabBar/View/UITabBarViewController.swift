@@ -6,8 +6,7 @@
 //
 
 import Combine
-import KNBookmark
-import KNNotice
+import KNCore
 import KNUtility
 import UIKit
 import SwiftUI

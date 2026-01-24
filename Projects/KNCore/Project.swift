@@ -1,0 +1,31 @@
+import ProjectDescription
+
+let infoPlist: [String: Plist.Value] = [:]
+let project = Project(
+    name: "KNCore",
+    targets: [
+        .target(
+            name: "KNCore",
+            destinations: .iOS,
+            product: .staticLibrary,
+            bundleId: "com.fx.KNCore",
+            deploymentTargets: .iOS("17.0"),
+            infoPlist: .extendingDefault(with: infoPlist),
+            sources: ["Sources/**"],
+            resources: ["Resources/**"],
+            dependencies: [
+                .project(target: "KNNotification", path: "../KNNotification"),
+                .project(target: "KNNetwork", path: "../KNNetwork"),
+                .project(target: "KNUtility", path: "../KNUtility"),
+                .project(target: "KNDesignSystem", path: "../KNDesignSystem"),
+                .project(target: "UIComponents", path: "../UIComponents"),
+                .project(target: "KNTip", path: "../KNTip"),
+                .external(name: "ComposableArchitecture"),
+                .external(name: "Factory"),
+                .external(name: "RxSwift"),
+                .external(name: "RxCocoa"),
+                .external(name: "RxDataSources")
+            ]
+        )
+    ]
+)

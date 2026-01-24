@@ -15,41 +15,9 @@ extension Container {
             FetchTipUseCaseImpl()
         }
     }
-    
-    @MainActor
-    var mainViewModel: Factory<MainTableViewModel> {
-        .mainActor(self) {
-            MainTableViewModel()
-        }
-    }
-    
-    @MainActor
-    var searchViewModel: Factory<SearchViewModel> {
-        .mainActor(self) { SearchViewModel() }
-    }
-    
-    @MainActor
-    var bookmarkTableViewModel: Factory<BookmarkTableViewModel> {
-        .mainActor(self) { BookmarkTableViewModel() }
-    }
-    
+
     @MainActor
     var parentViewModel: Factory<ParentViewModel> {
         .mainActor(self) { ParentViewModel() }
-    }
-}
-
-extension Factory {
-    @MainActor
-    static func mainActor(
-        _ container: ManagedContainer,
-        key: StaticString = #function,
-        _ factory: @escaping @MainActor () -> T
-    ) -> Factory<T> where T: Sendable {
-        Factory(container, key: key) {
-            MainActor.assumeIsolated {
-                factory()
-            }
-        }
     }
 }

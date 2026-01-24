@@ -1,0 +1,96 @@
+//
+//  BookmarkContainerFeature.swift
+//  KNUTICE
+//
+//  Created by 이정훈 on 12/16/25.
+//
+
+import ComposableArchitecture
+
+@Reducer
+public struct BookmarkContainerFeature {
+        
+    @ObservableState
+    public enum State: Equatable {
+        case detail(BookmarkDetailFeature.State)
+        case edit(BookmarkFormFeature.State)
+    }
+
+    public enum Action {
+        case detail(BookmarkDetailFeature.Action)
+        case edit(BookmarkFormFeature.Action)
+        case disappear
+    }
+    
+    public enum CancelID {
+        case deleteBookmark
+        case saveBookmark
+    }
+    
+    @Dependency(\.deleteBookmarkUseCase) private var deleteBookmarkUseCase
+    @Dependency(\.updateBookmarkUseCase) private var updateBookmarkUseCase
+    
+    public init() {}
+
+    public var body: some ReducerOf<Self> {
+        Reduce { state, action in
+            switch action {
+            case .detail(.delegate(.switchToEditMode)):
+                guard case let .detail(bookmarkState) = state, let bookmark = bookmarkState.bookmark else { return .none }
+                
+                state = .edit(
+                    BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .update)
+                )
+                return .none
+                
+            case .detail(.delegate(.deleteBookmark)):
+                return .run { [state] send in
+                    if case let .detail(detailState) = state, let bookmark = detailState.bookmark {
+                        try await deleteBookmarkUseCase.execute(for: bookmark)
+                        await send(.detail(.deleteBookmarkResponse(.success(()))))
+                    }
+                } catch: { error, send in
+                    await send(.detail(.deleteBookmarkResponse(.failure(error))))
+                }
+                .cancellable(id: CancelID.deleteBookmark)
+                
+            case let .edit(.delegate(.save(bookmark))):
+                return .run { send in
+                    try await updateBookmarkUseCase.execute(for: bookmark)
+                    await send(.edit(.saveBookmarkResponse(.success(()))))
+                } catch: { error, send in
+                    await send(.edit(.saveBookmarkResponse(.failure(error))))
+                }
+                .cancellable(id: CancelID.saveBookmark)
+                
+            case let .edit(.delegate(.switchToDetailMode(bookmark))):
+                guard case .edit(_) = state else { return .none }
+                
+                state = .detail(
+                    BookmarkDetailFeature.State(bookmark: bookmark, nttId: bookmark.identity)
+                )
+                
+                return .none
+                
+            case .edit:
+                return .none
+                
+            case .disappear:
+                return .merge(
+                    .cancel(id: CancelID.deleteBookmark),
+                    .cancel(id: CancelID.saveBookmark)
+                )
+                
+            default:
+                return .none
+            }
+        }
+        .ifCaseLet(\.detail, action: \.detail) {
+            BookmarkDetailFeature()
+        }
+        .ifCaseLet(\.edit, action: \.edit) {
+            BookmarkFormFeature()
+        }
+    }
+    
+}

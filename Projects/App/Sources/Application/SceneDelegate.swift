@@ -6,6 +6,7 @@
 //
 
 import Combine
+import KNCore
 import KNDeepLink
 import KNNotification
 import SwiftUI

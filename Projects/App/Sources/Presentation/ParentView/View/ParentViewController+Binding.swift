@@ -6,7 +6,7 @@
 //
 import Combine
 import Foundation
-import KNNotice
+import KNCore
 import KNUtility
 import UIKit
 

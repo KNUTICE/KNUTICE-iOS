@@ -8,9 +8,8 @@
 import Combine
 import Factory
 import Foundation
-import KNBookmark
+import KNCore
 import KNDeepLink
-import KNNotice
 import KNUtility
 import os
 
