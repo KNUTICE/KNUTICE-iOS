@@ -18,3 +18,7 @@ public enum RemoteServerError: Error {
 public enum UserInfoError: Error {
     case nttIdNotFound(message: String)
 }
+
+enum BookmarkPersistenceError: Error {
+    case contextUnavailable
+}

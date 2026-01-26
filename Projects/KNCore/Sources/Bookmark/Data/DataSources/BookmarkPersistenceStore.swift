@@ -86,8 +86,15 @@ extension BookmarkPersistenceStore {
 actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
     static let shared: BookmarkPersistenceStoreImpl = .init()
     
-    private var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Bookmark")
+    private var persistentContainer: NSPersistentContainer? = {
+        let modelName: String = "Bookmark"
+        
+        guard let modelURL = KNCoreResources.bundle.url(forResource: modelName, withExtension: "momd"),
+              let model = NSManagedObjectModel(contentsOf: modelURL) else {
+            return nil
+        }
+        
+        let container = NSPersistentContainer(name: modelName, managedObjectModel: model)
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -97,8 +104,8 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
         return container
     }()
     
-    private lazy var backgroundContext: NSManagedObjectContext = {
-        persistentContainer.newBackgroundContext()
+    private lazy var backgroundContext: NSManagedObjectContext? = {
+        persistentContainer?.newBackgroundContext()
     }()
     
     private init() {}
@@ -110,7 +117,9 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
         
         try Task.checkCancellation()
         
-        try await context.perform(schedule: .enqueued) {
+        try await context?.perform(schedule: .enqueued) {
+            guard let context else { throw BookmarkPersistenceError.contextUnavailable }
+            
             // BookmarkEntity
             let bookmarkEntity = BookmarkEntity(context: context)
             bookmarkEntity.memo = dto.memo
@@ -197,10 +206,12 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
         fetchOffset: Int = 0,
         sortDescriptors: [NSSortDescriptor]? = nil
     ) async throws -> [BookmarkEntity] {
-        let context = backgroundContext
+        guard let context = backgroundContext else {
+            throw BookmarkPersistenceError.contextUnavailable
+        }
         
         return try await context.perform {
-            let request = NSFetchRequest<BookmarkEntity>(entityName: "BookmarkEntity")
+            let request = BookmarkEntity.fetchRequest()
             request.predicate = predicate
             request.fetchLimit = fetchLimit
             request.fetchOffset = fetchOffset
@@ -225,8 +236,11 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
     func delete(by id: Int) async throws {
         try Task.checkCancellation()
         
-        let context = backgroundContext
         let entities: [BookmarkEntity] = try await fetch(withId: id)
+        
+        guard let context = backgroundContext else {
+            throw BookmarkPersistenceError.contextUnavailable
+        }
         
         try await context.perform(schedule: .enqueued) {
             entities.forEach {
@@ -244,8 +258,9 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
     func update(bookmark: Bookmark) async throws {
         try Task.checkCancellation()
         
-        let context = backgroundContext
         let entities: [BookmarkEntity] = try await fetch(withId: bookmark.notice.id)
+        
+        guard let context = backgroundContext else { throw BookmarkPersistenceError.contextUnavailable }
         
         try await context.perform(schedule: .enqueued) {   
             entities.forEach {
@@ -265,12 +280,12 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
         
         let entities: [BookmarkEntity] = try await fetch(withId: update.bookmark.notice.id)
         
+        guard let context = backgroundContext else { throw BookmarkPersistenceError.contextUnavailable }
+        
         for entity in entities {
             entity.createdAt = update.createdAt
             entity.updatedAt = update.updatedAt
         }
-        
-        let context = backgroundContext
         
         if context.hasChanges {
             try await context.perform(schedule: .enqueued) {

@@ -7,7 +7,7 @@ let project = Project(
         .target(
             name: "KNCore",
             destinations: .iOS,
-            product: .staticLibrary,
+            product: .staticFramework,
             bundleId: "com.fx.KNCore",
             deploymentTargets: .iOS("17.0"),
             infoPlist: .extendingDefault(with: infoPlist),
@@ -20,12 +20,13 @@ let project = Project(
                 .project(target: "KNDesignSystem", path: "../KNDesignSystem"),
                 .project(target: "UIComponents", path: "../UIComponents"),
                 .project(target: "KNTip", path: "../KNTip"),
+                .project(target: "KNReport", path: "../KNReport"),
                 .external(name: "ComposableArchitecture"),
                 .external(name: "Factory"),
                 .external(name: "RxSwift"),
                 .external(name: "RxCocoa"),
                 .external(name: "RxDataSources")
-            ]
+            ],
         )
     ]
 )
