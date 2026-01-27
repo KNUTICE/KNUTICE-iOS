@@ -9,6 +9,7 @@ import Combine
 import Factory
 import KNDesignSystem
 import KNTip
+import KNSetting
 import KNUtility
 import RxSwift
 import SwiftUI

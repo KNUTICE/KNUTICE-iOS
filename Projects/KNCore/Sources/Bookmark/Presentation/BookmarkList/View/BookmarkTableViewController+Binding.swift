@@ -7,6 +7,7 @@
 
 import Foundation
 import KNUtility
+import KNSetting
 import RxDataSources
 import RxSwift
 import SwiftUI

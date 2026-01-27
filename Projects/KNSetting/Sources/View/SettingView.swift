@@ -51,7 +51,7 @@ public struct SettingView: View {
                 .padding(.bottom)
                 
                 NavigationLink {
-                    BaseWebContentView(navigationTitle: "오픈소스 라이선스", contentURL: Bundle.main.openSourceURL)
+                    BaseWebContentView(navigationTitle: "오픈소스 라이선스", contentURL: Bundle.module.openSourceURL)
                 } label: {
                     NavigationIndicator(title: "오픈소스 라이선스")
                 }

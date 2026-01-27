@@ -42,6 +42,7 @@ let project = Project(
                 .project(target: "KNDeepLink", path: "../KNDeepLink"),
                 .project(target: "KNTip", path: "../KNTip"),
                 .project(target: "UIComponents", path: "../UIComponents"),
+                .project(target: "KNSetting", path: "../KNSetting"),
                 .external(name: "RxSwift"),
                 .external(name: "RxDataSources"),
                 .external(name: "Kingfisher"),

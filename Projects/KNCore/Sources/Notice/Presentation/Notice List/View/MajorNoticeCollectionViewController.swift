@@ -7,6 +7,7 @@
 
 import Combine
 import KNDesignSystem
+import KNSetting
 import KNUtility
 import RxSwift
 import SwiftUI

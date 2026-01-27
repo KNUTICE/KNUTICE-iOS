@@ -22,6 +22,7 @@ let project = Project(
                 .project(target: "KNTip", path: "../KNTip"),
                 .project(target: "KNReport", path: "../KNReport"),
                 .project(target: "KNTopic", path: "../KNTopic"),
+                .project(target: "KNSetting", path: "../KNSetting"),
                 .external(name: "ComposableArchitecture"),
                 .external(name: "Factory"),
                 .external(name: "RxSwift"),
