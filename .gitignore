@@ -121,3 +121,4 @@ cli/Tests/Fixtures/*.xcresult/database.sqlite3
 # Firebase configuration
 ServiceInfo.plist
 GoogleService-Info.plist
+**/ServiceInfo.plist
