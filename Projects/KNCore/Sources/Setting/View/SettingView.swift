@@ -10,6 +10,7 @@ import ComposableArchitecture
 import Factory
 import KNDesignSystem
 import KNReport
+import KNTopic
 import SwiftUI
 import UIComponents
 

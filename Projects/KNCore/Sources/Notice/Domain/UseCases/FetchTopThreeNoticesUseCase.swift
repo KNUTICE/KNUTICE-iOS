@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import KNUtility
 
 public protocol FetchTopThreeNoticesUseCase: Sendable {
     /// Fetches notices for all `NoticeCategory` cases concurrently and returns them as `[MainSectionNotice]`.

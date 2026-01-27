@@ -1,16 +1,13 @@
 //
 //  DependencyValues+Live.swift
-//  KNUTICE
+//  KNTopic
 //
-//  Created by 이정훈 on 12/9/25.
+//  Created by 이정훈 on 1/27/26.
 //
 
 import ComposableArchitecture
-import Foundation
-import KNCore
-import KNReport
 
-extension DependencyValues {    
+extension DependencyValues {
     var fetchTopicSubscriptionUseCase: FetchTopicSubscriptionsUseCase {
         get { self[FetchTopicSubscriptionUseCaseKey.self] }
         set { self[FetchTopicSubscriptionUseCaseKey.self] = newValue }

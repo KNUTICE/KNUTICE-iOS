@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KNUtility
 
 public enum College: CaseIterable {
     case fusionTechnology

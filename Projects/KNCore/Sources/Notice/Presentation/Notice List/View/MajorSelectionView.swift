@@ -6,6 +6,7 @@
 //
 
 import KNDesignSystem
+import KNUtility
 import SwiftUI
 
 public struct MajorSelectionView: View {

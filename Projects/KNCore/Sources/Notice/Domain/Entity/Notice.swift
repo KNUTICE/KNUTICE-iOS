@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KNUtility
 
 public struct Notice: Sendable {
     public let id: Int    // nttId

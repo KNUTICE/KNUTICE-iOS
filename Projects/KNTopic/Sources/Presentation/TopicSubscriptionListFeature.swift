@@ -11,22 +11,24 @@ import KNNetwork
 import KNUtility
 
 @Reducer
-struct TopicSubscriptionListFeature {
+public struct TopicSubscriptionListFeature {
     // MARK: - State
     
     @ObservableState
-    struct State: Equatable {
+    public struct State: Equatable {
         var noticeSubscriptionStates: [NoticeCategory: Bool] = [:]
         var isMajorNoticeNotificationSubscribed: Bool = false
         var isLoading: Bool = false
         var isShowingAlert: Bool = false
         var isShowingFCMTokenErrorAlert: Bool = false
         var alertMessage: String = ""
+        
+        public init() {}
     }
     
     // MARK: - Action
     @CasePathable
-    enum Action {
+    public enum Action {
         case onAppear
         case onDisappear
         
@@ -49,8 +51,10 @@ struct TopicSubscriptionListFeature {
     
     enum CancelID { case fetch, update }
     
+    public init() {}
+    
     // MARK: - Reducer
-    var body: some Reducer<State, Action> {
+    public var body: some Reducer<State, Action> {
         
         Reduce { state, action in
             switch action {

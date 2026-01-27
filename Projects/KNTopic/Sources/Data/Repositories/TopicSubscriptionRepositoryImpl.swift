@@ -10,11 +10,19 @@ import Foundation
 import KNNetwork
 import KNUtility
 
-actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
-    @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
-    private let baseURL: String? = Bundle.module.topicSubscriptionURL
+extension Bundle {
+    static var topicModule: Bundle {
+        Bundle(for: TopicSubscriptionRepositoryImpl.BundleFinder.self)
+    }
+}
+
+public actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
+    class BundleFinder {}
     
-    func fetch(for type: TopicType) async throws -> [TopicSubscriptionKey] {
+    @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
+    private let baseURL: String? = Bundle.topicModule.topicSubscriptionURL
+    
+    public func fetch(for type: TopicType) async throws -> [TopicSubscriptionKey] {
         try Task.checkCancellation()
         
         guard let baseURL else {
@@ -29,15 +37,15 @@ actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
             isInterceptable: true
         )
         
-        return dto.data.subscribedTopics.compactMap {
+        return dto.data.subscribedTopics.compactMap { value -> TopicSubscriptionKey? in
             switch type {
             case .notice:
                 // Map raw string to NoticeCategory, then wrap in TopicSubscriptionKey.notice
-                guard let category = NoticeCategory(rawValue: $0) else { return nil }
+                guard let category = NoticeCategory(rawValue: value) else { return nil }
                 return .notice(category)
             case .major:
                 // Map raw string to MajorCategory, then wrap in TopicSubscriptionKey.major
-                guard let category = MajorCategory(rawValue: $0) else { return nil }
+                guard let category = MajorCategory(rawValue: value) else { return nil }
                 return .major(category)
             case .meal:
                 // TODO: Enable subscription for `.meal` in the future
@@ -46,7 +54,7 @@ actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
         }
     }
     
-    func update(of type: TopicType, topic: any CategoryProtocol, isEnabled: Bool) async throws {
+    public func update(of type: TopicType, topic: any CategoryProtocol, isEnabled: Bool) async throws {
         try Task.checkCancellation()
         
         guard let baseURL else {

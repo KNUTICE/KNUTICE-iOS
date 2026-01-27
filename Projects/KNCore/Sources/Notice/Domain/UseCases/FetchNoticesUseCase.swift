@@ -8,6 +8,7 @@
 import Combine
 import Factory
 import Foundation
+import KNTopic
 import KNUtility
 
 public protocol FetchNoticesUseCase: Actor {
@@ -64,7 +65,11 @@ public actor FetchNoticesUseCaseImpl: FetchNoticesUseCase {
                category != storedMajorCategory {
                 group.addTask {
                     // 이전 선택된 학과 알림 비활성화
-                    try await self.topicSubscriptionRepository.update(of: .major, topic: storedMajorCategory, isEnabled: false)
+                    try await self.topicSubscriptionRepository.update(
+                        of: TopicType.major,
+                        topic: storedMajorCategory,
+                        isEnabled: false
+                    )
                 }
             }
             

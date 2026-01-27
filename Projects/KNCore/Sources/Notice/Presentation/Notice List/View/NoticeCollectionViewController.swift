@@ -6,8 +6,9 @@
 //
 
 import KNDesignSystem
-import UIKit
+import KNUtility
 import SwiftUI
+import UIKit
 import RxSwift
 
 typealias NoticeCollectionViewConfigurable = UICollectionViewDelegateFlowLayout & CompositionalLayoutConfigurable & RxDataSourceBindable

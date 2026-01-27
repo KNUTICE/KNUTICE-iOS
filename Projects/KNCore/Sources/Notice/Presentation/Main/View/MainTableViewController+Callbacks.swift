@@ -6,7 +6,7 @@
 //
 
 import Factory
-import KNCore
+import KNUtility
 import SwiftUI
 import UIKit
 

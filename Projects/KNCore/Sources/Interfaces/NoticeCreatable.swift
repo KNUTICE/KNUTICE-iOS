@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KNUtility
 
 public protocol NoticeCreatable {
     func createNotice(_ body: NoticeData) -> Notice

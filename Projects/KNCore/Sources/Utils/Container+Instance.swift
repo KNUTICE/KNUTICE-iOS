@@ -31,12 +31,6 @@ extension Container {
         }
     }
     
-    var topicSubscriptionRepository: Factory<TopicSubscriptionRepository> {
-        Factory(self) {
-            TopicSubscriptionRepositoryImpl()
-        }
-    }
-    
     // MARK: - UseCases
     // [Bookmark Related]
     var saveBookmarkUseCase: Factory<SaveBookmarkUseCase> {

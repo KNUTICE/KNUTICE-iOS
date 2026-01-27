@@ -7,14 +7,19 @@
 
 import ComposableArchitecture
 import KNDesignSystem
+import KNUtility
 import SwiftUI
 import UIComponents
 
-struct TopicSubscriptionList: View {
+public struct TopicSubscriptionList: View {
     let store: StoreOf<TopicSubscriptionListFeature>
     @Environment(\.dismiss) private var dismiss
     
-    var body: some View {
+    public init(store: StoreOf<TopicSubscriptionListFeature>) {
+        self.store = store
+    }
+    
+    public var body: some View {
         ZStack {
             List {
                 Section {

@@ -25,14 +25,6 @@ public extension Bundle {
         return url
     }
     
-    var topicSubscriptionURL: String? {
-        guard let url = resource?["TopicSubscription_URL"] as? String else {
-            return nil
-        }
-        
-        return url
-    }
-    
     var openSourceURL: String {
         guard let url = resource?["OpenSourceLicenseURL"] as? String else {
             return ""

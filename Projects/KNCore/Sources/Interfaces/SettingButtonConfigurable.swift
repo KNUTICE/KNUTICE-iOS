@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 import SwiftUI
-import UIComponents
 
 @MainActor
 public protocol SettingButtonConfigurable: AnyObject {
