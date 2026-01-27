@@ -7,6 +7,14 @@
 
 import Factory
 
+extension Container {
+    var tokenRepository: Factory<TokenRepository> {
+        Factory(self) {
+            TokenRepositoryImpl()
+        }
+    }
+}
+
 public extension Container {
     var registerFCMTokenUseCase: Factory<RegisterFCMTokenUseCase> {
         Factory(self) {

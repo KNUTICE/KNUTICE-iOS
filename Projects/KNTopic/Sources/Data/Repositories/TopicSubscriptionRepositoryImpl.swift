@@ -10,18 +10,21 @@ import Foundation
 import KNNetwork
 import KNUtility
 
-extension Bundle {
-    static var topicModule: Bundle {
-        Bundle(for: TopicSubscriptionRepositoryImpl.BundleFinder.self)
-    }
-}
-
 public actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
-    class BundleFinder {}
-    
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
-    private let baseURL: String? = Bundle.topicModule.topicSubscriptionURL
+    private let baseURL: String? = Bundle.module.topicSubscriptionURL
     
+    /// Fetches and maps subscribed topics from the server.
+    ///
+    /// This method performs the following:
+    /// 1. Constructs the query URL with the specified `TopicType`.
+    /// 2. Executes a GET request with interception for authentication.
+    /// 3. Validates and maps raw string values from the DTO into specific category enums.
+    ///
+    /// - Note: Currently, `.meal` type subscriptions are not supported and will return an empty list.
+    ///
+    /// - Parameter type: The type of topics to retrieve.
+    /// - Returns: A filtered list of valid `TopicSubscriptionKey` objects.
     public func fetch(for type: TopicType) async throws -> [TopicSubscriptionKey] {
         try Task.checkCancellation()
         
@@ -54,6 +57,14 @@ public actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
         }
     }
     
+    /// Updates the server-side subscription state for a specific topic category.
+    ///
+    /// Sends a PATCH request containing the topic identifier and the desired enabled state.
+    ///
+    /// - Parameters:
+    ///   - type: The category type (Notice, Major, etc.).
+    ///   - topic: The specific category instance to modify.
+    ///   - isEnabled: The new subscription state.
     public func update(of type: TopicType, topic: any CategoryProtocol, isEnabled: Bool) async throws {
         try Task.checkCancellation()
         
