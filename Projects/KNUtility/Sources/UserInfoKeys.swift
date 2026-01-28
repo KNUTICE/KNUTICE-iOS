@@ -1,0 +1,16 @@
+//
+//  UserInfoKeys.swift
+//  KNUTICE
+//
+//  Created by 이정훈 on 10/14/25.
+//
+
+import Foundation
+
+public enum UserInfoKeys : String {
+    case notificationEvent = "event"
+    case bookmarkSortOption
+    case selectedMajor
+    case fcmToken = "token"
+    case deepLink = "deeplink"
+}
