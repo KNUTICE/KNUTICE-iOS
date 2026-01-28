@@ -35,13 +35,13 @@ public actor UpdateFCMTokenUseCaseImpl: UpdateFCMTokenUseCase {
         async let existingToken = FCMTokenKeychainManager.shared.read()
         async let newToken = FCMTokenManager.shared.getToken()
         
+        // 요청 성공 후 키체인에 새 토큰 저장
+        try await FCMTokenKeychainManager.shared.save(fcmToken: newToken)
+        
         try await repository.update(
             oldFCMToken: existingToken,
             newFCMToken: newToken
         )
-        
-        // 요청 성공 후 키체인에 새 토큰 저장
-        await FCMTokenKeychainManager.shared.save(fcmToken: try await newToken)
     }
     
 }
