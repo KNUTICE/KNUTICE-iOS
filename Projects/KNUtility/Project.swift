@@ -7,7 +7,7 @@ let project = Project(
         .target(
             name: "KNUtility",
             destinations: .iOS,
-            product: .staticLibrary,
+            product: Environment.forPreview.getBoolean(default: false) ? .framework : .staticFramework,
             bundleId: "com.fx.KNUtility",
             deploymentTargets: .iOS("17.0"),
             infoPlist: .extendingDefault(with: infoPlist),

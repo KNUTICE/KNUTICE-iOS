@@ -7,7 +7,7 @@ let project = Project(
         .target(
             name: "KNSetting",
             destinations: .iOS,
-            product: .staticFramework,
+            product: Environment.forPreview.getBoolean(default: false) ? .framework : .staticFramework,
             bundleId: "com.fx.KNSetting",
             deploymentTargets: .iOS("17.0"),
             infoPlist: .extendingDefault(with: infoPlist),
@@ -16,6 +16,7 @@ let project = Project(
             dependencies: [
                 .project(target: "KNReport", path: "../KNReport"),
                 .project(target: "KNTopic", path: "../KNTopic"),
+                .project(target: "UIComponents", path: "../UIComponents"),
                 .external(name: "ComposableArchitecture"),
             ],
         )

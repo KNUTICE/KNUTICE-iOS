@@ -7,7 +7,7 @@ let project = Project(
         .target(
             name: "KNToken",
             destinations: .iOS,
-            product: .staticLibrary,
+            product: Environment.forPreview.getBoolean(default: false) ? .framework : .staticFramework,
             bundleId: "com.fx.KNToken",
             deploymentTargets: .iOS("17.0"),
             infoPlist: .extendingDefault(with: infoPlist),
