@@ -8,6 +8,7 @@
 import ComposableArchitecture
 import Combine
 import KNDesignSystem
+import KNIntelligence
 import SwiftUI
 import UIKit
 import WebKit
@@ -30,47 +31,50 @@ public final class NoticeContentViewController: UIViewController {
         
         return webView
     }()
+    private var buttonConfig: UIButton.Configuration {
+        if #available(iOS 26, *) {
+            return .glass()
+        }
+        
+        return .filled()
+    }
     private lazy var bookmarkButton: UIButton = {
-        let button = UIButton(type: .system)
+        // 1. 스타일 설정
+        var config = buttonConfig
+        config.baseBackgroundColor = KNDesignSystemAsset.accent2.color
+        config.cornerStyle = .capsule
         
-        // MARK: - Symbol Image
-        let plusImage = UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate)
-        button.setImage(plusImage, for: .normal)
+        // 2. 이미지 설정
+        config.image = KNDesignSystemAsset.knuticeaiLogo.image.resizedMaintainingAspectRatio(to: CGSize(width: 35, height: 35))
         
-        // MARK: - Appearance
-        button.layer.cornerRadius = 25
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.3
-        button.layer.shadowRadius = 7
-        button.layer.shadowOffset = .zero
-        
-        // MARK: - Interaction
-        button.addAction(UIAction { [weak self] _ in
+        // 3. 버튼 생성
+        let button = UIButton(configuration: config, primaryAction: UIAction { [weak self] _ in
             guard let notice = self?.viewModel.notice else { return }
             
-            let bookmark = Bookmark(notice: notice, memo: "")
-            let rootView = BookmarkForm(
-                store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
-                    BookmarkFormFeature()
-                }
-            ) {
-                self?.dismiss(animated: true)
-            }
+            let rootView = NoticeSummaryView(viewModel: NoticeSummaryViewModel(nttId: notice.id))
             let viewController = UIHostingController(rootView: rootView)
             let navigationController = UINavigationController(rootViewController: viewController)
             navigationController.modalPresentationStyle = .pageSheet
             
+            if let sheet = navigationController.sheetPresentationController {
+                sheet.detents = [
+                    .medium(),   // 기본 중간 높이
+                    .large()     // 사용자가 끝까지 확장 가능
+                ]
+                sheet.selectedDetentIdentifier = .medium
+                sheet.prefersGrabberVisible = true
+                sheet.prefersScrollingExpandsWhenScrolledToEdge = true
+                sheet.prefersEdgeAttachedInCompactHeight = true
+            }
+            
             self?.present(navigationController, animated: true, completion: nil)
-        }, for: .touchUpInside)
+        })
         
-        // MARK: - Style (iOS version specific)
-        if #available(iOS 26.0, *) {
-            button.tintColor = KNDesignSystemAsset.accent2.color
-            button.configuration = .prominentGlass()
-        } else {
-            button.tintColor = .white
-            button.backgroundColor = KNDesignSystemAsset.accent2.color
-        }
+        // 4. 그림자
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowRadius = 7
+        button.layer.shadowOffset = .zero
         
         return button
     }()
@@ -139,8 +143,8 @@ public final class NoticeContentViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        //NavigationItem
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
+        // ActivityView Item
+        let activityViewItem = UIBarButtonItem(
             image: UIImage(systemName: "square.and.arrow.up"),
             primaryAction: UIAction { [weak self] _ in
                 guard let notice = self?.viewModel.notice else { return }
@@ -158,6 +162,36 @@ public final class NoticeContentViewController: UIViewController {
                 self?.present(activityViewController, animated: true, completion: nil)
             }
         )
+        
+        // Bookmark Item
+        let bookmarkItem = UIBarButtonItem(
+            image: UIImage(systemName: "bookmark"),
+            primaryAction: UIAction { [weak self] _ in
+                guard let notice = self?.viewModel.notice else { return }
+                
+                let bookmark = Bookmark(notice: notice, memo: "")
+                let rootView = BookmarkForm(
+                    store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
+                        BookmarkFormFeature()
+                    }
+                ) {
+                    self?.dismiss(animated: true)
+                }
+                let viewController = UIHostingController(rootView: rootView)
+                let navigationController = UINavigationController(rootViewController: viewController)
+                navigationController.modalPresentationStyle = .pageSheet
+                
+                self?.present(navigationController, animated: true, completion: nil)
+            }
+        )
+            
+        
+        navigationItem.setRightBarButtonItems(
+            [
+                activityViewItem,
+                bookmarkItem
+            ],
+            animated: true)
     }
     
     private func showCompletionAlert() {
