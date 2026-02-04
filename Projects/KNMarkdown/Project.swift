@@ -12,7 +12,9 @@ let project = Project(
             deploymentTargets: .iOS("17.0"),
             infoPlist: .extendingDefault(with: infoPlist),
             sources: ["Sources/**"],
-            dependencies: [],
+            dependencies: [
+                .project(target: "KNDesignSystem", path: "../KNDesignSystem"),
+            ],
         )
     ]
 )

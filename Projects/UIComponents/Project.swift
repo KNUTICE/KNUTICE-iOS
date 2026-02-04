@@ -12,10 +12,7 @@ let project = Project(
             deploymentTargets: .iOS("17.0"),
             infoPlist: .extendingDefault(with: infoPlist),
             sources: ["Sources/**"],
-            dependencies: [
-                .external(name: "FirebaseMessaging"),
-                .external(name: "RxCocoa"),
-            ]
+            dependencies: []
         )
     ]
 )

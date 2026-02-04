@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum MarkdownNode: Identifiable, Sendable {
+public enum MarkdownNode: Identifiable, Equatable, Sendable {
     case heading(text: String, level: Int)
     case paragraph(text: String)
     case listItem(text: String)
