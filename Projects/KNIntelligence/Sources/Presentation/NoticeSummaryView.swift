@@ -45,11 +45,8 @@ public struct NoticeSummaryView: View {
                             case let .paragraph(content):
                                 Text(.init(content))
                                 
-                            case let .listItem(content):
-                                HStack(alignment: .firstTextBaseline, spacing: 3) {
-                                    Text("•")
-                                    Text(.init(content))
-                                }
+                            case let .listItem(content, level, child):
+                                ListItemView(content: content, level: level, children: child)
                                 
                             case let .table(headers, rows):
                                 MarkdownTableView(headers: headers, rows: rows)
