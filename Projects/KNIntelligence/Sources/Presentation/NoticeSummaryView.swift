@@ -39,7 +39,7 @@ public struct NoticeSummaryView: View {
                             case let .heading(content, level):
                                 Text(.init(content))
                                     .bold()
-                                    .font(level == 3 ? .title : level == 2 ? .title2 : .title3)
+                                    .font(level == 3 ? .title3 : level == 2 ? .title2 : .title)
                                     .padding(.top)
                                 
                             case let .paragraph(content):
