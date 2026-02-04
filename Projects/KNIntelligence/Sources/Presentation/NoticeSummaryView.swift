@@ -32,31 +32,33 @@ public struct NoticeSummaryView: View {
                 }
                 .padding(.leading, 10)
                 
-                VStack(alignment: .leading) {
+                VStack {
                     ForEach(viewModel.nodes) { node in
-                        switch node {
-                        case let .heading(content, level):
-                            Text(.init(content))
-                                .bold()
-                                .font(level == 3 ? .title : level == 2 ? .title2 : .title3)
-                                .padding(.top)
-                            
-                        case let .paragraph(content):
-                            Text(.init(content))
-                            
-                        case let .listItem(content):
-                            HStack(alignment: .firstTextBaseline, spacing: 3) {
-                                Text("•")
+                        Group {
+                            switch node {
+                            case let .heading(content, level):
                                 Text(.init(content))
+                                    .bold()
+                                    .font(level == 3 ? .title : level == 2 ? .title2 : .title3)
+                                    .padding(.top)
+                                
+                            case let .paragraph(content):
+                                Text(.init(content))
+                                
+                            case let .listItem(content):
+                                HStack(alignment: .firstTextBaseline, spacing: 3) {
+                                    Text("•")
+                                    Text(.init(content))
+                                }
+                                
+                            case let .table(headers, rows):
+                                MarkdownTableView(headers: headers, rows: rows)
                             }
-                            
-                        case let .table(headers, rows):
-                            MarkdownTableView(headers: headers, rows: rows)
                         }
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
                 .padding()
-                .frame(maxWidth: .infinity)
                 .background(KNDesignSystemAsset.gray2.swiftUIColor)
                 .cornerRadius(10)
                 .padding(.trailing)
