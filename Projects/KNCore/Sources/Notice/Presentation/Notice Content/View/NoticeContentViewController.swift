@@ -15,6 +15,11 @@ import SwiftUI
 import UIKit
 import WebKit
 
+enum ABTestLayoutType: String {
+    case typeA = "type_A"
+    case typeB = "type_B"
+}
+
 public final class NoticeContentViewController: UIViewController {
     
     // MARK: - UI Components
@@ -36,7 +41,7 @@ public final class NoticeContentViewController: UIViewController {
         return webView
     }()
     
-    private lazy var bookmarkButton: UIButton = {
+    private lazy var aiSummarizationButton: UIButton = {
         var config: UIButton.Configuration = {
             if #available(iOS 26, *) { return .glass() }
             return .filled()
@@ -57,14 +62,56 @@ public final class NoticeContentViewController: UIViewController {
         return button
     }()
     
+    private lazy var bookmarkButton: UIButton = {
+        let button = UIButton(type: .system)
+        
+        // MARK: - Symbol Image
+        let plusImage = UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate)
+        button.setImage(plusImage, for: .normal)
+        
+        // MARK: - Appearance
+        button.layer.cornerRadius = 25
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowRadius = 7
+        button.layer.shadowOffset = .zero
+        
+        // MARK: - Interaction
+        button.addAction(UIAction { [weak self] _ in
+            guard let notice = self?.viewModel.notice else { return }
+            
+            let bookmark = Bookmark(notice: notice, memo: "")
+            let rootView = BookmarkForm(
+                store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
+                    BookmarkFormFeature()
+                }
+            ) {
+                self?.dismiss(animated: true)
+            }
+            let viewController = UIHostingController(rootView: rootView)
+            let navigationController = UINavigationController(rootViewController: viewController)
+            navigationController.modalPresentationStyle = .pageSheet
+            
+            self?.present(navigationController, animated: true, completion: nil)
+        }, for: .touchUpInside)
+        
+        // MARK: - Style (iOS version specific)
+        if #available(iOS 26.0, *) {
+            button.tintColor = KNDesignSystemAsset.accent2.color
+            button.configuration = .prominentGlass()
+        } else {
+            button.tintColor = .white
+            button.backgroundColor = KNDesignSystemAsset.accent2.color
+        }
+        
+        return button
+    }()
+    
     // MARK: - Properties
     
     private let viewModel: NoticeContentViewModel
     private var cancellables = Set<AnyCancellable>()
-    private var abTestTask: Task<Void, Never>?
-    
-    @Published private var isWebPageLoaded = false
-    @Published private var isABTestLoaded = false
+    private var webViewTask: Task<Void, Never>?
     
     // MARK: - Init
     
@@ -84,6 +131,7 @@ public final class NoticeContentViewController: UIViewController {
         setupUI()
         bind()
         loadInitialData()
+        viewModel.fetchLayout()
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -95,8 +143,8 @@ public final class NoticeContentViewController: UIViewController {
     
     public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        viewModel.task?.cancel()
-        abTestTask?.cancel()
+        viewModel.noticeTask?.cancel()
+        webViewTask?.cancel()
     }
 }
 
@@ -106,36 +154,14 @@ private extension NoticeContentViewController {
     func setupUI() {
         view.backgroundColor = KNDesignSystemAsset.detailViewBackground.color
         
-        [webView, bookmarkButton, activityIndicator].forEach { view.addSubview($0) }
+        [webView, aiSummarizationButton, activityIndicator].forEach { view.addSubview($0) }
         
         webView.snp.makeConstraints { $0.edges.equalToSuperview() }
-        bookmarkButton.snp.makeConstraints { make in
-            let bottomOffset = UIDevice.current.userInterfaceIdiom == .phone ? -50 : -100
-            make.bottom.equalToSuperview().offset(bottomOffset)
-            make.trailing.equalToSuperview().offset(-20)
-            make.width.height.equalTo(50)
-        }
         activityIndicator.snp.makeConstraints { $0.center.equalToSuperview() }
-        
-        setupNavigationBar()
-    }
-    
-    func setupNavigationBar() {
-        let shareItem = UIBarButtonItem(
-            image: UIImage(systemName: "square.and.arrow.up"),
-            primaryAction: UIAction { [weak self] _ in self?.presentShareSheet() }
-        )
-        
-        let bookmarkItem = UIBarButtonItem(
-            image: UIImage(systemName: "bookmark"),
-            primaryAction: UIAction { [weak self] _ in self?.presentBookmarkForm() }
-        )
-        
-        navigationItem.rightBarButtonItems = [shareItem, bookmarkItem]
     }
     
     func bind() {
-        // 1. Notice URL 로딩 감시
+        // Notice URL 로딩 감시
         viewModel.$notice
             .compactMap { $0?.contentUrl }
             .compactMap { URL(string: $0) }
@@ -145,35 +171,26 @@ private extension NoticeContentViewController {
             }
             .store(in: &cancellables)
         
-        // 2. 최종 화면 노출 조건 결합
-        Publishers.CombineLatest($isWebPageLoaded, $isABTestLoaded)
-            .filter { $0 && $1 }
+        viewModel.$layoutType
+            .compactMap { $0 }
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.webView.isHidden = false
-                self?.activityIndicator.stopAnimating()
-            }
+            .sink(receiveValue: { [weak self] layout in
+                switch layout {
+                case .typeA:
+                    self?.configureLayoutA()
+                    
+                case .typeB:
+                    self?.configureLayoutB()
+                }
+            })
             .store(in: &cancellables)
     }
     
     func loadInitialData() {
-        fetchABTestConfig()
-        
         if let urlString = viewModel.notice?.contentUrl, let url = URL(string: urlString) {
             webView.load(URLRequest(url: url))
         } else if viewModel.nttId != nil {
-            viewModel.fetch()
-        }
-    }
-    
-    private func fetchABTestConfig() {
-        abTestTask = Task {
-            do {
-                let _ = try await ABTestManager.shared.getString(key: ABTestKeys.bookmarkBtnType.rawValue)
-                self.isABTestLoaded = true
-            } catch {
-                self.isABTestLoaded = true // 에러 발생 시에도 화면은 보여줌
-            }
+            viewModel.fetchNotice()
         }
     }
 }
@@ -181,14 +198,14 @@ private extension NoticeContentViewController {
 // MARK: - Presentation Actions
 
 private extension NoticeContentViewController {
-    private func presentSummarySheet() {
+    func presentSummarySheet() {
         guard let notice = viewModel.notice else { return }
         let summaryViewModel = NoticeSummaryViewModel(nttId: notice.id)
         let rootView = NoticeSummaryView(viewModel: summaryViewModel)
         presentSheet(rootView: rootView)
     }
     
-    private func presentBookmarkForm() {
+    func presentBookmarkForm() {
         guard let notice = viewModel.notice else { return }
         let bookmark = Bookmark(notice: notice, memo: "")
         let state = BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create)
@@ -202,7 +219,7 @@ private extension NoticeContentViewController {
         presentSheet(rootView: rootView)
     }
     
-    private func presentSheet<Content: View>(rootView: Content) {
+    func presentSheet<Content: View>(rootView: Content) {
         let vc = UIHostingController(rootView: rootView)
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .pageSheet
@@ -214,7 +231,7 @@ private extension NoticeContentViewController {
         present(nav, animated: true)
     }
     
-    private func presentShareSheet() {
+    func presentShareSheet() {
         guard let urlStr = viewModel.notice?.contentUrl else { return }
         let activityVC = UIActivityViewController(activityItems: [urlStr], applicationActivities: nil)
         activityVC.popoverPresentationController?.sourceView = view
@@ -224,7 +241,7 @@ private extension NoticeContentViewController {
         present(activityVC, animated: true)
     }
     
-    private func showCompletionAlert() {
+    func showCompletionAlert() {
         let alert = UIAlertController(title: "알림", message: "공유를 완료했어요.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default))
         present(alert, animated: true)
@@ -235,9 +252,14 @@ private extension NoticeContentViewController {
 
 extension NoticeContentViewController: WKNavigationDelegate {
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        webView.evaluateJavaScript(JavaScriptScripts.cleanUpKNUTPage) { [weak self] _, error in
-            if let error = error { print("JS Error: \(error)") }
-            self?.isWebPageLoaded = true
+        webViewTask = Task {
+            do {
+                let _ = try await webView.evaluateJavaScript(JavaScriptScripts.cleanUpKNUTPage)
+                webView.isHidden = false
+                activityIndicator.stopAnimating()
+            } catch {
+                print("Failed to configure layout: \(error)")
+            }
         }
     }
 }
@@ -250,6 +272,56 @@ extension NoticeContentViewController: WKUIDelegate {
             UIApplication.shared.open(url)
         }
         return nil
+    }
+}
+
+// MARK: A/B Test
+private extension NoticeContentViewController {
+    func configureLayoutA() {
+        // toolbar
+        let shareItem = UIBarButtonItem(
+            image: UIImage(systemName: "square.and.arrow.up"),
+            primaryAction: UIAction { [weak self] _ in self?.presentShareSheet() }
+        )
+        navigationItem.rightBarButtonItems = [shareItem]
+        
+        // AI 요약 버튼: 좌측 하단
+        aiSummarizationButton.snp.remakeConstraints { make in
+            let bottomOffset = UIDevice.current.userInterfaceIdiom == .phone ? -50 : -100
+            make.bottom.equalToSuperview().offset(bottomOffset)
+            make.leading.equalToSuperview().offset(20) // 좌측
+            make.width.height.equalTo(60) // 조금 더 강조된 크기
+        }
+        
+        // 북마크 버튼: 우측 하단 배치
+        view.addSubview(bookmarkButton)
+        bookmarkButton.snp.remakeConstraints { make in
+            let bottomOffset = UIDevice.current.userInterfaceIdiom == .phone ? -50 : -100
+            make.bottom.equalToSuperview().offset(bottomOffset)
+            make.trailing.equalToSuperview().offset(-20) // 우측
+            make.width.height.equalTo(60)
+        }
+    }
+    
+    func configureLayoutB() {
+        // toolbar
+        let shareItem = UIBarButtonItem(
+            image: UIImage(systemName: "square.and.arrow.up"),
+            primaryAction: UIAction { [weak self] _ in self?.presentShareSheet() }
+        )
+        let bookmarkItem = UIBarButtonItem(
+            image: UIImage(systemName: "bookmark"),
+            primaryAction: UIAction { [weak self] _ in self?.presentBookmarkForm() }
+        )
+        navigationItem.rightBarButtonItems = [shareItem, bookmarkItem]
+        
+        // AI 요약 버튼: 좌측 하단
+        aiSummarizationButton.snp.makeConstraints { make in
+            let bottomOffset = UIDevice.current.userInterfaceIdiom == .phone ? -50 : -100
+            make.bottom.equalToSuperview().offset(bottomOffset)
+            make.trailing.equalToSuperview().offset(-20)
+            make.width.height.equalTo(50)
+        }
     }
 }
 

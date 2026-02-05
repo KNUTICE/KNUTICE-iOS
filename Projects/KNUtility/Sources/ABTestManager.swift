@@ -15,7 +15,7 @@ public actor ABTestManager {
     private init() {
         // 기본값 설정 (서버 연결 실패 시 사용)
         let defaultValues: [String: NSObject] = [
-            "bookmark_btn_type": "toolbar" as NSObject
+            "notice_detail_layout_type": "type_A" as NSObject
         ]
         remoteConfig.setDefaults(defaultValues)
         
