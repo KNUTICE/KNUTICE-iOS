@@ -202,7 +202,7 @@ private extension NoticeContentViewController {
         guard let notice = viewModel.notice else { return }
         let summaryViewModel = NoticeSummaryViewModel(nttId: notice.id)
         let rootView = NoticeSummaryView(viewModel: summaryViewModel)
-        presentSheet(rootView: rootView)
+        presentSheet(rootView: rootView, detents: [.medium(), .large()])
     }
     
     func presentBookmarkForm() {
@@ -216,16 +216,16 @@ private extension NoticeContentViewController {
             self?.dismiss(animated: true)
         }
         
-        presentSheet(rootView: rootView)
+        presentSheet(rootView: rootView, detents: [.large()])
     }
     
-    func presentSheet<Content: View>(rootView: Content) {
+    func presentSheet<Content: View>(rootView: Content, detents: [UISheetPresentationController.Detent]) {
         let vc = UIHostingController(rootView: rootView)
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .pageSheet
         
         if let sheet = nav.sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
+            sheet.detents = detents
             sheet.prefersGrabberVisible = true
         }
         present(nav, animated: true)
