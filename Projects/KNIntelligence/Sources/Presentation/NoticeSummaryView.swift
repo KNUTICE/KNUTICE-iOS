@@ -40,7 +40,7 @@ public struct NoticeSummaryView: View {
                                 Text(.init(content))
                                     .bold()
                                     .font(level == 3 ? .title3 : level == 2 ? .title2 : .title)
-                                    .padding(.top)
+                                    .padding([.top, .bottom], 10)
                                 
                             case let .paragraph(content):
                                 Text(.init(content))
@@ -64,6 +64,7 @@ public struct NoticeSummaryView: View {
                 Text("Gemini가 답변을 생성하는 과정에서 실수가 있을 수 있습니다.")
                     .font(.caption)
                     .padding(.leading, 30)
+                    .padding(.trailing)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundStyle(.gray)
             }
