@@ -7,6 +7,7 @@
 
 import UIKit
 import Factory
+import Firebase
 import FirebaseCore
 import FirebaseMessaging
 import KNUtility
@@ -23,6 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // FCM 세팅
         setFCM(application)
+        
+        Installations.installations().authToken { result, _ in
+            print("Fiebase instance ID token is \(result?.authToken ?? "n/a")")
+        }
         
         return true
     }
@@ -42,8 +47,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
         #endif
         
-        if let filePath, let fileopts = FirebaseOptions(contentsOfFile: filePath) {
+        guard let filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist"),
+              let fileopts = FirebaseOptions(contentsOfFile: filePath) else {
+            print("❌ Firebase configuration file not found")
+            return
+        }
+        
+        if FirebaseApp.app() == nil {
             FirebaseApp.configure(options: fileopts)
+            print("✅ FirebaseApp Configured")
         }
         
         // UNUserNotificationCenter의 delegate를 AppDelegate class에서 처리하도록 설정
