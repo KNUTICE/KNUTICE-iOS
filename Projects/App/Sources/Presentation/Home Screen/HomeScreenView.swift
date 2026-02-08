@@ -86,6 +86,9 @@ struct HomeScreenView: View {
         .onAppear {
             store.send(.onAppear)
         }
+        .refreshable {
+            await store.send(.fetchAllContents).finish()
+        }
     }
 }
 
