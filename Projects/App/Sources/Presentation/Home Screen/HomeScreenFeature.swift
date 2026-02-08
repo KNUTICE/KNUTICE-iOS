@@ -16,13 +16,13 @@ struct HomeScreenFeature {
     @ObservableState
     struct State: Equatable {
         var sectionedNotices: [MainSectionNotice] = []
-        var majorNotices: MainSectionNotice? = nil
+        var majorNotices: LoadableState<MainSectionNotice> = .idle
     }
     
     enum Action {
         case onAppear
         case noticesResponse([MainSectionNotice])
-        case majorNoticesResponse(MainSectionNotice)
+        case majorNoticesResponse(LoadableState<MainSectionNotice>)
     }
     
     @Injected(\.fetchTopThreeNoticesUseCase) private var fetchTopThreeNoticesUseCase
@@ -47,15 +47,16 @@ struct HomeScreenFeature {
                         let major = MajorCategory(rawValue: majorStr)
                         
                         guard let major else {
-                            // TODO: 선택된 전공이 없으면 Default 화면 표시 하도록 수정
+                            await send(.majorNoticesResponse(.empty))
                             return
                         }
                         
                         try Task.checkCancellation()
                         
+                        await send(.majorNoticesResponse(.loaded(MainSectionNotice.skeleton())))
                         let notices = try await fetchNoticesUseCase.execute(category: major, size: 3)
                         let section = MainSectionNotice.from(notices: notices, header: major.localizedDescription)
-                        await send(.majorNoticesResponse(section))
+                        await send(.majorNoticesResponse(.loaded(section)))
                     } catch: { error, send in
                         
                     }
@@ -79,6 +80,16 @@ extension MainSectionNotice {
             MainNotice(
                 presentationType: .actual,
                 notice: notice
+            )
+        }
+        return MainSectionNotice(header: header, items: items)
+    }
+    
+    static func skeleton(header: String = "skeleton header", count: Int = 3) -> MainSectionNotice {
+        let items = (0..<count).map { i in
+            MainNotice(
+                presentationType: .skeleton,
+                notice: Notice.skeletonNotices().first!
             )
         }
         return MainSectionNotice(header: header, items: items)

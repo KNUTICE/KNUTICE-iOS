@@ -57,12 +57,19 @@ struct HomeScreenView: View {
                         .fill(KNDesignSystemAsset.mainCellBackground.swiftUIColor)
                 }
                 
-                if let majorNotices = store.majorNotices {
+                switch store.majorNotices {
+                case let .loaded(majorNotices):
                     NoticeList(notices: majorNotices)
                         .background {
                             RoundedRectangle(cornerRadius: 20)
                                 .fill(KNDesignSystemAsset.mainCellBackground.swiftUIColor)
                         }
+                    
+                case .empty:
+                    EmptyMajorNoticeView()
+                    
+                default:
+                    Color.clear
                 }
                 
             }
@@ -113,6 +120,7 @@ fileprivate struct NoticeList: View {
                     .font(.title3)
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .redacted(reason: notices.items.first?.presentationType == .skeleton ? .placeholder : [])
                 
                 Button {
                     
@@ -129,6 +137,8 @@ fileprivate struct NoticeList: View {
                     NoticeContentView(notice: item.notice)
                 } label: {
                     NoticeListRow(notice: item.notice)
+                        .redacted(reason: item.presentationType == .skeleton ? .placeholder : [])
+                        
                 }
                 
                 // 마지막 아이템이 아닐 때만 구분선 추가
@@ -166,6 +176,48 @@ fileprivate struct NoticeListRow: View {
             
         }
         .padding([.top, .bottom])
+    }
+}
+
+fileprivate struct EmptyMajorNoticeView: View {
+    var body: some View {
+        VStack(spacing: 16) {
+            // 아이콘 부분
+            Image(systemName: "graduationcap.fill")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 50, height: 50)
+                .foregroundStyle(KNDesignSystemAsset.gray3.swiftUIColor)
+                .padding(.top, 20)
+            
+            // 안내 텍스트
+            Text("학과를 선택하면 학과 소식을 받아 볼 수 있어요.")
+                .font(.subheadline)
+                .fontWeight(.medium)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+            
+            // 학과 선택 버튼
+            Button {
+                
+            } label: {
+                Text("학과 선택하기")
+                    .font(.subheadline)
+                    .foregroundStyle(.white)
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 24)
+                    .background {
+                        Capsule()
+                            .fill(KNDesignSystemAsset.accent2.swiftUIColor)
+                    }
+            }
+            .padding(.bottom, 20)
+        }
+        .frame(maxWidth: .infinity)
+        .background {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(KNDesignSystemAsset.mainCellBackground.swiftUIColor)
+        }
     }
 }
 
