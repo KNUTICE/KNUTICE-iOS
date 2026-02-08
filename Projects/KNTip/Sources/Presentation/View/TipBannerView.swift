@@ -11,30 +11,26 @@ import SwiftUI
 import UIComponents
 
 public struct TipBannerView: View, EntryTimeRecordable {
-    @EnvironmentObject private var viewModel: TipBannerViewModel
+    @StateObject private var viewModel: TipBannerViewModel
     @State private var isShowingFullScreen: Bool = false
     
-    public init() {}
+    public init(viewModel: TipBannerViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
     
     public var body: some View {
         if let tips = viewModel.tips {
             ZStack {
-                KNDesignSystemAsset.primaryBackground.swiftUIColor
-                    .ignoresSafeArea(.all)
-                
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(KNDesignSystemAsset.mainCellBackground.swiftUIColor)
-                    .frame(height: 40)
-                    .padding(16)
-
-                ZStack {
-                    ForEach([viewModel.selectedIndex], id: \.self) { index in
-                        TipItemView(content: tips[index].title)
-                            .transition(.push(from: .top))
-                            .padding([.leading, .trailing], 30)
-                    }
+                ForEach([viewModel.selectedIndex], id: \.self) { index in
+                    TipItemView(content: tips[index].title)
+                        .transition(.push(from: .top))
                 }
-                .animation(.easeInOut(duration: 0.8), value: viewModel.selectedIndex)
+            }
+            .animation(.easeInOut(duration: 0.8), value: viewModel.selectedIndex)
+            .padding()
+            .background {
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(KNDesignSystemAsset.mainCellBackground.swiftUIColor)
             }
             .onAppear {
                 viewModel.startAutoScrollTimer()
@@ -95,7 +91,6 @@ fileprivate struct TipItemView: View {
 
 #Preview {
     NavigationStack {
-        TipBannerView()
-            .environmentObject(TipBannerViewModel())
+        TipBannerView(viewModel: TipBannerViewModel())
     }
 }

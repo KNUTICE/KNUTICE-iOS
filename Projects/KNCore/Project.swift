@@ -28,7 +28,9 @@ let project = Project(
                 .external(name: "Factory"),
                 .external(name: "RxSwift"),
                 .external(name: "RxCocoa"),
-                .external(name: "RxDataSources")
+                .external(name: "RxDataSources"),
+                .external(name: "SnapKit"),
+                .external(name: "KingFisher"),
             ],
         )
     ]
