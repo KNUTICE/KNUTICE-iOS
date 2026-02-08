@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KNUtility
 
 public struct MainNotice: Equatable, Sendable {
     public enum PresentationType: Sendable {
@@ -28,10 +29,20 @@ public struct MainNotice: Equatable, Sendable {
 
 public struct MainSectionNotice: Equatable, Sendable {
     public let header: String
+    public let category: any CategoryProtocol
     public let items: [MainNotice]
     
-    public init(header: String, items: [MainNotice]) {
+    public init(
+        header: String,
+        category: any CategoryProtocol,
+        items: [MainNotice]
+    ) {
         self.header = header
+        self.category = category
         self.items = items
+    }
+    
+    public static func ==(lhs: MainSectionNotice, rhs: MainSectionNotice) -> Bool {
+        return lhs.items == rhs.items
     }
 }

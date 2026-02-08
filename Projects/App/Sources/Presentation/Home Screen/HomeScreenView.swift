@@ -9,6 +9,7 @@ import ComposableArchitecture
 import KNCore
 import KNDesignSystem
 import KNTip
+import KNUtility
 import SwiftUI
 
 struct HomeScreenView: View {
@@ -122,8 +123,14 @@ fileprivate struct NoticeList: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .redacted(reason: notices.items.first?.presentationType == .skeleton ? .placeholder : [])
                 
-                Button {
-                    
+                NavigationLink {
+                    if let category = notices.category as? NoticeCategory {
+                        NoticeCollectionView(
+                            viewModel: NoticeCollectionViewModel(category: category)
+                        )
+                        .edgesIgnoringSafeArea(.all)
+                        .navigationTitle(category.localizedDescription)
+                    }
                 } label: {
                     Text("더보기")
                         .font(.subheadline)
