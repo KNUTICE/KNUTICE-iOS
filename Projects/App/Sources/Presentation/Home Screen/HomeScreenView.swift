@@ -46,8 +46,14 @@ struct HomeScreenView: View {
                 }
                 
                 TabView {
-                    ForEach(store.sectionedNotices, id: \.header) { section in
-                        NoticeList(notices: section)
+                    switch store.sectionedNotices {
+                    case let .loaded(sectionedNotices):
+                        ForEach(sectionedNotices, id: \.header) { section in
+                            NoticeList(notices: section)
+                        }
+                        
+                    default:
+                        EmptyView()
                     }
                 }
                 .padding(.top, -30)
@@ -70,7 +76,7 @@ struct HomeScreenView: View {
                     EmptyMajorNoticeView()
                     
                 default:
-                    Color.clear
+                    EmptyView()
                 }
                 
             }

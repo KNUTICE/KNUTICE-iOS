@@ -12,15 +12,16 @@ import KNCore
 import KNUtility
 
 @Reducer
-struct HomeScreenFeature {
+struct HomeScreenFeature: EntryTimeRecordable {
     @ObservableState
     struct State: Equatable {
-        var sectionedNotices: [MainSectionNotice] = []
+        var sectionedNotices: LoadableState<[MainSectionNotice]> = .idle
         var majorNotices: LoadableState<MainSectionNotice> = .idle
     }
     
     enum Action {
         case onAppear
+        case fetchAllContents
         case noticesResponse([MainSectionNotice])
         case majorNoticesResponse(LoadableState<MainSectionNotice>)
     }
@@ -32,6 +33,16 @@ struct HomeScreenFeature {
         Reduce { state, action in
             switch action {
             case .onAppear:
+                let timeInterval = timeIntervalSinceLastEntry()
+                
+                if (state.sectionedNotices == .idle || state.majorNotices == .idle || timeInterval >= 1800) {
+                    recordEntryTime()
+                    return .send(.fetchAllContents)
+                }
+                
+                return .none
+                
+            case .fetchAllContents:
                 return .merge(
                     .run { send in
                         try Task.checkCancellation()
@@ -63,7 +74,7 @@ struct HomeScreenFeature {
                 )
                 
             case let .noticesResponse(notices):
-                state.sectionedNotices = notices
+                state.sectionedNotices = .loaded(notices)
                 return .none
                 
             case let .majorNoticesResponse(notices):
