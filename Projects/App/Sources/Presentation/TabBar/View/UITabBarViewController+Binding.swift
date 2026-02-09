@@ -20,38 +20,7 @@ extension UITabBarViewController {
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] deepLink in
-                guard let self else { return }
-                
-                let viewController: UIViewController
-                
-                switch deepLink {
-                case let .bookmark(nttId):
-                    let store = Store(
-                        initialState: BookmarkContainerFeature.State.detail(BookmarkDetailFeature.State(nttId: nttId)),
-                        reducer: { BookmarkContainerFeature() }
-                    )
-                    let rootView = BookmarkContainerView(
-                        store: store
-                    ) { [weak self] in
-                        self?.navigationController?.popViewController(animated: true)
-                    }
-                    viewController = UIHostingController(rootView: rootView)
-                    
-                case .meal:
-                    // TODO: 학식 알림 딥링크 구현
-                    return
-                    
-                case let .notice(nttId, _):
-                    viewController = NoticeContentViewController(
-                        viewModel: NoticeContentViewModel(nttId: nttId)
-                    )
-                    
-                default:
-                    return
-                }
-                
-                self.navigationController?.popToRootViewController(animated: true)
-                self.navigationController?.pushViewController(viewController, animated: true)
+                self?.handle(deepLink: deepLink)
             })
             .store(in: &cancellables)
         
@@ -59,11 +28,7 @@ extension UITabBarViewController {
             .compactMap { $0.object as? DeepLink }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] deepLink in
-                guard let self, case let .navigation(tabIndex) = deepLink else { return }
-                guard let vcs = self.viewControllers, vcs.indices.contains(tabIndex) else { return }
-                
-                self.selectedIndex = tabIndex
-                self.tabBarController(self, didSelect: vcs[tabIndex])
+                self?.handle(deepLink: deepLink)
             })
             .store(in: &cancellables)
         
