@@ -14,10 +14,10 @@ public actor DeepLinkManager {
     
     public func parse(_ url: URL) -> DeepLink {
         guard let host = url.host else { return .unknown }
+        let queryItems = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems
         
-        switch host {
+        switch host {            
         case "notice", "widget":
-            let queryItems = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems
             let nttIdValue = queryItems?.first(where: { $0.name == "nttId" })?.value
             let contentURL = queryItems?.first(where: { $0.name == "contentUrl" })?.value
             
@@ -26,11 +26,12 @@ public actor DeepLinkManager {
             }
             
             return .unknown
+            
         case "meal":
             // TODO: 학식 알림 딥링크 구현
             return .unknown
+            
         case "bookmark":
-            let queryItems = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems
             let nttIdValue = queryItems?.first(where: { $0.name == "nttId" })?.value
             
             if let nttIdValue, let nttId = Int(nttIdValue) {
@@ -38,6 +39,7 @@ public actor DeepLinkManager {
             }
             
             return .unknown
+            
         default:
             return .unknown
         }

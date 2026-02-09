@@ -7,6 +7,7 @@
 
 import ComposableArchitecture
 import KNCore
+import KNDeepLink
 import KNDesignSystem
 import KNTip
 import KNUtility
@@ -49,7 +50,19 @@ struct HomeScreenView: View {
                     switch store.sectionedNotices {
                     case let .loaded(sectionedNotices):
                         ForEach(sectionedNotices, id: \.header) { section in
-                            NoticeList(notices: section)
+                            NoticeList(notices: section) {
+                                NavigationLink {
+                                    if let category = section.category as? NoticeCategory {
+                                        NoticeCollectionView(
+                                            viewModel: NoticeCollectionViewModel(category: category)
+                                        )
+                                        .edgesIgnoringSafeArea(.all)
+                                        .navigationTitle(category.localizedDescription)
+                                    }
+                                } label: {
+                                    MoreButtonLabel()
+                                }
+                            }
                         }
                         
                     default:
@@ -66,11 +79,17 @@ struct HomeScreenView: View {
                 
                 switch store.majorNotices {
                 case let .loaded(majorNotices):
-                    NoticeList(notices: majorNotices)
-                        .background {
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(KNDesignSystemAsset.mainCellBackground.swiftUIColor)
+                    NoticeList(notices: majorNotices) {
+                        Button {
+                            NotificationCenter.default.post(name: .didReceiveDeepLink, object: DeepLink.navigation(tabIndex: 1))
+                        } label: {
+                            MoreButtonLabel()
                         }
+                    }
+                    .background {
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(KNDesignSystemAsset.mainCellBackground.swiftUIColor)
+                    }
                     
                 case .empty:
                     EmptyMajorNoticeView()
@@ -120,8 +139,9 @@ fileprivate struct HomeCardView: View {
     }
 }
 
-fileprivate struct NoticeList: View {
+fileprivate struct NoticeList<Content: View>: View {
     let notices: MainSectionNotice
+    let moreButton: (() -> Content)?
     
     var body: some View {
         VStack {
@@ -132,19 +152,7 @@ fileprivate struct NoticeList: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .redacted(reason: notices.items.first?.presentationType == .skeleton ? .placeholder : [])
                 
-                NavigationLink {
-                    if let category = notices.category as? NoticeCategory {
-                        NoticeCollectionView(
-                            viewModel: NoticeCollectionViewModel(category: category)
-                        )
-                        .edgesIgnoringSafeArea(.all)
-                        .navigationTitle(category.localizedDescription)
-                    }
-                } label: {
-                    Text("더보기")
-                        .font(.subheadline)
-                        .foregroundStyle(.gray)
-                }
+                moreButton?()
             }
             
             ForEach(Array(notices.items.enumerated()), id: \.element.notice.id) { index, item in
@@ -154,7 +162,6 @@ fileprivate struct NoticeList: View {
                 } label: {
                     NoticeListRow(notice: item.notice)
                         .redacted(reason: item.presentationType == .skeleton ? .placeholder : [])
-                        
                 }
                 
                 // 마지막 아이템이 아닐 때만 구분선 추가
@@ -215,7 +222,7 @@ fileprivate struct EmptyMajorNoticeView: View {
             
             // 학과 선택 버튼
             Button {
-                
+                NotificationCenter.default.post(name: .didReceiveDeepLink, object: DeepLink.navigation(tabIndex: 1))
             } label: {
                 Text("학과 선택하기")
                     .font(.subheadline)
@@ -234,6 +241,14 @@ fileprivate struct EmptyMajorNoticeView: View {
             RoundedRectangle(cornerRadius: 20)
                 .fill(KNDesignSystemAsset.mainCellBackground.swiftUIColor)
         }
+    }
+}
+
+fileprivate struct MoreButtonLabel: View {
+    var body: some View {
+        Text("더보기")
+            .font(.subheadline)
+            .foregroundStyle(.gray)
     }
 }
 
