@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 2/6/26.
 //
 
+import Combine
 import ComposableArchitecture
 import KNCore
 import KNDeepLink
@@ -16,6 +17,7 @@ import UIComponents
 
 struct HomeScreenView: View {
     @State private var store: StoreOf<HomeScreenFeature>
+    @State private var currentTabIndex: Int = 0
     
     init(store: StoreOf<HomeScreenFeature>) {
         self.store = store
@@ -47,10 +49,10 @@ struct HomeScreenView: View {
                     }
                 }
                 
-                TabView {
+                TabView(selection: $currentTabIndex) {
                     switch store.sectionedNotices {
                     case let .loaded(sectionedNotices):
-                        ForEach(sectionedNotices, id: \.header) { section in
+                        ForEach(Array(sectionedNotices.enumerated()), id: \.element.header) { index, section in
                             NoticeList(notices: section) {
                                 NavigationLink {
                                     if let category = section.category as? NoticeCategory {
@@ -64,6 +66,7 @@ struct HomeScreenView: View {
                                     MoreButtonLabel()
                                 }
                             }
+                            .tag(index)
                         }
                         
                     default:
@@ -108,6 +111,18 @@ struct HomeScreenView: View {
         }
         .refreshable {
             await store.send(.fetchAllContents).finish()
+        }
+        .onReceive(Timer.publish(every: 7, on: .main, in: .common).autoconnect()) { _ in
+            if case let .loaded(sectionedNotices) = store.sectionedNotices {
+                let isActualData = sectionedNotices.first?.items.first?.presentationType == .actual
+                let totalCount = sectionedNotices.count
+                
+                guard totalCount > 0 && isActualData else { return }
+                
+                withAnimation {
+                    currentTabIndex = (currentTabIndex + 1) % totalCount
+                }
+            }
         }
     }
 }
