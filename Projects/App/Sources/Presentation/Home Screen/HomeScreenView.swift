@@ -12,6 +12,7 @@ import KNDesignSystem
 import KNTip
 import KNUtility
 import SwiftUI
+import UIComponents
 
 struct HomeScreenView: View {
     @State private var store: StoreOf<HomeScreenFeature>
@@ -140,6 +141,8 @@ fileprivate struct HomeCardView: View {
 }
 
 fileprivate struct NoticeList<Content: View>: View {
+    @State private var isActivityViewPresented: Bool = false
+    
     let notices: MainSectionNotice
     let moreButton: (() -> Content)?
     
@@ -159,6 +162,23 @@ fileprivate struct NoticeList<Content: View>: View {
                 NavigationLink {
                     // 상세 화면 이동
                     NoticeContentView(notice: item.notice)
+                        .ignoresSafeArea(.all)
+                        .toolbar {
+                            ToolbarItem(placement: .topBarTrailing) {
+                                Button {
+                                    isActivityViewPresented.toggle()
+                                } label: {
+                                    Image(systemName: "square.and.arrow.up")
+                                }
+                            }
+                        }
+                        .background {
+                            if let url = URL(string: item.notice.contentUrl) {
+                                ActivityView(isPresented: $isActivityViewPresented, activityItmes: [
+                                    url
+                                ])
+                            }
+                        }
                 } label: {
                     NoticeListRow(notice: item.notice)
                         .redacted(reason: item.presentationType == .skeleton ? .placeholder : [])
