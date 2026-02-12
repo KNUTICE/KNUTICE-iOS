@@ -22,7 +22,7 @@ struct HomeScreenFeature: EntryTimeRecordable {
     enum Action {
         case onAppear
         case fetchAllContents
-        case noticesResponse([MainSectionNotice])
+        case noticesResponse(LoadableState<[MainSectionNotice]>)
         case majorNoticesResponse(LoadableState<MainSectionNotice>)
     }
     
@@ -48,10 +48,10 @@ struct HomeScreenFeature: EntryTimeRecordable {
                         try Task.checkCancellation()
                         
                         for try await notices in fetchTopThreeNoticesUseCase.execute(isRefresh: false).values {
-                            await send(.noticesResponse(notices))
+                            await send(.noticesResponse(.loaded(notices)))
                         }
                     } catch: { error, send in
-                        
+                        await send(.noticesResponse(.error))
                     },
                     .run { send in
                         let majorStr = UserDefaults.shared?.string(forKey: UserDefaultsKeys.selectedMajor.rawValue) ?? ""
@@ -69,16 +69,16 @@ struct HomeScreenFeature: EntryTimeRecordable {
                         let section = MainSectionNotice.from(notices: notices, category: major, header: major.localizedDescription)
                         await send(.majorNoticesResponse(.loaded(section)))
                     } catch: { error, send in
-                        
+                        await send(.majorNoticesResponse(.error))
                     }
                 )
                 
-            case let .noticesResponse(notices):
-                state.sectionedNotices = .loaded(notices)
+            case let .noticesResponse(response):
+                state.sectionedNotices = response
                 return .none
                 
-            case let .majorNoticesResponse(notices):
-                state.majorNotices = notices
+            case let .majorNoticesResponse(response):
+                state.majorNotices = response
                 return .none
             }
         }

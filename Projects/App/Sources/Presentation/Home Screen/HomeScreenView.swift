@@ -49,9 +49,9 @@ struct HomeScreenView: View {
                     }
                 }
                 
-                TabView(selection: $currentTabIndex) {
-                    switch store.sectionedNotices {
-                    case let .loaded(sectionedNotices):
+                switch store.sectionedNotices {
+                case let .loaded(sectionedNotices):
+                    TabView(selection: $currentTabIndex) {
                         ForEach(Array(sectionedNotices.enumerated()), id: \.element.header) { index, section in
                             NoticeList(notices: section) {
                                 NavigationLink {
@@ -68,17 +68,20 @@ struct HomeScreenView: View {
                             }
                             .tag(index)
                         }
-                        
-                    default:
-                        EmptyView()
                     }
-                }
-                .padding(.top, -30)
-                .frame(minHeight: 330)
-                .tabViewStyle(.page(indexDisplayMode: .always))
-                .background {
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(KNDesignSystemAsset.mainCellBackground.swiftUIColor)
+                    .padding(.top, -30)
+                    .frame(minHeight: 330)
+                    .tabViewStyle(.page(indexDisplayMode: .always))
+                    .background {
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(KNDesignSystemAsset.mainCellBackground.swiftUIColor)
+                    }
+                    
+                case .error:
+                    ErrorStateView()
+                    
+                default:
+                    EmptyView()
                 }
                 
                 switch store.majorNotices {
@@ -97,6 +100,9 @@ struct HomeScreenView: View {
                     
                 case .empty:
                     EmptyMajorNoticeView()
+                    
+                case .error:
+                    ErrorStateView()
                     
                 default:
                     EmptyView()
@@ -284,6 +290,34 @@ fileprivate struct MoreButtonLabel: View {
         Text("더보기")
             .font(.subheadline)
             .foregroundStyle(.gray)
+    }
+}
+
+fileprivate struct ErrorStateView: View {
+    var body: some View {
+        VStack(spacing: 12) {
+            Image(systemName: "exclamationmark.triangle.fill")
+                .font(.system(size: 40))
+                .foregroundStyle(KNDesignSystemAsset.gray3.swiftUIColor)
+            
+            VStack(spacing: 4) {
+                Text("데이터를 불러올 수 없습니다")
+                    .font(.headline)
+                    .foregroundStyle(.primary)
+                
+                Text("일시적인 네트워크 오류이거나 점검 중일 수 있습니다.\n잠시 후 다시 시도해 주세요.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(4)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical)
+        .background {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(KNDesignSystemAsset.mainCellBackground.swiftUIColor)
+        }
     }
 }
 
