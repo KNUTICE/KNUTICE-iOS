@@ -64,13 +64,13 @@ extension Container {
     }
     
     // [Notice Related]
-    var fetchTopThreeNoticesUseCase: Factory<FetchTopThreeNoticesUseCase> {
+    public var fetchTopThreeNoticesUseCase: Factory<FetchTopThreeNoticesUseCase> {
         Factory(self) {
             FetchTopThreeNoticesUseCaseImpl(repository: Container.shared.noticeRepository())
         }
     }
     
-    var fetchNoticesUseCase: Factory<FetchNoticesUseCase> {
+    public var fetchNoticesUseCase: Factory<FetchNoticesUseCase> {
         Factory(self) {
             FetchNoticesUseCaseImpl()
         }
@@ -99,11 +99,6 @@ extension Container {
     @MainActor
     var bookmarkTableViewModel: Factory<BookmarkTableViewModel> {
         .mainActor(self) { BookmarkTableViewModel() }
-    }
-    
-    @MainActor
-    var mainTableViewModel: Factory<MainTableViewModel> {
-        .mainActor(self) { MainTableViewModel() }
     }
     
     @MainActor

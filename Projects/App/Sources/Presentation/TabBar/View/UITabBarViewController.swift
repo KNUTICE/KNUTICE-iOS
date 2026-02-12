@@ -6,6 +6,7 @@
 //
 
 import Combine
+import ComposableArchitecture
 import KNCore
 import KNSetting
 import KNUtility
@@ -16,7 +17,10 @@ typealias NavigationItemConfigurable = FirstTabNavigationItemConfigurable & Seco
 
 final class UITabBarViewController: UITabBarController, NavigationItemConfigurable {
     private let mainViewController: UIViewController = {
-        let viewController = MainTableViewController()
+        let store = Store(initialState: HomeScreenFeature.State()) {
+            HomeScreenFeature()
+        }
+        let viewController = UIHostingController(rootView: HomeScreenView(store: store))
         viewController.tabBarItem.image = UIImage(systemName: "house")
         viewController.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
         viewController.tabBarItem.title = "홈"
@@ -119,7 +123,7 @@ extension UITabBarViewController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if UIDevice.current.userInterfaceIdiom == .phone {
             switch viewController {
-            case is MainTableViewController:
+            case is UIHostingController<HomeScreenView>:
                 setFirstTabNavigationItems()
             case is MajorNoticeCollectionViewController:
                 setSecondTabNavigationItems()

@@ -53,6 +53,7 @@ public final class FetchTopThreeNoticesUseCaseImpl: FetchTopThreeNoticesUseCase 
                 for (category, notices) in results {
                     let sectionNotice = MainSectionNotice(
                         header: category.localizedDescription,
+                        category: category,
                         items: notices.map { MainNotice(presentationType: .actual, notice: $0) }
                     )
                     sectionNotices[category] = sectionNotice
@@ -60,7 +61,7 @@ public final class FetchTopThreeNoticesUseCaseImpl: FetchTopThreeNoticesUseCase 
                 
                 // Ensure order follows NoticeCategory.allCases
                 return NoticeCategory.allCases.map { category in
-                    sectionNotices[category, default: MainSectionNotice(header: "", items: [])]
+                    sectionNotices[category, default: MainSectionNotice(header: "", category: category, items: [])]
                 }
             }
             .eraseToAnyPublisher()
@@ -91,22 +92,23 @@ public final class FetchTopThreeNoticesUseCaseImpl: FetchTopThreeNoticesUseCase 
         NoticeCategory.allCases.map { category in
             MainSectionNotice(
                 header: category.localizedDescription,
-                items: Notice.mockNotices.map { MainNotice(presentationType: .skeleton, notice: $0) }
+                category: category,
+                items: Notice.skeletonNotices().map { MainNotice(presentationType: .skeleton, notice: $0) }
             )
         }
     }
     
 }
 
-fileprivate extension Notice {
-    static var mockNotices: [Self] {
-        (0..<3).map { _ in
+public extension Notice {
+    static func skeletonNotices(count: Int = 3) -> [Self] {
+        (0..<count).map { index in
             Notice(
                 id: UUID().hashValue,
-                title: " ",
-                contentUrl: " ",
-                department: " ",
-                uploadDate: " ",
+                title: "공지사항 제목이 들어갈 자리입니다. 로딩 중입니다.",
+                contentUrl: "",
+                department: "학사운영팀",
+                uploadDate: "2026.00.00",
                 imageUrl: nil,
                 noticeCategory: nil
             )

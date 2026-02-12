@@ -7,7 +7,6 @@
 
 import Combine
 import Foundation
-import KNUtility
 import UIKit
 
 public protocol EntryTimeRecordable {

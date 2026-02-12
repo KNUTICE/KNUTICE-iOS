@@ -30,10 +30,7 @@ public final class TipBannerViewModel: ObservableObject {
         
         switch result {
         case .success(let tips):
-            if let tips {
-                NotificationCenter.default.post(name: Notification.Name.hasTipData, object: nil)
-                self.tips = tips
-            }
+            self.tips = tips
         case .failure(let error):
             logger.error("\(error.localizedDescription)")
         }

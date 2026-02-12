@@ -9,6 +9,7 @@ import Combine
 import ComposableArchitecture
 import Foundation
 import KNCore
+import KNDeepLink
 import KNUtility
 import SwiftUI
 import UIKit
@@ -16,37 +17,18 @@ import UIKit
 extension UITabBarViewController {
     func bind() {
         viewModel.$deepLink
+            .compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] deepLink in
-                guard let deepLink else { return }
-                
-                let viewController: UIViewController
-                
-                switch deepLink {
-                case .bookmark(let nttId):
-                    let store = Store(
-                        initialState: BookmarkContainerFeature.State.detail(BookmarkDetailFeature.State(nttId: nttId)),
-                        reducer: { BookmarkContainerFeature() }
-                    )
-                    let rootView = BookmarkContainerView(
-                        store: store
-                    ) { [weak self] in
-                        self?.navigationController?.popViewController(animated: true)
-                    }
-                    viewController = UIHostingController(rootView: rootView)
-                case .meal:
-                    // TODO: 학식 알림 딥링크 구현
-                    return
-                case .notice(let nttId, _):
-                    viewController = NoticeContentViewController(
-                        viewModel: NoticeContentViewModel(nttId: nttId)
-                    )
-                case .unknown:
-                    return
-                }
-                
-                self?.navigationController?.popToRootViewController(animated: true)
-                self?.navigationController?.pushViewController(viewController, animated: true)
+                self?.handle(deepLink: deepLink)
+            })
+            .store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: .didReceiveDeepLink)
+            .compactMap { $0.object as? DeepLink }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] deepLink in
+                self?.handle(deepLink: deepLink)
             })
             .store(in: &cancellables)
         

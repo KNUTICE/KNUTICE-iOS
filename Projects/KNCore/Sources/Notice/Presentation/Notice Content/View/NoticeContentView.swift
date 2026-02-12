@@ -7,24 +7,26 @@
 
 import SwiftUI
 
-struct NoticeContentView: UIViewControllerRepresentable {
+public struct NoticeContentView: UIViewControllerRepresentable {
     private let viewController: UIViewController
     
-    init(notice: Notice) {
+    public init(notice: Notice) {
         self.viewController = NoticeContentViewController(
             viewModel: NoticeContentViewModel(notice: notice)
         )
     }
     
-    func makeUIViewController(context: Context) -> some UIViewController {
+    public func makeUIViewController(context: Context) -> some UIViewController {
         return viewController
     }
     
-    func updateUIViewController(_ uiViewController: some UIViewController, context: Context) {}
+    public func updateUIViewController(_ uiViewController: some UIViewController, context: Context) {}
 }
 
 #if DEBUG
 #Preview {
-    NoticeContentView(notice: Notice.generalNoticesSample[0])
+    NavigationStack {
+        NoticeContentView(notice: Notice.generalNoticesSample[0])
+    }
 }
 #endif

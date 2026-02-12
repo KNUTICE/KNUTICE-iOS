@@ -11,5 +11,6 @@ public enum DeepLink: Sendable {
     case notice(nttId: Int, contentUrl: URL?)
     case meal
     case bookmark(nttId: Int)
+    case navigation(tabIndex: Int)
     case unknown
 }
