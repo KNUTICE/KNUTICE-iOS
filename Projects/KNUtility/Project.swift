@@ -16,6 +16,7 @@ let project = Project(
             dependencies: [
                 .external(name: "FirebaseMessaging"),
                 .external(name: "FirebaseRemoteConfig"),
+                .external(name: "Factory"),
             ]
         )
     ]
