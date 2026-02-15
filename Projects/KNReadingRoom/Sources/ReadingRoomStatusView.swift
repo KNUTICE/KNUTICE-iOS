@@ -60,18 +60,19 @@ extension ReadingRoomStatusView {
         }
         
         public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            task?.cancel()
             task = Task {
                 do {
                     try Task.checkCancellation()
                     
                     let fcmToken = try await FCMTokenManager.shared.getToken()
                     let javaScriptString = """
-                        window.setFcmToken('\(fcmToken)');
+                        \(Bundle.module.bridgingMethod)('\(fcmToken)');
                     """
                     
                     try await parent.webView.evaluateJavaScript(javaScriptString)
                 } catch {
-                    print(error)
+                    print("ReadingRoomStatusView.Coordinator: \(error)")
                 }
                 
             }

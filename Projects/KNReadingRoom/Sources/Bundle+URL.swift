@@ -24,4 +24,12 @@ extension Bundle {
         
         return url
     }
+    
+    var bridgingMethod: String {
+        guard let url = resource?["Bridging_Method"] as? String else {
+            return ""
+        }
+        
+        return url
+    }
 }
