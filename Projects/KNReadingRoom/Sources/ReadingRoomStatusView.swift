@@ -5,30 +5,38 @@
 //  Created by 이정훈 on 2/1/26.
 //
 
+import KNDesignSystem
 import KNUtility
 import WebKit
 import SwiftUI
 
 public struct ReadingRoomStatusView: UIViewRepresentable {
-    
-    private let url: String
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) private var colorScheme
     private let webView = WKWebView()
     
-    public init(url: String) {
-        self.url = url
-    }
+    public init() {}
 
     public func makeCoordinator() -> Coordinator {
         return Coordinator(parent: self)
     }
     
     public func makeUIView(context: Context) -> some UIView {
-        guard let url = URL(string: url) else {
+        let contentController = WKUserContentController()
+        contentController.add(context.coordinator, name: "bridge")
+        
+        let config = WKWebViewConfiguration()
+        config.userContentController = contentController
+        
+        let webView = WKWebView(frame: .zero, configuration: config)
+        webView.tintColor = .black
+        webView.navigationDelegate = context.coordinator
+        
+        guard let urlStr = Bundle.module.readingRoomStatusURL,
+              let url = URL(string: urlStr) else {
             return webView
         }
         
-        webView.tintColor = .black
-        webView.navigationDelegate = context.coordinator
         webView.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData))
         
         return webView
@@ -39,9 +47,9 @@ public struct ReadingRoomStatusView: UIViewRepresentable {
 }
 
 extension ReadingRoomStatusView {
-    public class Coordinator: NSObject, WKNavigationDelegate {
+    public class Coordinator: NSObject, WKNavigationDelegate, WKScriptMessageHandler {
         private let parent: ReadingRoomStatusView
-        private(set) var task: Task<Void, Never>?
+        private var task: Task<Void, Never>?
         
         public init(parent: ReadingRoomStatusView) {
             self.parent = parent
@@ -57,7 +65,9 @@ extension ReadingRoomStatusView {
                     try Task.checkCancellation()
                     
                     let fcmToken = try await FCMTokenManager.shared.getToken()
-                    let javaScriptString = "window.setFcmToken(\(fcmToken))"
+                    let javaScriptString = """
+                        window.setFcmToken('\(fcmToken)');
+                    """
                     
                     try await parent.webView.evaluateJavaScript(javaScriptString)
                 } catch {
@@ -66,9 +76,21 @@ extension ReadingRoomStatusView {
                 
             }
         }
+        
+        public func userContentController(
+            _ userContentController: WKUserContentController,
+            didReceive message: WKScriptMessage
+        ) {
+            if let body = message.body as? [String: String] {
+                // CLOSE_WEBVIEW Event
+                if body["type"] == "CLOSE_WEBVIEW" {
+                    parent.dismiss()
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    ReadingRoomStatusView(url: Bundle.module.readingRoomStatusURL!)
+    ReadingRoomStatusView()
 }
