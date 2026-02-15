@@ -115,6 +115,8 @@ final class UITabBarViewController: UITabBarController, NavigationItemConfigurab
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             navigationController?.setNavigationBarHidden(true, animated: true)
+        } else {
+            navigationController?.setNavigationBarHidden(false, animated: false)
         }
     }
 }

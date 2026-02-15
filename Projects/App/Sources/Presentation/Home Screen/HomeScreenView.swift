@@ -10,6 +10,7 @@ import ComposableArchitecture
 import KNCore
 import KNDeepLink
 import KNDesignSystem
+import KNReadingRoom
 import KNTip
 import KNUtility
 import SwiftUI
@@ -41,7 +42,9 @@ struct HomeScreenView: View {
                     }
                     
                     NavigationLink {
-                    
+                        ReadingRoomStatusView()
+                            .toolbar(.hidden)
+                            .background(KNDesignSystemAsset.primaryBackground.swiftUIColor)
                     } label: {
                         HomeCardView(title: "열람실 조회") {
                             Image("icon_study_area")

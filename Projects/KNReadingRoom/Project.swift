@@ -2,22 +2,26 @@ import ProjectDescription
 
 let infoPlist: [String: Plist.Value] = [:]
 let project = Project(
-    name: "KNUtility",
+    name: "KNReadingRoom",
     targets: [
         .target(
-            name: "KNUtility",
+            name: "KNReadingRoom",
             destinations: .iOS,
             product: Environment.forPreview.getBoolean(default: false) ? .framework : .staticFramework,
-            bundleId: "com.fx.KNUtility",
+            bundleId: "com.fx.KNReadingRoom",
             deploymentTargets: .iOS("17.0"),
             infoPlist: .extendingDefault(with: infoPlist),
             sources: ["Sources/**"],
             resources: ["Resources/**"],
             dependencies: [
-                .external(name: "FirebaseMessaging"),
-                .external(name: "FirebaseRemoteConfig"),
-                .external(name: "Factory"),
-            ]
+                .project(target: "KNUtility", path: "../KNUtility"),
+            ],
+            settings: .settings(
+                base: [
+                    "SWIFT_VERSION": "6.0",
+                    "SWIFT_STRICT_CONCURRENCY": "complete",
+                ]
+            )
         )
     ]
 )
