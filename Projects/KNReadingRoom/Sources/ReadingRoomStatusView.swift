@@ -12,8 +12,6 @@ import SwiftUI
 
 public struct ReadingRoomStatusView: UIViewRepresentable {
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.colorScheme) private var colorScheme
-    private let webView = WKWebView()
     
     public init() {}
 
@@ -70,7 +68,7 @@ extension ReadingRoomStatusView {
                         \(Bundle.module.bridgingMethod)('\(fcmToken)');
                     """
                     
-                    try await parent.webView.evaluateJavaScript(javaScriptString)
+                    try await webView.evaluateJavaScript(javaScriptString)
                 } catch {
                     print("ReadingRoomStatusView.Coordinator: \(error)")
                 }
