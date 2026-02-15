@@ -11,6 +11,7 @@ import KNCore
 import KNDeepLink
 import KNDesignSystem
 import KNReadingRoom
+import KNMeal
 import KNTip
 import KNUtility
 import SwiftUI
@@ -34,7 +35,10 @@ struct HomeScreenView: View {
                 
                 HStack(spacing: 20) {
                     NavigationLink {
-                        
+                        MealView()
+                            .navigationTitle("학식 조회")
+                            .background(KNDesignSystemAsset.primaryBackground.swiftUIColor)
+                            .ignoresSafeArea(edges: .bottom)
                     } label: {
                         HomeCardView(title: "학식 조회") {
                             Image("icon_dining_menu")
