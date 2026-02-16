@@ -315,7 +315,7 @@ private extension NoticeContentViewController {
         )
         navigationItem.rightBarButtonItems = [shareItem, bookmarkItem]
         
-        // AI 요약 버튼: 좌측 하단
+        // AI 요약 버튼: 우측 하단
         aiSummarizationButton.snp.makeConstraints { make in
             let bottomOffset = UIDevice.current.userInterfaceIdiom == .phone ? -50 : -100
             make.bottom.equalToSuperview().offset(bottomOffset)
