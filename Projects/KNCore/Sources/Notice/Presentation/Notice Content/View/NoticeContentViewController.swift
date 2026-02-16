@@ -15,7 +15,7 @@ import SwiftUI
 import UIKit
 import WebKit
 
-enum ABTestLayoutType: String {
+public enum ABTestLayoutType: String {
     case typeA = "type_A"
     case typeB = "type_B"
 }

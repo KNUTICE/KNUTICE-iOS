@@ -170,6 +170,8 @@ fileprivate struct HomeCardView: View {
 
 fileprivate struct NoticeList<Content: View>: View {
     @State private var isActivityViewPresented: Bool = false
+    @State private var layoutType: ABTestLayoutType?
+    @State private var isShowingBookmarkForm: Bool = false
     
     let notices: MainSectionNotice
     let moreButton: (() -> Content)?
@@ -192,7 +194,15 @@ fileprivate struct NoticeList<Content: View>: View {
                     NoticeContentView(notice: item.notice)
                         .ignoresSafeArea(.all)
                         .toolbar {
-                            ToolbarItem(placement: .topBarTrailing) {
+                            ToolbarItemGroup(placement: .topBarTrailing) {
+                                if let layoutType, case .typeB = layoutType {
+                                    Button {
+                                        isShowingBookmarkForm.toggle()
+                                    } label: {
+                                        Image(systemName: "bookmark")
+                                    }
+                                }
+                                
                                 Button {
                                     isActivityViewPresented.toggle()
                                 } label: {
@@ -205,6 +215,21 @@ fileprivate struct NoticeList<Content: View>: View {
                                 ActivityView(isPresented: $isActivityViewPresented, activityItmes: [
                                     url
                                 ])
+                            }
+                        }
+                        .task {
+                            await fetchLayoutType()
+                        }
+                        .sheet(isPresented: $isShowingBookmarkForm) {
+                            let bookmark = Bookmark(notice: item.notice, memo: "")
+                            NavigationStack {
+                                BookmarkForm(
+                                    store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
+                                        BookmarkFormFeature()
+                                    }
+                                ) {
+                                    isShowingBookmarkForm.toggle()
+                                }
                             }
                         }
                 } label: {
@@ -221,6 +246,15 @@ fileprivate struct NoticeList<Content: View>: View {
             }
         }
         .padding()
+    }
+    
+    private func fetchLayoutType() async {
+        do {
+            let layout = try await ABTestManager.shared.getString(key: ABTestKeys.noticeDetailLayoutType.rawValue)
+            layoutType = ABTestLayoutType(rawValue: layout)
+        } catch {
+            print("Failed to load layout type: \(error)")
+        }
     }
 }
 

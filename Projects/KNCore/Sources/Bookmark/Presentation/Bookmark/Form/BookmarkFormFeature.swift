@@ -12,7 +12,7 @@ import Foundation
 public struct BookmarkFormFeature {
     @ObservableState
     public struct State: Equatable {
-        enum FormType {
+        public enum FormType {
             case create
             case update
         }
@@ -26,6 +26,13 @@ public struct BookmarkFormFeature {
         var isAlarmOn: Bool {
             get { bookmark.alarmDate != nil }
             set { bookmark.alarmDate = newValue ? Date() : nil }
+        }
+        
+        public init(alert: AlertState<Action.Alert>? = nil, bookmark: Bookmark, original: Bookmark, formType: FormType) {
+            self.alert = alert
+            self.bookmark = bookmark
+            self.original = original
+            self.formType = formType
         }
     }
     
@@ -128,4 +135,6 @@ public struct BookmarkFormFeature {
         }
         .ifLet(\.$alert, action: \.alert)
     }
+    
+    public init() {}
 }

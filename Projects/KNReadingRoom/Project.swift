@@ -15,6 +15,7 @@ let project = Project(
             resources: ["Resources/**"],
             dependencies: [
                 .project(target: "KNUtility", path: "../KNUtility"),
+                .project(target: "KNDesignSystem", path: "../KNDesignSystem"),
             ],
             settings: .settings(
                 base: [

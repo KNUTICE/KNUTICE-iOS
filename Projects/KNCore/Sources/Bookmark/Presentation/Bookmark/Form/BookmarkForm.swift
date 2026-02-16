@@ -13,6 +13,11 @@ public struct BookmarkForm: View {
     @Bindable var store: StoreOf<BookmarkFormFeature>
     let dismissAction: () -> Void
     
+    public init(store: StoreOf<BookmarkFormFeature>, dismissAction: @escaping () -> Void) {
+        _store = Bindable(store)
+        self.dismissAction = dismissAction
+    }
+    
     public var body: some View {
         ScrollView {
             NoticeHeader(notice: store.bookmark.notice)
@@ -137,3 +142,4 @@ fileprivate struct TextFieldContainerView: View {
     }
 }
 #endif
+
