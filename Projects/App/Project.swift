@@ -50,7 +50,8 @@ let project = Project(
                 .external(name: "Kingfisher"),
                 .external(name: "ComposableArchitecture"),
                 .external(name: "SnapKit"),
-                .external(name: "SkeletonView")
+                .external(name: "SkeletonView"),
+                .external(name: "FirebaseAnalytics"),
             ],
             settings: .settings(
                 base: [

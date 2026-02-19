@@ -14,6 +14,7 @@ import SnapKit
 import SwiftUI
 import UIKit
 import WebKit
+import FirebaseAnalytics
 
 public enum ABTestLayoutType: String {
     case typeA = "type_A"
@@ -23,14 +24,12 @@ public enum ABTestLayoutType: String {
 public final class NoticeContentViewController: UIViewController {
     
     // MARK: - UI Components
-    
     private let activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .large)
         indicator.startAnimating()
         indicator.hidesWhenStopped = true
         return indicator
     }()
-    
     private lazy var webView: WKWebView = {
         let webView = WKWebView(frame: .zero)
         webView.navigationDelegate = self
@@ -40,7 +39,6 @@ public final class NoticeContentViewController: UIViewController {
         webView.isHidden = true
         return webView
     }()
-    
     private lazy var aiSummarizationButton: UIButton = {
         var config: UIButton.Configuration = {
             if #available(iOS 26, *) { return .glass() }
@@ -52,7 +50,15 @@ public final class NoticeContentViewController: UIViewController {
         config.image = KNDesignSystemAsset.knuticeaiLogo.image
             .resizedMaintainingAspectRatio(to: CGSize(width: 35, height: 35))
         
-        let action = UIAction { [weak self] _ in self?.presentSummarySheet() }
+        let action = UIAction {
+            [weak self] _ in
+            
+            // AI 요약 버튼 클릭 이벤트 전송
+            Analytics.logEvent(AnalyticsEventName.aiButtonClicked.rawValue, parameters: nil)
+            
+            // AI 요약 View 표시
+            self?.presentSummarySheet()
+        }
         let button = UIButton(configuration: config, primaryAction: action)
         
         button.layer.shadowColor = UIColor.black.cgColor
@@ -61,7 +67,6 @@ public final class NoticeContentViewController: UIViewController {
         button.layer.shadowOffset = .zero
         return button
     }()
-    
     private lazy var bookmarkButton: UIButton = {
         let button = UIButton(type: .system)
         
@@ -80,6 +85,10 @@ public final class NoticeContentViewController: UIViewController {
         button.addAction(UIAction { [weak self] _ in
             guard let notice = self?.viewModel.notice else { return }
             
+            // Bookmark 버튼 클릭 이벤트 전송
+            Analytics.logEvent(AnalyticsEventName.bookmarkButtonClicked.rawValue, parameters: nil)
+            
+            // Bookmark Form 표시
             let bookmark = Bookmark(notice: notice, memo: "")
             let rootView = BookmarkForm(
                 store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
@@ -311,8 +320,15 @@ private extension NoticeContentViewController {
         )
         let bookmarkItem = UIBarButtonItem(
             image: UIImage(systemName: "bookmark"),
-            primaryAction: UIAction { [weak self] _ in self?.presentBookmarkForm() }
+            primaryAction: UIAction { [weak self] _ in
+                // Bookmark 버튼 클릭 이벤트 전송
+                Analytics.logEvent(AnalyticsEventName.bookmarkButtonClicked.rawValue, parameters: nil)
+                
+                // Bookmark Form 표시
+                self?.presentBookmarkForm()
+            }
         )
+        
         navigationItem.rightBarButtonItems = [shareItem, bookmarkItem]
         
         // AI 요약 버튼: 우측 하단

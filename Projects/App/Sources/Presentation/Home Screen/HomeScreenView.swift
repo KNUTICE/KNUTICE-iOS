@@ -16,6 +16,7 @@ import KNTip
 import KNUtility
 import SwiftUI
 import UIComponents
+import FirebaseAnalytics
 
 struct HomeScreenView: View {
     @State private var store: StoreOf<HomeScreenFeature>
@@ -197,6 +198,10 @@ fileprivate struct NoticeList<Content: View>: View {
                             ToolbarItemGroup(placement: .topBarTrailing) {
                                 if let layoutType, case .typeB = layoutType {
                                     Button {
+                                        // Bookmark 버튼 클릭 이벤트 전송
+                                        Analytics.logEvent(AnalyticsEventName.bookmarkButtonClicked.rawValue, parameters: nil)
+                                        
+                                        // Bookmark Form 표시
                                         isShowingBookmarkForm.toggle()
                                     } label: {
                                         Image(systemName: "bookmark")
