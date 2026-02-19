@@ -158,7 +158,6 @@ public final class NoticeContentViewController: UIViewController {
 }
 
 // MARK: - Setup Methods
-
 private extension NoticeContentViewController {
     func setupUI() {
         view.backgroundColor = KNDesignSystemAsset.detailViewBackground.color
@@ -205,7 +204,6 @@ private extension NoticeContentViewController {
 }
 
 // MARK: - Presentation Actions
-
 private extension NoticeContentViewController {
     func presentSummarySheet() {
         guard let notice = viewModel.notice else { return }
@@ -258,7 +256,6 @@ private extension NoticeContentViewController {
 }
 
 // MARK: - WKNavigationDelegate
-
 extension NoticeContentViewController: WKNavigationDelegate {
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         webViewTask = Task {
@@ -274,7 +271,6 @@ extension NoticeContentViewController: WKNavigationDelegate {
 }
 
 // MARK: - WKUIDelegate
-
 extension NoticeContentViewController: WKUIDelegate {
     public func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for action: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         if let url = action.request.url {
@@ -288,18 +284,14 @@ extension NoticeContentViewController: WKUIDelegate {
 private extension NoticeContentViewController {
     func configureLayoutA() {
         // toolbar
-        let shareItem = UIBarButtonItem(
-            image: UIImage(systemName: "square.and.arrow.up"),
-            primaryAction: UIAction { [weak self] _ in self?.presentShareSheet() }
-        )
         navigationItem.rightBarButtonItems = [shareItem]
         
         // AI 요약 버튼: 좌측 하단
         aiSummarizationButton.snp.remakeConstraints { make in
             let bottomOffset = UIDevice.current.userInterfaceIdiom == .phone ? -50 : -100
             make.bottom.equalToSuperview().offset(bottomOffset)
-            make.leading.equalToSuperview().offset(20) // 좌측
-            make.width.height.equalTo(60) // 조금 더 강조된 크기
+            make.leading.equalToSuperview().offset(20)
+            make.width.height.equalTo(60)
         }
         
         // 북마크 버튼: 우측 하단 배치
@@ -314,10 +306,6 @@ private extension NoticeContentViewController {
     
     func configureLayoutB() {
         // toolbar
-        let shareItem = UIBarButtonItem(
-            image: UIImage(systemName: "square.and.arrow.up"),
-            primaryAction: UIAction { [weak self] _ in self?.presentShareSheet() }
-        )
         let bookmarkItem = UIBarButtonItem(
             image: UIImage(systemName: "bookmark"),
             primaryAction: UIAction { [weak self] _ in
@@ -336,13 +324,19 @@ private extension NoticeContentViewController {
             let bottomOffset = UIDevice.current.userInterfaceIdiom == .phone ? -50 : -100
             make.bottom.equalToSuperview().offset(bottomOffset)
             make.trailing.equalToSuperview().offset(-20)
-            make.width.height.equalTo(50)
+            make.width.height.equalTo(60)
         }
+    }
+    
+    var shareItem: UIBarButtonItem {
+        UIBarButtonItem(
+            image: UIImage(systemName: "square.and.arrow.up"),
+            primaryAction: UIAction { [weak self] _ in self?.presentShareSheet() }
+        )
     }
 }
 
 // MARK: - Constants
-
 private enum JavaScriptScripts {
     static let cleanUpKNUTPage = """
     (function() {
