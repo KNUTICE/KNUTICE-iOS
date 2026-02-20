@@ -50,6 +50,7 @@ struct HomeScreenView: View {
                         ReadingRoomStatusView()
                             .toolbar(.hidden)
                             .background(KNDesignSystemAsset.primaryBackground.swiftUIColor)
+                            .ignoresSafeArea(edges: .bottom)
                     } label: {
                         HomeCardView(title: "열람실 조회") {
                             Image("icon_study_area")

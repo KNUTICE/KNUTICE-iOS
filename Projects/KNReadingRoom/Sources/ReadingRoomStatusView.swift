@@ -68,7 +68,7 @@ extension ReadingRoomStatusView {
                         \(Bundle.module.bridgingMethod)('\(fcmToken)');
                     """
                     
-                    try await webView.evaluateJavaScript(javaScriptString)
+                    webView.evaluateJavaScript(javaScriptString, completionHandler: nil)
                 } catch {
                     print("ReadingRoomStatusView.Coordinator: \(error)")
                 }
