@@ -254,7 +254,7 @@ fileprivate struct NoticeList<Content: View>: View {
     }
     
     private func fetchLayoutType() async {
-        let layout = await ABTestManager.shared.value(for: ABTestKeys.noticeDetailLayoutType.rawValue)
+        let layout = await ABTestManager.shared.value(for: ABTestKeys.noticeDetailLayoutType)
         layoutType = ABTestLayoutType(rawValue: layout)
     }
 }

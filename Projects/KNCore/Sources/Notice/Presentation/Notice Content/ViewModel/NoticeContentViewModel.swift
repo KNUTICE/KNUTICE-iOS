@@ -62,7 +62,7 @@ public final class NoticeContentViewModel {
     
     func fetchLayout() {
         layoutTask = Task {
-            let value = await ABTestManager.shared.value(for: ABTestKeys.noticeDetailLayoutType.rawValue)
+            let value = await ABTestManager.shared.value(for: ABTestKeys.noticeDetailLayoutType)
             layoutType = ABTestLayoutType(rawValue: value)
         }
     }
