@@ -62,14 +62,8 @@ public final class NoticeContentViewModel {
     
     func fetchLayout() {
         layoutTask = Task {
-            do {
-                try Task.checkCancellation()
-                
-                let value = try await ABTestManager.shared.getString(key: ABTestKeys.noticeDetailLayoutType.rawValue)
-                layoutType = ABTestLayoutType(rawValue: value)
-            } catch {
-                print("NoticeContentViewModel.fetchLayout(): \(error)")
-            }
+            let value = await ABTestManager.shared.value(for: ABTestKeys.noticeDetailLayoutType.rawValue)
+            layoutType = ABTestLayoutType(rawValue: value)
         }
     }
 }

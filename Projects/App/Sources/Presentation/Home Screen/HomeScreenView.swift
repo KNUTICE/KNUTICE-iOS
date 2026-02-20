@@ -254,12 +254,8 @@ fileprivate struct NoticeList<Content: View>: View {
     }
     
     private func fetchLayoutType() async {
-        do {
-            let layout = try await ABTestManager.shared.getString(key: ABTestKeys.noticeDetailLayoutType.rawValue)
-            layoutType = ABTestLayoutType(rawValue: layout)
-        } catch {
-            print("Failed to load layout type: \(error)")
-        }
+        let layout = await ABTestManager.shared.value(for: ABTestKeys.noticeDetailLayoutType.rawValue)
+        layoutType = ABTestLayoutType(rawValue: layout)
     }
 }
 
