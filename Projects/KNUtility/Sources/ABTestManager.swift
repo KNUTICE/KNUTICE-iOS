@@ -74,19 +74,14 @@ public actor ABTestManager {
     
     /// Retrieves the configuration string value for a given A/B test key.
     ///
-    /// This method ensures that the Remote Config data is ready before returning the value.
-    /// If the manager is in an `idle` or `fetching` state, it will await the completion
-    /// of the fetch process.
+    /// This method reads directly from the locally cached Remote Config snapshot.
+    /// If `fetchConfiguration()` has not yet been called or has failed, the value
+    /// returned will fall back to the default set in `init()`.
     ///
-    /// - Parameter key: A specific key defined in `ABTestKeys` to look up in Remote Config.
-    /// - Returns: The string value associated with the key. Returns the default value if the fetch fails or the key is missing.
-    ///
-    /// - Note: This is an `async` method to handle potential network latency during the initial fetch.
-    public func value(for key: ABTestKeys) async -> String {
-        if case .idle = status, case .fetching = status {
-            await fetchConfiguration()
-        }
-        
+    /// - Parameter key: The `ABTestKeys` case identifying the Remote Config parameter to look up.
+    /// - Returns: The string value associated with the key, or an empty string if the
+    ///   key is missing or its value is `nil`.
+    public func value(for key: ABTestKeys) -> String {
         // 이미 fetch된 값을 반환하거나, 실패 시 기본값을 반환합니다.
         return remoteConfig[key.rawValue].stringValue ?? ""
     }
