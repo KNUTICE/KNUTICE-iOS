@@ -8,32 +8,81 @@
 import FirebaseRemoteConfig
 
 public actor ABTestManager {
+    /// Represents the current state of the Remote Config fetch process.
+    private enum FetchStatus {
+        /// No fetch has been attempted yet.
+        case idle
+        /// A fetch task is currently in progress.
+        case fetching(Task<RemoteConfigFetchAndActivateStatus, any Error>)
+        /// Remote Config has been successfully fetched and activated.
+        case fetched
+    }
+    
+    /// The shared singleton instance of the `ABTestManager`.
     public static let shared: ABTestManager = .init()
-    private var remoteConfig = RemoteConfig.remoteConfig()
-    private var isRemoteConfigFetched: Bool = false
+    
+    /// The internal Firebase Remote Config instance.
+    private let remoteConfig = RemoteConfig.remoteConfig()
+    
+    /// The current lifecycle status of the configuration fetch.
+    private var status: FetchStatus = .idle
     
     private init() {
-        // 기본값 설정 (서버 연결 실패 시 사용)
+        // 기본 값 세팅
         let defaultValues: [String: NSObject] = [
-            "bookmark_btn_type": "toolbar" as NSObject
+            "notice_detail_layout_type": "type_A" as NSObject
         ]
         remoteConfig.setDefaults(defaultValues)
         
         let settings = RemoteConfigSettings()
         #if DEBUG
-        settings.minimumFetchInterval = 0 // 0초로 설정하여 즉시 업데이트 허용
+        settings.minimumFetchInterval = 0    // 0초로 설정하여 즉시 업데이트 허용
         #endif
         remoteConfig.configSettings = settings
     }
     
-    public func getString(key: String) async throws -> String {        
-        guard !isRemoteConfigFetched else { return remoteConfig[key].stringValue ?? "" }
+    /// Fetches and activates the latest configuration from the Firebase server.
+    ///
+    /// If a fetch is already in progress, it waits for the existing task to complete.
+    /// If the configuration has already been fetched, it returns immediately.
+    ///
+    /// - Note: In case of failure, the status is reset to `.idle` to allow subsequent retry attempts.
+    public func fetchConfiguration() async {
+        // 이미 패치 중이라면 해당 태스크를 대기
+        if case let .fetching(task) = status {
+            _ = try? await task.value
+            return
+        }
         
-        try await remoteConfig.fetch()
-        try await remoteConfig.activate()
+        // 완료되었다면 즉시 반환
+        if case .fetched = status { return }
         
-        isRemoteConfigFetched = true
+        let fetchTask = Task {
+            try await remoteConfig.fetchAndActivate()
+        }
         
-        return remoteConfig[key].stringValue ?? ""
+        status = .fetching(fetchTask)
+        
+        do {
+            _ = try await fetchTask.value
+            status = .fetched
+        } catch {
+            status = .idle // 실패 시 다음 호출 때 재시도 가능하도록 초기화
+            print("RemoteConfig Fetch Failed: \(error)")
+        }
+    }
+    
+    /// Retrieves the configuration string value for a given A/B test key.
+    ///
+    /// This method reads directly from the locally cached Remote Config snapshot.
+    /// If `fetchConfiguration()` has not yet been called or has failed, the value
+    /// returned will fall back to the default set in `init()`.
+    ///
+    /// - Parameter key: The `ABTestKeys` case identifying the Remote Config parameter to look up.
+    /// - Returns: The string value associated with the key, or an empty string if the
+    ///   key is missing or its value is `nil`.
+    public func value(for key: ABTestKeys) -> String {
+        // 이미 fetch된 값을 반환하거나, 실패 시 기본값을 반환합니다.
+        return remoteConfig[key.rawValue].stringValue ?? ""
     }
 }

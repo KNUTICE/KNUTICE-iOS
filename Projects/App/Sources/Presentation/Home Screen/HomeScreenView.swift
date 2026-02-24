@@ -16,6 +16,7 @@ import KNTip
 import KNUtility
 import SwiftUI
 import UIComponents
+import FirebaseAnalytics
 
 struct HomeScreenView: View {
     @State private var store: StoreOf<HomeScreenFeature>
@@ -170,6 +171,8 @@ fileprivate struct HomeCardView: View {
 
 fileprivate struct NoticeList<Content: View>: View {
     @State private var isActivityViewPresented: Bool = false
+    @State private var layoutType: ABTestLayoutType?
+    @State private var isShowingBookmarkForm: Bool = false
     
     let notices: MainSectionNotice
     let moreButton: (() -> Content)?
@@ -192,7 +195,19 @@ fileprivate struct NoticeList<Content: View>: View {
                     NoticeContentView(notice: item.notice)
                         .ignoresSafeArea(.all)
                         .toolbar {
-                            ToolbarItem(placement: .topBarTrailing) {
+                            ToolbarItemGroup(placement: .topBarTrailing) {
+                                if let layoutType, case .typeB = layoutType {
+                                    Button {
+                                        // Bookmark 버튼 클릭 이벤트 전송
+                                        Analytics.logEvent(AnalyticsEventName.bookmarkButtonClicked.rawValue, parameters: nil)
+                                        
+                                        // Bookmark Form 표시
+                                        isShowingBookmarkForm.toggle()
+                                    } label: {
+                                        Image(systemName: "bookmark")
+                                    }
+                                }
+                                
                                 Button {
                                     isActivityViewPresented.toggle()
                                 } label: {
@@ -205,6 +220,21 @@ fileprivate struct NoticeList<Content: View>: View {
                                 ActivityView(isPresented: $isActivityViewPresented, activityItmes: [
                                     url
                                 ])
+                            }
+                        }
+                        .task {
+                            await fetchLayoutType()
+                        }
+                        .sheet(isPresented: $isShowingBookmarkForm) {
+                            let bookmark = Bookmark(notice: item.notice, memo: "")
+                            NavigationStack {
+                                BookmarkForm(
+                                    store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
+                                        BookmarkFormFeature()
+                                    }
+                                ) {
+                                    isShowingBookmarkForm.toggle()
+                                }
                             }
                         }
                 } label: {
@@ -221,6 +251,11 @@ fileprivate struct NoticeList<Content: View>: View {
             }
         }
         .padding()
+    }
+    
+    private func fetchLayoutType() async {
+        let layout = await ABTestManager.shared.value(for: ABTestKeys.noticeDetailLayoutType)
+        layoutType = ABTestLayoutType(rawValue: layout)
     }
 }
 

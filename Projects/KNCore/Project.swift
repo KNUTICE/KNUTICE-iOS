@@ -31,6 +31,7 @@ let project = Project(
                 .external(name: "RxDataSources"),
                 .external(name: "SnapKit"),
                 .external(name: "KingFisher"),
+                .external(name: "FirebaseAnalytics"),
             ],
         )
     ]

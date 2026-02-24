@@ -7,6 +7,6 @@
 
 import Foundation
 
-public enum ABTestKeys: String {
-    case bookmarkBtnType = "bookmark_btn_type"
+public enum ABTestKeys: String, Sendable {
+    case noticeDetailLayoutType = "notice_detail_layout_type"
 }

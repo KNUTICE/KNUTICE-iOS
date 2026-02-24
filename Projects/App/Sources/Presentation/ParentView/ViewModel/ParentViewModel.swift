@@ -24,12 +24,7 @@ final class ParentViewModel {
     /// A set of Combine cancellables used to store subscriptions for automatic cancellation
     /// when the owning instance is deallocated.
     private var cancellables: Set<AnyCancellable> = []
-    
-    /// The currently running async task for FCM token registration or related work.
-    /// Cancelling or overwriting this task will stop the in-progress operation.
-    var tokenUploadTask: Task<Void, Never>?
-    
-    var navigationFallbackTask: Task<Void, Never>?
+    private(set) var navigationFallbackTask: Task<Void, Never>?
     
     //MARK: - Methods
     
@@ -69,14 +64,12 @@ final class ParentViewModel {
     /// - SeeAlso:
     ///   - `service.register(fcmToken:)` for the actual network registration request.
     private func register(token: String) {        
-        tokenUploadTask = Task {
+         Task {
             do {
                 try Task.checkCancellation()
-                
                 try await registerFCMTokenUseCase.execute(token: token)
                 
                 shouldNavigateToMain = true
-                
             } catch {
                 print(error)
             }
@@ -118,6 +111,17 @@ final class ParentViewModel {
                 }
             })
             .store(in: &cancellables)
+    }
+    
+    /// Prepares the initial application configuration by fetching A/B test settings.
+    ///
+    /// This method initiates an asynchronous task to fetch and activate Remote Config
+    /// values from Firebase. It ensures that the necessary experiment data is available
+    /// before the user navigates to the main screens.
+    func prepareAppConfiguration() {
+        Task {
+            await ABTestManager.shared.fetchConfiguration()
+        }
     }
     
 }

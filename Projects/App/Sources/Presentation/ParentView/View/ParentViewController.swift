@@ -22,11 +22,11 @@ final class ParentViewController: UIViewController {
         addChildVC(loadingViewController)
         viewModel.subscribeToFCMToken()
         viewModel.subscribeToNotificationAuthorizationStatus()
+        viewModel.prepareAppConfiguration()
         bind()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        viewModel.tokenUploadTask?.cancel()
         viewModel.navigationFallbackTask?.cancel()
     }
     

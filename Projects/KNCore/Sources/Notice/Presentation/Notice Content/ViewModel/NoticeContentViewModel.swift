@@ -8,11 +8,13 @@
 import Combine
 import Factory
 import Foundation
+import KNUtility
 
 @MainActor
 public final class NoticeContentViewModel {
     /// Holds the current notice information.
     @Published private(set) var notice: Notice? = nil
+    @Published private(set) var layoutType: ABTestLayoutType? = nil
     
     /// Injected dependency that manages fetching notices from the data source.
     @Injected(\.noticeRepository) private var repository
@@ -21,7 +23,8 @@ public final class NoticeContentViewModel {
     private(set) var nttId: Int?
     
     /// A reference to the asynchronous task, used to track or cancel ongoing operations.
-    var task: Task<Void, Never>?
+    private(set) var noticeTask: Task<Void, Never>?
+    private(set) var layoutTask: Task<Void, Never>?
     
     public init(notice: Notice?, nttId: Int?) {
         self.notice = notice
@@ -43,17 +46,24 @@ public final class NoticeContentViewModel {
     /// - Important: Checks for cancellation using `Task.checkCancellation()`.
     /// - Throws: Can throw a network or decoding error during the fetch process.
     /// - Side Effects: The fetched `Notice` is assigned to the `notice` property.
-    func fetch() {
+    func fetchNotice() {
         guard let nttId else { return }
         
-        task = Task {
+        noticeTask = Task {
             do {
                 try Task.checkCancellation()
                 
                 notice = try await repository.fetchNotice(by: nttId)
             } catch {
-                print(error)
+                print("NoticeContentViewModel.fetch(): \(error)")
             }
+        }
+    }
+    
+    func fetchLayout() {
+        layoutTask = Task {
+            let value = await ABTestManager.shared.value(for: ABTestKeys.noticeDetailLayoutType)
+            layoutType = ABTestLayoutType(rawValue: value)
         }
     }
 }
