@@ -13,7 +13,6 @@ final class NoticeCollectionViewCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = .preferredFont(forTextStyle: .footnote)
-        label.textColor = KNDesignSystemAsset.accentColor.color
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label

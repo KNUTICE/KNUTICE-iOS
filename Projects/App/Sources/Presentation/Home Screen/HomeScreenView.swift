@@ -12,6 +12,7 @@ import KNDeepLink
 import KNDesignSystem
 import KNReadingRoom
 import KNMeal
+import KNSetting
 import KNTip
 import KNUtility
 import SwiftUI
@@ -132,21 +133,31 @@ struct HomeScreenView: View {
         .refreshable {
             await store.send(.fetchAllContents).finish()
         }
-//        .onReceive(
-//            Timer.publish(every: 7, on: .main, in: .common)
-//                .autoconnect()
-//        ) { _ in
-//            if case let .loaded(sectionedNotices) = store.sectionedNotices {
-//                let isActualData = sectionedNotices.first?.items.first?.presentationType == .actual
-//                let totalCount = sectionedNotices.count
-//                
-//                guard totalCount > 0 && isActualData else { return }
-//                
-//                withAnimation {
-//                    currentTabIndex = (currentTabIndex + 1) % totalCount
-//                }
-//            }
-//        }
+        .toolbar {
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                ToolbarItem(placement: .topBarLeading) {
+                    Text("KNUTICE")
+                        .bold()
+                        .font(.title2)
+                        .fixedSize()
+                }
+                .fork { view in
+                    if #available(iOS 26.0, *) {
+                        view.sharedBackgroundVisibility(.hidden)
+                    } else {
+                        view
+                    }
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        SettingView()
+                    } label: {
+                        Image(systemName: "gearshape")
+                    }
+                }
+            }
+        }
     }
     
     private func startTimer() {
