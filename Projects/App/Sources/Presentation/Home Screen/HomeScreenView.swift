@@ -222,8 +222,19 @@ fileprivate struct NoticeList<Content: View>: View {
             HStack {
                 Text(notices.header)
                     .font(.title3)
-                    .bold()
+                    .fontWeight(.heavy)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundStyle(
+                        (notices.category as? NoticeCategory).map { category -> Color in
+                            switch category {
+                            case .generalNotice:    return KNDesignSystemAsset.accentOrange.swiftUIColor
+                            case .academicNotice:    return KNDesignSystemAsset.accentAmber.swiftUIColor
+                            case .scholarshipNotice:    return KNDesignSystemAsset.accentMint.swiftUIColor
+                            case .eventNotice:    return KNDesignSystemAsset.accentBlue.swiftUIColor
+                            case .employmentNotice:    return KNDesignSystemAsset.accentPurple.swiftUIColor
+                            }
+                        } ?? .primary
+                    )
                     .redacted(reason: notices.items.first?.presentationType == .skeleton ? .placeholder : [])
                 
                 moreButton?()
