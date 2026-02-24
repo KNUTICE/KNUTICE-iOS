@@ -49,6 +49,7 @@ public struct TipBannerView: View, EntryTimeRecordable {
                         isLoading: .constant(false),
                         url: viewModel.selectedURL
                     )
+                    .ignoresSafeArea(edges: .all)
                     .toolbar {
                         ToolbarItem(placement: .topBarLeading) {
                             Button {
