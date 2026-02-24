@@ -21,6 +21,7 @@ import FirebaseAnalytics
 struct HomeScreenView: View {
     @State private var store: StoreOf<HomeScreenFeature>
     @State private var currentTabIndex: Int = 0
+    @State private var timerSubscription: AnyCancellable?
     
     init(store: StoreOf<HomeScreenFeature>) {
         self.store = store
@@ -85,6 +86,9 @@ struct HomeScreenView: View {
                         RoundedRectangle(cornerRadius: 20)
                             .fill(KNDesignSystemAsset.mainCellBackground.swiftUIColor)
                     }
+                    .onChange(of: currentTabIndex) {
+                        startTimer()
+                    }
                     
                 case .error:
                     ErrorStateView()
@@ -123,20 +127,44 @@ struct HomeScreenView: View {
         .background(KNDesignSystemAsset.primaryBackground.swiftUIColor)
         .onAppear {
             store.send(.onAppear)
+            startTimer()
         }
         .refreshable {
             await store.send(.fetchAllContents).finish()
         }
-        .onReceive(Timer.publish(every: 7, on: .main, in: .common).autoconnect()) { _ in
-            if case let .loaded(sectionedNotices) = store.sectionedNotices {
-                let isActualData = sectionedNotices.first?.items.first?.presentationType == .actual
-                let totalCount = sectionedNotices.count
-                
-                guard totalCount > 0 && isActualData else { return }
-                
-                withAnimation {
-                    currentTabIndex = (currentTabIndex + 1) % totalCount
-                }
+//        .onReceive(
+//            Timer.publish(every: 7, on: .main, in: .common)
+//                .autoconnect()
+//        ) { _ in
+//            if case let .loaded(sectionedNotices) = store.sectionedNotices {
+//                let isActualData = sectionedNotices.first?.items.first?.presentationType == .actual
+//                let totalCount = sectionedNotices.count
+//                
+//                guard totalCount > 0 && isActualData else { return }
+//                
+//                withAnimation {
+//                    currentTabIndex = (currentTabIndex + 1) % totalCount
+//                }
+//            }
+//        }
+    }
+    
+    private func startTimer() {
+        timerSubscription?.cancel() // 기존 타이머 제거
+        timerSubscription = Timer.publish(every: 7, on: .main, in: .common)
+            .autoconnect()
+            .sink { _ in
+                handleTimerTick()
+            }
+    }
+    
+    private func handleTimerTick() {
+        if case let .loaded(sectionedNotices) = store.sectionedNotices {
+            let totalCount = sectionedNotices.count
+            guard totalCount > 0 else { return }
+            
+            withAnimation {
+                currentTabIndex = (currentTabIndex + 1) % totalCount
             }
         }
     }
