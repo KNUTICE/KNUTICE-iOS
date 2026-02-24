@@ -44,7 +44,7 @@ public final class SearchViewController: UIViewController, CompositionalLayoutCo
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.estimatedRowHeight = 100    //cell height가 설정되기 전 임시 크기
         tableView.rowHeight = UITableView.automaticDimension    //동적 Height 설정
-        tableView.register(BookmarkTableViewCell.self, forCellReuseIdentifier: BookmarkTableViewCell.reuseIdentifier)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: BookmarkListRow.reuseIdentifier)
         tableView.backgroundColor = KNDesignSystemAsset.primaryBackground.color
         tableView.separatorStyle = .none
         tableView.isHidden = true
