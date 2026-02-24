@@ -14,17 +14,24 @@ actor TokenRepositoryImpl: TokenRepository {
     @Injected(\.remoteDataSource) private var dataSource
     private let baseURL: String? = Bundle.module.tokenURL
     
-    /// Registers a new FCM token to the KNUTICE server.
+    /// Registers a newly issued FCM token with the KNUTICE server.
     ///
-    /// This method sends a POST request to the server. Note that the actual FCM token
-    /// should be handled by the interceptor or the data source layer since `isInterceptable`
-    /// is set to `true`.
+    /// This method sends a `POST` request with the device type in the request
+    /// body. The FCM token itself is not passed as a parameter — it is
+    /// retrieved automatically and injected into the request header by
+    /// `NetworkInterceptor` when `useFCMToken` is set to `true`.
     ///
-    /// - Parameter token: The FCM token to register.
+    /// Cancellation is checked before the network call is made, so if the
+    /// enclosing `Task` has already been cancelled the method exits immediately
+    /// without sending a request.
+    ///
     /// - Throws:
-    ///   - `NetworkError.invalidURL` if the base URL is missing.
-    ///   - `Task.checkCancellation` errors if the request is aborted.
-    func register(token: String) async throws {
+    ///   - `CancellationError` if the enclosing `Task` was cancelled before
+    ///     the request could be dispatched.
+    ///   - `NetworkError.invalidURL` if `tokenURL` is absent or malformed
+    ///     in the module bundle.
+    ///   - Any networking or decoding error propagated from `RemoteDataSource`.
+    func register() async throws {
         try Task.checkCancellation()
         
         // KNUTICE 서버에 토큰 업로드
@@ -38,7 +45,7 @@ actor TokenRepositoryImpl: TokenRepository {
             method: .post,
             parameters: params,
             decoding: PostResponseDTO.self,
-            isInterceptable: true    // 새로 발급 받은 FCM 토큰은 요청 header에 저장
+            useFCMToken: true    // 새로 발급 받은 FCM 토큰은 요청 header에 저장
         )
     }
     
