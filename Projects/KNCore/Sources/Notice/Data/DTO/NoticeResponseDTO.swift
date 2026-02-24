@@ -25,6 +25,7 @@ public struct NoticeData: Decodable, Sendable {
     public let title: String
     public let contentURL: String
     public let contentImageURL: String?
+    public let isContentSummary: Bool
     public let department, registrationDate: String
     public let topic: String
 
@@ -33,14 +34,24 @@ public struct NoticeData: Decodable, Sendable {
         case title
         case contentURL = "contentUrl"
         case contentImageURL = "contentImageUrl"
-        case department, registrationDate, topic
+        case isContentSummary, department, registrationDate, topic
     }
     
-    public init(nttID: Int, title: String, contentURL: String, contentImageURL: String?, department: String, registrationDate: String, topic: String) {
+    public init(
+        nttID: Int,
+        title: String,
+        contentURL: String,
+        contentImageURL: String?,
+        isContentSummary: Bool,
+        department: String,
+        registrationDate: String,
+        topic: String
+    ) {
         self.nttID = nttID
         self.title = title
         self.contentURL = contentURL
         self.contentImageURL = contentImageURL
+        self.isContentSummary = isContentSummary
         self.department = department
         self.registrationDate = registrationDate
         self.topic = topic

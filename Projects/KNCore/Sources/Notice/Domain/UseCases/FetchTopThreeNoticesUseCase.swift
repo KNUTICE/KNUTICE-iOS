@@ -107,6 +107,7 @@ public extension Notice {
                 id: UUID().hashValue,
                 title: "공지사항 제목이 들어갈 자리입니다. 로딩 중입니다.",
                 contentUrl: "",
+                isSummarizable: false,
                 department: "학사운영팀",
                 uploadDate: "2026.00.00",
                 imageUrl: nil,

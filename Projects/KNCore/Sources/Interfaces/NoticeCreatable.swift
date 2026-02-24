@@ -18,6 +18,7 @@ public extension NoticeCreatable {
             id: data.nttID,
             title: data.title,
             contentUrl: data.contentURL,
+            isSummarizable: data.isContentSummary,
             department: data.department,
             uploadDate: data.registrationDate,
             imageUrl: data.contentImageURL,

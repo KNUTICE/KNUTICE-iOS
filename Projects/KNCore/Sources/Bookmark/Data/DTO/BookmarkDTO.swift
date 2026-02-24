@@ -40,6 +40,7 @@ fileprivate extension Notice {
             title: title,
             contentURL: contentUrl,
             contentImageURL: imageUrl,
+            isContentSummary: isSummarizable,
             department: department,
             registrationDate: uploadDate,
             topic: noticeCategory?.rawValue ?? ""
