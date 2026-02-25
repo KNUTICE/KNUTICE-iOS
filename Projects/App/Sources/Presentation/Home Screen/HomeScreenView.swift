@@ -318,7 +318,7 @@ fileprivate struct NoticeListRow: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(notice.title)
-                .font(.subheadline)
+                .font(.footnote)
                 .bold()
                 .lineLimit(1)
                 .foregroundStyle(colorScheme == .light ? .black : .white)
