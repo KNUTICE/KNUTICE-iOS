@@ -54,8 +54,8 @@ public struct BookmarkForm: View {
         .background(KNDesignSystemAsset.detailViewBackground.swiftUIColor)
         .animation(.easeInOut, value: store.state.isAlarmOn)
         .alert($store.scope(state: \.alert, action: \.alert))
-        .onChange(of: store.shouldDismiss) { shouldDismiss in
-            if shouldDismiss { dismissAction() }
+        .onChange(of: store.shouldDismiss) {
+            if store.shouldDismiss { dismissAction() }
         }
     }
 }

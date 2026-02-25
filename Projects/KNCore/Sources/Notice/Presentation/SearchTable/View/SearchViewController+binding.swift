@@ -54,10 +54,10 @@ extension SearchViewController: RxDataSourceBindable {
                 self?.updateBookmarkBackground(forResultsEmpty: items.isEmpty)
             })
             .bind(to: bookmarkTableView.rx.items(
-                cellIdentifier: BookmarkTableViewCell.reuseIdentifier,
-                cellType: BookmarkTableViewCell.self
+                cellIdentifier: BookmarkListRow.reuseIdentifier,
+                cellType: UITableViewCell.self
             )) { _, item, cell in
-                cell.configure(item)
+                cell.contentConfiguration = UIHostingConfiguration { BookmarkListRow(bookmark: item) }
                 cell.backgroundColor = .clear
             }
             .disposed(by: disposeBag)

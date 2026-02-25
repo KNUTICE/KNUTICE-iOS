@@ -140,6 +140,7 @@ fileprivate extension BookmarkDTO {
                 id: Int(noticeData.nttID),
                 title: noticeData.title,
                 contentUrl: noticeData.contentURL,
+                isSummarizable: noticeData.isContentSummary,
                 department: noticeData.department,
                 uploadDate: noticeData.registrationDate,
                 imageUrl: noticeData.contentImageURL,

@@ -17,6 +17,6 @@ public actor FetchTipUseCaseImpl: FetchTipUseCase {
     public init() {}
     
     public func execute() async -> Result<[Tip]?, any Error> {
-        return try await repository.fetchTips()
+        return await repository.fetchTips()
     }
 }

@@ -34,7 +34,7 @@ public actor RegisterFCMTokenUseCaseImpl: RegisterFCMTokenUseCase {
         try Task.checkCancellation()
         
         // KNUTICE 서버에 토큰 업로드
-        try await repository.register(token: token)
+        try await repository.register()
         
         // KNUTICE 서버에 저장된 토큰을 Keychain에 저장
         await FCMTokenKeychainManager.shared.save(fcmToken: token)

@@ -171,10 +171,14 @@ private extension NoticeContentViewController {
     func bind() {
         // Notice URL 로딩 감시
         viewModel.$notice
-            .compactMap { $0?.contentUrl }
-            .compactMap { URL(string: $0) }
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] url in
+            .compactMap { $0 }
+            .sink { [weak self] notice in
+                if !notice.isSummarizable {
+                    self?.aiSummarizationButton.isHidden = true
+                }
+                
+                guard let url = URL(string: notice.contentUrl) else { return }
                 self?.webView.load(URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad))
             }
             .store(in: &cancellables)

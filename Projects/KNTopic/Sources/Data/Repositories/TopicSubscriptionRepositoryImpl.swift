@@ -14,17 +14,25 @@ public actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
     private let baseURL: String? = Bundle.module.topicSubscriptionURL
     
-    /// Fetches and maps subscribed topics from the server.
+    /// Fetches the list of subscribed topics for the given topic type from the server.
     ///
-    /// This method performs the following:
-    /// 1. Constructs the query URL with the specified `TopicType`.
-    /// 2. Executes a GET request with interception for authentication.
-    /// 3. Validates and maps raw string values from the DTO into specific category enums.
+    /// This method performs the following steps:
+    /// 1. Checks for task cancellation before proceeding.
+    /// 2. Constructs the query URL by appending the `TopicType` as a query parameter.
+    /// 3. Sends a `GET` request with the FCM token injected into the header by `NetworkInterceptor`.
+    /// 4. Maps raw string values from the response DTO into typed `TopicSubscriptionKey` cases,
+    ///    discarding any unrecognized values via `compactMap`.
     ///
-    /// - Note: Currently, `.meal` type subscriptions are not supported and will return an empty list.
+    /// - Note: `.meal` type subscriptions are not yet supported and always return an empty list.
     ///
-    /// - Parameter type: The type of topics to retrieve.
-    /// - Returns: A filtered list of valid `TopicSubscriptionKey` objects.
+    /// - Parameter type: The topic category type to retrieve subscriptions for (e.g. `.notice`, `.major`).
+    ///
+    /// - Returns: A list of valid `TopicSubscriptionKey` objects corresponding to the subscribed topics.
+    ///
+    /// - Throws:
+    ///   - `CancellationError` if the enclosing `Task` was cancelled before the request was dispatched.
+    ///   - `NetworkError.invalidURL` if `topicSubscriptionURL` is absent or malformed in the module bundle.
+    ///   - Any networking or decoding error propagated from `RemoteDataSource`.
     public func fetch(for type: TopicType) async throws -> [TopicSubscriptionKey] {
         try Task.checkCancellation()
         
@@ -37,7 +45,7 @@ public actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
             endpoint,
             method: .get,
             decoding: TopicSubscriptionResponseDTO.self,
-            isInterceptable: true
+            useFCMToken: true
         )
         
         return dto.data.subscribedTopics.compactMap { value -> TopicSubscriptionKey? in
@@ -59,12 +67,22 @@ public actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
     
     /// Updates the server-side subscription state for a specific topic category.
     ///
-    /// Sends a PATCH request containing the topic identifier and the desired enabled state.
+    /// This method performs the following steps:
+    /// 1. Checks for task cancellation before proceeding.
+    /// 2. Constructs the query URL by appending the `TopicType` as a query parameter.
+    /// 3. Sends a `PATCH` request with the topic identifier and the desired enabled state
+    ///    in the JSON body. The FCM token is injected into the request header by `NetworkInterceptor`.
     ///
     /// - Parameters:
-    ///   - type: The category type (Notice, Major, etc.).
-    ///   - topic: The specific category instance to modify.
-    ///   - isEnabled: The new subscription state.
+    ///   - type: The topic category type that the target topic belongs to (e.g. `.notice`, `.major`).
+    ///   - topic: The specific category instance whose subscription state should be modified.
+    ///     Must conform to `CategoryProtocol` so its `rawValue` can be serialized into the request body.
+    ///   - isEnabled: `true` to subscribe to the topic; `false` to unsubscribe.
+    ///
+    /// - Throws:
+    ///   - `CancellationError` if the enclosing `Task` was cancelled before the request was dispatched.
+    ///   - `NetworkError.invalidURL` if `topicSubscriptionURL` is absent or malformed in the module bundle.
+    ///   - Any networking or decoding error propagated from `RemoteDataSource`.
     public func update(of type: TopicType, topic: any CategoryProtocol, isEnabled: Bool) async throws {
         try Task.checkCancellation()
         
@@ -83,7 +101,7 @@ public actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
             method: .patch,
             parameters: requestBody,
             decoding: PostResponseDTO.self,
-            isInterceptable: true
+            useFCMToken: true
         )
     }
 }

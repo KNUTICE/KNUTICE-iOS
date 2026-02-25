@@ -23,19 +23,17 @@ public protocol RemoteDataSource: Sendable {
     
     /// Sends an HTTP request using Swift Concurrency and decodes the response.
     ///
-    /// This method internally uses Alamofire and exposes it as an `async/await` API,
-    /// enabling structured concurrency and cancellation support.
-    ///
     /// - Parameters:
     ///   - url: The endpoint URL string.
     ///   - method: The HTTP method represented by `RequestMethod`.
-    ///   - parameters: Optional parameters encoded as JSON.
-    ///   - headers: Optional HTTP headers.
-    ///   - type: The expected response DTO type.
-    ///   - isInterceptable: Indicates whether a `TokenInterceptor` should be applied.
+    ///   - parameters: Optional parameters encoded as JSON body. Defaults to `nil`.
+    ///   - headers: Optional HTTP headers to attach to the request. Defaults to `nil`.
+    ///   - type: The expected response DTO type to decode into.
+    ///   - useFCMToken: When `true`, a `NetworkInterceptor` that injects the FCM
+    ///     registration token header is applied to the request. Defaults to `false`.
     ///
     /// - Returns: A decoded DTO of type `T`.
-    /// - Throws: Any networking or decoding error.
+    /// - Throws: An `AFError` or decoding error if the request or deserialization fails.
     @discardableResult
     func request<T>(
         _ url: String,
@@ -43,32 +41,29 @@ public protocol RemoteDataSource: Sendable {
         parameters: Parameters?,
         headers: HTTPHeaders?,
         decoding type: T.Type,
-        isInterceptable: Bool
+        useFCMToken: Bool
     ) async throws -> T where T: DTORepresentable
     
     /// Sends an HTTP request and publishes the decoded response as a Combine publisher.
     ///
-    /// This method wraps an Alamofire request into a Combine `AnyPublisher`,
-    /// automatically handling JSON encoding, optional headers, and token interception if enabled.
-    ///
     /// - Parameters:
     ///   - url: The endpoint URL string.
     ///   - method: The HTTP method represented by `RequestMethod`.
-    ///   - parameters: Optional parameters encoded as JSON.
-    ///   - headers: Optional HTTP headers.
-    ///   - type: The expected response DTO type.
-    ///   - isInterceptable: Indicates whether a `TokenInterceptor` should be applied.
+    ///   - parameters: Optional parameters encoded as JSON body. Defaults to `nil`.
+    ///   - headers: Optional HTTP headers to attach to the request. Defaults to `nil`.
+    ///   - type: The expected response DTO type to decode into.
+    ///   - useFCMToken: When `true`, a `NetworkInterceptor` that injects the FCM
+    ///     registration token header is applied to the request. Defaults to `false`.
     ///
-    /// - Returns: An `AnyPublisher` that publishes a decoded object of type `T` on success,
-    ///   or an `Error` if the request or decoding fails.
-    ///
+    /// - Returns: An `AnyPublisher` that emits a single decoded value of type `T`
+    ///   on success, or an `Error` if the request or decoding fails.
     func request<T>(
         _ url: String,
         method: RequestMethod,
         parameters: Parameters?,
         headers: HTTPHeaders?,
         decoding type: T.Type,
-        isInterceptable: Bool
+        useFCMToken: Bool
     ) -> AnyPublisher<T, any Error> where T: DTORepresentable
     
     /// Sends an HTTP request and emits a single decoded response of the specified type.
@@ -98,6 +93,8 @@ public protocol RemoteDataSource: Sendable {
 }
 
 public extension RemoteDataSource {
+    /// Default implementation that forwards to the primary `async/await` overload
+    /// with `parameters`, `headers`, and `useFCMToken` set to their default values.
     @discardableResult
     func request<T>(
         _ url: String,
@@ -105,7 +102,7 @@ public extension RemoteDataSource {
         parameters: Parameters? = nil,
         headers: HTTPHeaders? = nil,
         decoding type: T.Type,
-        isInterceptable: Bool = false
+        useFCMToken: Bool = false
     ) async throws -> T where T: DTORepresentable {
         return try await self.request(
             url,
@@ -113,17 +110,19 @@ public extension RemoteDataSource {
             parameters: parameters,
             headers: headers,
             decoding: type,
-            isInterceptable: isInterceptable
+            useFCMToken: useFCMToken
         )
     }
     
+    /// Default implementation that forwards to the primary Combine overload
+    /// with `parameters`, `headers`, and `useFCMToken` set to their default values.
     func request<T>(
         _ url: String,
         method: RequestMethod,
         parameters: Parameters? = nil,
         headers: HTTPHeaders? = nil,
         decoding type: T.Type,
-        isInterceptable: Bool = false
+        useFCMToken: Bool = false
     ) -> AnyPublisher<T, any Error> where T: DTORepresentable {
         return request(
             url,
@@ -131,10 +130,12 @@ public extension RemoteDataSource {
             parameters: parameters,
             headers: headers,
             decoding: type,
-            isInterceptable: isInterceptable
+            useFCMToken: useFCMToken
         )
     }
     
+    /// Default implementation that forwards to the deprecated RxSwift overload
+    /// with `parameters` set to its default value.
     func request<T>(
         _ url: String,
         method: RequestMethod,
@@ -147,13 +148,27 @@ public extension RemoteDataSource {
 
 // MARK: - RemoteDataSourceImpl
 
+/// The concrete implementation of `RemoteDataSource` that uses Alamofire under the hood.
+///
+/// `RemoteDataSourceImpl` manages a single Alamofire `Session` and delegates all
+/// request building, encoding, interception, and decoding to it.
+/// Inject a custom `Session` during initialisation (e.g. in unit tests) to swap
+/// out the underlying transport layer without changing call sites.
 public final class RemoteDataSourceImpl: RemoteDataSource, Sendable {
+    /// The Alamofire session used for all outgoing network requests.
     private let session: Session
     
+    /// Creates a new `RemoteDataSourceImpl`.
+    ///
+    /// - Parameter session: The Alamofire `Session` to use. Defaults to `Session.default`.
     public init(session: Session = Session.default) {
         self.session = session
     }
     
+    /// Executes the request with Alamofire and deserializes the response using `serializingDecodable`.
+    ///
+    /// A `NetworkInterceptor` is always attached; its `shouldContainFCMToken` flag
+    /// is driven by the `useFCMToken` parameter.
     @discardableResult
     public func request<T>(
         _ url: String,
@@ -161,7 +176,7 @@ public final class RemoteDataSourceImpl: RemoteDataSource, Sendable {
         parameters: Parameters? = nil,
         headers: HTTPHeaders? = nil,
         decoding type: T.Type,
-        isInterceptable: Bool = false
+        useFCMToken: Bool = false
     ) async throws -> T where T : DTORepresentable {
         return try await session.request(
             url,
@@ -169,19 +184,24 @@ public final class RemoteDataSourceImpl: RemoteDataSource, Sendable {
             parameters: parameters,
             encoding: JSONEncoding.default,
             headers: headers,
-            interceptor: isInterceptable ? TokenInterceptor() : nil
+            interceptor: useFCMToken ? NetworkInterceptor(shouldContainFCMToken: true) : NetworkInterceptor(shouldContainFCMToken: false)
         )
         .serializingDecodable(type)
         .value
     }
     
+    /// Executes the request with Alamofire and publishes the deserialized response
+    /// through Combine's `publishDecodable` API.
+    ///
+    /// Any `AFError` emitted by Alamofire is cast to the existential `Error` type
+    /// so the publisher signature remains protocol-agnostic.
     public func request<T>(
         _ url: String,
         method: RequestMethod,
         parameters: Parameters? = nil,
         headers: HTTPHeaders? = nil,
         decoding type: T.Type,
-        isInterceptable: Bool = false
+        useFCMToken: Bool = false
     ) -> AnyPublisher<T, any Error> where T : DTORepresentable {
         return session.request(
             url,
@@ -189,7 +209,7 @@ public final class RemoteDataSourceImpl: RemoteDataSource, Sendable {
             parameters: parameters,
             encoding: JSONEncoding.default,
             headers: headers,
-            interceptor: isInterceptable ? TokenInterceptor() : nil
+            interceptor: useFCMToken ? NetworkInterceptor(shouldContainFCMToken: true) : NetworkInterceptor(shouldContainFCMToken: false)
         )
         .publishDecodable(type: T.self)
         .value()
@@ -199,6 +219,10 @@ public final class RemoteDataSourceImpl: RemoteDataSource, Sendable {
         .eraseToAnyPublisher()
     }
     
+    /// Wraps the `async/await` overload in an RxSwift `Single` for backward compatibility.
+    ///
+    /// FCM token injection is not supported in this deprecated path; use the
+    /// `async/await` or Combine variants for requests that require the FCM header.
     public func request<T>(
         _ url: String,
         method: RequestMethod,

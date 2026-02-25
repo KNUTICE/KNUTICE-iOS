@@ -12,6 +12,7 @@ import KNDeepLink
 import KNDesignSystem
 import KNReadingRoom
 import KNMeal
+import KNSetting
 import KNTip
 import KNUtility
 import SwiftUI
@@ -21,6 +22,7 @@ import FirebaseAnalytics
 struct HomeScreenView: View {
     @State private var store: StoreOf<HomeScreenFeature>
     @State private var currentTabIndex: Int = 0
+    @State private var timerSubscription: AnyCancellable?
     
     init(store: StoreOf<HomeScreenFeature>) {
         self.store = store
@@ -50,6 +52,7 @@ struct HomeScreenView: View {
                         ReadingRoomStatusView()
                             .toolbar(.hidden)
                             .background(KNDesignSystemAsset.primaryBackground.swiftUIColor)
+                            .ignoresSafeArea(edges: .bottom)
                     } label: {
                         HomeCardView(title: "열람실 조회") {
                             Image("icon_study_area")
@@ -83,6 +86,9 @@ struct HomeScreenView: View {
                     .background {
                         RoundedRectangle(cornerRadius: 20)
                             .fill(KNDesignSystemAsset.mainCellBackground.swiftUIColor)
+                    }
+                    .onChange(of: currentTabIndex) {
+                        startTimer()
                     }
                     
                 case .error:
@@ -122,20 +128,54 @@ struct HomeScreenView: View {
         .background(KNDesignSystemAsset.primaryBackground.swiftUIColor)
         .onAppear {
             store.send(.onAppear)
+            startTimer()
         }
         .refreshable {
             await store.send(.fetchAllContents).finish()
         }
-        .onReceive(Timer.publish(every: 7, on: .main, in: .common).autoconnect()) { _ in
-            if case let .loaded(sectionedNotices) = store.sectionedNotices {
-                let isActualData = sectionedNotices.first?.items.first?.presentationType == .actual
-                let totalCount = sectionedNotices.count
-                
-                guard totalCount > 0 && isActualData else { return }
-                
-                withAnimation {
-                    currentTabIndex = (currentTabIndex + 1) % totalCount
+        .toolbar {
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                ToolbarItem(placement: .topBarLeading) {
+                    Text("KNUTICE")
+                        .bold()
+                        .font(.title2)
+                        .fixedSize()
                 }
+                .fork { view in
+                    if #available(iOS 26.0, *) {
+                        view.sharedBackgroundVisibility(.hidden)
+                    } else {
+                        view
+                    }
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        SettingView()
+                    } label: {
+                        Image(systemName: "gearshape")
+                    }
+                }
+            }
+        }
+    }
+    
+    private func startTimer() {
+        timerSubscription?.cancel() // 기존 타이머 제거
+        timerSubscription = Timer.publish(every: 7, on: .main, in: .common)
+            .autoconnect()
+            .sink { _ in
+                handleTimerTick()
+            }
+    }
+    
+    private func handleTimerTick() {
+        if case let .loaded(sectionedNotices) = store.sectionedNotices {
+            let totalCount = sectionedNotices.count
+            guard totalCount > 0 else { return }
+            
+            withAnimation {
+                currentTabIndex = (currentTabIndex + 1) % totalCount
             }
         }
     }
@@ -182,8 +222,19 @@ fileprivate struct NoticeList<Content: View>: View {
             HStack {
                 Text(notices.header)
                     .font(.title3)
-                    .bold()
+                    .fontWeight(.heavy)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundStyle(
+                        (notices.category as? NoticeCategory).map { category -> Color in
+                            switch category {
+                            case .generalNotice:    return KNDesignSystemAsset.accentOrange.swiftUIColor
+                            case .academicNotice:    return KNDesignSystemAsset.accentAmber.swiftUIColor
+                            case .scholarshipNotice:    return KNDesignSystemAsset.accentMint.swiftUIColor
+                            case .eventNotice:    return KNDesignSystemAsset.accentBlue.swiftUIColor
+                            case .employmentNotice:    return KNDesignSystemAsset.accentPurple.swiftUIColor
+                            }
+                        } ?? .primary
+                    )
                     .redacted(reason: notices.items.first?.presentationType == .skeleton ? .placeholder : [])
                 
                 moreButton?()
@@ -267,7 +318,7 @@ fileprivate struct NoticeListRow: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(notice.title)
-                .font(.subheadline)
+                .font(.footnote)
                 .bold()
                 .lineLimit(1)
                 .foregroundStyle(colorScheme == .light ? .black : .white)

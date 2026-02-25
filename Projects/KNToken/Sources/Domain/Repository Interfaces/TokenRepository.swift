@@ -13,9 +13,8 @@ protocol TokenRepository: Actor {
     /// This method is typically called during the initial app launch or when a user
     /// first grants notification permissions.
     ///
-    /// - Parameter token: The unique FCM token string provided by Firebase.
     /// - Throws: An error if the network request fails or if the server rejects the registration.
-    func register(token: String) async throws
+    func register() async throws
     
     /// Updates the server with a new FCM token while providing the previous token for identification.
     ///

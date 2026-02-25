@@ -52,6 +52,7 @@ public struct SettingView: View {
                 
                 NavigationLink {
                     BaseWebContentView(navigationTitle: "오픈소스 라이선스", contentURL: Bundle.module.openSourceURL)
+                        .ignoresSafeArea(edges: .all)
                 } label: {
                     NavigationIndicator(title: "오픈소스 라이선스")
                 }

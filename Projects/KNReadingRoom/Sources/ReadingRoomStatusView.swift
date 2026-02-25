@@ -28,6 +28,9 @@ public struct ReadingRoomStatusView: UIViewRepresentable {
         
         let webView = WKWebView(frame: .zero, configuration: config)
         webView.tintColor = .black
+        webView.backgroundColor = .clear
+        webView.scrollView.backgroundColor = KNDesignSystemAsset.primaryBackground.color
+        webView.isOpaque = false
         webView.navigationDelegate = context.coordinator
         
         guard let urlStr = Bundle.module.readingRoomStatusURL,
@@ -68,7 +71,7 @@ extension ReadingRoomStatusView {
                         \(Bundle.module.bridgingMethod)('\(fcmToken)');
                     """
                     
-                    try await webView.evaluateJavaScript(javaScriptString)
+                    webView.evaluateJavaScript(javaScriptString, completionHandler: nil)
                 } catch {
                     print("ReadingRoomStatusView.Coordinator: \(error)")
                 }

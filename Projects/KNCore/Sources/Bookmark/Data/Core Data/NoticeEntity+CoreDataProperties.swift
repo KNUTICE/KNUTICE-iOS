@@ -23,6 +23,7 @@ extension NoticeEntity {
     @NSManaged public var department: String?
     @NSManaged public var id: Int64
     @NSManaged public var imageUrl: String?
+    @NSManaged public var isSummarizable: Bool
     @NSManaged public var title: String?
     @NSManaged public var uploadDate: String?
     @NSManaged public var associatedBookmark: BookmarkEntity?

@@ -12,9 +12,7 @@ final class NoticeCollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "NoticeCollectionViewCell"
     private let titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = .preferredFont(forTextStyle: .footnote)
-        label.textColor = KNDesignSystemAsset.accentColor.color
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .font(for: .footnote, weight: .bold)
         
         return label
     }()
@@ -22,7 +20,6 @@ final class NoticeCollectionViewCell: UICollectionViewCell {
         let label = UILabel(frame: .zero)
         label.font = .preferredFont(forTextStyle: .caption2)
         label.textColor = KNDesignSystemAsset.subTitle.color
-        label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
     }()
@@ -47,7 +44,7 @@ final class NoticeCollectionViewCell: UICollectionViewCell {
         
         contentView.addSubview(subTitleLabel)
         subTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(8)
             make.leading.equalToSuperview().offset(16)
             make.bottom.equalToSuperview().offset(-16)
         }

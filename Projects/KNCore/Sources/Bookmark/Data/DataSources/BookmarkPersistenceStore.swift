@@ -133,6 +133,7 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
             noticeEntity.department = dto.noticeData.department
             noticeEntity.uploadDate = dto.noticeData.registrationDate
             noticeEntity.contentUrl = dto.noticeData.contentURL
+            noticeEntity.isSummarizable = dto.noticeData.isContentSummary
             noticeEntity.imageUrl = dto.noticeData.contentImageURL
             noticeEntity.category = dto.noticeData.topic
             
@@ -322,6 +323,7 @@ extension BookmarkEntity: @unchecked Sendable {
             title: noticeEntity?.title ?? "",
             contentURL: noticeEntity?.contentUrl ?? "",
             contentImageURL: noticeEntity?.imageUrl ?? "",
+            isContentSummary: noticeEntity?.isSummarizable ?? false,
             department: noticeEntity?.department ?? "",
             registrationDate: noticeEntity?.uploadDate ?? "",
             topic: noticeEntity?.category ?? ""

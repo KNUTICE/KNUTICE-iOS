@@ -12,6 +12,7 @@ public struct Notice: Sendable {
     public let id: Int    // nttId
     public let title: String    // 제목
     public let contentUrl: String    // 화면 전환 시 이동할 사이트 URL
+    public let isSummarizable: Bool    // AI 요약 가능 여부
     public let department: String    // 부서
     public let uploadDate: String    // 등록 날짜
     public let imageUrl: String?
@@ -22,6 +23,7 @@ public struct Notice: Sendable {
         id: Int,
         title: String,
         contentUrl: String,
+        isSummarizable: Bool,
         department: String,
         uploadDate: String,
         imageUrl: String?,
@@ -31,6 +33,7 @@ public struct Notice: Sendable {
         self.id = id
         self.title = title
         self.contentUrl = contentUrl
+        self.isSummarizable = isSummarizable
         self.department = department
         self.uploadDate = uploadDate
         self.imageUrl = imageUrl
@@ -46,6 +49,7 @@ public extension Notice {
             Notice(id: 1,
                    title: "2024학년도 2학기 재입학 신청 안내",
                    contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do",
+                   isSummarizable: false,
                    department: "학사관리과",
                    uploadDate: "2024-05-09",
                    imageUrl: nil,
@@ -53,6 +57,7 @@ public extension Notice {
             Notice(id: 2,
                    title: "[충청권 국립대학] 2024학년도 한밭대,한국교원대,공주대 하계 계절학기 학점교류 안내",
                    contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do",
+                   isSummarizable: false,
                    department: "학사관리과",
                    uploadDate: "2024-05-08",
                    imageUrl: nil,
@@ -60,6 +65,7 @@ public extension Notice {
             Notice(id: 3,
                    title: "2024-1학기 수업일수 3/4이상 수강한 휴학생 성적인정 신청 안내",
                    contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do",
+                   isSummarizable: false,
                    department: "학사관리과",
                    uploadDate: "2024-05-02",
                    imageUrl: nil,
@@ -72,6 +78,7 @@ public extension Notice {
             Notice(id: 4,
                    title: "2024학년도 1학기 분할납부(4차) 안내(5.13.~5.16.)",
                    contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do",
+                   isSummarizable: false,
                    department: "재무과",
                    uploadDate: "2024-05-10",
                    imageUrl: nil,
@@ -79,6 +86,7 @@ public extension Notice {
             Notice(id: 5,
                    title: "[연구인력혁신센터] 중소기업 연구인력 현장맞춤형 양성지원 R&D인턴(채용연계형) 모집",
                    contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do",
+                   isSummarizable: false,
                    department: "연구인력혁신센터",
                    uploadDate: "2024-05-08",
                    imageUrl: nil,
@@ -86,6 +94,7 @@ public extension Notice {
             Notice(id: 6,
                    title: "★ 2024학년도 취업동아리 참가학생 추가모집 안내 ★",
                    contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do",
+                   isSummarizable: false,
                    department: "취업성공지원과",
                    uploadDate: "2024-05-07",
                    imageUrl: nil,
@@ -98,6 +107,7 @@ public extension Notice {
             Notice(id: 7,
                    title: "2024년도 상반기 강화군 대학생 등록금 지원 사업 안내",
                    contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do",
+                   isSummarizable: false,
                    department: "장학팀",
                    uploadDate: "2024-05-14",
                    imageUrl: nil,
@@ -105,6 +115,7 @@ public extension Notice {
             Notice(id: 8,
                    title: "2024년 국가우수장학(이공계) 성적우수유형 및 재학중우수자(2년지원)유형 선발계획 안내",
                    contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do",
+                   isSummarizable: false,
                    department: "장학팀",
                    uploadDate: "2024-05-07",
                    imageUrl: nil,
@@ -112,6 +123,7 @@ public extension Notice {
             Notice(id: 9,
                    title: "2024년 화성시인재육성재단 주거비지원 장학생 선발 안내",
                    contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do",
+                   isSummarizable: false,
                    department: "장학팀",
                    uploadDate: "2024-05-03",
                    imageUrl: nil,
@@ -124,6 +136,7 @@ public extension Notice {
             Notice(id: 10,
                    title: "2024 일상 속 장애이슈 개선활동 청년 단체 모집",
                    contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do",
+                   isSummarizable: false,
                    department: "학생과",
                    uploadDate: "2024-05-14",
                    imageUrl: nil,
@@ -131,6 +144,7 @@ public extension Notice {
             Notice(id: 11,
                    title: "한국저작권보호원 2024「바로 지금 대학생 서포터즈」모집",
                    contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do",
+                   isSummarizable: false,
                    department: "학생과",
                    uploadDate: "2024-05-10",
                    imageUrl: nil,
@@ -138,6 +152,7 @@ public extension Notice {
             Notice(id: 12,
                    title: "‘2024 대한민국 열린 토론대회’ 논제 공모",
                    contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do",
+                   isSummarizable: false,
                    department: "학생과",
                    uploadDate: "2024-05-10",
                    imageUrl: nil,
@@ -151,6 +166,7 @@ public extension Notice {
                 id: 1082403,
                 title: "[졸업생특화프로그램사업] 잇다 제휴대학 개강이벤트 (졸업생, 지역청년도 참여 가능합니다)",
                 contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do?bbsId=BBSMSTR_000000000179&nttId=1082403",
+                isSummarizable: false,
                 department: "대학일자리플러스센터",
                 uploadDate: "2025-09-08",
                 imageUrl: nil,
@@ -160,6 +176,7 @@ public extension Notice {
                 id: 1082336,
                 title: "[고용노동부/대전지방고용노동청청주치청] 청년층 직업지도'캡파 CAP@ 프로그램' 참여자 모집 안내",
                 contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do?bbsId=BBSMSTR_000000000179&nttId=1082336",
+                isSummarizable: false,
                 department: "취업성공지원과",
                 uploadDate: "2025-09-05",
                 imageUrl: nil,
@@ -169,6 +186,7 @@ public extension Notice {
                 id: 1082334,
                 title: "[고려사이버대학교] Match業(매치업) '빅데이터실무전문가'심화과정 수강 안내",
                 contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do?bbsId=BBSMSTR_000000000179&nttId=1082334",
+                isSummarizable: false,
                 department: "취업성공지원과",
                 uploadDate: "2025-09-05",
                 imageUrl: nil,
