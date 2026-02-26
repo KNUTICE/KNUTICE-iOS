@@ -19,35 +19,36 @@ public struct TopicSubscriptionListFeature {
         var noticeSubscriptionStates: [NoticeCategory: Bool] = [:]
         var isMajorNoticeNotificationSubscribed: Bool = false
         var isLoading: Bool = false
-        var isShowingAlert: Bool = false
-        var isShowingFCMTokenErrorAlert: Bool = false
-        var alertMessage: String = ""
+        @Presents var alert: AlertState<Action.Alert>?
+        @Presents var fcmTokenErrorAlert: AlertState<Action.Alert>?
         
         public init() {}
     }
     
     // MARK: - Action
-    @CasePathable
-    public enum Action {
+    public enum Action {        
         case onAppear
         case onDisappear
-        
         case subscriptionsResponse(Result<[TopicSubscriptionKey], Error>)
-        
         case toggleNotice(NoticeCategory, Bool)
         case toggleNoticeState(NoticeCategory, Bool)
         case toggleMajor(Bool)
         case toggleMajorState(Bool)
-        
         case setLoading(Bool)
-        case showAlert(String)
-        case showFCMTokenErrorAlert(Bool)
         case setMajorNotificationSubscribed(Bool)
+        case alert(PresentationAction<Alert>)
+        case fcmTokenErrorAlert(PresentationAction<Alert>)
+        
+        public enum Alert: Equatable {
+            case dismiss
+            case confirmFCMError
+        }
     }
     
     // MARK: - Dependency
     @Dependency(\.fetchTopicSubscriptionUseCase) var fetchTopicSubscriptionUseCase
     @Dependency(\.updateTopicSubscriptionUseCase) var updateTopicSubscriptionUseCase
+    @Dependency(\.dismiss) var dismiss
     
     enum CancelID { case fetch, update }
     
@@ -55,7 +56,6 @@ public struct TopicSubscriptionListFeature {
     
     // MARK: - Reducer
     public var body: some Reducer<State, Action> {
-        
         Reduce { state, action in
             switch action {
             case .onAppear:
@@ -96,17 +96,37 @@ public struct TopicSubscriptionListFeature {
                 return .none
                 
             case .subscriptionsResponse(.failure(let error)):
-                // 네트워크 실패를 Alert 또는 FCM 오류 상태로 변환하여 UI에 전달
                 if let afError = error.asAFError,
                    case .requestAdaptationFailed(let underlying) = afError,
                    underlying is TokenError {
-                    state.isShowingFCMTokenErrorAlert = true
+                    state.fcmTokenErrorAlert = AlertState {
+                        TextState("알림")
+                    } actions: {
+                        ButtonState(action: .confirmFCMError) {    // 버튼 클릭 시 .confirmFCMError 액션 발생
+                            TextState("확인")
+                        }
+                    } message: {
+                        TextState("현재 서비스를 이용할 수 없습니다.\n잠시 후에 다시 시도해 주세요.")
+                    }
                 } else {
-                    state.alertMessage = "잠시 후 다시 시도해주세요."
-                    state.isShowingAlert = true
+                    state.alert = AlertState {
+                        TextState("알림 상태를 변경할 수 없어요.")
+                    } actions: {
+                        ButtonState(action: .dismiss) {    // 버튼 클릭 시, .dismiss 액션 발생
+                            TextState("확인")
+                        }
+                    } message: {
+                        TextState("잠시 후 다시 시도해주세요.")
+                    }
+                }
+                return .none
+                
+            case .fcmTokenErrorAlert(.presented(.confirmFCMError)):
+                return .run { _ in
+                    await dismiss()
                 }
                 
-                print("\(error.localizedDescription)")
+            case .alert, .fcmTokenErrorAlert:
                 return .none
                 
             case .toggleNotice(let topic, let isEnabled):
@@ -122,7 +142,7 @@ public struct TopicSubscriptionListFeature {
                         )
                         await send(.toggleNoticeState(topic, isEnabled))
                     } catch {
-                        await send(.showAlert("알림 상태를 변경할 수 없어요."))
+                        await send(.subscriptionsResponse(.failure(error)))
                     }
                     
                     await send(.setLoading(false))
@@ -161,17 +181,6 @@ public struct TopicSubscriptionListFeature {
             case .setLoading(let value):
                 // 로딩 인디케이터 표시 여부를 UI 상태로 변경
                 state.isLoading = value
-                return .none
-                
-            case .showAlert(let message):
-                // 사용자에게 보여줄 에러 메시지를 Alert용 상태로 저장
-                state.alertMessage = message
-                state.isShowingAlert = true
-                return .none
-                
-            case .showFCMTokenErrorAlert(let value):
-                // FCM 토큰 오류 발생 여부를 Alert 상태로 제어
-                state.isShowingFCMTokenErrorAlert = value
                 return .none
                 
             case let .setMajorNotificationSubscribed(isEnabled):
