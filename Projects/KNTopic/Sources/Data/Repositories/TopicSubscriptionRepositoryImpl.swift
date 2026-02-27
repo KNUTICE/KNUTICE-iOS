@@ -54,13 +54,20 @@ public actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
                 // Map raw string to NoticeCategory, then wrap in TopicSubscriptionKey.notice
                 guard let category = NoticeCategory(rawValue: value) else { return nil }
                 return .notice(category)
+                
             case .major:
                 // Map raw string to MajorCategory, then wrap in TopicSubscriptionKey.major
                 guard let category = MajorCategory(rawValue: value) else { return nil }
                 return .major(category)
+                
             case .meal:
-                // TODO: Enable subscription for `.meal` in the future
-                return nil
+                if value == CafeteriaCategory.studentCafeteria.rawValue {
+                    return .studentCafeteria
+                } else if value == CafeteriaCategory.staffCafeteria.rawValue {
+                    return .staffCafeteria
+                } else {
+                    return nil
+                }
             }
         }
     }

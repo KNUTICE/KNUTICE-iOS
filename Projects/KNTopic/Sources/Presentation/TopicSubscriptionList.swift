@@ -12,7 +12,7 @@ import SwiftUI
 import UIComponents
 
 public struct TopicSubscriptionList: View {
-    let store: StoreOf<TopicSubscriptionListFeature>
+    @Bindable var store: StoreOf<TopicSubscriptionListFeature>
     @Environment(\.dismiss) private var dismiss
     
     public init(store: StoreOf<TopicSubscriptionListFeature>) {
@@ -55,11 +55,9 @@ public struct TopicSubscriptionList: View {
                 }
                 
                 Section {
-                    Toggle(
-                        isOn: ViewStore(store, observe: { $0 }).binding(
-                            get: { $0.isMajorNoticeNotificationSubscribed },
-                            send: { .toggleMajor($0) }
-                        )
+                    Toggle(isOn: Binding(
+                        get: { store.isMajorNoticeNotificationSubscribed },
+                        set: { store.send(.toggleMajor($0)) })
                     ) {
                         ToggleCaption(
                             title: "학과소식",
@@ -71,42 +69,40 @@ public struct TopicSubscriptionList: View {
                     }
                     .tint(KNDesignSystemAsset.accent2.swiftUIColor)
                 }
+                
+                Section {
+                    Toggle(isOn: Binding(
+                        get: { store.isStudentCafeteriaNotificationSubscribed },
+                        set: { store.send(.toggleCafeteria(.studentCafeteria, $0)) })
+                    ) {
+                        ToggleCaption(
+                            title: "학생 식당",
+                            caption: "학생 식당의 메뉴를 알려드려요."
+                        )
+                    }
+                    
+                    Toggle(isOn: Binding(
+                        get: { store.isStaffCafeteriaNotificationSubscribed },
+                        set: { store.send(.toggleCafeteria(.staffCafeteria, $0)) })
+                    ) {
+                        ToggleCaption(
+                            title: "교직원 식당",
+                            caption: "교직원 식당의 메뉴를 알려드려요."
+                        )
+                    }
+                }
+                .tint(KNDesignSystemAsset.accent2.swiftUIColor)
             }
             
-            if store.isLoading {
-                SpinningIndicator()
-            }
+            SpinningIndicator()
+                .opacity(store.isLoading ? 1 : 0)
         }
         .navigationTitle("서비스 알림")
         .navigationBarTitleDisplayMode(.inline)
-        .task {
-            await store.send(.onAppear).finish()
-        }
-        .onDisappear {
-            store.send(.onDisappear)
-        }
-        .alert("알림 상태를 변경할 수 없어요.",
-               isPresented: ViewStore(store, observe: { $0 }).binding(
-                get: { $0.isShowingAlert },
-                send: { _ in .showAlert("") }
-               )
-        ) {
-            Button("확인") { }
-        } message: {
-            Text(store.alertMessage)
-        }
-        .alert("알림",
-               isPresented: ViewStore(store, observe: { $0 }).binding(
-                get: { $0.isShowingFCMTokenErrorAlert },
-                send: { _ in .showFCMTokenErrorAlert(false) }
-               )
-        ) {
-            Button("확인") {
-                dismiss()
-            }
-        } message: {
-            Text("현재 서비스를 이용할 수 없습니다.\n잠시 후에 다시 시도해 주세요.")
-        }
+        .task { await store.send(.onAppear).finish() }
+        .onDisappear { store.send(.onDisappear) }
+        .alert($store.scope(state: \.alert, action: \.alert))
+        .alert($store.scope(state: \.fcmTokenErrorAlert, action: \.fcmTokenErrorAlert))
     }
     
     private func toggleRow(
@@ -114,17 +110,15 @@ public struct TopicSubscriptionList: View {
         caption: String,
         topic: NoticeCategory
     ) -> some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
-            Toggle(
-                isOn: viewStore.binding(
-                    get: { $0.noticeSubscriptionStates[topic, default: false] },
-                    send: { .toggleNotice(topic, $0) }
-                )
-            ) {
-                ToggleCaption(title: title, caption: caption)
-            }
-            .tint(KNDesignSystemAsset.accent2.swiftUIColor)
+        Toggle(
+            isOn: Binding(
+                get: { store.noticeSubscriptionStates[topic, default: false] },
+                set: { store.send(.toggleNotice(topic, $0)) }
+            )
+        ) {
+            ToggleCaption(title: title, caption: caption)
         }
+        .tint(KNDesignSystemAsset.accent2.swiftUIColor)
     }
 }
 
