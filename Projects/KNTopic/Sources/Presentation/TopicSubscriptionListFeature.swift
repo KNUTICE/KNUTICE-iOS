@@ -56,7 +56,12 @@ public struct TopicSubscriptionListFeature {
     @Dependency(\.updateTopicSubscriptionUseCase) var updateTopicSubscriptionUseCase
     @Dependency(\.dismiss) var dismiss
     
-    enum CancelID { case fetch, update }
+    enum CancelID {
+        case fetch
+        case updateNotice
+        case updateMajor
+        case updateCafeteria
+    }
     
     public init() {}
     
@@ -94,7 +99,9 @@ public struct TopicSubscriptionListFeature {
                 // 화면이 사라질 때 진행 중이던 구독 조회 네트워크 요청 취소
                 return .merge(
                     .cancel(id: CancelID.fetch),
-                    .cancel(id: CancelID.update)
+                    .cancel(id: CancelID.updateNotice),
+                    .cancel(id: CancelID.updateMajor),
+                    .cancel(id: CancelID.updateCafeteria)
                 )
                 
             case .noticeSubscriptionsResponse(let subscriptions):
@@ -176,7 +183,7 @@ public struct TopicSubscriptionListFeature {
                     
                     await send(.setLoading(false))
                 }
-                .cancellable(id: CancelID.update, cancelInFlight: true)
+                .cancellable(id: CancelID.updateNotice, cancelInFlight: true)
                 
             case .toggleNoticeState(let topic, let isEnabled):
                 // 서버 업데이트 성공 후 로컬 State를 실제 값으로 동기화
@@ -201,7 +208,7 @@ public struct TopicSubscriptionListFeature {
                     
                     await send(.setLoading(false))
                 }
-                .cancellable(id: CancelID.update, cancelInFlight: true)
+                .cancellable(id: CancelID.updateMajor, cancelInFlight: true)
                 
             case let .toggleMajorState(isEnable):
                 state.isMajorNoticeNotificationSubscribed = isEnable
@@ -220,7 +227,7 @@ public struct TopicSubscriptionListFeature {
                     
                     await send(.setLoading(false))
                 }
-                .cancellable(id: CancelID.update, cancelInFlight: true)
+                .cancellable(id: CancelID.updateCafeteria, cancelInFlight: true)
                 
             case .toggleCafeteriaState(let category, let isEnabled):
                 switch category {
