@@ -1,6 +1,6 @@
 //
 //  TopicType.swift
-//  KNUTICECore
+//  KNTopic
 //
 //  Created by 이정훈 on 10/22/25.
 //

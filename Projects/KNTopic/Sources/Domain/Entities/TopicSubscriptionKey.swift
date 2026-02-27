@@ -11,4 +11,6 @@ import KNUtility
 public enum TopicSubscriptionKey: Sendable {
     case notice(NoticeCategory)
     case major(MajorCategory)
+    case studentCafeteria
+    case staffCafeteria
 }

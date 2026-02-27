@@ -69,11 +69,33 @@ public struct TopicSubscriptionList: View {
                     }
                     .tint(KNDesignSystemAsset.accent2.swiftUIColor)
                 }
+                
+                Section {
+                    Toggle(isOn: Binding(
+                        get: { store.isStudentCafeteriaNotificationSubscribed },
+                        set: { store.send(.toggleCafeteria(.studentCafeteria, $0)) })
+                    ) {
+                        ToggleCaption(
+                            title: "학생 식당",
+                            caption: "학생 식당의 메뉴를 알려드려요."
+                        )
+                    }
+                    
+                    Toggle(isOn: Binding(
+                        get: { store.isStaffCafeteriaNotificationSubscribed },
+                        set: { store.send(.toggleCafeteria(.staffCafeteria, $0)) })
+                    ) {
+                        ToggleCaption(
+                            title: "교직원 식당",
+                            caption: "교직원 식당의 메뉴를 알려드려요."
+                        )
+                    }
+                }
+                .tint(KNDesignSystemAsset.accent2.swiftUIColor)
             }
             
-            if store.isLoading {
-                SpinningIndicator()
-            }
+            SpinningIndicator()
+                .opacity(store.isLoading ? 1 : 0)
         }
         .navigationTitle("서비스 알림")
         .navigationBarTitleDisplayMode(.inline)

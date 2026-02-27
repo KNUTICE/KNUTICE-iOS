@@ -18,6 +18,8 @@ public struct TopicSubscriptionListFeature {
     public struct State: Equatable {
         var noticeSubscriptionStates: [NoticeCategory: Bool] = [:]
         var isMajorNoticeNotificationSubscribed: Bool = false
+        var isStudentCafeteriaNotificationSubscribed: Bool = false
+        var isStaffCafeteriaNotificationSubscribed: Bool = false
         var isLoading: Bool = false
         @Presents var alert: AlertState<Action.Alert>?
         @Presents var fcmTokenErrorAlert: AlertState<Action.Alert>?
@@ -29,11 +31,15 @@ public struct TopicSubscriptionListFeature {
     public enum Action {        
         case onAppear
         case onDisappear
-        case subscriptionsResponse(Result<[TopicSubscriptionKey], Error>)
+        case errorResponse(any Error)
+        case noticeSubscriptionsResponse([TopicSubscriptionKey])
+        case cafeteriaSubscriptionsResponse([TopicSubscriptionKey])
         case toggleNotice(NoticeCategory, Bool)
         case toggleNoticeState(NoticeCategory, Bool)
         case toggleMajor(Bool)
         case toggleMajorState(Bool)
+        case toggleCafeteria(CafeteriaCategory, Bool)
+        case toggleCafeteriaState(CafeteriaCategory, Bool)
         case setLoading(Bool)
         case setMajorNotificationSubscribed(Bool)
         case alert(PresentationAction<Alert>)
@@ -60,18 +66,28 @@ public struct TopicSubscriptionListFeature {
             switch action {
             case .onAppear:
                 // 서버에서 공지 구독 목록을 가져오는 비동기 네트워크 요청 시작
-                return .run { send in
-                    await send(.setLoading(true))
-                    
-                    do {
-                        let list = try await fetchTopicSubscriptionUseCase.execute(for: .notice)
-                        await send(.subscriptionsResponse(.success(list)))
-                    } catch {
-                        await send(.subscriptionsResponse(.failure(error)))
-                    }
-                    
-                    await send(.setLoading(false))
-                }
+                return .merge(
+                    .run { send in
+                        await send(.setLoading(true))
+                        
+                        do {
+                            let list = try await fetchTopicSubscriptionUseCase.execute(for: .notice)
+                            await send(.noticeSubscriptionsResponse(list))
+                        } catch {
+                            await send(.errorResponse(error))
+                        }
+                        
+                        await send(.setLoading(false))
+                    },
+                    .run { send in
+                        do {
+                            let subscriptions = try await fetchTopicSubscriptionUseCase.execute(for: .meal)
+                            await send(.cafeteriaSubscriptionsResponse(subscriptions))
+                        } catch {
+                            await send(.errorResponse(error))
+                        }
+                    },
+                )
                 .cancellable(id: CancelID.fetch, cancelInFlight: true)
                 
             case .onDisappear:
@@ -81,7 +97,7 @@ public struct TopicSubscriptionListFeature {
                     .cancel(id: CancelID.update)
                 )
                 
-            case .subscriptionsResponse(.success(let subscriptions)):
+            case .noticeSubscriptionsResponse(let subscriptions):
                 // 서버에서 받은 구독 결과를 UI 상태(State)에 반영
                 for subscription in subscriptions {
                     if case .notice(let topic) = subscription {
@@ -95,7 +111,7 @@ public struct TopicSubscriptionListFeature {
                 
                 return .none
                 
-            case .subscriptionsResponse(.failure(let error)):
+            case .errorResponse(let error):
                 if let afError = error.asAFError,
                    case .requestAdaptationFailed(let underlying) = afError,
                    underlying is TokenError {
@@ -121,6 +137,19 @@ public struct TopicSubscriptionListFeature {
                 }
                 return .none
                 
+            case .cafeteriaSubscriptionsResponse(let subscriptions):
+                for subscription in subscriptions {
+                    switch subscription {
+                    case .studentCafeteria:
+                        state.isStudentCafeteriaNotificationSubscribed = true
+                    case .staffCafeteria:
+                        state.isStaffCafeteriaNotificationSubscribed = true
+                    default:
+                        continue
+                    }
+                }
+                return .none
+                
             case .fcmTokenErrorAlert(.presented(.confirmFCMError)):
                 return .run { _ in
                     await dismiss()
@@ -142,7 +171,7 @@ public struct TopicSubscriptionListFeature {
                         )
                         await send(.toggleNoticeState(topic, isEnabled))
                     } catch {
-                        await send(.subscriptionsResponse(.failure(error)))
+                        await send(.errorResponse(error))
                     }
                     
                     await send(.setLoading(false))
@@ -178,6 +207,30 @@ public struct TopicSubscriptionListFeature {
                 state.isMajorNoticeNotificationSubscribed = isEnable
                 return .none
                 
+            case .toggleCafeteria(let category, let isEnabled):
+                return .run { send in
+                    await send(.setLoading(true))
+                    
+                    do {
+                        try await updateTopicSubscriptionUseCase.execute(of: .meal, topic: category, isEnabled: isEnabled)
+                        await send(.toggleCafeteriaState(category, isEnabled))
+                    } catch {
+                        await send(.errorResponse(error))
+                    }
+                    
+                    await send(.setLoading(false))
+                }
+                .cancellable(id: CancelID.update, cancelInFlight: true)
+                
+            case .toggleCafeteriaState(let category, let isEnabled):
+                switch category {
+                case .studentCafeteria:
+                    state.isStudentCafeteriaNotificationSubscribed = isEnabled
+                case .staffCafeteria:
+                    state.isStaffCafeteriaNotificationSubscribed = isEnabled
+                }
+                return .none
+                
             case .setLoading(let value):
                 // 로딩 인디케이터 표시 여부를 UI 상태로 변경
                 state.isLoading = value
@@ -188,5 +241,7 @@ public struct TopicSubscriptionListFeature {
                 return .none
             }
         }
+        .ifLet(\.$alert, action: \.alert)
+        .ifLet(\.$fcmTokenErrorAlert, action: \.fcmTokenErrorAlert)
     }
 }
