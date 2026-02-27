@@ -61,9 +61,9 @@ public actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
                 return .major(category)
                 
             case .meal:
-                if value == "STUDENT_CAFETERIA" {
+                if value == CafeteriaCategory.studentCafeteria.rawValue {
                     return .studentCafeteria
-                } else if value == "STAFF_CAFETERIA" {
+                } else if value == CafeteriaCategory.staffCafeteria.rawValue {
                     return .staffCafeteria
                 } else {
                     return nil
