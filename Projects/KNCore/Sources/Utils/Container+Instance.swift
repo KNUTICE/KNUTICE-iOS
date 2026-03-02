@@ -24,7 +24,7 @@ extension Container {
         }
     }
     
-    var noticeRepository: Factory<NoticeRepository> {
+    public var noticeRepository: Factory<NoticeRepository> {
         Factory(self) {
             // remoteDataSource()가 별도로 등록되어 있다고 가정합니다.
             NoticeRepositoryImpl(dataSource: Container.shared.remoteDataSource())

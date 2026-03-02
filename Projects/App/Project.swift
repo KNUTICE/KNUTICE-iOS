@@ -45,6 +45,7 @@ let project = Project(
                 .project(target: "KNSetting", path: "../KNSetting"),
                 .project(target: "KNReadingRoom", path: "../KNReadingRoom"),
                 .project(target: "KNMeal", path: "../KNMeal"),
+                .target(name: "KNUTICEWidget"),
                 .external(name: "RxSwift"),
                 .external(name: "RxDataSources"),
                 .external(name: "Kingfisher"),
@@ -76,6 +77,22 @@ let project = Project(
             sources: ["NotificationService/**"],
             dependencies: [
                 .project(target: "KNNotification", path: "../KNNotification")
+            ]
+        ),
+        .target(
+            name: "KNUTICEWidget",
+            destinations: .iOS,
+            product: .appExtension,
+            bundleId: "com.fx.KNUTICE.widget",
+            infoPlist: .extendingDefault(with: [
+                "CFBundleDisplayName": "KNUTICE",
+                "NSExtension": [
+                    "NSExtensionPointIdentifier": "com.apple.widgetkit-extension"
+                ]
+            ]),
+            sources: ["Widget/Sources/**"],
+            dependencies: [
+                .project(target: "KNCore", path: "../KNCore"),
             ]
         )
     ]
