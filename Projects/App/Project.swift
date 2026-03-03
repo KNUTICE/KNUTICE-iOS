@@ -84,11 +84,13 @@ let project = Project(
             destinations: .iOS,
             product: .appExtension,
             bundleId: "com.fx.KNUTICE.widget",
+            deploymentTargets: .iOS("17.0"),
             infoPlist: .extendingDefault(with: [
                 "CFBundleDisplayName": "KNUTICE",
                 "NSExtension": [
                     "NSExtensionPointIdentifier": "com.apple.widgetkit-extension"
-                ]
+                ],
+                "CFBundleShortVersionString": "1.7.0"
             ]),
             sources: ["Widget/Sources/**"],
             dependencies: [
