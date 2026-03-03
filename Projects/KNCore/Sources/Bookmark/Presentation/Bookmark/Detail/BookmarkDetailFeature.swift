@@ -8,10 +8,10 @@
 import ComposableArchitecture
 
 @Reducer
-public struct BookmarkDetailFeature {
+public struct BookmarkDetailFeature: Sendable {
     
     @ObservableState
-    public struct State: Equatable {
+    public struct State: Equatable, Sendable {
         @Presents var alert: AlertState<Action.Alert>?
         var bookmark: Bookmark?
         let nttId: Int
@@ -43,12 +43,12 @@ public struct BookmarkDetailFeature {
             case deleteBookmark
         }
         
-        public enum Alert: Equatable {
+        public enum Alert: Equatable, Sendable {
             case confirmDeletion
         }
     }
     
-    public enum CancelID {
+    public enum CancelID: Sendable {
         case fetchBookmark
     }
     

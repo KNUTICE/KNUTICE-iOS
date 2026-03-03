@@ -8,7 +8,7 @@
 import ComposableArchitecture
 
 @Reducer
-public struct ReportFeature {
+public struct ReportFeature: Sendable{
     
     @ObservableState
     public struct State: Equatable {

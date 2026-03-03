@@ -1,18 +1,7 @@
 import ProjectDescription
+import ProjectDescriptionHelpers
 
-let infoPlist: [String: Plist.Value] = [:]
-let project = Project(
+let project = Project.module(
     name: "UIComponents",
-    targets: [
-        .target(
-            name: "UIComponents",
-            destinations: .iOS,
-            product: .staticLibrary,
-            bundleId: "com.fx.UIComponents",
-            deploymentTargets: .iOS("17.0"),
-            infoPlist: .extendingDefault(with: infoPlist),
-            sources: ["Sources/**"],
-            dependencies: []
-        )
-    ]
+    product: .staticLibrary // 기존 설정 유지
 )

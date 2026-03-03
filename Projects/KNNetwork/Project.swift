@@ -1,24 +1,14 @@
 import ProjectDescription
+import ProjectDescriptionHelpers
 
-let infoPlist: [String: Plist.Value] = [:]
-let project = Project(
+let project = Project.module(
     name: "KNNetwork",
-    targets: [
-        .target(
-            name: "KNNetwork",
-            destinations: .iOS,
-            product: .staticLibrary,
-            bundleId: "com.fx.KNNetwork",
-            deploymentTargets: .iOS("17.0"),
-            infoPlist: .extendingDefault(with: infoPlist),
-            sources: ["Sources/**"],
-            dependencies: [
-                .project(target: "KNUtility", path: "../KNUtility"),
-                .external(name: "Alamofire"),
-                .external(name: "RxSwift"),
-                .external(name: "Factory"),
-                .external(name: "FirebaseMessaging"),
-            ]
-        )
+    product: .staticLibrary,
+    dependencies: [
+        .project(target: "KNUtility", path: "../KNUtility"),
+        .external(name: "Alamofire"),
+        .external(name: "RxSwift"),
+        .external(name: "Factory"),
+        .external(name: "FirebaseMessaging")
     ]
 )

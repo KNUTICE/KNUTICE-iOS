@@ -8,10 +8,10 @@
 import ComposableArchitecture
 
 @Reducer
-public struct BookmarkContainerFeature {
+public struct BookmarkContainerFeature: Sendable {
         
     @ObservableState
-    public enum State: Equatable {
+    public enum State: Equatable, Sendable {
         case detail(BookmarkDetailFeature.State)
         case edit(BookmarkFormFeature.State)
     }
@@ -22,7 +22,7 @@ public struct BookmarkContainerFeature {
         case disappear
     }
     
-    public enum CancelID {
+    public enum CancelID: Sendable {
         case deleteBookmark
         case saveBookmark
     }

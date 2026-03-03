@@ -59,6 +59,9 @@ let project = Project(
                     "OTHER_LDFLAGS": ["-all_load", "-ObjC"],
                     "SWIFT_VERSION": "6.0",
                     "SWIFT_STRICT_CONCURRENCY": "complete",
+                    "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
+                    "STRING_CATALOG_GENERATE_SYMBOLS": "YES",
+                    "MARKETING_VERSION": "1.7.0"
                 ]
             )
         ),
@@ -95,7 +98,12 @@ let project = Project(
             sources: ["Widget/Sources/**"],
             dependencies: [
                 .project(target: "KNCore", path: "../KNCore"),
-            ]
+            ],
+            settings: .settings(
+                base: [
+                    "MARKETING_VERSION": "1.7.0"
+                ]
+            )
         )
     ]
 )

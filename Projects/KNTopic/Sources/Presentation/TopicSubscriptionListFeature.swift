@@ -11,7 +11,7 @@ import KNNetwork
 import KNUtility
 
 @Reducer
-public struct TopicSubscriptionListFeature {
+public struct TopicSubscriptionListFeature: Sendable {
     // MARK: - State
     
     @ObservableState
