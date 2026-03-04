@@ -45,6 +45,7 @@ let project = Project(
                 .project(target: "KNSetting", path: "../KNSetting"),
                 .project(target: "KNReadingRoom", path: "../KNReadingRoom"),
                 .project(target: "KNMeal", path: "../KNMeal"),
+                .target(name: "NotificationService"),
                 .target(name: "KNUTICEWidget"),
                 .external(name: "RxSwift"),
                 .external(name: "RxDataSources"),
@@ -70,6 +71,7 @@ let project = Project(
             destinations: .iOS,
             product: .appExtension,
             bundleId: "com.fx.KNUTICE.NotificationService",
+            deploymentTargets: .iOS("17.0"),
             infoPlist: .extendingDefault(with: [
                 "CFBundleDisplayName": "$(PRODUCT_NAME)",
                 "NSExtension": [
