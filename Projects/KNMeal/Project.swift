@@ -1,21 +1,10 @@
 import ProjectDescription
+import ProjectDescriptionHelpers
 
-let infoPlist: [String: Plist.Value] = [:]
-let project = Project(
+let project = Project.module(
     name: "KNMeal",
-    targets: [
-        .target(
-            name: "KNMeal",
-            destinations: .iOS,
-            product: .staticLibrary,
-            bundleId: "com.fx.KNMeal",
-            deploymentTargets: .iOS("17.0"),
-            infoPlist: .extendingDefault(with: infoPlist),
-            sources: ["Sources/**"],
-            resources: ["Resources/**"],
-            dependencies: [
-                .project(target: "KNDesignSystem", path: "../KNDesignSystem"),
-            ]
-        )
-    ]
+    dependencies: [
+        .project(target: "KNDesignSystem", path: "../KNDesignSystem")
+    ],
+    resources: ["Resources/**"],
 )

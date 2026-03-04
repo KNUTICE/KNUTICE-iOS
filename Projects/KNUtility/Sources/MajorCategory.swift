@@ -1,12 +1,11 @@
 //
 //  MajorCategory.swift
-//  KNUTICECore
+//  KNUTICEUtility
 //
 //  Created by 이정훈 on 9/9/25.
 //
 
 import Foundation
-import KNUtility
 
 public enum MajorCategory: String, CategoryProtocol {
     

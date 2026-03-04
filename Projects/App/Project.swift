@@ -1,4 +1,5 @@
 import ProjectDescription
+import ProjectDescriptionHelpers
 
 let project = Project(
     name: "KNUTICE",
@@ -29,7 +30,7 @@ let project = Project(
                         ]
                     ]
                 ],
-                "CFBundleShortVersionString": "1.7.0"
+                "CFBundleShortVersionString": "\(Project.appVersion)"
             ]),
             sources: ["Sources/**"],
             resources: ["Resources/**"],
@@ -59,6 +60,9 @@ let project = Project(
                     "OTHER_LDFLAGS": ["-all_load", "-ObjC"],
                     "SWIFT_VERSION": "6.0",
                     "SWIFT_STRICT_CONCURRENCY": "complete",
+                    "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
+                    "STRING_CATALOG_GENERATE_SYMBOLS": "YES",
+                    "MARKETING_VERSION": Project.appVersion
                 ]
             )
         ),
@@ -84,16 +88,23 @@ let project = Project(
             destinations: .iOS,
             product: .appExtension,
             bundleId: "com.fx.KNUTICE.widget",
+            deploymentTargets: .iOS("17.0"),
             infoPlist: .extendingDefault(with: [
                 "CFBundleDisplayName": "KNUTICE",
                 "NSExtension": [
                     "NSExtensionPointIdentifier": "com.apple.widgetkit-extension"
-                ]
+                ],
+                "CFBundleShortVersionString": "\(Project.appVersion)"
             ]),
             sources: ["Widget/Sources/**"],
             dependencies: [
                 .project(target: "KNCore", path: "../KNCore"),
-            ]
+            ],
+            settings: .settings(
+                base: [
+                    "MARKETING_VERSION": Project.appVersion
+                ]
+            )
         )
     ]
 )

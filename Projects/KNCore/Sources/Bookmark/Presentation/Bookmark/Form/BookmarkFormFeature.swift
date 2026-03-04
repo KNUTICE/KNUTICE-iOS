@@ -9,10 +9,10 @@ import ComposableArchitecture
 import Foundation
 
 @Reducer
-public struct BookmarkFormFeature {
+public struct BookmarkFormFeature : Sendable {
     @ObservableState
-    public struct State: Equatable {
-        public enum FormType {
+    public struct State: Equatable, Sendable {
+        public enum FormType : Sendable {
             case create
             case update
         }
@@ -51,7 +51,7 @@ public struct BookmarkFormFeature {
             case switchToDetailMode(Bookmark)
         }
         
-        public enum Alert {
+        public enum Alert: Sendable {
             case saveCompleted
         }
     }

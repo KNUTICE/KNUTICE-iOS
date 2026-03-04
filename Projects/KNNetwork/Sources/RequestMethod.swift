@@ -7,7 +7,7 @@
 
 import Alamofire
 
-public enum RequestMethod {
+public enum RequestMethod: Sendable {
     case get
     case post
     case put
