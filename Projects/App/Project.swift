@@ -34,7 +34,7 @@ let project = Project(
             ]),
             sources: ["Sources/**"],
             resources: ["Resources/**"],
-            entitlements: .file(path: "KNUTICE.entitlements"),
+            entitlements: .file(path: "Resources/KNUTICE.entitlements"),
             dependencies: [
                 .project(target: "KNCore", path: "../KNCore"),
                 .project(target: "KNToken", path: "../KNToken"),
@@ -80,7 +80,9 @@ let project = Project(
                     "NSExtensionPrincipalClass": "$(PRODUCT_MODULE_NAME).NotificationService",
                 ],
             ]),
-            sources: ["NotificationService/**"],
+            sources: ["NotificationService/Sources/**"],
+            resources: ["NotificationService/Resources/**"],
+            entitlements: .file(path: "NotificationService/Resources/NotificationService.entitlements"),
             dependencies: [
                 .project(target: "KNNotification", path: "../KNNotification")
             ]
@@ -99,6 +101,8 @@ let project = Project(
                 "CFBundleShortVersionString": "\(Project.appVersion)"
             ]),
             sources: ["Widget/Sources/**"],
+            resources: ["Widget/Resources/**"],
+            entitlements: .file(path: "Widget/Resources/Widget.entitlements"),
             dependencies: [
                 .project(target: "KNCore", path: "../KNCore"),
             ],
