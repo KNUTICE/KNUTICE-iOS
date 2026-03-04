@@ -2,12 +2,13 @@ import ProjectDescription
 
 public extension Project {
     static let appVersion: SettingValue = "1.7.0"
+    static let deploymentTarget: DeploymentTargets = .iOS("17.0")
     
     static func module(
         name: String,
         product: Product = .staticFramework,
         bundleId: String? = nil,
-        deploymentTargets: DeploymentTargets = .iOS("17.0"),
+        deploymentTargets: DeploymentTargets = Self.deploymentTarget,
         infoPlist: InfoPlist = .default,
         dependencies: [TargetDependency] = [],
         sources: SourceFilesList = ["Sources/**"],

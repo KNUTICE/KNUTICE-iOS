@@ -9,7 +9,7 @@ let project = Project(
             destinations: .iOS,
             product: .app,
             bundleId: "com.fx.KNUTICE",
-            deploymentTargets: .iOS("17.0"),
+            deploymentTargets: Project.deploymentTarget,
             infoPlist: .extendingDefault(with: [
                 "UILaunchScreen": [
                     "UIColorName": "",
@@ -72,7 +72,7 @@ let project = Project(
             destinations: .iOS,
             product: .appExtension,
             bundleId: "com.fx.KNUTICE.NotificationService",
-            deploymentTargets: .iOS("17.0"),
+            deploymentTargets: Project.deploymentTarget,
             infoPlist: .extendingDefault(with: [
                 "CFBundleDisplayName": "$(PRODUCT_NAME)",
                 "NSExtension": [
@@ -92,7 +92,7 @@ let project = Project(
             destinations: .iOS,
             product: .appExtension,
             bundleId: "com.fx.KNUTICE.widget",
-            deploymentTargets: .iOS("17.0"),
+            deploymentTargets: Project.deploymentTarget,
             infoPlist: .extendingDefault(with: [
                 "CFBundleDisplayName": "KNUTICE",
                 "NSExtension": [
