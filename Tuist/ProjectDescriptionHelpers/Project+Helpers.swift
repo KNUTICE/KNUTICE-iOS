@@ -8,6 +8,8 @@
 import ProjectDescription
 
 public extension Project {
+    static let appVersion: SettingValue = "1.7.0"
+    
     static func module(
         name: String,
         product: Product = .staticFramework,
@@ -24,7 +26,7 @@ public extension Project {
                 "SWIFT_STRICT_CONCURRENCY": "complete",
                 "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
                 "STRING_CATALOG_GENERATE_SYMBOLS": "YES",
-                "MARKETING_VERSION": "1.7.0"
+                "MARKETING_VERSION": appVersion
             ]
         )
     ) -> Project {
