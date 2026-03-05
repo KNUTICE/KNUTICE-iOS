@@ -9,7 +9,7 @@ let project = Project(
             destinations: .iOS,
             product: .app,
             bundleId: "com.fx.KNUTICE",
-            deploymentTargets: .iOS("17.0"),
+            deploymentTargets: Project.deploymentTarget,
             infoPlist: .extendingDefault(with: [
                 "UILaunchScreen": [
                     "UIColorName": "",
@@ -30,11 +30,11 @@ let project = Project(
                         ]
                     ]
                 ],
-                "CFBundleShortVersionString": "\(Project.appVersion)"
+                "CFBundleShortVersionString": Project.appVersion
             ]),
             sources: ["Sources/**"],
             resources: ["Resources/**"],
-            entitlements: .file(path: "KNUTICE.entitlements"),
+            entitlements: .file(path: "Resources/KNUTICE.entitlements"),
             dependencies: [
                 .project(target: "KNCore", path: "../KNCore"),
                 .project(target: "KNToken", path: "../KNToken"),
@@ -46,6 +46,7 @@ let project = Project(
                 .project(target: "KNSetting", path: "../KNSetting"),
                 .project(target: "KNReadingRoom", path: "../KNReadingRoom"),
                 .project(target: "KNMeal", path: "../KNMeal"),
+                .target(name: "NotificationService"),
                 .target(name: "KNUTICEWidget"),
                 .external(name: "RxSwift"),
                 .external(name: "RxDataSources"),
@@ -62,7 +63,7 @@ let project = Project(
                     "SWIFT_STRICT_CONCURRENCY": "complete",
                     "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
                     "STRING_CATALOG_GENERATE_SYMBOLS": "YES",
-                    "MARKETING_VERSION": Project.appVersion
+                    "MARKETING_VERSION": Project.marketingVersion
                 ]
             )
         ),
@@ -71,6 +72,7 @@ let project = Project(
             destinations: .iOS,
             product: .appExtension,
             bundleId: "com.fx.KNUTICE.NotificationService",
+            deploymentTargets: Project.deploymentTarget,
             infoPlist: .extendingDefault(with: [
                 "CFBundleDisplayName": "$(PRODUCT_NAME)",
                 "NSExtension": [
@@ -78,7 +80,9 @@ let project = Project(
                     "NSExtensionPrincipalClass": "$(PRODUCT_MODULE_NAME).NotificationService",
                 ],
             ]),
-            sources: ["NotificationService/**"],
+            sources: ["NotificationService/Sources/**"],
+            resources: ["NotificationService/Resources/**"],
+            entitlements: .file(path: "NotificationService/Resources/NotificationService.entitlements"),
             dependencies: [
                 .project(target: "KNNotification", path: "../KNNotification")
             ]
@@ -88,21 +92,23 @@ let project = Project(
             destinations: .iOS,
             product: .appExtension,
             bundleId: "com.fx.KNUTICE.widget",
-            deploymentTargets: .iOS("17.0"),
+            deploymentTargets: Project.deploymentTarget,
             infoPlist: .extendingDefault(with: [
                 "CFBundleDisplayName": "KNUTICE",
                 "NSExtension": [
                     "NSExtensionPointIdentifier": "com.apple.widgetkit-extension"
                 ],
-                "CFBundleShortVersionString": "\(Project.appVersion)"
+                "CFBundleShortVersionString": Project.appVersion
             ]),
             sources: ["Widget/Sources/**"],
+            resources: ["Widget/Resources/**"],
+            entitlements: .file(path: "Widget/Resources/Widget.entitlements"),
             dependencies: [
                 .project(target: "KNCore", path: "../KNCore"),
             ],
             settings: .settings(
                 base: [
-                    "MARKETING_VERSION": Project.appVersion
+                    "MARKETING_VERSION": Project.marketingVersion
                 ]
             )
         )

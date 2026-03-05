@@ -1,13 +1,15 @@
 import ProjectDescription
 
 public extension Project {
-    static let appVersion: SettingValue = "1.7.0"
+    static let marketingVersion: SettingValue = "1.7.0"
+    static let appVersion: Plist.Value = "1.7.0"
+    static let deploymentTarget: DeploymentTargets = .iOS("17.0")
     
     static func module(
         name: String,
         product: Product = .staticFramework,
         bundleId: String? = nil,
-        deploymentTargets: DeploymentTargets = .iOS("17.0"),
+        deploymentTargets: DeploymentTargets = Self.deploymentTarget,
         infoPlist: InfoPlist = .default,
         dependencies: [TargetDependency] = [],
         sources: SourceFilesList = ["Sources/**"],
@@ -19,7 +21,7 @@ public extension Project {
                 "SWIFT_STRICT_CONCURRENCY": "complete",
                 "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
                 "STRING_CATALOG_GENERATE_SYMBOLS": "YES",
-                "MARKETING_VERSION": appVersion
+                "MARKETING_VERSION": marketingVersion
             ]
         )
     ) -> Project {

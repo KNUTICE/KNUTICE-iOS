@@ -103,9 +103,11 @@ struct NoticeWidget: Widget {
 
 // MARK: - Preview
 
+#if DEBIG
 #Preview(as: .systemSmall) {
     NoticeWidget()
 } timeline: {
     NoticeEntry(date: .now, category: .generalNotice, notices: [Notice.generalNoticesSample.first!], isPlaceholder: false)
     NoticeEntry(date: .now, category: .generalNotice, notices: [Notice.academicNoticesSample.first!], isPlaceholder: false)
 }
+#endif
