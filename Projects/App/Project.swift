@@ -30,7 +30,7 @@ let project = Project(
                         ]
                     ]
                 ],
-                "CFBundleShortVersionString": "\(Project.appVersion)"
+                "CFBundleShortVersionString": Project.appVersion
             ]),
             sources: ["Sources/**"],
             resources: ["Resources/**"],
@@ -63,7 +63,7 @@ let project = Project(
                     "SWIFT_STRICT_CONCURRENCY": "complete",
                     "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
                     "STRING_CATALOG_GENERATE_SYMBOLS": "YES",
-                    "MARKETING_VERSION": Project.appVersion
+                    "MARKETING_VERSION": Project.marketingVersion
                 ]
             )
         ),
@@ -98,7 +98,7 @@ let project = Project(
                 "NSExtension": [
                     "NSExtensionPointIdentifier": "com.apple.widgetkit-extension"
                 ],
-                "CFBundleShortVersionString": "\(Project.appVersion)"
+                "CFBundleShortVersionString": Project.appVersion
             ]),
             sources: ["Widget/Sources/**"],
             resources: ["Widget/Resources/**"],
@@ -108,7 +108,7 @@ let project = Project(
             ],
             settings: .settings(
                 base: [
-                    "MARKETING_VERSION": Project.appVersion
+                    "MARKETING_VERSION": Project.marketingVersion
                 ]
             )
         )

@@ -7,6 +7,7 @@ let project = Project.module(
         .project(target: "KNUtility", path: "../KNUtility"),
         .project(target: "KNNetwork", path: "../KNNetwork"),
         .project(target: "UIComponents", path: "../UIComponents"),
+        .project(target: "KNDesignSystem", path: "../KNDesignSystem"),
         .external(name: "Factory")
     ],
     resources: ["Resources/**"],
