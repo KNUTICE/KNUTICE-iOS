@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KNUtility
 
 public actor DeepLinkManager {
     public static let shared = DeepLinkManager()
@@ -28,8 +29,11 @@ public actor DeepLinkManager {
             return .unknown
             
         case "meal":
-            // TODO: 학식 알림 딥링크 구현
-            return .unknown
+            let topic = queryItems?.first(where: { $0.name == "topic" })?.value
+            
+            guard let topic, let cafeteria = CafeteriaCategory(rawValue: topic) else { return .unknown }
+            
+            return .meal(cafeteria: cafeteria)
             
         case "bookmark":
             let nttIdValue = queryItems?.first(where: { $0.name == "nttId" })?.value
@@ -39,6 +43,12 @@ public actor DeepLinkManager {
             }
             
             return .unknown
+            
+        case "reading-room":
+            let roomId = queryItems?.first(where: { $0.name == "roomId" })?.value ?? ""
+            let seat = queryItems?.first(where: { $0.name == "seat" })?.value ?? ""
+            
+            return .readingRoom(roomId: roomId, seat: seat)
             
         default:
             return .unknown
