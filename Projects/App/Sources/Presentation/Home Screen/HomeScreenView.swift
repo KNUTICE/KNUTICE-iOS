@@ -133,6 +133,7 @@ struct HomeScreenView: View {
         .refreshable {
             await store.send(.fetchAllContents).finish()
         }
+        .toolbar(.visible)
         .toolbar {
             if UIDevice.current.userInterfaceIdiom == .pad {
                 ToolbarItem(placement: .topBarLeading) {
