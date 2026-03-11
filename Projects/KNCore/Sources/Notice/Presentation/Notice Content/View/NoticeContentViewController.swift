@@ -212,7 +212,9 @@ private extension NoticeContentViewController {
     func presentSummarySheet() {
         guard let notice = viewModel.notice else { return }
         let summaryViewModel = NoticeSummaryViewModel(nttId: notice.id)
-        let rootView = NoticeSummaryView(viewModel: summaryViewModel)
+        let rootView = NoticeSummaryView(viewModel: summaryViewModel) { [weak self] in
+            self?.dismiss(animated: true)
+        }
         presentSheet(rootView: rootView, detents: [.medium(), .large()])
     }
     
