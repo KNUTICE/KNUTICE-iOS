@@ -27,13 +27,29 @@ public struct MealView: UIViewRepresentable {
         webView.backgroundColor = .clear
         webView.scrollView.backgroundColor = KNDesignSystemAsset.primaryBackground.color
         webView.isOpaque = false
+        webView.navigationDelegate = context.coordinator
         webView.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData))
-        webView.evaluateJavaScript("window.setCafeteriaType(\(cafeteria.rawValue));")
         
         return webView
     }
     
     public func updateUIView(_ uiView: UIViewType, context: Context) {}
+    
+    public func makeCoordinator() -> Coordinator {
+        return Coordinator(parent: self)
+    }
+    
+    public class Coordinator: NSObject, WKNavigationDelegate {
+        private let parent: MealView
+        
+        public init(parent: MealView) {
+            self.parent = parent
+        }
+        
+        public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            webView.evaluateJavaScript("window.setCafeteriaType(\"\(parent.cafeteria.rawValue)\");")
+        }
+    }
 }
 
 #Preview {
