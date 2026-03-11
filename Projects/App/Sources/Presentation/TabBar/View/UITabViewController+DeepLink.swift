@@ -9,6 +9,8 @@ import ComposableArchitecture
 import Foundation
 import KNCore
 import KNDeepLink
+import KNMeal
+import KNReadingRoom
 import SwiftUI
 import UIKit
 
@@ -17,7 +19,7 @@ extension UITabBarViewController {
         let viewController: UIViewController
         
         switch deepLink {
-        case let .bookmark(nttId):
+        case .bookmark(let nttId):
             let store = Store(
                 initialState: BookmarkContainerFeature.State.detail(BookmarkDetailFeature.State(nttId: nttId)),
                 reducer: { BookmarkContainerFeature() }
@@ -29,21 +31,24 @@ extension UITabBarViewController {
             }
             viewController = UIHostingController(rootView: rootView)
             
-        case .meal:
-            // TODO: 학식 알림 딥링크 구현
-            return
-            
-        case let .notice(nttId, _):
+        case .notice(let nttId, _):
             viewController = NoticeContentViewController(
                 viewModel: NoticeContentViewModel(nttId: nttId)
             )
             
-        case let .navigation(tabIndex):
+        case .navigation(let tabIndex):
             guard let vcs = self.viewControllers, vcs.indices.contains(tabIndex) else { return }
             
             self.selectedIndex = tabIndex
             self.tabBarController(self, didSelect: vcs[tabIndex])
             return
+            
+        case .meal(let cafeteria):
+            viewController = UIHostingController(rootView: MealView(cafeteria: cafeteria))
+            
+        case .readingRoom(let roomId, let seat):
+            viewController = UIHostingController(rootView: ReadingRoomStatusView())
+            
         case .unknown:
             return
             

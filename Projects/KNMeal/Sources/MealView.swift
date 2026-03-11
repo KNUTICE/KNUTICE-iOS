@@ -6,11 +6,16 @@
 //
 
 import KNDesignSystem
+import KNUtility
 import SwiftUI
 import WebKit
 
 public struct MealView: UIViewRepresentable {
-    public init() {}
+    private let cafeteria: CafeteriaCategory
+    
+    public init(cafeteria: CafeteriaCategory = CafeteriaCategory.studentCafeteria) {
+        self.cafeteria = cafeteria
+    }
     
     public func makeUIView(context: Context) -> some UIView {
         let webView: WKWebView = WKWebView()
@@ -22,12 +27,29 @@ public struct MealView: UIViewRepresentable {
         webView.backgroundColor = .clear
         webView.scrollView.backgroundColor = KNDesignSystemAsset.primaryBackground.color
         webView.isOpaque = false
+        webView.navigationDelegate = context.coordinator
         webView.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData))
         
         return webView
     }
     
     public func updateUIView(_ uiView: UIViewType, context: Context) {}
+    
+    public func makeCoordinator() -> Coordinator {
+        return Coordinator(parent: self)
+    }
+    
+    public class Coordinator: NSObject, WKNavigationDelegate {
+        private let parent: MealView
+        
+        public init(parent: MealView) {
+            self.parent = parent
+        }
+        
+        public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            webView.evaluateJavaScript(Bundle.module.bridgingMethod + "(\"\(parent.cafeteria.rawValue)\");")
+        }
+    }
 }
 
 #Preview {

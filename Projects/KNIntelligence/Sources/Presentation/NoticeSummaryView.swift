@@ -11,11 +11,12 @@ import SwiftUI
 
 public struct NoticeSummaryView: View {
     private let viewModel: NoticeSummaryViewModel
+    private let dismissAction: () -> Void
     @Environment(\.colorScheme) private var colorScheme
-    @Environment(\.dismiss) private var dismiss
     
-    public init(viewModel: NoticeSummaryViewModel) {
+    public init(viewModel: NoticeSummaryViewModel, dismissAction: @escaping () -> Void) {
         self.viewModel = viewModel
+        self.dismissAction = dismissAction
     }
     
     public var body: some View {
@@ -73,9 +74,9 @@ public struct NoticeSummaryView: View {
         .scrollIndicators(.hidden)
         .background(colorScheme == .light ? .white : .black)
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
+            ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    dismiss()
+                    dismissAction()
                 } label: {
                     Image(systemName: "xmark")
                 }
@@ -89,5 +90,7 @@ public struct NoticeSummaryView: View {
 }
 
 #Preview {
-    NoticeSummaryView(viewModel: NoticeSummaryViewModel(nttId: 1085082))
+    NoticeSummaryView(viewModel: NoticeSummaryViewModel(nttId: 1085082)) {
+        // Dismiss Action
+    }
 }
