@@ -47,7 +47,7 @@ public struct MealView: UIViewRepresentable {
         }
         
         public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            webView.evaluateJavaScript("window.setCafeteriaType(\"\(parent.cafeteria.rawValue)\");")
+            webView.evaluateJavaScript(Bundle.module.bridgingMethod + "(\"\(parent.cafeteria.rawValue)\");")
         }
     }
 }
