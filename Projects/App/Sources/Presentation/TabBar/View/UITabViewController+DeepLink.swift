@@ -37,10 +37,18 @@ extension UITabBarViewController {
             )
             
         case .navigation(let tabIndex):
-            guard let vcs = self.viewControllers, vcs.indices.contains(tabIndex) else { return }
-            
-            self.selectedIndex = tabIndex
-            self.tabBarController(self, didSelect: vcs[tabIndex])
+            // iPadOS 18.0부터 UITab API를 사용
+            // `selectedTab`을 변경하여 선택된 탭 이동
+            if #available(iOS 18, *), UIDevice.current.userInterfaceIdiom == .pad {
+                guard tabs.indices.contains(tabIndex) else { return }
+                
+                self.selectedTab = tabs[tabIndex]
+            } else {
+                guard let vcs = self.viewControllers, vcs.indices.contains(tabIndex) else { return }
+                
+                self.selectedIndex = tabIndex
+                self.tabBarController(self, didSelect: vcs[tabIndex])
+            }
             return
             
         case .meal(let cafeteria):
