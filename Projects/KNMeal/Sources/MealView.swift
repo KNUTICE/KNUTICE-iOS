@@ -6,11 +6,16 @@
 //
 
 import KNDesignSystem
+import KNUtility
 import SwiftUI
 import WebKit
 
 public struct MealView: UIViewRepresentable {
-    public init() {}
+    private let cafeteria: CafeteriaCategory
+    
+    public init(cafeteria: CafeteriaCategory = CafeteriaCategory.studentCafeteria) {
+        self.cafeteria = cafeteria
+    }
     
     public func makeUIView(context: Context) -> some UIView {
         let webView: WKWebView = WKWebView()
@@ -23,6 +28,7 @@ public struct MealView: UIViewRepresentable {
         webView.scrollView.backgroundColor = KNDesignSystemAsset.primaryBackground.color
         webView.isOpaque = false
         webView.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData))
+        webView.evaluateJavaScript("window.setCafeteriaType(\(cafeteria.rawValue));")
         
         return webView
     }

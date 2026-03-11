@@ -43,8 +43,8 @@ extension UITabBarViewController {
             self.tabBarController(self, didSelect: vcs[tabIndex])
             return
             
-        case .meal:
-            viewController = UIHostingController(rootView: MealView())
+        case .meal(let cafeteria):
+            viewController = UIHostingController(rootView: MealView(cafeteria: cafeteria))
             
         case .readingRoom(let roomId, let seat):
             viewController = UIHostingController(rootView: ReadingRoomStatusView())
