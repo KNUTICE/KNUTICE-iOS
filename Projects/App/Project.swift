@@ -36,7 +36,11 @@ let project = Project(
                 "CFBundleShortVersionString": Project.appVersion
             ]),
             sources: ["Sources/**"],
-            resources: ["Resources/**"],
+            resources: [
+                .glob(pattern: "Resources/**", excluding: [
+                    "Resources/*.entitlements"
+                ])
+            ],
             entitlements: .file(path: "Resources/KNUTICE.entitlements"),
             dependencies: [
                 .project(target: "KNCore", path: "../KNCore"),
@@ -66,6 +70,7 @@ let project = Project(
                     "SWIFT_STRICT_CONCURRENCY": "complete",
                     "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
                     "STRING_CATALOG_GENERATE_SYMBOLS": "YES",
+                    "LOCALIZED_STRING_SWIFT_SYMBOLS_GENERATION": "YES",
                     "MARKETING_VERSION": Project.marketingVersion
                 ]
             )
@@ -78,13 +83,18 @@ let project = Project(
             deploymentTargets: Project.deploymentTarget,
             infoPlist: .extendingDefault(with: [
                 "CFBundleDisplayName": "$(PRODUCT_NAME)",
+                "CFBundleShortVersionString": Project.appVersion,
                 "NSExtension": [
                     "NSExtensionPointIdentifier": "com.apple.usernotifications.service",
                     "NSExtensionPrincipalClass": "$(PRODUCT_MODULE_NAME).NotificationService",
                 ],
             ]),
             sources: ["NotificationService/Sources/**"],
-            resources: ["NotificationService/Resources/**"],
+            resources: [
+                .glob(pattern: "NotificationService/Resources", excluding: [
+                    "NotificationService/Resources/**.entitlements"
+                ])
+            ],
             entitlements: .file(path: "NotificationService/Resources/NotificationService.entitlements"),
             dependencies: [
                 .project(target: "KNNotification", path: "../KNNotification")
@@ -104,7 +114,11 @@ let project = Project(
                 "CFBundleShortVersionString": Project.appVersion
             ]),
             sources: ["Widget/Sources/**"],
-            resources: ["Widget/Resources/**"],
+            resources: [
+                .glob(pattern: "Widget/Resources/**", excluding: [
+                    "Widget/Resources/**.entitlements"
+                ])
+            ],
             entitlements: .file(path: "Widget/Resources/Widget.entitlements"),
             dependencies: [
                 .project(target: "KNCore", path: "../KNCore"),

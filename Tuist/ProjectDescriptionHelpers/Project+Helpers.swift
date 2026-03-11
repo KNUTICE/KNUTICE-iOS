@@ -21,6 +21,7 @@ public extension Project {
                 "SWIFT_STRICT_CONCURRENCY": "complete",
                 "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
                 "STRING_CATALOG_GENERATE_SYMBOLS": "YES",
+                "LOCALIZED_STRING_SWIFT_SYMBOLS_GENERATION": "YES",
                 "MARKETING_VERSION": marketingVersion
             ]
         )
