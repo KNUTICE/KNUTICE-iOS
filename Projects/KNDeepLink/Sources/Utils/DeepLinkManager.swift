@@ -45,9 +45,10 @@ public actor DeepLinkManager {
             return .unknown
             
         case "reading-room":
-            let roomId = queryItems?.first(where: { $0.name == "roomId" })?.value ?? ""
-            let seat = queryItems?.first(where: { $0.name == "seat" })?.value ?? ""
-            
+            guard let roomId = queryItems?.first(where: { $0.name == "roomId" })?.value,
+                  let seat = queryItems?.first(where: { $0.name == "seat" })?.value else {
+                return .unknown
+            }
             return .readingRoom(roomId: roomId, seat: seat)
             
         default:
