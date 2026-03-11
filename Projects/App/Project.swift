@@ -11,6 +11,9 @@ let project = Project(
             bundleId: "com.fx.KNUTICE",
             deploymentTargets: Project.deploymentTarget,
             infoPlist: .extendingDefault(with: [
+                "NSAppTransportSecurity": [
+                    "NSAllowsArbitraryLoads": true
+                ],
                 "UILaunchScreen": [
                     "UIColorName": "",
                     "UIImageName": "",

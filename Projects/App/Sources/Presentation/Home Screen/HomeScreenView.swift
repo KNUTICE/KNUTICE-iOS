@@ -341,10 +341,10 @@ fileprivate struct EmptyMajorNoticeView: View {
     var body: some View {
         VStack(spacing: 16) {
             // 아이콘 부분
-            Image(systemName: "graduationcap.fill")
+            Image("graduation_cap")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 50, height: 50)
+                .frame(width: 100, height: 100)
                 .foregroundStyle(KNDesignSystemAsset.gray3.swiftUIColor)
                 .padding(.top, 20)
             
