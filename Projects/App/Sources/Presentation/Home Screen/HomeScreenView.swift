@@ -269,7 +269,7 @@ fileprivate struct NoticeList<Content: View>: View {
                         }
                         .background {
                             if let url = URL(string: item.notice.contentUrl) {
-                                ActivityView(isPresented: $isActivityViewPresented, activityItmes: [
+                                ActivityView(isPresented: $isActivityViewPresented, activityItems: [
                                     url
                                 ])
                             }
