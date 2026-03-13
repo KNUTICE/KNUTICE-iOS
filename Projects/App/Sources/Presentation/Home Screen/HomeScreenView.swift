@@ -345,7 +345,6 @@ fileprivate struct EmptyMajorNoticeView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 100, height: 100)
-                .foregroundStyle(KNDesignSystemAsset.gray3.swiftUIColor)
                 .padding(.top, 20)
             
             // 안내 텍스트
