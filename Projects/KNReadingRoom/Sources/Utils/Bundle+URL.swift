@@ -32,17 +32,19 @@ public extension Bundle {
     }
     
     var readingRoomStatusURL: String? {
-        guard let url = resource?["Reading_Room_Status_URL"] as? String else {
-            return nil
-        }
+        guard let url = resource?["Reading_Room_Status_URL"] as? String else { return nil }
         
         return url
     }
     
     var bridgingMethod: String {
-        guard let url = resource?["Bridging_Method"] as? String else {
-            return ""
-        }
+        guard let url = resource?["Bridging_Method"] as? String else { return "" }
+        
+        return url
+    }
+    
+    var baseURL: String? {
+        guard let url = resource?["Base_URL"] as? String else { return nil }
         
         return url
     }
