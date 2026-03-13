@@ -92,7 +92,7 @@ let project = Project(
             sources: ["NotificationService/Sources/**"],
             resources: [
                 .glob(pattern: "NotificationService/Resources", excluding: [
-                    "NotificationService/Resources/**.entitlements"
+                    "NotificationService/Resources/*.entitlements"
                 ])
             ],
             entitlements: .file(path: "NotificationService/Resources/NotificationService.entitlements"),
@@ -116,7 +116,7 @@ let project = Project(
             sources: ["Widget/Sources/**"],
             resources: [
                 .glob(pattern: "Widget/Resources/**", excluding: [
-                    "Widget/Resources/**.entitlements"
+                    "Widget/Resources/*.entitlements"
                 ])
             ],
             entitlements: .file(path: "Widget/Resources/Widget.entitlements"),
