@@ -12,7 +12,12 @@ let project = Project(
             deploymentTargets: Project.deploymentTarget,
             infoPlist: .extendingDefault(with: [
                 "NSAppTransportSecurity": [
-                    "NSAllowsArbitraryLoads": true
+                    "NSExceptionDomains": [
+                        "www.ut.ac.kr": [
+                            "NSExceptionAllowsInsecureHTTPLoads": true,
+                            "NSIncludesSubdomains": true
+                        ]
+                    ]
                 ],
                 "UILaunchScreen": [
                     "UIColorName": "",
