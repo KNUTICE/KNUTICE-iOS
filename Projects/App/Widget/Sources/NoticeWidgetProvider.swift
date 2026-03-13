@@ -41,7 +41,7 @@ struct NoticeWidgetProvider: AppIntentTimelineProvider {
     }
     
     /// Builds and returns the widget timeline
-    /// - Note: Refreshes every 15 minutes returns an empty timeline if the task is cancelled
+    /// - Note: Refreshes every 2 hours returns an empty timeline if the task is cancelled
     func timeline(for configuration: NoticeWidgetIntent, in context: Context) async -> Timeline<NoticeEntry> {
         let contentCount = getContentCount(for: context.family)
         let category = configuration.category
@@ -55,7 +55,7 @@ struct NoticeWidgetProvider: AppIntentTimelineProvider {
             )
         ]
         
-        guard let refreshDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date()) else {
+        guard let refreshDate = Calendar.current.date(byAdding: .hour, value: 2, to: Date()) else {
             return Timeline(entries: entries, policy: .never)
         }
         

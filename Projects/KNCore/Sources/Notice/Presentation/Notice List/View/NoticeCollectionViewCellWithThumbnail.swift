@@ -80,7 +80,7 @@ final class NoticeCollectionViewCellWithThumbnail: UICollectionViewCell {
         if let imageURL = item.imageUrl {
             self.imageURL = imageURL
         } else {
-            self.imageURL = Bundle.main.defaultThumbnailURL
+            self.imageURL = Bundle.module.defaultThumbnailURL
         }
     }
     

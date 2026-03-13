@@ -97,10 +97,8 @@ public struct ReportView: View {
             }
         }
         .alert($store.scope(state: \.alert, action: \.alert))
-        .onChange(of: store.shouldDismiss) { shouldDismiss in
-            if shouldDismiss {
-                dismiss()
-            }
+        .onChange(of: store.shouldDismiss) {
+            if store.shouldDismiss { dismiss() }
         }
         .onDisappear {
             store.send(.disappear)
