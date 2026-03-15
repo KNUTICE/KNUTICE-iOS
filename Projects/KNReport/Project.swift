@@ -9,6 +9,5 @@ let project = Project.module(
         .project(target: "KNDesignSystem", path: "../KNDesignSystem"),
         .external(name: "ComposableArchitecture")
     ],
-    hasTests: false,
     resources: ["Resources/**"],
 )

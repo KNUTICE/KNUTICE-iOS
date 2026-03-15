@@ -35,7 +35,7 @@ func submitReport() async throws {
         endpoint,
         method: .post,
         decoding: PostResponseDTO.self,
-        isInterceptable: true
+        useFCMToken: true
     )
     
     #expect(true)
