@@ -10,5 +10,6 @@ let project = Project.module(
         .external(name: "RxSwift"),
         .external(name: "Factory"),
         .external(name: "FirebaseMessaging")
-    ]
+    ],
+    hasTests: false,
 )

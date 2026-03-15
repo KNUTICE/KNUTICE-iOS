@@ -11,5 +11,6 @@ let project = Project.module(
         .external(name: "ComposableArchitecture"),
         .external(name: "Factory")
     ],
+    hasTests: false,
     resources: ["Resources/**"],
 )

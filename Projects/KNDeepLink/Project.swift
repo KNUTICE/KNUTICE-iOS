@@ -8,4 +8,5 @@ let project = Project.module(
         .project(target: "KNUtility", path: "../KNUtility"),
         .external(name: "Factory")
     ],
+    hasTests: false
 )

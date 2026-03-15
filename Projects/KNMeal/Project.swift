@@ -7,5 +7,6 @@ let project = Project.module(
         .project(target: "KNDesignSystem", path: "../KNDesignSystem"),
         .project(target: "KNUtility", path: "../KNUtility"),
     ],
+    hasTests: false,
     resources: ["Resources/**"],
 )

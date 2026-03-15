@@ -9,5 +9,6 @@ let project = Project.module(
         .project(target: "KNUtility", path: "../KNUtility"),
         .project(target: "KNNetwork", path: "../KNNetwork")
     ],
+    hasTests: false,
     resources: ["Resources/**"],
 )

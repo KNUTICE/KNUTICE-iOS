@@ -8,5 +8,6 @@ let project = Project.module(
         .external(name: "FirebaseRemoteConfig"),
         .external(name: "Factory")
     ],
+    hasTests: false,
     resources: ["Resources/**"],
 )

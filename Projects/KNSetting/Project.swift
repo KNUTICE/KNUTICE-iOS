@@ -9,5 +9,6 @@ let project = Project.module(
         .project(target: "UIComponents", path: "../UIComponents"),
         .external(name: "ComposableArchitecture")
     ],
+    hasTests: false,
     resources: ["Resources/**"],
 )

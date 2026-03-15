@@ -1,9 +1,8 @@
 import ProjectDescription
 import ProjectDescriptionHelpers
 
-import ProjectDescription
-
 let project = Project.module(
     name: "KNDesignSystem",
+    hasTests: false,
     resources: ["Resources/**"],
 )

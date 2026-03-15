@@ -23,5 +23,6 @@ let project = Project.module(
         .external(name: "KingFisher"),
         .external(name: "FirebaseAnalytics"),
     ],
+    hasTests: false,
     resources: ["Resources/**"],
 )
