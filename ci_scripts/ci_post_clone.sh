@@ -50,6 +50,21 @@ cat <<EOF > "$TOPIC_DIR/ServiceInfo.plist"
 </plist>
 EOF
 
+# --- KNTip 모듈 설정 ---
+echo "📍 Generating ServiceInfo.plist for KNTopic..."
+TOPIC_DIR="$PROJECT_ROOT/Projects/KNTip/Resources"
+mkdir -p "$TOPIC_DIR"
+cat <<EOF > "$TOPIC_DIR/ServiceInfo.plist"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>TipURL</key>
+    <string>${TipURL}</string>
+</dict>
+</plist>
+EOF
+
 echo "✅ File generation complete!"
 
 # ---------------------------------------------------------
