@@ -8,6 +8,8 @@
 import Foundation
 
 extension Bundle {
+    static var knMeal: Bundle { Bundle.module }
+    
     var resource: NSDictionary? {
         guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
               let resource = NSDictionary(contentsOfFile: file) else {
