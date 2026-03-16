@@ -24,7 +24,7 @@ func submitReport() async throws {
         RemoteDataSourceImpl(session: session)
     }
     
-    guard let endpoint = Bundle.module.reportURL else {
+    guard let endpoint = Bundle.knReport.reportURL else {
         throw NetworkError.invalidURL(message: "Invalid or missing report URL.")
     }
     
