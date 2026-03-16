@@ -1,0 +1,229 @@
+{
+  "metaData": {
+    "success": true,
+    "code": 200,
+    "message": null
+  },
+  "data": [
+    {
+      "nttId": 1087050,
+      "title": "2026학년도 창업동아리 모집 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=xMBdsKyJMK9lTOqLjuPcoq5SILn11y21IxJwu42DRk3Xljfat1RMQXMJSVy8S0zq.knut_servlet_homepage?nttId=1087050",
+      "contentImageUrl": "https://www.ut.ac.kr/namo/binary/images/000104/20260313151235912_A3FN8V4R.png",
+      "isContentSummary": true,
+      "department": "창업지원교육센터",
+      "registrationDate": "2026-03-13",
+      "isAttachment": false,
+      "topic": "GENERAL_NEWS"
+    },
+    {
+      "nttId": 1087037,
+      "title": "[모집] 2026 에듀이음 서포터즈 모집 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=qojXLXjaWgNUnAIWntEVHSaVbJ8nTLvlIhLmUi9CYE7nzdPqtb5WOn1E1OmtBQ27.knut_servlet_homepage?nttId=1087037",
+      "contentImageUrl": "https://www.ut.ac.kr/namo/binary/images/000104/서포터즈_홍보_포스터_2.jpg",
+      "isContentSummary": true,
+      "department": "AI에듀테크융합교육원",
+      "registrationDate": "2026-03-13",
+      "isAttachment": true,
+      "topic": "GENERAL_NEWS"
+    },
+    {
+      "nttId": 1087034,
+      "title": "[문화체육관광부] 2026년 스포츠 사업 채용 박람회 개최 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=Z4tSbzBWIePYdu5N4EZG2B6Qy5dJHpnjI3jaQ5QIqdUOBMG5tlCbtLG58O3wEZuq.knut_servlet_homepage?nttId=1087034&kind=&mno=sitemap_12&pageIndex=1&searchCnd=&searchWrd=",
+      "contentImageUrl": null,
+      "isContentSummary": true,
+      "department": "대학일자리플러스센터",
+      "registrationDate": "2026-03-13",
+      "isAttachment": true,
+      "topic": "GENERAL_NEWS"
+    },
+    {
+      "nttId": 1087033,
+      "title": "[문화체육관광부] 2026년 스포츠 사업 채용 박람회 개최 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=Z4tSbzBWIePYdu5N4EZG2B6Qy5dJHpnjI3jaQ5QIqdUOBMG5tlCbtLG58O3wEZuq.knut_servlet_homepage?nttId=1087033&kind=&mno=sitemap_12&pageIndex=1&searchCnd=&searchWrd=",
+      "contentImageUrl": "https://www.ut.ac.kr/namo/binary/images/000104/20260313094046937_04DU6SDJ.png",
+      "isContentSummary": true,
+      "department": "대학일자리플러스센터",
+      "registrationDate": "2026-03-13",
+      "isAttachment": true,
+      "topic": "GENERAL_NEWS"
+    },
+    {
+      "nttId": 1087031,
+      "title": "[국립대학육성사업] 2026학년도 1학기 IDF 크루 모집",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=uFnbOV5aqs5OjJlfMYFSHmh20tNzvk5FIDi6bbZOlJ9NQF1pt1Ca6YaBv1xnYRLN.knut_servlet_homepage?nttId=1087031",
+      "contentImageUrl": "https://www.ut.ac.kr/namo/binary/images/000104/1학기_포스터.jpg",
+      "isContentSummary": true,
+      "department": "창업지원교육센터",
+      "registrationDate": "2026-03-13",
+      "isAttachment": false,
+      "topic": "GENERAL_NEWS"
+    },
+    {
+      "nttId": 1087023,
+      "title": "📢 2026년 학사사관(예비)후보생 / 군가산복무지원금 지급대상자 모집",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=1ymCKXHy0gzDHyJKYyJ55ja3PSV7jgfRYTLV6FwHFLDRrO2utA6hQ1tcj8YSZkCp.knut_servlet_homepage?nttId=1087023",
+      "contentImageUrl": "https://www.ut.ac.kr/namo/binary/images/000104/20260312165359310_VUZUKTB0.png",
+      "isContentSummary": true,
+      "department": "대학일자리플러스센터",
+      "registrationDate": "2026-03-12",
+      "isAttachment": true,
+      "topic": "GENERAL_NEWS"
+    },
+    {
+      "nttId": 1087019,
+      "title": "[국립대학육성사업] 충주시민과 함께 하는 하루 공예 교실 3월 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=uO9v1r0JxqbPwvYa8Ua7pOQKI1aedcYTYX2gAU7Zs1Y4cvkPtI8wh9NstsEdx5vg.knut_servlet_homepage?nttId=1087019",
+      "contentImageUrl": "https://www.ut.ac.kr/namo/binary/images/000104/3월_교통대_하루공예교실_온라인_포스터_1_1.jpeg",
+      "isContentSummary": true,
+      "department": "창업지원교육센터",
+      "registrationDate": "2026-03-12",
+      "isAttachment": false,
+      "topic": "GENERAL_NEWS"
+    },
+    {
+      "nttId": 1087014,
+      "title": "📢[창업지원교육센터] 2026학년도 창업동아리 설명회 안내📢",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=J2VvmNGBlzy1NBW24J1JINBwHF0CwjApYAOg8LcbbjUzsfdetarrddwYij2yLzTa.knut_servlet_homepage?nttId=1087014",
+      "contentImageUrl": null,
+      "isContentSummary": true,
+      "department": "창업지원교육센터",
+      "registrationDate": "2026-03-12",
+      "isAttachment": false,
+      "topic": "GENERAL_NEWS"
+    },
+    {
+      "nttId": 1087008,
+      "title": "📢충북 PRIDE 공유대학 서포터즈 모집 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=dTFBbKVW0nsy855UHKaYCGmj7nU6GM8HaoMR2HhwnopeiNDUt5n0a6D776zmAoOu.knut_servlet_homepage?nttId=1087008&kind=&mno=sitemap_12&pageIndex=1&searchCnd=&searchWrd=",
+      "contentImageUrl": "https://www.ut.ac.kr/namo/binary/images/000104/3._2026년_제2기_충북_PRIDE_공유대학_서포터즈_모집_안내_포스터.jpg",
+      "isContentSummary": true,
+      "department": "RISE사업단",
+      "registrationDate": "2026-03-11",
+      "isAttachment": true,
+      "topic": "GENERAL_NEWS"
+    },
+    {
+      "nttId": 1086965,
+      "title": "2026년 3월 천원의 아침밥 사업 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=oBPBk1aSzkuFXcSC88DuTWDWxkEUnRLqCWA8cY10wVpruGdxtU1APs6ALFR16O37.knut_servlet_homepage?nttId=1086965&kind=&mno=sitemap_12&pageIndex=1&searchCnd=&searchWrd=",
+      "contentImageUrl": "https://www.ut.ac.kr/namo/binary/images/000104/2026.3월_천원의아침밥_홍보물.png",
+      "isContentSummary": true,
+      "department": "학생과",
+      "registrationDate": "2026-03-10",
+      "isAttachment": false,
+      "topic": "GENERAL_NEWS"
+    },
+    {
+      "nttId": 1086902,
+      "title": "📢[충북 PRIDE 공유대학] 26-1학기 글로벌 비교과과정 학생 모집",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=gsVzQ4WqsF20SXiRz6aaQe4IddEO66YOTaJNaRG1XHNiplFatJAtnM1RSxekloYc.knut_servlet_homepage?nttId=1086902&kind=&mno=sitemap_12&pageIndex=1&searchCnd=&searchWrd=",
+      "contentImageUrl": "https://www.ut.ac.kr/namo/binary/images/000104/4._충북_PRIDE_공유대학_글로벌_비교과과정_26-1학기_학생모집_홍보_포스터(QR).pdf_page_1.jpg",
+      "isContentSummary": true,
+      "department": "RISE사업단",
+      "registrationDate": "2026-03-06",
+      "isAttachment": true,
+      "topic": "GENERAL_NEWS"
+    },
+    {
+      "nttId": 1086800,
+      "title": "2026학년도 대학회계 세입·세출 예산서",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=hZyfA74HAdCb31TGXo8WldXhgeJuVBkvzhUneZQwpo7ooGC9tZOF87ZMf14nBf2q.knut_servlet_homepage?nttId=1086800",
+      "contentImageUrl": null,
+      "isContentSummary": true,
+      "department": "재무과",
+      "registrationDate": "2026-03-03",
+      "isAttachment": true,
+      "topic": "GENERAL_NEWS"
+    },
+    {
+      "nttId": 1086697,
+      "title": "2026학년도 제1학기 대학(원)생 등록금 추가 수납 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=1vUll29wYzVvCNJXeI1tnhWHgqXHxiDdpvBXAZLLVD45TrjFttMizSiSdAz7GE11.knut_servlet_homepage?nttId=1086697",
+      "contentImageUrl": null,
+      "isContentSummary": true,
+      "department": "재무과",
+      "registrationDate": "2026-02-27",
+      "isAttachment": true,
+      "topic": "GENERAL_NEWS"
+    },
+    {
+      "nttId": 1086666,
+      "title": "2026학년도 1학기 학생증(NH 체크카드 학생증) 발급 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=qafbdKLwtNoERTI4oYqYpMfU149Qhy1PJErR3ruiDOnS1Dfyt16Tys53RpIoEhq1.knut_servlet_homepage?nttId=1086666",
+      "contentImageUrl": null,
+      "isContentSummary": true,
+      "department": "학생과",
+      "registrationDate": "2026-02-27",
+      "isAttachment": true,
+      "topic": "GENERAL_NEWS"
+    },
+    {
+      "nttId": 1086631,
+      "title": "[페이코] 통학버스 승차권 사용자 가이드",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=lQzk34yoahRVRUAols0oyaw3A3hklLYBVKKf40XpPSUmQYx4t1HACuJPbuOkwLhO.knut_servlet_homepage?nttId=1086631&kind=&mno=sitemap_12&pageIndex=1&searchCnd=&searchWrd=",
+      "contentImageUrl": null,
+      "isContentSummary": true,
+      "department": "학생과",
+      "registrationDate": "2026-02-26",
+      "isAttachment": true,
+      "topic": "GENERAL_NEWS"
+    },
+    {
+      "nttId": 1086627,
+      "title": "2026학년도 1학기 교내 외국어특강 참여 학생 모집 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=gDfsK6G6ux7qkUy1MajiVyCAqRDwSWIyV1qfd8VsRTlB1rKDt6agsmQ76oGLeouK.knut_servlet_homepage?nttId=1086627",
+      "contentImageUrl": null,
+      "isContentSummary": true,
+      "department": "국제교류본부",
+      "registrationDate": "2026-02-26",
+      "isAttachment": true,
+      "topic": "GENERAL_NEWS"
+    },
+    {
+      "nttId": 1086603,
+      "title": "[졸업생특화프로그램] 국립한국교통대학교 졸업생특화프로그램 참여 신청방법",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=sWsI2K71np7rh43ofVavqsz7ZhivHw4P4AtUcBS9CGOEpvRyt36UDahHQ7abCLs5.knut_servlet_homepage?nttId=1086603&kind=&mno=sitemap_12&pageIndex=1&searchCnd=&searchWrd=",
+      "contentImageUrl": null,
+      "isContentSummary": true,
+      "department": "대학일자리플러스센터",
+      "registrationDate": "2026-02-25",
+      "isAttachment": true,
+      "topic": "GENERAL_NEWS"
+    },
+    {
+      "nttId": 1086550,
+      "title": "[국립대학육성사업] 와인소믈리에 양성과정 수강생 모집",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=ZHrlLVAEM1shas0wWekn1NGHHVHv65nsyfiKba6sPpskYdEEtgizHBhlWdHybiKC.knut_servlet_homepage?nttId=1086550&kind=&mno=sitemap_12&pageIndex=1&searchCnd=&searchWrd=",
+      "contentImageUrl": null,
+      "isContentSummary": true,
+      "department": "평생교육원",
+      "registrationDate": "2026-02-24",
+      "isAttachment": false,
+      "topic": "GENERAL_NEWS"
+    },
+    {
+      "nttId": 1086533,
+      "title": "2026학년도 국립한국교통대학교 정시 신입생 대상 어학 설명회 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=hUhTxV8VTnzUODSUGZGQzxzhd4v4X9rNUyaFq1DRptleQnY7t3lVV0yCf3Wvoa4Q.knut_servlet_homepage?nttId=1086533",
+      "contentImageUrl": null,
+      "isContentSummary": true,
+      "department": "국제교류본부",
+      "registrationDate": "2026-02-23",
+      "isAttachment": true,
+      "topic": "GENERAL_NEWS"
+    },
+    {
+      "nttId": 1086526,
+      "title": "국립대학 웹예능 \u003C방방곡곡 과제곡\u003E 시청 안내",
+      "contentUrl": "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do;jsessionid=xKYl2Lg7KaFnKBaloNP055pivyFdqGab0k9SX1iy4Q41RufctNmftDoZeH8SgNNl.knut_servlet_homepage?nttId=1086526&kind=&mno=sitemap_12&pageIndex=1&searchCnd=&searchWrd=",
+      "contentImageUrl": null,
+      "isContentSummary": true,
+      "department": "기획과",
+      "registrationDate": "2026-02-23",
+      "isAttachment": true,
+      "topic": "GENERAL_NEWS"
+    }
+  ]
+}

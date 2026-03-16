@@ -1,6 +1,6 @@
 //
 //  NoticeCategoriesAPITests.swift
-//  KNUTICEUnitTests
+//  KNCoreTests
 //
 //  Created by 이정훈 on 9/9/25.
 //
@@ -8,7 +8,9 @@
 import Alamofire
 import Factory
 import Foundation
-import KNUTICECore
+@testable import KNCore
+import KNNetwork
+import KNUtility
 import Testing
 
 @Test
@@ -25,7 +27,7 @@ func fetchAllNoticeTypes() async throws {
     
     let dataSource = Container.shared.remoteDataSource()
     
-    guard let baseURL = Bundle.standard.noticeURL else {
+    guard let baseURL = Bundle.knCore.noticeURL else {
         throw NetworkError.invalidURL(
             message: "Failed to load noticeURL from Bundle.main. Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension."
         )
