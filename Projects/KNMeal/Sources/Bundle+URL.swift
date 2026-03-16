@@ -7,10 +7,22 @@
 
 import Foundation
 
-extension Bundle {
-    static var knMeal: Bundle { Bundle.module }
+private class KNMealBundleFinder {}
+
+public extension Bundle {
+    static var knMeal: Bundle {
+        let frameworkBundle = Bundle(for: KNMealBundleFinder.self)
+        let resource = "KNMeal_KNMeal.bundle"
+        
+        if let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent(resource),
+           let bundle = Bundle(url: bundleURL) {
+            return bundle
+        }
+        
+        return frameworkBundle
+    }
     
-    var resource: NSDictionary? {
+    private var resource: NSDictionary? {
         guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
               let resource = NSDictionary(contentsOfFile: file) else {
             return nil
