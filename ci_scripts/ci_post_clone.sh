@@ -55,6 +55,8 @@ echo "✅ File generation complete!"
 # ---------------------------------------------------------
 # Tuist 작업 수행
 # ---------------------------------------------------------
+cd "$PROJECT_ROOT"
+
 echo "❗️tuist install"
 tuist install
 
