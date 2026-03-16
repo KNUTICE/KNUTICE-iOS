@@ -7,10 +7,10 @@
 
 import Foundation
 
-extension Bundle {
+public extension Bundle {
     static var knReadingRoom: Bundle { .module }
     
-    var resource: NSDictionary? {
+    private var resource: NSDictionary? {
         guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
               let resource = NSDictionary(contentsOfFile: file) else {
             return nil
