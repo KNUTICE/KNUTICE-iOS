@@ -33,7 +33,7 @@ public struct ReadingRoomStatusView: UIViewRepresentable {
         webView.isOpaque = false
         webView.navigationDelegate = context.coordinator
         
-        guard let urlStr = Bundle.module.readingRoomStatusURL,
+        guard let urlStr = Bundle.knReadingRoom.readingRoomStatusURL,
               let url = URL(string: urlStr) else {
             return webView
         }
@@ -68,7 +68,7 @@ extension ReadingRoomStatusView {
                     
                     let fcmToken = try await FCMTokenManager.shared.getToken()
                     let javaScriptString = """
-                        \(Bundle.module.bridgingMethod)('\(fcmToken)');
+                        \(Bundle.knReadingRoom.bridgingMethod)('\(fcmToken)');
                     """
                     
                     webView.evaluateJavaScript(javaScriptString, completionHandler: nil)
