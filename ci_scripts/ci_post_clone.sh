@@ -77,7 +77,7 @@ cat <<EOF > "$TOPIC_DIR/ServiceInfo.plist"
     <key>Notice_URL</key>
     <string>${Notice_URL}</string>
     <key>DefaultThumbnail_URL</key>
-    <string>${DefaultThumbnail_URL}</key>
+    <string>${DefaultThumbnail_URL}</string>
 </dict>
 </plist>
 EOF
