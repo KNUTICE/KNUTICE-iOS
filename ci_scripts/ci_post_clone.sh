@@ -82,6 +82,21 @@ cat <<EOF > "$TOPIC_DIR/ServiceInfo.plist"
 </plist>
 EOF
 
+# --- KNIntelligence 모듈 설정 ---
+echo "📍 Generating ServiceInfo.plist for KNIntelligence..."
+TOPIC_DIR="$PROJECT_ROOT/Projects/KNIntelligence/Resources"
+mkdir -p "$TOPIC_DIR"
+cat <<EOF > "$TOPIC_DIR/ServiceInfo.plist"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Notice_Summary_URL</key>
+    <string>${Notice_Summary_URL}</string>
+</dict>
+</plist>
+EOF
+
 echo "✅ File generation complete!"
 
 # ---------------------------------------------------------
