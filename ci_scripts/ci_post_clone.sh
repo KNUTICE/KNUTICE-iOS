@@ -16,7 +16,7 @@ mise install
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 # ---------------------------------------------------------
-# 리소스 파일 먼저 생성 (Tuist 실행 전!)
+# 리소스 파일 먼저 생성
 # ---------------------------------------------------------
 echo "🎨 Creating ServiceInfo.plist for each module..."
 
@@ -51,7 +51,7 @@ cat <<EOF > "$TOPIC_DIR/ServiceInfo.plist"
 EOF
 
 # --- KNTip 모듈 설정 ---
-echo "📍 Generating ServiceInfo.plist for KNTopic..."
+echo "📍 Generating ServiceInfo.plist for KNTip..."
 TOPIC_DIR="$PROJECT_ROOT/Projects/KNTip/Resources"
 mkdir -p "$TOPIC_DIR"
 cat <<EOF > "$TOPIC_DIR/ServiceInfo.plist"
@@ -61,6 +61,23 @@ cat <<EOF > "$TOPIC_DIR/ServiceInfo.plist"
 <dict>
     <key>TipURL</key>
     <string>${TipURL}</string>
+</dict>
+</plist>
+EOF
+
+# --- KNCore 모듈 설정 ---
+echo "📍 Generating ServiceInfo.plist for KNCore..."
+TOPIC_DIR="$PROJECT_ROOT/Projects/KNCore/Resources"
+mkdir -p "$TOPIC_DIR"
+cat <<EOF > "$TOPIC_DIR/ServiceInfo.plist"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Notice_URL</key>
+    <string>${Notice_URL}</string>
+    <key>DefaultThumbnail_URL</key>
+    <string>${DefaultThumbnail_URL}</key>
 </dict>
 </plist>
 EOF
