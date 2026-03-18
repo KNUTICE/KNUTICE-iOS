@@ -1,4 +1,4 @@
-#!/volumes/tester/bin/bash
+#!/usr/bin/env bash
 
 # 에러 발생 시 중단
 set -e
