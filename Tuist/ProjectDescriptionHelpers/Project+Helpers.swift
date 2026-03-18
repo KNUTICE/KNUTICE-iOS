@@ -26,12 +26,12 @@ public extension Project {
             ]
         )
     ) -> Project {
-        // 메인 타겟
+        let mainBundleId = bundleId ?? "com.fx.\(name)"
         let mainTarget = Target.target(
             name: name,
             destinations: .iOS,
             product: Environment.forPreview.getBoolean(default: false) ? .framework : product,
-            bundleId: bundleId ?? "com.fx.\(name)",
+            bundleId: mainBundleId,
             deploymentTargets: deploymentTargets,
             infoPlist: infoPlist,
             sources: sources,
@@ -48,7 +48,7 @@ public extension Project {
                 name: "\(name)Tests",
                 destinations: .iOS,
                 product: .unitTests,
-                bundleId: bundleId ?? "com.fx.\(name)Tests",
+                bundleId: mainBundleId + "Tests",
                 deploymentTargets: deploymentTargets,
                 infoPlist: .default,
                 sources: ["Tests/Sources/**"],
