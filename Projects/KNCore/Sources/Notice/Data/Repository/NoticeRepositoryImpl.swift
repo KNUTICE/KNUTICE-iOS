@@ -11,7 +11,7 @@ import KNNetwork
 
 public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
     private let dataSource: RemoteDataSource
-    private let baseURL: String? = Bundle.module.noticeURL
+    private let baseURL: String? = Bundle.knCore.noticeURL
     
     public init(dataSource: RemoteDataSource) {
         self.dataSource = dataSource

@@ -92,6 +92,7 @@ public extension MockURLProtocol {
         case fetchSingleNoticeShouldSucceed
         case fetchTipsShouldSucceed
         case submitReportShouldSucceed
+        case fetchNoticeSummaryShouldSucceed
         
         var jsonFileName: String {
             switch self {
@@ -125,6 +126,8 @@ public extension MockURLProtocol {
             case .fetchTipsShouldSucceed:
                 return "Tips"
                 
+            case .fetchNoticeSummaryShouldSucceed:
+                return "notice_summary_success_response"
             }
         }
     }

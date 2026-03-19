@@ -12,6 +12,8 @@ public extension Project {
         deploymentTargets: DeploymentTargets = Self.deploymentTarget,
         infoPlist: InfoPlist = .default,
         dependencies: [TargetDependency] = [],
+        hasTests: Bool = true,
+        testDependencies: [TargetDependency] = [],
         sources: SourceFilesList = ["Sources/**"],
         resources: ResourceFileElements? = nil,
         settings: Settings? = .settings(
@@ -20,28 +22,45 @@ public extension Project {
                 "SWIFT_VERSION": "6.0",
                 "SWIFT_STRICT_CONCURRENCY": "complete",
                 "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
-                "STRING_CATALOG_GENERATE_SYMBOLS": "YES",
-                "LOCALIZED_STRING_SWIFT_SYMBOLS_GENERATION": "YES",
                 "MARKETING_VERSION": marketingVersion
             ]
         )
     ) -> Project {
+        let mainBundleId = bundleId ?? "com.fx.\(name)"
+        let mainTarget = Target.target(
+            name: name,
+            destinations: .iOS,
+            product: Environment.forPreview.getBoolean(default: false) ? .framework : product,
+            bundleId: mainBundleId,
+            deploymentTargets: deploymentTargets,
+            infoPlist: infoPlist,
+            sources: sources,
+            resources: resources,
+            dependencies: dependencies,
+            settings: settings
+        )
+        
+        var targets: [Target] = [mainTarget]
+        
+        // 테스트 타겟
+        if hasTests {
+            let testTarget = Target.target(
+                name: "\(name)Tests",
+                destinations: .iOS,
+                product: .unitTests,
+                bundleId: mainBundleId + "Tests",
+                deploymentTargets: deploymentTargets,
+                infoPlist: .default,
+                sources: ["Tests/Sources/**"],
+                resources: ["Tests/Resources/**"],
+                dependencies: testDependencies + [.target(name: name)]
+            )
+            targets.append(testTarget)
+        }
+        
         return Project(
             name: name,
-            targets: [
-                .target(
-                    name: name,
-                    destinations: .iOS,
-                    product: Environment.forPreview.getBoolean(default: false) ? .framework : product,
-                    bundleId: bundleId ?? "com.fx.\(name)",
-                    deploymentTargets: deploymentTargets,
-                    infoPlist: infoPlist,
-                    sources: sources,
-                    resources: resources,
-                    dependencies: dependencies,
-                    settings: settings
-                )
-            ]
+            targets: targets
         )
     }
 }

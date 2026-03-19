@@ -3,5 +3,6 @@ import ProjectDescriptionHelpers
 
 let project = Project.module(
     name: "KNNotification",
-    product: .staticLibrary
+    product: .staticLibrary,
+    hasTests: false
 )

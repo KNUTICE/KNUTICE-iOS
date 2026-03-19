@@ -7,8 +7,22 @@
 
 import Foundation
 
-extension Bundle {
-    var resource: NSDictionary? {
+private class KNReportBundleFinder {}
+
+public extension Bundle {
+    static var knReport: Bundle {
+        let frameworkBundle = Bundle(for: KNReportBundleFinder.self)
+        let resource = "KNReport_KNReport.bundle"
+        
+        if let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent(resource),
+           let bundle = Bundle(url: bundleURL) {
+            return bundle
+        }
+        
+        return frameworkBundle
+    }
+    
+    private var resource: NSDictionary? {
         guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
               let resource = NSDictionary(contentsOfFile: file) else {
             return nil

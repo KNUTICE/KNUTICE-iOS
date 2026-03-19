@@ -20,7 +20,7 @@ public struct MealView: UIViewRepresentable {
     public func makeUIView(context: Context) -> some UIView {
         let webView: WKWebView = WKWebView()
         
-        guard let url = URL(string: Bundle.module.baseURL) else {
+        guard let url = URL(string: Bundle.knMeal.baseURL) else {
             return webView
         }
         
@@ -47,7 +47,7 @@ public struct MealView: UIViewRepresentable {
         }
         
         public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            webView.evaluateJavaScript(Bundle.module.bridgingMethod + "(\"\(parent.cafeteria.rawValue)\");")
+            webView.evaluateJavaScript(Bundle.knMeal.bridgingMethod + "(\"\(parent.cafeteria.rawValue)\");")
         }
     }
 }
