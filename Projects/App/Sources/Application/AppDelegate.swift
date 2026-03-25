@@ -5,13 +5,14 @@
 //  Created by 이정훈 on 5/4/24.
 //
 
-import UIKit
 import Factory
 import Firebase
 import FirebaseCore
 import FirebaseMessaging
+import KNDeepLink
 import KNUtility
 import KNToken
+import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -131,7 +132,11 @@ extension AppDelegate: @MainActor UNUserNotificationCenterDelegate {
     // MARK: - Foreground Notification Handling
     
     //알림을 터치하지 않아도 알림이 전달되면 호출
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
         completionHandler([.list, .banner, .sound])
         
         
@@ -147,16 +152,20 @@ extension AppDelegate: @MainActor UNUserNotificationCenterDelegate {
         }
     }
     
-    // MARK: - Background Notification Handling
+    // MARK: - User notification tap handling
     
-    //알림을 클릭했을 때 호출
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        set(userInfo: response.notification.request.content.userInfo)
+    // 알림을 클릭했을 때 호출
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
+        let userInfo = response.notification.request.content.userInfo
+        
+        // 알림 데이터를 DeepLinkManager의 Publisher로 전달하여 앱 내부에서 딥링크 처리
+        DeepLinkManager.shared.notificationPublisher.send(response.notification.request.content.userInfo)
+        
+        // 시스템에 알림 처리가 완료되었음을 알림
         completionHandler()
     }
-    
-    private func set(userInfo: [AnyHashable : Any]) {
-        UserDefaults.standard.set(userInfo, forKey: UserDefaultsKeys.userInfo.rawValue)
-    }
 }
-
