@@ -57,15 +57,16 @@ extension UITabBarViewController {
         
         DeepLinkManager.shared.notificationPublisher
             .compactMap { $0 }
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] userInfo in
+            .compactMap { userInfo -> DeepLink? in
                 guard let deepLinkStr = userInfo[UserInfoKeys.deepLink.rawValue] as? String,
                       let url = URL(string: deepLinkStr) else {
-                    return
+                    return nil
                 }
                 
-                let deepLink = DeepLinkManager.shared.parse(url)
-                
+                return DeepLinkManager.shared.parse(url)
+            }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] deepLink in
                 self?.handle(deepLink: deepLink)
             })
             .store(in: &cancellables)
