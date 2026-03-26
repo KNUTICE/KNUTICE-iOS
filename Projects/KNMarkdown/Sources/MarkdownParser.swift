@@ -34,8 +34,12 @@ public struct MarkdownParser {
                 
                 // 구분선 건너뛰고 데이터 row부터 시작 (i + 2)
                 var j = i + 2
-                while j < lines.count && lines[j].trimmingCharacters(in: .whitespaces).hasPrefix("|") {
-                    rows.append(parseTableRow(lines[j]))
+                while j < lines.count {
+                    let rowLine = lines[j].trimmingCharacters(in: .whitespaces)
+                    
+                    guard rowLine.hasPrefix("|") else { break }
+                    
+                    rows.append(parseTableRow(rowLine))
                     j += 1
                 }
                 
