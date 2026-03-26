@@ -13,7 +13,7 @@ actor NoticeSummaryRepositoryImpl: NoticeSummaryRepository {
     @Injected(\.remoteDataSource) private var remoteDataSource
     
     func fetch(for nttId: Int) async throws -> NoticeSummary {
-        guard var baseURL = Bundle.module.noticeSummaryURL else {
+        guard var baseURL = Bundle.knIntelligence.noticeSummaryURL else {
             throw NetworkError.invalidURL(message: "Invalid or missing 'Notice_Summary_URL' in resource.")
         }
         

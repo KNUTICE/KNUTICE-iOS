@@ -15,27 +15,12 @@ import SwiftUI
 import UIKit
 
 extension UITabBarViewController {
-    func bind() {
-        viewModel.$deepLink
-            .compactMap { $0 }
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] deepLink in
-                self?.handle(deepLink: deepLink)
-            })
-            .store(in: &cancellables)
-        
+    func bind() {        
         NotificationCenter.default.publisher(for: .didReceiveDeepLink)
             .compactMap { $0.object as? DeepLink }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] deepLink in
                 self?.handle(deepLink: deepLink)
-            })
-            .store(in: &cancellables)
-        
-        NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
-            .sink(receiveValue: { [weak self] _ in
-                // FIXME: 중복 호출 문제 수정, Cold Start에서는 호출되지 않음
-                self?.viewModel.fetchDeepLinkIfExists()
             })
             .store(in: &cancellables)
         
@@ -67,6 +52,22 @@ extension UITabBarViewController {
                     object: self,
                     userInfo: [UserInfoKeys.bookmarkSortOption.rawValue: sortOption]
                 )
+            })
+            .store(in: &cancellables)
+        
+        DeepLinkManager.shared.notificationPublisher
+            .compactMap { $0 }
+            .compactMap { userInfo -> DeepLink? in
+                guard let deepLinkStr = userInfo[UserInfoKeys.deepLink.rawValue] as? String,
+                      let url = URL(string: deepLinkStr) else {
+                    return nil
+                }
+                
+                return DeepLinkManager.shared.parse(url)
+            }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] deepLink in
+                self?.handle(deepLink: deepLink)
             })
             .store(in: &cancellables)
     }

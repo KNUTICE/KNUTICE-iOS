@@ -12,7 +12,7 @@ import KNUtility
 
 actor TokenRepositoryImpl: TokenRepository {
     @Injected(\.remoteDataSource) private var dataSource
-    private let baseURL: String? = Bundle.module.tokenURL
+    private let baseURL: String? = Bundle.knToken.tokenURL
     
     /// Registers a newly issued FCM token with the KNUTICE server.
     ///

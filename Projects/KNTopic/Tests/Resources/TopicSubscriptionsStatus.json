@@ -1,0 +1,16 @@
+{
+  "metaData": {
+    "success": true,
+    "code": 200,
+    "message": "토픽 조회 성공"
+  },
+  "data": {
+    "subscribedTopics": [
+      "GENERAL_NEWS",
+      "SCHOLARSHIP_NEWS",
+      "EVENT_NEWS",
+      "ACADEMIC_NEWS",
+      "EMPLOYMENT_NEWS"
+    ]
+  }
+}

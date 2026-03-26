@@ -6,5 +6,6 @@ let project = Project.module(
     product: .staticLibrary,
     dependencies: [
         .project(target: "KNDesignSystem", path: "../KNDesignSystem")
-    ]
+    ],
+    hasTests: false
 )

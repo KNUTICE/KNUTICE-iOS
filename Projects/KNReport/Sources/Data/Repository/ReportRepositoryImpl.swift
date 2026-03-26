@@ -35,7 +35,7 @@ actor ReportRepositoryImpl: ReportRepository {
     ///     malformed in the module bundle.
     ///   - Any networking or decoding error propagated from `RemoteDataSource`.
     func register(params: [String : any Sendable]) async throws {
-        guard let endpoint = Bundle.module.reportURL else {
+        guard let endpoint = Bundle.knReport.reportURL else {
             throw NetworkError.invalidURL(message: "Invalid or missing report URL.")
         }
         
