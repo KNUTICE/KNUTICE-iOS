@@ -9,53 +9,54 @@ import Foundation
 
 public struct MarkdownParser {
     public static func parse(_ markdown: String) -> [MarkdownNode] {
-        var lines = markdown.components(separatedBy: .newlines)
+        let lines = markdown.components(separatedBy: .newlines)
         var allNodes: [MarkdownNode] = []
         var i = 0
         
         while i < lines.count {
-            let line = lines[i]
-            let trimmedLine = line.trimmingCharacters(in: .whitespaces)
+            let line = lines[i].trimmingCharacters(in: .whitespaces)
             
-            if trimmedLine.isEmpty {
+            if line.isEmpty {
                 i += 1
                 continue
             }
             
-            // List
-            if trimmedLine.hasPrefix("* ") || trimmedLine.hasPrefix("- ") {
+            // 1. Heading
+            if line.hasPrefix("#") {
+                allNodes.append(parseHeading(line))
+                i += 1
+            }
+            
+            // 2. Table
+            else if line.hasPrefix("|") && i + 1 < lines.count && hasTableSeparator(lines[i + 1]) {
+                let headers = parseTableRow(line)
+                var rows = [[String]]()
+                
+                // 구분선 건너뛰고 데이터 row부터 시작 (i + 2)
+                var j = i + 2
+                while j < lines.count {
+                    let rowLine = lines[j].trimmingCharacters(in: .whitespaces)
+                    
+                    guard rowLine.hasPrefix("|") else { break }
+                    
+                    rows.append(parseTableRow(rowLine))
+                    j += 1
+                }
+                
+                allNodes.append(.table(headers: headers, rows: rows))
+                i = j
+            }
+            
+            // 3. List
+            else if line.hasPrefix("* ") || line.hasPrefix("- ") {
                 let (node, nextIndex) = parseList(lines, startIndex: i)
                 allNodes.append(node)
                 i = nextIndex
             }
             
-            // Heading
-            else if line.hasPrefix("#") {
-                allNodes.append(parseHeading(line))
-                i += 1
-            }
-            
-            // Table
-            else if line.hasPrefix("|") {
-                if !lines.isEmpty && hasTableSeparator(lines.first ?? "") {
-                    let headers = parseTableRow(line)    // 첫 줄은 헤더
-                    lines.removeFirst()    // 구분선 제거
-                    
-                    var rows = [[String]]()
-                    while !lines.isEmpty && lines.first?.trimmingCharacters(in: .whitespaces).hasPrefix("|") == true {
-                        let rowData = lines.removeFirst()
-                        rows.append(parseTableRow(rowData))
-                    }
-                    
-                    allNodes.append(.table(headers: headers, rows: rows))
-                } else {
-                    allNodes.append(.paragraph(text: line))
-                }
-            }
-            
-            // Text
+            // 4. Paragraph
             else {
-                allNodes.append(.paragraph(text: trimmedLine))
+                allNodes.append(.paragraph(text: line))
                 i += 1
             }
         }
