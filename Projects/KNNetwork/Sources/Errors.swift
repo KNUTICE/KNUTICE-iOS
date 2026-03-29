@@ -11,7 +11,7 @@ public enum TokenError: Error {
     case notFound
 }
 
-public enum NetworkError: Error {
+public enum NetworkError: Error, Equatable {
     case remoteServerError(message: String)
     case invalidURL(message: String)
 }
