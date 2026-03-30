@@ -25,7 +25,7 @@ let package = Package(
         .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "10.0.0"),
         .package(url: "https://github.com/onevcat/Kingfisher", from: "8.6.2"),
         .package(url: "https://github.com/RxSwiftCommunity/RxDataSources", from: "5.0.2"),
-        .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "1.23.1"),
+        .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "1.25.2"),
         .package(url: "https://github.com/SnapKit/SnapKit.git", from: "5.7.1"),
         .package(url: "https://github.com/Juanpe/SkeletonView.git", from: "1.31.0")
     ]
