@@ -133,8 +133,9 @@ struct HomeScreenView: View {
         .refreshable {
             await store.send(.fetchAllContents).finish()
         }
-        .toolbar(.visible)
+        .toolbar(.visible)    // iPadOS에서 툴바 활성화를 위해서 적용
         .toolbar {
+            // iPadOS 툴바 생성
             if UIDevice.current.userInterfaceIdiom == .pad {
                 ToolbarItem(placement: .topBarLeading) {
                     Text("KNUTICE")
