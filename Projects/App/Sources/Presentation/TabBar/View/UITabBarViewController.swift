@@ -111,6 +111,9 @@ final class UITabBarViewController: UITabBarController, NavigationItemConfigurab
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             navigationController?.setNavigationBarHidden(true, animated: true)
+        } else {
+            let isSearchTab = viewControllers?[selectedIndex] is SearchViewController
+            navigationController?.setNavigationBarHidden(isSearchTab, animated: false)
         }
     }
 }

@@ -7,6 +7,7 @@
 
 import UserNotifications
 
+@MainActor
 public extension UNUserNotificationCenter {
     /// 새로운 알림 추가
     func scheduleBookmarkNotification(
