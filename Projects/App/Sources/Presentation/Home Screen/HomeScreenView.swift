@@ -81,7 +81,7 @@ struct HomeScreenView: View {
                         }
                     }
                     .padding(.top, -30)
-                    .frame(minHeight: 330)
+                    .frame(minHeight: 340)
                     .tabViewStyle(.page(indexDisplayMode: .always))
                     .background {
                         RoundedRectangle(cornerRadius: 20)
