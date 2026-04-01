@@ -81,7 +81,7 @@ struct HomeScreenView: View {
                         }
                     }
                     .padding(.top, -30)
-                    .frame(minHeight: 330)
+                    .frame(minHeight: 340)
                     .tabViewStyle(.page(indexDisplayMode: .always))
                     .background {
                         RoundedRectangle(cornerRadius: 20)
@@ -131,7 +131,8 @@ struct HomeScreenView: View {
             startTimer()
         }
         .refreshable {
-            await store.send(.fetchAllContents).finish()
+            // 새로고침 중 상태 변화로 비동기 작업이 취소되지 않도록 별도 Task에서 실행
+            await Task { await store.send(.fetchAllContents).finish() }.value
         }
         .toolbar(.visible)    // iPadOS에서 툴바 활성화를 위해서 적용
         .toolbar {
