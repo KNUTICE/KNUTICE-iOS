@@ -131,7 +131,7 @@ struct HomeScreenView: View {
             startTimer()
         }
         .refreshable {
-            await store.send(.fetchAllContents).finish()
+            await Task { await store.send(.fetchAllContents).finish() }.value
         }
         .toolbar(.visible)    // iPadOS에서 툴바 활성화를 위해서 적용
         .toolbar {

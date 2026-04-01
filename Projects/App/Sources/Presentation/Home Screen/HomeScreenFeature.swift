@@ -62,9 +62,10 @@ struct HomeScreenFeature: EntryTimeRecordable {
                             return
                         }
                         
+                        await send(.majorNoticesResponse(.loaded(MainSectionNotice.skeleton(category: major))))
+                        
                         try Task.checkCancellation()
                         
-                        await send(.majorNoticesResponse(.loaded(MainSectionNotice.skeleton(category: major))))
                         let notices = try await fetchNoticesUseCase.execute(category: major, size: 3)
                         let section = MainSectionNotice.from(notices: notices, category: major, header: major.localizedDescription)
                         await send(.majorNoticesResponse(.loaded(section)))
