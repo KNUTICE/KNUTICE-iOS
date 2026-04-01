@@ -1,8 +1,8 @@
 import ProjectDescription
 
 public extension Project {
-    static let marketingVersion: SettingValue = "1.7.2"
-    static let appVersion: Plist.Value = "1.7.2"
+    static let marketingVersion: SettingValue = "1.7.3"
+    static let appVersion: Plist.Value = "1.7.3"
     static let deploymentTarget: DeploymentTargets = .iOS("17.0")
     
     static func module(
