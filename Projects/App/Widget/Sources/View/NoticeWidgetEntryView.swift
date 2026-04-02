@@ -10,7 +10,6 @@ import WidgetKit
 import SwiftUI
 
 // MARK: - Widget Entry View
-
 struct KNUTICEWidgetEntryView: View {
     @Environment(\.widgetFamily) var family: WidgetFamily
     var entry: NoticeWidgetProvider.Entry
@@ -89,7 +88,6 @@ fileprivate struct NoticeRowView: View {
 }
 
 // MARK: - Widget Configuration
-
 struct NoticeWidget: Widget {
     private let kind: String = "NoticeWidget"
 
@@ -103,7 +101,7 @@ struct NoticeWidget: Widget {
 
 // MARK: - Preview
 
-#if DEBIG
+#if DEBUG
 #Preview(as: .systemSmall) {
     NoticeWidget()
 } timeline: {
