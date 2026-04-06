@@ -13,4 +13,10 @@ extension Container {
             ReadingRoomRepositoryImpl()
         }
     }
+    
+    public var fetchReadingRoomStatusUseCase: Factory<FetchReadingRoomStatusUseCase> {
+        Factory(self) {
+            FetchReadingRoomStatusUseCaseImpl()
+        }
+    }
 }

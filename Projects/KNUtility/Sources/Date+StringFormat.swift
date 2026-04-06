@@ -21,4 +21,11 @@ public extension Date {
         
         return dateFormatter.string(from: self)
     }
+    
+    var time: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm"
+        
+        return dateFormatter.string(from: self)
+    }
 }

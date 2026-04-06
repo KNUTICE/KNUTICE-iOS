@@ -16,9 +16,10 @@ class ReadingRoomRepositoryImpl: ReadingRoomRepository {
         guard let baseURL = Bundle.module.baseURL else { throw NetworkError.invalidURL(message: "BaseURL is missing in the bundle configuration.") }
         
         return try await remoteDataSource.request(
-            baseURL + "status",
+            baseURL + "/status",
             method: .get,
-            decoding: ReadingRoomStatusDTO.self
+            decoding: ReadingRoomStatusDTO.self,
+            useFCMToken: true
         )
         .toDomain
     }

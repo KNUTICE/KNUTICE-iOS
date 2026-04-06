@@ -8,14 +8,14 @@
 import Factory
 import Foundation
 
-protocol FetchReadingRoomStatusUseCase {
+public protocol FetchReadingRoomStatusUseCase {
     func execute() async throws -> [ReadingRoomStatus]
 }
 
-struct FetchReadingRoomStatusUseCaseImpl: FetchReadingRoomStatusUseCase {
+public struct FetchReadingRoomStatusUseCaseImpl: FetchReadingRoomStatusUseCase {
     @Injected(\.readingRoomRepository) private var repository
 
-    func execute() async throws -> [ReadingRoomStatus] {
+    public func execute() async throws -> [ReadingRoomStatus] {
         return try await repository.fetchReadingRoomStatus()
     }
 }

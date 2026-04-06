@@ -11,6 +11,7 @@ import SwiftUI
 @main
 struct KNUTICEWidgetBundle: WidgetBundle {
     var body: some Widget {
-        NoticeWidget()
+//        NoticeWidget()
+        ReadingRoomWidget()
     }
 }

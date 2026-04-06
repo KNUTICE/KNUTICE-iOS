@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ReadingRoomType: String {
+public enum ReadingRoomType: String {
     case room1 = "ROOM1"
     case room2 = "ROOM2"
     case room3 = "ROOM3"
