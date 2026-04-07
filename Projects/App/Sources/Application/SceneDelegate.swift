@@ -93,17 +93,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func handleDeepLink(_ url: URL) {
-        Task { @MainActor [weak self] in            
-            let deepLink = await DeepLinkManager.shared.parse(url)
-            
-            if let navigationController = self?.window?.rootViewController as? UINavigationController,
-               case .notice(let nttId, _) = deepLink {
-                let viewController = NoticeContentViewController(
-                    viewModel: NoticeContentViewModel(nttId: nttId)
-                )
-                navigationController.pushViewController(viewController, animated: true)
-            }
-        }
+        DeepLinkManager.shared.notificationPublisher.send(url)
     }
     
     /// Subscribes to the `.didFinishLoading` notification to handle pending deep links after the loading process completes.

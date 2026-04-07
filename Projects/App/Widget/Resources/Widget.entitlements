@@ -6,5 +6,9 @@
 	<array>
 		<string>group.com.fx.KNUTICE</string>
 	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)com.fx.KNUTICE</string>
+	</array>
 </dict>
 </plist>

@@ -57,13 +57,9 @@ struct NetworkInterceptor: RequestInterceptor, @unchecked Sendable {
         
         // fcmToken 헤더 추가
         Task {
-            do {
-                let token = try await FCMTokenManager.shared.getToken()
-                urlRequest.headers.add(name: "fcmToken", value: token)
-                completion(.success(urlRequest))
-            } catch {
-                completion(.failure(TokenError.notFound))
-            }
+            let token = await FCMTokenKeychainManager.shared.read()
+            urlRequest.headers.add(name: "fcmToken", value: token ?? "")
+            completion(.success(urlRequest))
         }
     }
     

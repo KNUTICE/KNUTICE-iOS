@@ -33,10 +33,10 @@ public actor RegisterFCMTokenUseCaseImpl: RegisterFCMTokenUseCase {
     public func execute(token: String) async throws {
         try Task.checkCancellation()
         
-        // KNUTICE 서버에 토큰 업로드
-        try await repository.register()
-        
         // KNUTICE 서버에 저장된 토큰을 Keychain에 저장
         await FCMTokenKeychainManager.shared.save(fcmToken: token)
+        
+        // KNUTICE 서버에 토큰 업로드
+        try await repository.register()
     }
 }

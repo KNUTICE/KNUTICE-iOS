@@ -100,7 +100,6 @@ public struct FCMTokenKeychainManager : Sendable {
             DispatchQueue.global(qos: .background).async {
                 let saveQuery = baseQuery()
                 saveQuery[kSecValueData] = token.data(using: .utf8)!
-                
                 continuation.resume(returning: SecItemAdd(saveQuery, nil) == errSecSuccess)
             }
         }
@@ -113,12 +112,13 @@ public struct FCMTokenKeychainManager : Sendable {
     private func baseQuery(returnData: Bool = false) -> NSMutableDictionary {
         let attrLabel: String = "fcmToken"
         let serviceName: String = "KNUTICE"
-        
+        let accessGroup: String = Bundle.knUtility.teamId + ".com.fx.KNUTICE"
         let query: NSMutableDictionary = [
             kSecAttrAccessible: kSecAttrAccessibleAfterFirstUnlock,
             kSecClass: kSecClassGenericPassword,
             kSecAttrLabel: attrLabel,
-            kSecAttrService: serviceName
+            kSecAttrService: serviceName,
+            kSecAttrAccessGroup: accessGroup
         ]
         
         if returnData {
