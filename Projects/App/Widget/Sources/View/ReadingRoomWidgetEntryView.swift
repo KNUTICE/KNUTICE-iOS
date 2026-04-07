@@ -25,9 +25,7 @@ struct ReadingRoomEntryView: View {
                 Text("마지막 업데이트: \(entry.date.time)")
                     .font(.caption)
                 
-                Button {
-                    
-                } label: {
+                Button(intent: RefreshWidgetIntent()) {
                     Image(systemName: "arrow.trianglehead.2.clockwise")
                         .resizable()
                         .frame(width: 15, height: 15)
@@ -88,7 +86,8 @@ fileprivate struct RoomStatusCard: View {
                     .foregroundStyle(color)
             }
             
-            Text("\(status.occupiedSeats)/\(status.totalSeats)")
+            Text("\(status.availableSeats)석")
+                .bold()
                 .font(.caption2)
         }
         .frame(maxWidth: .infinity)
@@ -103,13 +102,15 @@ struct ReadingRoomWidget: Widget {
     private let kind: String = "ReadingRoomWidget"
     
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: kind, intent: ReadingRoomWidgetIntent.self, provider: ReadingRoomProvider()) { entry in
+        StaticConfiguration(kind: kind, provider: ReadingRoomProvider()) { entry in
             ReadingRoomEntryView(entry: entry)
                 .containerBackground(for: .widget) {
                     KNDesignSystemAsset.primaryBackground.swiftUIColor
                 }
         }
         .supportedFamilies([.systemMedium])
+        .configurationDisplayName("열람실 현황")
+        .description("실시간 좌석 현황을 확인합니다.")
     }
 }
 
