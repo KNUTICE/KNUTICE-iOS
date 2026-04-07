@@ -57,8 +57,8 @@ extension UITabBarViewController {
         
         DeepLinkManager.shared.notificationPublisher
             .compactMap { $0 }
-            .map { DeepLinkManager.shared.parse($0) }
             .receive(on: DispatchQueue.main)
+            .map { DeepLinkManager.shared.parse($0) }
             .sink(receiveValue: { [weak self] deepLink in
                 self?.handle(deepLink: deepLink)
             })
