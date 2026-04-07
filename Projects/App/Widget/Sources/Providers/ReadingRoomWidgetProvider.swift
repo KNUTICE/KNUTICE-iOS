@@ -12,14 +12,18 @@ import WidgetKit
 struct ReadingRoomProvider: TimelineProvider {
     private let fetchReadingRoomStatusUseCase = Container.shared.fetchReadingRoomStatusUseCase()
     
-    // 위젯 갤러리에서 보여줄 미리보기 데이터
+    // 젯이 데이터를 불러오기 전에 잠깐 보여주는 임시 데이터
     func placeholder(in context: Context) -> ReadingRoomEntry {
-        ReadingRoomEntry(date: Date(), roomStatuses: [])
+        ReadingRoomEntry(date: Date(), isSkeleton: true, roomStatuses: ReadingRoomStatus.placeholders)
     }
     
-    // 위젯 추가 시 또는 특정 상황에서 일시적으로 보여줄 스냅샷
+    // 위젯 갤러리에서 보여줄 스냅샷
     func getSnapshot(in context: Context, completion: @escaping @Sendable (ReadingRoomEntry) -> Void) {
-        completion(ReadingRoomEntry(date: Date(), roomStatuses: []))
+        Task {
+            let currentDate = Date()
+            let readingRoomStatuses = try? await fetchReadingRoomStatusUseCase.execute()
+            completion(ReadingRoomEntry(date: currentDate, isSkeleton: false, roomStatuses: readingRoomStatuses ?? []))
+        }
     }
     
     // 실제 위젯의 타임라인(데이터 업데이트 스케줄)을 생성
@@ -28,7 +32,7 @@ struct ReadingRoomProvider: TimelineProvider {
             var entries: [ReadingRoomEntry] = []
             let currentDate = Date()
             let readingRoomStatuses = try? await fetchReadingRoomStatusUseCase.execute()
-            let entry = ReadingRoomEntry(date: Date(), roomStatuses: readingRoomStatuses ?? [])
+            let entry = ReadingRoomEntry(date: Date(), isSkeleton: false, roomStatuses: readingRoomStatuses ?? [])
             entries.append(entry)
             
             let nextUpdate = Calendar.current.date(byAdding: .minute, value: 30, to: currentDate)!
@@ -41,6 +45,39 @@ struct ReadingRoomProvider: TimelineProvider {
 struct ReadingRoomEntry: TimelineEntry {
     // 위젯이 렌더링될 시간
     let date: Date
+    // 스켈레톤 표시 여부
+    let isSkeleton: Bool
     // 실제 표시할 데이터 리스트
     let roomStatuses: [ReadingRoomStatus]
+}
+
+extension ReadingRoomStatus {
+    static var placeholders: [ReadingRoomStatus] {
+        return [
+            ReadingRoomStatus(
+                id: "placeholder_1",
+                roomType: .room1,
+                name: "제1집중",
+                totalSeats: 300,
+                availableSeats: 300,
+                occupiedSeats: 0
+            ),
+            ReadingRoomStatus(
+                id: "placeholder_2",
+                roomType: .room2,
+                name: "제2집중",
+                totalSeats: 126,
+                availableSeats: 126,
+                occupiedSeats: 0
+            ),
+            ReadingRoomStatus(
+                id: "placeholder_3",
+                roomType: .room3,
+                name: "제3협업",
+                totalSeats: 108,
+                availableSeats: 108,
+                occupiedSeats: 0
+            )
+        ]
+    }
 }

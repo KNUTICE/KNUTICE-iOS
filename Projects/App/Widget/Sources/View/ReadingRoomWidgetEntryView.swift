@@ -36,7 +36,7 @@ struct ReadingRoomEntryView: View {
             
             HStack {
                 ForEach(entry.roomStatuses, id: \.id) { status in
-                    RoomStatusCard(status: status)
+                    RoomStatusCard(status: status, isSkeleton: entry.isSkeleton)
                 }
             }
         }
@@ -45,6 +45,7 @@ struct ReadingRoomEntryView: View {
 
 fileprivate struct RoomStatusCard: View {
     let status: ReadingRoomStatus
+    let isSkeleton: Bool
     
     var color: Color {
         switch status.congestionLevel {
@@ -62,6 +63,7 @@ fileprivate struct RoomStatusCard: View {
             Text(status.name.split(separator: " ").first ?? "")
                 .bold()
                 .font(.caption)
+                .redacted(reason: isSkeleton ? .placeholder : [])
             
             ZStack {
                 Circle()
@@ -84,11 +86,13 @@ fileprivate struct RoomStatusCard: View {
                     .bold()
                     .font(.caption)
                     .foregroundStyle(color)
+                    .redacted(reason: isSkeleton ? .placeholder : [])
             }
             
             Text("\(status.availableSeats)석")
                 .bold()
                 .font(.caption2)
+                .redacted(reason: isSkeleton ? .placeholder : [])
         }
         .frame(maxWidth: .infinity)
         .padding(5)
@@ -118,30 +122,5 @@ struct ReadingRoomWidget: Widget {
 #Preview(as: .systemMedium) {
     ReadingRoomWidget()
 } timeline: {
-    ReadingRoomEntry(date: Date(), roomStatuses: [
-        ReadingRoomStatus(
-            id: UUID().uuidString,
-            roomType: .room1,
-            name: "제1집중",
-            totalSeats: 100,
-            availableSeats: 50,
-            occupiedSeats: 50
-        ),
-        ReadingRoomStatus(
-            id: UUID().uuidString,
-            roomType: .room2,
-            name: "제2집중",
-            totalSeats: 100,
-            availableSeats: 30,
-            occupiedSeats: 70
-        ),
-        ReadingRoomStatus(
-            id: UUID().uuidString,
-            roomType: .room3,
-            name: "제3협업",
-            totalSeats: 100,
-            availableSeats: 60,
-            occupiedSeats: 40
-        )
-    ])
+    ReadingRoomEntry(date: Date(), isSkeleton: false, roomStatuses: ReadingRoomStatus.placeholders)
 }
