@@ -162,8 +162,11 @@ extension AppDelegate: @MainActor UNUserNotificationCenterDelegate {
     ) {
         let userInfo = response.notification.request.content.userInfo
         
-        // 알림 데이터를 DeepLinkManager의 Publisher로 전달하여 앱 내부에서 딥링크 처리
-        DeepLinkManager.shared.notificationPublisher.send(userInfo)
+        if let deepLinkStr = userInfo[UserInfoKeys.deepLink.rawValue] as? String,
+           let url = URL(string: deepLinkStr) {
+            // 알림 데이터를 DeepLinkManager의 Publisher로 전달하여 앱 내부에서 딥링크 처리
+            DeepLinkManager.shared.notificationPublisher.send(url)
+        }
         
         // 시스템에 알림 처리가 완료되었음을 알림
         completionHandler()

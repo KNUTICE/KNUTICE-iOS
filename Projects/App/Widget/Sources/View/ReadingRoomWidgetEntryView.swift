@@ -15,28 +15,32 @@ struct ReadingRoomEntryView: View {
     let entry: ReadingRoomProvider.Entry
     
     var body: some View {
-        VStack {
-            HStack(alignment: .center) {
-                Text("열람실 현황")
-                    .bold()
-                
-                Spacer()
-                
-                Text("마지막 업데이트: \(entry.date.time)")
-                    .font(.caption)
-                
-                Button(intent: RefreshWidgetIntent()) {
-                    Image(systemName: "arrow.trianglehead.2.clockwise")
-                        .resizable()
-                        .frame(width: 15, height: 15)
-                        .bold()
-                }
-                .buttonStyle(.plain)
-            }
-            
-            HStack {
-                ForEach(entry.roomStatuses, id: \.id) { status in
-                    RoomStatusCard(status: status, isSkeleton: entry.isSkeleton)
+        if let url = URL(string: "widget://reading-room") {
+            Link(destination: url) {
+                VStack {
+                    HStack(alignment: .center) {
+                        Text("열람실 현황")
+                            .bold()
+                        
+                        Spacer()
+                        
+                        Text("마지막 업데이트: \(entry.date.time)")
+                            .font(.caption)
+                        
+                        Button(intent: RefreshWidgetIntent()) {
+                            Image(systemName: "arrow.trianglehead.2.clockwise")
+                                .resizable()
+                                .frame(width: 15, height: 15)
+                                .bold()
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    
+                    HStack {
+                        ForEach(entry.roomStatuses, id: \.id) { status in
+                            RoomStatusCard(status: status, isSkeleton: entry.isSkeleton)
+                        }
+                    }
                 }
             }
         }

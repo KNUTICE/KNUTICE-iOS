@@ -22,7 +22,7 @@ public final class DeepLinkManager {
     ///
     /// Use this to observe notification data across the app.
     /// Initial value is `nil`.
-    public let notificationPublisher: CurrentValueSubject<[AnyHashable : Any]?, Never> = .init(nil)
+    public let notificationPublisher: CurrentValueSubject<URL?, Never> = .init(nil)
     
     private init() {}
     
@@ -67,7 +67,7 @@ public final class DeepLinkManager {
         case "reading-room":
             guard let roomId = queryItems?.first(where: { $0.name == "roomId" })?.value,
                   let seat = queryItems?.first(where: { $0.name == "seat" })?.value else {
-                return .unknown
+                return .readingRoom(roomId: nil, seat: nil)
             }
             return .readingRoom(roomId: roomId, seat: seat)
             

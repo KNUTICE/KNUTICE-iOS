@@ -33,7 +33,7 @@ public enum DeepLink: Sendable {
     /// - Parameters:
     ///   - roomId: The unique identifier for the reading room.
     ///   - seatNum: The specific seat number.
-    case readingRoom(roomId: String, seat: String)
+    case readingRoom(roomId: String?, seat: String?)
     
     /// Represents an undefined or invalid deep link.
     case unknown
