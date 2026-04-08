@@ -50,7 +50,7 @@ struct HomeScreenView: View {
                     
                     NavigationLink {
                         ReadingRoomStatusView()
-                            .toolbar(.hidden)
+                            .toolbar(.hidden, for: .navigationBar)
                             .background(KNDesignSystemAsset.primaryBackground.swiftUIColor)
                             .ignoresSafeArea(edges: .bottom)
                     } label: {

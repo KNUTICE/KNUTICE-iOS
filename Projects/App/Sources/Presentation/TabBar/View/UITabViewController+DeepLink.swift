@@ -55,7 +55,7 @@ extension UITabBarViewController {
             viewController = UIHostingController(rootView: MealView(cafeteria: cafeteria))
             
         case .readingRoom(_, _):
-            viewController = UIHostingController(rootView: ReadingRoomStatusView())
+            viewController = ReadingRoomStatusViewController()
             
         case .unknown:
             return
