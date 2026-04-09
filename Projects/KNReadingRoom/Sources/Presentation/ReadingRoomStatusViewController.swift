@@ -33,8 +33,10 @@ public final class ReadingRoomStatusViewController: UIViewController {
     }()
     
     private var task: Task<Void, Never>?
+    private var roomId: String?
     
-    public init() {
+    public init(roomId: String? = nil) {
+        self.roomId = roomId
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -110,7 +112,8 @@ extension ReadingRoomStatusViewController: WKNavigationDelegate {
                 
                 let fcmToken = try await FCMTokenManager.shared.getToken()
                 let javaScriptString = """
-                    \(Bundle.knReadingRoom.bridgingMethod)('\(fcmToken)');
+                    \(Bundle.knReadingRoom.fcmTokenMethod)('\(fcmToken)');
+                    \(Bundle.knReadingRoom.navigationMethod)('\(roomId ?? "")');
                 """
                 
                 try await webView.evaluateJavaScript(javaScriptString)
@@ -149,6 +152,6 @@ extension ReadingRoomStatusViewController: UIGestureRecognizerDelegate {
 
 // MARK: - Preview
 #Preview {
-    ReadingRoomStatusViewController()
+    ReadingRoomStatusViewController(roomId: "ROOM1")
         .makePreview()
 }

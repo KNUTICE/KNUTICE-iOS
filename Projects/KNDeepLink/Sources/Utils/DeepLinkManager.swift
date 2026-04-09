@@ -65,11 +65,11 @@ public final class DeepLinkManager {
             return .unknown
             
         case "reading-room":
-            guard let roomId = queryItems?.first(where: { $0.name == "roomId" })?.value,
-                  let seat = queryItems?.first(where: { $0.name == "seat" })?.value else {
-                return .readingRoom(roomId: nil, seat: nil)
+            guard let roomId = queryItems?.first(where: { $0.name == "roomId" })?.value else {
+                return .readingRoom(roomId: nil)
             }
-            return .readingRoom(roomId: roomId, seat: seat)
+            
+            return .readingRoom(roomId: roomId)
             
         default:
             return .unknown
