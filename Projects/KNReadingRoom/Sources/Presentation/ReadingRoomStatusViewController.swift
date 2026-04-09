@@ -15,7 +15,6 @@ import WebKit
 
 public final class ReadingRoomStatusViewController: UIViewController {
     private lazy var webView: WKWebView = {
-        let contentController = WKUserContentController()
         contentController.add(self, name: "bridge")
         
         let config = WKWebViewConfiguration()
@@ -32,6 +31,7 @@ public final class ReadingRoomStatusViewController: UIViewController {
         return webView
     }()
     
+    private let contentController = WKUserContentController()
     private var task: Task<Void, Never>?
     private var roomId: String?
     
@@ -67,6 +67,7 @@ public final class ReadingRoomStatusViewController: UIViewController {
         super.viewDidDisappear(animated)
         
         task?.cancel()
+        contentController.removeAllScriptMessageHandlers()    // add(_:name:) 호출 시 발생할 수 있는 메모리 누수 방지
     }
     
     private func setupLayout() {
@@ -151,7 +152,9 @@ extension ReadingRoomStatusViewController: UIGestureRecognizerDelegate {
 }
 
 // MARK: - Preview
+#if DEBUG
 #Preview {
     ReadingRoomStatusViewController(roomId: "ROOM1")
         .makePreview()
 }
+#endif
