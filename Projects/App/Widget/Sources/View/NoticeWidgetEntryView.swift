@@ -43,7 +43,6 @@ fileprivate struct CategoryTitleView: View {
     
     var body: some View {
         Text(title ?? "")
-            .font(.subheadline)
             .bold()
             .frame(maxWidth: .infinity, alignment: .leading)
             .redacted(reason: isPlaceholder ? .placeholder : [])
@@ -96,6 +95,8 @@ struct NoticeWidget: Widget {
             KNUTICEWidgetEntryView(entry: entry)
                 .containerBackground(.fill.tertiary, for: .widget)
         }
+        .configurationDisplayName("공지 사항")
+        .description("최신 공지 사항을 확인합니다.")
     }
 }
 

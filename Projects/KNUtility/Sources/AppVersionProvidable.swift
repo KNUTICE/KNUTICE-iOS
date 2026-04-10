@@ -17,29 +17,10 @@ public extension AppVersionProvidable {
             return ""
         }
         
-        #if DEV
-        return version + " beta " + Bundle.main.betaVersion
+        #if DEBUG
+        return version + " beta " + Bundle.knUtility.betaVersion
         #else
         return version
         #endif
-    }
-}
-
-fileprivate extension Bundle {
-    private var resource: NSDictionary? {
-        guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
-              let resource = NSDictionary(contentsOfFile: file) else {
-            return nil
-        }
-        
-        return resource
-    }
-    
-    var betaVersion: String {
-        guard let resource, let version = resource["Beta_Version"] as? String else {
-            return ""
-        }
-        
-        return version
     }
 }

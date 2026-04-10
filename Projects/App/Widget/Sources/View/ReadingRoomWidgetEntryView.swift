@@ -38,7 +38,11 @@ struct ReadingRoomEntryView: View {
                     
                     HStack {
                         ForEach(entry.roomStatuses, id: \.id) { status in
-                            RoomStatusCard(status: status, isSkeleton: entry.isSkeleton)
+                            if let url = URL(string: "widget://reading-room?roomId=\(status.id)") {
+                                Link(destination: url) {
+                                    RoomStatusCard(status: status, isSkeleton: entry.isSkeleton)
+                                }
+                            }
                         }
                     }
                 }

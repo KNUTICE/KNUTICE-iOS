@@ -29,7 +29,7 @@ struct NoticeWidgetProvider: AppIntentTimelineProvider {
     /// - Note: Attempts to fetch real data; falls back to an empty array on failure
     func snapshot(for configuration: NoticeWidgetIntent, in context: Context) async -> NoticeEntry {
         let notices = try? await noticeRepository.fetchNotices(
-            for: NoticeCategory.generalNotice.localizedDescription,
+            for: NoticeCategory.generalNotice.rawValue,
             size: getContentCount(for: context.family)
         )
         return NoticeEntry(
@@ -97,11 +97,11 @@ fileprivate extension Notice {
         (1...count).map { index in
             Notice(
                 id: index,
-                title: "placeholder",
+                title: "여기에 공지사항의 제목이 표시됩니다. 스켈레톤 뷰 렌더링을 위한 텍스트입니다.",
                 contentUrl: "",
                 isSummarizable: false,
-                department: "",
-                uploadDate: "",
+                department: "소프트웨어학과",
+                uploadDate: "2024-04-09",
                 imageUrl: nil
             )
         }

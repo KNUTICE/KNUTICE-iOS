@@ -32,8 +32,7 @@ public enum DeepLink: Sendable {
     /// Navigates to a specific library reading room and seat.
     /// - Parameters:
     ///   - roomId: The unique identifier for the reading room.
-    ///   - seatNum: The specific seat number.
-    case readingRoom(roomId: String?, seat: String?)
+    case readingRoom(roomId: String?)
     
     /// Represents an undefined or invalid deep link.
     case unknown

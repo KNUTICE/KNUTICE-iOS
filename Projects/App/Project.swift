@@ -77,6 +77,14 @@ let project = Project(
                     "STRING_CATALOG_GENERATE_SYMBOLS": "YES",
                     "LOCALIZED_STRING_SWIFT_SYMBOLS_GENERATION": "YES",
                     "MARKETING_VERSION": Project.marketingVersion
+                ],
+                configurations: [
+                    .debug(name: "Debug", settings: [
+                        "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon-Debug"
+                    ]),
+                    .release(name: "Release", settings: [
+                        "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon"
+                    ])
                 ]
             )
         ),

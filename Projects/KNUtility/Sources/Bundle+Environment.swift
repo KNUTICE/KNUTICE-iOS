@@ -32,10 +32,14 @@ extension Bundle {
     }
     
     var teamId: String {
-        guard let teamId = resource?["Team_Id"] as? String else {
-            return ""
-        }
+        guard let teamId = resource?["Team_Id"] as? String else { return "" }
         
         return teamId
+    }
+    
+    var betaVersion: String {
+        guard let betaVersion = resource?["Beta_Version"] as? String else { return "" }
+        
+        return betaVersion
     }
 }

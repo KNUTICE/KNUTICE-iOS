@@ -37,8 +37,14 @@ public extension Bundle {
         return url
     }
     
-    var bridgingMethod: String {
-        guard let url = resource?["Bridging_Method"] as? String else { return "" }
+    var fcmTokenMethod: String {
+        guard let url = resource?["FCMToken_Method"] as? String else { return "" }
+        
+        return url
+    }
+    
+    var navigationMethod: String {
+        guard let url = resource?["Navigation_Method"] as? String else { return "" }
         
         return url
     }
