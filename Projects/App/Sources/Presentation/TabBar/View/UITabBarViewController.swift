@@ -32,13 +32,10 @@ final class UITabBarViewController: UITabBarController, NavigationItemConfigurab
         return viewController
     }()
     private let majorNoticeViewController: UIViewController = {
-        let majorStr = UserDefaults.shared?.string(forKey: UserDefaultsKeys.selectedMajor.rawValue) ?? ""
-        let viewController = MajorNoticeCollectionViewController(
-            viewModel: NoticeCollectionViewModel(category: MajorCategory(rawValue: majorStr))
-        )
-        viewController.tabBarItem.image = UIImage(systemName: "graduationcap")
-        viewController.tabBarItem.selectedImage = UIImage(systemName: "graduationcap.fill")
-        viewController.tabBarItem.title = "학과소식"
+        let viewController = NoticeTabViewController()
+        viewController.tabBarItem.image = UIImage(systemName: "megaphone")
+        viewController.tabBarItem.selectedImage = UIImage(systemName: "megaphone.fill")
+        viewController.tabBarItem.title = "공지"
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             return UINavigationController(rootViewController: viewController)
@@ -124,7 +121,7 @@ extension UITabBarViewController: UITabBarControllerDelegate {
             switch viewController {
             case is UIHostingController<HomeScreenView>:
                 setFirstTabNavigationItems()
-            case is MajorNoticeCollectionViewController:
+            case is NoticeTabViewController:
                 setSecondTabNavigationItems()
             case is BookmarkTableViewController:
                 setThirdTabNavigationItems(selectedOption: viewModel.bookmarkSortOption)
@@ -132,27 +129,6 @@ extension UITabBarViewController: UITabBarControllerDelegate {
                 removeAllNavigationItems()
             }
         }
-    }
-}
-
-extension UITabBarViewController {    
-    @objc func didTapMajorSelectionButton(_ sender: UIButton) {
-        let viewController = UIHostingController(
-            rootView: MajorSelectionView(selectedCategory: Binding(
-                get: {
-                    self.viewModel.category
-                },
-                set: {
-                    self.viewModel.category = $0
-                }))
-        )
-        viewController.modalPresentationStyle = .pageSheet
-        
-        if let sheet = viewController.sheetPresentationController {
-            sheet.detents = [.medium()]
-        }
-        
-        present(viewController, animated: true)
     }
 }
 
@@ -167,7 +143,7 @@ extension UITabBarViewController {
     func setSecondTabNavigationItems() {
         // Bookmark의 rightBarButtonItems 제거
         navigationItem.rightBarButtonItems = nil
-        makeMajorSelectionButton()
+        setNoticeBarButtonItem()
         setSettingBarButtonItem()
     }
     

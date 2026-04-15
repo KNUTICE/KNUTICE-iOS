@@ -23,7 +23,7 @@ public final class MajorNoticeCollectionViewController: NoticeCollectionViewCont
         view.backgroundColor = KNDesignSystemAsset.primaryBackground.color
         
         if UIDevice.current.userInterfaceIdiom == .pad {
-            makeMajorSelectionButton()
+            setNoticeBarButtonItem()
             setSettingBarButtonItem()
         }
     }
@@ -36,42 +36,10 @@ public final class MajorNoticeCollectionViewController: NoticeCollectionViewCont
         }
     }
     
-    override func setupBackground() {
-        collectionView.backgroundView = UIHostingController(rootView: MajorNoticeBackgroundView()).view
-    }
-    
     override func bind() {
         super.bind()
         
-        bindCategory()
-        bindMajorSelectionNotificationIfNeeded()
         bindFetchingState()
-    }
-
-    private func bindCategory() {
-        viewModel.$category
-            .compactMap { $0 }
-            .sink { [weak self] category in
-                // 버튼 타이틀 수정
-                self?.makeMajorSelectionButton(withTitle: category.localizedDescription)
-                // 기존 데이터 초기화
-                self?.viewModel.notices.accept([])
-                // 새로운 공지 서버에서 가져오기
-                self?.viewModel.requestNotices(category: category, update: .replace)
-            }
-            .store(in: &cancellables)
-    }
-
-    private func bindMajorSelectionNotificationIfNeeded() {
-        guard UIDevice.current.userInterfaceIdiom == .phone else { return }
-        
-        NotificationCenter.default.publisher(for: .majorSelectionDidChange)
-            .sink { [weak self] notification in
-                guard let self, let category = notification.userInfo?[UserInfoKeys.selectedMajor] as? MajorCategory else { return }
-                
-                viewModel.category = category
-            }
-            .store(in: &cancellables)
     }
     
     private func bindFetchingState() {
@@ -84,29 +52,6 @@ public final class MajorNoticeCollectionViewController: NoticeCollectionViewCont
                 }
             })
             .disposed(by: disposeBag)
-    }
-    
-    @objc public func didTapMajorSelectionButton(_ sender: UIButton) {
-        let viewController = UIHostingController(
-            rootView: MajorSelectionView(selectedCategory: Binding(
-                get: {
-                    guard let category = self.viewModel.category as? MajorCategory else {
-                        return nil
-                    }
-                    
-                    return category
-                },
-                set: {
-                    self.viewModel.category = $0
-                }))
-        )
-        viewController.modalPresentationStyle = .pageSheet
-        
-        if let sheet = viewController.sheetPresentationController {
-            sheet.detents = [.medium()]
-        }
-        
-        present(viewController, animated: true)
     }
 }
 

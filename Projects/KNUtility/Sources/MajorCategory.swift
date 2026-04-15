@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum MajorCategory: String, CategoryProtocol {
+public enum MajorCategory: String {
     
     // ---------- 융합기술대학 ----------
     case mechanicalEngineering = "MECHANICAL_ENGINEERING"
@@ -72,8 +72,10 @@ public enum MajorCategory: String, CategoryProtocol {
     case railwayVehicleSystemEngineering = "RAILWAY_VEHICLE_SYSTEM_ENGINEERING"
     case railroadInfrastructureEngineering = "RAILROAD_INFRASTRUCTURE_ENGINEERING"
     case railroadElectricalAndInformationEngineering = "RAILROAD_ELECTRICAL_AND_INFORMATION_ENGINEERING"
-    
-    // MARK: - Localized Description
+}
+
+// MARK: - CategoryProtocol
+extension MajorCategory: CategoryProtocol {
     public var localizedDescription: String {
         switch self {
         // 융합기술대학
@@ -141,4 +143,10 @@ public enum MajorCategory: String, CategoryProtocol {
         case .railroadElectricalAndInformationEngineering: return "철도전기정보공학과"
         }
     }
+}
+
+// MARK: - NoticeTabRepresentable
+extension MajorCategory: NoticeTabRepresentable {
+    public var id: String { self.rawValue }
+    public var tabTitle: String { localizedDescription }
 }
