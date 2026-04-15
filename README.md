@@ -30,13 +30,15 @@
 # 🧐 What I learned
 프로젝트 기획부터 개발, 실제 앱스토어 배포에 이르기까지 서비스 런칭과 운영 전 과정을 직접 주도적으로 경험할 수 있었음
 - UIKit, SwiftUI
-  - Storyboard 없이 코드 베이스로 UI를 구현하는 방법에 대해 알게 되었음
-- Auto Layout을 활용하여 다양한 화면 크기와 방향에서 View를 배치하고, 동적으로 변하는 UI 요소에 유연하게 대응하는 방법을 알게 되었음
-- SwiftUI의 데이터 상태에 따른 View 갱신 알고리즘과 데이터 의존성을 분리하여 SwiftUI의 성능을 향상하는 방법을 알게 되었음
+  - AutoLayout을 활용하여 다양한 화면 크기와 방향에서 View를 배치하고, 동적으로 변하는 UI 요소에 유연하게 대응하는 방법을 알게 되었음
+  - SwiftUI의 데이터 상태에 따른 View 갱신 알고리즘과 데이터 의존성을 분리하여 SwiftUI의 성능을 향상하는 방법을 알게 되었음
+- TCA
+  - TCA의 단방향 데이터 흐름을 통해 상태 변경을 한 곳에서 관리하고, 예측 가능한 구조를 바탕으로 선언형 UI의 이점을 극대화하는 설계 방식을 알게 되었음
+- Tuist
+  - Tuist를 활용한 모듈화 구조 설계를 통해 기능 단위로 의존성을 분리하고, 빌드 시간 단축과 코드 재사용성을 높이는 프로젝트 구성 방식을 알게 되었음
 - Combine, RxSwift
   - 비동기 네트워크 요청과 응답을 처리하기 위해 Publisher와 Subscriber 기반의 데이터 스트림을 생성하여 반응형 프로그래밍을 구현하는 방법에 대해 알게 되었음
   - Combine에서 제공하는 다양한 연산자(map, flatMap, merge, debounce 등)를 활용하여 데이터를 변환, 통합하는 방법에 대해 알게 되었음
-  - Combine과 RxCocoa를 활용하여 View와 ViewModel 사이에서 데이터 바인딩을 구현하는 방법에 대해 알게 되었음
 - Swift Concurrency
   - GCD 대비 Swift Concurrency가 가지는 성능적 장점을 이해하고 사용할 수 있음
   - async/await, async-let, Task Tree, Actor 등을 활용하여 비동기 코드에서 구조적 프로그래밍이 가능하도록 코드를 작성하는 방법을 알게 되었음
