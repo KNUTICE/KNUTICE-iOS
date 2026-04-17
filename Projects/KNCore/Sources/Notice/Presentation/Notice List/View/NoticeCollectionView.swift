@@ -15,10 +15,7 @@ public struct NoticeCollectionView: UIViewControllerRepresentable {
     }
 
     public func makeUIViewController(context: Context) -> NoticeCollectionViewController {
-        let viewController = NoticeCollectionViewController(
-            viewModel: viewModel,
-            navigationTitle: ""
-        )
+        let viewController = NoticeCollectionViewController(viewModel: viewModel)
         return viewController
     }
 

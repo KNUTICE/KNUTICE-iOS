@@ -16,7 +16,7 @@ import RxSwift
 @MainActor
 @Observable
 final class NoticeTabItems {
-    private(set) var categories: [CategoryItem] = [] {
+    private(set) var categories: [CategoryItem] {
         didSet {
             categoriesRelay.accept(categories)
         }
@@ -70,7 +70,7 @@ final class NoticeTabItems {
     }
     
     func removeMajor(at indexSet: IndexSet) {
-        let offset = 5
+        let offset = NoticeCategory.allCases.count
         let adjustedIndices = IndexSet(indexSet.map { $0 + offset })    // categoriesRelay에는 앞에 5개의 추가적인 데이터가 존재
         categories.remove(atOffsets: adjustedIndices)
     }

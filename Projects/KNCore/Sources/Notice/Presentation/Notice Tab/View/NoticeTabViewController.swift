@@ -89,18 +89,16 @@ public final class NoticeTabViewController: UIViewController {
         viewModel.categories
             .observe(on: MainScheduler.instance)
             .do { [weak self] categories in
-                self?.viewControllers = categories.compactMap { item -> (any CategoryProtocol)? in
-                    if case let .category(category) = item {
-                        return category as? (any CategoryProtocol)
-                    } else {
-                        return nil
-                    }
-                }.map {
-                    NoticeCollectionViewController(viewModel: NoticeCollectionViewModel(category: $0))
+                let newCategories = categories.compactMap {
+                    if case let .category(category) = $0 { return category as (any NoticeTabRepresentable) }
+                    else { return nil }
                 }
                 
-                if let viewController = self?.viewControllers.first {
-                    self?.pageViewController.setViewControllers([viewController], direction: .forward, animated: true)
+                self?.viewControllers = newCategories.map { category in
+                    self?.viewControllers
+                        .compactMap { $0 as? NoticeCollectionViewController }
+                        .first { ($0.viewModel.category as? any NoticeTabRepresentable)?.id == category.id }
+                    ?? NoticeCollectionViewController(viewModel: NoticeCollectionViewModel(category: category as? any CategoryProtocol))
                 }
             }
             .bind(to: collectionView.rx.items) { [weak self] (collectionView, row, element) in
@@ -148,25 +146,8 @@ public final class NoticeTabViewController: UIViewController {
             switch element {
             case .category:
                 self?.viewModel.selectedIndex.accept(indexPath.row)
-                
             case .addButton:
                 self?.collectionView.deselectItem(at: indexPath, animated: false)
-            }
-            
-            let currentIndex: Int = {
-                guard let currentVC = self?.pageViewController.viewControllers?.first,
-                      let index = self?.viewControllers.firstIndex(of: currentVC) else {
-                    return 0
-                }
-                return index
-            }()
-            let targetIndex = indexPath.row
-            let direction: UIPageViewController.NavigationDirection = (targetIndex >= currentIndex) ? .forward : .reverse
-            
-            if let viewController = self?.viewControllers[targetIndex] {
-                if targetIndex != currentIndex {
-                    self?.pageViewController.setViewControllers([viewController], direction: direction, animated: true)
-                }
             }
         })
         .disposed(by: disposeBag)
@@ -177,19 +158,29 @@ public final class NoticeTabViewController: UIViewController {
     private func bindSelectedIndex() {
         Observable.combineLatest(viewModel.categories, viewModel.selectedIndex)
             .observe(on: MainScheduler.asyncInstance)    // reloadData가 완료된 후 실행될 수 있도록 설정
-            .subscribe(onNext: { [weak self] categories, index in
-                guard index < categories.count else { return }
+            .subscribe(onNext: { [weak self] categories, targetIndex in
+                guard targetIndex < categories.count else { return }
                 
-                let targetIndexPath = IndexPath(row: index, section: 0)
-                let isAlreadySelected = self?.collectionView.indexPathsForSelectedItems?.contains(targetIndexPath) == true
+                let currentPageIndex: Int = {
+                    guard let currentVC = self?.pageViewController.viewControllers?.first,
+                          let index = self?.viewControllers.firstIndex(of: currentVC) else {
+                        return 0
+                    }
+                    return index
+                }()
                 
-                if !isAlreadySelected {
-                    self?.collectionView.selectItem(
-                        at: targetIndexPath,
-                        animated: true,
-                        scrollPosition: .centeredHorizontally
-                    )
+                let direction: UIPageViewController.NavigationDirection = (targetIndex >= currentPageIndex) ? .forward : .reverse
+                
+                if let viewController = self?.viewControllers[targetIndex] {
+                    self?.pageViewController.setViewControllers([viewController], direction: direction, animated: currentPageIndex != targetIndex)
                 }
+                
+                let targetIndexPath = IndexPath(row: targetIndex, section: 0)
+                self?.collectionView.selectItem(
+                    at: targetIndexPath,
+                    animated: true,
+                    scrollPosition: .centeredHorizontally
+                )
             })
             .disposed(by: disposeBag)
     }

@@ -54,7 +54,7 @@ struct HomeScreenFeature: EntryTimeRecordable {
                         await send(.noticesResponse(.error))
                     },
                     .run { send in
-                        let majorStr = UserDefaults.shared?.string(forKey: UserDefaultsKeys.selectedMajor.rawValue) ?? ""
+                        let majorStr = await MajorManager.shared.majorStrings.first ?? ""
                         let major = MajorCategory(rawValue: majorStr)
                         
                         guard let major else {
