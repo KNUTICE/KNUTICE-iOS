@@ -159,7 +159,10 @@ public final class NoticeTabViewController: UIViewController {
         Observable.combineLatest(viewModel.categories, viewModel.selectedIndex)
             .observe(on: MainScheduler.asyncInstance)    // reloadData가 완료된 후 실행될 수 있도록 설정
             .subscribe(onNext: { [weak self] categories, targetIndex in
-                guard targetIndex < categories.count else { return }
+                guard targetIndex < categories.count - 1 else {
+                    self?.viewModel.selectedIndex.accept(0)    // 현재 선택된 탭이 삭제되는 경우, 0번 탭으로 이동
+                    return
+                }
                 
                 let currentPageIndex: Int = {
                     guard let currentVC = self?.pageViewController.viewControllers?.first,
