@@ -58,8 +58,8 @@ final class CategoryCell: UICollectionViewCell {
             contentView.backgroundColor = KNDesignSystemAsset.accent2.color
             titleLabel.textColor = .white
         } else {
-            contentView.backgroundColor = UIColor.systemGray.withAlphaComponent(0.15)
-            titleLabel.textColor = .darkGray
+            contentView.backgroundColor = KNDesignSystemAsset.mainCellBackground.color
+            titleLabel.textColor = KNDesignSystemAsset.gray4.color
         }
     }
     

@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 4/10/26.
 //
 
+import KNDesignSystem
 import RxSwift
 import UIKit
 import SnapKit
@@ -16,8 +17,10 @@ final class AddButtonCell: UICollectionViewCell {
         var config = UIButton.Configuration.filled()
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 12, weight: .medium)
         config.image = UIImage(systemName: "plus", withConfiguration: imageConfig)
-        config.baseBackgroundColor = .systemGray6
-        config.baseForegroundColor = .black
+        config.baseBackgroundColor = KNDesignSystemAsset.mainCellBackground.color
+        config.baseForegroundColor = UIColor { traitCollection in
+            return traitCollection.userInterfaceStyle == .dark ? .white : .black
+        }
         config.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
         config.background.cornerRadius = 16
         
