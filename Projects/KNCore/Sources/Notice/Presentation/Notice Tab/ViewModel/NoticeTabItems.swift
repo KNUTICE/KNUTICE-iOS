@@ -22,6 +22,16 @@ final class NoticeTabItems {
         }
     }
     
+    var selectedMajors: [MajorCategory] {
+        categories.compactMap { item -> MajorCategory? in
+            if case let .category(representable) = item,
+               let major = representable as? MajorCategory {
+                return major
+            }
+            return nil
+        }
+    }
+    
     @ObservationIgnored private let categoriesRelay: BehaviorRelay<[CategoryItem]>
     @ObservationIgnored private let disposeBag: DisposeBag = .init()
     @ObservationIgnored @Injected(\.updateTopicSubscriptionUseCase) private var updateTopicSubscriptionUseCase
@@ -29,6 +39,12 @@ final class NoticeTabItems {
     init(_ categoriesRelay: BehaviorRelay<[CategoryItem]>) {
         self.categoriesRelay = categoriesRelay
         self.categories = categoriesRelay.value
+    }
+    
+    func availableMajors(for college: College) -> [MajorCategory] {
+        college.majors.filter { major in
+            !selectedMajors.contains(where: { $0 == major })
+        }
     }
     
     func insertAfterLastMajorCategory(newItem: CategoryItem) {

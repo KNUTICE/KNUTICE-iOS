@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 4/12/26.
 //
 
+import KNDesignSystem
 import KNUtility
 import SwiftUI
 
@@ -16,35 +17,41 @@ struct NoticeTabSettings: View {
         NavigationStack {
             List {
                 Section {
-                    let noticeTabs = noticeTabItems.categories.compactMap { item -> (any NoticeTabRepresentable)? in
-                        if case let .category(representable) = item, representable is MajorCategory {
-                            return representable
-                        }
-                        
-                        return nil
-                    }
-
-                    ForEach(noticeTabs, id: \.id) {
+                    ForEach(noticeTabItems.selectedMajors, id: \.id) {
                         Text($0.tabTitle)
                     }
                     .onDelete { indexSet in
                         Task {
-                            let targetsToDeactivate = indexSet.map { noticeTabs[$0] }
+                            let targetsToDeactivate = indexSet.map { noticeTabItems.selectedMajors[$0] }
                             for target in targetsToDeactivate {
-                                if let major = target as? MajorCategory {
-                                    await noticeTabItems.deactiveTopic(of: major)
-                                }
+                                await noticeTabItems.deactiveTopic(of: target)
                             }
-                            noticeTabItems.removeMajor(at: indexSet)
+                            withAnimation {
+                                noticeTabItems.removeMajor(at: indexSet)
+                            }
                         }
                     }
-                    
-                    NavigationLink("학과 추가") {
-                        MajorSelectionView()
-                            .environment(noticeTabItems)
-                    }
                 } header: {
-                    Text("학과 공지")
+                    Text("선택한 학과")
+                }
+                .listSectionSeparator(.visible, edges: .bottom)
+                
+                ForEach(College.allCases, id: \.self) { college in
+                    Section {
+                        ForEach(noticeTabItems.availableMajors(for: college), id: \.id) { major in
+                            MajorSelectionRow(title: major.localizedDescription) {
+                                Task {
+                                    await noticeTabItems.activeTopic(of: major)
+                                    withAnimation {
+                                        noticeTabItems.insertAfterLastMajorCategory(newItem: CategoryItem.category(major))
+                                    }
+                                }
+                            }
+                            .listRowSeparator(.hidden)
+                        }
+                    } header: {
+                        Text(college.localizedDescription)
+                    }
                 }
             }
             .listStyle(.inset)
@@ -63,6 +70,28 @@ struct NoticeTabSettings: View {
             }
             .navigationTitle("공지 항목 관리")
             .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+}
+
+fileprivate struct MajorSelectionRow: View {
+    @Environment(\.editMode) private var editMode
+    
+    let title: String
+    let selectAction: () -> Void
+    
+    var body: some View {
+        HStack {
+            Text(title)
+            Spacer()
+            Button {
+                selectAction()
+            } label: {
+                Text("선택")
+                    .font(.subheadline)
+                    .foregroundStyle(editMode?.wrappedValue.isEditing == true ? KNDesignSystemAsset.gray5.swiftUIColor : KNDesignSystemAsset.accent2.swiftUIColor)
+            }
+            .disabled(editMode?.wrappedValue.isEditing == true)
         }
     }
 }
