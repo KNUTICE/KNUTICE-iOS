@@ -11,7 +11,11 @@ import SwiftUI
 
 struct NoticeTabSettings: View {
     @Environment(\.dismiss) private var dismiss
-    @Environment(NoticeTabItems.self) private var noticeTabItems
+    @Bindable private var noticeTabItems: NoticeTabItems
+    
+    init(noticeTabItems: NoticeTabItems) {
+        self.noticeTabItems = noticeTabItems
+    }
     
     var body: some View {
         NavigationStack {
@@ -70,6 +74,9 @@ struct NoticeTabSettings: View {
             }
             .navigationTitle("공지 항목 관리")
             .navigationBarTitleDisplayMode(.inline)
+            .alert(isPresented: $noticeTabItems.isShowingAlert) {
+                Alert(title: Text("알림"), message: Text(noticeTabItems.alertMessage))
+            }
         }
     }
 }
@@ -97,6 +104,5 @@ fileprivate struct MajorSelectionRow: View {
 }
 
 #Preview {
-    NoticeTabSettings()
-        .environment(NoticeTabItems(.init(value: [])))
+    NoticeTabSettings(noticeTabItems: NoticeTabItems(.init(value: [])))
 }

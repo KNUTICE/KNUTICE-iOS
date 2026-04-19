@@ -190,8 +190,7 @@ public final class NoticeTabViewController: UIViewController {
     
     /// Presents the notice tab settings screen as a full-screen modal.
     private func showNoticeTabSettings() {
-        let view = NoticeTabSettings()
-            .environment(NoticeTabItems(viewModel.categories))
+        let view = NoticeTabSettings(noticeTabItems: NoticeTabItems(viewModel.categories))
         let viewController = UIHostingController(rootView: view)
         viewController.modalPresentationStyle = .fullScreen
         

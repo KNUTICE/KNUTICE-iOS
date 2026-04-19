@@ -22,6 +22,9 @@ final class NoticeTabItems {
         }
     }
     
+    private(set) var alertMessage: String = ""
+    var isShowingAlert: Bool = false
+    
     var selectedMajors: [MajorCategory] {
         categories.compactMap { item -> MajorCategory? in
             if case let .category(representable) = item,
@@ -48,6 +51,12 @@ final class NoticeTabItems {
     }
     
     func insertAfterLastMajorCategory(newItem: CategoryItem) {
+        guard selectedMajors.count < 1 else {
+            alertMessage = "선택되어 있는 전공 삭제 후 사용해주세요."
+            isShowingAlert.toggle()
+            return
+        }
+        
         let isAlreadyExists = categories.contains { $0.id == newItem.id }
         
         guard !isAlreadyExists else { return }
