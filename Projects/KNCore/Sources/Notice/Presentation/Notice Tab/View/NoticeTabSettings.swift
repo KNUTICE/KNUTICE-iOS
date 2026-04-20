@@ -25,13 +25,13 @@ struct NoticeTabSettings: View {
                         Text($0.tabTitle)
                     }
                     .onDelete { indexSet in
+                        let targetsToDeactivate = indexSet.map { noticeTabItems.selectedMajors[$0] }
+                        withAnimation {
+                            noticeTabItems.removeMajor(at: indexSet)
+                        }
                         Task {
-                            let targetsToDeactivate = indexSet.map { noticeTabItems.selectedMajors[$0] }
                             for target in targetsToDeactivate {
                                 await noticeTabItems.deactiveTopic(of: target)
-                            }
-                            withAnimation {
-                                noticeTabItems.removeMajor(at: indexSet)
                             }
                         }
                     }
