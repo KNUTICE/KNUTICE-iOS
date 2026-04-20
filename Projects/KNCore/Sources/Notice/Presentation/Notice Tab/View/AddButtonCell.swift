@@ -44,7 +44,8 @@ final class AddButtonCell: UICollectionViewCell {
     }
     
     func configureAction(_ action: @escaping () -> Void) {
-        actionButton.removeTarget(nil, action: nil, for: .touchUpInside)
-        actionButton.addAction(UIAction { _ in action() }, for: .touchUpInside)
+        let identifier = UIAction.Identifier("AddButtonAction")
+        actionButton.removeAction(identifiedBy: identifier, for: .touchUpInside)
+        actionButton.addAction(UIAction(identifier: identifier) { _ in action() }, for: .touchUpInside)
     }
 }
