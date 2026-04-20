@@ -82,7 +82,7 @@ final class NoticeTabItems {
         if let index = lastMajorIndex {
             categories.insert(newItem, at: index + 1)
         } else {
-            categories.insert(newItem, at: 5)
+            categories.insert(newItem, at: NoticeCategory.allCases.count)
         }
     }
     
