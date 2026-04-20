@@ -112,6 +112,7 @@ public struct TopicSubscriptionListFeature: Sendable {
                     }
                 }
                 
+                // FIXME: MajorManager로 리팩토링
                 state.isMajorNoticeNotificationSubscribed = UserDefaults.standard.bool(
                     forKey: UserDefaultsKeys.isMajorNotificationSubscribed.rawValue
                 )
@@ -195,7 +196,7 @@ public struct TopicSubscriptionListFeature: Sendable {
                 return .run { send in
                     await send(.setLoading(true))
                     
-                    if let majorStr = UserDefaults.shared?.string(forKey: UserDefaultsKeys.selectedMajor.rawValue),
+                    if let majorStr = await MajorManager.shared.majorStrings.first,
                        let major = MajorCategory(rawValue: majorStr) {
                         try await updateTopicSubscriptionUseCase.execute(
                             of: .major,
@@ -244,6 +245,7 @@ public struct TopicSubscriptionListFeature: Sendable {
                 return .none
                 
             case let .setMajorNotificationSubscribed(isEnabled):
+                // FIXME: MajorManager로 리팩토링
                 UserDefaults.standard.set(isEnabled, forKey: UserDefaultsKeys.isMajorNotificationSubscribed.rawValue)
                 return .none
             }
