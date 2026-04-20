@@ -44,6 +44,8 @@ struct NoticeTabSettings: View {
                     Section {
                         ForEach(noticeTabItems.availableMajors(for: college), id: \.id) { major in
                             MajorSelectionRow(title: major.localizedDescription) {
+                                guard noticeTabItems.isAddable else { return }
+                                
                                 Task {
                                     await noticeTabItems.activeTopic(of: major)
                                     withAnimation {

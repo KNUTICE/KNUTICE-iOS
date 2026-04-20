@@ -10,21 +10,21 @@ import Foundation
 @propertyWrapper
 public struct UserDefaultMajors {
     private let storage = UserDefaults.shared
-    private let key = UserDefaultsKeys.isMajorNotificationSubscribed.rawValue
+    private let storedMajorkey = UserDefaultsKeys.selectedMajor.rawValue
     
     /// The array of subscribed majors.
     /// Updating this value will immediately persist the new array to `UserDefaults`.
     public var wrappedValue: [String] {
         get {
             // Check for the modern format (String Array)
-            if let value = storage?.stringArray(forKey: key) {
+            if let value = storage?.stringArray(forKey: storedMajorkey) {
                 return value
             }
             
             // allback to legacy format (Single String) for migration
-            if let singleValue = storage?.string(forKey: key) {
-                storage?.set([singleValue], forKey: key)
-                storage?.removeObject(forKey: key)
+            if let singleValue = storage?.string(forKey: storedMajorkey) {
+                storage?.removeObject(forKey: storedMajorkey)
+                storage?.set([singleValue], forKey: storedMajorkey)
                 return [singleValue]
             }
             
@@ -32,7 +32,7 @@ public struct UserDefaultMajors {
             return []
         }
         set {
-            storage?.set(newValue, forKey: key)
+            storage?.set(newValue, forKey: storedMajorkey)
         }
     }
     

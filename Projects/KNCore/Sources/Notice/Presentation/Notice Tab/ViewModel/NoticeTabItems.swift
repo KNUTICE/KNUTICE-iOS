@@ -35,6 +35,16 @@ final class NoticeTabItems {
         }
     }
     
+    var isAddable: Bool {
+        guard selectedMajors.count < 1 else {
+            alertMessage = "선택되어 있는 전공 삭제 후 사용해주세요."
+            isShowingAlert.toggle()
+            return false
+        }
+        
+        return true
+    }
+    
     @ObservationIgnored private let categoriesRelay: BehaviorRelay<[CategoryItem]>
     @ObservationIgnored private let disposeBag: DisposeBag = .init()
     @ObservationIgnored @Injected(\.updateTopicSubscriptionUseCase) private var updateTopicSubscriptionUseCase
@@ -50,13 +60,13 @@ final class NoticeTabItems {
         }
     }
     
+    
+    // MARK: Add Major
+    
+    /// Inserts a new category item after the last existing `MajorCategory` in the list.
+    /// If no `MajorCategory` exists, the item is inserted at index 5.
+    /// Duplicate items are ignored.
     func insertAfterLastMajorCategory(newItem: CategoryItem) {
-        guard selectedMajors.count < 1 else {
-            alertMessage = "선택되어 있는 전공 삭제 후 사용해주세요."
-            isShowingAlert.toggle()
-            return
-        }
-        
         let isAlreadyExists = categories.contains { $0.id == newItem.id }
         
         guard !isAlreadyExists else { return }
@@ -76,6 +86,8 @@ final class NoticeTabItems {
         }
     }
     
+    /// Activates the FCM topic subscription for the given major
+    /// and registers it to `MajorManager`.
     func activeTopic(of major: MajorCategory) async {
         do {
             try await updateTopicSubscriptionUseCase.execute(of: .major, topic: major, isEnabled: true)
@@ -85,6 +97,20 @@ final class NoticeTabItems {
         }
     }
     
+    // MARK: - Delete Major
+    
+    /// Removes major categories at the specified index set.
+    /// - Parameter indexSet: The indices relative to the `selectedMajors` list.
+    ///   An offset equal to the number of `NoticeCategory` cases is applied internally
+    ///   to map to the correct positions in `categories`.
+    func removeMajor(at indexSet: IndexSet) {
+        let offset = NoticeCategory.allCases.count
+        let adjustedIndices = IndexSet(indexSet.map { $0 + offset })    // categoriesRelay에는 앞에 5개의 추가적인 데이터가 존재
+        categories.remove(atOffsets: adjustedIndices)
+    }
+    
+    /// Deactivates the FCM topic subscription for the given major
+    /// and unregisters it from `MajorManager`.
     func deactiveTopic(of major: MajorCategory) async {
         do {
             try await updateTopicSubscriptionUseCase.execute(of: .major, topic: major, isEnabled: false)
@@ -92,11 +118,5 @@ final class NoticeTabItems {
         } catch {
             print(error)
         }
-    }
-    
-    func removeMajor(at indexSet: IndexSet) {
-        let offset = NoticeCategory.allCases.count
-        let adjustedIndices = IndexSet(indexSet.map { $0 + offset })    // categoriesRelay에는 앞에 5개의 추가적인 데이터가 존재
-        categories.remove(atOffsets: adjustedIndices)
     }
 }
