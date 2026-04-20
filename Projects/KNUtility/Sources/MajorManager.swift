@@ -23,8 +23,7 @@ public struct UserDefaultsMajors {
             
             // allback to legacy format (Single String) for migration
             if let singleValue = storage?.string(forKey: key) {
-                storage?.removeObject(forKey: key)
-                storage?.set([singleValue], forKey: key)
+                storage?.set([singleValue], forKey: key)    // 기본 문자열 값을 문자열 배열로 마이그레이션
                 return [singleValue]
             }
             
