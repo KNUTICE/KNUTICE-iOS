@@ -14,18 +14,12 @@ import KNUtility
 public protocol FetchNoticesUseCase: Actor {
     /// Fetches notices for the specified category and updates related user settings if necessary.
     ///
-    /// This method performs the following tasks:
-    /// - Checks for task cancellation.
-    /// - If the category is a `MajorCategory` and the user has enabled major notifications,
-    ///   updates the user’s subscription information accordingly.
-    /// - Updates the user’s selected major category in `UserDefaults`.
-    /// - Fetches notice data from the server for the specified category.
-    ///
     /// - Parameters:
     ///   - category: The notice category to fetch, conforming to `CategoryProtocol`.
     ///   - nttId: The ID of the last fetched notice, used for pagination. Pass `nil` to fetch the latest notices.
+    ///   - size: The number of notices to fetch per request.
     /// - Returns: An array of `Notice` objects fetched from the server.
-    /// - Throws: An error if the task is cancelled, the subscription update fails, or fetching notices from the repository fails.
+    /// - Throws: An error if the task is cancelled or fetching notices from the repository fails.
     func execute(category: some CategoryProtocol, after nttId: Int?, size: Int) async throws -> [Notice]
 }
 
@@ -37,50 +31,16 @@ public extension FetchNoticesUseCase {
 
 public actor FetchNoticesUseCaseImpl: FetchNoticesUseCase {
     @Injected(\.noticeRepository) private var noticeRepository
-    @Injected(\.topicSubscriptionRepository) private var topicSubscriptionRepository
     
     public func execute(category: some CategoryProtocol, after nttId: Int?, size: Int) async throws -> [Notice] {
         try Task.checkCancellation()
         
-        // TODO: Topic 업데이트 실패
-        // 서버에서 가져올 공지 데이터가 학과 소식이면서, 사용자가 학과 소식 알림을 허용한 경우
-        if let selectedMajorCategory = category as? MajorCategory {
-            if UserDefaults.standard.bool(forKey: UserDefaultsKeys.isMajorNotificationSubscribed.rawValue) {
-                try await updateSubscription(of: selectedMajorCategory)
-            }
-            
-            // UserDefaultsKeys.selectedMajor 업데이트
-            UserDefaults.shared?.set(category.rawValue, forKey: UserDefaultsKeys.selectedMajor.rawValue)
-        }
+        // TODO: 공지 업로드 시간 확인 후 New badge 표기 여부
         
         // 서버에서 선택된 공지 데이터 가져오기
         let notices = try await noticeRepository.fetchNotices(for: category.rawValue, after: nttId, size: size)
         
         return notices
-    }
-    
-    private func updateSubscription(of category: MajorCategory) async throws {
-        try await withThrowingTaskGroup(of: Void.self) { group in
-            if let majorStr = UserDefaults.shared?.string(forKey: UserDefaultsKeys.selectedMajor.rawValue),
-               let storedMajorCategory = MajorCategory(rawValue: majorStr),
-               category != storedMajorCategory {
-                group.addTask {
-                    // 이전 선택된 학과 알림 비활성화
-                    try await self.topicSubscriptionRepository.update(
-                        of: TopicType.major,
-                        topic: storedMajorCategory,
-                        isEnabled: false
-                    )
-                }
-            }
-            
-            group.addTask {
-                // 새로 선택된 학과 공지 알림 활성화
-                try await self.topicSubscriptionRepository.update(of: .major, topic: category, isEnabled: true)
-            }
-            
-            try await group.waitForAll()
-        }
     }
     
 }

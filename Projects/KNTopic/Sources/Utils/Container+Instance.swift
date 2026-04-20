@@ -13,4 +13,10 @@ public extension Container {
             TopicSubscriptionRepositoryImpl()
         }
     }
+    
+    var updateTopicSubscriptionUseCase: Factory<UpdateTopicSubscriptionUseCase> {
+        Factory(self) {
+            UpdateTopicSubscriptionUseCaseImpl()
+        }
+    }
 }

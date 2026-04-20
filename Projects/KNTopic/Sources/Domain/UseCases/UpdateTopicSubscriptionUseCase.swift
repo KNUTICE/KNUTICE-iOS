@@ -8,14 +8,14 @@
 import Factory
 import KNUtility
 
-protocol UpdateTopicSubscriptionUseCase: Actor {
+public protocol UpdateTopicSubscriptionUseCase: Actor {
     func execute(of type: TopicType, topic: any CategoryProtocol, isEnabled: Bool) async throws
 }
 
-actor UpdateTopicSubscriptionUseCaseImpl: UpdateTopicSubscriptionUseCase {
+public actor UpdateTopicSubscriptionUseCaseImpl: UpdateTopicSubscriptionUseCase {
     @Injected(\.topicSubscriptionRepository) private var repository
     
-    func execute(of type: TopicType, topic: any CategoryProtocol, isEnabled: Bool) async throws {
+    public func execute(of type: TopicType, topic: any CategoryProtocol, isEnabled: Bool) async throws {
         try await repository.update(of: type, topic: topic, isEnabled: isEnabled)
     }
     

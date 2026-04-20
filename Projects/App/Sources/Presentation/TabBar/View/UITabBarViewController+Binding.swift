@@ -24,22 +24,6 @@ extension UITabBarViewController {
             })
             .store(in: &cancellables)
         
-        viewModel.$category
-            .sink(receiveValue: { [weak self] category in
-                guard let category else { return }
-                
-                // 버튼 타이틀 변경
-                self?.makeMajorSelectionButton(withTitle: category.localizedDescription)
-                
-                // 선택 된 전공 MajorNoticeCollectionViewController로 전달
-                NotificationCenter.default.post(
-                    name: Notification.Name.majorSelectionDidChange,
-                    object: self,
-                    userInfo: [UserInfoKeys.selectedMajor: category]
-                )
-            })
-            .store(in: &cancellables)
-        
         viewModel.$bookmarkSortOption
             .dropFirst()
             .sink(receiveValue: { [weak self] sortOption in

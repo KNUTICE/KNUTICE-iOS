@@ -36,18 +36,26 @@ extension UITabBarViewController {
                 viewModel: NoticeContentViewModel(nttId: nttId)
             )
             
-        case let .navigation(tabIndex):
+        case let .navigation(tabIndex, _):
             // iPadOS 18.0부터 UITab API를 사용
             // `selectedTab`을 변경하여 선택된 탭 이동
             if #available(iOS 18, *), UIDevice.current.userInterfaceIdiom == .pad {
                 guard tabs.indices.contains(tabIndex) else { return }
                 
+                if let viewController = tabs[tabIndex].viewController as? NoticeTabViewController {
+                    viewController.handle(deepLink: deepLink)
+                }
+                
                 self.selectedTab = tabs[tabIndex]
             } else {
-                guard let vcs = self.viewControllers, vcs.indices.contains(tabIndex) else { return }
+                guard let viewControllers = self.viewControllers, viewControllers.indices.contains(tabIndex) else { return }
+                
+                if let viewController = viewControllers[tabIndex] as? NoticeTabViewController {
+                    viewController.handle(deepLink: deepLink)
+                }
                 
                 self.selectedIndex = tabIndex
-                self.tabBarController(self, didSelect: vcs[tabIndex])
+                self.tabBarController(self, didSelect: viewControllers[tabIndex])
             }
             return
             

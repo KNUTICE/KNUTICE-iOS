@@ -30,11 +30,9 @@ public class NoticeCollectionViewController: UIViewController, NoticeCollectionV
     let disposeBag = DisposeBag()
     private let currentColumnCount: CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 1 : 2
     
-    public init(viewModel: NoticeCollectionViewModel, navigationTitle: String = "") {
+    public init(viewModel: NoticeCollectionViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        
-        setupNavigationBar(title: navigationTitle)
     }
     
     required init?(coder: NSCoder) {
@@ -112,20 +110,12 @@ public class NoticeCollectionViewController: UIViewController, NoticeCollectionV
             }
             .disposed(by: disposeBag)
     }
-    
-    private func setupNavigationBar(title: String) {
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = title
-    }
 }
 
 #if DEBUG
 #Preview {
-    NoticeCollectionViewController(
-        viewModel: NoticeCollectionViewModel(category: NoticeCategory.generalNotice),
-        navigationTitle: "일반소식"
-    )
-    .makePreview()
+    NoticeCollectionViewController(viewModel: NoticeCollectionViewModel(category: NoticeCategory.generalNotice))
+        .makePreview()
 }
 #endif
 

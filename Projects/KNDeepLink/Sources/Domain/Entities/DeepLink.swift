@@ -25,9 +25,11 @@ public enum DeepLink: Sendable {
     /// - Parameter nttId: The unique identifier of the bookmarked notice.
     case bookmark(nttId: Int)
     
-    /// Switches the app's main tab to a specific index.
-    /// - Parameter tabIndex: The index of the tab to display.
-    case navigation(tabIndex: Int)
+    /// Navigates to a specific tab, optionally scrolling to an item within it.
+    /// - Parameters:
+    ///   - tabIndex: The index of the tab to display.
+    ///   - itemIndex: The index of the item to scroll to within the tab. If `nil`, no item navigation occurs.
+    case navigation(tabIndex: Int, itemIndex: Int? = nil)
     
     /// Navigates to a specific library reading room and seat.
     /// - Parameters:
