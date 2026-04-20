@@ -65,14 +65,11 @@ struct HomeScreenView: View {
                     TabView(selection: $currentTabIndex) {
                         ForEach(Array(sectionedNotices.enumerated()), id: \.element.header) { index, section in
                             NoticeList(notices: section) {
-                                NavigationLink {
-                                    if let category = section.category as? NoticeCategory {
-                                        NoticeCollectionView(
-                                            viewModel: NoticeCollectionViewModel(category: category)
-                                        )
-                                        .edgesIgnoringSafeArea(.all)
-                                        .navigationTitle(category.localizedDescription)
-                                    }
+                                Button {
+                                    NotificationCenter.default.post(
+                                        name: .didReceiveDeepLink,
+                                        object: DeepLink.navigation(tabIndex: 1, itemIndex: index)
+                                    )
                                 } label: {
                                     MoreButtonLabel()
                                 }

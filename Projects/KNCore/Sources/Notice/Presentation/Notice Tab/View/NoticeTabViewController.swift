@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 4/10/26.
 //
 
+import KNDeepLink
 import KNDesignSystem
 import KNUtility
 import UIKit
@@ -195,6 +196,17 @@ public final class NoticeTabViewController: UIViewController {
         viewController.modalPresentationStyle = .fullScreen
         
         self.present(viewController, animated: true, completion: nil)
+    }
+    
+    public func handle(deepLink: DeepLink) {
+        switch deepLink {
+        case let .navigation(_, itemIndex):
+            if let itemIndex {
+                viewModel.selectedIndex.accept(itemIndex)
+            }
+        default:
+            break
+        }
     }
 }
 
