@@ -11,12 +11,13 @@ import KNUtility
 public struct Notice: Sendable, Equatable, Identifiable {
     public let id: Int    // nttId
     public let title: String    // 제목
-    public let contentUrl: String    // 화면 전환 시 이동할 사이트 URL
+    public let contentUrl: URL?    // 화면 전환 시 이동할 사이트 URL
     public let isSummarizable: Bool    // AI 요약 가능 여부
     public let department: String    // 부서
     public let uploadDate: String    // 등록 날짜
     public let imageUrl: String?    // 썸네일 URL
     public let category: any CategoryProtocol    // 공지 카테고리 종류
+    public var isNew: Bool
     
     public init(
         id: Int,
@@ -27,15 +28,17 @@ public struct Notice: Sendable, Equatable, Identifiable {
         uploadDate: String,
         imageUrl: String?,
         category: any CategoryProtocol,
+        isNew: Bool = false
     ) {
         self.id = id
         self.title = title
-        self.contentUrl = contentUrl
+        self.contentUrl = URL(string: contentUrl)
         self.isSummarizable = isSummarizable
         self.department = department
         self.uploadDate = uploadDate
         self.imageUrl = imageUrl
         self.category = category
+        self.isNew = isNew
     }
     
     public static func == (lhs: Notice, rhs: Notice) -> Bool {

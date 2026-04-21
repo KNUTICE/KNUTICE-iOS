@@ -38,7 +38,7 @@ fileprivate extension Notice {
         NoticeData(
             nttID: id,
             title: title,
-            contentURL: contentUrl,
+            contentURL: contentUrl?.absoluteString ?? "",
             contentImageURL: imageUrl,
             isContentSummary: isSummarizable,
             department: department,
