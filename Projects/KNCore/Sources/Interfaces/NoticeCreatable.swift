@@ -14,6 +14,16 @@ public protocol NoticeCreatable {
 
 public extension NoticeCreatable {
     func createNotice(_ data: NoticeData) -> Notice {
+        let extractedCategory: any CategoryProtocol
+        
+        if let category = NoticeCategory(rawValue: data.topic) {
+            extractedCategory = category
+        } else if let category = MajorCategory(rawValue: data.topic) {
+            extractedCategory = category
+        } else {
+            extractedCategory = NoticeCategory.generalNotice
+        }
+        
         return Notice(
             id: data.nttID,
             title: data.title,
@@ -22,8 +32,7 @@ public extension NoticeCreatable {
             department: data.department,
             uploadDate: data.registrationDate,
             imageUrl: data.contentImageURL,
-            noticeCategory: NoticeCategory(rawValue: data.topic),
-            majorCategory: MajorCategory(rawValue: data.topic)
+            category: extractedCategory
         )
     }
 }

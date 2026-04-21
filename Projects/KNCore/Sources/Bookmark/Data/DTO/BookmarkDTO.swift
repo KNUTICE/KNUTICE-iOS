@@ -43,7 +43,7 @@ fileprivate extension Notice {
             isContentSummary: isSummarizable,
             department: department,
             registrationDate: uploadDate,
-            topic: noticeCategory?.rawValue ?? ""
+            topic: category.rawValue
         )
     }
 }

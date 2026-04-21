@@ -135,6 +135,16 @@ fileprivate extension BookmarkDTO {
     /// operate only with pure domain models.
     var asEntity: Bookmark {
         let noticeData = self.noticeData
+        let extractedCategory: any CategoryProtocol
+
+        if let category = NoticeCategory(rawValue: noticeData.topic) {
+            extractedCategory = category
+        } else if let category = MajorCategory(rawValue: noticeData.topic) {
+            extractedCategory = category
+        } else {
+            extractedCategory = NoticeCategory.generalNotice
+        }
+        
         return Bookmark(
             notice: Notice(
                 id: Int(noticeData.nttID),
@@ -144,8 +154,7 @@ fileprivate extension BookmarkDTO {
                 department: noticeData.department,
                 uploadDate: noticeData.registrationDate,
                 imageUrl: noticeData.contentImageURL,
-                noticeCategory: NoticeCategory(rawValue: noticeData.topic),
-                majorCategory: MajorCategory(rawValue: noticeData.topic)
+                category: extractedCategory
             ),
             memo: self.memo ?? "",
             alarmDate: self.alarmDate

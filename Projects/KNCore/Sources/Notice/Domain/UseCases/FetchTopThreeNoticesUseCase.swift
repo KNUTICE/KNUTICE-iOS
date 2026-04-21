@@ -111,7 +111,7 @@ public extension Notice {
                 department: "학사운영팀",
                 uploadDate: "2026.00.00",
                 imageUrl: nil,
-                noticeCategory: nil
+                category: NoticeCategory.generalNotice
             )
         }
     }
