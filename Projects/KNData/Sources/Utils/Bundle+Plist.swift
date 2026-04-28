@@ -1,18 +1,18 @@
 //
-//  Bundle+URL.swift
-//  KNUTICE
+//  Bundle+Plist.swift
+//  KNData
 //
-//  Created by 이정훈 on 5/22/24.
+//  Created by 이정훈 on 4/28/26.
 //
 
 import Foundation
 
-private class KNCoreBundleFinder {}
+private class KNDataBundleFinder {}
 
-public extension Bundle {
-    static var knCore: Bundle {
-        let frameworkBundle = Bundle(for: KNCoreBundleFinder.self)
-        let resource = "KNCore_KNCore.bundle"
+extension Bundle {
+    static var knData: Bundle {
+        let frameworkBundle = Bundle(for: KNDataBundleFinder.self)
+        let resource = "knData_knData.bundle"
         
         if let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent(resource),
            let bundle = Bundle(url: bundleURL) {
@@ -31,12 +31,11 @@ public extension Bundle {
         return resource
     }
     
-    var defaultThumbnailURL: String {
-        guard let url = resource?["DefaultThumbnail_URL"] as? String else {
-            return ""
+    var noticeURL: String? {
+        guard let url = resource?["Notice_URL"] as? String else {
+            return nil
         }
         
         return url
     }
-    
 }

@@ -58,6 +58,7 @@ let project = Project(
                 .project(target: "KNSetting", path: "../KNSetting"),
                 .project(target: "KNReadingRoom", path: "../KNReadingRoom"),
                 .project(target: "KNMeal", path: "../KNMeal"),
+                .project(target: "KNDomain", path: "../KNDomain"),
                 .target(name: "NotificationService"),
                 .target(name: "KNUTICEWidget"),
                 .external(name: "RxSwift"),

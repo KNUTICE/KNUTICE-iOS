@@ -7,11 +7,13 @@
 
 import Combine
 import Foundation
+import KNDomain
 import KNNetwork
+import KNUtility
 
-public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
+public final class NoticeRepositoryImpl: NoticeRepository {
     private let dataSource: RemoteDataSource
-    private let baseURL: String? = Bundle.knCore.noticeURL
+    private let baseURL: String? = KNDataResources.bundle.noticeURL
     
     public init(dataSource: RemoteDataSource) {
         self.dataSource = dataSource
@@ -116,4 +118,29 @@ public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
         return notice
     }
     
+}
+
+extension NoticeRepositoryImpl {
+    func createNotice(_ data: NoticeData) -> Notice {
+        let extractedCategory: any CategoryProtocol
+        
+        if let category = NoticeCategory(rawValue: data.topic) {
+            extractedCategory = category
+        } else if let category = MajorCategory(rawValue: data.topic) {
+            extractedCategory = category
+        } else {
+            extractedCategory = NoticeCategory.generalNotice
+        }
+        
+        return Notice(
+            id: data.nttID,
+            title: data.title,
+            contentUrl: data.contentURL,
+            isSummarizable: data.isContentSummary,
+            department: data.department,
+            uploadDate: data.registrationDate,
+            imageUrl: data.contentImageURL,
+            category: extractedCategory
+        )
+    }
 }

@@ -7,6 +7,7 @@
 
 import Factory
 import Foundation
+import KNDomain
 import KNTopic
 import KNUtility
 import Observation

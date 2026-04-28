@@ -7,15 +7,20 @@
 
 import Factory
 import Foundation
+import KNDomain
 
 public protocol SearchNoticesUseCase: Actor {
     func execute(with keyword: String) async throws -> [Notice]
 }
 
 public actor SearchNoticesUseCaseImpl: SearchNoticesUseCase {
-    @Injected(\.noticeRepository) private var repository
+    private let noticeRepository: NoticeRepository
+    
+    public init(noticeRepository: NoticeRepository) {
+        self.noticeRepository = noticeRepository
+    }
     
     public func execute(with keyword: String) async throws -> [Notice] {
-        return try await repository.fetchNotices(keyword: keyword)
+        return try await noticeRepository.fetchNotices(keyword: keyword)
     }
 }

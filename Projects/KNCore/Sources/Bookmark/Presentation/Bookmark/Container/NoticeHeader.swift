@@ -6,6 +6,7 @@
 //
 
 import KNDesignSystem
+import KNDomain
 import SwiftUI
 
 struct NoticeHeader: View {

@@ -30,7 +30,11 @@ public extension FetchNoticesUseCase {
 }
 
 public actor FetchNoticesUseCaseImpl: FetchNoticesUseCase, UploadDateComparable {
-    @Injected(\.noticeRepository) private var noticeRepository
+    private var noticeRepository: NoticeRepository
+    
+    public init(noticeRepository: NoticeRepository) {
+        self.noticeRepository = noticeRepository
+    }
     
     public func execute(category: some CategoryProtocol, after nttId: Int?, size: Int) async throws -> [Notice] {
         try Task.checkCancellation()

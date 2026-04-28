@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 6/19/25.
 //
 
+import KNDomain
 import Kingfisher
 import KNDesignSystem
 import UIKit

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KNDomain
 import RxDataSources
 
 public struct Bookmark: Sendable {
