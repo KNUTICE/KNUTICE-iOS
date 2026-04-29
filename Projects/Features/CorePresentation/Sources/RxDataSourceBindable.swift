@@ -10,7 +10,7 @@ import RxSwift
 import UIKit
 
 @MainActor
-protocol RxDataSourceBindable: AnyObject {
+public protocol RxDataSourceBindable: AnyObject {
     associatedtype T: NoticeSectionModelProvidable
     
     var collectionView: UICollectionView { get }
@@ -20,7 +20,7 @@ protocol RxDataSourceBindable: AnyObject {
     func bindNotices()
 }
 
-extension RxDataSourceBindable {
+public extension RxDataSourceBindable {
     func bindNotices() {
         viewModel.notices
             .skip(1)

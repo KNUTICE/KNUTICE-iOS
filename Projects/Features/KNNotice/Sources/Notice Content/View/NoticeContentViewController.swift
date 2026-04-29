@@ -84,22 +84,22 @@ public final class NoticeContentViewController: UIViewController {
         
         // MARK: - Interaction
         button.addAction(UIAction { [weak self] _ in
-            guard let notice = self?.viewModel.notice else { return }
+            guard let notice = self?.viewModel.notice, let makeBookmarkFormViewController = self?.makeBookmarkFormViewController else { return }
             
             // Bookmark 버튼 클릭 이벤트 전송
             Analytics.logEvent(AnalyticsEventName.bookmarkButtonClicked.rawValue, parameters: nil)
             
-            // Bookmark Form 표시
-            let bookmark = Bookmark(notice: notice, memo: "")
-            let rootView = BookmarkForm(
-                store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
-                    BookmarkFormFeature()
-                }
-            ) {
-                self?.dismiss(animated: true)
-            }
-            let viewController = UIHostingController(rootView: rootView)
-            let navigationController = UINavigationController(rootViewController: viewController)
+//            // Bookmark Form 표시
+//            let bookmark = Bookmark(notice: notice, memo: "")
+//            let rootView = BookmarkForm(
+//                store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
+//                    BookmarkFormFeature()
+//                }
+//            ) {
+//                self?.dismiss(animated: true)
+//            }
+//            let viewController = UIHostingController(rootView: rootView)
+            let navigationController = UINavigationController(rootViewController: makeBookmarkFormViewController(notice))
             navigationController.modalPresentationStyle = .pageSheet
             
             self?.present(navigationController, animated: true, completion: nil)
@@ -122,11 +122,13 @@ public final class NoticeContentViewController: UIViewController {
     private let viewModel: NoticeContentViewModel
     private var cancellables = Set<AnyCancellable>()
     private var webViewTask: Task<Void, Never>?
+    private let makeBookmarkFormViewController: (Notice) -> UIViewController
     
     // MARK: - Init
     
-    public init(viewModel: NoticeContentViewModel) {
+    public init(viewModel: NoticeContentViewModel, makeBookmarkFormViewController: @escaping (Notice) -> UIViewController) {
         self.viewModel = viewModel
+        self.makeBookmarkFormViewController = makeBookmarkFormViewController
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -221,19 +223,19 @@ private extension NoticeContentViewController {
     
     func presentBookmarkForm() {
         guard let notice = viewModel.notice else { return }
-        let bookmark = Bookmark(notice: notice, memo: "")
-        let state = BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create)
+//        let bookmark = Bookmark(notice: notice, memo: "")
+//        let state = BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create)
+//        
+//        let rootView = BookmarkForm(
+//            store: Store(initialState: state) { BookmarkFormFeature() }
+//        ) { [weak self] in
+//            self?.dismiss(animated: true)
+//        }
         
-        let rootView = BookmarkForm(
-            store: Store(initialState: state) { BookmarkFormFeature() }
-        ) { [weak self] in
-            self?.dismiss(animated: true)
-        }
-        
-        presentSheet(rootView: rootView, detents: [.large()])
+        presentSheet(viewController: makeBookmarkFormViewController(notice), detents: [.large()])
     }
     
-    func presentSheet<Content: View>(rootView: Content, detents: [UISheetPresentationController.Detent]) {
+    private func presentSheet<Content: View>(rootView: Content, detents: [UISheetPresentationController.Detent]) {
         let vc = UIHostingController(rootView: rootView)
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .pageSheet
@@ -245,7 +247,17 @@ private extension NoticeContentViewController {
         present(nav, animated: true)
     }
     
-    func presentShareSheet() {
+    private func presentSheet(viewController: UIViewController, detents: [UISheetPresentationController.Detent]) {
+        viewController.modalPresentationStyle = .pageSheet
+        
+        if let sheet = viewController.sheetPresentationController {
+            sheet.detents = detents
+            sheet.prefersGrabberVisible = true
+        }
+        present(viewController, animated: true)
+    }
+    
+    private func presentShareSheet() {
         guard let urlStr = viewModel.notice?.contentUrl else { return }
         let activityVC = UIActivityViewController(activityItems: [urlStr], applicationActivities: nil)
         activityVC.popoverPresentationController?.sourceView = view
@@ -255,7 +267,7 @@ private extension NoticeContentViewController {
         present(activityVC, animated: true)
     }
     
-    func showCompletionAlert() {
+    private func showCompletionAlert() {
         let alert = UIAlertController(title: "알림", message: "공유를 완료했어요.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default))
         present(alert, animated: true)

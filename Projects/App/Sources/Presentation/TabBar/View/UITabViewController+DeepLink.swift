@@ -9,7 +9,9 @@ import ComposableArchitecture
 import Foundation
 import KNCore
 import KNDeepLink
+import KNDomain
 import KNMeal
+import KNNotice
 import KNReadingRoom
 import SwiftUI
 import UIKit
@@ -32,9 +34,17 @@ extension UITabBarViewController {
             viewController = UIHostingController(rootView: rootView)
             
         case let .notice(nttId, _):
-            viewController = NoticeContentViewController(
-                viewModel: NoticeContentViewModel(nttId: nttId)
-            )
+            viewController = NoticeContentViewController(viewModel: NoticeContentViewModel(nttId: nttId)) { notice in
+                let bookmark = Bookmark(notice: notice, memo: "")
+                let rootView = BookmarkForm(
+                    store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
+                        BookmarkFormFeature()
+                    }
+                ) { [weak self] in self?.dismiss(animated: true) }
+                let viewController = UIHostingController(rootView: rootView)
+                
+                return viewController
+            }
             
         case let .navigation(tabIndex, _):
             // iPadOS 18.0부터 UITab API를 사용

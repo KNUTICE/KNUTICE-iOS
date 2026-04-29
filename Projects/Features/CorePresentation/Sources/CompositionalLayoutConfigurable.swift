@@ -5,17 +5,16 @@
 //  Created by 이정훈 on 6/19/25.
 //
 
-import KNDomain
 import UIKit
 import RxRelay
 
 //MARK: CompositionalLayoutConfigurable
 @MainActor
-protocol CompositionalLayoutConfigurable {
+public protocol CompositionalLayoutConfigurable {
     func createCompositionalLayout() -> UICollectionViewCompositionalLayout
 }
 
-extension CompositionalLayoutConfigurable {
+public extension CompositionalLayoutConfigurable {
     func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(UIDevice.current.userInterfaceIdiom == .phone ? 1.0 : 0.5),
@@ -32,9 +31,4 @@ extension CompositionalLayoutConfigurable {
         
         return layout
     }
-}
-
-//MARK: NoticeRepresentable
-protocol NoticesRepresentable {
-    var notices: BehaviorRelay<[Notice]> { get }
 }

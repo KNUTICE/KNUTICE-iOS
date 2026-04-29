@@ -9,7 +9,7 @@ import RxRelay
 import RxSwift
 
 @MainActor
-protocol NoticeFetchable {
+public protocol NoticeFetchable {
     var isFetching: BehaviorRelay<Bool> { get }
     var isRefreshing: BehaviorRelay<Bool> { get }
     
@@ -17,7 +17,7 @@ protocol NoticeFetchable {
     func fetchNextPage()
 }
 
-extension NoticeFetchable {
+public extension NoticeFetchable {
     var isFetchingObservable: Observable<Bool> {
         return isFetching.asObservable()
     }

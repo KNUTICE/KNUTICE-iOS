@@ -10,10 +10,8 @@ import Kingfisher
 import KNDesignSystem
 import UIKit
 
-final class NoticeCollectionViewCellWithThumbnail: UICollectionViewCell {
-    static var reuseIdentifier: String {
-        "NoticeCollectionViewCellWithThumbnail"
-    }
+public final class NoticeCollectionViewCellWithThumbnail: UICollectionViewCell {
+    public static var reuseIdentifier: String { "NoticeCollectionViewCellWithThumbnail" }
     let titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = .font(for: .footnote, weight: .bold)
@@ -81,11 +79,11 @@ final class NoticeCollectionViewCellWithThumbnail: UICollectionViewCell {
         if let imageURL = item.imageUrl {
             self.imageURL = imageURL
         } else {
-            self.imageURL = Bundle.knCore.defaultThumbnailURL
+            self.imageURL = CorePresentationResources.bundle.defaultThumbnailURL
         }
     }
     
-    override func updateConfiguration(using state: UICellConfigurationState) {
+    public override func updateConfiguration(using state: UICellConfigurationState) {
         var backgroundConfiguration = UIBackgroundConfiguration.clear()
         backgroundConfiguration.backgroundColor = state.isHighlighted ? KNDesignSystemAsset.cellHighlight.color : .clear
         self.backgroundConfiguration = backgroundConfiguration

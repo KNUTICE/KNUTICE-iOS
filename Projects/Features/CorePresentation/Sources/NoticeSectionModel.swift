@@ -8,14 +8,18 @@
 import KNDomain
 import RxDataSources
 
-struct NoticeSectionModel {
-    var items: [Item]
+public struct NoticeSectionModel {
+    public var items: [Item]
+    
+    public init(items: [Notice]) {
+        self.items = items
+    }
 }
 
 extension NoticeSectionModel: SectionModelType {
-    typealias Item = Notice
+    public typealias Item = Notice
     
-    init(original: NoticeSectionModel, items: [Item]) {
+    public init(original: NoticeSectionModel, items: [Item]) {
         self = original
         self.items = items
     }

@@ -11,9 +11,10 @@ import SwiftUI
 public struct NoticeContentView: UIViewControllerRepresentable {
     private let viewController: UIViewController
     
-    public init(notice: Notice) {
+    public init(notice: Notice, makeBookmarkFormViewController: @escaping (Notice) -> UIViewController) {
         self.viewController = NoticeContentViewController(
-            viewModel: NoticeContentViewModel(notice: notice)
+            viewModel: NoticeContentViewModel(notice: notice),
+            makeBookmarkFormViewController: makeBookmarkFormViewController
         )
     }
     
@@ -27,7 +28,9 @@ public struct NoticeContentView: UIViewControllerRepresentable {
 #if DEBUG
 #Preview {
     NavigationStack {
-        NoticeContentView(notice: Notice.generalNoticesSample[0])
+        NoticeContentView(notice: Notice.generalNoticesSample[0]) { _ in
+            UIViewController()
+        }
     }
 }
 #endif

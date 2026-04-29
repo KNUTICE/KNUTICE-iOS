@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 6/19/25.
 //
 
+import CorePresentation
 import Factory
 import KNDomain
 import RxRelay
@@ -12,8 +13,8 @@ import RxSwift
 import os
 
 @MainActor
-final class SearchViewModel: NoticeSectionModelProvidable, Searchable {
-    let notices: BehaviorRelay<[NoticeSectionModel]> = .init(value: [])
+public final class SearchViewModel: NoticeSectionModelProvidable, Searchable {
+    public let notices: BehaviorRelay<[NoticeSectionModel]> = .init(value: [])
     let bookmarks: BehaviorRelay<[Bookmark]> = .init(value: [])
     let keyword: BehaviorRelay<String> = .init(value: "")
     

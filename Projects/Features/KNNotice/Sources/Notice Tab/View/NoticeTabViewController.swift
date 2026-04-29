@@ -95,11 +95,10 @@ public final class NoticeTabViewController: UIViewController {
                     else { return nil }
                 }
                 
-                self?.viewControllers = newCategories.map { category in
+                self?.viewControllers = newCategories.compactMap { category in
                     self?.viewControllers
                         .compactMap { $0 as? NoticeCollectionViewController }
                         .first { ($0.viewModel.category as? any NoticeTabRepresentable)?.id == category.id }
-                    ?? NoticeCollectionViewController(viewModel: NoticeCollectionViewModel(category: category as? any CategoryProtocol))
                 }
             }
             .bind(to: collectionView.rx.items) { [weak self] (collectionView, row, element) in

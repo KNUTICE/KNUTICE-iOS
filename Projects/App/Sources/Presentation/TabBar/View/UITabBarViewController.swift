@@ -8,6 +8,8 @@
 import Combine
 import ComposableArchitecture
 import KNCore
+import KNDomain
+import KNNotice
 import KNSetting
 import KNUtility
 import UIKit
@@ -55,8 +57,19 @@ final class UITabBarViewController: UITabBarController, NavigationItemConfigurab
         
         return viewController
     }()
-    private let searchViewController: UIViewController = {
-        let viewController = SearchViewController()
+    private lazy var searchViewController: UIViewController = {
+        let viewController = SearchViewController() { notice in
+            let bookmark = Bookmark(notice: notice, memo: "")
+            let bookmarkForm = BookmarkForm(
+                store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
+                    BookmarkFormFeature()
+                }
+            ) { [weak self] in
+                self?.dismiss(animated: true)
+            }
+            
+            return UIHostingController(rootView: bookmarkForm)
+        }
         
         if #available(iOS 26, *) {
             viewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)

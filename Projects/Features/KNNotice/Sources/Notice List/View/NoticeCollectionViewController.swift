@@ -5,7 +5,9 @@
 //  Created by 이정훈 on 5/7/25.
 //
 
+import CorePresentation
 import KNDesignSystem
+import KNDomain
 import KNUtility
 import SwiftUI
 import UIKit
@@ -14,7 +16,7 @@ import RxSwift
 typealias NoticeCollectionViewConfigurable = UICollectionViewDelegateFlowLayout & CompositionalLayoutConfigurable & RxDataSourceBindable
 
 public class NoticeCollectionViewController: UIViewController, NoticeCollectionViewConfigurable {
-    lazy var collectionView: UICollectionView = {
+    public lazy var collectionView: UICollectionView = {
         let layout = createCompositionalLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.delegate = self
@@ -26,12 +28,14 @@ public class NoticeCollectionViewController: UIViewController, NoticeCollectionV
         return collectionView
     }()
     let refreshControl: UIRefreshControl = UIRefreshControl()
-    let viewModel: NoticeCollectionViewModel
-    let disposeBag = DisposeBag()
+    public let viewModel: NoticeCollectionViewModel
+    public let disposeBag = DisposeBag()
     private let currentColumnCount: CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 1 : 2
+    private let makeBookmarkFormViewController: (Notice) -> UIViewController
     
-    public init(viewModel: NoticeCollectionViewModel) {
+    public init(viewModel: NoticeCollectionViewModel, makeBookmarkFormViewController: @escaping (Notice) -> UIViewController) {
         self.viewModel = viewModel
+        self.makeBookmarkFormViewController = makeBookmarkFormViewController
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -59,7 +63,8 @@ public class NoticeCollectionViewController: UIViewController, NoticeCollectionV
     ) {
         let notice = viewModel.notices.value[0].items[indexPath.row]
         let viewController = NoticeContentViewController(
-            viewModel: NoticeContentViewModel(notice: notice)
+            viewModel: NoticeContentViewModel(notice: notice),
+            makeBookmarkFormViewController: makeBookmarkFormViewController
         )
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -113,9 +118,18 @@ public class NoticeCollectionViewController: UIViewController, NoticeCollectionV
 }
 
 #if DEBUG
+actor MockFetchNoticesUseCase: FetchNoticesUseCase {}
+
 #Preview {
-    NoticeCollectionViewController(viewModel: NoticeCollectionViewModel(category: NoticeCategory.generalNotice))
-        .makePreview()
+    NoticeCollectionViewController(
+        viewModel: NoticeCollectionViewModel(
+            category: NoticeCategory.generalNotice,
+            fetchNoticesUseCase: MockFetchNoticesUseCase()
+        )
+    ) { _ in
+        UIViewController()
+    }
+    .makePreview()
 }
 #endif
 

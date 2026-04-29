@@ -8,9 +8,10 @@
 import KNDomain
 import UIKit
 import KNDesignSystem
+import SnapKit
 
-final class NoticeCollectionViewCell: UICollectionViewCell {
-    static let reuseIdentifier = "NoticeCollectionViewCell"
+public final class NoticeCollectionViewCell: UICollectionViewCell {
+    public static let reuseIdentifier = "NoticeCollectionViewCell"
     private let titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = .font(for: .footnote, weight: .bold)
@@ -56,7 +57,7 @@ final class NoticeCollectionViewCell: UICollectionViewCell {
         subTitleLabel.text = "[\(item.department)]  \(item.uploadDate)"
     }
     
-    override func updateConfiguration(using state: UICellConfigurationState) {
+    public override func updateConfiguration(using state: UICellConfigurationState) {
         var backgroundConfiguration = UIBackgroundConfiguration.clear()
         backgroundConfiguration.backgroundColor = state.isHighlighted ? KNDesignSystemAsset.cellHighlight.color : .clear
         self.backgroundConfiguration = backgroundConfiguration

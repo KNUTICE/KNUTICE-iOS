@@ -16,6 +16,8 @@ let project = Project.module(
         .project(target: "KNIntelligence", path: "../KNIntelligence"),
         .project(target: "KNData", path: "../KNData"),
         .project(target: "KNDomain", path: "../KNDomain"),
+        .project(target: "KNNotice", path: "../Features/KNNotice"),
+        .project(target: "CorePresentation", path: "../Features/CorePresentation"),
         .external(name: "ComposableArchitecture"),
         .external(name: "Factory"),
         .external(name: "RxSwift"),

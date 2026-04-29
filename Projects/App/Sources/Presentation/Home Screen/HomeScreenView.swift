@@ -13,6 +13,7 @@ import KNDesignSystem
 import KNDomain
 import KNReadingRoom
 import KNMeal
+import KNNotice
 import KNSetting
 import KNTip
 import KNUtility
@@ -214,6 +215,7 @@ fileprivate struct NoticeList<Content: View>: View {
     @State private var isActivityViewPresented: Bool = false
     @State private var layoutType: ABTestLayoutType?
     @State private var isShowingBookmarkForm: Bool = false
+    @Environment(\.dismiss) private var dismiss
     
     let notices: MainSectionNotice
     let moreButton: (() -> Content)?
@@ -244,7 +246,16 @@ fileprivate struct NoticeList<Content: View>: View {
             ForEach(Array(notices.items.enumerated()), id: \.element.notice.id) { index, item in
                 NavigationLink {
                     // 상세 화면 이동
-                    NoticeContentView(notice: item.notice)
+                    NoticeContentView(notice: item.notice) { notice in
+                        let bookmark = Bookmark(notice: notice, memo: "")
+                        let bookmarkForm = BookmarkForm(
+                            store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
+                                BookmarkFormFeature()
+                            }
+                        ) { self.dismiss() }
+                        
+                        return UIHostingController(rootView: bookmarkForm)
+                    }
                         .ignoresSafeArea(.all)
                         .toolbar {
                             ToolbarItemGroup(placement: .topBarTrailing) {

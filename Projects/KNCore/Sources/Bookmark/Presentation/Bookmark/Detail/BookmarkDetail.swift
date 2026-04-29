@@ -8,11 +8,13 @@
 import ComposableArchitecture
 import KNDesignSystem
 import KNDomain
+import KNNotice
 import SwiftUI
 import UIComponents
 
 struct BookmarkDetail: View {
     @Bindable var store: StoreOf<BookmarkDetailFeature>
+    @Environment(\.dismiss) private var dismiss
     
     let dismissAction: () -> Void
     
@@ -66,18 +68,27 @@ struct BookmarkDetail: View {
                     }
                     .fullScreenCover(isPresented: $store.isShowingWebView) {
                         NavigationStack {
-                            NoticeContentView(notice: bookmark.notice)
-                                .edgesIgnoringSafeArea(.bottom)
-                                .background(KNDesignSystemAsset.detailViewBackground.swiftUIColor)
-                                .toolbar {
-                                    ToolbarItem(placement: .topBarLeading) {
-                                        Button {
-                                            store.send(.toggleWebView(false))
-                                        } label: {
-                                            Image(systemName: "xmark")
-                                        }
+                            NoticeContentView(notice: bookmark.notice) { notice in
+                                let bookmark = Bookmark(notice: notice, memo: "")
+                                let bookmarkForm = BookmarkForm(
+                                    store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
+                                        BookmarkFormFeature()
+                                    }
+                                ) { self.dismiss() }
+                                
+                                return UIHostingController(rootView: bookmarkForm)
+                            }
+                            .edgesIgnoringSafeArea(.bottom)
+                            .background(KNDesignSystemAsset.detailViewBackground.swiftUIColor)
+                            .toolbar {
+                                ToolbarItem(placement: .topBarLeading) {
+                                    Button {
+                                        store.send(.toggleWebView(false))
+                                    } label: {
+                                        Image(systemName: "xmark")
                                     }
                                 }
+                            }
                         }
                     }
                     .alert($store.scope(state: \.alert, action: \.alert))
