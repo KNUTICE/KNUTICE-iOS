@@ -7,7 +7,6 @@
 
 import Factory
 import Foundation
-import KNDomain
 
 public protocol SearchNoticesUseCase: Actor {
     func execute(with keyword: String) async throws -> [Notice]

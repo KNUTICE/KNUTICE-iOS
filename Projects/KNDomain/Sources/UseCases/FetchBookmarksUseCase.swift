@@ -9,7 +9,7 @@ import Factory
 import Foundation
 import KNUtility
 
-public protocol FetchBookmarksUseCase: Actor {
+public protocol FetchBookmarksUseCase: Sendable {
     
     /// Fetches a list of bookmarks for a given page, page size, and sort option.
     ///
@@ -44,10 +44,12 @@ public extension FetchBookmarksUseCase {
     }
 }
 
-public actor FetchBookmarksUseCaseImpl: FetchBookmarksUseCase {
-    @Injected(\.bookmarkRepository) private var bookmarkRepository
+public final class FetchBookmarksUseCaseImpl: FetchBookmarksUseCase {
+    private let bookmarkRepository: BookmarkRepository
     
-    public init() {}
+    public init(bookmarkReportory: BookmarkRepository) {
+        self.bookmarkRepository = bookmarkReportory
+    }
     
     /// Fetches bookmark data, ensuring that timestamp fields (`createdAt`, `updatedAt`)
     /// are initialized for legacy bookmark entries that may lack these values.

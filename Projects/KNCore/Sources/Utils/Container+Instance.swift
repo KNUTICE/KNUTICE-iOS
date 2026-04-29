@@ -41,31 +41,31 @@ extension Container {
     // [Bookmark Related]
     var saveBookmarkUseCase: Factory<SaveBookmarkUseCase> {
         Factory(self) {
-            SaveBookmarkUseCaseImpl()
+            SaveBookmarkUseCaseImpl(bookmarkRepository: self.bookmarkRepository())
         }
     }
     
     var deleteBookmarkUseCase: Factory<DeleteBookmarkUseCase> {
         Factory(self) {
-            DeleteBookmarkUseCaseImpl()
+            DeleteBookmarkUseCaseImpl(bookmarkRepository: self.bookmarkRepository())
         }
     }
     
     var updateBookmarkUseCase: Factory<UpdateBookmarkUseCase> {
         Factory(self) {
-            UpdateBookmarkUseCaseImpl()
+            UpdateBookmarkUseCaseImpl(bookmarkRepository: self.bookmarkRepository())
         }
     }
     
     var fetchBookmarksUseCase: Factory<FetchBookmarksUseCase> {
         Factory(self) {
-            FetchBookmarksUseCaseImpl()
+            FetchBookmarksUseCaseImpl(bookmarkReportory: self.bookmarkRepository())
         }
     }
     
     var searchBookmarksUseCase: Factory<SearchBookmarksUseCase> {
         Factory(self) {
-            SearchBookmarksUseCaseImpl()
+            SearchBookmarksUseCaseImpl(repository: self.bookmarkRepository())
         }
     }
     
@@ -79,13 +79,13 @@ extension Container {
     // [Composite / Utility]
     var searchNoticeAndBookmarkUseCase: Factory<SearchNoticeAndBookmarkUseCase> {
         Factory(self) {
-            SearchNoticeAndBookmarkUseCaseImpl()
+            SearchNoticeAndBookmarkUseCaseImpl(searchNoticesUseCase: self.searchNoticesUseCase(), searchBookmarksUseCase: self.searchBookmarksUseCase())
         }
     }
     
     var provideReloadEventPublisherUseCase: Factory<ProvideReloadEventPublisherUseCase> {
         Factory(self) {
-            ProvideReloadEventPublisherUseCaseImpl()
+            ProvideReloadEventPublisherUseCaseImpl(repository: self.bookmarkRepository())
         }
     }
     

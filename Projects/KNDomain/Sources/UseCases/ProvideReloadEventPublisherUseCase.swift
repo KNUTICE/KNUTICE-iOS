@@ -18,7 +18,11 @@ public protocol ProvideReloadEventPublisherUseCase {
 }
 
 public final class ProvideReloadEventPublisherUseCaseImpl: ProvideReloadEventPublisherUseCase {
-    @Injected(\.bookmarkRepository) private var repository
+    private let repository: BookmarkRepository
+    
+    public init(repository: BookmarkRepository) {
+        self.repository = repository
+    }
     
     /// Returns the repository’s reload event publisher.
     public var eventPublisher: AnyPublisher<ReloadEvent, Never> {

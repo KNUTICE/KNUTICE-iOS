@@ -7,9 +7,8 @@
 
 import Factory
 import Foundation
-import KNDomain
 
-public protocol SearchNoticeAndBookmarkUseCase: Actor {
+public protocol SearchNoticeAndBookmarkUseCase: Sendable {
     typealias SearchResult = Result<([Notice], [Bookmark]), any Error>
     
     /// Executes a concurrent search for both notices and bookmarks using the given keyword.
@@ -20,9 +19,17 @@ public protocol SearchNoticeAndBookmarkUseCase: Actor {
     func execute(with keyword: String) async -> SearchResult
 }
 
-public actor SearchNoticeAndBookmarkUseCaseImpl: SearchNoticeAndBookmarkUseCase {
-    @Injected(\.searchNoticesUseCase) private var searchNoticesUseCase
-    @Injected(\.searchBookmarksUseCase) private var searchBookmarksUseCase
+public final class SearchNoticeAndBookmarkUseCaseImpl: SearchNoticeAndBookmarkUseCase {
+    private let searchNoticesUseCase: SearchNoticesUseCase
+    private let searchBookmarksUseCase: SearchBookmarksUseCase
+    
+    public init(
+        searchNoticesUseCase: SearchNoticesUseCase,
+        searchBookmarksUseCase: SearchBookmarksUseCase
+    ) {
+        self.searchNoticesUseCase = searchNoticesUseCase
+        self.searchBookmarksUseCase = searchBookmarksUseCase
+    }
     
     public func execute(with keyword: String) async -> SearchResult {
         do {

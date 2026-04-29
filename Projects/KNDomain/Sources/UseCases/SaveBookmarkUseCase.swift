@@ -9,16 +9,18 @@ import Factory
 import Foundation
 import UserNotifications
 
-public protocol SaveBookmarkUseCase: Actor {
+public protocol SaveBookmarkUseCase: Sendable {
     /// Saves the given bookmark.
     /// - Parameter bookmark: The bookmark to be saved.
     func execute(_ bookmark: Bookmark) async throws
 }
 
 public actor SaveBookmarkUseCaseImpl: SaveBookmarkUseCase {
-    @Injected(\.bookmarkRepository) private var bookmarkRepository: BookmarkRepository
+    private let bookmarkRepository: BookmarkRepository
     
-    public init() {}
+    public init(bookmarkRepository: BookmarkRepository) {
+        self.bookmarkRepository = bookmarkRepository
+    }
     
     /// Executes the bookmark save flow:
     /// 1. Persists the bookmark in the local repository.

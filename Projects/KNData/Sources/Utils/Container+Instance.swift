@@ -9,8 +9,14 @@ import Factory
 import KNDomain
 import KNNetwork
 
-public extension Container {
-    var noticeRepository: Factory<NoticeRepository> {
+extension Container {
+    public var noticeRepository: Factory<NoticeRepository> {
         Factory(self) { NoticeRepositoryImpl(dataSource: RemoteDataSourceImpl()) }
+    }
+    
+    var bookmarkDataSource: Factory<BookmarkPersistenceStore> {
+        Factory(self) {
+            BookmarkPersistenceStoreImpl.shared
+        }
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import KNDomain
 
 @Reducer
 public struct BookmarkDetailFeature: Sendable {

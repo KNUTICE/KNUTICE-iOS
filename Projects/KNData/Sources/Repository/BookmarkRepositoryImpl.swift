@@ -12,13 +12,13 @@ import KNDomain
 import KNUtility
 import UserNotifications
 
-actor BookmarkRepositoryImpl: BookmarkRepository {
+public actor BookmarkRepositoryImpl: BookmarkRepository {
     /// A public-facing publisher that emits `ReloadEvent` to notify observers
     /// when bookmark data has been modified.
     ///
     /// Marked as `nonisolated` to avoid actor isolation constraints for
     /// Combine pipelines on the main thread or background threads.
-    nonisolated var eventPublisher: AnyPublisher<ReloadEvent, Never> {
+    nonisolated public var eventPublisher: AnyPublisher<ReloadEvent, Never> {
         eventTrigger.eraseToAnyPublisher()
     }
     
@@ -29,7 +29,7 @@ actor BookmarkRepositoryImpl: BookmarkRepository {
     private nonisolated let eventTrigger: PassthroughSubject<ReloadEvent, Never> = .init()
     
     /// Shared singleton instance providing a single source of truth.
-    static let shared: BookmarkRepositoryImpl = .init()
+    public static let shared: BookmarkRepositoryImpl = .init()
     
     @Injected(\.bookmarkDataSource) private var dataSource
     
@@ -44,7 +44,7 @@ actor BookmarkRepositoryImpl: BookmarkRepository {
     /// Note:
     /// - Repositories should convert Entities -> DTOs only inside the data layer.
     /// - DTOs are not exposed to upper layers (UseCase / ViewModel).
-    func save(bookmark: Bookmark) async throws {
+    public func save(bookmark: Bookmark) async throws {
         let isExist = try await dataSource.isDuplication(id: bookmark.notice.id)
         
         guard !isExist else {
@@ -59,7 +59,7 @@ actor BookmarkRepositoryImpl: BookmarkRepository {
     
     /// Fetches paginated bookmarks and maps DTOs to domain entities.
     /// DTOs stay within the data layer and are never returned to the domain.
-    func fetch(page pageNum: Int, pageSize: Int, sortBy option: BookmarkSortOption) async throws -> [Bookmark] {
+    public func fetch(page pageNum: Int, pageSize: Int, sortBy option: BookmarkSortOption) async throws -> [Bookmark] {
         let dto = try await dataSource.fetch(page: pageNum, pageSize: pageSize, sortBy: option)
         
         return dto.compactMap { $0.asEntity }
@@ -67,7 +67,7 @@ actor BookmarkRepositoryImpl: BookmarkRepository {
     
     /// Fetches bookmarks that do not have timestamps.
     /// Useful for handling items that require additional processing.
-    func fetchWhereTimestampsAreNil() async throws -> [Bookmark] {
+    public func fetchWhereTimestampsAreNil() async throws -> [Bookmark] {
         let dto = try await dataSource.fetchItemsWhereTimestampsAreNil()
         
         return dto.compactMap { $0.asEntity }
@@ -75,7 +75,7 @@ actor BookmarkRepositoryImpl: BookmarkRepository {
     
     /// Performs keyword-based searching and returns the corresponding entities.
     /// Uses Task cancellation checks to ensure responsiveness.
-    func search(with keyword: String) async throws -> [Bookmark] {
+    public func search(with keyword: String) async throws -> [Bookmark] {
         try Task.checkCancellation()
         
         let dtos = try await dataSource.fetch(keyword: keyword)
@@ -85,7 +85,7 @@ actor BookmarkRepositoryImpl: BookmarkRepository {
     
     /// Fetches a single bookmark by ID.
     /// Returns a mapped domain entity, or `nil` if not found.
-    func fetch(id: Int) async throws -> Bookmark? {
+    public func fetch(id: Int) async throws -> Bookmark? {
         try Task.checkCancellation()
         
         let dto = try await dataSource.fetch(withId: id)
@@ -97,7 +97,7 @@ actor BookmarkRepositoryImpl: BookmarkRepository {
     
     /// Deletes a bookmark by ID.
     /// No entity mapping is needed for delete operations.
-    func delete(by id: Int) async throws {
+    public func delete(by id: Int) async throws {
         try await dataSource.delete(by: id)
         eventTrigger.send(.normal)
     }
@@ -106,13 +106,13 @@ actor BookmarkRepositoryImpl: BookmarkRepository {
     
     /// Updates an existing bookmark.
     /// Since updates involve domain rules, the domain entity is passed directly.
-    func update(_ bookmark: Bookmark) async throws {
+    public func update(_ bookmark: Bookmark) async throws {
         try await dataSource.update(bookmark: bookmark)
         eventTrigger.send(.preserveCount)
     }
     
     /// Updates the timestamp-related values of a bookmark record.
-    func updateTimeStamp(_ update: BookmarkUpdate) async throws {
+    public func updateTimeStamp(_ update: BookmarkUpdate) async throws {
         try await dataSource.updateTimeStamp(update)
     }
     

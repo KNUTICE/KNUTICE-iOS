@@ -10,7 +10,7 @@ import Foundation
 import KNNotification
 import UserNotifications
 
-public protocol UpdateBookmarkUseCase: Actor {
+public protocol UpdateBookmarkUseCase: Sendable {
     
     /// Updates the given bookmark.
     ///
@@ -19,10 +19,12 @@ public protocol UpdateBookmarkUseCase: Actor {
     func execute(for bookmark: Bookmark) async throws
 }
 
-public actor UpdateBookmarkUseCaseImpl: UpdateBookmarkUseCase {
-    @Injected(\.bookmarkRepository) private var bookmarkRepository: BookmarkRepository
+public final class UpdateBookmarkUseCaseImpl: UpdateBookmarkUseCase {
+    private let bookmarkRepository: BookmarkRepository
     
-    public init() {}
+    public init(bookmarkRepository: BookmarkRepository) {
+        self.bookmarkRepository = bookmarkRepository
+    }
     
     /// Executes the update process for a bookmark:
     /// 1. Removes the existing scheduled local notification for the bookmark.

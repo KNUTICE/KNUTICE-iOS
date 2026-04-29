@@ -6,7 +6,9 @@
 //
 
 import ComposableArchitecture
+import Factory
 import Foundation
+import KNDomain
 
 extension DependencyValues {        
     var deleteBookmarkUseCase: DeleteBookmarkUseCase {
@@ -31,17 +33,17 @@ extension DependencyValues {
 }
 
 fileprivate enum DeleteBookmarkUseCaseKey: DependencyKey {
-    static let liveValue: DeleteBookmarkUseCase = DeleteBookmarkUseCaseImpl()
+    static let liveValue: DeleteBookmarkUseCase = DeleteBookmarkUseCaseImpl(bookmarkRepository: Container.shared.bookmarkRepository())
 }
 
 fileprivate enum SaveBookmarkUseCaseKey: DependencyKey {
-    static let liveValue: SaveBookmarkUseCase = SaveBookmarkUseCaseImpl()
+    static let liveValue: SaveBookmarkUseCase = SaveBookmarkUseCaseImpl(bookmarkRepository: Container.shared.bookmarkRepository())
 }
 
 fileprivate enum UpdateBookmarkUseCaseKey: DependencyKey {
-    static let liveValue: UpdateBookmarkUseCase = UpdateBookmarkUseCaseImpl()
+    static let liveValue: UpdateBookmarkUseCase = UpdateBookmarkUseCaseImpl(bookmarkRepository: Container.shared.bookmarkRepository())
 }
 
 fileprivate enum FetchBookmarkUseCaseKey: DependencyKey {
-    static let liveValue: FetchBookmarksUseCase = FetchBookmarksUseCaseImpl()
+    static let liveValue: FetchBookmarksUseCase = FetchBookmarksUseCaseImpl(bookmarkReportory: Container.shared.bookmarkRepository())
 }

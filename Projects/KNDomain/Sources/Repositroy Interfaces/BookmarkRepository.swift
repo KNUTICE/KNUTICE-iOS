@@ -7,13 +7,14 @@
 
 import Combine
 import Foundation
+import KNUtility
 
 public enum ReloadEvent {
     case normal
     case preserveCount
 }
 
-protocol BookmarkRepository: Sendable {
+public protocol BookmarkRepository: Sendable {
     /// A publisher that emits `ReloadEvent` whenever a bookmark-related
     /// mutation occurs (e.g., save, delete, update).
     ///

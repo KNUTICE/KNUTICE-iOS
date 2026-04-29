@@ -7,9 +7,10 @@
 
 import CoreData
 import Foundation
-import KNData
+import KNDomain
+import KNUtility
 
-protocol BookmarkPersistenceStore: Sendable {
+public protocol BookmarkPersistenceStore: Sendable {
     /// Saves a `Bookmark` into the persistent store.
     ///
     /// This method creates both a `BookmarkEntity` and its associated `NoticeEntity`
@@ -84,13 +85,13 @@ extension BookmarkPersistenceStore {
     }
 }
 
-actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
-    static let shared: BookmarkPersistenceStoreImpl = .init()
+public actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
+    public static let shared: BookmarkPersistenceStoreImpl = .init()
     
     private var persistentContainer: NSPersistentContainer? = {
         let modelName: String = "Bookmark"
         
-        guard let modelURL = KNCoreResources.bundle.url(forResource: modelName, withExtension: "momd"),
+        guard let modelURL = KNDataResources.bundle.url(forResource: modelName, withExtension: "momd"),
               let model = NSManagedObjectModel(contentsOf: modelURL) else {
             return nil
         }
@@ -113,7 +114,7 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
     
     // MARK: - Save
     
-    func save(_ dto: BookmarkDTO) async throws {
+    public func save(_ dto: BookmarkDTO) async throws {
         let context = backgroundContext
         
         try Task.checkCancellation()
@@ -148,7 +149,7 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
     
     // MARK: - Fetch
     
-    func fetch(page: Int, pageSize: Int, sortBy option: BookmarkSortOption) async throws -> [BookmarkDTO] {
+    public func fetch(page: Int, pageSize: Int, sortBy option: BookmarkSortOption) async throws -> [BookmarkDTO] {
         try Task.checkCancellation()
         
         let entities = try await fetchBookmarkEntities(
@@ -160,7 +161,7 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
         return createBookmarkDTOs(from: entities)
     }
     
-    func isDuplication(id: Int) async throws -> Bool {
+    public func isDuplication(id: Int) async throws -> Bool {
         try Task.checkCancellation()
         
         let entities: [BookmarkEntity] = try await fetch(withId: id)
@@ -168,7 +169,7 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
         return !entities.isEmpty
     }
     
-    func fetchItemsWhereTimestampsAreNil() async throws -> [BookmarkDTO] {
+    public func fetchItemsWhereTimestampsAreNil() async throws -> [BookmarkDTO] {
         try Task.checkCancellation()
         
         let entities = try await fetchBookmarkEntities(
@@ -178,7 +179,7 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
         return createBookmarkDTOs(from: entities)
     }
     
-    func fetch(keyword: String) async throws -> [BookmarkDTO] {
+    public func fetch(keyword: String) async throws -> [BookmarkDTO] {
         try Task.checkCancellation()
         
         let entities = try await fetchBookmarkEntities(
@@ -188,7 +189,7 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
         return createBookmarkDTOs(from: entities)
     }
     
-    func fetch(withId id: Int) async throws -> BookmarkDTO? {
+    public func fetch(withId id: Int) async throws -> BookmarkDTO? {
         try Task.checkCancellation()
         
         let entities: [BookmarkEntity] = try await fetch(withId: id)
@@ -235,7 +236,7 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
     
     // MARK: - Delete
     
-    func delete(by id: Int) async throws {
+    public func delete(by id: Int) async throws {
         try Task.checkCancellation()
         
         let entities: [BookmarkEntity] = try await fetch(withId: id)
@@ -257,7 +258,7 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
     
     // MARK: - Update
     
-    func update(bookmark: Bookmark) async throws {
+    public func update(bookmark: Bookmark) async throws {
         try Task.checkCancellation()
         
         let entities: [BookmarkEntity] = try await fetch(withId: bookmark.notice.id)
@@ -277,7 +278,7 @@ actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
         }
     }
     
-    func updateTimeStamp(_ update: BookmarkUpdate) async throws {
+    public func updateTimeStamp(_ update: BookmarkUpdate) async throws {
         try Task.checkCancellation()
         
         let entities: [BookmarkEntity] = try await fetch(withId: update.bookmark.notice.id)

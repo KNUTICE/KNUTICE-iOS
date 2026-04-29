@@ -6,6 +6,7 @@
 //
 
 import Factory
+import KNDomain
 import RxRelay
 import RxSwift
 import os

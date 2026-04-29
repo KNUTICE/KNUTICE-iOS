@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24512" systemVersion="25D125" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
-    <entity name="BookmarkEntity" representedClassName="KNCore.BookmarkEntity" syncable="YES">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24837" systemVersion="25E253" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="BookmarkEntity" representedClassName="KNData.BookmarkEntity" syncable="YES">
         <attribute name="alarmDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="memo" attributeType="String"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="bookmarkedNotice" maxCount="1" deletionRule="Cascade" destinationEntity="NoticeEntity" inverseName="associatedBookmark" inverseEntity="NoticeEntity"/>
     </entity>
-    <entity name="NoticeEntity" representedClassName="NoticeEntity" syncable="YES">
+    <entity name="NoticeEntity" representedClassName="KNData.NoticeEntity" syncable="YES">
         <attribute name="category" optional="YES" attributeType="String"/>
         <attribute name="contentUrl" attributeType="String"/>
         <attribute name="department" attributeType="String"/>

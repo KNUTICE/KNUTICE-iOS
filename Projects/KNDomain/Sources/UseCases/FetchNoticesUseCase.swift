@@ -8,7 +8,6 @@
 import Combine
 import Factory
 import Foundation
-import KNTopic
 import KNUtility
 
 public protocol FetchNoticesUseCase: Actor {

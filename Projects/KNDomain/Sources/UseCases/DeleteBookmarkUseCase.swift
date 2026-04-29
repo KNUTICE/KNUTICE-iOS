@@ -9,16 +9,18 @@ import Factory
 import Foundation
 import UserNotifications
 
-public protocol DeleteBookmarkUseCase: Actor {
+public protocol DeleteBookmarkUseCase: Sendable {
     /// Deletes the given bookmark.
     /// - Parameter bookmark: The bookmark to be removed.
     func execute(for bookmark: Bookmark) async throws
 }
 
-public actor DeleteBookmarkUseCaseImpl: DeleteBookmarkUseCase {
-    @Injected(\.bookmarkRepository) private var bookmarkRepository: BookmarkRepository
+public final class DeleteBookmarkUseCaseImpl: DeleteBookmarkUseCase {
+    private let bookmarkRepository: BookmarkRepository
     
-    public init() {}
+    public init(bookmarkRepository: BookmarkRepository) {
+        self.bookmarkRepository = bookmarkRepository
+    }
     
     /// Executes the deletion flow for a given bookmark:
     /// 1. If the bookmark has no scheduled alarm, it is deleted immediately.

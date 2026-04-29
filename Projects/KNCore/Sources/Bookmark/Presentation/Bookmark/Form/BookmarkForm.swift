@@ -7,6 +7,7 @@
 
 import ComposableArchitecture
 import KNDesignSystem
+import KNDomain
 import SwiftUI
 
 public struct BookmarkForm: View {

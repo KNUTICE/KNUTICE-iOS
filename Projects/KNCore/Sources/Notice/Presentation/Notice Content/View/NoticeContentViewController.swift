@@ -8,6 +8,7 @@
 import ComposableArchitecture
 import Combine
 import KNDesignSystem
+import KNDomain
 import KNIntelligence
 import KNUtility
 import SnapKit

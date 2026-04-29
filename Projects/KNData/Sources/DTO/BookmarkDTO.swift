@@ -6,10 +6,9 @@
 //
 
 import Foundation
-import KNData
 import KNDomain
 
-struct BookmarkDTO: Sendable {
+public struct BookmarkDTO: Sendable {
     let noticeData: NoticeData
     let memo: String?
     let alarmDate: Date?
