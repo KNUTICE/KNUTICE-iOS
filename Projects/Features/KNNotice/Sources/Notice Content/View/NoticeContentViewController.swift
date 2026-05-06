@@ -213,14 +213,6 @@ private extension NoticeContentViewController {
     
     func presentBookmarkForm() {
         guard let notice = viewModel.notice else { return }
-//        let bookmark = Bookmark(notice: notice, memo: "")
-//        let state = BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create)
-//        
-//        let rootView = BookmarkForm(
-//            store: Store(initialState: state) { BookmarkFormFeature() }
-//        ) { [weak self] in
-//            self?.dismiss(animated: true)
-//        }
         
         presentSheet(viewController: makeBookmarkFormViewController(notice), detents: [.large()])
     }
