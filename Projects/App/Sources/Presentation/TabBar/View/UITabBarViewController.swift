@@ -34,7 +34,7 @@ final class UITabBarViewController: UITabBarController, NavigationItemConfigurab
         return viewController
     }()
     private let majorNoticeViewController: UIViewController = {
-        let viewController = NoticeTabViewController()
+        let viewController = NoticeTabViewController(noticeCollectionViewControllerFactory: NoticeCollectionViewControllerFactoryImpl())
         viewController.tabBarItem.image = UIImage(systemName: "megaphone")
         viewController.tabBarItem.selectedImage = UIImage(systemName: "megaphone.fill")
         viewController.tabBarItem.title = "공지"

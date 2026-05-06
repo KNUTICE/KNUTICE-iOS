@@ -43,6 +43,8 @@ public final class NoticeTabViewController: UIViewController {
         return viewController
     }()
     
+    private let noticeCollectionViewControllerFactory: NoticeCollectionViewControllerFactory
+    
     /// List of view controllers corresponding to each category tab.
     private var viewControllers: [UIViewController] = []
     
@@ -51,6 +53,15 @@ public final class NoticeTabViewController: UIViewController {
     
     /// Dispose bag for managing RxSwift subscriptions.
     private let disposeBag: DisposeBag = .init()
+    
+    public init(noticeCollectionViewControllerFactory: NoticeCollectionViewControllerFactory) {
+        self.noticeCollectionViewControllerFactory = noticeCollectionViewControllerFactory
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,15 +101,15 @@ public final class NoticeTabViewController: UIViewController {
         viewModel.categories
             .observe(on: MainScheduler.instance)
             .do { [weak self] categories in
+                guard let self else { return }
+                
                 let newCategories = categories.compactMap {
                     if case let .category(category) = $0 { return category as (any NoticeTabRepresentable) }
                     else { return nil }
                 }
                 
-                self?.viewControllers = newCategories.compactMap { category in
-                    self?.viewControllers
-                        .compactMap { $0 as? NoticeCollectionViewController }
-                        .first { ($0.viewModel.category as? any NoticeTabRepresentable)?.id == category.id }
+                viewControllers = newCategories.compactMap { category in
+                    existingViewController(for: category) ?? makeViewController(for: category)
                 }
             }
             .bind(to: collectionView.rx.items) { [weak self] (collectionView, row, element) in
@@ -282,9 +293,33 @@ extension NoticeTabViewController: UIPageViewControllerDelegate, UIPageViewContr
     
 }
 
+extension NoticeTabViewController {
+    private func existingViewController(
+        for category: any NoticeTabRepresentable
+    ) -> NoticeCollectionViewController? {
+        viewControllers
+            .compactMap { $0 as? NoticeCollectionViewController }
+            .first { ($0.viewModel.category as? any NoticeTabRepresentable)?.id == category.id }
+    }
+
+    private func makeViewController(
+        for category: any NoticeTabRepresentable
+    ) -> NoticeCollectionViewController? {
+        guard let category = category as? any CategoryProtocol else { return nil }
+        return noticeCollectionViewControllerFactory.make(for: category)
+    }
+}
+
 #if DEBUG
+struct MockFactory: NoticeCollectionViewControllerFactory {
+    func make(for category: any KNUtility.CategoryProtocol) -> NoticeCollectionViewController? {
+        return nil
+    }
+    
+}
+
 #Preview {
-    NoticeTabViewController()
+    NoticeTabViewController(noticeCollectionViewControllerFactory: MockFactory())
         .makePreview()
 }
 #endif

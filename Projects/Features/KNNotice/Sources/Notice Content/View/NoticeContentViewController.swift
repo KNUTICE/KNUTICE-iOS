@@ -89,16 +89,6 @@ public final class NoticeContentViewController: UIViewController {
             // Bookmark 버튼 클릭 이벤트 전송
             Analytics.logEvent(AnalyticsEventName.bookmarkButtonClicked.rawValue, parameters: nil)
             
-//            // Bookmark Form 표시
-//            let bookmark = Bookmark(notice: notice, memo: "")
-//            let rootView = BookmarkForm(
-//                store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
-//                    BookmarkFormFeature()
-//                }
-//            ) {
-//                self?.dismiss(animated: true)
-//            }
-//            let viewController = UIHostingController(rootView: rootView)
             let navigationController = UINavigationController(rootViewController: makeBookmarkFormViewController(notice))
             navigationController.modalPresentationStyle = .pageSheet
             

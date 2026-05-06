@@ -247,6 +247,7 @@ fileprivate struct NoticeList<Content: View>: View {
                 NavigationLink {
                     // 상세 화면 이동
                     NoticeContentView(notice: item.notice) { notice in
+                        
                         let bookmark = Bookmark(notice: notice, memo: "")
                         let bookmarkForm = BookmarkForm(
                             store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
@@ -256,50 +257,50 @@ fileprivate struct NoticeList<Content: View>: View {
                         
                         return UIHostingController(rootView: bookmarkForm)
                     }
-                        .ignoresSafeArea(.all)
-                        .toolbar {
-                            ToolbarItemGroup(placement: .topBarTrailing) {
-                                if let layoutType, case .typeB = layoutType {
-                                    Button {
-                                        // Bookmark 버튼 클릭 이벤트 전송
-                                        Analytics.logEvent(AnalyticsEventName.bookmarkButtonClicked.rawValue, parameters: nil)
-                                        
-                                        // Bookmark Form 표시
-                                        isShowingBookmarkForm.toggle()
-                                    } label: {
-                                        Image(systemName: "bookmark")
-                                    }
-                                }
-                                
+                    .ignoresSafeArea(.all)
+                    .toolbar {
+                        ToolbarItemGroup(placement: .topBarTrailing) {
+                            if let layoutType, case .typeB = layoutType {
                                 Button {
-                                    isActivityViewPresented.toggle()
-                                } label: {
-                                    Image(systemName: "square.and.arrow.up")
-                                }
-                            }
-                        }
-                        .background {
-                            if let url = item.notice.contentUrl {
-                                ActivityView(isPresented: $isActivityViewPresented, activityItems: [
-                                    url
-                                ])
-                            }
-                        }
-                        .task {
-                            await fetchLayoutType()
-                        }
-                        .sheet(isPresented: $isShowingBookmarkForm) {
-                            let bookmark = Bookmark(notice: item.notice, memo: "")
-                            NavigationStack {
-                                BookmarkForm(
-                                    store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
-                                        BookmarkFormFeature()
-                                    }
-                                ) {
+                                    // Bookmark 버튼 클릭 이벤트 전송
+                                    Analytics.logEvent(AnalyticsEventName.bookmarkButtonClicked.rawValue, parameters: nil)
+                                    
+                                    // Bookmark Form 표시
                                     isShowingBookmarkForm.toggle()
+                                } label: {
+                                    Image(systemName: "bookmark")
                                 }
                             }
+                            
+                            Button {
+                                isActivityViewPresented.toggle()
+                            } label: {
+                                Image(systemName: "square.and.arrow.up")
+                            }
                         }
+                    }
+                    .background {
+                        if let url = item.notice.contentUrl {
+                            ActivityView(isPresented: $isActivityViewPresented, activityItems: [
+                                url
+                            ])
+                        }
+                    }
+                    .task {
+                        await fetchLayoutType()
+                    }
+                    .sheet(isPresented: $isShowingBookmarkForm) {
+                        let bookmark = Bookmark(notice: item.notice, memo: "")
+                        NavigationStack {
+                            BookmarkForm(
+                                store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
+                                    BookmarkFormFeature()
+                                }
+                            ) {
+                                isShowingBookmarkForm.toggle()
+                            }
+                        }
+                    }
                 } label: {
                     NoticeListRow(notice: item.notice)
                         .redacted(reason: item.presentationType == .skeleton ? .placeholder : [])
