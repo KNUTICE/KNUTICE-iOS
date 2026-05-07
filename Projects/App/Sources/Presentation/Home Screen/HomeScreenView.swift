@@ -66,7 +66,7 @@ struct HomeScreenView: View {
                 case let .loaded(sectionedNotices):
                     TabView(selection: $currentTabIndex) {
                         ForEach(Array(sectionedNotices.enumerated()), id: \.element.header) { index, section in
-                            NoticeList(notices: section) {
+                            NoticeList(notices: section, bookmarkFormFactory: BookmarkFormFactoryImpl()) {
                                 Button {
                                     NotificationCenter.default.post(
                                         name: .didReceiveDeepLink,
@@ -99,7 +99,7 @@ struct HomeScreenView: View {
                 
                 switch store.majorNotices {
                 case let .loaded(majorNotices):
-                    NoticeList(notices: majorNotices) {
+                    NoticeList(notices: majorNotices, bookmarkFormFactory: BookmarkFormFactoryImpl()) {
                         Button {
                             NotificationCenter.default.post(name: .didReceiveDeepLink, object: DeepLink.navigation(tabIndex: 1))
                         } label: {
@@ -215,9 +215,9 @@ fileprivate struct NoticeList<Content: View>: View {
     @State private var isActivityViewPresented: Bool = false
     @State private var layoutType: ABTestLayoutType?
     @State private var isShowingBookmarkForm: Bool = false
-    @Environment(\.dismiss) private var dismiss
     
     let notices: MainSectionNotice
+    let bookmarkFormFactory: BookmarkFormFactory
     let moreButton: (() -> Content)?
     
     var body: some View {
@@ -227,17 +227,7 @@ fileprivate struct NoticeList<Content: View>: View {
                     .font(.title3)
                     .fontWeight(.heavy)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundStyle(
-                        (notices.category as? NoticeCategory).map { category -> Color in
-                            switch category {
-                            case .generalNotice:    return KNDesignSystemAsset.accentOrange.swiftUIColor
-                            case .academicNotice:    return KNDesignSystemAsset.accentAmber.swiftUIColor
-                            case .scholarshipNotice:    return KNDesignSystemAsset.accentMint.swiftUIColor
-                            case .eventNotice:    return KNDesignSystemAsset.accentBlue.swiftUIColor
-                            case .employmentNotice:    return KNDesignSystemAsset.accentPurple.swiftUIColor
-                            }
-                        } ?? .primary
-                    )
+                    .foregroundStyle((notices.category as? NoticeCategory).map { titleColor(for: $0) } ?? .primary)
                     .redacted(reason: notices.items.first?.presentationType == .skeleton ? .placeholder : [])
                 
                 moreButton?()
@@ -246,61 +236,52 @@ fileprivate struct NoticeList<Content: View>: View {
             ForEach(Array(notices.items.enumerated()), id: \.element.notice.id) { index, item in
                 NavigationLink {
                     // 상세 화면 이동
-                    NoticeContentView(notice: item.notice) { notice in
-                        
-                        let bookmark = Bookmark(notice: notice, memo: "")
-                        let bookmarkForm = BookmarkForm(
-                            store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
-                                BookmarkFormFeature()
-                            }
-                        ) { self.dismiss() }
-                        
-                        return UIHostingController(rootView: bookmarkForm)
-                    }
-                    .ignoresSafeArea(.all)
-                    .toolbar {
-                        ToolbarItemGroup(placement: .topBarTrailing) {
-                            if let layoutType, case .typeB = layoutType {
+                    NoticeContentView(notice: item.notice) { notice in bookmarkFormFactory.make(for: notice) }
+                        .ignoresSafeArea(.all)
+                        .toolbar {
+                            ToolbarItemGroup(placement: .topBarTrailing) {
+                                if let layoutType, case .typeB = layoutType {
+                                    Button {
+                                        // Bookmark 버튼 클릭 이벤트 전송
+                                        Analytics.logEvent(AnalyticsEventName.bookmarkButtonClicked.rawValue, parameters: nil)
+                                        
+                                        // Bookmark Form 표시
+                                        isShowingBookmarkForm.toggle()
+                                    } label: {
+                                        Image(systemName: "bookmark")
+                                    }
+                                }
+                                
                                 Button {
-                                    // Bookmark 버튼 클릭 이벤트 전송
-                                    Analytics.logEvent(AnalyticsEventName.bookmarkButtonClicked.rawValue, parameters: nil)
-                                    
-                                    // Bookmark Form 표시
-                                    isShowingBookmarkForm.toggle()
+                                    isActivityViewPresented.toggle()
                                 } label: {
-                                    Image(systemName: "bookmark")
+                                    Image(systemName: "square.and.arrow.up")
                                 }
                             }
-                            
-                            Button {
-                                isActivityViewPresented.toggle()
-                            } label: {
-                                Image(systemName: "square.and.arrow.up")
+                        }
+                        .background {
+                            if let url = item.notice.contentUrl {
+                                ActivityView(isPresented: $isActivityViewPresented, activityItems: [
+                                    url
+                                ])
                             }
                         }
-                    }
-                    .background {
-                        if let url = item.notice.contentUrl {
-                            ActivityView(isPresented: $isActivityViewPresented, activityItems: [
-                                url
-                            ])
+                        .task {
+                            await fetchLayoutType()
                         }
-                    }
-                    .task {
-                        await fetchLayoutType()
-                    }
-                    .sheet(isPresented: $isShowingBookmarkForm) {
-                        let bookmark = Bookmark(notice: item.notice, memo: "")
-                        NavigationStack {
-                            BookmarkForm(
-                                store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
-                                    BookmarkFormFeature()
+                        .sheet(isPresented: $isShowingBookmarkForm) {
+                            NavigationStack {
+                                let bookmark = Bookmark(notice: item.notice, memo: "")
+                                
+                                BookmarkForm(
+                                    store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
+                                        BookmarkFormFeature()
+                                    }
+                                ) {
+                                    isShowingBookmarkForm.toggle()
                                 }
-                            ) {
-                                isShowingBookmarkForm.toggle()
                             }
                         }
-                    }
                 } label: {
                     NoticeListRow(notice: item.notice)
                         .redacted(reason: item.presentationType == .skeleton ? .placeholder : [])
@@ -321,6 +302,22 @@ fileprivate struct NoticeList<Content: View>: View {
         let layout = await ABTestManager.shared.value(for: ABTestKeys.noticeDetailLayoutType)
         layoutType = ABTestLayoutType(rawValue: layout)
     }
+    
+    private func titleColor(for notice: NoticeCategory) -> Color {
+        switch notice {
+        case .generalNotice:
+            return KNDesignSystemAsset.accentOrange.swiftUIColor
+        case .academicNotice:
+            return KNDesignSystemAsset.accentAmber.swiftUIColor
+        case .scholarshipNotice:
+            return KNDesignSystemAsset.accentMint.swiftUIColor
+        case .eventNotice:
+            return KNDesignSystemAsset.accentBlue.swiftUIColor
+        case .employmentNotice:
+            return KNDesignSystemAsset.accentPurple.swiftUIColor
+        }
+    }
+    
 }
 
 fileprivate struct NoticeListRow: View {
