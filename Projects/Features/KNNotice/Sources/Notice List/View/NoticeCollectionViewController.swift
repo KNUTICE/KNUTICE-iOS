@@ -29,13 +29,13 @@ public class NoticeCollectionViewController: UIViewController, NoticeCollectionV
     }()
     let refreshControl: UIRefreshControl = UIRefreshControl()
     public let viewModel: NoticeCollectionViewModel
+    private let bookmarkFormFactory: BookmarkFormFactory
     public let disposeBag = DisposeBag()
     private let currentColumnCount: CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 1 : 2
-    private let makeBookmarkFormViewController: (Notice) -> UIViewController
     
-    public init(viewModel: NoticeCollectionViewModel, makeBookmarkFormViewController: @escaping (Notice) -> UIViewController) {
+    public init(viewModel: NoticeCollectionViewModel, bookmarkFormFactory: BookmarkFormFactory) {
         self.viewModel = viewModel
-        self.makeBookmarkFormViewController = makeBookmarkFormViewController
+        self.bookmarkFormFactory = bookmarkFormFactory
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -45,8 +45,6 @@ public class NoticeCollectionViewController: UIViewController, NoticeCollectionV
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
         // Set up
         setupLayout()
@@ -63,9 +61,11 @@ public class NoticeCollectionViewController: UIViewController, NoticeCollectionV
     ) {
         let notice = viewModel.notices.value[0].items[indexPath.row]
         let viewController = NoticeContentViewController(
-            viewModel: NoticeContentViewModel(notice: notice),
-            makeBookmarkFormViewController: makeBookmarkFormViewController
-        )
+            viewModel: NoticeContentViewModel(notice: notice)
+        ) { [weak self] notice in
+            self?.bookmarkFormFactory.make(for: notice) ?? UIViewController()
+        }
+        
         navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -120,15 +120,18 @@ public class NoticeCollectionViewController: UIViewController, NoticeCollectionV
 #if DEBUG
 actor MockFetchNoticesUseCase: FetchNoticesUseCase {}
 
+struct MockBookamrkFormFactory: BookmarkFormFactory {
+    func make(for notice: KNDomain.Notice) -> UIViewController { UIViewController() }
+}
+
 #Preview {
     NoticeCollectionViewController(
         viewModel: NoticeCollectionViewModel(
             category: NoticeCategory.generalNotice,
             fetchNoticesUseCase: MockFetchNoticesUseCase()
-        )
-    ) { _ in
-        UIViewController()
-    }
+        ),
+        bookmarkFormFactory: MockBookamrkFormFactory()
+    )
     .makePreview()
 }
 #endif
