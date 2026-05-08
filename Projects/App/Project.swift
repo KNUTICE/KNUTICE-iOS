@@ -136,6 +136,7 @@ let project = Project(
             entitlements: .file(path: "Widget/Resources/Widget.entitlements"),
             dependencies: [
                 .project(target: "KNCore", path: "../KNCore"),
+                .project(target: "KNDeepLink", path: "../KNDeepLink"),
                 .project(target: "KNDesignSystem", path: "../KNDesignSystem"),
                 .project(target: "KNReadingRoom", path: "../KNReadingRoom"),
             ],
