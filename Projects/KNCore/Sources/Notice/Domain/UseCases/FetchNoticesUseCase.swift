@@ -29,16 +29,21 @@ public extension FetchNoticesUseCase {
     }
 }
 
-public actor FetchNoticesUseCaseImpl: FetchNoticesUseCase {
+public actor FetchNoticesUseCaseImpl: FetchNoticesUseCase, UploadDateComparable {
     @Injected(\.noticeRepository) private var noticeRepository
     
     public func execute(category: some CategoryProtocol, after nttId: Int?, size: Int) async throws -> [Notice] {
         try Task.checkCancellation()
         
-        // TODO: 공지 업로드 시간 확인 후 New badge 표기 여부
-        
         // 서버에서 선택된 공지 데이터 가져오기
-        let notices = try await noticeRepository.fetchNotices(for: category.rawValue, after: nttId, size: size)
+        var notices = try await noticeRepository.fetchNotices(for: category.rawValue, after: nttId, size: size)
+        
+        // 업로드 날짜 기준 24시간 이내 여부 확인
+        for i in notices.indices {
+            guard isWithin24Hours(from: notices[i].uploadDate) else { break }
+            
+            notices[i].isNew = true
+        }
         
         return notices
     }

@@ -129,24 +129,16 @@ fileprivate extension Bookmark {
     }
 }
 
-fileprivate extension BookmarkDTO {
+extension BookmarkDTO: NoticeCreatable {
     /// Converts a DTO into a domain `Bookmark` entity.
     /// This ensures that upper layers (UseCase / ViewModel)
     /// operate only with pure domain models.
     var asEntity: Bookmark {
         let noticeData = self.noticeData
+        let notice = createNotice(noticeData)
+        
         return Bookmark(
-            notice: Notice(
-                id: Int(noticeData.nttID),
-                title: noticeData.title,
-                contentUrl: noticeData.contentURL,
-                isSummarizable: noticeData.isContentSummary,
-                department: noticeData.department,
-                uploadDate: noticeData.registrationDate,
-                imageUrl: noticeData.contentImageURL,
-                noticeCategory: NoticeCategory(rawValue: noticeData.topic),
-                majorCategory: MajorCategory(rawValue: noticeData.topic)
-            ),
+            notice: notice,
             memo: self.memo ?? "",
             alarmDate: self.alarmDate
         )

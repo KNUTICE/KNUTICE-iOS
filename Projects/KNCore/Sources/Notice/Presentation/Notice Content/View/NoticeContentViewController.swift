@@ -178,7 +178,7 @@ private extension NoticeContentViewController {
                     self?.aiSummarizationButton.isHidden = true
                 }
                 
-                guard let url = URL(string: notice.contentUrl) else { return }
+                guard let url = notice.contentUrl else { return }
                 self?.webView.load(URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad))
             }
             .store(in: &cancellables)
@@ -199,7 +199,7 @@ private extension NoticeContentViewController {
     }
     
     func loadInitialData() {
-        if let urlString = viewModel.notice?.contentUrl, let url = URL(string: urlString) {
+        if let url = viewModel.notice?.contentUrl {
             webView.load(URLRequest(url: url))
         } else if viewModel.nttId != nil {
             viewModel.fetchNotice()
