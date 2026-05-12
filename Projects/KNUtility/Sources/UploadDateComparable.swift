@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol UploadDateComparable {
+public protocol UploadDateComparable {
     func isWithin24Hours(from dateString: String) -> Bool
 }
 
-extension UploadDateComparable {
+public extension UploadDateComparable {
     func isWithin24Hours(from dateString: String) -> Bool {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
