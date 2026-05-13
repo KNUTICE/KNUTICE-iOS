@@ -15,18 +15,16 @@ import UIKit
 struct BookmarkFormFactoryImpl: BookmarkFormFactory {
     
     func make(for notice: Notice) -> UIViewController {
-        var hostingController: UIHostingController<BookmarkForm>?
         let bookmark = Bookmark(notice: notice, memo: "")
-        let rootView = BookmarkForm(
+        let hostingController = UIHostingController<BookmarkForm?>(rootView: nil)
+        hostingController.rootView = BookmarkForm(
             store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
                 BookmarkFormFeature()
             }
-        ) {
+        ) { [weak hostingController] in
             hostingController?.dismiss(animated: true)
         }
         
-        hostingController = UIHostingController(rootView: rootView)
-        
-        return hostingController!
+        return hostingController
     }
 }
