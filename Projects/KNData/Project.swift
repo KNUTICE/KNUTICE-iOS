@@ -8,6 +8,5 @@ let project = Project.module(
         .project(target: "KNUtility", path: "../KNUtility"),
         .project(target: "KNDomain", path: "../KNDomain"),
     ],
-    hasTests: false,
     resources: ["Resources/**"],
 )

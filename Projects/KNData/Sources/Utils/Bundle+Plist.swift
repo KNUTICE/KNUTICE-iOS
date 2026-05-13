@@ -7,7 +7,21 @@
 
 import Foundation
 
+private class KNDataBundleFinder {}
+
 extension Bundle {
+    public static var knData: Bundle {
+        let frameworkBundle = Bundle(for: KNDataBundleFinder.self)
+        let resource = "KNData_KNData.bundle"
+        
+        if let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent(resource),
+           let bundle = Bundle(url: bundleURL) {
+            return bundle
+        }
+        
+        return frameworkBundle
+    }
+    
     private var resource: NSDictionary? {
         guard let file = self.path(forResource: "ServiceInfo", ofType: "plist"),
               let resource = NSDictionary(contentsOfFile: file) else {
