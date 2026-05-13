@@ -214,7 +214,9 @@ private extension NoticeContentViewController {
     func presentBookmarkForm() {
         guard let notice = viewModel.notice else { return }
         
-        presentSheet(viewController: makeBookmarkFormViewController(notice), detents: [.large()])
+        let vc = makeBookmarkFormViewController(notice)
+        let nav = UINavigationController(rootViewController: vc)
+        presentSheet(viewController: nav, detents: [.large()])
     }
     
     private func presentSheet<Content: View>(rootView: Content, detents: [UISheetPresentationController.Detent]) {
