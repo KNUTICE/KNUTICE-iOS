@@ -53,32 +53,22 @@ public extension Notice {
     static var academicNoticesSample: [Notice] {
         return [
             Notice(
-                id: 1,
-                title: "2024학년도 2학기 재입학 신청 안내",
-                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do",
-                isSummarizable: false,
+                id: 1121917,
+                title: "2026학년도 1학기 3C인재 인증 신청 안내",
+                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?nttId=1121917",
+                isSummarizable: true,
                 department: "학사관리과",
-                uploadDate: "2024-05-09",
+                uploadDate: "2026-05-11",
                 imageUrl: nil,
                 category: NoticeCategory.academicNotice
             ),
             Notice(
-                id: 2,
-                title: "[충청권 국립대학] 2024학년도 한밭대,한국교원대,공주대 하계 계절학기 학점교류 안내",
-                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do",
-                isSummarizable: false,
+                id: 1121886,
+                title: "2026학년도 하계 계절학기 수강신청 및 수강료 납부 안내",
+                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?nttId=1121886",
+                isSummarizable: true,
                 department: "학사관리과",
-                uploadDate: "2024-05-08",
-                imageUrl: nil,
-                category: NoticeCategory.academicNotice
-            ),
-            Notice(
-                id: 3,
-                title: "2024-1학기 수업일수 3/4이상 수강한 휴학생 성적인정 신청 안내",
-                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do",
-                isSummarizable: false,
-                department: "학사관리과",
-                uploadDate: "2024-05-02",
+                uploadDate: "2026-05-07",
                 imageUrl: nil,
                 category: NoticeCategory.academicNotice
             )
@@ -88,33 +78,23 @@ public extension Notice {
     static var generalNoticesSample: [Notice] {
         return [
             Notice(
-                id: 4,
-                title: "2024학년도 1학기 분할납부(4차) 안내(5.13.~5.16.)",
-                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do",
-                isSummarizable: false,
-                department: "재무과",
-                uploadDate: "2024-05-10",
+                id: 1121959,
+                title: "2026학년도 교내 온라인 모의토익/토익스피킹 실시 안내",
+                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?nttId=1121959",
+                isSummarizable: true,
+                department: "국제교류본부",
+                uploadDate: "2026-05-12",
                 imageUrl: nil,
                 category: NoticeCategory.generalNotice
             ),
             Notice(
-                id: 5,
-                title: "[연구인력혁신센터] 중소기업 연구인력 현장맞춤형 양성지원 R&D인턴(채용연계형) 모집",
-                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do",
-                isSummarizable: false,
-                department: "연구인력혁신센터",
-                uploadDate: "2024-05-08",
-                imageUrl: nil,
-                category: NoticeCategory.generalNotice
-            ),
-            Notice(
-                id: 6,
-                title: "★ 2024학년도 취업동아리 참가학생 추가모집 안내 ★",
-                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do",
-                isSummarizable: false,
-                department: "취업성공지원과",
-                uploadDate: "2024-05-07",
-                imageUrl: nil,
+                id: 1121930,
+                title: "📢[IPP사업단] 일학습병행 설명회 개최 안내📢",
+                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?nttId=1121930",
+                isSummarizable: true,
+                department: "IPP사업단",
+                uploadDate: "2026-05-11",
+                imageUrl: "https://www.ut.ac.kr/namo/binary/images/000106/20260511165256844_H46XWBBY.png",
                 category: NoticeCategory.generalNotice
             )
         ]
@@ -123,34 +103,74 @@ public extension Notice {
     static var scholarshipNoticesSample: [Notice] {
         return [
             Notice(
-                id: 7,
-                title: "2024년도 상반기 강화군 대학생 등록금 지원 사업 안내",
-                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do",
-                isSummarizable: false,
+                id: 1121967,
+                title: "2026학년도 1학기 OCU컨소시엄 장학생 선발 안내",
+                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?nttId=1121967",
+                isSummarizable: true,
                 department: "장학팀",
-                uploadDate: "2024-05-14",
+                uploadDate: "2026-05-12",
                 imageUrl: nil,
                 category: NoticeCategory.scholarshipNotice
             ),
             Notice(
-                id: 8,
-                title: "2024년 국가우수장학(이공계) 성적우수유형 및 재학중우수자(2년지원)유형 선발계획 안내",
-                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do",
-                isSummarizable: false,
+                id: 1121915,
+                title: "[홍보]세종이도인재 장학금 장학생 모집 안내",
+                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?nttId=1121915",
+                isSummarizable: true,
                 department: "장학팀",
-                uploadDate: "2024-05-07",
+                uploadDate: "2026-05-11",
                 imageUrl: nil,
                 category: NoticeCategory.scholarshipNotice
+            )
+        ]
+    }
+
+    static var eventNoticesSample: [Notice] {
+        return [
+            Notice(
+                id: 1121966,
+                title: "‘2026 한-프랑스 어학 보조교사 교류사업’ 한국어 보조교사 선발 안내",
+                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do?nttId=1121966",
+                isSummarizable: true,
+                department: "학생과",
+                uploadDate: "2026-05-12",
+                imageUrl: nil,
+                category: NoticeCategory.eventNotice
             ),
             Notice(
-                id: 9,
-                title: "2024년 화성시인재육성재단 주거비지원 장학생 선발 안내",
-                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do",
-                isSummarizable: false,
-                department: "장학팀",
-                uploadDate: "2024-05-03",
+                id: 1121960,
+                title: "기술보증기금 「2026년도 대국민 혁신 아이디어 공모전」",
+                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do?nttId=1121960",
+                isSummarizable: true,
+                department: "학생과",
+                uploadDate: "2026-05-12",
                 imageUrl: nil,
-                category: NoticeCategory.scholarshipNotice
+                category: NoticeCategory.eventNotice
+            )
+        ]
+    }
+
+    static var employmentNoticesSample: [Notice] {
+        return [
+            Notice(
+                id: 1121950,
+                title: "[대학일자리플러스센터] 2026학년도 객원상담제 안내(충북지역 취업연계)",
+                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do?nttId=1121950",
+                isSummarizable: true,
+                department: "대학일자리플러스센터",
+                uploadDate: "2026-05-12",
+                imageUrl: nil,
+                category: NoticeCategory.employmentNotice
+            ),
+            Notice(
+                id: 1121929,
+                title: "2026 GLOBAL TALENT FAIR(채용박람회)",
+                contentUrl: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do?nttId=1121929",
+                isSummarizable: true,
+                department: "대학일자리플러스센터",
+                uploadDate: "2026-05-11",
+                imageUrl: nil,
+                category: NoticeCategory.employmentNotice
             )
         ]
     }

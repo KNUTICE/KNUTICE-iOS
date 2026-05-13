@@ -1,17 +1,18 @@
 //
 //  MockNoticeRepository.swift
-//  KNCoreTests
+//  TestSupport
 //
 //  Created by 이정훈 on 9/9/25.
 //
 
 import Combine
-import Foundation
-@testable import KNCore
+import KNDomain
 import KNUtility
 
-final class MockNoticeRepository: NoticeRepository {
-    func fetchNotices(
+public final class MockNoticeRepository: NoticeRepository {
+    public init() {}
+    
+    public func fetchNotices(
         for category: String? = nil,
         keyword: String? = nil,
         after nttId: Int? = nil,
@@ -38,7 +39,7 @@ final class MockNoticeRepository: NoticeRepository {
         .eraseToAnyPublisher()
     }
     
-    func fetchNotices(
+    public func fetchNotices(
         for category: String? = nil,
         keyword: String? = nil,
         after nttId: Int? = nil,
@@ -52,17 +53,17 @@ final class MockNoticeRepository: NoticeRepository {
         return Array(notices.prefix(size))
     }
     
-    func fetchNotice(by nttId: Int) -> AnyPublisher<Notice?, any Error> {
+    public func fetchNotice(by nttId: Int) -> AnyPublisher<Notice?, any Error> {
         return Just(Notice.generalNoticesSample.first)
             .setFailureType(to: Error.self)
             .eraseToAnyPublisher()
     }
     
-    func fetchNotice(by nttId: Int) async throws -> Notice? {
+    public func fetchNotice(by nttId: Int) async throws -> Notice? {
         return Notice.generalNoticesSample.first
     }
     
-    func fetchNotices(by nttIds: [Int]) -> AnyPublisher<[Notice], any Error> {
+    public func fetchNotices(by nttIds: [Int]) -> AnyPublisher<[Notice], any Error> {
         return Just(Notice.generalNoticesSample)
             .setFailureType(to: Error.self)
             .eraseToAnyPublisher()

@@ -10,6 +10,9 @@ let project = Project.module(
         .project(target: "CorePresentation", path: "../CorePresentation"),
         .project(target: "KNDomain", path: "../../KNDomain"),
         .project(target: "KNTopic", path: "../../KNTopic"),
+        .project(target: "KNDeepLink", path: "../../KNDeepLink"),
+        .project(target: "KNIntelligence", path: "../../KNIntelligence"),
+        .project(target: "KNData", path: "../../KNData"),
         .external(name: "ComposableArchitecture"),
         .external(name: "Factory"),
         .external(name: "RxSwift"),
@@ -17,6 +20,9 @@ let project = Project.module(
         .external(name: "RxDataSources"),
         .external(name: "SnapKit"),
         .external(name: "KingFisher"),
+        .external(name: "FirebaseAnalytics"),
     ],
-    hasTests: false
+    testDependencies: [
+        .project(target: "TestSupport", path: "../../TestSupport"),
+    ]
 )
