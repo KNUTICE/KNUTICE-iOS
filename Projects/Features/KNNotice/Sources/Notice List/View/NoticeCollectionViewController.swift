@@ -60,10 +60,8 @@ public class NoticeCollectionViewController: UIViewController, NoticeCollectionV
         didSelectItemAt indexPath: IndexPath
     ) {
         let notice = viewModel.notices.value[0].items[indexPath.row]
-        let viewController = NoticeContentViewController(
-            viewModel: NoticeContentViewModel(notice: notice)
-        ) { [weak self] notice in
-            self?.bookmarkFormFactory.make(for: notice) ?? UIViewController()
+        let viewController = NoticeContentViewController(viewModel: NoticeContentViewModel(notice: notice)) { [weak self] notice in
+            self?.bookmarkFormFactory.make(for: notice)
         }
         
         navigationController?.pushViewController(viewController, animated: true)

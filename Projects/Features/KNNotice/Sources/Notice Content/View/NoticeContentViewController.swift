@@ -84,12 +84,12 @@ public final class NoticeContentViewController: UIViewController {
         
         // MARK: - Interaction
         button.addAction(UIAction { [weak self] _ in
-            guard let notice = self?.viewModel.notice, let makeBookmarkFormViewController = self?.makeBookmarkFormViewController else { return }
+            guard let notice = self?.viewModel.notice, let viewController = self?.makeBookmarkFormViewController(notice) else { return }
             
             // Bookmark 버튼 클릭 이벤트 전송
             Analytics.logEvent(AnalyticsEventName.bookmarkButtonClicked.rawValue, parameters: nil)
             
-            let navigationController = UINavigationController(rootViewController: makeBookmarkFormViewController(notice))
+            let navigationController = UINavigationController(rootViewController: viewController)
             navigationController.modalPresentationStyle = .pageSheet
             
             self?.present(navigationController, animated: true, completion: nil)
@@ -112,11 +112,11 @@ public final class NoticeContentViewController: UIViewController {
     private let viewModel: NoticeContentViewModel
     private var cancellables = Set<AnyCancellable>()
     private var webViewTask: Task<Void, Never>?
-    private let makeBookmarkFormViewController: (Notice) -> UIViewController
+    private let makeBookmarkFormViewController: (Notice) -> UIViewController?
     
     // MARK: - Init
     
-    public init(viewModel: NoticeContentViewModel, makeBookmarkFormViewController: @escaping (Notice) -> UIViewController) {
+    public init(viewModel: NoticeContentViewModel, makeBookmarkFormViewController: @escaping (Notice) -> UIViewController?) {
         self.viewModel = viewModel
         self.makeBookmarkFormViewController = makeBookmarkFormViewController
         super.init(nibName: nil, bundle: nil)
@@ -212,9 +212,8 @@ private extension NoticeContentViewController {
     }
     
     func presentBookmarkForm() {
-        guard let notice = viewModel.notice else { return }
+        guard let notice = viewModel.notice, let vc = makeBookmarkFormViewController(notice) else { return }
         
-        let vc = makeBookmarkFormViewController(notice)
         let nav = UINavigationController(rootViewController: vc)
         presentSheet(viewController: nav, detents: [.large()])
     }
