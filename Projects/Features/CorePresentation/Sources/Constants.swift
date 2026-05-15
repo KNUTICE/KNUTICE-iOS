@@ -8,6 +8,7 @@
 import Foundation
 
 public enum Constants {
-    public static let size: CGFloat = 16
-    public static let newBadgeCornerRadius: CGFloat = 8
+    public static let newBadeFrameSize: CGFloat = 14
+    public static let newBadgeFontSize: CGFloat = 9
+    public static let newBadgeCornerRadius: CGFloat = 7
 }

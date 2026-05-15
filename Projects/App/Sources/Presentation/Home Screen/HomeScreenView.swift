@@ -331,10 +331,9 @@ fileprivate struct NoticeListRow: View {
             HStack(spacing: 6) {
                 if notice.isNew {
                     Text("N")
-                        .bold()
-                        .font(.caption2)
+                        .font(.system(size: Constants.newBadgeFontSize, weight: .bold))
                         .foregroundStyle(.white)
-                        .frame(width: Constants.size, height: Constants.size)
+                        .frame(width: Constants.newBadeFrameSize, height: Constants.newBadeFrameSize)
                         .background(KNDesignSystemAsset.accent2.swiftUIColor)
                         .cornerRadius(Constants.newBadgeCornerRadius)
                 }

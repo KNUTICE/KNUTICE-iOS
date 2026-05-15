@@ -18,7 +18,7 @@ public final class NoticeCollectionViewCell: UICollectionViewCell {
         let label = UILabel(frame: .zero)
         label.text = "N"
         label.textColor = .white
-        label.font = .font(for: .caption2, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: Constants.newBadgeFontSize, weight: .bold)
         label.backgroundColor = KNDesignSystemAsset.accent2.color
         label.textAlignment = .center
         label.layer.cornerRadius = Constants.newBadgeCornerRadius
@@ -29,7 +29,7 @@ public final class NoticeCollectionViewCell: UICollectionViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = .font(for: .subheadline, weight: .bold)
+        label.font = .font(for: .footnote, weight: .bold)
         
         return label
     }()
@@ -48,7 +48,7 @@ public final class NoticeCollectionViewCell: UICollectionViewCell {
     
     private let subTitleLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = .preferredFont(forTextStyle: .footnote)
+        label.font = .preferredFont(forTextStyle: .caption1)
         label.textColor = KNDesignSystemAsset.subTitle.color
         
         return label
@@ -90,7 +90,7 @@ public final class NoticeCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(stackView)
         
         newBadgeLabel.snp.makeConstraints {
-            $0.width.height.equalTo(Constants.size)
+            $0.width.height.equalTo(Constants.newBadeFrameSize)
         }
         
         stackView.snp.makeConstraints { make in
