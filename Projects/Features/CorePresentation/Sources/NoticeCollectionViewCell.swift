@@ -14,11 +14,36 @@ import SnapKit
 public final class NoticeCollectionViewCell: UICollectionViewCell {
     public static let reuseIdentifier = "NoticeCollectionViewCell"
     
+    private let newBadgeLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.text = "N"
+        label.textColor = .white
+        label.font = .font(for: .caption2, weight: .bold)
+        label.backgroundColor = KNDesignSystemAsset.accent2.color
+        label.textAlignment = .center
+        label.layer.cornerRadius = Constants.newBadgeCornerRadius
+        label.clipsToBounds = true
+        
+        return label
+    }()
+    
     private let titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = .font(for: .subheadline, weight: .bold)
         
         return label
+    }()
+    
+    private lazy var titleStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [
+            newBadgeLabel,
+            titleLabel
+        ])
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.spacing = 6
+        
+        return stackView
     }()
     
     private let subTitleLabel: UILabel = {
@@ -41,7 +66,7 @@ public final class NoticeCollectionViewCell: UICollectionViewCell {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
             thumbnailImageView,
-            titleLabel,
+            titleStackView,
             subTitleLabel
         ])
         
@@ -64,6 +89,10 @@ public final class NoticeCollectionViewCell: UICollectionViewCell {
     private func setUpLayout() {
         contentView.addSubview(stackView)
         
+        newBadgeLabel.snp.makeConstraints {
+            $0.width.height.equalTo(Constants.size)
+        }
+        
         stackView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(16)
         }
@@ -79,6 +108,10 @@ public final class NoticeCollectionViewCell: UICollectionViewCell {
         titleLabel.text = item.title
         subTitleLabel.text = "[\(item.department)]  \(item.uploadDate)"
         
+        // New Badge
+        newBadgeLabel.isHidden = !item.isNew
+        
+        // Thumbnail
         guard isShowingThumbnail else {
             thumbnailImageView.isHidden = true
             return
