@@ -53,11 +53,6 @@ public final class SearchViewController: UIViewController,
             NoticeCollectionViewCell.self,
             forCellWithReuseIdentifier: NoticeCollectionViewCell.reuseIdentifier
         )
-        collectionView.register(
-            NoticeCollectionViewCellWithThumbnail.self,
-            forCellWithReuseIdentifier: NoticeCollectionViewCellWithThumbnail
-                .reuseIdentifier
-        )
         let loadingIndicator = UIActivityIndicatorView(style: .large)
         loadingIndicator.startAnimating()
         collectionView.backgroundView = loadingIndicator
