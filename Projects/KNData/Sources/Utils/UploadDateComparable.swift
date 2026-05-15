@@ -1,6 +1,6 @@
 //
 //  UploadDateComparable.swift
-//  KNCore
+//  KNData
 //
 //  Created by 이정훈 on 4/21/26.
 //
