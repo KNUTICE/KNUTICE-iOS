@@ -8,11 +8,12 @@
 import Factory
 import Foundation
 import KNCore
+import KNDomain
 import KNUtility
 import WidgetKit
 
 struct NoticeWidgetProvider: AppIntentTimelineProvider {
-    private let noticeRepository: NoticeRepository = Container.shared.noticeRepository()
+    private let fetchNoticesUseCase: FetchNoticesUseCase = Container.shared.fetchNoticesUseCase()
     
     /// Returns placeholder entry displayed while the widget is loading
     /// - Note: Uses mock data with redacted styling instead of real data
@@ -28,8 +29,8 @@ struct NoticeWidgetProvider: AppIntentTimelineProvider {
     /// Returns a snapshot entry for widget gallery previews
     /// - Note: Attempts to fetch real data; falls back to an empty array on failure
     func snapshot(for configuration: NoticeWidgetIntent, in context: Context) async -> NoticeEntry {
-        let notices = try? await noticeRepository.fetchNotices(
-            for: NoticeCategory.generalNotice.rawValue,
+        let notices = try? await fetchNoticesUseCase.execute(
+            category: NoticeCategory.generalNotice,
             size: getContentCount(for: context.family)
         )
         return NoticeEntry(
@@ -45,7 +46,10 @@ struct NoticeWidgetProvider: AppIntentTimelineProvider {
     func timeline(for configuration: NoticeWidgetIntent, in context: Context) async -> Timeline<NoticeEntry> {
         let contentCount = getContentCount(for: context.family)
         let category = configuration.category
-        let notices = try? await noticeRepository.fetchNotices(for: category.toNoticeCategory.rawValue, size: contentCount)
+        let notices = try? await fetchNoticesUseCase.execute(
+            category: category.toNoticeCategory,
+            size: getContentCount(for: context.family)
+        )
         let entries: [NoticeEntry] = [
             NoticeEntry(
                 date: Date(),

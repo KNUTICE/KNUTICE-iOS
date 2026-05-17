@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import KNDomain
 import SwiftUI
 
 public struct BookmarkContainerView: View {

@@ -10,8 +10,10 @@ import ComposableArchitecture
 import KNCore
 import KNDeepLink
 import KNDesignSystem
+import KNDomain
 import KNReadingRoom
 import KNMeal
+import KNNotice
 import KNSetting
 import KNTip
 import KNUtility
@@ -64,7 +66,7 @@ struct HomeScreenView: View {
                 case let .loaded(sectionedNotices):
                     TabView(selection: $currentTabIndex) {
                         ForEach(Array(sectionedNotices.enumerated()), id: \.element.header) { index, section in
-                            NoticeList(notices: section) {
+                            NoticeList(notices: section, bookmarkFormFactory: BookmarkFormFactoryImpl()) {
                                 Button {
                                     NotificationCenter.default.post(
                                         name: .didReceiveDeepLink,
@@ -97,7 +99,7 @@ struct HomeScreenView: View {
                 
                 switch store.majorNotices {
                 case let .loaded(majorNotices):
-                    NoticeList(notices: majorNotices) {
+                    NoticeList(notices: majorNotices, bookmarkFormFactory: BookmarkFormFactoryImpl()) {
                         Button {
                             NotificationCenter.default.post(name: .didReceiveDeepLink, object: DeepLink.navigation(tabIndex: 1))
                         } label: {
@@ -215,6 +217,7 @@ fileprivate struct NoticeList<Content: View>: View {
     @State private var isShowingBookmarkForm: Bool = false
     
     let notices: MainSectionNotice
+    let bookmarkFormFactory: BookmarkFormFactory
     let moreButton: (() -> Content)?
     
     var body: some View {
@@ -224,17 +227,7 @@ fileprivate struct NoticeList<Content: View>: View {
                     .font(.title3)
                     .fontWeight(.heavy)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundStyle(
-                        (notices.category as? NoticeCategory).map { category -> Color in
-                            switch category {
-                            case .generalNotice:    return KNDesignSystemAsset.accentOrange.swiftUIColor
-                            case .academicNotice:    return KNDesignSystemAsset.accentAmber.swiftUIColor
-                            case .scholarshipNotice:    return KNDesignSystemAsset.accentMint.swiftUIColor
-                            case .eventNotice:    return KNDesignSystemAsset.accentBlue.swiftUIColor
-                            case .employmentNotice:    return KNDesignSystemAsset.accentPurple.swiftUIColor
-                            }
-                        } ?? .primary
-                    )
+                    .foregroundStyle((notices.category as? NoticeCategory).map { titleColor(for: $0) } ?? .primary)
                     .redacted(reason: notices.items.first?.presentationType == .skeleton ? .placeholder : [])
                 
                 moreButton?()
@@ -243,7 +236,7 @@ fileprivate struct NoticeList<Content: View>: View {
             ForEach(Array(notices.items.enumerated()), id: \.element.notice.id) { index, item in
                 NavigationLink {
                     // 상세 화면 이동
-                    NoticeContentView(notice: item.notice)
+                    NoticeContentView(notice: item.notice) { notice in bookmarkFormFactory.make(for: notice) }
                         .ignoresSafeArea(.all)
                         .toolbar {
                             ToolbarItemGroup(placement: .topBarTrailing) {
@@ -277,8 +270,9 @@ fileprivate struct NoticeList<Content: View>: View {
                             await fetchLayoutType()
                         }
                         .sheet(isPresented: $isShowingBookmarkForm) {
-                            let bookmark = Bookmark(notice: item.notice, memo: "")
                             NavigationStack {
+                                let bookmark = Bookmark(notice: item.notice, memo: "")
+                                
                                 BookmarkForm(
                                     store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
                                         BookmarkFormFeature()
@@ -308,6 +302,22 @@ fileprivate struct NoticeList<Content: View>: View {
         let layout = await ABTestManager.shared.value(for: ABTestKeys.noticeDetailLayoutType)
         layoutType = ABTestLayoutType(rawValue: layout)
     }
+    
+    private func titleColor(for notice: NoticeCategory) -> Color {
+        switch notice {
+        case .generalNotice:
+            return KNDesignSystemAsset.accentOrange.swiftUIColor
+        case .academicNotice:
+            return KNDesignSystemAsset.accentAmber.swiftUIColor
+        case .scholarshipNotice:
+            return KNDesignSystemAsset.accentMint.swiftUIColor
+        case .eventNotice:
+            return KNDesignSystemAsset.accentBlue.swiftUIColor
+        case .employmentNotice:
+            return KNDesignSystemAsset.accentPurple.swiftUIColor
+        }
+    }
+    
 }
 
 fileprivate struct NoticeListRow: View {

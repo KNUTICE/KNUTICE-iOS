@@ -7,11 +7,12 @@
 
 import ComposableArchitecture
 import KNDesignSystem
+import KNDomain
 import SwiftUI
 
 public struct BookmarkForm: View {
-    @Bindable var store: StoreOf<BookmarkFormFeature>
-    let dismissAction: () -> Void
+    @Bindable private var store: StoreOf<BookmarkFormFeature>
+    private let dismissAction: () -> Void
     
     public init(store: StoreOf<BookmarkFormFeature>, dismissAction: @escaping () -> Void) {
         _store = Bindable(store)

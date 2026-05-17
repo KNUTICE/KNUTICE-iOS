@@ -31,14 +31,6 @@ public extension Bundle {
         return resource
     }
     
-    var noticeURL: String? {
-        guard let url = resource?["Notice_URL"] as? String else {
-            return nil
-        }
-        
-        return url
-    }
-    
     var defaultThumbnailURL: String {
         guard let url = resource?["DefaultThumbnail_URL"] as? String else {
             return ""

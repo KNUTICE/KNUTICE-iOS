@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 6/19/25.
 //
 
+import CorePresentation
 import RxDataSources
 import RxSwift
 import RxCocoa
@@ -17,7 +18,7 @@ extension SearchViewController: RxDataSourceBindable {
         bindBookmarks()
     }
     
-    func bindNotices() {
+    public func bindNotices() {
         viewModel.notices
             .observe(on: MainScheduler.instance)
             .do { [weak self] in

@@ -6,6 +6,9 @@
 //
 
 import Factory
+import KNData
+import KNDomain
+import KNNetwork
 import KNUtility
 
 extension Container {
@@ -24,74 +27,65 @@ extension Container {
         }
     }
     
-    public var noticeRepository: Factory<NoticeRepository> {
+    // MARK: - UseCases
+    public var fetchNoticesUseCase: Factory<FetchNoticesUseCase> {
         Factory(self) {
-            // remoteDataSource()가 별도로 등록되어 있다고 가정합니다.
-            NoticeRepositoryImpl(dataSource: Container.shared.remoteDataSource())
+            FetchNoticesUseCaseImpl(noticeRepository: self.noticeRepository())
         }
     }
     
-    // MARK: - UseCases
+    public var fetchTopThreeNoticesUseCase: Factory<FetchTopThreeNoticesUseCase> {
+        Factory(self) { FetchTopThreeNoticesUseCaseImpl(repository: self.noticeRepository()) }
+    }
+    
     // [Bookmark Related]
     var saveBookmarkUseCase: Factory<SaveBookmarkUseCase> {
         Factory(self) {
-            SaveBookmarkUseCaseImpl()
+            SaveBookmarkUseCaseImpl(bookmarkRepository: self.bookmarkRepository())
         }
     }
     
     var deleteBookmarkUseCase: Factory<DeleteBookmarkUseCase> {
         Factory(self) {
-            DeleteBookmarkUseCaseImpl()
+            DeleteBookmarkUseCaseImpl(bookmarkRepository: self.bookmarkRepository())
         }
     }
     
     var updateBookmarkUseCase: Factory<UpdateBookmarkUseCase> {
         Factory(self) {
-            UpdateBookmarkUseCaseImpl()
+            UpdateBookmarkUseCaseImpl(bookmarkRepository: self.bookmarkRepository())
         }
     }
     
     var fetchBookmarksUseCase: Factory<FetchBookmarksUseCase> {
         Factory(self) {
-            FetchBookmarksUseCaseImpl()
+            FetchBookmarksUseCaseImpl(bookmarkReportory: self.bookmarkRepository())
         }
     }
     
     var searchBookmarksUseCase: Factory<SearchBookmarksUseCase> {
         Factory(self) {
-            SearchBookmarksUseCaseImpl()
+            SearchBookmarksUseCaseImpl(repository: self.bookmarkRepository())
         }
     }
     
     // [Notice Related]
-    public var fetchTopThreeNoticesUseCase: Factory<FetchTopThreeNoticesUseCase> {
-        Factory(self) {
-            FetchTopThreeNoticesUseCaseImpl(repository: Container.shared.noticeRepository())
-        }
-    }
-    
-    public var fetchNoticesUseCase: Factory<FetchNoticesUseCase> {
-        Factory(self) {
-            FetchNoticesUseCaseImpl()
-        }
-    }
-    
     var searchNoticesUseCase: Factory<SearchNoticesUseCase> {
         Factory(self) {
-            SearchNoticesUseCaseImpl()
+            SearchNoticesUseCaseImpl(noticeRepository: NoticeRepositoryImpl(dataSource: RemoteDataSourceImpl()))
         }
     }
     
     // [Composite / Utility]
     var searchNoticeAndBookmarkUseCase: Factory<SearchNoticeAndBookmarkUseCase> {
         Factory(self) {
-            SearchNoticeAndBookmarkUseCaseImpl()
+            SearchNoticeAndBookmarkUseCaseImpl(searchNoticesUseCase: self.searchNoticesUseCase(), searchBookmarksUseCase: self.searchBookmarksUseCase())
         }
     }
     
     var provideReloadEventPublisherUseCase: Factory<ProvideReloadEventPublisherUseCase> {
         Factory(self) {
-            ProvideReloadEventPublisherUseCaseImpl()
+            ProvideReloadEventPublisherUseCaseImpl(repository: self.bookmarkRepository())
         }
     }
     

@@ -1,0 +1,147 @@
+//
+//  BookmarkRepositoryImpl.swift
+//  KNUTICE
+//
+//  Created by 이정훈 on 1/10/25.
+//
+
+@preconcurrency import Combine
+import Factory
+import Foundation
+import KNDomain
+import KNUtility
+import UserNotifications
+
+public actor BookmarkRepositoryImpl: BookmarkRepository {
+    /// A public-facing publisher that emits `ReloadEvent` to notify observers
+    /// when bookmark data has been modified.
+    ///
+    /// Marked as `nonisolated` to avoid actor isolation constraints for
+    /// Combine pipelines on the main thread or background threads.
+    nonisolated public var eventPublisher: AnyPublisher<ReloadEvent, Never> {
+        eventTrigger.eraseToAnyPublisher()
+    }
+    
+    /// Internal subject used to send reload events.
+    ///
+    /// This property is also `nonisolated` so Combine can interact with it
+    /// outside the actor’s isolation boundary.
+    private nonisolated let eventTrigger: PassthroughSubject<ReloadEvent, Never> = .init()
+    
+    /// Shared singleton instance providing a single source of truth.
+    public static let shared: BookmarkRepositoryImpl = .init()
+    
+    @Injected(\.bookmarkDataSource) private var dataSource
+    
+    private init() {}
+    
+    // MARK: - Create
+    
+    /// Saves a new bookmark into the underlying data source.
+    /// The repository checks for duplication using the domain entity's ID
+    /// before converting the entity into a DTO.
+    ///
+    /// Note:
+    /// - Repositories should convert Entities -> DTOs only inside the data layer.
+    /// - DTOs are not exposed to upper layers (UseCase / ViewModel).
+    public func save(bookmark: Bookmark) async throws {
+        let isExist = try await dataSource.isDuplication(id: bookmark.notice.id)
+        
+        guard !isExist else {
+            throw ExistingBookmarkError.alreadyExist(message: "이미 존재하는 북마크에요.")
+        }
+        
+        try await dataSource.save(bookmark.asDTO)
+        eventTrigger.send(.normal)
+    }
+    
+    // MARK: - Read
+    
+    /// Fetches paginated bookmarks and maps DTOs to domain entities.
+    /// DTOs stay within the data layer and are never returned to the domain.
+    public func fetch(page pageNum: Int, pageSize: Int, sortBy option: BookmarkSortOption) async throws -> [Bookmark] {
+        let dto = try await dataSource.fetch(page: pageNum, pageSize: pageSize, sortBy: option)
+        
+        return dto.compactMap { $0.asEntity }
+    }
+    
+    /// Fetches bookmarks that do not have timestamps.
+    /// Useful for handling items that require additional processing.
+    public func fetchWhereTimestampsAreNil() async throws -> [Bookmark] {
+        let dto = try await dataSource.fetchItemsWhereTimestampsAreNil()
+        
+        return dto.compactMap { $0.asEntity }
+    }
+    
+    /// Performs keyword-based searching and returns the corresponding entities.
+    /// Uses Task cancellation checks to ensure responsiveness.
+    public func search(with keyword: String) async throws -> [Bookmark] {
+        try Task.checkCancellation()
+        
+        let dtos = try await dataSource.fetch(keyword: keyword)
+        
+        return dtos.compactMap { $0.asEntity }
+    }
+    
+    /// Fetches a single bookmark by ID.
+    /// Returns a mapped domain entity, or `nil` if not found.
+    public func fetch(id: Int) async throws -> Bookmark? {
+        try Task.checkCancellation()
+        
+        let dto = try await dataSource.fetch(withId: id)
+        
+        return dto.flatMap { $0.asEntity }
+    }
+    
+    // MARK: - Delete
+    
+    /// Deletes a bookmark by ID.
+    /// No entity mapping is needed for delete operations.
+    public func delete(by id: Int) async throws {
+        try await dataSource.delete(by: id)
+        eventTrigger.send(.normal)
+    }
+    
+    // MARK: - Update
+    
+    /// Updates an existing bookmark.
+    /// Since updates involve domain rules, the domain entity is passed directly.
+    public func update(_ bookmark: Bookmark) async throws {
+        try await dataSource.update(bookmark: bookmark)
+        eventTrigger.send(.preserveCount)
+    }
+    
+    /// Updates the timestamp-related values of a bookmark record.
+    public func updateTimeStamp(_ update: BookmarkUpdate) async throws {
+        try await dataSource.updateTimeStamp(update)
+    }
+    
+}
+
+fileprivate extension Bookmark {
+    /// Converts a domain `Bookmark` entity into a DTO.
+    /// Entities should be mapped to DTOs only within the data layer.
+    var asDTO: BookmarkDTO {
+        BookmarkDTO(
+            from: self.notice,
+            memo: memo,
+            alarmDate: alarmDate
+        )
+    }
+}
+
+extension BookmarkDTO: NoticeCreatable {
+    /// Converts a DTO into a domain `Bookmark` entity.
+    /// This ensures that upper layers (UseCase / ViewModel)
+    /// operate only with pure domain models.
+    var asEntity: Bookmark {
+        let noticeData = self.noticeData
+        let notice = createNotice(noticeData)
+        
+        return Bookmark(
+            notice: notice,
+            memo: self.memo ?? "",
+            alarmDate: self.alarmDate
+        )
+    }
+}

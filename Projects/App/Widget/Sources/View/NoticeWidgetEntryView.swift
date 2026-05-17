@@ -6,6 +6,7 @@
 //
 
 import KNCore
+import KNDomain
 import WidgetKit
 import SwiftUI
 
