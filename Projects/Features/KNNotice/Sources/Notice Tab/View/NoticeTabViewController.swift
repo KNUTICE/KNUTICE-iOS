@@ -1,19 +1,20 @@
 //
 //  NoticeTabViewController.swift
-//  KNCore
+//  KNNotice
 //
 //  Created by 이정훈 on 4/10/26.
 //
 
 import KNDeepLink
 import KNDesignSystem
+import KNSetting
 import KNUtility
 import UIKit
 import RxSwift
 import SnapKit
 import SwiftUI
 
-public final class NoticeTabViewController: UIViewController {
+public final class NoticeTabViewController: UIViewController, SettingButtonConfigurable {
     /// Horizontal scroll collection view displaying category tabs and an add button.
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -54,6 +55,10 @@ public final class NoticeTabViewController: UIViewController {
     /// Dispose bag for managing RxSwift subscriptions.
     private let disposeBag: DisposeBag = .init()
     
+    private var isPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
     public init(noticeCollectionViewControllerFactory: NoticeCollectionViewControllerFactory) {
         self.noticeCollectionViewControllerFactory = noticeCollectionViewControllerFactory
         super.init(nibName: nil, bundle: nil)
@@ -72,6 +77,11 @@ public final class NoticeTabViewController: UIViewController {
         bindCollectionView()
         bindCollectionViewSelection()
         bindSelectedIndex()
+        
+        if isPad {
+            setLeftBarButtonItem()
+            setSettingBarButtonItem()
+        }
     }
     
     /// Adds the category collection view to the view hierarchy and applies constraints.
@@ -216,6 +226,19 @@ public final class NoticeTabViewController: UIViewController {
             }
         default:
             break
+        }
+    }
+    
+    private func setLeftBarButtonItem() {
+        let titleLabel = UILabel()
+        titleLabel.text = "공지"
+        titleLabel.font = UIFont.font(for: .title2, weight: .heavy)
+        let labelItem = UIBarButtonItem(customView: titleLabel)
+        
+        navigationItem.leftBarButtonItem = labelItem
+        
+        if #available(iOS 26, *) {
+            navigationItem.leftBarButtonItem?.hidesSharedBackground = true
         }
     }
 }
