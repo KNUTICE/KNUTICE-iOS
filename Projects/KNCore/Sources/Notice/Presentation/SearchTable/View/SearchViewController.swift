@@ -15,9 +15,7 @@ import RxSwift
 import SwiftUI
 import UIKit
 
-public final class SearchViewController: UIViewController,
-    CompositionalLayoutConfigurable
-{
+public final class SearchViewController: UIViewController, CompositionalLayoutConfigurable {
     lazy var segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(frame: .zero)
         control.insertSegment(withTitle: "공지", at: 0, animated: true)
@@ -108,9 +106,9 @@ public final class SearchViewController: UIViewController,
     }
     @Injected(\.searchViewModel) public var viewModel
     public let disposeBag: DisposeBag = .init()
-    private let makeBookmarkFormViewController: (Notice) -> UIViewController
+    private let makeBookmarkFormViewController: (Notice) -> UIViewController?
 
-    public init(makeBookmarkFormViewController: @escaping (Notice) -> UIViewController) {
+    public init(makeBookmarkFormViewController: @escaping (Notice) -> UIViewController?) {
         self.makeBookmarkFormViewController = makeBookmarkFormViewController
         super.init(nibName: nil, bundle: nil)
     }
