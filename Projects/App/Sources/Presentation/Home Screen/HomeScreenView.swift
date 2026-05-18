@@ -23,9 +23,17 @@ import UIComponents
 import FirebaseAnalytics
 
 struct HomeScreenView: View {
+    private struct TabHeightPreferenceKey: PreferenceKey {
+        static let defaultValue: CGFloat = 0
+        static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+            value = max(value, nextValue())
+        }
+    }
+    
     @State private var store: StoreOf<HomeScreenFeature>
     @State private var currentTabIndex: Int = 0
     @State private var timerSubscription: AnyCancellable?
+    @State private var tabHeight: CGFloat = 0
     
     init(store: StoreOf<HomeScreenFeature>) {
         self.store = store
@@ -78,10 +86,15 @@ struct HomeScreenView: View {
                                 }
                             }
                             .tag(index)
+                            .padding(.bottom)
                         }
+                        .background(
+                            GeometryReader { proxy in
+                                Color.clear.preference(key: TabHeightPreferenceKey.self, value: proxy.size.height)
+                            }
+                        )
                     }
-                    .padding(.top, -30)
-                    .frame(minHeight: 340)
+                    .frame(height: tabHeight)
                     .tabViewStyle(.page(indexDisplayMode: .always))
                     .background {
                         RoundedRectangle(cornerRadius: 20)
@@ -89,6 +102,9 @@ struct HomeScreenView: View {
                     }
                     .onChange(of: currentTabIndex) {
                         startTimer()
+                    }
+                    .onPreferenceChange(TabHeightPreferenceKey.self) { height in
+                        tabHeight = height
                     }
                     
                 case .error:
@@ -328,7 +344,7 @@ fileprivate struct NoticeListRow: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            HStack(spacing: 6) {
+            HStack(alignment: .center, spacing: 6) {
                 if notice.isNew {
                     Text("N")
                         .font(.system(size: Constants.newBadgeFontSize, weight: .bold))
@@ -344,6 +360,7 @@ fileprivate struct NoticeListRow: View {
                     .foregroundStyle(colorScheme == .light ? .black : .white)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
+            .frame(minHeight: 20)
             
             HStack(spacing: 5) {
                 Text("[" + notice.department + "]")
