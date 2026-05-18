@@ -22,7 +22,7 @@ final class UITabBarViewController: UITabBarController, NavigationItemConfigurab
     let viewModel: TabBarViewModel
     var cancellables: Set<AnyCancellable> = []
     
-    private var isPad: Bool {
+    var isPad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
     }
     
