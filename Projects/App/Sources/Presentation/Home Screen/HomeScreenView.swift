@@ -8,7 +8,7 @@
 import Combine
 import ComposableArchitecture
 import CorePresentation
-import KNCore
+import KNBookmark
 import KNDeepLink
 import KNDesignSystem
 import KNDomain

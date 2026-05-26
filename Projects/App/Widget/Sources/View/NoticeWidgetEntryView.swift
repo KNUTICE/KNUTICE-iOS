@@ -5,7 +5,6 @@
 //  Created by 이정훈 on 3/1/26.
 //
 
-import KNCore
 import KNDomain
 import WidgetKit
 import SwiftUI

@@ -7,7 +7,6 @@
 
 import Factory
 import Foundation
-import KNCore
 import KNDomain
 import KNUtility
 import WidgetKit
@@ -44,7 +43,6 @@ struct NoticeWidgetProvider: AppIntentTimelineProvider {
     /// Builds and returns the widget timeline
     /// - Note: Refreshes every 2 hours returns an empty timeline if the task is cancelled
     func timeline(for configuration: NoticeWidgetIntent, in context: Context) async -> Timeline<NoticeEntry> {
-        let contentCount = getContentCount(for: context.family)
         let category = configuration.category
         let notices = try? await fetchNoticesUseCase.execute(
             category: category.toNoticeCategory,

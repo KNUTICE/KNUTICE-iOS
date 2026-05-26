@@ -12,55 +12,8 @@ import KNNetwork
 import KNUtility
 
 extension Container {
-    
-    // MARK: - Data Sources
-    var bookmarkDataSource: Factory<BookmarkPersistenceStore> {
-        Factory(self) {
-            BookmarkPersistenceStoreImpl.shared
-        }
-    }
-    
-    // MARK: - Repositories
     var bookmarkRepository: Factory<BookmarkRepository> {
-        Factory(self) {
-            BookmarkRepositoryImpl.shared
-        }
-    }
-    
-    // MARK: - UseCases
-    public var fetchNoticesUseCase: Factory<FetchNoticesUseCase> {
-        Factory(self) {
-            FetchNoticesUseCaseImpl(noticeRepository: self.noticeRepository())
-        }
-    }
-    
-    public var fetchTopThreeNoticesUseCase: Factory<FetchTopThreeNoticesUseCase> {
-        Factory(self) { FetchTopThreeNoticesUseCaseImpl(repository: self.noticeRepository()) }
-    }
-    
-    // [Bookmark Related]
-    var saveBookmarkUseCase: Factory<SaveBookmarkUseCase> {
-        Factory(self) {
-            SaveBookmarkUseCaseImpl(bookmarkRepository: self.bookmarkRepository())
-        }
-    }
-    
-    var deleteBookmarkUseCase: Factory<DeleteBookmarkUseCase> {
-        Factory(self) {
-            DeleteBookmarkUseCaseImpl(bookmarkRepository: self.bookmarkRepository())
-        }
-    }
-    
-    var updateBookmarkUseCase: Factory<UpdateBookmarkUseCase> {
-        Factory(self) {
-            UpdateBookmarkUseCaseImpl(bookmarkRepository: self.bookmarkRepository())
-        }
-    }
-    
-    var fetchBookmarksUseCase: Factory<FetchBookmarksUseCase> {
-        Factory(self) {
-            FetchBookmarksUseCaseImpl(bookmarkReportory: self.bookmarkRepository())
-        }
+        Factory(self) { BookmarkRepositoryImpl.shared }
     }
     
     var searchBookmarksUseCase: Factory<SearchBookmarksUseCase> {
@@ -81,18 +34,6 @@ extension Container {
         Factory(self) {
             SearchNoticeAndBookmarkUseCaseImpl(searchNoticesUseCase: self.searchNoticesUseCase(), searchBookmarksUseCase: self.searchBookmarksUseCase())
         }
-    }
-    
-    var provideReloadEventPublisherUseCase: Factory<ProvideReloadEventPublisherUseCase> {
-        Factory(self) {
-            ProvideReloadEventPublisherUseCaseImpl(repository: self.bookmarkRepository())
-        }
-    }
-    
-    // MARK: - ViewModels
-    @MainActor
-    var bookmarkTableViewModel: Factory<BookmarkTableViewModel> {
-        .mainActor(self) { BookmarkTableViewModel() }
     }
     
     @MainActor

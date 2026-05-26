@@ -6,6 +6,7 @@
 //
 
 import CorePresentation
+import KNBookmark
 import RxDataSources
 import RxSwift
 import RxCocoa

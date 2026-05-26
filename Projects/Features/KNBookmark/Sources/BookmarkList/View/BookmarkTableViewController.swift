@@ -7,8 +7,11 @@
 
 import ComposableArchitecture
 import Combine
+import CorePresentation
 import Factory
 import KNDesignSystem
+import KNDomain
+import KNUtility
 import UIKit
 import SwiftUI
 import RxSwift
@@ -27,13 +30,20 @@ public final class BookmarkTableViewController: UIViewController {
         
         return tableView
     }()
-    @Injected(\.bookmarkTableViewModel) var viewModel: BookmarkTableViewModel
-    public var sortedBookmarkViewModel: BookmarkSortOptionProvidable {
-        return viewModel
-    }
+    let viewModel: BookmarkTableViewModel
+    public var sortedBookmarkViewModel: BookmarkSortOptionProvidable { viewModel }
     let disposeBag: DisposeBag = .init()
     var cancellables: Set<AnyCancellable> = []
-
+    
+    public init(viewModel: BookmarkTableViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -74,9 +84,35 @@ extension BookmarkTableViewController: UITableViewDelegate {
 }
 
 #if DEBUG
+struct MockFetchBookmarksUseCase: FetchBookmarksUseCase {
+    func execute(page: Int, pageSize: Int, sortBy option: BookmarkSortOption) async throws -> [Bookmark] {
+        return []
+    }
+    
+    func execute(for id: Int) async throws -> Bookmark? {
+        return nil
+    }
+}
+
+struct MockProviderReloadEventPublisher: ProvideReloadEventPublisherUseCase {
+    var eventPublisher: AnyPublisher<ReloadEvent, Never> {
+        Empty().eraseToAnyPublisher()
+    }
+}
+
+struct MockDeleteBookmarkUseCase: DeleteBookmarkUseCase {
+    func execute(for bookmark: Bookmark) async throws {}
+}
+
 #Preview {
-    BookmarkTableViewController()
-        .makePreview()
-        .edgesIgnoringSafeArea(.all)
+    BookmarkTableViewController(
+        viewModel: BookmarkTableViewModel(
+            fetchBookmarksUseCase: MockFetchBookmarksUseCase(),
+            providerReloadEventPublisherUseCase: MockProviderReloadEventPublisher(),
+            deleteBookmarkUseCase: MockDeleteBookmarkUseCase()
+        )
+    )
+    .makePreview()
+    .edgesIgnoringSafeArea(.all)
 }
 #endif

@@ -59,6 +59,8 @@ let project = Project(
                 .project(target: "KNReadingRoom", path: "../KNReadingRoom"),
                 .project(target: "KNMeal", path: "../KNMeal"),
                 .project(target: "KNDomain", path: "../KNDomain"),
+                .project(target: "KNNotice", path: "../Features/KNNotice"),
+                .project(target: "KNBookmark", path: "../Features/KNBookmark"),
                 .target(name: "NotificationService"),
                 .target(name: "KNUTICEWidget"),
                 .external(name: "RxSwift"),
@@ -135,10 +137,12 @@ let project = Project(
             ],
             entitlements: .file(path: "Widget/Resources/Widget.entitlements"),
             dependencies: [
-                .project(target: "KNCore", path: "../KNCore"),
+                .project(target: "KNDomain", path: "../KNDomain"),
+                .project(target: "KNData", path: "../KNData"),
                 .project(target: "KNDeepLink", path: "../KNDeepLink"),
                 .project(target: "KNDesignSystem", path: "../KNDesignSystem"),
                 .project(target: "KNReadingRoom", path: "../KNReadingRoom"),
+                .external(name: "Factory"),
             ],
             settings: .settings(
                 base: [

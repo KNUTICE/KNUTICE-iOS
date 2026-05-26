@@ -9,12 +9,16 @@ import KNDomain
 import KNUtility
 import SwiftUI
 
-struct BookmarkListRow: View {
-    static let reuseIdentifier = "BookmarkListRow"
+public struct BookmarkListRow: View {
+    public static let reuseIdentifier = "BookmarkListRow"
     
-    let bookmark: Bookmark
+    private let bookmark: Bookmark
     
-    var body: some View {
+    public init(bookmark: Bookmark) {
+        self.bookmark = bookmark
+    }
+    
+    public var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(bookmark.notice.title)
                 .font(.footnote)

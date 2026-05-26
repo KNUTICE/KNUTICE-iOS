@@ -8,6 +8,7 @@
 import ComposableArchitecture
 import CorePresentation
 import Factory
+import KNBookmark
 import KNDesignSystem
 import KNDomain
 import KNNotice

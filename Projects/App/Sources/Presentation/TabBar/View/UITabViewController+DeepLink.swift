@@ -7,7 +7,7 @@
 
 import ComposableArchitecture
 import Foundation
-import KNCore
+import KNBookmark
 import KNDeepLink
 import KNDomain
 import KNMeal

@@ -7,6 +7,9 @@
 
 import Combine
 import ComposableArchitecture
+import CorePresentation
+import Factory
+import KNBookmark
 import KNCore
 import KNDomain
 import KNNotice
@@ -60,7 +63,7 @@ final class UITabBarViewController: UITabBarController, NavigationItemConfigurab
     }()
     
     private lazy var bookmarkViewController: UIViewController = {
-        let viewController = BookmarkTableViewController()
+        let viewController = BookmarkTableViewController(viewModel: Container.shared.bookmarkTableViewModel())
         viewController.tabBarItem.image = UIImage(systemName: "bookmark")
         viewController.tabBarItem.selectedImage = UIImage(systemName: "bookmark.fill")
         viewController.tabBarItem.title = "북마크"

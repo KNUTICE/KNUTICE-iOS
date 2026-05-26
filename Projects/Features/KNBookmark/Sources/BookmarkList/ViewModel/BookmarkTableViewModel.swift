@@ -6,6 +6,7 @@
 //
 
 import Combine
+import CorePresentation
 import Factory
 import Foundation
 import KNDomain
@@ -15,25 +16,33 @@ import RxSwift
 import os
 
 @MainActor
-final class BookmarkTableViewModel: BookmarkSortOptionProvidable {
+public final class BookmarkTableViewModel: BookmarkSortOptionProvidable {
     let bookmarks: BehaviorRelay<[BookmarkSectionModel]> = .init(value: [])
-    
     let isRefreshing: BehaviorRelay<Bool> = .init(value: false)
     
-    @Published var bookmarkSortOption: BookmarkSortOption = {
+    @Published public var bookmarkSortOption: BookmarkSortOption = {
         let value = UserDefaults.standard.string(forKey: UserDefaultsKeys.bookmarkSortOption.rawValue) ?? ""
         return BookmarkSortOption(rawValue: value) ?? .createdAtDescending
     }()
     
-    @Injected(\.fetchBookmarksUseCase) private var fetchBookmarksUseCase
-    @Injected(\.provideReloadEventPublisherUseCase) private var provideReloadEventPublisherUseCase
-    @Injected(\.deleteBookmarkUseCase) private var deleteBookmarkUseCase
-    
+    private var fetchBookmarksUseCase: FetchBookmarksUseCase
+    private var provideReloadEventPublisherUseCase: ProvideReloadEventPublisherUseCase
+    private var deleteBookmarkUseCase: DeleteBookmarkUseCase
     private(set) var fetchTask: Task<Void, Never>?
     private(set) var reloadTask: Task<Void, Never>?
     private(set) var deleteTask: Task<Void, Never>?
     private var cancellables: Set<AnyCancellable> = []
     private let logger: Logger = Logger()
+    
+    public init(
+        fetchBookmarksUseCase: FetchBookmarksUseCase,
+        providerReloadEventPublisherUseCase: ProvideReloadEventPublisherUseCase,
+        deleteBookmarkUseCase: DeleteBookmarkUseCase
+    ) {
+        self.fetchBookmarksUseCase = fetchBookmarksUseCase
+        self.provideReloadEventPublisherUseCase = providerReloadEventPublisherUseCase
+        self.deleteBookmarkUseCase = deleteBookmarkUseCase
+    }
     
     func observePublisher() {
         provideReloadEventPublisherUseCase.eventPublisher

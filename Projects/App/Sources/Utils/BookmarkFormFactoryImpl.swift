@@ -6,7 +6,7 @@
 //
 
 import ComposableArchitecture
-import KNCore
+import KNBookmark
 import KNDomain
 import KNNotice
 import SwiftUI
