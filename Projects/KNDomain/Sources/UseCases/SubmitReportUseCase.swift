@@ -14,9 +14,11 @@ public protocol SubmitReportUseCase: Actor {
 }
 
 public actor SubmitReportUseCaseImpl: SubmitReportUseCase, AppVersionProvidable {
-    @Injected(\.reportRepository) private var repository
+    private let repository: ReportRepository
     
-    public init() {}
+    public init(repository: ReportRepository) {
+        self.repository = repository
+    }
     
     public func execute(content: String, device: String) async throws {
         let params: [String: any Sendable] = [

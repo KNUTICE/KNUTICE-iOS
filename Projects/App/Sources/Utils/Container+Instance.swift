@@ -22,6 +22,10 @@ extension Container {
         Factory(self) { BookmarkRepositoryImpl.shared }
     }
     
+    var reportRepository: Factory<ReportRepository> {
+        Factory(self) { ReportRepositoryImpl() }
+    }
+    
     //MARK: - UseCase
     var fetchBookmarksUseCase: Factory<FetchBookmarksUseCase> {
         Factory(self) { FetchBookmarksUseCaseImpl(bookmarkReportory: self.bookmarkRepository()) }
@@ -53,6 +57,10 @@ extension Container {
     
     var updateBookmarkUseCase: Factory<UpdateBookmarkUseCase> {
         Factory(self) { UpdateBookmarkUseCaseImpl(bookmarkRepository: self.bookmarkRepository()) }
+    }
+    
+    var submitReportUseCase: Factory<SubmitReportUseCase> {
+        Factory(self) { SubmitReportUseCaseImpl(repository: self.reportRepository()) }
     }
     
     

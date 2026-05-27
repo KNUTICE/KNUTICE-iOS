@@ -193,6 +193,7 @@ extension AppDelegate {
             $0.deleteBookmarkUseCase = Container.shared.deleteBookmarkUseCase()
             $0.updateBookmarkUseCase = Container.shared.updateBookmarkUseCase()
             $0.saveBookmarkUseCase = Container.shared.saveBookmarkUseCase()
+            $0.submitReportUseCase = Container.shared.submitReportUseCase()
         }
     }
 }

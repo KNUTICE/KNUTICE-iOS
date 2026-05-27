@@ -6,14 +6,17 @@
 //
 
 import ComposableArchitecture
+import KNDomain
 
 extension DependencyValues {
-    var submitReportUseCase: SubmitReportUseCase {
+    public var submitReportUseCase: SubmitReportUseCase {
         get { self[SubmitReportUseCaseKey.self] }
         set { self[SubmitReportUseCaseKey.self] = newValue }
     }
 }
 
-fileprivate enum SubmitReportUseCaseKey: DependencyKey {
-    static let liveValue: SubmitReportUseCase = SubmitReportUseCaseImpl()
+enum SubmitReportUseCaseKey: DependencyKey {
+    static var liveValue: SubmitReportUseCase {
+        fatalError("Must override from App")
+    }
 }

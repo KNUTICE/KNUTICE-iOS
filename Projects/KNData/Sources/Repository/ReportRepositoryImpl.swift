@@ -7,6 +7,7 @@
 
 import Foundation
 import Factory
+import KNDomain
 import KNNetwork
 import KNUtility
 
@@ -16,9 +17,11 @@ import KNUtility
 /// `ReportRepositoryImpl` is declared as an `actor` to guarantee that all
 /// accesses to its mutable state are serialized, preventing data races in
 /// concurrent environments.
-actor ReportRepositoryImpl: ReportRepository {
+public actor ReportRepositoryImpl: ReportRepository {
     
     @Injected(\.remoteDataSource) var dataSource: RemoteDataSource
+    
+    public init() {}
     
     /// Submits a report to the server with the given parameters.
     ///
@@ -34,8 +37,8 @@ actor ReportRepositoryImpl: ReportRepository {
     ///   - `NetworkError.invalidURL` if the report endpoint URL is absent or
     ///     malformed in the module bundle.
     ///   - Any networking or decoding error propagated from `RemoteDataSource`.
-    func register(params: [String : any Sendable]) async throws {
-        guard let endpoint = Bundle.knReport.reportURL else {
+    public func register(params: [String : any Sendable]) async throws {
+        guard let endpoint = Bundle.knData.reportURL else {
             throw NetworkError.invalidURL(message: "Invalid or missing report URL.")
         }
         

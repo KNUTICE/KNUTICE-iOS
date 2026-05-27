@@ -50,7 +50,7 @@ let project = Project(
             dependencies: [
                 .project(target: "KNToken", path: "../KNToken"),
                 .project(target: "KNUtility", path: "../KNUtility"),
-                .project(target: "KNReport", path: "../KNReport"),
+                .project(target: "KNReport", path: "../Features/KNReport"),
                 .project(target: "KNDeepLink", path: "../KNDeepLink"),
                 .project(target: "KNTip", path: "../KNTip"),
                 .project(target: "UIComponents", path: "../UIComponents"),

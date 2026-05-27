@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol ReportRepository: Actor {
+public protocol ReportRepository: Actor {
     func register(params: [String: any Sendable]) async throws
 }
