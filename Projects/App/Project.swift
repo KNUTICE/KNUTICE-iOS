@@ -48,7 +48,6 @@ let project = Project(
             ],
             entitlements: .file(path: "Resources/KNUTICE.entitlements"),
             dependencies: [
-                .project(target: "KNCore", path: "../KNCore"),
                 .project(target: "KNToken", path: "../KNToken"),
                 .project(target: "KNUtility", path: "../KNUtility"),
                 .project(target: "KNReport", path: "../KNReport"),
@@ -61,6 +60,7 @@ let project = Project(
                 .project(target: "KNDomain", path: "../KNDomain"),
                 .project(target: "KNNotice", path: "../Features/KNNotice"),
                 .project(target: "KNBookmark", path: "../Features/KNBookmark"),
+                .project(target: "KNSearch", path: "../Features/KNSearch"),
                 .target(name: "NotificationService"),
                 .target(name: "KNUTICEWidget"),
                 .external(name: "RxSwift"),

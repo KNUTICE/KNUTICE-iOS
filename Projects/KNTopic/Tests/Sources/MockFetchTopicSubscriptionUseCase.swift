@@ -5,7 +5,6 @@
 //  Created by 이정훈 on 12/10/25.
 //
 
-import KNCore
 @testable import KNTopic
 
 actor MockFetchTopicSubscriptionUseCase: FetchTopicSubscriptionsUseCase {

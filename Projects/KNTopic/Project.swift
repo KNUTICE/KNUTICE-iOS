@@ -12,7 +12,6 @@ let project = Project.module(
         .external(name: "Factory")
     ],
     testDependencies: [
-        .project(target: "KNCore", path: "../KNCore"),
         .project(target: "KNNetwork", path: "../KNNetwork"),
     ],
     resources: ["Resources/**"],

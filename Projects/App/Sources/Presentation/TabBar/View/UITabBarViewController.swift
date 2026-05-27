@@ -10,9 +10,9 @@ import ComposableArchitecture
 import CorePresentation
 import Factory
 import KNBookmark
-import KNCore
 import KNDomain
 import KNNotice
+import KNSearch
 import KNSetting
 import KNUtility
 import UIKit
