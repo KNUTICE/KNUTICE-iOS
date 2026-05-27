@@ -7,18 +7,19 @@
 
 import Factory
 
-protocol FetchTopicSubscriptionsUseCase: Actor {
+public protocol FetchTopicSubscriptionsUseCase: Sendable {
     func execute(for topicType: TopicType) async throws -> [TopicSubscriptionKey]
 }
 
-actor FetchTopicSubscriptionsUseCaseImpl: FetchTopicSubscriptionsUseCase {
-    @Injected(\.topicSubscriptionRepository) private var repository
+public final class FetchTopicSubscriptionsUseCaseImpl: FetchTopicSubscriptionsUseCase {
+    private let repository: TopicSubscriptionRepository
     
-    public init() {}
+    public init(repository: TopicSubscriptionRepository) {
+        self.repository = repository
+    }
     
     public func execute(for topicType: TopicType) async throws -> [TopicSubscriptionKey] {
         return try await repository.fetch(for: topicType)
     }
-    
     
 }

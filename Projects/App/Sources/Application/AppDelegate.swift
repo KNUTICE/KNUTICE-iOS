@@ -194,6 +194,8 @@ extension AppDelegate {
             $0.updateBookmarkUseCase = Container.shared.updateBookmarkUseCase()
             $0.saveBookmarkUseCase = Container.shared.saveBookmarkUseCase()
             $0.submitReportUseCase = Container.shared.submitReportUseCase()
+            $0.fetchTopicSubscriptionUseCase = Container.shared.fetchTopicSubscriptionUseCase()
+            $0.updateTopicSubscriptionUseCase = Container.shared.updateTopicSubscriptionUseCase()
         }
     }
 }

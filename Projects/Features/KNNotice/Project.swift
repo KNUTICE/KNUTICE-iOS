@@ -9,7 +9,6 @@ let project = Project.module(
         .project(target: "UIComponents", path: "../../UIComponents"),
         .project(target: "CorePresentation", path: "../CorePresentation"),
         .project(target: "KNDomain", path: "../../KNDomain"),
-        .project(target: "KNTopic", path: "../../KNTopic"),
         .project(target: "KNDeepLink", path: "../../KNDeepLink"),
         .project(target: "KNIntelligence", path: "../../KNIntelligence"),
         .project(target: "KNData", path: "../../KNData"),

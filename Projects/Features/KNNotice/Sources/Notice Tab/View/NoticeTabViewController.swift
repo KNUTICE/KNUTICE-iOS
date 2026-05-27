@@ -10,6 +10,7 @@ import KNDesignSystem
 import KNSetting
 import KNUtility
 import UIKit
+import RxRelay
 import RxSwift
 import SnapKit
 import SwiftUI
@@ -59,8 +60,14 @@ public final class NoticeTabViewController: UIViewController, SettingButtonConfi
         UIDevice.current.userInterfaceIdiom == .pad
     }
     
-    public init(noticeCollectionViewControllerFactory: NoticeCollectionViewControllerFactory) {
+    private let noticeTabSettingsFactory: NoticeTabSettingsFactory
+    
+    public init(
+        noticeCollectionViewControllerFactory: NoticeCollectionViewControllerFactory,
+        noticeTabSettingsFactory: NoticeTabSettingsFactory
+    ) {
         self.noticeCollectionViewControllerFactory = noticeCollectionViewControllerFactory
+        self.noticeTabSettingsFactory = noticeTabSettingsFactory
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -211,7 +218,8 @@ public final class NoticeTabViewController: UIViewController, SettingButtonConfi
     
     /// Presents the notice tab settings screen as a full-screen modal.
     private func showNoticeTabSettings() {
-        let view = NoticeTabSettings(noticeTabItems: NoticeTabItems(viewModel.categories))
+        guard let view = noticeTabSettingsFactory.make(categoriesRelay: viewModel.categories) else { return }
+        
         let viewController = UIHostingController(rootView: view)
         viewController.modalPresentationStyle = .fullScreen
         
@@ -334,15 +342,23 @@ extension NoticeTabViewController {
 }
 
 #if DEBUG
-struct MockFactory: NoticeCollectionViewControllerFactory {
+struct MockNoticeCollectionViewControllerFactory: NoticeCollectionViewControllerFactory {
     func make(for category: any KNUtility.CategoryProtocol) -> NoticeCollectionViewController? {
         return nil
     }
-    
+}
+
+struct MockNoticeTabSettingsFactory: NoticeTabSettingsFactory {
+    func make(categoriesRelay: BehaviorRelay<[CategoryItem]>) -> NoticeTabSettings? {
+        return nil
+    }
 }
 
 #Preview {
-    NoticeTabViewController(noticeCollectionViewControllerFactory: MockFactory())
-        .makePreview()
+    NoticeTabViewController(
+        noticeCollectionViewControllerFactory: MockNoticeCollectionViewControllerFactory(),
+        noticeTabSettingsFactory: MockNoticeTabSettingsFactory()
+    )
+    .makePreview()
 }
 #endif

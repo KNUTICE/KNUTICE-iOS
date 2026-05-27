@@ -6,23 +6,28 @@
 //
 
 import ComposableArchitecture
+import KNDomain
 
 extension DependencyValues {
-    var fetchTopicSubscriptionUseCase: FetchTopicSubscriptionsUseCase {
+    public var fetchTopicSubscriptionUseCase: FetchTopicSubscriptionsUseCase {
         get { self[FetchTopicSubscriptionUseCaseKey.self] }
         set { self[FetchTopicSubscriptionUseCaseKey.self] = newValue }
     }
     
-    var updateTopicSubscriptionUseCase: UpdateTopicSubscriptionUseCase {
+    public var updateTopicSubscriptionUseCase: UpdateTopicSubscriptionUseCase {
         get { self[UpdateTopicSubscriptionUseCaseKey.self] }
         set { self[UpdateTopicSubscriptionUseCaseKey.self] = newValue }
     }
 }
 
 fileprivate enum FetchTopicSubscriptionUseCaseKey: DependencyKey {
-    static let liveValue: FetchTopicSubscriptionsUseCase = FetchTopicSubscriptionsUseCaseImpl()
+    static var liveValue: FetchTopicSubscriptionsUseCase {
+        fatalError("Must override from App")
+    }
 }
 
 fileprivate enum UpdateTopicSubscriptionUseCaseKey: DependencyKey {
-    static let liveValue: UpdateTopicSubscriptionUseCase = UpdateTopicSubscriptionUseCaseImpl()
+    static var liveValue: UpdateTopicSubscriptionUseCase {
+        fatalError("Must override from App")
+    }
 }

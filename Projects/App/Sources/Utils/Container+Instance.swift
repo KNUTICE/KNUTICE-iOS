@@ -30,6 +30,10 @@ extension Container {
         Factory(self) { TipRepositoryImpl() }
     }
     
+    var topicSubscriptionRepository: Factory<TopicSubscriptionRepository> {
+        Factory(self) { TopicSubscriptionRepositoryImpl() }
+    }
+    
     //MARK: - UseCase
     var fetchBookmarksUseCase: Factory<FetchBookmarksUseCase> {
         Factory(self) { FetchBookmarksUseCaseImpl(bookmarkReportory: self.bookmarkRepository()) }
@@ -65,6 +69,14 @@ extension Container {
     
     var submitReportUseCase: Factory<SubmitReportUseCase> {
         Factory(self) { SubmitReportUseCaseImpl(repository: self.reportRepository()) }
+    }
+    
+    var fetchTopicSubscriptionUseCase: Factory<FetchTopicSubscriptionsUseCase> {
+        Factory(self) { FetchTopicSubscriptionsUseCaseImpl(repository: self.topicSubscriptionRepository()) }
+    }
+    
+    var updateTopicSubscriptionUseCase: Factory<UpdateTopicSubscriptionUseCase> {
+        Factory(self) { UpdateTopicSubscriptionUseCaseImpl(repository: self.topicSubscriptionRepository()) }
     }
     
     

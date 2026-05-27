@@ -50,7 +50,10 @@ final class UITabBarViewController: UITabBarController, NavigationItemConfigurab
     }()
     
     private lazy var majorNoticeViewController: UIViewController = {
-        let viewController = NoticeTabViewController(noticeCollectionViewControllerFactory: NoticeCollectionViewControllerFactoryImpl())
+        let viewController = NoticeTabViewController(
+            noticeCollectionViewControllerFactory: NoticeCollectionViewControllerFactoryImpl(),
+            noticeTabSettingsFactory: NoticeTabSettingsFactoryImpl()
+        )
         viewController.tabBarItem.image = UIImage(systemName: "megaphone")
         viewController.tabBarItem.selectedImage = UIImage(systemName: "megaphone.fill")
         viewController.tabBarItem.title = "공지"

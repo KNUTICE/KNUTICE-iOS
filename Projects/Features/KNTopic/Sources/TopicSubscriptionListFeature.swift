@@ -7,6 +7,7 @@
 
 import ComposableArchitecture
 import Foundation
+import KNDomain
 import KNNetwork
 import KNUtility
 
