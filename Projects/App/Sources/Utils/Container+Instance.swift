@@ -26,6 +26,10 @@ extension Container {
         Factory(self) { ReportRepositoryImpl() }
     }
     
+    var tipRepository: Factory<TipRepository> {
+        Factory(self) { TipRepositoryImpl() }
+    }
+    
     //MARK: - UseCase
     var fetchBookmarksUseCase: Factory<FetchBookmarksUseCase> {
         Factory(self) { FetchBookmarksUseCaseImpl(bookmarkReportory: self.bookmarkRepository()) }
@@ -44,7 +48,7 @@ extension Container {
     }
     
     var fetchTipUseCase: Factory<FetchTipUseCase> {
-        Factory(self) { FetchTipUseCaseImpl() }
+        Factory(self) { FetchTipUseCaseImpl(repository: self.tipRepository()) }
     }
     
     var fetchTopThreeNoticesUseCase: Factory<FetchTopThreeNoticesUseCase> {

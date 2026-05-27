@@ -8,6 +8,7 @@
 import Combine
 import Factory
 import Foundation
+import KNDomain
 import os
 
 @MainActor
@@ -15,13 +16,15 @@ public final class TipBannerViewModel: ObservableObject {
     @Published var tips: [Tip]? = nil
     @Published var selectedIndex: Int = 0
     
-    @Injected(\.fetchTipUseCase) private var fetchTipUseCase
+    private let fetchTipUseCase: FetchTipUseCase
     
     private let logger: Logger = Logger()
     var selectedURL: String = ""
     private(set) var task: Task<Void, Never>?
     
-    public init() {}
+    public init(fetchTipUseCase: FetchTipUseCase) {
+        self.fetchTipUseCase = fetchTipUseCase
+    }
     
     func fetchTips() async {
         let result = await fetchTipUseCase.execute()

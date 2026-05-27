@@ -52,7 +52,7 @@ let project = Project(
                 .project(target: "KNUtility", path: "../KNUtility"),
                 .project(target: "KNReport", path: "../Features/KNReport"),
                 .project(target: "KNDeepLink", path: "../KNDeepLink"),
-                .project(target: "KNTip", path: "../KNTip"),
+                .project(target: "KNTip", path: "../Features/KNTip"),
                 .project(target: "UIComponents", path: "../UIComponents"),
                 .project(target: "KNSetting", path: "../KNSetting"),
                 .project(target: "KNReadingRoom", path: "../KNReadingRoom"),

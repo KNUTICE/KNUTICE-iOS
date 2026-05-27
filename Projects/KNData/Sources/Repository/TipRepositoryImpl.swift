@@ -7,13 +7,16 @@
 
 import Factory
 import Foundation
+import KNDomain
 import KNNetwork
 
-actor TipRepositoryImpl: TipRepository {
+public actor TipRepositoryImpl: TipRepository {
     @Injected(\.remoteDataSource) private var dataSource
     
-    func fetchTips() async -> Result<[Tip]?, any Error> {
-        guard let baseURL = Bundle.knTip.tipURL else {
+    public init() {}
+    
+    public func fetchTips() async -> Result<[Tip]?, any Error> {
+        guard let baseURL = Bundle.knData.tipURL else {
             return .failure(NetworkError.invalidURL(message: "The tip API URL is missing or invalid."))
         }
         

@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol TipRepository: Actor {
+public protocol TipRepository: Actor {
     func fetchTips() async -> Result<[Tip]?, any Error>
 }

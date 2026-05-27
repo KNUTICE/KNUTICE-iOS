@@ -12,9 +12,11 @@ public protocol FetchTipUseCase: Actor {
 }
 
 public actor FetchTipUseCaseImpl: FetchTipUseCase {
-    @Injected(\.tipRepository) private var repository
+    private let repository: TipRepository
     
-    public init() {}
+    public init(repository: TipRepository) {
+        self.repository = repository
+    }
     
     public func execute() async -> Result<[Tip]?, any Error> {
         return await repository.fetchTips()

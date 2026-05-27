@@ -8,6 +8,8 @@
 import Combine
 import ComposableArchitecture
 import CorePresentation
+import Factory
+import FirebaseAnalytics
 import KNBookmark
 import KNDeepLink
 import KNDesignSystem
@@ -20,7 +22,6 @@ import KNTip
 import KNUtility
 import SwiftUI
 import UIComponents
-import FirebaseAnalytics
 
 struct HomeScreenView: View {
     private struct TabHeightPreferenceKey: PreferenceKey {
@@ -45,7 +46,7 @@ struct HomeScreenView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                TipBannerView(viewModel: TipBannerViewModel())
+                TipBannerView(viewModel: TipBannerViewModel(fetchTipUseCase: Container.shared.fetchTipUseCase()))
                 
                 HStack(spacing: 20) {
                     NavigationLink {
