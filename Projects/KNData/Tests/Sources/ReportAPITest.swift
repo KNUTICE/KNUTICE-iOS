@@ -10,8 +10,8 @@ import Alamofire
 import Factory
 import Foundation
 import Testing
+@testable import KNData
 import KNNetwork
-@testable import KNReport
 import KNUtility
 
 @Test
@@ -24,7 +24,7 @@ func submitReport() async throws {
         RemoteDataSourceImpl(session: session)
     }
     
-    guard let endpoint = Bundle.knReport.reportURL else {
+    guard let endpoint = Bundle.knData.reportURL else {
         throw NetworkError.invalidURL(message: "Invalid or missing report URL.")
     }
     

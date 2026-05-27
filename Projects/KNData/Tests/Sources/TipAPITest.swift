@@ -10,7 +10,7 @@ import Factory
 import Foundation
 import Testing
 import KNNetwork
-@testable import KNTip
+@testable import KNData
 
 @Test
 func fetchTipDTO() async throws {
@@ -26,7 +26,7 @@ func fetchTipDTO() async throws {
     
     let dataSource = Container.shared.remoteDataSource()
     
-    guard let endpoint = Bundle.knTip.tipURL else {
+    guard let endpoint = Bundle.knData.tipURL else {
         throw NetworkError.invalidURL(
             message: "Failed to load tipURL from Bundle.main. Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension."
         )
