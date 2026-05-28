@@ -56,7 +56,7 @@ let project = Project(
                 .project(target: "UIComponents", path: "../UIComponents"),
                 .project(target: "KNSetting", path: "../KNSetting"),
                 .project(target: "KNReadingRoom", path: "../Features/KNReadingRoom"),
-                .project(target: "KNMeal", path: "../KNMeal"),
+                .project(target: "KNMeal", path: "../Features/KNMeal"),
                 .project(target: "KNDomain", path: "../KNDomain"),
                 .project(target: "KNNotice", path: "../Features/KNNotice"),
                 .project(target: "KNBookmark", path: "../Features/KNBookmark"),
