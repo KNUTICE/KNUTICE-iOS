@@ -114,6 +114,8 @@ public final class NoticeCollectionViewCell: UICollectionViewCell {
         // Thumbnail
         guard isShowingThumbnail else {
             thumbnailImageView.isHidden = true
+            thumbnailImageView.kf.cancelDownloadTask()
+            thumbnailImageView.image = nil
             return
         }
         
