@@ -6,7 +6,6 @@
 //
 
 import Combine
-import Factory
 import KNUtility
 
 public protocol SubmitReportUseCase: Actor {

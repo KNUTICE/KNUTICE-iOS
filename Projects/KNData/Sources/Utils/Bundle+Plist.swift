@@ -58,4 +58,10 @@ extension Bundle {
         
         return url
     }
+    
+    var readingRoomURL: String? {
+        guard let url = resource?["ReadingRoom_URL"] as? String else { return nil }
+        
+        return url
+    }
 }

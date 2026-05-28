@@ -5,8 +5,8 @@
 //  Created by 이정훈 on 4/1/26.
 //
 
+import KNDomain
 import KNDesignSystem
-import KNReadingRoom
 import KNUtility
 import WidgetKit
 import SwiftUI

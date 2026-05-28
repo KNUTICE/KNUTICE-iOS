@@ -5,7 +5,7 @@
 //  Created by 이정훈 on 12/11/25.
 //
 
-import Factory
+import Foundation
 
 public protocol FetchTopicSubscriptionsUseCase: Sendable {
     func execute(for topicType: TopicType) async throws -> [TopicSubscriptionKey]

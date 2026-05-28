@@ -5,7 +5,7 @@
 //  Created by 이정훈 on 1/6/26.
 //
 
-import Factory
+import Foundation
 
 public protocol FetchTipUseCase: Actor {
     func execute() async -> Result<[Tip]?, any Error>

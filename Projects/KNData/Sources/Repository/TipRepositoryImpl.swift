@@ -16,7 +16,7 @@ public actor TipRepositoryImpl: TipRepository {
     public init() {}
     
     public func fetchTips() async -> Result<[Tip]?, any Error> {
-        guard let baseURL = Bundle.knData.tipURL else {
+        guard let baseURL = Bundle.module.tipURL else {
             return .failure(NetworkError.invalidURL(message: "The tip API URL is missing or invalid."))
         }
         

@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol ReadingRoomRepository {
+public protocol ReadingRoomRepository {
     func fetchReadingRoomStatus() async throws -> [ReadingRoomStatus]
 }

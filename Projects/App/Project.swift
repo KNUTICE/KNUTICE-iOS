@@ -55,7 +55,7 @@ let project = Project(
                 .project(target: "KNTip", path: "../Features/KNTip"),
                 .project(target: "UIComponents", path: "../UIComponents"),
                 .project(target: "KNSetting", path: "../KNSetting"),
-                .project(target: "KNReadingRoom", path: "../KNReadingRoom"),
+                .project(target: "KNReadingRoom", path: "../Features/KNReadingRoom"),
                 .project(target: "KNMeal", path: "../KNMeal"),
                 .project(target: "KNDomain", path: "../KNDomain"),
                 .project(target: "KNNotice", path: "../Features/KNNotice"),
@@ -141,7 +141,6 @@ let project = Project(
                 .project(target: "KNData", path: "../KNData"),
                 .project(target: "KNDeepLink", path: "../KNDeepLink"),
                 .project(target: "KNDesignSystem", path: "../KNDesignSystem"),
-                .project(target: "KNReadingRoom", path: "../KNReadingRoom"),
                 .external(name: "Factory"),
             ],
             settings: .settings(

@@ -5,7 +5,6 @@
 //  Created by 이정훈 on 12/11/25.
 //
 
-import Factory
 import KNUtility
 
 public protocol UpdateTopicSubscriptionUseCase: Sendable {

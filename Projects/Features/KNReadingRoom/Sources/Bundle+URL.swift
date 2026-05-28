@@ -48,10 +48,4 @@ public extension Bundle {
         
         return url
     }
-    
-    var baseURL: String? {
-        guard let url = resource?["Base_URL"] as? String else { return nil }
-        
-        return url
-    }
 }

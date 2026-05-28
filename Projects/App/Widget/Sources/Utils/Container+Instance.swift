@@ -15,7 +15,15 @@ extension Container {
         Factory(self) { NoticeRepositoryImpl(dataSource: RemoteDataSourceImpl()) }
     }
     
+    private var readingRoomRepository: Factory<ReadingRoomRepository> {
+        Factory(self) { ReadingRoomRepositoryImpl() }
+    }
+    
     var fetchNoticesUseCase: Factory<FetchNoticesUseCase> {
         Factory(self) { FetchNoticesUseCaseImpl(noticeRepository: self.noticeRepository()) }
+    }
+    
+    var fetchReadingRoomStatusUseCase: Factory<FetchReadingRoomStatusUseCase> {
+        Factory(self) { FetchReadingRoomStatusUseCaseImpl(repository: self.readingRoomRepository()) }
     }
 }
