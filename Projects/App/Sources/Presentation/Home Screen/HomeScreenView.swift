@@ -333,7 +333,7 @@ fileprivate struct NoticeListRow: View {
                     Text("N")
                         .font(.system(size: Constants.newBadgeFontSize, weight: .bold))
                         .foregroundStyle(.white)
-                        .frame(width: Constants.newBadeFrameSize, height: Constants.newBadeFrameSize)
+                        .frame(width: Constants.newBadgeFrameSize, height: Constants.newBadgeFrameSize)
                         .background(KNDesignSystemAsset.accent2.swiftUIColor)
                         .cornerRadius(Constants.newBadgeCornerRadius)
                 }
