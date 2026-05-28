@@ -90,7 +90,7 @@ public final class NoticeCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(stackView)
         
         newBadgeLabel.snp.makeConstraints {
-            $0.width.height.equalTo(Constants.newBadeFrameSize)
+            $0.width.height.equalTo(Constants.newBadgeFrameSize)
         }
         
         stackView.snp.makeConstraints { make in
