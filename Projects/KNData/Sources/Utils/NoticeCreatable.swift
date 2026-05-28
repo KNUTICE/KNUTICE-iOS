@@ -29,7 +29,7 @@ public extension NoticeCreatable {
             uploadDate: data.registrationDate,
             imageUrl: data.contentImageURL,
             category: category,
-            isNew: isWithin24Hours(from: data.registrationDate)
+            isNew: isWithin48Hours(from: data.registrationDate)
         )
     }
 }
