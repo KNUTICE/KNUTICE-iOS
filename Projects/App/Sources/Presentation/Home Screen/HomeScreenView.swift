@@ -334,8 +334,7 @@ fileprivate struct NoticeListRow: View {
                         .font(.system(size: Constants.newBadgeFontSize, weight: .bold))
                         .foregroundStyle(.white)
                         .frame(width: Constants.newBadgeFrameSize, height: Constants.newBadgeFrameSize)
-                        .background(KNDesignSystemAsset.accent2.swiftUIColor)
-                        .cornerRadius(Constants.newBadgeCornerRadius)
+                        .background(KNDesignSystemAsset.accent2.swiftUIColor, in: RoundedRectangle(cornerRadius: Constants.newBadgeCornerRadius))
                 }
                 
                 Text(notice.title)
