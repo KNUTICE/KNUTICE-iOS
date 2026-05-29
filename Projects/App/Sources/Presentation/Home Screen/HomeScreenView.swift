@@ -7,6 +7,7 @@
 
 import Combine
 import ComposableArchitecture
+import CorePresentation
 import KNCore
 import KNDeepLink
 import KNDesignSystem
@@ -327,12 +328,22 @@ fileprivate struct NoticeListRow: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(notice.title)
-                .font(.footnote)
-                .bold()
-                .lineLimit(1)
-                .foregroundStyle(colorScheme == .light ? .black : .white)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            HStack(spacing: 6) {
+                if notice.isNew {
+                    Text("N")
+                        .font(.system(size: Constants.newBadgeFontSize, weight: .bold))
+                        .foregroundStyle(.white)
+                        .frame(width: Constants.newBadgeFrameSize, height: Constants.newBadgeFrameSize)
+                        .background(KNDesignSystemAsset.accent2.swiftUIColor, in: RoundedRectangle(cornerRadius: Constants.newBadgeCornerRadius))
+                }
+                
+                Text(notice.title)
+                    .font(.footnote)
+                    .bold()
+                    .lineLimit(1)
+                    .foregroundStyle(colorScheme == .light ? .black : .white)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
             
             HStack(spacing: 5) {
                 Text("[" + notice.department + "]")

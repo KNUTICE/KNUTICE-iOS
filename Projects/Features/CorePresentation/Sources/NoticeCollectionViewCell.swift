@@ -7,23 +7,73 @@
 
 import KNDomain
 import UIKit
+import Kingfisher
 import KNDesignSystem
 import SnapKit
 
 public final class NoticeCollectionViewCell: UICollectionViewCell {
     public static let reuseIdentifier = "NoticeCollectionViewCell"
+    
+    private let newBadgeLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.text = "N"
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: Constants.newBadgeFontSize, weight: .bold)
+        label.backgroundColor = KNDesignSystemAsset.accent2.color
+        label.textAlignment = .center
+        label.layer.cornerRadius = Constants.newBadgeCornerRadius
+        label.clipsToBounds = true
+        
+        return label
+    }()
+    
     private let titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = .font(for: .footnote, weight: .bold)
         
         return label
     }()
+    
+    private lazy var titleStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [
+            newBadgeLabel,
+            titleLabel
+        ])
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.spacing = 6
+        
+        return stackView
+    }()
+    
     private let subTitleLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = .preferredFont(forTextStyle: .caption2)
+        label.font = .preferredFont(forTextStyle: .caption1)
         label.textColor = KNDesignSystemAsset.subTitle.color
         
         return label
+    }()
+    
+    private let thumbnailImageView: UIImageView = {
+        let imageView = UIImageView(frame: .zero)
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        
+        return imageView
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [
+            thumbnailImageView,
+            titleStackView,
+            subTitleLabel
+        ])
+        
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        
+        return stackView
     }()
     
     override init(frame: CGRect = .zero) {
@@ -37,24 +87,68 @@ public final class NoticeCollectionViewCell: UICollectionViewCell {
     }
     
     private func setUpLayout() {
-        contentView.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
+        contentView.addSubview(stackView)
+        
+        newBadgeLabel.snp.makeConstraints {
+            $0.width.height.equalTo(Constants.newBadgeFrameSize)
         }
         
-        contentView.addSubview(subTitleLabel)
-        subTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(8)
-            make.leading.equalToSuperview().offset(16)
-            make.bottom.equalToSuperview().offset(-16)
+        stackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(16)
         }
+        
+        thumbnailImageView.snp.makeConstraints { make in
+            make.height.equalTo(thumbnailImageView.snp.width).multipliedBy(0.55)
+        }
+        
+        stackView.setCustomSpacing(16, after: thumbnailImageView)    // 썸네일 이미지와 타이틀 사이 공간을 16으로 설정
     }
     
-    func configure(with item: Notice) {
+    func configure(
+        with item: Notice,
+        isShowingThumbnail: Bool,
+        containerWidth: CGFloat? = nil
+    ) {
         titleLabel.text = item.title
         subTitleLabel.text = "[\(item.department)]  \(item.uploadDate)"
+
+        // New Badge
+        newBadgeLabel.isHidden = !item.isNew
+        
+        // Thumbnail
+        guard isShowingThumbnail else {
+            thumbnailImageView.isHidden = true
+            thumbnailImageView.kf.cancelDownloadTask()
+            thumbnailImageView.image = nil
+            return
+        }
+
+        thumbnailImageView.isHidden = false
+
+        // 현재 View 기준 width 사용
+        let baseWidth = containerWidth ?? bounds.width
+        let width: CGFloat = traitCollection.userInterfaceIdiom == .phone ? baseWidth - 32 : baseWidth / 2 - 32
+        let height = width * 0.4
+        let scale = traitCollection.displayScale
+        let targetSize = CGSize(
+            width: width * scale,
+            height: height * scale
+        )
+        let processor =
+        DownsamplingImageProcessor(size: targetSize) |>
+        CroppingImageProcessor(
+            size: targetSize,
+            anchor: CGPoint(x: 0.5, y: 0)
+        )
+        
+        thumbnailImageView.isHidden = false
+        thumbnailImageView.kf.indicatorType = .activity
+        thumbnailImageView.kf.setImage(
+            with: URL(string: item.imageUrl ?? CorePresentationResources.bundle.defaultThumbnailURL),
+            options: [
+                .processor(processor)
+            ]
+        )
     }
     
     public override func updateConfiguration(using state: UICellConfigurationState) {

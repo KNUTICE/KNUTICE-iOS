@@ -9,7 +9,7 @@ import Foundation
 import KNDomain
 import KNUtility
 
-public protocol NoticeCreatable {
+public protocol NoticeCreatable: UploadDateComparable {
     func createNotice(_ body: NoticeData) -> Notice
 }
 
@@ -28,7 +28,8 @@ public extension NoticeCreatable {
             department: data.department,
             uploadDate: data.registrationDate,
             imageUrl: data.contentImageURL,
-            category: category
+            category: category,
+            isNew: isWithin48Hours(from: data.registrationDate)
         )
     }
 }

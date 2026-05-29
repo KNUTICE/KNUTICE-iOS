@@ -28,7 +28,7 @@ public struct Notice: Sendable, Equatable, Identifiable {
         uploadDate: String,
         imageUrl: String?,
         category: any CategoryProtocol,
-        isNew: Bool = false
+        isNew: Bool
     ) {
         self.id = id
         self.title = title
@@ -60,7 +60,8 @@ public extension Notice {
                 department: "학사관리과",
                 uploadDate: "2026-05-11",
                 imageUrl: nil,
-                category: NoticeCategory.academicNotice
+                category: NoticeCategory.academicNotice,
+                isNew: false
             ),
             Notice(
                 id: 1121886,
@@ -70,7 +71,8 @@ public extension Notice {
                 department: "학사관리과",
                 uploadDate: "2026-05-07",
                 imageUrl: nil,
-                category: NoticeCategory.academicNotice
+                category: NoticeCategory.academicNotice,
+                isNew: false
             )
         ]
     }
@@ -85,7 +87,8 @@ public extension Notice {
                 department: "국제교류본부",
                 uploadDate: "2026-05-12",
                 imageUrl: nil,
-                category: NoticeCategory.generalNotice
+                category: NoticeCategory.generalNotice,
+                isNew: false
             ),
             Notice(
                 id: 1121930,
@@ -95,7 +98,8 @@ public extension Notice {
                 department: "IPP사업단",
                 uploadDate: "2026-05-11",
                 imageUrl: "https://www.ut.ac.kr/namo/binary/images/000106/20260511165256844_H46XWBBY.png",
-                category: NoticeCategory.generalNotice
+                category: NoticeCategory.generalNotice,
+                isNew: false
             )
         ]
     }
@@ -110,7 +114,8 @@ public extension Notice {
                 department: "장학팀",
                 uploadDate: "2026-05-12",
                 imageUrl: nil,
-                category: NoticeCategory.scholarshipNotice
+                category: NoticeCategory.scholarshipNotice,
+                isNew: false
             ),
             Notice(
                 id: 1121915,
@@ -120,7 +125,8 @@ public extension Notice {
                 department: "장학팀",
                 uploadDate: "2026-05-11",
                 imageUrl: nil,
-                category: NoticeCategory.scholarshipNotice
+                category: NoticeCategory.scholarshipNotice,
+                isNew: false
             )
         ]
     }
@@ -135,7 +141,8 @@ public extension Notice {
                 department: "학생과",
                 uploadDate: "2026-05-12",
                 imageUrl: nil,
-                category: NoticeCategory.eventNotice
+                category: NoticeCategory.eventNotice,
+                isNew: false
             ),
             Notice(
                 id: 1121960,
@@ -145,7 +152,8 @@ public extension Notice {
                 department: "학생과",
                 uploadDate: "2026-05-12",
                 imageUrl: nil,
-                category: NoticeCategory.eventNotice
+                category: NoticeCategory.eventNotice,
+                isNew: false
             )
         ]
     }
@@ -160,7 +168,8 @@ public extension Notice {
                 department: "대학일자리플러스센터",
                 uploadDate: "2026-05-12",
                 imageUrl: nil,
-                category: NoticeCategory.employmentNotice
+                category: NoticeCategory.employmentNotice,
+                isNew: false
             ),
             Notice(
                 id: 1121929,
@@ -170,7 +179,8 @@ public extension Notice {
                 department: "대학일자리플러스센터",
                 uploadDate: "2026-05-11",
                 imageUrl: nil,
-                category: NoticeCategory.employmentNotice
+                category: NoticeCategory.employmentNotice,
+                isNew: false
             )
         ]
     }

@@ -28,7 +28,7 @@ public extension FetchNoticesUseCase {
     }
 }
 
-public actor FetchNoticesUseCaseImpl: FetchNoticesUseCase, UploadDateComparable {
+public actor FetchNoticesUseCaseImpl: FetchNoticesUseCase {
     private var noticeRepository: NoticeRepository
     
     public init(noticeRepository: NoticeRepository) {
@@ -40,13 +40,6 @@ public actor FetchNoticesUseCaseImpl: FetchNoticesUseCase, UploadDateComparable 
         
         // 서버에서 선택된 공지 데이터 가져오기
         var notices = try await noticeRepository.fetchNotices(for: category.rawValue, after: nttId, size: size)
-        
-        // 업로드 날짜 기준 24시간 이내 여부 확인
-        for i in notices.indices {
-            guard isWithin24Hours(from: notices[i].uploadDate) else { break }
-            
-            notices[i].isNew = true
-        }
         
         return notices
     }

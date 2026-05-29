@@ -63,15 +63,9 @@ public extension RxDataSourceBindable {
                 }
             }()
             
-            if shouldUseThumbnail {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoticeCollectionViewCellWithThumbnail.reuseIdentifier, for: indexPath) as! NoticeCollectionViewCellWithThumbnail
-                cell.imageURL = ""
-                cell.configure(with: item)
-                return cell
-            }
-            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoticeCollectionViewCell.reuseIdentifier, for: indexPath) as! NoticeCollectionViewCell
-            cell.configure(with: item)
+            
+            cell.configure(with: item, isShowingThumbnail: shouldUseThumbnail)
             return cell
         })
     }
