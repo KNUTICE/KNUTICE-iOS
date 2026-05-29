@@ -104,10 +104,14 @@ public final class NoticeCollectionViewCell: UICollectionViewCell {
         stackView.setCustomSpacing(16, after: thumbnailImageView)    // 썸네일 이미지와 타이틀 사이 공간을 16으로 설정
     }
     
-    func configure(with item: Notice, isShowingThumbnail: Bool) {
+    func configure(
+        with item: Notice,
+        isShowingThumbnail: Bool,
+        containerWidth: CGFloat? = nil
+    ) {
         titleLabel.text = item.title
         subTitleLabel.text = "[\(item.department)]  \(item.uploadDate)"
-        
+
         // New Badge
         newBadgeLabel.isHidden = !item.isNew
         
@@ -118,10 +122,14 @@ public final class NoticeCollectionViewCell: UICollectionViewCell {
             thumbnailImageView.image = nil
             return
         }
-        
-        let width = UIDevice.current.userInterfaceIdiom == .phone ? UIScreen.main.bounds.width - 32 : UIScreen.main.bounds.width / 2 - 32
+
+        thumbnailImageView.isHidden = false
+
+        // 현재 View 기준 width 사용
+        let baseWidth = containerWidth ?? bounds.width
+        let width: CGFloat = traitCollection.userInterfaceIdiom == .phone ? baseWidth - 32 : baseWidth / 2 - 32
         let height = width * 0.4
-        let scale = UIScreen.main.scale
+        let scale = traitCollection.displayScale
         let targetSize = CGSize(
             width: width * scale,
             height: height * scale
