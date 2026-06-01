@@ -17,7 +17,6 @@ public struct Notice: Sendable, Equatable, Identifiable {
     public let uploadDate: String    // 등록 날짜
     public let imageUrl: String?    // 썸네일 URL
     public let category: any CategoryProtocol    // 공지 카테고리 종류
-    public var isNew: Bool
     
     public init(
         id: Int,
@@ -28,7 +27,6 @@ public struct Notice: Sendable, Equatable, Identifiable {
         uploadDate: String,
         imageUrl: String?,
         category: any CategoryProtocol,
-        isNew: Bool
     ) {
         self.id = id
         self.title = title
@@ -38,13 +36,18 @@ public struct Notice: Sendable, Equatable, Identifiable {
         self.uploadDate = uploadDate
         self.imageUrl = imageUrl
         self.category = category
-        self.isNew = isNew
     }
     
     public static func == (lhs: Notice, rhs: Notice) -> Bool {
         lhs.id == rhs.id &&
         lhs.isNew == rhs.isNew &&
         lhs.category.rawValue == rhs.category.rawValue
+    }
+}
+
+extension Notice: UploadDateComparable {
+    public var isNew: Bool {
+        isWithin48Hours(from: uploadDate)
     }
 }
 
@@ -61,7 +64,6 @@ public extension Notice {
                 uploadDate: "2026-05-11",
                 imageUrl: nil,
                 category: NoticeCategory.academicNotice,
-                isNew: false
             ),
             Notice(
                 id: 1121886,
@@ -72,7 +74,6 @@ public extension Notice {
                 uploadDate: "2026-05-07",
                 imageUrl: nil,
                 category: NoticeCategory.academicNotice,
-                isNew: false
             )
         ]
     }
@@ -88,7 +89,6 @@ public extension Notice {
                 uploadDate: "2026-05-12",
                 imageUrl: nil,
                 category: NoticeCategory.generalNotice,
-                isNew: false
             ),
             Notice(
                 id: 1121930,
@@ -99,7 +99,6 @@ public extension Notice {
                 uploadDate: "2026-05-11",
                 imageUrl: "https://www.ut.ac.kr/namo/binary/images/000106/20260511165256844_H46XWBBY.png",
                 category: NoticeCategory.generalNotice,
-                isNew: false
             )
         ]
     }
@@ -115,7 +114,6 @@ public extension Notice {
                 uploadDate: "2026-05-12",
                 imageUrl: nil,
                 category: NoticeCategory.scholarshipNotice,
-                isNew: false
             ),
             Notice(
                 id: 1121915,
@@ -126,7 +124,6 @@ public extension Notice {
                 uploadDate: "2026-05-11",
                 imageUrl: nil,
                 category: NoticeCategory.scholarshipNotice,
-                isNew: false
             )
         ]
     }
@@ -142,7 +139,6 @@ public extension Notice {
                 uploadDate: "2026-05-12",
                 imageUrl: nil,
                 category: NoticeCategory.eventNotice,
-                isNew: false
             ),
             Notice(
                 id: 1121960,
@@ -153,7 +149,6 @@ public extension Notice {
                 uploadDate: "2026-05-12",
                 imageUrl: nil,
                 category: NoticeCategory.eventNotice,
-                isNew: false
             )
         ]
     }
@@ -169,7 +164,6 @@ public extension Notice {
                 uploadDate: "2026-05-12",
                 imageUrl: nil,
                 category: NoticeCategory.employmentNotice,
-                isNew: false
             ),
             Notice(
                 id: 1121929,
@@ -180,7 +174,6 @@ public extension Notice {
                 uploadDate: "2026-05-11",
                 imageUrl: nil,
                 category: NoticeCategory.employmentNotice,
-                isNew: false
             )
         ]
     }
