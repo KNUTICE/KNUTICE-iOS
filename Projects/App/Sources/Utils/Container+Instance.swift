@@ -34,6 +34,10 @@ extension Container {
         Factory(self) { TopicSubscriptionRepositoryImpl() }
     }
     
+    var noticeSummaryRepository: Factory<NoticeSummaryRepository> {
+        Factory(self) { NoticeSummaryRepositoryImpl() }
+    }
+    
     //MARK: - UseCase
     var fetchBookmarksUseCase: Factory<FetchBookmarksUseCase> {
         Factory(self) { FetchBookmarksUseCaseImpl(bookmarkReportory: self.bookmarkRepository()) }

@@ -89,8 +89,10 @@ public struct NoticeSummaryView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     NoticeSummaryView(viewModel: NoticeSummaryViewModel(nttId: 1085082)) {
         // Dismiss Action
     }
 }
+#endif

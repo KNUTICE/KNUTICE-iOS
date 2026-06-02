@@ -11,6 +11,7 @@ import Firebase
 import FirebaseCore
 import FirebaseMessaging
 import KNDeepLink
+import KNDomain
 import KNUtility
 import KNToken
 import UIKit
@@ -196,6 +197,10 @@ extension AppDelegate {
             $0.submitReportUseCase = Container.shared.submitReportUseCase()
             $0.fetchTopicSubscriptionUseCase = Container.shared.fetchTopicSubscriptionUseCase()
             $0.updateTopicSubscriptionUseCase = Container.shared.updateTopicSubscriptionUseCase()
+        }
+        
+        Container.shared.fetchNoticeSummaryUseCase.register {
+            FetchNoticeSummaryUseCaseImpl(repository: Container.shared.noticeSummaryRepository())
         }
     }
 }

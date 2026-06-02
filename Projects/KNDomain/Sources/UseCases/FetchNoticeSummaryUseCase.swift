@@ -5,18 +5,21 @@
 //  Created by 이정훈 on 1/29/26.
 //
 
-import Factory
 import Foundation
 import KNMarkdown
 
-protocol FetchNoticeSummaryUseCase: Actor {
+public protocol FetchNoticeSummaryUseCase: Sendable {
     func execute(for nttId: Int) async throws -> [MarkdownNode]
 }
 
-actor FetchNoticeSummaryUseCaseImpl: FetchNoticeSummaryUseCase {
-    @Injected(\.noticeSummaryRepository) private var repository
+public final class FetchNoticeSummaryUseCaseImpl: FetchNoticeSummaryUseCase {
+    private let repository: NoticeSummaryRepository
     
-    func execute(for nttId: Int) async throws -> [MarkdownNode] {
+    public init(repository: NoticeSummaryRepository) {
+        self.repository = repository
+    }
+    
+    public func execute(for nttId: Int) async throws -> [MarkdownNode] {
         try Task.checkCancellation()
         
         let noticeSummary = try await repository.fetch(for: nttId)

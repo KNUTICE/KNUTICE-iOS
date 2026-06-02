@@ -64,4 +64,12 @@ extension Bundle {
         
         return url
     }
+    
+    var noticeSummaryURL: String? {
+        guard let url = resource?["Notice_Summary_URL"] as? String else {
+            return nil
+        }
+        
+        return url
+    }
 }

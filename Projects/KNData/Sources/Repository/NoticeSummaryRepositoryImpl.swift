@@ -7,13 +7,16 @@
 
 import Factory
 import Foundation
+import KNDomain
 import KNNetwork
 
-actor NoticeSummaryRepositoryImpl: NoticeSummaryRepository {
+public actor NoticeSummaryRepositoryImpl: NoticeSummaryRepository {
     @Injected(\.remoteDataSource) private var remoteDataSource
     
-    func fetch(for nttId: Int) async throws -> NoticeSummary {
-        guard var baseURL = Bundle.knIntelligence.noticeSummaryURL else {
+    public init() {}
+    
+    public func fetch(for nttId: Int) async throws -> NoticeSummary {
+        guard var baseURL = Bundle.module.noticeSummaryURL else {
             throw NetworkError.invalidURL(message: "Invalid or missing 'Notice_Summary_URL' in resource.")
         }
         

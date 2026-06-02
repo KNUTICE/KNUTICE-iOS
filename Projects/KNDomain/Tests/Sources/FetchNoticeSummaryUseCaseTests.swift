@@ -6,11 +6,10 @@
 //
 
 import Factory
-@testable import KNIntelligence
+@testable import KNDomain
 import Testing
 
 // MARK: - Mock
-/// 테스트 데이터가 고정되어 있다면 상수로 분리하는 것이 가독성에 좋습니다.
 extension NoticeSummary {
     static let mock = NoticeSummary(
         id: 1087050,
@@ -29,12 +28,7 @@ struct FetchNoticeSummaryUseCaseTests {
     private let usecase: FetchNoticeSummaryUseCase
     
     init() {
-        // Mock 주입
-        Container.shared.noticeSummaryRepository.register {
-            MockNoticeSummaryRepository()
-        }
-        
-        self.usecase = Container.shared.fetchNoticeSummaryUseCase()
+        usecase = FetchNoticeSummaryUseCaseImpl(repository: MockNoticeSummaryRepository())
     }
 
     @Test("공지사항 요약 데이터를 가져와 마크다운 노드로 변환하는 데 성공한다")

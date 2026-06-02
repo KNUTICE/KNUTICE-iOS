@@ -7,8 +7,8 @@
 
 import Alamofire
 import Foundation
+@testable import KNData
 import Testing
-@testable import KNIntelligence
 import KNNetwork
 
 @Suite("공지 AI 요약 API 테스트")
@@ -26,7 +26,7 @@ struct NoticeSummaryTests {
         let dataSource = RemoteDataSourceImpl(session: session)
         self.dataSource = dataSource
         
-        guard let url = Bundle.knIntelligence.noticeSummaryURL else {
+        guard let url = Bundle.knData.noticeSummaryURL else {
             throw NetworkError.invalidURL(
                 message: "Failed to load baseURL from Bundle.knIntelligence. " +
                 "Make sure the URL is properly defined in ServiceInfo.plist or the Bundle extension."

@@ -7,16 +7,19 @@
 
 import Factory
 import Foundation
+import KNDomain
 import KNMarkdown
 
 @MainActor @Observable public class NoticeSummaryViewModel {
     private(set) var nodes: [MarkdownNode] = []
-    private let nttId: Int
     
+    @ObservationIgnored private let nttId: Int
     @ObservationIgnored @Injected(\.fetchNoticeSummaryUseCase) private var fetchNoticeSummaryUseCase
     @ObservationIgnored private var allFetchedNodes: [MarkdownNode] = []
     
-    public init(nttId: Int) { self.nttId = nttId }
+    public init(nttId: Int) {
+        self.nttId = nttId
+    }
     
     func fetch() async {
         do {

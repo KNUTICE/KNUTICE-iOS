@@ -10,7 +10,7 @@ let project = Project.module(
         .project(target: "CorePresentation", path: "../CorePresentation"),
         .project(target: "KNDomain", path: "../../KNDomain"),
         .project(target: "KNDeepLink", path: "../../KNDeepLink"),
-        .project(target: "KNIntelligence", path: "../../KNIntelligence"),
+        .project(target: "KNIntelligence", path: "../KNIntelligence"),
         .project(target: "KNData", path: "../../KNData"),
         .project(target: "KNSetting", path: "../../KNSetting"),
         .external(name: "ComposableArchitecture"),

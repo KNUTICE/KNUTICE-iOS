@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol NoticeSummaryRepository: Actor {
+public protocol NoticeSummaryRepository: Actor {
     func fetch(for nttId: Int) async throws -> NoticeSummary
 }
