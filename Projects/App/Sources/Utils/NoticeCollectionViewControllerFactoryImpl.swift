@@ -14,10 +14,7 @@ import KNUtility
 struct NoticeCollectionViewControllerFactoryImpl: NoticeCollectionViewControllerFactory {
     
     func make(for category: any CategoryProtocol) -> NoticeCollectionViewController? {
-        let dataSource = RemoteDataSourceImpl()
-        let repository = NoticeRepositoryImpl(dataSource: dataSource)
-        let usecase = FetchNoticesUseCaseImpl(noticeRepository: repository)
-        let viewModel = NoticeCollectionViewModel(category: category, fetchNoticesUseCase: usecase)
+        let viewModel = NoticeCollectionViewModel(category: category)
         
         return NoticeCollectionViewController(viewModel: viewModel, bookmarkFormFactory: BookmarkFormFactoryImpl())
     }

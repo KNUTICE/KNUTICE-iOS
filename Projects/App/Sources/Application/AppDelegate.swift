@@ -202,5 +202,32 @@ extension AppDelegate {
         Container.shared.fetchNoticeSummaryUseCase.register {
             FetchNoticeSummaryUseCaseImpl(repository: Container.shared.noticeSummaryRepository())
         }
+        
+        Container.shared.fetchNoticesUseCase.register {
+            FetchNoticesUseCaseImpl(noticeRepository: Container.shared.noticeRepository())
+        }
+        
+        Container.shared.searchNoticeAndBookmarkUseCase.register {
+            SearchNoticeAndBookmarkUseCaseImpl(
+                searchNoticesUseCase: Container.shared.searchNoticesUseCase(),
+                searchBookmarksUseCase: Container.shared.searchBookmarksUseCase()
+            )
+        }
+        
+        Container.shared.fetchTipUseCase.register {
+            FetchTipUseCaseImpl(repository: Container.shared.tipRepository())
+        }
+        
+        Container.shared.fetchBookmarkUseCase.register {
+            FetchBookmarksUseCaseImpl(bookmarkReportory: Container.shared.bookmarkRepository())
+        }
+        
+        Container.shared.provideReloadEventPublisherUseCase.register {
+            ProvideReloadEventPublisherUseCaseImpl(repository: Container.shared.bookmarkRepository())
+        }
+        
+        Container.shared.deleteBookmarkUseCase.register {
+            DeleteBookmarkUseCaseImpl(bookmarkRepository: Container.shared.bookmarkRepository())
+        }
     }
 }

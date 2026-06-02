@@ -106,11 +106,7 @@ struct MockDeleteBookmarkUseCase: DeleteBookmarkUseCase {
 
 #Preview {
     BookmarkTableViewController(
-        viewModel: BookmarkTableViewModel(
-            fetchBookmarksUseCase: MockFetchBookmarksUseCase(),
-            providerReloadEventPublisherUseCase: MockProviderReloadEventPublisher(),
-            deleteBookmarkUseCase: MockDeleteBookmarkUseCase()
-        )
+        viewModel: BookmarkTableViewModel()
     )
     .makePreview()
     .edgesIgnoringSafeArea(.all)

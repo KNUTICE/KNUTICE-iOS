@@ -51,14 +51,6 @@ extension Container {
         Factory(self) { SaveBookmarkUseCaseImpl(bookmarkRepository: self.bookmarkRepository()) }
     }
     
-    var providerReloadEventPublisherUseCase: Factory<ProvideReloadEventPublisherUseCase> {
-        Factory(self) { ProvideReloadEventPublisherUseCaseImpl(repository: self.bookmarkRepository()) }
-    }
-    
-    var fetchTipUseCase: Factory<FetchTipUseCase> {
-        Factory(self) { FetchTipUseCaseImpl(repository: self.tipRepository()) }
-    }
-    
     var fetchTopThreeNoticesUseCase: Factory<FetchTopThreeNoticesUseCase> {
         Factory(self) { FetchTopThreeNoticesUseCaseImpl(repository: self.noticeRepository()) }
     }
@@ -83,6 +75,14 @@ extension Container {
         Factory(self) { UpdateTopicSubscriptionUseCaseImpl(repository: self.topicSubscriptionRepository()) }
     }
     
+    var searchNoticesUseCase: Factory<SearchNoticesUseCase> {
+        Factory(self) { SearchNoticesUseCaseImpl(noticeRepository: self.noticeRepository()) }
+    }
+    
+    var searchBookmarksUseCase: Factory<SearchBookmarksUseCase> {
+        Factory(self) { SearchBookmarksUseCaseImpl(repository: self.bookmarkRepository()) }
+    }
+    
     
     //MARK: - ViewModel
     
@@ -90,11 +90,7 @@ extension Container {
     var bookmarkTableViewModel: Factory<BookmarkTableViewModel> {
         Factory(self) {
             MainActor.assumeIsolated {
-                BookmarkTableViewModel(
-                    fetchBookmarksUseCase: self.fetchBookmarksUseCase(),
-                    providerReloadEventPublisherUseCase: self.providerReloadEventPublisherUseCase(),
-                    deleteBookmarkUseCase: self.deleteBookmarkUseCase()
-                )
+                BookmarkTableViewModel()
             }
         }
     }

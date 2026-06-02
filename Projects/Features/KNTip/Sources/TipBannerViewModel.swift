@@ -16,15 +16,13 @@ public final class TipBannerViewModel: ObservableObject {
     @Published var tips: [Tip]? = nil
     @Published var selectedIndex: Int = 0
     
-    private let fetchTipUseCase: FetchTipUseCase
+    @Injected(\.fetchTipUseCase) private var fetchTipUseCase: FetchTipUseCase
     
     private let logger: Logger = Logger()
     var selectedURL: String = ""
     private(set) var task: Task<Void, Never>?
     
-    public init(fetchTipUseCase: FetchTipUseCase) {
-        self.fetchTipUseCase = fetchTipUseCase
-    }
+    public init() {}
     
     func fetchTips() async {
         let result = await fetchTipUseCase.execute()

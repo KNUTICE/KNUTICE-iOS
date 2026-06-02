@@ -92,15 +92,9 @@ fileprivate struct TipItemView: View {
 }
 
 #if DEBUG
-actor MockFetchTipUseCaseImpl: FetchTipUseCase {
-    func execute() async -> Result<[Tip]?, any Error> {
-        return .success(nil)
-    }
-}
-
 #Preview {
     NavigationStack {
-        TipBannerView(viewModel: TipBannerViewModel(fetchTipUseCase: MockFetchTipUseCaseImpl()))
+        TipBannerView(viewModel: TipBannerViewModel())
     }
 }
 #endif

@@ -25,24 +25,17 @@ public final class BookmarkTableViewModel: BookmarkSortOptionProvidable {
         return BookmarkSortOption(rawValue: value) ?? .createdAtDescending
     }()
     
-    private var fetchBookmarksUseCase: FetchBookmarksUseCase
-    private var provideReloadEventPublisherUseCase: ProvideReloadEventPublisherUseCase
-    private var deleteBookmarkUseCase: DeleteBookmarkUseCase
+    @Injected(\.fetchBookmarkUseCase) private var fetchBookmarksUseCase
+    @Injected(\.provideReloadEventPublisherUseCase) private var provideReloadEventPublisherUseCase
+    @Injected(\.deleteBookmarkUseCase) private var deleteBookmarkUseCase
+    
     private(set) var fetchTask: Task<Void, Never>?
     private(set) var reloadTask: Task<Void, Never>?
     private(set) var deleteTask: Task<Void, Never>?
     private var cancellables: Set<AnyCancellable> = []
     private let logger: Logger = Logger()
     
-    public init(
-        fetchBookmarksUseCase: FetchBookmarksUseCase,
-        providerReloadEventPublisherUseCase: ProvideReloadEventPublisherUseCase,
-        deleteBookmarkUseCase: DeleteBookmarkUseCase
-    ) {
-        self.fetchBookmarksUseCase = fetchBookmarksUseCase
-        self.provideReloadEventPublisherUseCase = providerReloadEventPublisherUseCase
-        self.deleteBookmarkUseCase = deleteBookmarkUseCase
-    }
+    public init() {}
     
     func observePublisher() {
         provideReloadEventPublisherUseCase.eventPublisher

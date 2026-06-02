@@ -46,7 +46,7 @@ struct HomeScreenView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                TipBannerView(viewModel: TipBannerViewModel(fetchTipUseCase: Container.shared.fetchTipUseCase()))
+                TipBannerView(viewModel: TipBannerViewModel())
                 
                 HStack(spacing: 20) {
                     NavigationLink {

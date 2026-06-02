@@ -6,33 +6,16 @@
 //
 
 import Factory
-import KNData
 import KNDomain
 import KNNetwork
 import KNUtility
 
 extension Container {
-    var bookmarkRepository: Factory<BookmarkRepository> {
-        Factory(self) { BookmarkRepositoryImpl.shared }
-    }
-    
-    var searchBookmarksUseCase: Factory<SearchBookmarksUseCase> {
+    public var searchNoticeAndBookmarkUseCase: Factory<SearchNoticeAndBookmarkUseCase> {
         Factory(self) {
-            SearchBookmarksUseCaseImpl(repository: self.bookmarkRepository())
-        }
-    }
-    
-    // [Notice Related]
-    var searchNoticesUseCase: Factory<SearchNoticesUseCase> {
-        Factory(self) {
-            SearchNoticesUseCaseImpl(noticeRepository: NoticeRepositoryImpl(dataSource: RemoteDataSourceImpl()))
-        }
-    }
-    
-    // [Composite / Utility]
-    var searchNoticeAndBookmarkUseCase: Factory<SearchNoticeAndBookmarkUseCase> {
-        Factory(self) {
-            SearchNoticeAndBookmarkUseCaseImpl(searchNoticesUseCase: self.searchNoticesUseCase(), searchBookmarksUseCase: self.searchBookmarksUseCase())
+            fatalError(
+                "SearchNoticeAndBookmarkUseCase is not registered. Register it in App's dependency composition root."
+            )
         }
     }
     
