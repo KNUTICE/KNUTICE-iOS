@@ -50,58 +50,17 @@ public final class FetchBookmarksUseCaseImpl: FetchBookmarksUseCase {
         self.bookmarkRepository = bookmarkReportory
     }
     
-    /// Fetches bookmark data, ensuring that timestamp fields (`createdAt`, `updatedAt`)
-    /// are initialized for legacy bookmark entries that may lack these values.
-    ///
-    /// Process Overview:
-    /// 1. If timestamps are already updated (based on a stored flag), it simply returns paginated data.
-    /// 2. Otherwise, it:
-    ///    - Retrieves all bookmarks missing timestamp fields.
-    ///    - Derives the timestamps using the associated notice’s upload date.
-    ///    - Updates each bookmark asynchronously using a task group.
-    ///    - Persists a flag so this migration step does not repeat.
-    /// 3. Finally, returns the fully updated and sorted bookmark list.
+    /// Fetches bookmarked notices using the specified pagination and sorting options.
     ///
     /// - Parameters:
-    ///   - page: The page index to load.
-    ///   - pageSize: Maximum number of bookmarks to return.
-    ///   - option: Sorting option applied to the final bookmark set.
-    /// - Returns: A list of bookmarks reflecting updated timestamp fields and appropriate pagination.
-    /// - Throws: An error if any migration or fetching operation fails.
+    ///   - page: The page number to fetch.
+    ///   - pageSize: The number of bookmarks to fetch per page. Defaults to `20`.
+    ///   - option: The sorting option used to order the bookmarks.
+    /// - Returns: A list of bookmarks matching the specified criteria.
+    /// - Throws: A `CancellationError` if the task is cancelled, or an error thrown by the repository.
     public func execute(page: Int, pageSize: Int = 20, sortBy option: BookmarkSortOption) async throws -> [Bookmark] {
         try Task.checkCancellation()
         
-        guard !UserDefaults.standard.bool(forKey: UserDefaultsKeys.isBookmarkTimestampUpdated.rawValue) else {
-            return try await bookmarkRepository.fetch(page: page, pageSize: pageSize, sortBy: option)
-        }
-        
-        // createdAt 필드가 nil인 모든 Bookmark 데이터를 가져옴
-        let incompleteBookmarks = try await bookmarkRepository.fetchWhereTimestampsAreNil()
-        let updates = incompleteBookmarks.map {
-            let timestamp = $0.notice.uploadDate.toDate() ?? Date()
-            
-            return BookmarkUpdate(
-                bookmark: $0,
-                createdAt: timestamp,
-                updatedAt: timestamp
-            )
-        }
-        
-        // updatedAt, createdAt 필드 업데이트
-        try await withThrowingTaskGroup { group in
-            for update in updates {
-                group.addTask {
-                    try await self.bookmarkRepository.updateTimeStamp(update)
-                }
-            }
-            
-            try await group.waitForAll()
-        }
-        
-        // timestamp update flag 값을 true로 변경
-        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.isBookmarkTimestampUpdated.rawValue)
-        
-        // 업데이트 된 Bookmark 조회
         return try await bookmarkRepository.fetch(page: page, pageSize: pageSize, sortBy: option)
     }
     

@@ -5,7 +5,6 @@
 //  Created by 이정훈 on 12/31/24.
 //
 
-import RxSwift
 import Combine
 import Alamofire
 
@@ -65,31 +64,6 @@ public protocol RemoteDataSource: Sendable {
         decoding type: T.Type,
         useFCMToken: Bool
     ) -> AnyPublisher<T, any Error> where T: DTORepresentable
-    
-    /// Sends an HTTP request and emits a single decoded response of the specified type.
-    ///
-    /// - Warning: **Deprecated**
-    ///   - This method is deprecated and may be removed in future versions.
-    ///   - Use `request(_:method:parameters:headers:decoding:isInterceptable:)` or other supported methods instead.
-    ///
-    /// - Parameters:
-    ///   - url: The endpoint URL string.
-    ///   - method: The HTTP method represented by `RequestMethod`.
-    ///   - parameters: Optional parameters encoded as JSON.
-    ///   - headers: Optional HTTP headers.
-    ///   - type: The expected response DTO type.
-    ///   - isInterceptable: Indicates whether a `TokenInterceptor` should be applied.
-    ///
-    /// - Returns: A `Single` that emits a decoded object of type `T` on success, or an error on failure.
-    ///
-    /// - Note: Use this method for one-time network requests that return a single value. The request is performed when subscribed to.
-    @available(*, deprecated)
-    func request<T>(
-        _ url: String,
-        method: RequestMethod,
-        parameters: Parameters?,
-        decoding type: T.Type
-    ) -> Single<T> where T: DTORepresentable
 }
 
 public extension RemoteDataSource {
@@ -132,17 +106,6 @@ public extension RemoteDataSource {
             decoding: type,
             useFCMToken: useFCMToken
         )
-    }
-    
-    /// Default implementation that forwards to the deprecated RxSwift overload
-    /// with `parameters` set to its default value.
-    func request<T>(
-        _ url: String,
-        method: RequestMethod,
-        parameters: Parameters? = nil,
-        decoding type: T.Type
-    ) -> Single<T> where T: DTORepresentable {
-        return request(url, method: method, parameters: parameters, decoding: type)
     }
 }
 
@@ -217,20 +180,5 @@ public final class RemoteDataSourceImpl: RemoteDataSource, Sendable {
             $0 as Error
         }
         .eraseToAnyPublisher()
-    }
-    
-    /// Wraps the `async/await` overload in an RxSwift `Single` for backward compatibility.
-    ///
-    /// FCM token injection is not supported in this deprecated path; use the
-    /// `async/await` or Combine variants for requests that require the FCM header.
-    public func request<T>(
-        _ url: String,
-        method: RequestMethod,
-        parameters: Parameters? = nil,
-        decoding type: T.Type
-    ) -> Single<T> where T : DTORepresentable {
-        return Single.create {
-            try await self.request(url, method: method, parameters: parameters, decoding: T.self)
-        }
     }
 }

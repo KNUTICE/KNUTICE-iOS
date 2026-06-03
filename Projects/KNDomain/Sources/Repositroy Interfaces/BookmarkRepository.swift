@@ -45,14 +45,6 @@ public protocol BookmarkRepository: Sendable {
         pageSize: Int,
         sortBy option: BookmarkSortOption
     ) async throws -> [Bookmark]
-
-    /// Fetches all bookmarks whose timestamp values are `nil`.
-    ///
-    /// Typically used for migration, synchronization, or first-run logic.
-    ///
-    /// - Returns: An array of bookmarks missing timestamps.
-    /// - Throws: Errors from the underlying data source.
-    func fetchWhereTimestampsAreNil() async throws -> [Bookmark]
     
     /// Fetches a single bookmark by its ID.
     ///
