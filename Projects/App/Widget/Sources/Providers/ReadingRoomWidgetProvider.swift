@@ -6,7 +6,7 @@
 //
 
 import Factory
-import KNReadingRoom
+import KNDomain
 import WidgetKit
 
 struct ReadingRoomProvider: TimelineProvider {

@@ -7,7 +7,7 @@
 
 import ComposableArchitecture
 import Foundation
-import KNCore
+import KNBookmark
 import KNDeepLink
 import KNDomain
 import KNMeal
@@ -49,19 +49,21 @@ extension UITabBarViewController {
         case let .navigation(tabIndex, _):
             // iPadOS 18.0부터 UITab API를 사용
             // `selectedTab`을 변경하여 선택된 탭 이동
-            if #available(iOS 18, *), UIDevice.current.userInterfaceIdiom == .pad {
+            if #available(iOS 18, *), isPad {
                 guard tabs.indices.contains(tabIndex) else { return }
                 
-                if let viewController = tabs[tabIndex].viewController as? NoticeTabViewController {
-                    viewController.handle(deepLink: deepLink)
+                // iPad에서는 최상단 ViewController가 UINavigationController
+                if let navigationController = tabs[tabIndex].viewController as? UINavigationController,
+                   let destinationViewController = navigationController.topViewController as? NoticeTabViewController{
+                    destinationViewController.handle(deepLink: deepLink)
                 }
                 
                 self.selectedTab = tabs[tabIndex]
             } else {
                 guard let viewControllers = self.viewControllers, viewControllers.indices.contains(tabIndex) else { return }
                 
-                if let viewController = viewControllers[tabIndex] as? NoticeTabViewController {
-                    viewController.handle(deepLink: deepLink)
+                if let destinationViewController = viewControllers[tabIndex] as? NoticeTabViewController {
+                    destinationViewController.handle(deepLink: deepLink)
                 }
                 
                 self.selectedIndex = tabIndex

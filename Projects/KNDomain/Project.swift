@@ -6,7 +6,7 @@ let project = Project.module(
     dependencies: [
         .project(target: "KNUtility", path: "../KNUtility"),
         .project(target: "KNNotification", path: "../KNNotification"),
+        .project(target: "KNMarkdown", path: "../KNMarkdown"),
         .external(name: "RxDataSources"),
     ],
-    hasTests: false
 )

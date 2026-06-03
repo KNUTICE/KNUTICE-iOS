@@ -38,4 +38,38 @@ extension Bundle {
         
         return url
     }
+    
+    var reportURL: String? {
+        guard let url = resource?["Report_URL"] as? String else { return nil }
+        
+        return url
+    }
+    
+    var tipURL: String? {
+        guard let url = resource?["TipURL"] as? String else { return nil }
+        
+        return url
+    }
+    
+    var topicSubscriptionURL: String? {
+        guard let url = resource?["TopicSubscription_URL"] as? String else {
+            return nil
+        }
+        
+        return url
+    }
+    
+    var readingRoomURL: String? {
+        guard let url = resource?["ReadingRoom_URL"] as? String else { return nil }
+        
+        return url
+    }
+    
+    var noticeSummaryURL: String? {
+        guard let url = resource?["Notice_Summary_URL"] as? String else {
+            return nil
+        }
+        
+        return url
+    }
 }

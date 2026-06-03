@@ -7,7 +7,6 @@
 
 import CorePresentation
 import KNDesignSystem
-import KNDomain
 import KNUtility
 import SwiftUI
 import UIKit
@@ -115,7 +114,7 @@ public class NoticeCollectionViewController: UIViewController, NoticeCollectionV
 }
 
 #if DEBUG
-actor MockFetchNoticesUseCase: FetchNoticesUseCase {}
+import KNDomain
 
 struct MockBookamrkFormFactory: BookmarkFormFactory {
     func make(for notice: KNDomain.Notice) -> UIViewController { UIViewController() }
@@ -123,10 +122,7 @@ struct MockBookamrkFormFactory: BookmarkFormFactory {
 
 #Preview {
     NoticeCollectionViewController(
-        viewModel: NoticeCollectionViewModel(
-            category: NoticeCategory.generalNotice,
-            fetchNoticesUseCase: MockFetchNoticesUseCase()
-        ),
+        viewModel: NoticeCollectionViewModel(category: NoticeCategory.generalNotice),
         bookmarkFormFactory: MockBookamrkFormFactory()
     )
     .makePreview()

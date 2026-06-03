@@ -9,14 +9,14 @@ import Foundation
 import KNUtility
 import RxRelay
 
-enum CategoryItem: Identifiable {
+public enum CategoryItem: Identifiable {
     /// A selectable notice category tab conforming to `NoticeTabRepresentable`.
     case category(any NoticeTabRepresentable)
     /// A fixed button cell for adding or managing notice categories.
     case addButton
     
     /// A stable identifier used to distinguish items in the collection view.
-    var id: String {
+    public var id: String {
         switch self {
         case let .category(noticeTab): return noticeTab.id
         case .addButton: return "add_button"

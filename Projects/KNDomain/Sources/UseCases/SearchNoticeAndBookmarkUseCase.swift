@@ -5,7 +5,6 @@
 //  Created by 이정훈 on 10/30/25.
 //
 
-import Factory
 import Foundation
 
 public protocol SearchNoticeAndBookmarkUseCase: Sendable {

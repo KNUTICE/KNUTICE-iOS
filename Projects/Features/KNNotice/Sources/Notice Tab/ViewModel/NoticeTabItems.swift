@@ -16,7 +16,7 @@ import RxSwift
 
 @MainActor
 @Observable
-final class NoticeTabItems {
+public final class NoticeTabItems {
     private(set) var categories: [CategoryItem] {
         didSet {
             categoriesRelay.accept(categories)
@@ -48,11 +48,15 @@ final class NoticeTabItems {
     
     @ObservationIgnored private let categoriesRelay: BehaviorRelay<[CategoryItem]>
     @ObservationIgnored private let disposeBag: DisposeBag = .init()
-    @ObservationIgnored @Injected(\.updateTopicSubscriptionUseCase) private var updateTopicSubscriptionUseCase
+    @ObservationIgnored private let updateTopicSubscriptionUseCase: UpdateTopicSubscriptionUseCase
     
-    init(_ categoriesRelay: BehaviorRelay<[CategoryItem]>) {
+    public init(
+        _ categoriesRelay: BehaviorRelay<[CategoryItem]>,
+        updateTopicSubscriptionUseCase: UpdateTopicSubscriptionUseCase
+    ) {
         self.categoriesRelay = categoriesRelay
         self.categories = categoriesRelay.value
+        self.updateTopicSubscriptionUseCase = updateTopicSubscriptionUseCase
     }
     
     func availableMajors(for college: College) -> [MajorCategory] {

@@ -7,9 +7,12 @@
 
 import Combine
 import ComposableArchitecture
-import KNCore
+import CorePresentation
+import Factory
+import KNBookmark
 import KNDomain
 import KNNotice
+import KNSearch
 import KNSetting
 import KNUtility
 import UIKit
@@ -18,7 +21,19 @@ import SwiftUI
 typealias NavigationItemConfigurable = FirstTabNavigationItemConfigurable & SecondTabNavigationItemConfigurable & SettingButtonConfigurable & ThirdTabNavigationItemConfigurable
 
 final class UITabBarViewController: UITabBarController, NavigationItemConfigurable {
-    private let mainViewController: UIViewController = {
+    
+    let viewModel: TabBarViewModel
+    var cancellables: Set<AnyCancellable> = []
+    
+    var isPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
+    var sortedBookmarkViewModel: BookmarkSortOptionProvidable {
+        viewModel
+    }
+    
+    private lazy var mainViewController: UIViewController = {
         let store = Store(initialState: HomeScreenFeature.State()) {
             HomeScreenFeature()
         }
@@ -27,48 +42,45 @@ final class UITabBarViewController: UITabBarController, NavigationItemConfigurab
         viewController.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
         viewController.tabBarItem.title = "홈"
         
-        if UIDevice.current.userInterfaceIdiom == .pad {
+        if isPad {
             return UINavigationController(rootViewController: viewController)
         }
         
         return viewController
     }()
-    private let majorNoticeViewController: UIViewController = {
-        let viewController = NoticeTabViewController(noticeCollectionViewControllerFactory: NoticeCollectionViewControllerFactoryImpl())
+    
+    private lazy var majorNoticeViewController: UIViewController = {
+        let viewController = NoticeTabViewController(
+            noticeCollectionViewControllerFactory: NoticeCollectionViewControllerFactoryImpl(),
+            noticeTabSettingsFactory: NoticeTabSettingsFactoryImpl()
+        )
         viewController.tabBarItem.image = UIImage(systemName: "megaphone")
         viewController.tabBarItem.selectedImage = UIImage(systemName: "megaphone.fill")
         viewController.tabBarItem.title = "공지"
         
-        if UIDevice.current.userInterfaceIdiom == .pad {
+        if isPad {
             return UINavigationController(rootViewController: viewController)
         }
         
         return viewController
     }()
-    private let bookmarkViewController: UIViewController = {
-        let viewController = BookmarkTableViewController()
+    
+    private lazy var bookmarkViewController: UIViewController = {
+        let viewController = BookmarkTableViewController(viewModel: Container.shared.bookmarkTableViewModel())
         viewController.tabBarItem.image = UIImage(systemName: "bookmark")
         viewController.tabBarItem.selectedImage = UIImage(systemName: "bookmark.fill")
         viewController.tabBarItem.title = "북마크"
         
-        if UIDevice.current.userInterfaceIdiom == .pad {
+        if isPad {
             return UINavigationController(rootViewController: viewController)
         }
         
         return viewController
     }()
+    
     private lazy var searchViewController: UIViewController = {
-        let viewController = SearchViewController() { notice in
-            let bookmark = Bookmark(notice: notice, memo: "")
-            let bookmarkForm = BookmarkForm(
-                store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
-                    BookmarkFormFeature()
-                }
-            ) { [weak self] in
-                self?.dismiss(animated: true)
-            }
-            
-            return UIHostingController(rootView: bookmarkForm)
+        let viewController = SearchViewController() { [weak self] notice in
+            self?.bookmarkFormFactory.make(for: notice)
         }
         
         if #available(iOS 26, *) {
@@ -82,18 +94,15 @@ final class UITabBarViewController: UITabBarController, NavigationItemConfigurab
                 viewController.tabBarItem.title = "검색"
             }
             
-            if UIDevice.current.userInterfaceIdiom == .pad {
+            if isPad {
                 return UINavigationController(rootViewController: viewController)
             }
             
             return viewController
         }
     }()
-    let viewModel: TabBarViewModel
-    var sortedBookmarkViewModel: BookmarkSortOptionProvidable {
-        return viewModel
-    }
-    var cancellables: Set<AnyCancellable> = []
+    
+    private let bookmarkFormFactory: BookmarkFormFactory = BookmarkFormFactoryImpl()
     
     init(viewModel: TabBarViewModel) {
         self.viewModel = viewModel
@@ -119,7 +128,7 @@ final class UITabBarViewController: UITabBarController, NavigationItemConfigurab
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if UIDevice.current.userInterfaceIdiom == .pad {
+        if isPad {
             navigationController?.setNavigationBarHidden(true, animated: true)
         } else {
             let isSearchTab = viewControllers?[selectedIndex] is SearchViewController
@@ -183,12 +192,12 @@ extension UITabBarViewController {
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = appearance
         
-        if #available(iOS 18, *), UIDevice.current.userInterfaceIdiom == .pad {
+        if #available(iOS 18, *), isPad {
             tabs = [
                 UITab(title: "홈", image: UIImage(systemName: "house.fill"), identifier: "Tabs.main") { _ in
                     self.mainViewController
                 },
-                UITab(title: "학과소식", image: UIImage(systemName: "globe.fill"), identifier: "Tabs.majorNotice") { _ in
+                UITab(title: "공지", image: UIImage(systemName: "globe.fill"), identifier: "Tabs.majorNotice") { _ in
                     self.majorNoticeViewController
                 },
                 UITab(title: "북마크", image: UIImage(systemName: "bookmark.fill"), identifier: "Tabs.bookmark") { _ in

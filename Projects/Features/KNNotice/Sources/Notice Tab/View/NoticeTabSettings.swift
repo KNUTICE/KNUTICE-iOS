@@ -10,15 +10,15 @@ import KNDomain
 import KNUtility
 import SwiftUI
 
-struct NoticeTabSettings: View {
+public struct NoticeTabSettings: View {
     @Environment(\.dismiss) private var dismiss
     @Bindable private var noticeTabItems: NoticeTabItems
     
-    init(noticeTabItems: NoticeTabItems) {
+    public init(noticeTabItems: NoticeTabItems) {
         self.noticeTabItems = noticeTabItems
     }
     
-    var body: some View {
+    public var body: some View {
         NavigationStack {
             List {
                 Section {
@@ -106,6 +106,16 @@ fileprivate struct MajorSelectionRow: View {
     }
 }
 
-#Preview {
-    NoticeTabSettings(noticeTabItems: NoticeTabItems(.init(value: [])))
+#if DEBUG
+struct MockUpdateTopicSubscriptionUseCase: UpdateTopicSubscriptionUseCase {
+    func execute(of type: TopicType, topic: any CategoryProtocol, isEnabled: Bool) async throws {}
+    
+    
 }
+
+#Preview {
+    NoticeTabSettings(
+        noticeTabItems: NoticeTabItems(.init(value: []), updateTopicSubscriptionUseCase: MockUpdateTopicSubscriptionUseCase())
+    )
+}
+#endif

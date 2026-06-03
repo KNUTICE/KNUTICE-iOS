@@ -5,17 +5,19 @@
 //  Created by 이정훈 on 5/4/24.
 //
 
+import ComposableArchitecture
 import Factory
 import Firebase
 import FirebaseCore
 import FirebaseMessaging
 import KNDeepLink
+import KNDomain
 import KNUtility
 import KNToken
 import UIKit
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -25,6 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // FCM 세팅
         setFCM(application)
+        
+        // 의존성 설정
+        setDependencies()
         
         Installations.installations().authToken { result, _ in
             print("Fiebase instance ID token is \(result?.authToken ?? "n/a")")
@@ -170,5 +175,59 @@ extension AppDelegate: @MainActor UNUserNotificationCenterDelegate {
         
         // 시스템에 알림 처리가 완료되었음을 알림
         completionHandler()
+    }
+}
+
+extension AppDelegate {
+    /// TCA Feature에서 사용하는 UseCase 의존성 설정
+    ///
+    /// - Feature와 Data 계층 간 직접 의존성을 제거하고
+    /// - App 계층을 Composition Root로 활용하며
+    /// - 테스트 시 Mock UseCase로 손쉽게 교체할 수 있다.
+    ///
+    /// - Note:
+    ///   Feature 모듈 내부에서는 `liveValue`를 직접 구현하지 않고,
+    ///   App 시작 시점에 `prepareDependencies`를 통해 실제 구현체를 등록한다.
+    private func setDependencies() {
+        prepareDependencies {
+            $0.fetchBookmarkUseCase = Container.shared.fetchBookmarksUseCase()
+            $0.deleteBookmarkUseCase = Container.shared.deleteBookmarkUseCase()
+            $0.updateBookmarkUseCase = Container.shared.updateBookmarkUseCase()
+            $0.saveBookmarkUseCase = Container.shared.saveBookmarkUseCase()
+            $0.submitReportUseCase = Container.shared.submitReportUseCase()
+            $0.fetchTopicSubscriptionUseCase = Container.shared.fetchTopicSubscriptionUseCase()
+            $0.updateTopicSubscriptionUseCase = Container.shared.updateTopicSubscriptionUseCase()
+        }
+        
+        Container.shared.fetchNoticeSummaryUseCase.register {
+            FetchNoticeSummaryUseCaseImpl(repository: Container.shared.noticeSummaryRepository())
+        }
+        
+        Container.shared.fetchNoticesUseCase.register {
+            FetchNoticesUseCaseImpl(noticeRepository: Container.shared.noticeRepository())
+        }
+        
+        Container.shared.searchNoticeAndBookmarkUseCase.register {
+            SearchNoticeAndBookmarkUseCaseImpl(
+                searchNoticesUseCase: Container.shared.searchNoticesUseCase(),
+                searchBookmarksUseCase: Container.shared.searchBookmarksUseCase()
+            )
+        }
+        
+        Container.shared.fetchTipUseCase.register {
+            FetchTipUseCaseImpl(repository: Container.shared.tipRepository())
+        }
+        
+        Container.shared.fetchBookmarkUseCase.register {
+            FetchBookmarksUseCaseImpl(bookmarkReportory: Container.shared.bookmarkRepository())
+        }
+        
+        Container.shared.provideReloadEventPublisherUseCase.register {
+            ProvideReloadEventPublisherUseCaseImpl(repository: Container.shared.bookmarkRepository())
+        }
+        
+        Container.shared.deleteBookmarkUseCase.register {
+            DeleteBookmarkUseCaseImpl(bookmarkRepository: Container.shared.bookmarkRepository())
+        }
     }
 }
