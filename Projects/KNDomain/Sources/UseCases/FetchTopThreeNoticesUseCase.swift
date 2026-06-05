@@ -112,6 +112,7 @@ public extension Notice {
                 uploadDate: "2026.00.00",
                 imageUrl: nil,
                 category: NoticeCategory.generalNotice,
+                isNew: false
             )
         }
     }

@@ -9,7 +9,7 @@ import Combine
 import Foundation
 import KNUtility
 
-public protocol FetchNoticesUseCase: Sendable {
+public protocol FetchNoticesUseCase: Actor {
     /// Fetches notices for the specified category and updates related user settings if necessary.
     ///
     /// - Parameters:
@@ -27,8 +27,8 @@ public extension FetchNoticesUseCase {
     }
 }
 
-public final class FetchNoticesUseCaseImpl: FetchNoticesUseCase {
-    private let noticeRepository: NoticeRepository
+public actor FetchNoticesUseCaseImpl: FetchNoticesUseCase {
+    private var noticeRepository: NoticeRepository
     
     public init(noticeRepository: NoticeRepository) {
         self.noticeRepository = noticeRepository
@@ -38,7 +38,7 @@ public final class FetchNoticesUseCaseImpl: FetchNoticesUseCase {
         try Task.checkCancellation()
         
         // 서버에서 선택된 공지 데이터 가져오기
-        let notices = try await noticeRepository.fetchNotices(for: category.rawValue, after: nttId, size: size)
+        var notices = try await noticeRepository.fetchNotices(for: category.rawValue, after: nttId, size: size)
         
         return notices
     }

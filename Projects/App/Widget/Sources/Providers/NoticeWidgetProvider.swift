@@ -106,6 +106,7 @@ fileprivate extension Notice {
                 uploadDate: "2024-04-09",
                 imageUrl: nil,
                 category: NoticeCategory.generalNotice,
+                isNew: false
             )
         }
     }
