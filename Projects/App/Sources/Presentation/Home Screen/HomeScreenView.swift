@@ -364,7 +364,7 @@ fileprivate struct NoticeListRow: View {
             .frame(minHeight: 20)
             
             HStack(spacing: 5) {
-                Text("[" + snapshot.notice.department + "]")
+                Text("[\(snapshot.notice.department)]")
                 Text(snapshot.notice.uploadDate)
             }
             .foregroundStyle(KNDesignSystemAsset.subTitle.swiftUIColor)
