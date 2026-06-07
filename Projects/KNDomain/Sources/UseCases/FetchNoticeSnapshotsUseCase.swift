@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 10/1/25.
 //
 
+import Combine
 import Foundation
 
 public final class FetchNoticeSnapshotsUseCase: NoticeSnapshotCreatable, Sendable {
@@ -35,6 +36,18 @@ public final class FetchNoticeSnapshotsUseCase: NoticeSnapshotCreatable, Sendabl
         let snapshots = notices.map { createSnapshot(from: $0) }
         
         return snapshots
+    }
+    
+    public func execute(
+        category: some CategoryProtocol,
+        after nttId: Int? = nil,
+        size: Int = 20
+    ) -> AnyPublisher<[NoticeSnapshot], any Error> {
+        return noticeRepository.fetchNotices(for: category.rawValue, after: nttId, size: size)
+            .map { [weak self] notices in
+                notices.compactMap { self?.createSnapshot(from: $0) }
+            }
+            .eraseToAnyPublisher()
     }
     
 }

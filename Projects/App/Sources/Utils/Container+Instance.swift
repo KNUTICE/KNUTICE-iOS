@@ -52,11 +52,15 @@ extension Container {
     }
     
     var fetchTopThreeNoticesUseCase: Factory<FetchTopThreeNoticesUseCase> {
-        Factory(self) { FetchTopThreeNoticesUseCase(repository: self.noticeRepository()) }
+        Factory(self) { FetchTopThreeNoticesUseCase(fetchNoticeSnapshotsUseCase: self.fetchNoticeSnapshotsUseCase()) }
     }
     
     var fetchNoticeSnapshotsUseCase: Factory<FetchNoticeSnapshotsUseCase> {
         Factory(self) { FetchNoticeSnapshotsUseCase(noticeRepository: self.noticeRepository()) }
+    }
+    
+    var fetchNoticeSnapshotsWithSkeletonUseCase: Factory<FetchNoticeSnapshotsWithSkeletonUseCase> {
+        Factory(self) { FetchNoticeSnapshotsWithSkeletonUseCase(fetchNoticeSnapshotsUseCase: self.fetchNoticeSnapshotsUseCase()) }
     }
     
     var updateBookmarkUseCase: Factory<UpdateBookmarkUseCase> {

@@ -9,10 +9,10 @@ import Combine
 import Foundation
 
 public final class FetchTopThreeNoticesUseCase: NoticeSnapshotCreatable, Sendable {
-    private let repository: NoticeRepository
+    private let fetchNoticeSnapshotsUseCase: FetchNoticeSnapshotsUseCase
     
-    public init(repository: NoticeRepository) {
-        self.repository = repository
+    public init(fetchNoticeSnapshotsUseCase: FetchNoticeSnapshotsUseCase) {
+        self.fetchNoticeSnapshotsUseCase = fetchNoticeSnapshotsUseCase
     }
     
     /// Fetches the latest three notices for each notice category and converts them
@@ -30,12 +30,10 @@ public final class FetchTopThreeNoticesUseCase: NoticeSnapshotCreatable, Sendabl
     ///   The section order always follows `NoticeCategory.allCases`.
     /// - Throws:
     ///   Publishes an error if any notice request fails.
-    public func execute(isRefresh: Bool) -> AnyPublisher<[MainSectionNotice], any Error> {
+    public func execute() -> AnyPublisher<[MainSectionNotice], any Error> {
         let publishers = NoticeCategory.allCases.map { category in
-            repository.fetchNotices(for: category.rawValue, size: 3)
-                .map { notices -> (NoticeCategory, [NoticeSnapshot]) in
-                    (category, notices.map { self.createSnapshot(from: $0) })
-                }
+            fetchNoticeSnapshotsUseCase.execute(category: category, size: 3)
+                .map { snapshots in (category, snapshots) }
                 .eraseToAnyPublisher()
         }
         
@@ -45,11 +43,11 @@ public final class FetchTopThreeNoticesUseCase: NoticeSnapshotCreatable, Sendabl
                 // Convert to dictionary for easy access
                 var sectionNotices: [NoticeCategory: MainSectionNotice] = [:]
                 
-                for (category, notices) in results {
+                for (category, snapshots) in results {
                     let sectionNotice = MainSectionNotice(
                         header: category.localizedDescription,
                         category: category,
-                        items: notices.map { MainNotice(presentationType: .actual, noticeSnapshot: $0) }
+                        items: snapshots.map { MainNotice(presentationType: .actual, noticeSnapshot: $0) }
                     )
                     sectionNotices[category] = sectionNotice
                 }
@@ -61,17 +59,9 @@ public final class FetchTopThreeNoticesUseCase: NoticeSnapshotCreatable, Sendabl
             }
             .eraseToAnyPublisher()
         
-        return Deferred { [weak self] in
-            if isRefresh {
-                return mainSectionNoticePublishers
-                    .eraseToAnyPublisher()
-            }
-            
-            return mainSectionNoticePublishers
-                .prepend(self?.getMockNotices() ?? [])    // 로딩 중 Skeleton 화면을 표시하기 위한 임시 데이터 전달
-                .eraseToAnyPublisher()
-        }
-        .eraseToAnyPublisher()
+        return mainSectionNoticePublishers
+            .prepend(getMockNotices())    // 로딩 중 Skeleton 화면을 표시하기 위한 임시 데이터 전달
+            .eraseToAnyPublisher()
     }
     
     /// Generates mock notice data for displaying a skeleton loading UI.

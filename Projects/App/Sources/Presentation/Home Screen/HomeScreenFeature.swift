@@ -27,7 +27,7 @@ struct HomeScreenFeature: EntryTimeRecordable {
     }
     
     @Injected(\.fetchTopThreeNoticesUseCase) private var fetchTopThreeNoticesUseCase
-    @Injected(\.fetchNoticeSnapshotsUseCase) private var fetchNoticeSnapshotsUseCase
+    @Injected(\.fetchNoticeSnapshotsWithSkeletonUseCase) private var fetchNoticeSnapshotsWithSkeletonUseCase
     
     var body: some Reducer<State, Action> {
         Reduce { state, action in
@@ -47,7 +47,7 @@ struct HomeScreenFeature: EntryTimeRecordable {
                     .run { send in
                         try Task.checkCancellation()
                         
-                        for try await notices in fetchTopThreeNoticesUseCase.execute(isRefresh: false).values {
+                        for try await notices in fetchTopThreeNoticesUseCase.execute().values {
                             await send(.noticesResponse(.loaded(notices)))
                         }
                     } catch: { error, send in
@@ -62,13 +62,9 @@ struct HomeScreenFeature: EntryTimeRecordable {
                             return
                         }
                         
-                        await send(.majorNoticesResponse(.loaded(MainSectionNotice.skeleton(header: major.localizedDescription, category: major))))
-                        
-                        try Task.checkCancellation()
-                        
-                        let snapshots = try await fetchNoticeSnapshotsUseCase.execute(category: major, size: 3)
-                        let section = MainSectionNotice.from(snapshots: snapshots, category: major, header: major.localizedDescription)
-                        await send(.majorNoticesResponse(.loaded(section)))
+                        for try await notices in fetchNoticeSnapshotsWithSkeletonUseCase.execute(category: major, size: 3) {
+                            await send(.majorNoticesResponse(.loaded(notices)))
+                        }
                     } catch: { error, send in
                         await send(.majorNoticesResponse(.error))
                     }
@@ -83,23 +79,6 @@ struct HomeScreenFeature: EntryTimeRecordable {
                 return .none
             }
         }
-    }
-}
-
-extension MainSectionNotice {
-    static func from(snapshots: [NoticeSnapshot], category: any CategoryProtocol, header: String) -> MainSectionNotice {
-        let items = snapshots.map {
-            MainNotice(presentationType: .actual, noticeSnapshot: $0)
-        }
-        return MainSectionNotice(header: header, category: category, items: items)
-    }
-    
-    // TODO: AsyncStream UseCase로 변경
-    static func skeleton(header: String, category: any CategoryProtocol, count: Int = 3) -> MainSectionNotice {
-        let items = (0..<count).map { i in
-            MainNotice(presentationType: .skeleton, noticeSnapshot: NoticeSnapshot(notice: Notice.skeletonNotices().first!, isNew: false))
-        }
-        return MainSectionNotice(header: header, category: category, items: items)
     }
 }
 
