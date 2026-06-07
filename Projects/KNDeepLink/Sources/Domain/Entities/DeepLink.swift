@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KNDomain
 import KNUtility
 
 /// A type representing supported deep link destinations within the app.

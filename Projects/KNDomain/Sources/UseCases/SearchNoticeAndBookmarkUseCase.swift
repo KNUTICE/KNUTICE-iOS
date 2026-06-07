@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol SearchNoticeAndBookmarkUseCase: Sendable {
-    typealias SearchResult = Result<([Notice], [Bookmark]), any Error>
+    typealias SearchResult = Result<([NoticeSnapshot], [Bookmark]), any Error>
     
     /// Executes a concurrent search for both notices and bookmarks using the given keyword.
     /// - Parameter keyword: The search keyword entered by the user.
@@ -19,11 +19,11 @@ public protocol SearchNoticeAndBookmarkUseCase: Sendable {
 }
 
 public final class SearchNoticeAndBookmarkUseCaseImpl: SearchNoticeAndBookmarkUseCase {
-    private let searchNoticesUseCase: SearchNoticesUseCase
+    private let searchNoticesUseCase: SearchNoticeSnapshotsUseCase
     private let searchBookmarksUseCase: SearchBookmarksUseCase
     
     public init(
-        searchNoticesUseCase: SearchNoticesUseCase,
+        searchNoticesUseCase: SearchNoticeSnapshotsUseCase,
         searchBookmarksUseCase: SearchBookmarksUseCase
     ) {
         self.searchNoticesUseCase = searchNoticesUseCase
@@ -34,10 +34,10 @@ public final class SearchNoticeAndBookmarkUseCaseImpl: SearchNoticeAndBookmarkUs
         do {
             try Task.checkCancellation()
             
-            async let notices = searchNoticesUseCase.execute(with: keyword)
+            async let noticeSnapshots = searchNoticesUseCase.execute(with: keyword)
             async let bookmarks = searchBookmarksUseCase.execute(with: keyword)
             
-            let results = (try await notices, try await bookmarks)
+            let results = (try await noticeSnapshots, try await bookmarks)
             return .success(results)
         } catch {
             return .failure(error)

@@ -203,8 +203,8 @@ extension AppDelegate {
             FetchNoticeSummaryUseCaseImpl(repository: Container.shared.noticeSummaryRepository())
         }
         
-        Container.shared.fetchNoticesUseCase.register {
-            FetchNoticesUseCaseImpl(noticeRepository: Container.shared.noticeRepository())
+        Container.shared.fetchNoticeSnapshotsUseCase.register {
+            FetchNoticeSnapshotsUseCase(noticeRepository: Container.shared.noticeRepository())
         }
         
         Container.shared.searchNoticeAndBookmarkUseCase.register {

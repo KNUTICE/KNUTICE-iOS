@@ -5,7 +5,7 @@
 //  Created by 이정훈 on 5/6/26.
 //
 
-import KNUtility
+import KNDomain
 
 @MainActor
 public protocol NoticeCollectionViewControllerFactory {

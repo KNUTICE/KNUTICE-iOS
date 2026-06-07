@@ -6,6 +6,7 @@ let project = Project.module(
     product: .staticLibrary,
     dependencies: [
         .project(target: "KNUtility", path: "../KNUtility"),
+        .project(target: "KNDomain", path: "../KNDomain"),
         .external(name: "Factory")
     ],
     hasTests: false

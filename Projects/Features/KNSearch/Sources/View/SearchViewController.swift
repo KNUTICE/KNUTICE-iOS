@@ -171,7 +171,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
     ) {
         let viewController = NoticeContentViewController(
             viewModel: NoticeContentViewModel(
-                notice: viewModel.notices.value[0].items[indexPath.row]
+                notice: viewModel.notices.value[0].items[indexPath.row].notice
             ),
             makeBookmarkFormViewController: makeBookmarkFormViewController
         )

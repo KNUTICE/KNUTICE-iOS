@@ -7,6 +7,7 @@
 
 import KNDeepLink
 import KNDesignSystem
+import KNDomain
 import KNSetting
 import KNUtility
 import UIKit
@@ -343,7 +344,7 @@ extension NoticeTabViewController {
 
 #if DEBUG
 struct MockNoticeCollectionViewControllerFactory: NoticeCollectionViewControllerFactory {
-    func make(for category: any KNUtility.CategoryProtocol) -> NoticeCollectionViewController? {
+    func make(for category: any CategoryProtocol) -> NoticeCollectionViewController? {
         return nil
     }
 }

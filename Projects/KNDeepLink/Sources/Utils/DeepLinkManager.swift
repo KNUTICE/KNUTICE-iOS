@@ -7,7 +7,7 @@
 
 import Combine
 import Foundation
-import KNUtility
+import KNDomain
 
 /// A manager responsible for handling deep links and notification-based navigation.
 ///

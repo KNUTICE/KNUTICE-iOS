@@ -251,10 +251,10 @@ fileprivate struct NoticeList<Content: View>: View {
                 moreButton?()
             }
             
-            ForEach(Array(notices.items.enumerated()), id: \.element.notice.id) { index, item in
+            ForEach(Array(notices.items.enumerated()), id: \.element.noticeSnapshot.id) { index, item in
                 NavigationLink {
                     // 상세 화면 이동
-                    NoticeContentView(notice: item.notice) { notice in bookmarkFormFactory.make(for: notice) }
+                    NoticeContentView(notice: item.noticeSnapshot.notice) { notice in bookmarkFormFactory.make(for: notice) }
                         .ignoresSafeArea(.all)
                         .toolbar {
                             ToolbarItemGroup(placement: .topBarTrailing) {
@@ -278,7 +278,7 @@ fileprivate struct NoticeList<Content: View>: View {
                             }
                         }
                         .background {
-                            if let url = item.notice.contentUrl {
+                            if let url = item.noticeSnapshot.notice.contentUrl {
                                 ActivityView(isPresented: $isActivityViewPresented, activityItems: [
                                     url
                                 ])
@@ -289,7 +289,7 @@ fileprivate struct NoticeList<Content: View>: View {
                         }
                         .sheet(isPresented: $isShowingBookmarkForm) {
                             NavigationStack {
-                                let bookmark = Bookmark(notice: item.notice, memo: "")
+                                let bookmark = Bookmark(notice: item.noticeSnapshot.notice, memo: "")
                                 
                                 BookmarkForm(
                                     store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
@@ -301,7 +301,7 @@ fileprivate struct NoticeList<Content: View>: View {
                             }
                         }
                 } label: {
-                    NoticeListRow(notice: item.notice)
+                    NoticeListRow(snapshot: item.noticeSnapshot)
                         .redacted(reason: item.presentationType == .skeleton ? .placeholder : [])
                 }
                 
@@ -341,12 +341,12 @@ fileprivate struct NoticeList<Content: View>: View {
 fileprivate struct NoticeListRow: View {
     @Environment(\.colorScheme) private var colorScheme
     
-    let notice: Notice
+    let snapshot: NoticeSnapshot
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .center, spacing: 6) {
-                if notice.isNew {
+                if snapshot.isNew {
                     Text("N")
                         .font(.system(size: Constants.newBadgeFontSize, weight: .bold))
                         .foregroundStyle(.white)
@@ -354,7 +354,7 @@ fileprivate struct NoticeListRow: View {
                         .background(KNDesignSystemAsset.accent2.swiftUIColor, in: RoundedRectangle(cornerRadius: Constants.newBadgeCornerRadius))
                 }
                 
-                Text(notice.title)
+                Text(snapshot.notice.title)
                     .font(.footnote)
                     .bold()
                     .lineLimit(1)
@@ -364,8 +364,8 @@ fileprivate struct NoticeListRow: View {
             .frame(minHeight: 20)
             
             HStack(spacing: 5) {
-                Text("[" + notice.department + "]")
-                Text(notice.uploadDate)
+                Text("[" + snapshot.notice.department + "]")
+                Text(snapshot.notice.uploadDate)
             }
             .foregroundStyle(KNDesignSystemAsset.subTitle.swiftUIColor)
             .font(.caption)

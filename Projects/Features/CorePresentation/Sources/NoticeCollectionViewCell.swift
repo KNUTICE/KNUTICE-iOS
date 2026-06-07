@@ -105,12 +105,12 @@ public final class NoticeCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(
-        with item: Notice,
+        with item: NoticeSnapshot,
         isShowingThumbnail: Bool,
         containerWidth: CGFloat? = nil
     ) {
-        titleLabel.text = item.title
-        subTitleLabel.text = "[\(item.department)]  \(item.uploadDate)"
+        titleLabel.text = item.notice.title
+        subTitleLabel.text = "[\(item.notice.department)]  \(item.notice.uploadDate)"
 
         // New Badge
         newBadgeLabel.isHidden = !item.isNew
@@ -144,7 +144,7 @@ public final class NoticeCollectionViewCell: UICollectionViewCell {
         thumbnailImageView.isHidden = false
         thumbnailImageView.kf.indicatorType = .activity
         thumbnailImageView.kf.setImage(
-            with: URL(string: item.imageUrl ?? CorePresentationResources.bundle.defaultThumbnailURL),
+            with: URL(string: item.notice.imageUrl ?? CorePresentationResources.bundle.defaultThumbnailURL),
             options: [
                 .processor(processor)
             ]

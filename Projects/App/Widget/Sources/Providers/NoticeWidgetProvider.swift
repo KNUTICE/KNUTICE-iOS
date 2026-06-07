@@ -12,7 +12,7 @@ import KNUtility
 import WidgetKit
 
 struct NoticeWidgetProvider: AppIntentTimelineProvider {
-    private let fetchNoticesUseCase: FetchNoticesUseCase = Container.shared.fetchNoticesUseCase()
+    private let fetchNoticesUseCase: FetchNoticeSnapshotsUseCase = Container.shared.fetchNoticesUseCase()
     
     /// Returns placeholder entry displayed while the widget is loading
     /// - Note: Uses mock data with redacted styling instead of real data
@@ -31,7 +31,8 @@ struct NoticeWidgetProvider: AppIntentTimelineProvider {
         let notices = try? await fetchNoticesUseCase.execute(
             category: NoticeCategory.generalNotice,
             size: getContentCount(for: context.family)
-        )
+        ).map { $0.notice }
+        
         return NoticeEntry(
             date: Date(),
             category: .generalNotice,
@@ -47,7 +48,7 @@ struct NoticeWidgetProvider: AppIntentTimelineProvider {
         let notices = try? await fetchNoticesUseCase.execute(
             category: category.toNoticeCategory,
             size: getContentCount(for: context.family)
-        )
+        ).map { $0.notice }
         let entries: [NoticeEntry] = [
             NoticeEntry(
                 date: Date(),
@@ -106,7 +107,6 @@ fileprivate extension Notice {
                 uploadDate: "2024-04-09",
                 imageUrl: nil,
                 category: NoticeCategory.generalNotice,
-                isNew: false
             )
         }
     }

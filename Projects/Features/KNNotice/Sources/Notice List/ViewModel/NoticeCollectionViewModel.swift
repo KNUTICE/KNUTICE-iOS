@@ -24,7 +24,7 @@ public final class NoticeCollectionViewModel: NoticeSectionModelProvidable & Not
     /// 새로고침 여부를 나타내는 변수
     public let isRefreshing: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     /// 공지 사항 리스트 요청을 위한 `FetchNoticesUseCase` 인스턴스
-    @Injected(\.fetchNoticesUseCase) private var fetchNoticesUseCase: FetchNoticesUseCase
+    @Injected(\.fetchNoticeSnapshotsUseCase) private var fetchNoticeSnapshotsUseCase
     /// 선택된 공지 종류
     /// 외부에서 변경되면 최신 값으로 공지를 가져오도록 사용
     @Published var category: (any CategoryProtocol)?
@@ -98,7 +98,7 @@ extension NoticeCollectionViewModel {
                     try await Task.sleep(nanoseconds: 500_000_000)
                 }
                 
-                let notices = try await fetchNoticesUseCase.execute(category: category, after: nttId)
+                let notices = try await fetchNoticeSnapshotsUseCase.execute(category: category, after: nttId)
                 let sectionModel = NoticeSectionModel(items: notices)
                 
                 switch update {

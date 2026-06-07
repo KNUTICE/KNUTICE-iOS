@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KNUtility
 
 public enum NoticeCategory: String {
     case generalNotice = "GENERAL_NEWS"

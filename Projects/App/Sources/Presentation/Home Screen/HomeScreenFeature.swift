@@ -27,7 +27,7 @@ struct HomeScreenFeature: EntryTimeRecordable {
     }
     
     @Injected(\.fetchTopThreeNoticesUseCase) private var fetchTopThreeNoticesUseCase
-    @Injected(\.fetchNoticesUseCase) private var fetchNoticesUseCase
+    @Injected(\.fetchNoticeSnapshotsUseCase) private var fetchNoticeSnapshotsUseCase
     
     var body: some Reducer<State, Action> {
         Reduce { state, action in
@@ -66,8 +66,8 @@ struct HomeScreenFeature: EntryTimeRecordable {
                         
                         try Task.checkCancellation()
                         
-                        let notices = try await fetchNoticesUseCase.execute(category: major, size: 3)
-                        let section = MainSectionNotice.from(notices: notices, category: major, header: major.localizedDescription)
+                        let snapshots = try await fetchNoticeSnapshotsUseCase.execute(category: major, size: 3)
+                        let section = MainSectionNotice.from(snapshots: snapshots, category: major, header: major.localizedDescription)
                         await send(.majorNoticesResponse(.loaded(section)))
                     } catch: { error, send in
                         await send(.majorNoticesResponse(.error))
@@ -87,22 +87,17 @@ struct HomeScreenFeature: EntryTimeRecordable {
 }
 
 extension MainSectionNotice {
-    static func from(notices: [Notice], category: any CategoryProtocol, header: String) -> MainSectionNotice {
-        let items = notices.map { notice in
-            MainNotice(
-                presentationType: .actual,
-                notice: notice
-            )
+    static func from(snapshots: [NoticeSnapshot], category: any CategoryProtocol, header: String) -> MainSectionNotice {
+        let items = snapshots.map {
+            MainNotice(presentationType: .actual, noticeSnapshot: $0)
         }
         return MainSectionNotice(header: header, category: category, items: items)
     }
     
+    // TODO: AsyncStream UseCase로 변경
     static func skeleton(header: String, category: any CategoryProtocol, count: Int = 3) -> MainSectionNotice {
         let items = (0..<count).map { i in
-            MainNotice(
-                presentationType: .skeleton,
-                notice: Notice.skeletonNotices().first!
-            )
+            MainNotice(presentationType: .skeleton, noticeSnapshot: NoticeSnapshot(notice: Notice.skeletonNotices().first!, isNew: false))
         }
         return MainSectionNotice(header: header, category: category, items: items)
     }
