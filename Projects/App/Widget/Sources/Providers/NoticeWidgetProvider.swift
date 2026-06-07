@@ -12,7 +12,7 @@ import KNUtility
 import WidgetKit
 
 struct NoticeWidgetProvider: AppIntentTimelineProvider {
-    private let fetchNoticesUseCase: FetchNoticeSnapshotsUseCase = Container.shared.fetchNoticesUseCase()
+    private let fetchNoticeSnapshotsUseCase: FetchNoticeSnapshotsUseCase = Container.shared.fetchNoticeSnapshotsUseCase()
     
     /// Returns placeholder entry displayed while the widget is loading
     /// - Note: Uses mock data with redacted styling instead of real data
