@@ -28,7 +28,7 @@ struct NoticeWidgetProvider: AppIntentTimelineProvider {
     /// Returns a snapshot entry for widget gallery previews
     /// - Note: Attempts to fetch real data; falls back to an empty array on failure
     func snapshot(for configuration: NoticeWidgetIntent, in context: Context) async -> NoticeEntry {
-        let notices = try? await fetchNoticesUseCase.execute(
+        let notices = try? await fetchNoticeSnapshotsUseCase.execute(
             category: NoticeCategory.generalNotice,
             size: getContentCount(for: context.family)
         ).map { $0.notice }
@@ -45,7 +45,7 @@ struct NoticeWidgetProvider: AppIntentTimelineProvider {
     /// - Note: Refreshes every 2 hours returns an empty timeline if the task is cancelled
     func timeline(for configuration: NoticeWidgetIntent, in context: Context) async -> Timeline<NoticeEntry> {
         let category = configuration.category
-        let notices = try? await fetchNoticesUseCase.execute(
+        let notices = try? await fetchNoticeSnapshotsUseCase.execute(
             category: category.toNoticeCategory,
             size: getContentCount(for: context.family)
         ).map { $0.notice }
