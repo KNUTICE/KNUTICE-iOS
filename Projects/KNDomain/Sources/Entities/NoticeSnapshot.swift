@@ -25,6 +25,6 @@ extension NoticeSnapshot: Identifiable {
 
 extension NoticeSnapshot: Equatable {
     public static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.notice.id == rhs.notice.id && lhs.isNew == rhs.isNew
+        return lhs.notice == rhs.notice && lhs.isNew == rhs.isNew
     }
 }
