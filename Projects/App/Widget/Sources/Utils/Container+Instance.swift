@@ -19,7 +19,7 @@ extension Container {
         Factory(self) { ReadingRoomRepositoryImpl() }
     }
     
-    var fetchNoticesUseCase: Factory<FetchNoticeSnapshotsUseCase> {
+    var fetchNoticeSnapshotsUseCase: Factory<FetchNoticeSnapshotsUseCase> {
         Factory(self) { FetchNoticeSnapshotsUseCase(noticeRepository: self.noticeRepository()) }
     }
     
