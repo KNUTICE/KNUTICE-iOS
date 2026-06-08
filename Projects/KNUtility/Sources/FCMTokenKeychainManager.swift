@@ -8,107 +8,100 @@
 import Foundation
 import Security
 
-public struct FCMTokenKeychainManager : Sendable {
-    //MARK: - Properties
+public actor FCMTokenKeychainManager {
+    
+    // MARK: - Properties
     
     public static let shared: FCMTokenKeychainManager = .init()
     
     private init() {}
     
     // MARK: - Public Methods
-    
+
     /// Saves the given FCM token to the Keychain.
+    ///
+    /// This method first removes any existing token by calling `delete()` and then inserts
+    /// the new token using `create(for:)`. Since this method contains no `await` points,
+    /// it executes synchronously within the actor's context, ensuring atomicity without
+    /// interleaved execution.
     ///
     /// - Parameter token: The FCM token string to be stored.
     /// - Returns: `true` if successfully saved, otherwise `false`.
+    ///
+    /// - Warning: This method performs synchronous, blocking disk I/O operations underneath.
+    ///   Calling this from the `MainActor` (e.g., UI Thread) will block the main thread
+    ///   until the operation completes. To prevent UI freezes, invoke this method from
+    ///   a background context, such as `Task.detached`.
     @discardableResult
-    public func save(fcmToken token: String) async -> Bool {
-        await delete()    // Remove existing token before saving
-        return await create(for: token)    //Save token
+    public func save(fcmToken token: String) -> Bool {
+        // Remove existing token before saving
+        delete()
+        // Save token
+        return create(for: token)
     }
     
     /// Reads the stored FCM token from the Keychain.
     ///
-    /// - Returns: The stored FCM token as a `String`, or `nil` if not found or decoding fails.
+    /// This method performs a synchronous Keychain lookup isolated within the actor.
+    /// When called from outside the actor, it must be invoked asynchronously using `await`.
+    ///
+    /// - Returns: The stored FCM token string, or `nil` if the item does not exist,
+    ///   the query fails, or the data cannot be decoded as UTF-8.
+    ///
     /// - Important:
-    ///   - If the Keychain item was saved with `kSecAttrAccessibleWhenUnlocked`,
-    ///     this method will return `nil` when the device is locked (e.g., during a silent push or background execution).
-    ///   - To ensure access in background or locked states, save the item with
-    ///     `kSecAttrAccessibleAfterFirstUnlock` or `kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly`.
-    /// - Note:
-    ///   Uses a background queue to avoid blocking the main thread.
-    public func read() async -> String? {
-        return await withCheckedContinuation { continuation in
-            DispatchQueue.global(qos: .background).async {
-                var item: AnyObject?
-                let result = SecItemCopyMatching(baseQuery(returnData: true), &item)
-                
-                guard result == errSecSuccess else {
-                    continuation.resume(returning: nil)
-                    return
-                }
-                
-                guard let data = item as? Data else {
-                    continuation.resume(returning: nil)
-                    return
-                }
-                
-                continuation.resume(returning: String(data: data, encoding: .utf8))
-            }
+    ///   - Uses `kSecAttrAccessibleAfterFirstUnlock`, allowing token access even during
+    ///     background execution once the device has been unlocked for the first time.
+    ///
+    /// - Warning: Keychain access is a blocking system call. Even though it is marked with `await`
+    ///   from the caller's perspective due to actor isolation, the underlying execution will still
+    ///   block the caller's thread. It is highly recommended to call this within a `Task.detached`
+    ///   context if invoked from the main UI thread.
+    public func read() -> String? {
+        let query = baseQuery(returnData: true)
+        var item: AnyObject?
+        let result = SecItemCopyMatching(query as CFDictionary, &item)
+        
+        guard result == errSecSuccess, let data = item as? Data else {
+            return nil
         }
-    }
-    
-    /// Deletes a Keychain item asynchronously.
-    ///
-    /// This method performs a `SecItemDelete` query on a background thread to avoid blocking the main thread.
-    /// It uses Swift's async/await with `withCheckedContinuation` to bridge the synchronous Keychain API into an async context.
-    ///
-    /// - Returns: `true` if the item was successfully deleted, otherwise `false`.
-    ///
-    /// ## Note
-    /// - Executes on `DispatchQueue.global(qos: .default)` to prevent UI blocking.
-    /// - The `baseQuery()` must be configured to target the correct Keychain item.
-    /// - Keychain services are thread-safe, but running on a background queue improves performance in UI-intensive environments.
-    @discardableResult
-    public func delete() async -> Bool {
-        return await withCheckedContinuation { continuation in
-            DispatchQueue.global(qos: .background).async {
-                continuation.resume(returning: SecItemDelete(baseQuery()) == errSecSuccess)
-            }
-        }
+        
+        return String(data: data, encoding: .utf8)
     }
     
     // MARK: - Private Methods
     
-    /// Saves the given FCM token to the Keychain.
+    /// Deletes the stored FCM token from the Keychain.
     ///
-    /// - Parameter token: The FCM token string to be stored.
-    /// - Returns: A Boolean value indicating whether the token was successfully saved (`true`) or not (`false`).
+    /// This method performs a synchronous `SecItemDelete` operation, blocking the current
+    /// actor executor until the deletion is complete.
     ///
-    /// This method uses the `kSecClassGenericPassword` class to store the token
-    /// with the specified service (`serviceName`) and label (`attrLabel`).
-    /// If an item with the same attribute combination already exists,
-    /// `SecItemAdd` will fail. To overwrite, use `SecItemUpdate`
-    /// or delete the existing item before adding it again.
-    ///
-    /// - Note:
-    ///   - The stored token is securely protected by the Keychain.
-    ///   - The return value is `true` only if the `SecItemAdd` result code is `errSecSuccess`.
+    /// - Returns: `true` if the item was successfully deleted or did not exist, otherwise `false`.
     @discardableResult
-    private func create(for token: String) async -> Bool {
-        return await withCheckedContinuation { continuation in
-            DispatchQueue.global(qos: .background).async {
-                let saveQuery = baseQuery()
-                saveQuery[kSecValueData] = token.data(using: .utf8)!
-                continuation.resume(returning: SecItemAdd(saveQuery, nil) == errSecSuccess)
-            }
-        }
+    private func delete() -> Bool {
+        let query = baseQuery()
+        return SecItemDelete(query as CFDictionary) == errSecSuccess
     }
     
-    /// Generates a base query dictionary for Keychain operations.
+    /// Creates a new Keychain item for the given FCM token.
     ///
-    /// - Parameter returnData: If `true`, adds `kSecReturnData: true` to the query.
-    /// - Returns: A mutable dictionary for Keychain queries.
+    /// This method uses the `kSecClassGenericPassword` class to securely store the token
+    /// data. Since duplicate keys will cause `SecItemAdd` to fail, any existing item
+    /// must be deleted prior to calling this method.
+    ///
+    /// - Parameter token: The FCM token string to be stored.
+    /// - Returns: `true` if the `SecItemAdd` operation returns `errSecSuccess`, otherwise `false`.
+    @discardableResult
+    private func create(for token: String) -> Bool {
+        let query = baseQuery()
+        query[kSecValueData as String] = token.data(using: .utf8)!
+        
+        return SecItemAdd(query as CFDictionary, nil) == errSecSuccess
+    }
+    
+    /// Generates the base query dictionary configured for FCM token Keychain operations.
+    ///
+    /// - Parameter returnData: If `true`, adds the `kSecReturnData` key to the dictionary.
+    /// - Returns: An `NSMutableDictionary` containing the standard query attributes.
     private func baseQuery(returnData: Bool = false) -> NSMutableDictionary {
         let attrLabel: String = "fcmToken"
         let serviceName: String = "KNUTICE"
