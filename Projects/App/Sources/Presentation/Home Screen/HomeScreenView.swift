@@ -119,7 +119,10 @@ struct HomeScreenView: View {
                 case let .loaded(majorNotices):
                     NoticeList(notices: majorNotices, bookmarkFormFactory: BookmarkFormFactoryImpl()) {
                         Button {
-                            NotificationCenter.default.post(name: .didReceiveDeepLink, object: DeepLink.navigation(tabIndex: 1))
+                            NotificationCenter.default.post(
+                                name: .didReceiveDeepLink,
+                                object: DeepLink.navigation(tabIndex: 1, itemIndex: NoticeCategory.allCases.count)
+                            )
                         } label: {
                             MoreButtonLabel()
                         }
@@ -394,7 +397,8 @@ fileprivate struct EmptyMajorNoticeView: View {
             
             // 학과 선택 버튼
             Button {
-                NotificationCenter.default.post(name: .didReceiveDeepLink, object: DeepLink.navigation(tabIndex: 1))
+                let deepLink = DeepLink.navigation(tabIndex: 1, itemIndex: NoticeCategory.allCases.count)
+                NotificationCenter.default.post(name: .didReceiveDeepLink, object: deepLink)
             } label: {
                 Text("학과 선택하기")
                     .font(.subheadline)
