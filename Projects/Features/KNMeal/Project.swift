@@ -6,6 +6,7 @@ let project = Project.module(
     dependencies: [
         .project(target: "KNDesignSystem", path: "../../KNDesignSystem"),
         .project(target: "KNUtility", path: "../../KNUtility"),
+        .project(target: "KNDomain", path: "../../KNDomain"),
     ],
     hasTests: false,
     resources: ["Resources/**"],

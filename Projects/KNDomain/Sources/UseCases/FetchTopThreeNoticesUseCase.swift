@@ -7,40 +7,33 @@
 
 import Combine
 import Foundation
-import KNUtility
 
-public protocol FetchTopThreeNoticesUseCase: Sendable {
-    /// Fetches notices for all `NoticeCategory` cases concurrently and returns them as `[MainSectionNotice]`.
-    ///
-    /// This method performs the following tasks:
-    /// 1. Fetches notices for each category concurrently using `Publishers.MergeMany`.
-    /// 2. Maps the results into `MainSectionNotice` objects with the actual notices.
-    /// 3. Ensures the returned array preserves the order of `NoticeCategory.allCases`.
-    ///
-    /// If `isRefresh` is `false`, the method first emits mock notices (skeleton UI)
-    /// using `.prepend(getMockNotices())` to provide immediate placeholder data before the actual network data arrives.
-    ///
-    /// - Parameter isRefresh: A boolean indicating whether this fetch is triggered by a refresh action.
-    ///                        If `true`, only actual notices are emitted without skeleton placeholders.
-    /// - Returns:
-    ///   An `AnyPublisher` that emits:
-    ///   1. An initial array of mock `MainSectionNotice` values (if `isRefresh == false`) for loading state, and
-    ///   2. The actual array of notices fetched from the server once all requests complete.
-    ///   The publisher may fail with an error if any fetch operation fails.
-    func execute(isRefresh: Bool) -> AnyPublisher<[MainSectionNotice], any Error>
-}
-
-public final class FetchTopThreeNoticesUseCaseImpl: FetchTopThreeNoticesUseCase {
-    private let repository: NoticeRepository
+public final class FetchTopThreeNoticesUseCase: NoticeSnapshotCreatable, Sendable {
+    private let fetchNoticeSnapshotsUseCase: FetchNoticeSnapshotsUseCase
     
-    public init(repository: NoticeRepository) {
-        self.repository = repository
+    public init(fetchNoticeSnapshotsUseCase: FetchNoticeSnapshotsUseCase) {
+        self.fetchNoticeSnapshotsUseCase = fetchNoticeSnapshotsUseCase
     }
     
-    public func execute(isRefresh: Bool) -> AnyPublisher<[MainSectionNotice], any Error> {
+    /// Fetches the latest three notices for each notice category and converts them
+    /// into `MainSectionNotice` objects for presentation.
+    ///
+    /// When `isRefresh` is `false`, skeleton data is emitted first to allow the UI
+    /// to display a loading state while notice data is being fetched.
+    ///
+    /// - Parameter isRefresh:
+    ///   A Boolean value indicating whether the request is triggered by a refresh action.
+    ///   If `true`, only fetched data is emitted. If `false`, skeleton data is emitted
+    ///   before the fetched data.
+    /// - Returns:
+    ///   A publisher that emits an ordered array of `MainSectionNotice` objects.
+    ///   The section order always follows `NoticeCategory.allCases`.
+    /// - Throws:
+    ///   Publishes an error if any notice request fails.
+    public func execute() -> AnyPublisher<[MainSectionNotice], any Error> {
         let publishers = NoticeCategory.allCases.map { category in
-            repository.fetchNotices(for: category.rawValue, size: 3)
-                .map { notices -> (NoticeCategory, [Notice]) in (category, notices) }
+            fetchNoticeSnapshotsUseCase.execute(category: category, size: 3)
+                .map { snapshots in (category, snapshots) }
                 .eraseToAnyPublisher()
         }
         
@@ -50,11 +43,11 @@ public final class FetchTopThreeNoticesUseCaseImpl: FetchTopThreeNoticesUseCase 
                 // Convert to dictionary for easy access
                 var sectionNotices: [NoticeCategory: MainSectionNotice] = [:]
                 
-                for (category, notices) in results {
+                for (category, snapshots) in results {
                     let sectionNotice = MainSectionNotice(
                         header: category.localizedDescription,
                         category: category,
-                        items: notices.map { MainNotice(presentationType: .actual, notice: $0) }
+                        items: snapshots.map { MainNotice(presentationType: .actual, noticeSnapshot: $0) }
                     )
                     sectionNotices[category] = sectionNotice
                 }
@@ -66,17 +59,9 @@ public final class FetchTopThreeNoticesUseCaseImpl: FetchTopThreeNoticesUseCase 
             }
             .eraseToAnyPublisher()
         
-        return Deferred { [weak self] in
-            if isRefresh {
-                return mainSectionNoticePublishers
-                    .eraseToAnyPublisher()
-            }
-            
-            return mainSectionNoticePublishers
-                .prepend(self?.getMockNotices() ?? [])    // 로딩 중 Skeleton 화면을 표시하기 위한 임시 데이터 전달
-                .eraseToAnyPublisher()
-        }
-        .eraseToAnyPublisher()
+        return mainSectionNoticePublishers
+            .prepend(getMockNotices())    // 로딩 중 Skeleton 화면을 표시하기 위한 임시 데이터 전달
+            .eraseToAnyPublisher()
     }
     
     /// Generates mock notice data for displaying a skeleton loading UI.
@@ -93,7 +78,9 @@ public final class FetchTopThreeNoticesUseCaseImpl: FetchTopThreeNoticesUseCase 
             MainSectionNotice(
                 header: category.localizedDescription,
                 category: category,
-                items: Notice.skeletonNotices().map { MainNotice(presentationType: .skeleton, notice: $0) }
+                items: Notice.skeletonNotices().map {
+                    MainNotice(presentationType: .skeleton, noticeSnapshot: createSnapshot(from: $0))
+                }
             )
         }
     }
@@ -112,7 +99,6 @@ public extension Notice {
                 uploadDate: "2026.00.00",
                 imageUrl: nil,
                 category: NoticeCategory.generalNotice,
-                isNew: false
             )
         }
     }

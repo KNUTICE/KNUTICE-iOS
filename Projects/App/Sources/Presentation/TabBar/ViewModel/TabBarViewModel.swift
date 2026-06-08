@@ -10,6 +10,7 @@ import CorePresentation
 import Factory
 import Foundation
 import KNDeepLink
+import KNDomain
 import KNUtility
 import os
 

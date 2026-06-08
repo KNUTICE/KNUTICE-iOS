@@ -7,18 +7,16 @@
 
 import Foundation
 
-public protocol SearchNoticesUseCase: Actor {
-    func execute(with keyword: String) async throws -> [Notice]
-}
-
-public actor SearchNoticesUseCaseImpl: SearchNoticesUseCase {
+public final class SearchNoticeSnapshotsUseCase: NoticeSnapshotCreatable, Sendable {
     private let noticeRepository: NoticeRepository
     
     public init(noticeRepository: NoticeRepository) {
         self.noticeRepository = noticeRepository
     }
     
-    public func execute(with keyword: String) async throws -> [Notice] {
-        return try await noticeRepository.fetchNotices(keyword: keyword)
+    public func execute(with keyword: String) async throws -> [NoticeSnapshot] {
+        let notices = try await noticeRepository.fetchNotices(keyword: keyword)
+        
+        return notices.map { createSnapshot(from: $0) }
     }
 }

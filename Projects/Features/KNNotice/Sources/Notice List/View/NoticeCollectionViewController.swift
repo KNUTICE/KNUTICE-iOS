@@ -57,7 +57,12 @@ public class NoticeCollectionViewController: UIViewController, NoticeCollectionV
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        let notice = viewModel.notices.value[0].items[indexPath.row]
+        guard let section = viewModel.notices.value.first,
+              section.items.indices.contains(indexPath.row) else {
+            return
+        }
+        
+        let notice = section.items[indexPath.row].notice
         let viewController = NoticeContentViewController(viewModel: NoticeContentViewModel(notice: notice)) { [weak self] notice in
             self?.bookmarkFormFactory.make(for: notice)
         }

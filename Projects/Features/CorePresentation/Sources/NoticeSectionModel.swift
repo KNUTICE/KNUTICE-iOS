@@ -11,13 +11,13 @@ import RxDataSources
 public struct NoticeSectionModel {
     public var items: [Item]
     
-    public init(items: [Notice]) {
+    public init(items: [NoticeSnapshot]) {
         self.items = items
     }
 }
 
 extension NoticeSectionModel: SectionModelType {
-    public typealias Item = Notice
+    public typealias Item = NoticeSnapshot
     
     public init(original: NoticeSectionModel, items: [Item]) {
         self = original

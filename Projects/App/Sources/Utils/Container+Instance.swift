@@ -52,11 +52,15 @@ extension Container {
     }
     
     var fetchTopThreeNoticesUseCase: Factory<FetchTopThreeNoticesUseCase> {
-        Factory(self) { FetchTopThreeNoticesUseCaseImpl(repository: self.noticeRepository()) }
+        Factory(self) { FetchTopThreeNoticesUseCase(fetchNoticeSnapshotsUseCase: self.fetchNoticeSnapshotsUseCase()) }
     }
     
-    var fetchNoticesUseCase: Factory<FetchNoticesUseCase> {
-        Factory(self) { FetchNoticesUseCaseImpl(noticeRepository: self.noticeRepository()) }
+    var fetchNoticeSnapshotsUseCase: Factory<FetchNoticeSnapshotsUseCase> {
+        Factory(self) { FetchNoticeSnapshotsUseCase(noticeRepository: self.noticeRepository()) }
+    }
+    
+    var fetchNoticeSnapshotsWithSkeletonUseCase: Factory<FetchNoticeSnapshotsWithSkeletonUseCase> {
+        Factory(self) { FetchNoticeSnapshotsWithSkeletonUseCase(fetchNoticeSnapshotsUseCase: self.fetchNoticeSnapshotsUseCase()) }
     }
     
     var updateBookmarkUseCase: Factory<UpdateBookmarkUseCase> {
@@ -75,8 +79,8 @@ extension Container {
         Factory(self) { UpdateTopicSubscriptionUseCaseImpl(repository: self.topicSubscriptionRepository()) }
     }
     
-    var searchNoticesUseCase: Factory<SearchNoticesUseCase> {
-        Factory(self) { SearchNoticesUseCaseImpl(noticeRepository: self.noticeRepository()) }
+    var searchNoticesUseCase: Factory<SearchNoticeSnapshotsUseCase> {
+        Factory(self) { SearchNoticeSnapshotsUseCase(noticeRepository: self.noticeRepository()) }
     }
     
     var searchBookmarksUseCase: Factory<SearchBookmarksUseCase> {

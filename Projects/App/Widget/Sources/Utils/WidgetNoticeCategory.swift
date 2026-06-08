@@ -6,7 +6,7 @@
 //
 
 import AppIntents
-import KNUtility
+import KNDomain
 
 enum WidgetNoticeCategory: String, AppEnum {
     case generalNotice = "일반소식"

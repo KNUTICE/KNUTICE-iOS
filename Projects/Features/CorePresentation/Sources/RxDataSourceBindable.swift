@@ -46,19 +46,19 @@ public extension RxDataSourceBindable {
             
             let shouldUseThumbnail: Bool = {
                 if UIDevice.current.userInterfaceIdiom == .phone {
-                    return item.imageUrl != nil
+                    return item.notice.imageUrl != nil
                 } else {
-                    if item.imageUrl != nil { return true }
+                    if item.notice.imageUrl != nil { return true }
                     
                     let items = self.viewModel.notices.value[0].items
                     let count = self.viewModel.notices.value[0].items.count
                     
                     if indexPath.row % 2 == 0 {    //짝수번째 cell
                         let next = indexPath.row + 1
-                        return 0..<count ~= next && items[next].imageUrl != nil
+                        return 0..<count ~= next && items[next].notice.imageUrl != nil
                     } else {    //홀수번째 cell
                         let before = indexPath.row - 1
-                        return 0..<count ~= before && items[before].imageUrl != nil
+                        return 0..<count ~= before && items[before].notice.imageUrl != nil
                     }
                 }
             }()

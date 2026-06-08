@@ -169,9 +169,14 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
+        guard let section = viewModel.notices.value.first,
+              section.items.indices.contains(indexPath.row) else {
+            return
+        }
+        
         let viewController = NoticeContentViewController(
             viewModel: NoticeContentViewModel(
-                notice: viewModel.notices.value[0].items[indexPath.row]
+                notice: section.items[indexPath.row].notice
             ),
             makeBookmarkFormViewController: makeBookmarkFormViewController
         )

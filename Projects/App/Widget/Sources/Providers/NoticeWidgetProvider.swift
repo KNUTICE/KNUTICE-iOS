@@ -12,7 +12,7 @@ import KNUtility
 import WidgetKit
 
 struct NoticeWidgetProvider: AppIntentTimelineProvider {
-    private let fetchNoticesUseCase: FetchNoticesUseCase = Container.shared.fetchNoticesUseCase()
+    private let fetchNoticeSnapshotsUseCase: FetchNoticeSnapshotsUseCase = Container.shared.fetchNoticeSnapshotsUseCase()
     
     /// Returns placeholder entry displayed while the widget is loading
     /// - Note: Uses mock data with redacted styling instead of real data
@@ -28,10 +28,11 @@ struct NoticeWidgetProvider: AppIntentTimelineProvider {
     /// Returns a snapshot entry for widget gallery previews
     /// - Note: Attempts to fetch real data; falls back to an empty array on failure
     func snapshot(for configuration: NoticeWidgetIntent, in context: Context) async -> NoticeEntry {
-        let notices = try? await fetchNoticesUseCase.execute(
+        let notices = try? await fetchNoticeSnapshotsUseCase.execute(
             category: NoticeCategory.generalNotice,
             size: getContentCount(for: context.family)
-        )
+        ).map { $0.notice }
+        
         return NoticeEntry(
             date: Date(),
             category: .generalNotice,
@@ -44,10 +45,10 @@ struct NoticeWidgetProvider: AppIntentTimelineProvider {
     /// - Note: Refreshes every 2 hours returns an empty timeline if the task is cancelled
     func timeline(for configuration: NoticeWidgetIntent, in context: Context) async -> Timeline<NoticeEntry> {
         let category = configuration.category
-        let notices = try? await fetchNoticesUseCase.execute(
+        let notices = try? await fetchNoticeSnapshotsUseCase.execute(
             category: category.toNoticeCategory,
             size: getContentCount(for: context.family)
-        )
+        ).map { $0.notice }
         let entries: [NoticeEntry] = [
             NoticeEntry(
                 date: Date(),
@@ -106,7 +107,6 @@ fileprivate extension Notice {
                 uploadDate: "2024-04-09",
                 imageUrl: nil,
                 category: NoticeCategory.generalNotice,
-                isNew: false
             )
         }
     }

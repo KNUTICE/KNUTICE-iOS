@@ -7,7 +7,7 @@
 
 import ComposableArchitecture
 import KNDesignSystem
-import KNUtility
+import KNDomain
 import SwiftUI
 import UIComponents
 

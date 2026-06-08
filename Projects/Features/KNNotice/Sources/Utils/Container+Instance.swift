@@ -9,10 +9,10 @@ import Factory
 import KNDomain
 
 extension Container {
-    public var fetchNoticesUseCase: Factory<FetchNoticesUseCase> {
+    public var fetchNoticeSnapshotsUseCase: Factory<FetchNoticeSnapshotsUseCase> {
         Factory(self) {
             fatalError(
-                "FetchNoticesUseCase is not registered. Register it in App's dependency composition root."
+                "FetchNoticeSnapshotsUseCase is not registered. Register it in App's dependency composition root."
             )
         }
     }

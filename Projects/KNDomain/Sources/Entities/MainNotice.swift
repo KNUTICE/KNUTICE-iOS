@@ -15,15 +15,15 @@ public struct MainNotice: Equatable, Sendable {
     }
     
     public let presentationType: PresentationType
-    public let notice: Notice
+    public let noticeSnapshot: NoticeSnapshot
     
-    public init(presentationType: PresentationType, notice: Notice) {
+    public init(presentationType: PresentationType, noticeSnapshot: NoticeSnapshot) {
         self.presentationType = presentationType
-        self.notice = notice
+        self.noticeSnapshot = noticeSnapshot
     }
     
     public static func == (lhs: MainNotice, rhs: MainNotice) -> Bool {
-        return lhs.notice.id == rhs.notice.id
+        return lhs.noticeSnapshot == rhs.noticeSnapshot && lhs.presentationType == rhs.presentationType
     }
 }
 
@@ -42,7 +42,7 @@ public struct MainSectionNotice: Equatable, Sendable {
         self.items = items
     }
     
-    public static func ==(lhs: MainSectionNotice, rhs: MainSectionNotice) -> Bool {
+    public static func == (lhs: MainSectionNotice, rhs: MainSectionNotice) -> Bool {
         return lhs.items == rhs.items
     }
 }
