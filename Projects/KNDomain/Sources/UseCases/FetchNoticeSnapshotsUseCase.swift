@@ -14,6 +14,7 @@ public final class FetchNoticeSnapshotsUseCase: NoticeSnapshotCreatable, Sendabl
     public init(noticeRepository: NoticeRepository) {
         self.noticeRepository = noticeRepository
     }
+    
     /// Fetches notices for the specified category and converts them into `NoticeSnapshot`s
     /// by applying business rules such as determining whether a notice is new.
     ///
@@ -38,6 +39,19 @@ public final class FetchNoticeSnapshotsUseCase: NoticeSnapshotCreatable, Sendabl
         return snapshots
     }
     
+    /// Fetches notices for the specified category and converts them into `NoticeSnapshot`s
+    /// using a Combine publisher.
+    ///
+    /// The returned publisher applies business rules such as determining whether
+    /// a notice is new and transforms each `Notice` into a corresponding
+    /// `NoticeSnapshot`.
+    ///
+    /// - Parameters:
+    ///   - category: The notice category to fetch.
+    ///   - nttId: The identifier of the last fetched notice for pagination.
+    ///   - size: The maximum number of notices to fetch.
+    /// - Returns: A publisher that emits an array of `NoticeSnapshot`s enriched
+    ///   with business-specific state, or fails with an error.
     public func execute(
         category: some CategoryProtocol,
         after nttId: Int? = nil,
