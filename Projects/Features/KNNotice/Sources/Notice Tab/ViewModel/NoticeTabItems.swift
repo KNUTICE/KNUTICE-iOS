@@ -47,7 +47,6 @@ public final class NoticeTabItems {
     }
     
     @ObservationIgnored private let categoriesRelay: BehaviorRelay<[CategoryItem]>
-    @ObservationIgnored private let disposeBag: DisposeBag = .init()
     @ObservationIgnored private let updateTopicSubscriptionUseCase: UpdateTopicSubscriptionUseCase
     
     public init(

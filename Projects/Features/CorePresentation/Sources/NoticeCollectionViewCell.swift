@@ -98,7 +98,7 @@ public final class NoticeCollectionViewCell: UICollectionViewCell {
         }
         
         thumbnailImageView.snp.makeConstraints { make in
-            make.height.equalTo(thumbnailImageView.snp.width).multipliedBy(0.55)
+            make.height.equalTo(thumbnailImageView.snp.width).multipliedBy(0.56)
         }
         
         stackView.setCustomSpacing(16, after: thumbnailImageView)    // 썸네일 이미지와 타이틀 사이 공간을 16으로 설정
@@ -116,19 +116,18 @@ public final class NoticeCollectionViewCell: UICollectionViewCell {
         newBadgeLabel.isHidden = !item.isNew
         
         // Thumbnail
+        thumbnailImageView.kf.cancelDownloadTask()
+        
         guard isShowingThumbnail else {
             thumbnailImageView.isHidden = true
-            thumbnailImageView.kf.cancelDownloadTask()
             thumbnailImageView.image = nil
             return
         }
 
-        thumbnailImageView.isHidden = false
-
         // 현재 View 기준 width 사용
         let baseWidth = containerWidth ?? bounds.width
-        let width: CGFloat = traitCollection.userInterfaceIdiom == .phone ? baseWidth - 32 : baseWidth / 2 - 32
-        let height = width * 0.4
+        let width: CGFloat = traitCollection.userInterfaceIdiom == .phone ? baseWidth : baseWidth / 2
+        let height: CGFloat = width * 0.56
         let scale = traitCollection.displayScale
         let targetSize = CGSize(
             width: width * scale,
