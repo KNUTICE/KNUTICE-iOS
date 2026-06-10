@@ -9,8 +9,6 @@ import Combine
 import ComposableArchitecture
 import CorePresentation
 import Factory
-import FirebaseAnalytics
-import KNBookmark
 import KNDeepLink
 import KNDesignSystem
 import KNDomain
@@ -232,13 +230,9 @@ fileprivate struct HomeCardView: View {
     }
 }
 
-fileprivate struct NoticeList<Content: View>: View {
-    @State private var isActivityViewPresented: Bool = false
-    @State private var layoutType: ABTestLayoutType?
-    @State private var isShowingBookmarkForm: Bool = false
-    
+fileprivate struct NoticeList<Content: View, Factory: BookmarkFormFactory>: View {
     let notices: MainSectionNotice
-    let bookmarkFormFactory: BookmarkFormFactory
+    let bookmarkFormFactory: Factory
     let moreButton: (() -> Content)?
     
     var body: some View {
@@ -256,53 +250,7 @@ fileprivate struct NoticeList<Content: View>: View {
             
             ForEach(Array(notices.items.enumerated()), id: \.element.noticeSnapshot.id) { index, item in
                 NavigationLink {
-                    // 상세 화면 이동
-                    NoticeContentView(notice: item.noticeSnapshot.notice) { notice in bookmarkFormFactory.make(for: notice) }
-                        .ignoresSafeArea(.all)
-                        .toolbar {
-                            ToolbarItemGroup(placement: .topBarTrailing) {
-                                if let layoutType, case .typeB = layoutType {
-                                    Button {
-                                        // Bookmark 버튼 클릭 이벤트 전송
-                                        Analytics.logEvent(AnalyticsEventName.bookmarkButtonClicked.rawValue, parameters: nil)
-                                        
-                                        // Bookmark Form 표시
-                                        isShowingBookmarkForm.toggle()
-                                    } label: {
-                                        Image(systemName: "bookmark")
-                                    }
-                                }
-                                
-                                Button {
-                                    isActivityViewPresented.toggle()
-                                } label: {
-                                    Image(systemName: "square.and.arrow.up")
-                                }
-                            }
-                        }
-                        .background {
-                            if let url = item.noticeSnapshot.notice.contentUrl {
-                                ActivityView(isPresented: $isActivityViewPresented, activityItems: [
-                                    url
-                                ])
-                            }
-                        }
-                        .task {
-                            await fetchLayoutType()
-                        }
-                        .sheet(isPresented: $isShowingBookmarkForm) {
-                            NavigationStack {
-                                let bookmark = Bookmark(notice: item.noticeSnapshot.notice, memo: "")
-                                
-                                BookmarkForm(
-                                    store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
-                                        BookmarkFormFeature()
-                                    }
-                                ) {
-                                    isShowingBookmarkForm.toggle()
-                                }
-                            }
-                        }
+                    NoticeDetailView(notice: item.noticeSnapshot.notice, bookmarkFormFactory: bookmarkFormFactory)
                 } label: {
                     NoticeListRow(snapshot: item.noticeSnapshot)
                         .redacted(reason: item.presentationType == .skeleton ? .placeholder : [])
@@ -317,11 +265,6 @@ fileprivate struct NoticeList<Content: View>: View {
             }
         }
         .padding()
-    }
-    
-    private func fetchLayoutType() async {
-        let layout = await ABTestManager.shared.value(for: ABTestKeys.noticeDetailLayoutType)
-        layoutType = ABTestLayoutType(rawValue: layout)
     }
     
     private func titleColor(for notice: NoticeCategory) -> Color {
