@@ -45,6 +45,7 @@ public struct TopicSubscriptionListFeature: Sendable {
         case setMajorNotificationSubscribed(Bool)
         case alert(PresentationAction<Alert>)
         case fcmTokenErrorAlert(PresentationAction<Alert>)
+        case majorSubscriptionResponse(Bool)
         
         public enum Alert: Equatable {
             case dismiss
@@ -93,6 +94,11 @@ public struct TopicSubscriptionListFeature: Sendable {
                             await send(.errorResponse(error))
                         }
                     },
+                    .run { send in
+                        // 로컬 저장소에서 구독 정보 가져오기
+                        let isMajorSubscribed = await MajorNotificationManager.shared.isSubscribed
+                        await send(.majorSubscriptionResponse(isMajorSubscribed))
+                    }
                 )
                 .cancellable(id: CancelID.fetch, cancelInFlight: true)
                 
@@ -112,12 +118,10 @@ public struct TopicSubscriptionListFeature: Sendable {
                         state.noticeSubscriptionStates[topic] = true
                     }
                 }
+                return .none
                 
-                // FIXME: MajorManager로 리팩토링
-                state.isMajorNoticeNotificationSubscribed = UserDefaults.standard.bool(
-                    forKey: UserDefaultsKeys.isMajorNotificationSubscribed.rawValue
-                )
-                
+            case .majorSubscriptionResponse(let isSubscribed):
+                state.isMajorNoticeNotificationSubscribed = isSubscribed
                 return .none
                 
             case .errorResponse(let error):
@@ -193,10 +197,11 @@ public struct TopicSubscriptionListFeature: Sendable {
                 return .none
                 
             case let .toggleMajor(isEnabled):
-                // 학과 구독 상태를 서버에 저장하는 비동기 네트워크 요청 수행
                 return .run { send in
+                    // 로딩 인디케이터 활성화
                     await send(.setLoading(true))
                     
+                    // 학과 구독 상태를 서버에 저장하는 비동기 네트워크 요청 수행
                     if let majorStr = await MajorManager.shared.majorStrings.first,
                        let major = MajorCategory(rawValue: majorStr) {
                         try await updateTopicSubscriptionUseCase.execute(
@@ -204,10 +209,13 @@ public struct TopicSubscriptionListFeature: Sendable {
                             topic: major,
                             isEnabled: isEnabled
                         )
-                        await send(.toggleMajorState(isEnabled))
-                        await send(.setMajorNotificationSubscribed(isEnabled))
                     }
                     
+                    // UI 토글 변경
+                    await send(.toggleMajorState(isEnabled))
+                    // 로컬 저장소에 반영
+                    await send(.setMajorNotificationSubscribed(isEnabled))
+                    // 로딩 인디케이터 비활성화
                     await send(.setLoading(false))
                 }
                 .cancellable(id: CancelID.updateMajor, cancelInFlight: true)
@@ -246,9 +254,10 @@ public struct TopicSubscriptionListFeature: Sendable {
                 return .none
                 
             case let .setMajorNotificationSubscribed(isEnabled):
-                // FIXME: MajorManager로 리팩토링
-                UserDefaults.standard.set(isEnabled, forKey: UserDefaultsKeys.isMajorNotificationSubscribed.rawValue)
-                return .none
+                return .run { _ in
+                    // 로컬 저장소에 학과 구독 정보 갱신
+                    await MajorNotificationManager.shared.set(isSubscribed: isEnabled)
+                }
             }
         }
         .ifLet(\.$alert, action: \.alert)
