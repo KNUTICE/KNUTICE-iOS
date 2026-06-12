@@ -231,8 +231,8 @@ public final class NoticeTabViewController: UIViewController, SettingButtonConfi
         switch deepLink {
         case let .navigation(_, itemIndex):
             if let itemIndex {
-                // 전체 개수에서 마지막에 있는 버튼을 제외한 범위
-                if (0..<viewModel.categoriesValue.count - 1) ~= itemIndex {
+                let maxIndex = viewModel.categoriesValue.count - 1
+                if maxIndex > 0, (0..<maxIndex).contains(itemIndex) {
                     // 선택된 탭으로 이동
                     viewModel.selectedIndex.accept(itemIndex)
                 } else {
