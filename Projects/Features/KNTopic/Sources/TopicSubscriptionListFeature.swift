@@ -77,22 +77,19 @@ public struct TopicSubscriptionListFeature: Sendable {
                     .run { send in
                         await send(.setLoading(true))
                         
-                        do {
-                            let list = try await fetchTopicSubscriptionUseCase.execute(for: .notice)
-                            await send(.noticeSubscriptionsResponse(list))
-                        } catch {
-                            await send(.errorResponse(error))
-                        }
+                        let list = try await fetchTopicSubscriptionUseCase.execute(for: .notice)
                         
+                        await send(.noticeSubscriptionsResponse(list))
                         await send(.setLoading(false))
+                    } catch: { error, send in
+                        await send(.setLoading(false))
+                        await send(.errorResponse(error))
                     },
                     .run { send in
-                        do {
-                            let subscriptions = try await fetchTopicSubscriptionUseCase.execute(for: .meal)
-                            await send(.cafeteriaSubscriptionsResponse(subscriptions))
-                        } catch {
-                            await send(.errorResponse(error))
-                        }
+                        let subscriptions = try await fetchTopicSubscriptionUseCase.execute(for: .meal)
+                        await send(.cafeteriaSubscriptionsResponse(subscriptions))
+                    } catch: { error, send in
+                        await send(.errorResponse(error))
                     },
                     .run { send in
                         // 로컬 저장소에서 구독 정보 가져오기
@@ -176,18 +173,17 @@ public struct TopicSubscriptionListFeature: Sendable {
                 return .run { send in
                     await send(.setLoading(true))
                     
-                    do {
-                        try await updateTopicSubscriptionUseCase.execute(
-                            of: .notice,
-                            topic: topic,
-                            isEnabled: isEnabled
-                        )
-                        await send(.toggleNoticeState(topic, isEnabled))
-                    } catch {
-                        await send(.errorResponse(error))
-                    }
+                    try await updateTopicSubscriptionUseCase.execute(
+                        of: .notice,
+                        topic: topic,
+                        isEnabled: isEnabled
+                    )
+                    await send(.toggleNoticeState(topic, isEnabled))
                     
                     await send(.setLoading(false))
+                } catch: { error, send in
+                    await send(.setLoading(false))
+                    await send(.errorResponse(error))
                 }
                 .cancellable(id: CancelID.updateNotice, cancelInFlight: true)
                 
@@ -217,6 +213,9 @@ public struct TopicSubscriptionListFeature: Sendable {
                     await send(.setMajorNotificationSubscribed(isEnabled))
                     // 로딩 인디케이터 비활성화
                     await send(.setLoading(false))
+                } catch: { error, send in
+                    await send(.setLoading(false))
+                    await send(.errorResponse(error))
                 }
                 .cancellable(id: CancelID.updateMajor, cancelInFlight: true)
                 
@@ -228,14 +227,13 @@ public struct TopicSubscriptionListFeature: Sendable {
                 return .run { send in
                     await send(.setLoading(true))
                     
-                    do {
-                        try await updateTopicSubscriptionUseCase.execute(of: .meal, topic: category, isEnabled: isEnabled)
-                        await send(.toggleCafeteriaState(category, isEnabled))
-                    } catch {
-                        await send(.errorResponse(error))
-                    }
+                    try await updateTopicSubscriptionUseCase.execute(of: .meal, topic: category, isEnabled: isEnabled)
+                    await send(.toggleCafeteriaState(category, isEnabled))
                     
                     await send(.setLoading(false))
+                } catch: { error, send in
+                    await send(.setLoading(false))
+                    await send(.errorResponse(error))
                 }
                 .cancellable(id: CancelID.updateCafeteria, cancelInFlight: true)
                 
