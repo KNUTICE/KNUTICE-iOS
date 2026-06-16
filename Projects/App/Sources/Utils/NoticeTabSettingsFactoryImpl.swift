@@ -12,7 +12,11 @@ import RxRelay
 struct NoticeTabSettingsFactoryImpl: NoticeTabSettingsFactory {
     func make(categoriesRelay: BehaviorRelay<[CategoryItem]>) -> NoticeTabSettings? {
         NoticeTabSettings(
-            noticeTabItems: NoticeTabItems(categoriesRelay, updateTopicSubscriptionUseCase: Container.shared.updateTopicSubscriptionUseCase())
+            noticeTabItems: NoticeTabItems(
+                categoriesRelay,
+                addMajorUseCase: Container.shared.addMajorUseCase(),
+                deleteMajorUseCase: Container.shared.deleteMajorUseCase()
+            )
         )
     }
 }

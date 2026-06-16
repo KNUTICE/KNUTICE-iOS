@@ -87,6 +87,13 @@ extension Container {
         Factory(self) { SearchBookmarksUseCaseImpl(repository: self.bookmarkRepository()) }
     }
     
+    var addMajorUseCase: Factory<AddMajorUseCase> {
+        Factory(self) { AddMajorUseCase(repository: self.topicSubscriptionRepository()) }.singleton
+    }
+    
+    var deleteMajorUseCase: Factory<DeleteMajorUseCase> {
+        Factory(self) { DeleteMajorUseCase(repository: self.topicSubscriptionRepository()) }.singleton
+    }
     
     //MARK: - ViewModel
     

@@ -19,7 +19,13 @@ public final class UpdateTopicSubscriptionUseCaseImpl: UpdateTopicSubscriptionUs
     }
     
     public func execute(of type: TopicType, topic: any CategoryProtocol, isEnabled: Bool) async throws {
-        try await repository.update(of: type, topic: topic, isEnabled: isEnabled)
+        try Task.checkCancellation()
+        
+        if isEnabled {
+            try await repository.subscribe(of: type, topic: topic)
+        } else {
+            try await repository.unsubscribe(of: type, topic: topic)
+        }
     }
     
 }

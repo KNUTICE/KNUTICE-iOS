@@ -8,13 +8,13 @@
 import Foundation
 
 @propertyWrapper
-public struct UserDefaultsMajors {
+struct UserDefaultsMajors {
     private let storage = UserDefaults.shared
     private let key = UserDefaultsKeys.selectedMajor.rawValue
     
     /// The array of subscribed majors.
     /// Updating this value will immediately persist the new array to `UserDefaults`.
-    public var wrappedValue: [String] {
+    var wrappedValue: [String] {
         get {
             // Check for the modern format (String Array)
             if let value = storage?.stringArray(forKey: key) {
@@ -35,24 +35,34 @@ public struct UserDefaultsMajors {
         }
     }
     
-    public init() {}
 }
 
+/// Manages the user's subscribed majors using persistent storage.
 public actor MajorManager {
+    
+    /// Shared singleton instance.
     public static let shared = MajorManager()
     
+    /// Persisted list of subscribed majors.
     @UserDefaultsMajors private var storedMajors: [String]
     
+    /// Returns all currently subscribed majors.
     public var majorStrings: [String] { storedMajors }
     
     private init() {}
     
+    /// Removes the specified major from the subscription list.
+    ///
+    /// - Parameter major: The major to remove.
     public func removeMajor(_ major: String) {
         var current = storedMajors
         current.removeAll { $0 == major }
         storedMajors = current
     }
     
+    /// Adds a major to the subscription list if it does not already exist.
+    ///
+    /// - Parameter major: The major to add.
     public func addMajor(_ major: String) {
         var current = storedMajors
         
@@ -62,6 +72,7 @@ public actor MajorManager {
         storedMajors = current
     }
     
+    /// Removes all subscribed majors.
     public func clearAll() {
         storedMajors = []
     }

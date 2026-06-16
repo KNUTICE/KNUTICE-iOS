@@ -12,7 +12,8 @@ import SwiftUI
 
 public struct NoticeTabSettings: View {
     @Environment(\.dismiss) private var dismiss
-    @Bindable private var noticeTabItems: NoticeTabItems
+    
+    private let noticeTabItems: NoticeTabItems
     
     public init(noticeTabItems: NoticeTabItems) {
         self.noticeTabItems = noticeTabItems
@@ -27,12 +28,14 @@ public struct NoticeTabSettings: View {
                     }
                     .onDelete { indexSet in
                         let targetsToDeactivate = indexSet.map { noticeTabItems.selectedMajors[$0] }
-                        withAnimation {
-                            noticeTabItems.removeMajor(at: indexSet)
-                        }
+                        
                         Task {
                             for target in targetsToDeactivate {
-                                await noticeTabItems.deactiveTopic(of: target)
+                                await noticeTabItems.delete(major: target)
+                            }
+                            
+                            withAnimation {
+                                noticeTabItems.removeMajors(atDisplayedIndices: indexSet)
                             }
                         }
                     }
@@ -45,10 +48,9 @@ public struct NoticeTabSettings: View {
                     Section {
                         ForEach(noticeTabItems.availableMajors(for: college), id: \.id) { major in
                             MajorSelectionRow(title: major.localizedDescription) {
-                                guard noticeTabItems.isAddable else { return }
-                                
                                 Task {
-                                    await noticeTabItems.activeTopic(of: major)
+                                    await noticeTabItems.add(major: major)
+                                    
                                     withAnimation {
                                         noticeTabItems.insertAfterLastMajorCategory(newItem: CategoryItem.category(major))
                                     }
@@ -77,9 +79,6 @@ public struct NoticeTabSettings: View {
             }
             .navigationTitle("공지 항목 관리")
             .navigationBarTitleDisplayMode(.inline)
-            .alert(isPresented: $noticeTabItems.isShowingAlert) {
-                Alert(title: Text("알림"), message: Text(noticeTabItems.alertMessage))
-            }
         }
     }
 }
@@ -107,15 +106,24 @@ fileprivate struct MajorSelectionRow: View {
 }
 
 #if DEBUG
-struct MockUpdateTopicSubscriptionUseCase: UpdateTopicSubscriptionUseCase {
-    func execute(of type: TopicType, topic: any CategoryProtocol, isEnabled: Bool) async throws {}
+actor MockTopicSubscriptionRepository: TopicSubscriptionRepository {
+    func fetch(for topicType: KNDomain.TopicType) async throws -> [TopicSubscriptionKey] {
+        return []
+    }
     
+    func subscribe(of type: KNDomain.TopicType, topic: any KNDomain.CategoryProtocol) async throws {}
+    
+    func unsubscribe(of type: KNDomain.TopicType, topic: any KNDomain.CategoryProtocol) async throws {}
     
 }
 
 #Preview {
     NoticeTabSettings(
-        noticeTabItems: NoticeTabItems(.init(value: []), updateTopicSubscriptionUseCase: MockUpdateTopicSubscriptionUseCase())
+        noticeTabItems: NoticeTabItems(
+            .init(value: []),
+            addMajorUseCase: AddMajorUseCase(repository: MockTopicSubscriptionRepository()),
+            deleteMajorUseCase: DeleteMajorUseCase(repository: MockTopicSubscriptionRepository())
+        )
     )
 }
 #endif

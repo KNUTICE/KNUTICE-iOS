@@ -75,37 +75,38 @@ public actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
         }
     }
     
-    /// Updates the server-side subscription state for a specific topic category.
-    ///
-    /// This method performs the following steps:
-    /// 1. Checks for task cancellation before proceeding.
-    /// 2. Constructs the query URL by appending the `TopicType` as a query parameter.
-    /// 3. Sends a `PATCH` request with the topic identifier and the desired enabled state
-    ///    in the JSON body. The FCM token is injected into the request header by `NetworkInterceptor`.
-    ///
-    /// - Parameters:
-    ///   - type: The topic category type that the target topic belongs to (e.g. `.notice`, `.major`).
-    ///   - topic: The specific category instance whose subscription state should be modified.
-    ///     Must conform to `CategoryProtocol` so its `rawValue` can be serialized into the request body.
-    ///   - isEnabled: `true` to subscribe to the topic; `false` to unsubscribe.
-    ///
-    /// - Throws:
-    ///   - `CancellationError` if the enclosing `Task` was cancelled before the request was dispatched.
-    ///   - `NetworkError.invalidURL` if `topicSubscriptionURL` is absent or malformed in the module bundle.
-    ///   - Any networking or decoding error propagated from `RemoteDataSource`.
-    public func update(of type: TopicType, topic: any CategoryProtocol, isEnabled: Bool) async throws {
+    /// Subscribes the current user to the specified topic.
+    public func subscribe(of type: TopicType, topic: any CategoryProtocol) async throws {
         try Task.checkCancellation()
-        
+        try await updateSubscription(of: type, topic: topic, enabled: true)
+    }
+    
+    /// Unsubscribes the current user from the specified topic.
+    public func unsubscribe(of type: TopicType, topic: any CategoryProtocol) async throws {
+        try Task.checkCancellation()
+        try await updateSubscription(of: type, topic: topic, enabled: false)
+    }
+    
+    /// Updates the subscription state of the specified topic on the server.
+    private func updateSubscription(
+        of type: TopicType,
+        topic: any CategoryProtocol,
+        enabled: Bool
+    ) async throws {
+        try Task.checkCancellation()
+
         guard let baseURL else {
-            throw NetworkError.invalidURL(message: "The Topic subscription API URL is missing or invalid.")
+            throw NetworkError.invalidURL(
+                message: "The Topic subscription API URL is missing or invalid."
+            )
         }
-        
-        let endpoint = baseURL + "?type=\(type.rawValue)"
-        let requestBody = [
+
+        let endpoint = "\(baseURL)?type=\(type.rawValue)"
+        let requestBody: [String: any Sendable] = [
             "topic": topic.rawValue,
-            "enabled": isEnabled
-        ] as [String: any Sendable]
-        
+            "enabled": enabled
+        ]
+
         try await dataSource.request(
             endpoint,
             method: .patch,
@@ -114,5 +115,6 @@ public actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
             useFCMToken: true
         )
     }
+    
 }
 
