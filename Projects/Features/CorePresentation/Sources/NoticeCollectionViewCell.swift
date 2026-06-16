@@ -106,8 +106,7 @@ public final class NoticeCollectionViewCell: UICollectionViewCell {
     
     func configure(
         with item: NoticeSnapshot,
-        isShowingThumbnail: Bool,
-        containerWidth: CGFloat? = nil
+        isShowingThumbnail: Bool
     ) {
         titleLabel.text = item.notice.title
         subTitleLabel.text = "[\(item.notice.department)]  \(item.notice.uploadDate)"
@@ -124,10 +123,8 @@ public final class NoticeCollectionViewCell: UICollectionViewCell {
             return
         }
 
-        // 현재 View 기준 width 사용
-        let baseWidth = containerWidth ?? bounds.width
-        let width: CGFloat = traitCollection.userInterfaceIdiom == .phone ? baseWidth : baseWidth / 2
-        let height: CGFloat = width * 0.56
+        let width = bounds.width
+        let height = width * 0.56
         let scale = traitCollection.displayScale
         let targetSize = CGSize(
             width: width * scale,
