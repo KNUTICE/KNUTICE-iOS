@@ -61,12 +61,22 @@ public final class NoticeTabItems {
     /// If an item already exists at that index, it will be replaced.
     /// If the array has fewer than 5 elements, the item is appended at the end.
     func insertAfterLastMajorCategory(newItem: CategoryItem) {
-        let targetIndex = 5
+        let isAlreadyExists = categories.contains { $0.id == newItem.id }
         
-        if categories.indices.contains(targetIndex) {
-            categories[targetIndex] = newItem
+        guard !isAlreadyExists else { return }
+        
+        let lastMajorIndex = categories.lastIndex { item in
+            if case let .category(representable) = item {
+                // 연관 값(representable)이 MajorCategory 타입인지 확인
+                return representable is MajorCategory
+            }
+            return false
+        }
+        
+        if let index = lastMajorIndex {
+            categories.insert(newItem, at: index + 1)
         } else {
-            categories.insert(newItem, at: categories.endIndex)
+            categories.insert(newItem, at: NoticeCategory.allCases.count)
         }
     }
     
