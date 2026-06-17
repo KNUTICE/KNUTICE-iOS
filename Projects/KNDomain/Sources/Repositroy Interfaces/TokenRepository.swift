@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol TokenRepository: Actor {
+public protocol TokenRepository: Actor {
     /// Registers a newly generated FCM token with the backend server.
     ///
     /// This method is typically called during the initial app launch or when a user

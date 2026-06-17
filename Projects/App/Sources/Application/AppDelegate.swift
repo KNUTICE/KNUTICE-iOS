@@ -13,7 +13,6 @@ import FirebaseMessaging
 import KNDeepLink
 import KNDomain
 import KNUtility
-import KNToken
 import UIKit
 
 @main

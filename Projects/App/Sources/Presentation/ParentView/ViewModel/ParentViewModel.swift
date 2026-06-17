@@ -66,7 +66,6 @@ final class ParentViewModel {
     private func register(token: String) {        
          Task {
             do {
-                try Task.checkCancellation()
                 try await registerFCMTokenUseCase.execute(token: token)
                 
                 shouldNavigateToMain = true
