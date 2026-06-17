@@ -8,15 +8,12 @@
 import Factory
 import KNUtility
 
-public protocol UpdateFCMTokenUseCase {
-    /// Updates the FCM token by synchronizing the local storage with the server.
-    ///
-    /// - Throws: An error if fetching tokens fails or the server update request is unsuccessful.
-    func execute() async throws
-}
-
-public actor UpdateFCMTokenUseCaseImpl: UpdateFCMTokenUseCase {
-    @Injected(\.tokenRepository) private var repository
+public final class UpdateFCMTokenUseCaseImpl: Sendable {
+    private let repository: TokenRepository
+    
+    public init(repository: TokenRepository) {
+        self.repository = repository
+    }
     
     /// Updates the FCM token on the KNUTICE server and refreshes the local Keychain.
     ///

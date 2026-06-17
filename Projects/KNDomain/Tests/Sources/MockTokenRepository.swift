@@ -7,7 +7,7 @@
 
 import Foundation
 import KNNetwork
-@testable import KNToken
+@testable import KNDomain
 
 actor MockTokenRepository: TokenRepository {
     let shouldThrowError: Bool

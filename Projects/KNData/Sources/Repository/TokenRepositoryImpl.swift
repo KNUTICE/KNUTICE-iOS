@@ -7,12 +7,15 @@
 
 import Factory
 import Foundation
+import KNDomain
 import KNNetwork
 import KNUtility
 
-actor TokenRepositoryImpl: TokenRepository {
+public actor TokenRepositoryImpl: TokenRepository {
     @Injected(\.remoteDataSource) private var dataSource
-    private let baseURL: String? = Bundle.knToken.tokenURL
+    private let baseURL: String? = Bundle.module.tokenURL
+    
+    public init() {}
     
     /// Registers a newly issued FCM token with the KNUTICE server.
     ///
@@ -31,7 +34,7 @@ actor TokenRepositoryImpl: TokenRepository {
     ///   - `NetworkError.invalidURL` if `tokenURL` is absent or malformed
     ///     in the module bundle.
     ///   - Any networking or decoding error propagated from `RemoteDataSource`.
-    func register() async throws {
+    public func register() async throws {
         try Task.checkCancellation()
         
         // KNUTICE 서버에 토큰 업로드
@@ -59,7 +62,7 @@ actor TokenRepositoryImpl: TokenRepository {
     ///   - oldFCMToken: The previous token stored in the Keychain (nullable).
     ///   - newFCMToken: The freshly generated FCM token from the device.
     /// - Throws: `NetworkError` if the request fails or URL is invalid.
-    func update(oldFCMToken: String?, newFCMToken: String) async throws {
+    public func update(oldFCMToken: String?, newFCMToken: String) async throws {
         try Task.checkCancellation()
         
         guard let endpoint = baseURL else {

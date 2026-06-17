@@ -48,7 +48,6 @@ let project = Project(
             ],
             entitlements: .file(path: "Resources/KNUTICE.entitlements"),
             dependencies: [
-                .project(target: "KNToken", path: "../KNToken"),
                 .project(target: "KNUtility", path: "../KNUtility"),
                 .project(target: "KNReport", path: "../Features/KNReport"),
                 .project(target: "KNDeepLink", path: "../KNDeepLink"),

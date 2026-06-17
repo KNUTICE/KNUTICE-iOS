@@ -9,11 +9,11 @@ import Alamofire
 import Factory
 import Foundation
 import KNNetwork
-@testable import KNToken
+@testable import KNData
 import Testing
 
 struct TokenRepositoryTests {
-    private let baseURL: String? = Bundle.knToken.tokenURL
+    private let baseURL: String? = Bundle.knData.tokenURL
     
     init() {
         let configuration = URLSessionConfiguration.ephemeral
@@ -34,7 +34,7 @@ struct TokenRepositoryTests {
         
         MockURLProtocol.setUpMockData(.postRequestShouldSucceed, for: URL(string: baseURL)!)
         
-        let repository = Container.shared.tokenRepository()
+        let repository = TokenRepositoryImpl()
         try await repository.register()
         
         #expect(true)
@@ -49,7 +49,7 @@ struct TokenRepositoryTests {
         
         MockURLProtocol.setUpMockData(.postRequestShouldSucceed, for: URL(string: baseURL)!)
         
-        let repository = Container.shared.tokenRepository()
+        let repository = TokenRepositoryImpl()
         try await repository.update(oldFCMToken: nil, newFCMToken: "")
         
         #expect(true)

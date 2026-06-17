@@ -9,6 +9,7 @@ import Alamofire
 import Factory
 import Foundation
 @testable import KNData
+import KNDomain
 import KNNetwork
 import KNUtility
 import Testing
