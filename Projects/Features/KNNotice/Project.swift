@@ -12,7 +12,7 @@ let project = Project.module(
         .project(target: "KNDeepLink", path: "../../KNDeepLink"),
         .project(target: "KNIntelligence", path: "../KNIntelligence"),
         .project(target: "KNData", path: "../../KNData"),
-        .project(target: "KNSetting", path: "../../KNSetting"),
+        .project(target: "KNSetting", path: "../KNSetting"),
         .external(name: "ComposableArchitecture"),
         .external(name: "Factory"),
         .external(name: "RxSwift"),
