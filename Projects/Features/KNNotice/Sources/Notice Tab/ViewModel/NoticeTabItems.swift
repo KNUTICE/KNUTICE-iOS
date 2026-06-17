@@ -65,16 +65,17 @@ public final class NoticeTabItems {
         
         guard !isAlreadyExists else { return }
         
-        let lastMajorIndex = categories.lastIndex { item in
+        let hasMajor = categories.contains { item in
             if case let .category(representable) = item {
                 // 연관 값(representable)이 MajorCategory 타입인지 확인
                 return representable is MajorCategory
             }
+            
             return false
         }
         
-        if let index = lastMajorIndex {
-            categories.insert(newItem, at: index + 1)
+        if hasMajor {
+            categories[NoticeCategory.allCases.count] = newItem
         } else {
             categories.insert(newItem, at: NoticeCategory.allCases.count)
         }
