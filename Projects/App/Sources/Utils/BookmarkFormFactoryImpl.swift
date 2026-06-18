@@ -14,6 +14,15 @@ import UIKit
 
 struct BookmarkFormFactoryImpl: BookmarkFormFactory {
     
+    func makeSwiftUIView(for notice: Notice, dismissAction: @escaping () -> Void) -> some View {
+        let bookmark = Bookmark(notice: notice, memo: "")
+        return BookmarkForm(
+            store: Store(initialState: BookmarkFormFeature.State(bookmark: bookmark, original: bookmark, formType: .create) ) {
+                BookmarkFormFeature()
+            }
+        ) { dismissAction() }
+    }
+    
     func make(for notice: Notice) -> UIViewController {
         let bookmark = Bookmark(notice: notice, memo: "")
         let hostingController = UIHostingController<BookmarkForm?>(rootView: nil)

@@ -28,7 +28,9 @@ extension Bookmark: IdentifiableType, Equatable {
     }
     
     public static func == (lhs: Bookmark, rhs: Bookmark) -> Bool {
-        return lhs.identity == rhs.identity
+        lhs.notice == rhs.notice &&
+        lhs.memo == rhs.memo &&
+        lhs.alarmDate == rhs.alarmDate
     }
 }
 

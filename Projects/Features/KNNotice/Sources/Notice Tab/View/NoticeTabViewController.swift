@@ -231,7 +231,14 @@ public final class NoticeTabViewController: UIViewController, SettingButtonConfi
         switch deepLink {
         case let .navigation(_, itemIndex):
             if let itemIndex {
-                viewModel.selectedIndex.accept(itemIndex)
+                let maxIndex = viewModel.categoriesValue.count - 1
+                if maxIndex > 0, (0..<maxIndex).contains(itemIndex) {
+                    // 선택된 탭으로 이동
+                    viewModel.selectedIndex.accept(itemIndex)
+                } else {
+                    // 학과 선택이 되어 있지 않은 경우, 학과 선택 화면으로 이동
+                    showNoticeTabSettings()
+                }
             }
         default:
             break

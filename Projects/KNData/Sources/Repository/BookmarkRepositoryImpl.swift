@@ -65,14 +65,6 @@ public actor BookmarkRepositoryImpl: BookmarkRepository {
         return dto.compactMap { $0.asEntity }
     }
     
-    /// Fetches bookmarks that do not have timestamps.
-    /// Useful for handling items that require additional processing.
-    public func fetchWhereTimestampsAreNil() async throws -> [Bookmark] {
-        let dto = try await dataSource.fetchItemsWhereTimestampsAreNil()
-        
-        return dto.compactMap { $0.asEntity }
-    }
-    
     /// Performs keyword-based searching and returns the corresponding entities.
     /// Uses Task cancellation checks to ensure responsiveness.
     public func search(with keyword: String) async throws -> [Bookmark] {

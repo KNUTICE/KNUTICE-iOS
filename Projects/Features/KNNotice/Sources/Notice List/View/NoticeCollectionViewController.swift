@@ -122,6 +122,9 @@ public class NoticeCollectionViewController: UIViewController, NoticeCollectionV
 import KNDomain
 
 struct MockBookamrkFormFactory: BookmarkFormFactory {
+    func makeSwiftUIView(for notice: Notice, dismissAction: @escaping () -> Void) -> some View {
+        EmptyView()
+    }
     func make(for notice: KNDomain.Notice) -> UIViewController { UIViewController() }
 }
 

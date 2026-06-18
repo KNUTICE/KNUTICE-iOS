@@ -23,9 +23,6 @@ public final class NoticeTabItems {
         }
     }
     
-    private(set) var alertMessage: String = ""
-    var isShowingAlert: Bool = false
-    
     var selectedMajors: [MajorCategory] {
         categories.compactMap { item -> MajorCategory? in
             if case let .category(representable) = item,
@@ -36,27 +33,19 @@ public final class NoticeTabItems {
         }
     }
     
-    var isAddable: Bool {
-        guard selectedMajors.count < 1 else {
-            alertMessage = "선택되어 있는 전공 삭제 후 사용해주세요."
-            isShowingAlert.toggle()
-            return false
-        }
-        
-        return true
-    }
-    
     @ObservationIgnored private let categoriesRelay: BehaviorRelay<[CategoryItem]>
-    @ObservationIgnored private let disposeBag: DisposeBag = .init()
-    @ObservationIgnored private let updateTopicSubscriptionUseCase: UpdateTopicSubscriptionUseCase
+    @ObservationIgnored private let addMajorUseCase: AddMajorUseCase
+    @ObservationIgnored private let deleteMajorUseCase: DeleteMajorUseCase
     
     public init(
         _ categoriesRelay: BehaviorRelay<[CategoryItem]>,
-        updateTopicSubscriptionUseCase: UpdateTopicSubscriptionUseCase
+        addMajorUseCase: AddMajorUseCase,
+        deleteMajorUseCase: DeleteMajorUseCase
     ) {
         self.categoriesRelay = categoriesRelay
         self.categories = categoriesRelay.value
-        self.updateTopicSubscriptionUseCase = updateTopicSubscriptionUseCase
+        self.addMajorUseCase = addMajorUseCase
+        self.deleteMajorUseCase = deleteMajorUseCase
     }
     
     func availableMajors(for college: College) -> [MajorCategory] {
@@ -68,24 +57,25 @@ public final class NoticeTabItems {
     
     // MARK: Add Major
     
-    /// Inserts a new category item after the last existing `MajorCategory` in the list.
-    /// If no `MajorCategory` exists, the item is inserted at index 5.
-    /// Duplicate items are ignored.
+    /// Inserts a new category item at index 5.
+    /// If an item already exists at that index, it will be replaced.
+    /// If the array has fewer than 5 elements, the item is appended at the end.
     func insertAfterLastMajorCategory(newItem: CategoryItem) {
         let isAlreadyExists = categories.contains { $0.id == newItem.id }
         
         guard !isAlreadyExists else { return }
         
-        let lastMajorIndex = categories.lastIndex { item in
+        let hasMajor = categories.contains { item in
             if case let .category(representable) = item {
                 // 연관 값(representable)이 MajorCategory 타입인지 확인
                 return representable is MajorCategory
             }
+            
             return false
         }
         
-        if let index = lastMajorIndex {
-            categories.insert(newItem, at: index + 1)
+        if hasMajor {
+            categories[NoticeCategory.allCases.count] = newItem
         } else {
             categories.insert(newItem, at: NoticeCategory.allCases.count)
         }
@@ -93,10 +83,9 @@ public final class NoticeTabItems {
     
     /// Activates the FCM topic subscription for the given major
     /// and registers it to `MajorManager`.
-    func activeTopic(of major: MajorCategory) async {
+    func add(major: MajorCategory) async {
         do {
-            try await updateTopicSubscriptionUseCase.execute(of: .major, topic: major, isEnabled: true)
-            await MajorManager.shared.addMajor(major.rawValue)
+            try await addMajorUseCase.execute(major: major)
         } catch {
             print(error)
         }
@@ -108,7 +97,7 @@ public final class NoticeTabItems {
     /// - Parameter indexSet: The indices relative to the `selectedMajors` list.
     ///   An offset equal to the number of `NoticeCategory` cases is applied internally
     ///   to map to the correct positions in `categories`.
-    func removeMajor(at indexSet: IndexSet) {
+    func removeMajors(atDisplayedIndices indexSet: IndexSet) {
         let offset = NoticeCategory.allCases.count
         let adjustedIndices = IndexSet(indexSet.map { $0 + offset })    // categoriesRelay에는 앞에 5개의 추가적인 데이터가 존재
         categories.remove(atOffsets: adjustedIndices)
@@ -116,10 +105,9 @@ public final class NoticeTabItems {
     
     /// Deactivates the FCM topic subscription for the given major
     /// and unregisters it from `MajorManager`.
-    func deactiveTopic(of major: MajorCategory) async {
+    func delete(major: MajorCategory) async {
         do {
-            try await updateTopicSubscriptionUseCase.execute(of: .major, topic: major, isEnabled: false)
-            await MajorManager.shared.removeMajor(major.rawValue)
+            try await deleteMajorUseCase.execute(for: major)
         } catch {
             print(error)
         }

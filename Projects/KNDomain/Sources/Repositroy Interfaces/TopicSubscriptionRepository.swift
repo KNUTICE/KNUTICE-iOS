@@ -15,12 +15,19 @@ public protocol TopicSubscriptionRepository: Actor {
     /// - Throws: An error if the network request fails or data mapping is unsuccessful.
     func fetch(for topicType: TopicType) async throws -> [TopicSubscriptionKey]
     
-    /// Updates the subscription status of a specific topic.
+    /// Subscribes the current user to the specified topic.
     ///
     /// - Parameters:
-    ///   - type: The category type of the topic.
-    ///   - topic: The specific category to update (must conform to `CategoryProtocol`).
-    ///   - isEnabled: A boolean indicating whether to subscribe (`true`) or unsubscribe (`false`).
-    /// - Throws: An error if the update request fails on the server side.
-    func update(of type: TopicType, topic: any CategoryProtocol, isEnabled: Bool) async throws
+    ///   - type: The category type that the topic belongs to.
+    ///   - topic: The topic to subscribe to.
+    /// - Throws: An error if the subscription request fails.
+    func subscribe(of type: TopicType, topic: any CategoryProtocol) async throws
+    
+    /// Unsubscribes the current user from the specified topic.
+    ///
+    /// - Parameters:
+    ///   - type: The category type that the topic belongs to.
+    ///   - topic: The topic to unsubscribe from.
+    /// - Throws: An error if the unsubscription request fails.
+    func unsubscribe(of type: TopicType, topic: any CategoryProtocol) async throws
 }
