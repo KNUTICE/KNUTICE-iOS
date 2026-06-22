@@ -5,11 +5,11 @@
 //  Created by 이정훈 on 6/9/26.
 //
 
+import CorePresentation
 import FirebaseAnalytics
 import KNDomain
 import KNUtility
 import SwiftUI
-import UIComponents
 
 /// A SwiftUI wrapper view that displays the detailed content of a notice along with conditional toolbar actions.
 ///

@@ -6,10 +6,10 @@
 //
 
 import ComposableArchitecture
+import CorePresentation
 import KNDesignSystem
 import KNDomain
 import SwiftUI
-import UIComponents
 
 public struct TopicSubscriptionList: View {
     @Bindable var store: StoreOf<TopicSubscriptionListFeature>

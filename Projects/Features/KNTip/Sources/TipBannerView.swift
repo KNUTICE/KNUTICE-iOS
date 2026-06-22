@@ -5,11 +5,11 @@
 //  Created by 이정훈 on 7/1/25.
 //
 
+import CorePresentation
 import KNDesignSystem
 import KNDomain
 import KNUtility
 import SwiftUI
-import UIComponents
 
 public struct TipBannerView: View, EntryTimeRecordable {
     @StateObject private var viewModel: TipBannerViewModel

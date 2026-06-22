@@ -19,7 +19,6 @@ import KNSetting
 import KNTip
 import KNUtility
 import SwiftUI
-import UIComponents
 
 struct HomeScreenView: View {
     private struct TabHeightPreferenceKey: PreferenceKey {

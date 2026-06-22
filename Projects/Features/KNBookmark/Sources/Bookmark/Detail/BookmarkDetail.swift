@@ -6,11 +6,11 @@
 //
 
 import ComposableArchitecture
+import CorePresentation
 import KNDesignSystem
 import KNDomain
 import KNNotice
 import SwiftUI
-import UIComponents
 
 struct BookmarkDetail: View {
     @Bindable var store: StoreOf<BookmarkDetailFeature>
