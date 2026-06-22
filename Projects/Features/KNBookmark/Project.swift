@@ -7,7 +7,6 @@ let project = Project.module(
         .project(target: "KNNotification", path: "../../KNNotification"),
         .project(target: "KNUtility", path: "../../KNUtility"),
         .project(target: "KNDesignSystem", path: "../../KNDesignSystem"),
-        .project(target: "UIComponents", path: "../../UIComponents"),
         .project(target: "KNData", path: "../../KNData"),
         .project(target: "KNDomain", path: "../../KNDomain"),
         .project(target: "KNNotice", path: "../KNNotice"),

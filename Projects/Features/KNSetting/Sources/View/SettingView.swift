@@ -7,12 +7,12 @@
 
 import Combine
 import ComposableArchitecture
+import CorePresentation
 import Factory
 import KNDesignSystem
 import KNReport
 import KNTopic
 import SwiftUI
-import UIComponents
 
 public struct SettingView: View {
     @State private var isShowingReport: Bool = false
