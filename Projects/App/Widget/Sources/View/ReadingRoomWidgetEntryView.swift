@@ -45,7 +45,9 @@ struct ReadingRoomEntryView: View {
                             }
                         }
                     }
+                    
                 }
+                .frame(maxHeight: .infinity, alignment: .top)
             }
         }
     }

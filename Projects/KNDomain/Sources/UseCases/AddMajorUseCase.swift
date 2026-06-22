@@ -59,9 +59,12 @@ public actor AddMajorUseCase {
         // TODO: 1.8 버전 이후, 다중 학과 선택 변경 예정
         let majorStr = await MajorManager.shared.majorStrings.first
         
-        if let majorStr, let subscribedMajor = MajorCategory(rawValue: majorStr), isSubscribed {
-            // 이전에 선택된 학과를 서버에서 구독 해제
-            try await repository.unsubscribe(of: .major, topic: subscribedMajor)
+        if let majorStr {
+            
+            if let subscribedMajor = MajorCategory(rawValue: majorStr), isSubscribed {
+                // 이전에 선택된 학과를 서버에서 구독 해제
+                try await repository.unsubscribe(of: .major, topic: subscribedMajor)
+            }
             
             // 이전에 선택된 학과를 UserDefaults에서 삭제
             await MajorManager.shared.removeMajor(majorStr)
