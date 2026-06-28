@@ -39,7 +39,7 @@ public struct Notice: Sendable, Equatable, Identifiable {
     
     public static func == (lhs: Notice, rhs: Notice) -> Bool {
         lhs.id == rhs.id &&
-        lhs.category.rawValue == rhs.category.rawValue
+        lhs.category.topic == rhs.category.topic
     }
 }
 

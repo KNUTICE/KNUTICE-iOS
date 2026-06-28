@@ -20,4 +20,8 @@ public enum CafeteriaCategory: String, CategoryProtocol {
         }
     }
     
+    public var topic: String {
+        return self.rawValue
+    }
+    
 }

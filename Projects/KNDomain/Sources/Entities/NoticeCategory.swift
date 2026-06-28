@@ -8,7 +8,7 @@
 import Foundation
 import KNUtility
 
-public enum NoticeCategory: String {
+public enum NoticeCategory: String, CaseIterable {
     case generalNotice = "GENERAL_NEWS"
     case academicNotice = "ACADEMIC_NEWS"
     case scholarshipNotice = "SCHOLARSHIP_NEWS"
@@ -31,6 +31,10 @@ extension NoticeCategory: CategoryProtocol {
         case .employmentNotice:
             return "취업안내"
         }
+    }
+    
+    public var topic: String {
+        return self.rawValue
     }
 }
 
