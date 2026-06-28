@@ -11,93 +11,105 @@ eval "$(mise activate bash --shims)"
 echo "❗️mise version: $(mise --version)"
 mise install 
 
-# 프로젝트 루트 경로 설정
-# ci_scripts에서 실행되므로 한 단계 위가 루트
-PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+#!/bin/bash
 
-# ---------------------------------------------------------
-# 리소스 파일 먼저 생성
-# ---------------------------------------------------------
-echo "🎨 Creating ServiceInfo.plist for each module..."
+set -e
 
-# --- KNReport 모듈 설정 ---
-echo "📍 Generating ServiceInfo.plist for KNReport..."
-REPORT_DIR="$PROJECT_ROOT/Projects/KNReport/Resources"
-mkdir -p "$REPORT_DIR"
-cat <<EOF > "$REPORT_DIR/ServiceInfo.plist"
+echo "Creating ServiceInfo.plist files..."
+
+mkdir -p "Projects/Features/CorePresentation/Resources"
+cat > "Projects/Features/CorePresentation/Resources/ServiceInfo.plist" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>Report_URL</key>
-    <string>${Report_URL}</string>
-</dict>
-</plist>
-EOF
-
-# --- KNTopic 모듈 설정 ---
-echo "📍 Generating ServiceInfo.plist for KNTopic..."
-TOPIC_DIR="$PROJECT_ROOT/Projects/KNTopic/Resources"
-mkdir -p "$TOPIC_DIR"
-cat <<EOF > "$TOPIC_DIR/ServiceInfo.plist"
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>TopicSubscription_URL</key>
-    <string>${TopicSubscription_URL}</string>
-</dict>
-</plist>
-EOF
-
-# --- KNTip 모듈 설정 ---
-echo "📍 Generating ServiceInfo.plist for KNTip..."
-TOPIC_DIR="$PROJECT_ROOT/Projects/KNTip/Resources"
-mkdir -p "$TOPIC_DIR"
-cat <<EOF > "$TOPIC_DIR/ServiceInfo.plist"
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>TipURL</key>
-    <string>${TipURL}</string>
-</dict>
-</plist>
-EOF
-
-# --- KNCore 모듈 설정 ---
-echo "📍 Generating ServiceInfo.plist for KNCore..."
-TOPIC_DIR="$PROJECT_ROOT/Projects/KNCore/Resources"
-mkdir -p "$TOPIC_DIR"
-cat <<EOF > "$TOPIC_DIR/ServiceInfo.plist"
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>Notice_URL</key>
-    <string>${Notice_URL}</string>
     <key>DefaultThumbnail_URL</key>
     <string>${DefaultThumbnail_URL}</string>
 </dict>
 </plist>
 EOF
 
-# --- KNIntelligence 모듈 설정 ---
-echo "📍 Generating ServiceInfo.plist for KNIntelligence..."
-TOPIC_DIR="$PROJECT_ROOT/Projects/KNIntelligence/Resources"
-mkdir -p "$TOPIC_DIR"
-cat <<EOF > "$TOPIC_DIR/ServiceInfo.plist"
+mkdir -p "Projects/Features/KNMeal/Resources"
+cat > "Projects/Features/KNMeal/Resources/ServiceInfo.plist" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>Notice_Summary_URL</key>
-    <string>${Notice_Summary_URL}</string>
+    <key>Bridging_Method</key>
+    <string>${Bridging_Method}</string>
+    <key>Base_URL</key>
+    <string>${Base_URL}</string>
 </dict>
 </plist>
 EOF
 
-echo "✅ File generation complete!"
+mkdir -p "Projects/Features/KNReadingRoom/Resources"
+cat > "Projects/Features/KNReadingRoom/Resources/ServiceInfo.plist" <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Navigation_Method</key>
+    <string>${Navigation_Method}</string>
+    <key>FCMToken_Method</key>
+    <string>${FCMToken_Method}</string>
+    <key>Reading_Room_Status_URL</key>
+    <string>${Reading_Room_Status_URL}</string>
+</dict>
+</plist>
+EOF
+
+mkdir -p "Projects/Features/KNSetting/Resources"
+cat > "Projects/Features/KNSetting/Resources/ServiceInfo.plist" <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>OpenSourceLicenseURL</key>
+    <string>${OpenSourceLicenseURL}</string>
+</dict>
+</plist>
+EOF
+
+mkdir -p "Projects/KNData/Resources"
+cat > "Projects/KNData/Resources/ServiceInfo.plist" <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Token_URL</key>
+    <string>${Token_URL}</string>
+    <key>Notice_Summary_URL</key>
+    <string>${Notice_Summary_URL}</string>
+    <key>ReadingRoom_URL</key>
+    <string>${ReadingRoom_URL}</string>
+    <key>TopicSubscription_URL</key>
+    <string>${TopicSubscription_URL}</string>
+    <key>TipURL</key>
+    <string>${TipURL}</string>
+    <key>Report_URL</key>
+    <string>${Report_URL}</string>
+    <key>Notice_URL</key>
+    <string>${Notice_URL}</string>
+</dict>
+</plist>
+EOF
+
+mkdir -p "Projects/KNUtility/Resources"
+cat > "Projects/KNUtility/Resources/ServiceInfo.plist" <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Team_Id</key>
+    <string>${Team_Id}</string>
+    <key>Beta_Version</key>
+    <string>${Beta_Version}</string>
+</dict>
+</plist>
+EOF
+
+echo "ServiceInfo.plist files created."
 
 # ---------------------------------------------------------
 # Tuist 작업 수행
