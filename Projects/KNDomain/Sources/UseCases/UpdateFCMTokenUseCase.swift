@@ -8,7 +8,7 @@
 import Factory
 import KNUtility
 
-public final class UpdateFCMTokenUseCaseImpl: Sendable {
+public final class UpdateFCMTokenUseCase: Sendable {
     private let repository: TokenRepository
     
     public init(repository: TokenRepository) {

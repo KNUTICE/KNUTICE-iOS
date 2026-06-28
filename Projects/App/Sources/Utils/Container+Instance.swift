@@ -99,8 +99,8 @@ extension Container {
         Factory(self) { DeleteMajorUseCase(repository: self.topicSubscriptionRepository()) }.singleton
     }
     
-    var updateFCMTokenUseCase: Factory<UpdateFCMTokenUseCaseImpl> {
-        Factory(self) { UpdateFCMTokenUseCaseImpl(repository: self.tokenRepository()) }
+    var updateFCMTokenUseCase: Factory<UpdateFCMTokenUseCase> {
+        Factory(self) { UpdateFCMTokenUseCase(repository: self.tokenRepository()) }
     }
     
     var registerFCMTokenUseCase: Factory<RegisterFCMTokenUseCase> {
