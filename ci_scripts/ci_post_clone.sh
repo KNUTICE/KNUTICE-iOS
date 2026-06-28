@@ -9,11 +9,7 @@ export PATH="$HOME/.local/bin:$PATH"
 eval "$(mise activate bash --shims)"
 
 echo "❗️mise version: $(mise --version)"
-mise install 
-
-#!/bin/bash
-
-set -e
+mise install
 
 echo "Creating ServiceInfo.plist files..."
 
@@ -111,10 +107,7 @@ EOF
 
 echo "ServiceInfo.plist files created."
 
-# ---------------------------------------------------------
-# Tuist 작업 수행
-# ---------------------------------------------------------
-cd "$PROJECT_ROOT"
+echo "Generating Tuist project..."
 
 echo "❗️tuist install"
 tuist install
@@ -122,4 +115,4 @@ tuist install
 echo "❗️tuist generate"
 tuist generate --no-open
 
-echo "🚀 All tasks completed successfully!"
+echo "Done!"
