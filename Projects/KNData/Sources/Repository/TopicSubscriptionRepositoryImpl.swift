@@ -103,7 +103,7 @@ public actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
 
         let endpoint = "\(baseURL)?type=\(type.rawValue)"
         let requestBody: [String: any Sendable] = [
-            "topic": topic.rawValue,
+            "topic": topic.topic,
             "enabled": enabled
         ]
 

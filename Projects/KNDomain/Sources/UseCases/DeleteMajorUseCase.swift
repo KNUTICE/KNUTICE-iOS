@@ -62,6 +62,6 @@ public actor DeleteMajorUseCase {
         }
         
         // UserDefaults에 선택한 학과 삭제
-        await MajorManager.shared.removeMajor(major.rawValue)
+        await MajorManager.shared.removeMajor(major.topic)
     }
 }

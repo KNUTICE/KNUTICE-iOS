@@ -77,6 +77,10 @@ public enum MajorCategory: String {
 
 // MARK: - CategoryProtocol
 extension MajorCategory: CategoryProtocol {
+    public var topic: String {
+        return self.rawValue
+    }
+    
     public var localizedDescription: String {
         switch self {
         // 융합기술대학

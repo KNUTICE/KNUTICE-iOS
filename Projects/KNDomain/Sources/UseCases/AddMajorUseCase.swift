@@ -76,6 +76,6 @@ public actor AddMajorUseCase {
         }
         
         // UserDefaults에 선택한 학과 저장
-        await MajorManager.shared.addMajor(major.rawValue)
+        await MajorManager.shared.addMajor(major.topic)
     }
 }
