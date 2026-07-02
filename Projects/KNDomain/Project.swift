@@ -9,4 +9,7 @@ let project = Project.module(
         .project(target: "KNMarkdown", path: "../KNMarkdown"),
         .external(name: "RxDataSources"),
     ],
+    testDependencies: [
+        .project(target: "KNNetwork", path: "../KNNetwork"),
+    ]
 )

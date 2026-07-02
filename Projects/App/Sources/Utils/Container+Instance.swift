@@ -38,6 +38,10 @@ extension Container {
         Factory(self) { NoticeSummaryRepositoryImpl() }
     }
     
+    var tokenRepository: Factory<TokenRepository> {
+        Factory(self) { TokenRepositoryImpl() }
+    }
+    
     //MARK: - UseCase
     var fetchBookmarksUseCase: Factory<FetchBookmarksUseCase> {
         Factory(self) { FetchBookmarksUseCaseImpl(bookmarkReportory: self.bookmarkRepository()) }
@@ -93,6 +97,14 @@ extension Container {
     
     var deleteMajorUseCase: Factory<DeleteMajorUseCase> {
         Factory(self) { DeleteMajorUseCase(repository: self.topicSubscriptionRepository()) }.singleton
+    }
+    
+    var updateFCMTokenUseCase: Factory<UpdateFCMTokenUseCase> {
+        Factory(self) { UpdateFCMTokenUseCase(repository: self.tokenRepository()) }
+    }
+    
+    var registerFCMTokenUseCase: Factory<RegisterFCMTokenUseCase> {
+        Factory(self) { RegisterFCMTokenUseCase(repository: self.tokenRepository()) }
     }
     
     //MARK: - ViewModel

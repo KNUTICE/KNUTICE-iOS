@@ -6,7 +6,7 @@ let project = Project.module(
     dependencies: [
         .project(target: "KNDomain", path: "../../KNDomain"),
         .project(target: "KNDesignSystem", path: "../../KNDesignSystem"),
-        .project(target: "UIComponents", path: "../../UIComponents"),
+        .project(target: "CorePresentation", path: "../CorePresentation"),
         .external(name: "ComposableArchitecture"),
         .external(name: "Factory")
     ],
