@@ -51,10 +51,13 @@ public final class SearchViewModel: NoticeSectionModelProvidable {
     }
     
     func fetchNextNoticesPage() {
-        guard hasNextNoticesPage, let lastId = notices.value.last?.items.last?.id else { return }
+        guard hasNextNoticesPage, nextNoticesPageTask == nil, let lastId = notices.value.last?.items.last?.id else { return }
         
-        nextNoticesPageTask?.cancel()
         nextNoticesPageTask = Task {
+            defer {
+                nextNoticesPageTask = nil
+            }
+            
             do {
                 let notices = try await searchNoticesUseCase.execute(with: keyword.value, after: lastId)
                 
