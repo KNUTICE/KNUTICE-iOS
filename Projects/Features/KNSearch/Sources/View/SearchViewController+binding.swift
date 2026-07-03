@@ -41,7 +41,7 @@ extension SearchViewController: RxDataSourceBindable {
     private func bindSearchBar() {
         searchBar.rx.text
             .orEmpty    // Optional<String>이 아닌 String 타입으로 변환
-            .debounce(.microseconds(500), scheduler: MainScheduler.instance)    // 0.5초 대기
+            .debounce(.milliseconds(500), scheduler: MainScheduler.instance)    // 0.5초 대기
             .distinctUntilChanged()    // 동일한 값은 무시
             .bind(to: viewModel.keyword)
             .disposed(by: disposeBag)
