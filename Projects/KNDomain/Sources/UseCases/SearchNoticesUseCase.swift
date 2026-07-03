@@ -14,9 +14,13 @@ public final class SearchNoticeSnapshotsUseCase: NoticeSnapshotCreatable, Sendab
         self.noticeRepository = noticeRepository
     }
     
-    public func execute(with keyword: String) async throws -> [NoticeSnapshot] {
-        let notices = try await noticeRepository.fetchNotices(keyword: keyword)
+    public func execute(
+        with keyword: String,
+        after nttId: Int? = nil
+    ) async throws -> [NoticeSnapshot] {
+        let notices = try await noticeRepository.fetchNotices(keyword: keyword, after: nttId)
         
         return notices.map { createSnapshot(from: $0) }
     }
+    
 }

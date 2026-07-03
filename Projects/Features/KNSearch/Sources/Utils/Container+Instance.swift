@@ -11,12 +11,12 @@ import KNNetwork
 import KNUtility
 
 extension Container {
-    public var searchNoticeAndBookmarkUseCase: Factory<SearchNoticeAndBookmarkUseCase> {
-        Factory(self) {
-            fatalError(
-                "SearchNoticeAndBookmarkUseCase is not registered. Register it in App's dependency composition root."
-            )
-        }
+    public var searchNoticesUseCase: Factory<SearchNoticeSnapshotsUseCase> {
+        Factory(self) { fatalError("SearchNoticesUseCase has not been registered.") }
+    }
+    
+    public var searchBookmarksUseCase: Factory<SearchBookmarksUseCase> {
+        Factory(self) { fatalError("SearchBookmarksUseCase has not been registered.") }
     }
     
     @MainActor

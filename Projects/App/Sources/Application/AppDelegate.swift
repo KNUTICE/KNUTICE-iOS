@@ -206,11 +206,12 @@ extension AppDelegate {
             FetchNoticeSnapshotsUseCase(noticeRepository: Container.shared.noticeRepository())
         }
         
-        Container.shared.searchNoticeAndBookmarkUseCase.register {
-            SearchNoticeAndBookmarkUseCaseImpl(
-                searchNoticesUseCase: Container.shared.searchNoticesUseCase(),
-                searchBookmarksUseCase: Container.shared.searchBookmarksUseCase()
-            )
+        Container.shared.searchNoticesUseCase.register {
+            SearchNoticeSnapshotsUseCase(noticeRepository: Container.shared.noticeRepository())
+        }
+        
+        Container.shared.searchBookmarksUseCase.register {
+            SearchBookmarksUseCaseImpl(repository: Container.shared.bookmarkRepository())
         }
         
         Container.shared.fetchTipUseCase.register {

@@ -13,38 +13,66 @@ import RxSwift
 import os
 
 @MainActor
-public final class SearchViewModel: NoticeSectionModelProvidable, Searchable {
+public final class SearchViewModel: NoticeSectionModelProvidable {
     public let notices: BehaviorRelay<[NoticeSectionModel]> = .init(value: [])
     let bookmarks: BehaviorRelay<[Bookmark]> = .init(value: [])
     let keyword: BehaviorRelay<String> = .init(value: "")
     
-    @Injected(\.searchNoticeAndBookmarkUseCase) private var searchNoticeAndBookmarkUseCase
+    @Injected(\.searchNoticesUseCase) private var searchNoticesUseCase
+    @Injected(\.searchBookmarksUseCase) private var searchBookmarksUseCase
     
     private let disposeBag: DisposeBag = DisposeBag()
     private let logger: Logger = Logger()
-    var tasks: [Task<Void, Never>] = []
+    private var initialTask: Task<Void, Never>?
+    private(set) var nextNoticesPageTask: Task<Void, Never>?
+    private var hasNextNoticesPage = true
     
     func search(with keyword: String) {
         guard !keyword.isEmpty else {
             notices.accept([])
             bookmarks.accept([])
+            hasNextNoticesPage = false
             return
         }
         
-        let task = Task {
-            let result = await searchNoticeAndBookmarkUseCase.execute(with: keyword)
+        hasNextNoticesPage = true
+        initialTask?.cancel()
+        initialTask = Task {
+            async let noticesResult = searchNoticesUseCase.execute(with: keyword)
+            async let bookmarksResult = searchBookmarksUseCase.execute(with: keyword)
             
-            switch result {
-            case .success((let notices, let bookmarks)):
+            do {
+                let (notices, bookmarks) = try await (noticesResult, bookmarksResult)
                 let noticeSectionModel = NoticeSectionModel(items: notices)
-                
                 self.notices.accept([noticeSectionModel])
                 self.bookmarks.accept(bookmarks)
-            case .failure(let error):
-                logger.log("SearchTableViewModel.search(with:) error: \(error.localizedDescription)")
+            } catch {
+                logger.error("SearchViewModel: \(error)")
             }
         }
-        
-        tasks.append(task)
     }
+    
+    func fetchNextNoticesPage() {
+        guard hasNextNoticesPage, let lastId = notices.value.last?.items.last?.id else { return }
+        
+        nextNoticesPageTask?.cancel()
+        nextNoticesPageTask = Task {
+            do {
+                let notices = try await searchNoticesUseCase.execute(with: keyword.value, after: lastId)
+                
+                guard !notices.isEmpty else {
+                    self.hasNextNoticesPage = false
+                    return
+                }
+                
+                guard var current = self.notices.value.first else { return }
+                
+                current.items.append(contentsOf: notices)
+                self.notices.accept([current])
+            } catch {
+                logger.error("SearchViewModel: \(error)")
+            }
+        }
+    }
+    
 }
