@@ -9,7 +9,6 @@ import CorePresentation
 import Factory
 import KNDomain
 import RxRelay
-import RxSwift
 import os
 
 @MainActor
@@ -21,7 +20,6 @@ public final class SearchViewModel: NoticeSectionModelProvidable {
     @Injected(\.searchNoticesUseCase) private var searchNoticesUseCase
     @Injected(\.searchBookmarksUseCase) private var searchBookmarksUseCase
     
-    private let disposeBag: DisposeBag = DisposeBag()
     private let logger: Logger = Logger()
     private var initialTask: Task<Void, Never>?
     private(set) var nextNoticesPageTask: Task<Void, Never>?
