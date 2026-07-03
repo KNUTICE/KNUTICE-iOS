@@ -28,46 +28,48 @@ public extension RxDataSourceBindable {
                 guard let self, !notices.isEmpty else { return }
                 
                 collectionView.backgroundView = nil
-                
-                if let viewModel = self.viewModel as? NoticeFetchable, viewModel.isRefreshing.value == false {
-                    let offset = self.collectionView.contentOffset
-                    self.collectionView.setContentOffset(offset, animated: false)
-                }
             })
             .bind(to: collectionView.rx.items(dataSource: makeNoticeDataSource()))
             .disposed(by: disposeBag)
     }
     
-    func makeNoticeDataSource() -> RxCollectionViewSectionedReloadDataSource<NoticeSectionModel> {
-        RxCollectionViewSectionedReloadDataSource<NoticeSectionModel>(configureCell: { [weak self] (dataSource, collectionView, indexPath, item) in
-            guard let self else {
-                return UICollectionViewCell()
-            }
-            
-            let shouldUseThumbnail: Bool = {
-                if UIDevice.current.userInterfaceIdiom == .phone {
-                    return item.notice.imageUrl != nil
-                } else {
-                    if item.notice.imageUrl != nil { return true }
-                    
-                    let items = self.viewModel.notices.value[0].items
-                    let count = self.viewModel.notices.value[0].items.count
-                    
-                    if indexPath.row % 2 == 0 {    //짝수번째 cell
-                        let next = indexPath.row + 1
-                        return 0..<count ~= next && items[next].notice.imageUrl != nil
-                    } else {    //홀수번째 cell
-                        let before = indexPath.row - 1
-                        return 0..<count ~= before && items[before].notice.imageUrl != nil
-                    }
+    func makeNoticeDataSource() -> RxCollectionViewSectionedAnimatedDataSource<NoticeSectionModel> {
+        RxCollectionViewSectionedAnimatedDataSource<NoticeSectionModel>(
+            animationConfiguration: AnimationConfiguration(
+                insertAnimation: .none,
+                reloadAnimation: .none,
+                deleteAnimation: .none
+            ),
+            configureCell: { [weak self] (dataSource, collectionView, indexPath, item) in
+                guard let self else {
+                    return UICollectionViewCell()
                 }
-            }()
-            
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoticeCollectionViewCell.reuseIdentifier, for: indexPath) as! NoticeCollectionViewCell
-            
-            cell.configure(with: item, isShowingThumbnail: shouldUseThumbnail)
-            return cell
-        })
+                
+                let shouldUseThumbnail: Bool = {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return item.notice.imageUrl != nil
+                    } else {
+                        if item.notice.imageUrl != nil { return true }
+                        
+                        let items = self.viewModel.notices.value[0].items
+                        let count = self.viewModel.notices.value[0].items.count
+                        
+                        if indexPath.row % 2 == 0 {    //짝수번째 cell
+                            let next = indexPath.row + 1
+                            return 0..<count ~= next && items[next].notice.imageUrl != nil
+                        } else {    //홀수번째 cell
+                            let before = indexPath.row - 1
+                            return 0..<count ~= before && items[before].notice.imageUrl != nil
+                        }
+                    }
+                }()
+                
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoticeCollectionViewCell.reuseIdentifier, for: indexPath) as! NoticeCollectionViewCell
+                
+                cell.configure(with: item, isShowingThumbnail: shouldUseThumbnail)
+                return cell
+            }
+        )
     }
     
 }

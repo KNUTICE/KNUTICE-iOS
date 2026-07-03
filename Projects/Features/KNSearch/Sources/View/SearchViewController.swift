@@ -41,6 +41,7 @@ public final class SearchViewController: UIViewController, CompositionalLayoutCo
         )
         return control
     }()
+    
     public lazy var collectionView: UICollectionView = {
         let layout = createCompositionalLayout()
         let collectionView = UICollectionView(
@@ -60,6 +61,7 @@ public final class SearchViewController: UIViewController, CompositionalLayoutCo
 
         return collectionView
     }()
+    
     lazy var bookmarkTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.estimatedRowHeight = 100  //cell height가 설정되기 전 임시 크기
@@ -75,6 +77,7 @@ public final class SearchViewController: UIViewController, CompositionalLayoutCo
 
         return tableView
     }()
+    
     lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.delegate = self
@@ -83,19 +86,22 @@ public final class SearchViewController: UIViewController, CompositionalLayoutCo
 
         return searchBar
     }()
+    
     lazy var cancelButton: UIButton = {
         let configuration = UIButton.Configuration.plain()
         let button = UIButton(configuration: configuration)
         button.setTitle("취소", for: .normal)
-        button.addTarget(
-            self,
-            action: #selector(cancelButtonAction(_:)),
+        button.addAction(
+            UIAction { [weak self] _ in
+                self?.resignFirstResponderIfNeeded()
+            },
             for: .touchUpInside
         )
 
         return button
     }()
-    var sholdHideNoticeView: Bool? {
+    
+    private var sholdHideNoticeView: Bool? {
         didSet {
             guard let sholdHideNoticeView = self.sholdHideNoticeView else {
                 return
@@ -105,6 +111,7 @@ public final class SearchViewController: UIViewController, CompositionalLayoutCo
 
         }
     }
+    
     @Injected(\.searchViewModel) public var viewModel
     public let disposeBag: DisposeBag = .init()
     private let makeBookmarkFormViewController: (Notice) -> UIViewController?
@@ -143,19 +150,13 @@ public final class SearchViewController: UIViewController, CompositionalLayoutCo
 
     public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-
-        viewModel.tasks.forEach {
-            $0.cancel()
-        }
+        
+        viewModel.nextNoticesPageTask?.cancel()
     }
 
     private func resignFirstResponderIfNeeded() {
         searchBar.resignFirstResponder()
         updateSearchBarConstraints(isShowCancelButton: false)
-    }
-
-    @objc func cancelButtonAction(_ sender: UIButton) {
-        resignFirstResponderIfNeeded()
     }
 
     @objc func didChangeValue(segment: UISegmentedControl) {
@@ -181,6 +182,16 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
             makeBookmarkFormViewController: makeBookmarkFormViewController
         )
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    public func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        if let count = viewModel.notices.value.first?.items.count, indexPath.row == count - 1 {
+            viewModel.fetchNextNoticesPage()
+        }
     }
 }
 

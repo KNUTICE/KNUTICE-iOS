@@ -16,6 +16,7 @@ extension SearchViewController: RxDataSourceBindable {
     func bind() {
         bindNotices()
         bindSearchBar()
+        bindKeyword()
         bindBookmarks()
     }
     
@@ -39,13 +40,19 @@ extension SearchViewController: RxDataSourceBindable {
     // MARK: - Private Bindings
     private func bindSearchBar() {
         searchBar.rx.text
-            .debounce(.milliseconds(500), scheduler: MainScheduler.instance)    // 0.5초 대기
+            .orEmpty    // Optional<String>이 아닌 String 타입으로 변환
+            .debounce(.microseconds(500), scheduler: MainScheduler.instance)    // 0.5초 대기
             .distinctUntilChanged()    // 동일한 값은 무시
-            .bind(with: self) { owner, keyword in
-                if let keyword {
-                    owner.viewModel.search(with: keyword)
-                }
-            }
+            .bind(to: viewModel.keyword)
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindKeyword() {
+        viewModel.keyword
+            .skip(1)
+            .subscribe(onNext: { [weak self] keyword in
+                self?.viewModel.search(with: keyword)
+            })
             .disposed(by: disposeBag)
     }
 
