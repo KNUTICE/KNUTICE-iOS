@@ -9,7 +9,6 @@ import FactoryKit
 import Foundation
 import KNDomain
 import KNNetwork
-import KNUtility
 
 public actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
