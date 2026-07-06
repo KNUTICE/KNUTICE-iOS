@@ -8,7 +8,7 @@
 import Foundation
 import KNUtility
 
-public enum MajorCategory: String {
+public enum MajorCategory: String, CaseIterable {
     
     // ---------- 융합기술대학 ----------
     case mechanicalEngineering = "MECHANICAL_ENGINEERING"
@@ -152,6 +152,10 @@ extension MajorCategory: CategoryProtocol {
 
 // MARK: - NoticeTabRepresentable
 extension MajorCategory: NoticeTabRepresentable {
-    public var id: String { self.rawValue }
+    public var id: Int {
+        guard let index = Self.allCases.firstIndex(of: self) else { return 0 }
+        return NoticeCategory.allCases.count + index + 1
+    }
+    
     public var tabTitle: String { localizedDescription }
 }
