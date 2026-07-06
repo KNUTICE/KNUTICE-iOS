@@ -12,7 +12,6 @@ import Foundation
 import Testing
 @testable import KNData
 import KNNetwork
-import KNUtility
 
 @Test
 func submitReport() async throws {

@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - PostResponseDTO
-public struct PostResponseDTO: Decodable, Sendable {
-    public let metaData: MetaData
-    public let data: Bool
+struct PostResponseDTO: Decodable, Sendable {
+    let metaData: MetaData
+    let data: Bool
 }

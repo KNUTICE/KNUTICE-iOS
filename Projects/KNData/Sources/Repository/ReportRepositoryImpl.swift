@@ -9,7 +9,6 @@ import Foundation
 import Factory
 import KNDomain
 import KNNetwork
-import KNUtility
 
 /// The concrete implementation of `ReportRepository` that submits user reports
 /// to the remote server via `RemoteDataSource`.

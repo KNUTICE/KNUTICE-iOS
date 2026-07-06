@@ -9,7 +9,6 @@ import Combine
 import Foundation
 import KNDomain
 import KNNetwork
-import KNUtility
 
 public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
     private let dataSource: RemoteDataSource

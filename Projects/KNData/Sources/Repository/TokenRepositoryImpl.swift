@@ -9,7 +9,6 @@ import Factory
 import Foundation
 import KNDomain
 import KNNetwork
-import KNUtility
 
 public actor TokenRepositoryImpl: TokenRepository {
     @Injected(\.remoteDataSource) private var dataSource
