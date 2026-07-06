@@ -14,6 +14,46 @@ public enum NoticeCategory: String, CaseIterable {
     case scholarshipNotice = "SCHOLARSHIP_NEWS"
     case eventNotice = "EVENT_NEWS"
     case employmentNotice = "EMPLOYMENT_NEWS"
+    
+    public init?(id: Int) {
+        switch id {
+        case 1:
+            self = .generalNotice
+        case 2:
+            self = .academicNotice
+        case 3:
+            self = .scholarshipNotice
+        case 4:
+            self = .eventNotice
+        case 5:
+            self = .employmentNotice
+        default:
+            return nil
+        }
+    }
+    
+    public var id: Int {
+        switch self {
+        case .generalNotice:
+            return 1
+        case .academicNotice:
+            return 2
+        case .scholarshipNotice:
+            return 3
+        case .eventNotice:
+            return 4
+        case .employmentNotice:
+            return 5
+        }
+    }
+    
+    public static func id(fromRawValue rawValue: String) -> Int? {
+        NoticeCategory(rawValue: rawValue)?.id
+    }
+    
+    public static func rawValue(fromID id: Int) -> String? {
+        NoticeCategory(id: id)?.rawValue
+    }
 }
 
 // MARK: - CategoryProtocol
@@ -40,8 +80,6 @@ extension NoticeCategory: CategoryProtocol {
 
 // MARK: - NoticeTabRepresentable
 extension NoticeCategory: NoticeTabRepresentable {
-    public var id: String { self.rawValue }
-    
     public var tabTitle: String {
         switch self {
         case .generalNotice:

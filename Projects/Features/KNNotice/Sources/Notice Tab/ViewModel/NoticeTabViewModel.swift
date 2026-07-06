@@ -17,10 +17,10 @@ public enum CategoryItem: Identifiable {
     case addButton
     
     /// A stable identifier used to distinguish items in the collection view.
-    public var id: String {
+    public var id: Int {
         switch self {
         case let .category(noticeTab): return noticeTab.id
-        case .addButton: return "add_button"
+        case .addButton: return Int.min
         }
     }
 }
