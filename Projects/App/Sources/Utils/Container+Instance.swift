@@ -106,6 +106,10 @@ extension Container {
         Factory(self) { FetchSelectedMajorCategoryUseCase(repository: self.topicRepository()) }
     }
     
+    var migrateUserDefaultsMajorsUseCase: Factory<MigrateUserDefaultsMajorsUseCase> {
+        Factory(self) { MigrateUserDefaultsMajorsUseCase(repository: self.topicRepository()) }
+    }
+    
     var updateFCMTokenUseCase: Factory<UpdateFCMTokenUseCase> {
         Factory(self) { UpdateFCMTokenUseCase(repository: self.tokenRepository()) }
     }
@@ -113,6 +117,8 @@ extension Container {
     var registerFCMTokenUseCase: Factory<RegisterFCMTokenUseCase> {
         Factory(self) { RegisterFCMTokenUseCase(repository: self.tokenRepository()) }
     }
+    
+    
     
     //MARK: - ViewModel
     
