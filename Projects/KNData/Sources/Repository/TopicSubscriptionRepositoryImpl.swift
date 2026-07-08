@@ -12,7 +12,7 @@ import KNNetwork
 
 public actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
-    private let baseURL: String? = Bundle.module.topicURL
+    private let baseURL: String? = Bundle.module.topicURLV1
     
     public init() {}
     

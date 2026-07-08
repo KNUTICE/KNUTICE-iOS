@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 4/12/26.
 //
 
+import CorePresentation
 import KNDesignSystem
 import KNDomain
 import KNUtility
@@ -21,66 +22,73 @@ public struct NoticeTabSettings: View {
     
     public var body: some View {
         NavigationStack {
-            List {
-                Section {
-                    ForEach(noticeTabItems.selectedMajors, id: \.id) {
-                        Text($0.tabTitle)
-                    }
-                    .onDelete { indexSet in
-                        let targetsToDeactivate = indexSet.map { noticeTabItems.selectedMajors[$0] }
-                        
-                        Task {
-                            for target in targetsToDeactivate {
-                                await noticeTabItems.delete(major: target)
-                            }
-                            
-                            withAnimation {
-                                noticeTabItems.removeMajors(atDisplayedIndices: indexSet)
-                            }
-                        }
-                    }
-                } header: {
-                    Text("선택한 학과")
+            ZStack {
+                if noticeTabItems.isLoading {
+                    SpinningIndicator()
                 }
-                .listSectionSeparator(.visible, edges: .bottom)
                 
-                ForEach(noticeTabItems.colleges, id: \.self) { college in
+                List {
                     Section {
-                        ForEach(noticeTabItems.availableMajors(for: college), id: \.id) { major in
-                            MajorSelectionRow(title: major.localizedDescription) {
-                                Task {
-                                    await noticeTabItems.add(major: major)
-                                    
-                                    withAnimation {
-                                        noticeTabItems.insertAfterLastMajorCategory(newItem: CategoryItem.category(major))
-                                    }
+                        ForEach(noticeTabItems.selectedMajors, id: \.id) {
+                            Text($0.tabTitle)
+                        }
+                        .onDelete { indexSet in
+                            let targetsToDeactivate = indexSet.map { noticeTabItems.selectedMajors[$0] }
+                            
+                            Task {
+                                for target in targetsToDeactivate {
+                                    await noticeTabItems.delete(major: target)
+                                }
+                                
+                                withAnimation {
+                                    noticeTabItems.removeMajors(atDisplayedIndices: indexSet)
                                 }
                             }
-                            .listRowSeparator(.hidden)
                         }
                     } header: {
-                        Text(college)
+                        Text("선택한 학과")
+                    }
+                    .listSectionSeparator(.visible, edges: .bottom)
+                    
+                    ForEach(noticeTabItems.colleges, id: \.self) { college in
+                        Section {
+                            ForEach(noticeTabItems.availableMajors(for: college), id: \.id) { major in
+                                MajorSelectionRow(title: major.localizedDescription) {
+                                    Task {
+                                        await noticeTabItems.add(major: major)
+                                        
+                                        withAnimation {
+                                            noticeTabItems.insertAfterLastMajorCategory(newItem: CategoryItem.category(major))
+                                        }
+                                    }
+                                }
+                                .listRowSeparator(.hidden)
+                            }
+                        } header: {
+                            Text(college)
+                        }
                     }
                 }
-            }
-            .listStyle(.inset)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "xmark")
+                .opacity(noticeTabItems.isLoading ? 0 : 1)
+                .listStyle(.inset)
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button {
+                            dismiss()
+                        } label: {
+                            Image(systemName: "xmark")
+                        }
+                    }
+                    
+                    ToolbarItem(placement: .topBarTrailing) {
+                        EditButton()
                     }
                 }
-                
-                ToolbarItem(placement: .topBarTrailing) {
-                    EditButton()
+                .navigationTitle("공지 항목 관리")
+                .navigationBarTitleDisplayMode(.inline)
+                .task {
+                    await noticeTabItems.fetchMajorCategories()
                 }
-            }
-            .navigationTitle("공지 항목 관리")
-            .navigationBarTitleDisplayMode(.inline)
-            .task {
-                await noticeTabItems.fetchMajorCategories()
             }
         }
     }

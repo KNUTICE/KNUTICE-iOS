@@ -39,6 +39,8 @@ public final class NoticeTabItems {
         majorCategories.keys.sorted()
     }
     
+    var isLoading: Bool = false
+    
     @ObservationIgnored
     private let categoriesRelay: BehaviorRelay<[CategoryItem]>
     
@@ -57,7 +59,10 @@ public final class NoticeTabItems {
     }
     
     func fetchMajorCategories() async {
+        defer { isLoading = false }
+        
         do {
+            isLoading = true
             majorCategories = try await fetchMajorCategoriesUseCase.execute()
         } catch {
             print(error)
