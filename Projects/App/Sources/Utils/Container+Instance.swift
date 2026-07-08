@@ -42,6 +42,10 @@ extension Container {
         Factory(self) { TokenRepositoryImpl() }
     }
     
+    var topicRepository: Factory<TopicRepository> {
+        Factory(self) { TopicRepositoryImpl() }
+    }
+    
     //MARK: - UseCase
     var fetchBookmarksUseCase: Factory<FetchBookmarksUseCase> {
         Factory(self) { FetchBookmarksUseCaseImpl(bookmarkReportory: self.bookmarkRepository()) }
@@ -76,11 +80,18 @@ extension Container {
     }
     
     var fetchTopicSubscriptionUseCase: Factory<FetchTopicSubscriptionsUseCase> {
-        Factory(self) { FetchTopicSubscriptionsUseCaseImpl(repository: self.topicSubscriptionRepository()) }
+        Factory(self) {
+            FetchTopicSubscriptionsUseCase(
+                topicSubscriptionRepository: Container.shared.topicSubscriptionRepository(),
+                topicRepository: Container.shared.topicRepository()
+            )
+        }
     }
     
     var updateTopicSubscriptionUseCase: Factory<UpdateTopicSubscriptionUseCase> {
-        Factory(self) { UpdateTopicSubscriptionUseCaseImpl(repository: self.topicSubscriptionRepository()) }
+        Factory(self) {
+            UpdateTopicSubscriptionUseCase(repository: Container.shared.topicSubscriptionRepository())
+        }
     }
     
     var searchNoticesUseCase: Factory<SearchNoticeSnapshotsUseCase> {
@@ -91,12 +102,8 @@ extension Container {
         Factory(self) { SearchBookmarksUseCaseImpl(repository: self.bookmarkRepository()) }
     }
     
-    var addMajorUseCase: Factory<AddMajorUseCase> {
-        Factory(self) { AddMajorUseCase(repository: self.topicSubscriptionRepository()) }.singleton
-    }
-    
-    var deleteMajorUseCase: Factory<DeleteMajorUseCase> {
-        Factory(self) { DeleteMajorUseCase(repository: self.topicSubscriptionRepository()) }.singleton
+    var fetchSelectedMajorCategoryUseCase: Factory<FetchSelectedMajorCategoryUseCase> {
+        Factory(self) { FetchSelectedMajorCategoryUseCase(repository: self.topicRepository()) }
     }
     
     var updateFCMTokenUseCase: Factory<UpdateFCMTokenUseCase> {

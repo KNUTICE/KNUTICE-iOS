@@ -58,10 +58,10 @@ public actor DeleteMajorUseCase {
         
         // 서버에 구독 되어 있는 학과 topic 삭제
         if let subscribedMajor = major as? MajorCategory, isSubscribed {
-            try await repository.unsubscribe(of: .major, topic: subscribedMajor)
+            try await repository.unsubscribe(of: .major, topicID: subscribedMajor.id)
         }
         
         // UserDefaults에 선택한 학과 삭제
-        await MajorManager.shared.removeMajor(major.topic)
+        await MajorManager.shared.remove(id: major.id)
     }
 }

@@ -7,24 +7,20 @@
 
 import KNUtility
 
-public protocol UpdateTopicSubscriptionUseCase: Sendable {
-    func execute(of type: TopicType, topic: any CategoryProtocol, isEnabled: Bool) async throws
-}
-
-public final class UpdateTopicSubscriptionUseCaseImpl: UpdateTopicSubscriptionUseCase {
+public final class UpdateTopicSubscriptionUseCase: Sendable {
     private let repository: TopicSubscriptionRepository
     
     public init(repository: TopicSubscriptionRepository) {
         self.repository = repository
     }
     
-    public func execute(of type: TopicType, topic: any CategoryProtocol, isEnabled: Bool) async throws {
+    public func execute(of type: TopicType, topicID id: Int, isEnabled: Bool) async throws {
         try Task.checkCancellation()
         
         if isEnabled {
-            try await repository.subscribe(of: type, topic: topic)
+            try await repository.subscribe(of: type, topicID: id)
         } else {
-            try await repository.unsubscribe(of: type, topic: topic)
+            try await repository.unsubscribe(of: type, topicID: id)
         }
     }
     

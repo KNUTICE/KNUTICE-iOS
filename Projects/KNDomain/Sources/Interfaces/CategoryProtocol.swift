@@ -7,7 +7,8 @@
 
 import Foundation
 
-public protocol CategoryProtocol: Sendable {
+public protocol CategoryProtocol: Sendable, Identifiable {
+    var id: Int { get }
     
     /// A localized, human-readable name of the category for display in the user interface.
     var localizedDescription: String { get }

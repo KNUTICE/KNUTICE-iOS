@@ -12,30 +12,29 @@ import KNNetwork
 
 public actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
     @Injected(\.remoteDataSource) private var dataSource: RemoteDataSource
-    private let baseURL: String? = Bundle.module.topicSubscriptionURL
+    private let baseURL: String? = Bundle.module.topicURL
     
     public init() {}
     
-    /// Fetches the list of subscribed topics for the given topic type from the server.
+    /// Fetches the identifiers of the topics the current user is subscribed to for the specified topic type.
     ///
     /// This method performs the following steps:
     /// 1. Checks for task cancellation before proceeding.
-    /// 2. Constructs the query URL by appending the `TopicType` as a query parameter.
-    /// 3. Sends a `GET` request with the FCM token injected into the header by `NetworkInterceptor`.
-    /// 4. Maps raw string values from the response DTO into typed `TopicSubscriptionKey` cases,
-    ///    discarding any unrecognized values via `compactMap`.
+    /// 2. Builds the request URL with the specified `TopicType`.
+    /// 3. Sends a `GET` request with the FCM token automatically injected by `NetworkInterceptor`.
+    /// 4. Decodes the response and returns the subscribed topic identifiers.
     ///
-    /// - Note: `.meal` type subscriptions are not yet supported and always return an empty list.
+    /// - Note: Subscriptions for `.meal` are not currently supported and always return an empty array.
     ///
-    /// - Parameter type: The topic category type to retrieve subscriptions for (e.g. `.notice`, `.major`).
+    /// - Parameter type: The type of topics to retrieve subscriptions for.
     ///
-    /// - Returns: A list of valid `TopicSubscriptionKey` objects corresponding to the subscribed topics.
+    /// - Returns: An array of subscribed topic identifiers.
     ///
     /// - Throws:
-    ///   - `CancellationError` if the enclosing `Task` was cancelled before the request was dispatched.
-    ///   - `NetworkError.invalidURL` if `topicSubscriptionURL` is absent or malformed in the module bundle.
+    ///   - `CancellationError` if the task is cancelled before the request is sent.
+    ///   - `NetworkError.invalidURL` if `topicSubscriptionURL` is missing or invalid.
     ///   - Any networking or decoding error propagated from `RemoteDataSource`.
-    public func fetch(for type: TopicType) async throws -> [TopicSubscriptionKey] {
+    public func fetch(for type: TopicType) async throws -> [Int] {
         try Task.checkCancellation()
         
         guard let baseURL else {
@@ -50,46 +49,54 @@ public actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
             useFCMToken: true
         )
         
-        return dto.data.subscribedTopics.compactMap { value -> TopicSubscriptionKey? in
-            switch type {
-            case .notice:
-                // Map raw string to NoticeCategory, then wrap in TopicSubscriptionKey.notice
-                guard let category = NoticeCategory(rawValue: value) else { return nil }
-                return .notice(category)
-                
-            case .major:
-                // Map raw string to MajorCategory, then wrap in TopicSubscriptionKey.major
-                guard let category = MajorCategory(rawValue: value) else { return nil }
-                return .major(category)
-                
-            case .meal:
-                if value == CafeteriaCategory.studentCafeteria.rawValue {
-                    return .studentCafeteria
-                } else if value == CafeteriaCategory.staffCafeteria.rawValue {
-                    return .staffCafeteria
-                } else {
-                    return nil
-                }
-            }
-        }
+        return dto.data.subscribedTopicIds
     }
     
     /// Subscribes the current user to the specified topic.
-    public func subscribe(of type: TopicType, topic: any CategoryProtocol) async throws {
+    ///
+    /// - Parameters:
+    ///   - type: The type of the topic to subscribe to.
+    ///   - id: The identifier of the topic to subscribe to.
+    ///
+    /// - Throws:
+    ///   - `CancellationError` if the task is cancelled before the request is sent.
+    ///   - `NetworkError.invalidURL` if `topicSubscriptionURL` is missing or invalid.
+    ///   - Any networking error propagated from `RemoteDataSource`.
+    public func subscribe(of type: TopicType, topicID id: Int) async throws {
         try Task.checkCancellation()
-        try await updateSubscription(of: type, topic: topic, enabled: true)
+        try await updateSubscription(of: type, topicID: id, enabled: true)
     }
     
     /// Unsubscribes the current user from the specified topic.
-    public func unsubscribe(of type: TopicType, topic: any CategoryProtocol) async throws {
+    ///
+    /// - Parameters:
+    ///   - type: The type of the topic to unsubscribe from.
+    ///   - id: The identifier of the topic to unsubscribe from.
+    ///
+    /// - Throws:
+    ///   - `CancellationError` if the task is cancelled before the request is sent.
+    ///   - `NetworkError.invalidURL` if `topicSubscriptionURL` is missing or invalid.
+    ///   - Any networking error propagated from `RemoteDataSource`.
+    public func unsubscribe(of type: TopicType, topicID id: Int) async throws {
         try Task.checkCancellation()
-        try await updateSubscription(of: type, topic: topic, enabled: false)
+        try await updateSubscription(of: type, topicID: id, enabled: false)
     }
     
-    /// Updates the subscription state of the specified topic on the server.
+    /// Updates the subscription state of a topic on the server.
+    ///
+    /// - Parameters:
+    ///   - type: The type of the topic.
+    ///   - topicID: The identifier of the topic.
+    ///   - enabled: A Boolean value indicating whether the topic should be subscribed to.
+    ///     Pass `true` to subscribe or `false` to unsubscribe.
+    ///
+    /// - Throws:
+    ///   - `CancellationError` if the task is cancelled before the request is sent.
+    ///   - `NetworkError.invalidURL` if `topicSubscriptionURL` is missing or invalid.
+    ///   - Any networking error propagated from `RemoteDataSource`.
     private func updateSubscription(
         of type: TopicType,
-        topic: any CategoryProtocol,
+        topicID: Int,
         enabled: Bool
     ) async throws {
         try Task.checkCancellation()
@@ -102,7 +109,7 @@ public actor TopicSubscriptionRepositoryImpl: TopicSubscriptionRepository {
 
         let endpoint = "\(baseURL)?type=\(type.rawValue)"
         let requestBody: [String: any Sendable] = [
-            "topic": topic.topic,
+            "topicId": topicID,
             "enabled": enabled
         ]
 

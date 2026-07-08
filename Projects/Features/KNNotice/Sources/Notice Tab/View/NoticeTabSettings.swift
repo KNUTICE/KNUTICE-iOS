@@ -44,7 +44,7 @@ public struct NoticeTabSettings: View {
                 }
                 .listSectionSeparator(.visible, edges: .bottom)
                 
-                ForEach(College.allCases, id: \.self) { college in
+                ForEach(noticeTabItems.colleges, id: \.self) { college in
                     Section {
                         ForEach(noticeTabItems.availableMajors(for: college), id: \.id) { major in
                             MajorSelectionRow(title: major.localizedDescription) {
@@ -59,7 +59,7 @@ public struct NoticeTabSettings: View {
                             .listRowSeparator(.hidden)
                         }
                     } header: {
-                        Text(college.localizedDescription)
+                        Text(college)
                     }
                 }
             }
@@ -79,6 +79,9 @@ public struct NoticeTabSettings: View {
             }
             .navigationTitle("공지 항목 관리")
             .navigationBarTitleDisplayMode(.inline)
+            .task {
+                await noticeTabItems.fetchMajorCategories()
+            }
         }
     }
 }
@@ -106,24 +109,9 @@ fileprivate struct MajorSelectionRow: View {
 }
 
 #if DEBUG
-actor MockTopicSubscriptionRepository: TopicSubscriptionRepository {
-    func fetch(for topicType: KNDomain.TopicType) async throws -> [TopicSubscriptionKey] {
-        return []
-    }
-    
-    func subscribe(of type: KNDomain.TopicType, topic: any KNDomain.CategoryProtocol) async throws {}
-    
-    func unsubscribe(of type: KNDomain.TopicType, topic: any KNDomain.CategoryProtocol) async throws {}
-    
-}
-
 #Preview {
     NoticeTabSettings(
-        noticeTabItems: NoticeTabItems(
-            .init(value: []),
-            addMajorUseCase: AddMajorUseCase(repository: MockTopicSubscriptionRepository()),
-            deleteMajorUseCase: DeleteMajorUseCase(repository: MockTopicSubscriptionRepository())
-        )
+        noticeTabItems: NoticeTabItems(.init(value: []))
     )
 }
 #endif
