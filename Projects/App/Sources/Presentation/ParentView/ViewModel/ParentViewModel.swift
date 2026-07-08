@@ -8,6 +8,7 @@
 import Combine
 import Factory
 import Foundation
+import KNDomain
 import KNUtility
 
 @MainActor
@@ -20,6 +21,7 @@ final class ParentViewModel {
     
     /// The injected service responsible for handling FCM token registration and management.
     @Injected(\.registerFCMTokenUseCase) private var registerFCMTokenUseCase
+    @Injected(\.fetchSelectedMajorCategoryUseCase) private var fetchMajorCategoryUseCase
     
     /// A set of Combine cancellables used to store subscriptions for automatic cancellation
     /// when the owning instance is deallocated.
@@ -120,6 +122,15 @@ final class ParentViewModel {
     func prepareAppConfiguration() {
         Task {
             await ABTestManager.shared.fetchConfiguration()
+        }
+    }
+    
+    func fetchMajorCategory() async -> MajorCategory? {
+        do {
+            return try await fetchMajorCategoryUseCase.execute()
+        } catch {
+            print(error)
+            return nil
         }
     }
     

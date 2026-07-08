@@ -51,8 +51,8 @@ extension Bundle {
         return url
     }
     
-    var topicSubscriptionURL: String? {
-        guard let url = resource?["TopicSubscription_URL"] as? String else {
+    var topicURL: String? {
+        guard let url = resource?["Topic_URL"] as? String else {
             return nil
         }
         

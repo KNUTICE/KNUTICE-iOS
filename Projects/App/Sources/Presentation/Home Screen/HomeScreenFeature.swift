@@ -28,6 +28,7 @@ struct HomeScreenFeature: EntryTimeRecordable {
     
     @Injected(\.fetchTopThreeNoticesUseCase) private var fetchTopThreeNoticesUseCase
     @Injected(\.fetchNoticeSnapshotsWithSkeletonUseCase) private var fetchNoticeSnapshotsWithSkeletonUseCase
+    @Injected(\.fetchSelectedMajorCategoryUseCase) private var fetchSelectedMajorCategoryUseCase
     
     var body: some Reducer<State, Action> {
         Reduce { state, action in
@@ -54,10 +55,7 @@ struct HomeScreenFeature: EntryTimeRecordable {
                         await send(.noticesResponse(.error))
                     },
                     .run { send in
-                        let majorStr = await MajorManager.shared.majorStrings.first ?? ""
-                        let major = MajorCategory(rawValue: majorStr)
-                        
-                        guard let major else {
+                        guard let major = try await fetchSelectedMajorCategoryUseCase.execute() else {
                             await send(.majorNoticesResponse(.empty))
                             return
                         }

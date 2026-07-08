@@ -53,29 +53,31 @@ public actor AddMajorUseCase {
     }
     
     private func performUpdate(major: any CategoryProtocol) async throws {
+        
         // 학과 구독 여부
         let isSubscribed = await MajorNotificationManager.shared.isSubscribed
         // 선택된 학과
         // TODO: 1.8 버전 이후, 다중 학과 선택 변경 예정
-        let majorStr = await MajorManager.shared.majorStrings.first
+        let majorID = await MajorManager.shared.majorIDs.first
         
-        if let majorStr {
+        if let majorID {
             
-            if let subscribedMajor = MajorCategory(rawValue: majorStr), isSubscribed {
-                // 이전에 선택된 학과를 서버에서 구독 해제
-                try await repository.unsubscribe(of: .major, topic: subscribedMajor)
+            // 이전에 선택된 학과를 서버에서 구독 해제
+            if isSubscribed {
+                try await repository.unsubscribe(of: .major, topicID: majorID)
             }
             
             // 이전에 선택된 학과를 UserDefaults에서 삭제
-            await MajorManager.shared.removeMajor(majorStr)
+            await MajorManager.shared.remove(id: majorID)
         }
         
         // 새로 선택한 학과 알림 구독
         if isSubscribed {
-            try await repository.subscribe(of: .major, topic: major)
+            try await repository.subscribe(of: .major, topicID: major.id)
         }
         
         // UserDefaults에 선택한 학과 저장
-        await MajorManager.shared.addMajor(major.topic)
+        await MajorManager.shared.add(id: major.id)
+        
     }
 }

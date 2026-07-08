@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 4/10/26.
 //
 
+import Factory
 import Foundation
 import KNDomain
 import KNUtility
@@ -39,22 +40,24 @@ final class NoticeTabViewModel {
         return categories.value
     }
     
+    @Injected(\.fetchMajorCategoryUseCase) private var fetchMajorCategoryUseCase
+    
     /// Initializes the view model and asynchronously loads the full category list.
     ///
     /// The loading order is:
     /// 1. All default `NoticeCategory` cases
     /// 2. Major-specific categories fetched from `MajorManager`
     /// 3. The add button appended at the end
-    init() {
+    func loadCategoryItems() {
         Task {
-            var value: [CategoryItem] = NoticeCategory.allCases.map { CategoryItem.category($0) }
-            await MajorManager.shared.majorStrings.forEach {
-                if let categoryItem = MajorCategory(rawValue: $0) {
-                    value.append(.category(categoryItem))
-                }
+            var items: [CategoryItem] = NoticeCategory.allCases.map { CategoryItem.category($0) }
+            
+            if let majorCategory = try? await fetchMajorCategoryUseCase.execute() {
+                items.append(.category(majorCategory))
             }
-            value.append(.addButton)
-            categories.accept(value)
+            
+            items.append(.addButton)
+            categories.accept(items)
         }
     }
 }

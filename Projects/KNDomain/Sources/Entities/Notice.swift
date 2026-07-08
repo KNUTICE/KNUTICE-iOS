@@ -15,7 +15,7 @@ public struct Notice: Sendable, Equatable, Identifiable {
     public let department: String    // 부서
     public let uploadDate: String    // 등록 날짜
     public let imageUrl: String?    // 썸네일 URL
-    public let category: any CategoryProtocol    // 공지 카테고리 종류
+    public let topic: String
     
     public init(
         id: Int,
@@ -25,7 +25,7 @@ public struct Notice: Sendable, Equatable, Identifiable {
         department: String,
         uploadDate: String,
         imageUrl: String?,
-        category: any CategoryProtocol
+        topic: String
     ) {
         self.id = id
         self.title = title
@@ -34,12 +34,11 @@ public struct Notice: Sendable, Equatable, Identifiable {
         self.department = department
         self.uploadDate = uploadDate
         self.imageUrl = imageUrl
-        self.category = category
+        self.topic = topic
     }
     
     public static func == (lhs: Notice, rhs: Notice) -> Bool {
-        lhs.id == rhs.id &&
-        lhs.category.topic == rhs.category.topic
+        lhs.id == rhs.id
     }
 }
 
@@ -55,7 +54,7 @@ public extension Notice {
                 department: "학사관리과",
                 uploadDate: "2026-05-11",
                 imageUrl: nil,
-                category: NoticeCategory.academicNotice,
+                topic: NoticeCategory.academicNotice.rawValue,
             ),
             Notice(
                 id: 1121886,
@@ -65,7 +64,7 @@ public extension Notice {
                 department: "학사관리과",
                 uploadDate: "2026-05-07",
                 imageUrl: nil,
-                category: NoticeCategory.academicNotice,
+                topic: NoticeCategory.academicNotice.rawValue,
             )
         ]
     }
@@ -80,7 +79,7 @@ public extension Notice {
                 department: "국제교류본부",
                 uploadDate: "2026-05-12",
                 imageUrl: nil,
-                category: NoticeCategory.generalNotice,
+                topic: NoticeCategory.generalNotice.rawValue,
             ),
             Notice(
                 id: 1121930,
@@ -90,7 +89,7 @@ public extension Notice {
                 department: "IPP사업단",
                 uploadDate: "2026-05-11",
                 imageUrl: "https://www.ut.ac.kr/namo/binary/images/000106/20260511165256844_H46XWBBY.png",
-                category: NoticeCategory.generalNotice,
+                topic: NoticeCategory.generalNotice.rawValue,
             )
         ]
     }
@@ -105,7 +104,7 @@ public extension Notice {
                 department: "장학팀",
                 uploadDate: "2026-05-12",
                 imageUrl: nil,
-                category: NoticeCategory.scholarshipNotice,
+                topic: NoticeCategory.scholarshipNotice.rawValue,
             ),
             Notice(
                 id: 1121915,
@@ -115,7 +114,7 @@ public extension Notice {
                 department: "장학팀",
                 uploadDate: "2026-05-11",
                 imageUrl: nil,
-                category: NoticeCategory.scholarshipNotice,
+                topic: NoticeCategory.scholarshipNotice.rawValue,
             )
         ]
     }
@@ -130,7 +129,7 @@ public extension Notice {
                 department: "학생과",
                 uploadDate: "2026-05-12",
                 imageUrl: nil,
-                category: NoticeCategory.eventNotice,
+                topic: NoticeCategory.eventNotice.rawValue,
             ),
             Notice(
                 id: 1121960,
@@ -140,7 +139,7 @@ public extension Notice {
                 department: "학생과",
                 uploadDate: "2026-05-12",
                 imageUrl: nil,
-                category: NoticeCategory.eventNotice,
+                topic: NoticeCategory.eventNotice.rawValue,
             )
         ]
     }
@@ -155,7 +154,7 @@ public extension Notice {
                 department: "대학일자리플러스센터",
                 uploadDate: "2026-05-12",
                 imageUrl: nil,
-                category: NoticeCategory.employmentNotice,
+                topic: NoticeCategory.employmentNotice.rawValue,
             ),
             Notice(
                 id: 1121929,
@@ -165,7 +164,7 @@ public extension Notice {
                 department: "대학일자리플러스센터",
                 uploadDate: "2026-05-11",
                 imageUrl: nil,
-                category: NoticeCategory.employmentNotice,
+                topic: NoticeCategory.employmentNotice.rawValue,
             )
         ]
     }
