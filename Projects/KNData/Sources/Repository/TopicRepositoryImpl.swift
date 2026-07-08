@@ -16,7 +16,8 @@ public actor TopicRepositoryImpl: TopicRepository {
     @Injected(\.remoteDataSource) private var dataSource
     
     /// The base URL used to request topic data.
-    private let baseURL: String? = Bundle.module.topicURL
+    private let baseURLV1: String? = Bundle.module.topicURLV1
+    private let baseURLV2: String? = Bundle.module.topicURLV2
     
     public init() {}
     
@@ -28,6 +29,8 @@ public actor TopicRepositoryImpl: TopicRepository {
     public func getAllTopics(for type: TopicType) async throws -> [any CategoryProtocol] {
 
         let dto = try await request(
+            baseURL: baseURLV1,
+            path: "/types",
             queryItems: [
                 .init(name: "type", value: type.rawValue)
             ]
@@ -52,6 +55,8 @@ public actor TopicRepositoryImpl: TopicRepository {
     public func getTopics(id: Int) async throws -> [any CategoryProtocol] {
         // TODO: 학교 공지와 식당 카테고리는 네트워크 요청 없이 즉시 반환
         let dto = try await request(
+            baseURL: baseURLV2,
+            path: "/types",
             queryItems: [
                 URLQueryItem(name: "topicId", value: "\(id)")
             ]
@@ -68,6 +73,8 @@ public actor TopicRepositoryImpl: TopicRepository {
     public func getTopics(_ topic: String) async throws -> [any CategoryProtocol] {
         // TODO: 학교 공지와 식당 카테고리는 네트워크 요청 없이 즉시 반환
         let dto = try await request(
+            baseURL: baseURLV2,
+            path: "/types",
             queryItems: [
                 URLQueryItem(name: "topic", value: topic)
             ]
@@ -82,12 +89,18 @@ public actor TopicRepositoryImpl: TopicRepository {
     /// - Returns: The decoded topic response.
     /// - Throws: A `NetworkError` if the request URL is invalid or the request fails.
     private func request(
+        baseURL: String?,
+        path: String? = nil,
         queryItems: [URLQueryItem]
     ) async throws -> TopicResponseDTO {
 
-        guard let baseURL = baseURL,
+        guard let baseURL,
               var components = URLComponents(string: baseURL) else {
             throw NetworkError.invalidURL(message: "Invalid or missing 'topicURL' in resource.")
+        }
+
+        if let path {
+            components.path += path.hasPrefix("/") ? path : "/\(path)"
         }
 
         components.queryItems = queryItems

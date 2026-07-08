@@ -51,8 +51,16 @@ extension Bundle {
         return url
     }
     
-    var topicURL: String? {
-        guard let url = resource?["Topic_URL"] as? String else {
+    var topicURLV1: String? {
+        guard let url = resource?["Topic_URL_V1"] as? String else {
+            return nil
+        }
+        
+        return url
+    }
+    
+    var topicURLV2: String? {
+        guard let url = resource?["Topic_URL_V2"] as? String else {
             return nil
         }
         
