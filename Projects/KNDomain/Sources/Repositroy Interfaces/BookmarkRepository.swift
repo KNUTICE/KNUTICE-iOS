@@ -69,12 +69,6 @@ public protocol BookmarkRepository: Sendable {
     /// - Throws: Errors if the update cannot be performed.
     func update(_ bookmark: Bookmark) async throws
 
-    /// Updates the timestamp-related fields of a bookmark.
-    ///
-    /// - Parameter update: A value object containing timestamp changes.
-    /// - Throws: Errors from the underlying data source.
-    func updateTimeStamp(_ update: BookmarkUpdate) async throws
-
     // MARK: - Search
 
     /// Searches bookmarks with a matching keyword.

@@ -48,15 +48,15 @@ extension Container {
     
     //MARK: - UseCase
     var fetchBookmarksUseCase: Factory<FetchBookmarksUseCase> {
-        Factory(self) { FetchBookmarksUseCaseImpl(bookmarkReportory: self.bookmarkRepository()) }
+        Factory(self) { FetchBookmarksUseCaseImpl(bookmarkReportory: SwiftDataBookmarkRepository.shared) }
     }
     
     var deleteBookmarkUseCase: Factory<DeleteBookmarkUseCase> {
-        Factory(self) { DeleteBookmarkUseCaseImpl(bookmarkRepository: self.bookmarkRepository()) }
+        Factory(self) { DeleteBookmarkUseCaseImpl(bookmarkRepository: SwiftDataBookmarkRepository.shared) }
     }
     
     var saveBookmarkUseCase: Factory<SaveBookmarkUseCase> {
-        Factory(self) { SaveBookmarkUseCaseImpl(bookmarkRepository: self.bookmarkRepository()) }
+        Factory(self) { SaveBookmarkUseCaseImpl(bookmarkRepository: SwiftDataBookmarkRepository.shared) }
     }
     
     var fetchTopThreeNoticesUseCase: Factory<FetchTopThreeNoticesUseCase> {
@@ -72,7 +72,7 @@ extension Container {
     }
     
     var updateBookmarkUseCase: Factory<UpdateBookmarkUseCase> {
-        Factory(self) { UpdateBookmarkUseCaseImpl(bookmarkRepository: self.bookmarkRepository()) }
+        Factory(self) { UpdateBookmarkUseCaseImpl(bookmarkRepository: SwiftDataBookmarkRepository.shared) }
     }
     
     var submitReportUseCase: Factory<SubmitReportUseCase> {
@@ -99,7 +99,7 @@ extension Container {
     }
     
     var searchBookmarksUseCase: Factory<SearchBookmarksUseCase> {
-        Factory(self) { SearchBookmarksUseCaseImpl(repository: self.bookmarkRepository()) }
+        Factory(self) { SearchBookmarksUseCaseImpl(repository: SwiftDataBookmarkRepository.shared) }
     }
     
     var fetchSelectedMajorCategoryUseCase: Factory<FetchSelectedMajorCategoryUseCase> {

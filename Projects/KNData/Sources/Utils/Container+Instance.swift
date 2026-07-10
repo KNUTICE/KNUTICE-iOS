@@ -19,4 +19,12 @@ extension Container {
             BookmarkPersistenceStoreImpl.shared
         }
     }
+    
+    @available(iOS 17.0, *)
+    @available(macCatalyst 17.0, *)
+    var bookmarkDataStore: Factory<BookmarkManageable> {
+        Factory(self) {
+            BookmarkDataStore.shared
+        }
+    }
 }

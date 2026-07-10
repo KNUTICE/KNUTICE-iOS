@@ -45,15 +45,3 @@ public extension Bookmark {
     }
 }
 #endif
-
-public struct BookmarkUpdate: Sendable {
-    public let bookmark: Bookmark
-    public let createdAt: Date
-    public let updatedAt: Date
-    
-    public init(bookmark: Bookmark, createdAt: Date, updatedAt: Date) {
-        self.bookmark = bookmark
-        self.createdAt = createdAt
-        self.updatedAt = updatedAt
-    }
-}
