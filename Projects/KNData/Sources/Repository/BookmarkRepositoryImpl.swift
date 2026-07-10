@@ -102,12 +102,6 @@ public actor BookmarkRepositoryImpl: BookmarkRepository {
         try await dataSource.update(bookmark: bookmark)
         eventTrigger.send(.preserveCount)
     }
-    
-    /// Updates the timestamp-related values of a bookmark record.
-    public func updateTimeStamp(_ update: BookmarkUpdate) async throws {
-        try await dataSource.updateTimeStamp(update)
-    }
-    
 }
 
 fileprivate extension Bookmark {

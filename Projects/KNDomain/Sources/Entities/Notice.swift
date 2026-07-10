@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Notice: Sendable, Equatable, Identifiable {
+public struct Notice: Sendable, Codable, Equatable, Identifiable {
     public let id: Int    // nttId
     public let title: String    // 제목
     public let contentUrl: URL?    // 화면 전환 시 이동할 사이트 URL
