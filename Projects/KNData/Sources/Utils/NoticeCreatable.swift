@@ -25,11 +25,11 @@ extension NoticeCreatable {
         return Notice(
             id: item.nttID,
             title: item.title,
-            contentUrl: item.contentURL,
+            contentURL: item.contentURL,
             isSummarizable: item.isContentSummary,
             department: item.department,
             uploadDate: item.registrationDate,
-            imageUrl: item.contentImageURL,
+            imageURL: item.contentImageURL,
             topicId: item.topicIc
         )
     }
@@ -40,11 +40,11 @@ extension NoticeCreatable {
         return Notice(
             id: data.nttID,
             title: data.title,
-            contentUrl: data.contentURL,
+            contentURL: data.contentURL,
             isSummarizable: data.isContentSummary,
             department: data.department,
             uploadDate: data.registrationDate,
-            imageUrl: data.contentImageURL,
+            imageURL: data.contentImageURL,
             topicId: Int(data.topic) ?? NoticeCategory.id(fromRawValue: data.topic) ?? 0
         )
     }
