@@ -43,7 +43,7 @@ public final class DeepLinkManager {
             let contentURL = queryItems?.first(where: { $0.name == "contentUrl" })?.value
             
             if let nttIdValue, let nttId = Int(nttIdValue) {
-                return .notice(nttId: nttId, contentUrl: URL(string: contentURL ?? ""))
+                return .notice(nttId: nttId, contentURL: URL(string: contentURL ?? ""))
             }
             
             return .unknown
