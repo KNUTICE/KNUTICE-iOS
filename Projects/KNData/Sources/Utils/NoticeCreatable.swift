@@ -30,7 +30,7 @@ extension NoticeCreatable {
             department: item.department,
             uploadDate: item.registrationDate,
             imageURL: item.contentImageURL,
-            topicId: item.topicIc
+            topicId: item.topicId
         )
     }
 

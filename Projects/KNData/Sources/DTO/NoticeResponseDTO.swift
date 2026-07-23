@@ -72,7 +72,7 @@ struct NoticeItem: Decodable, Sendable {
     let contentImageURL: String?
     let isContentSummary: Bool
     let department, registrationDate: String
-    let topicIc: Int
+    let topicId: Int
     
     enum CodingKeys: String, CodingKey {
         case nttID = "nttId"
@@ -80,7 +80,7 @@ struct NoticeItem: Decodable, Sendable {
         case contentURL = "contentUrl"
         case contentImageURL = "contentImageUrl"
         case isContentSummary, department, registrationDate
-        case topicIc = "topicIc"
+        case topicId = "topicId"
     }
     
     init(
@@ -91,7 +91,7 @@ struct NoticeItem: Decodable, Sendable {
         isContentSummary: Bool,
         department: String,
         registrationDate: String,
-        topicIc: Int
+        topicId: Int
     ) {
         self.nttID = nttID
         self.title = title
@@ -100,7 +100,7 @@ struct NoticeItem: Decodable, Sendable {
         self.isContentSummary = isContentSummary
         self.department = department
         self.registrationDate = registrationDate
-        self.topicIc = topicIc
+        self.topicId = topicId
     }
 }
 
