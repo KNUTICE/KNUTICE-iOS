@@ -21,7 +21,7 @@ final class NoticeModel {
     var title: String
     
     /// The optional URL for the notice content page.
-    var contentUrl: URL?
+    var contentURL: URL?
     
     /// A Boolean value indicating whether the notice content can be summarized.
     var isSummarizable: Bool
@@ -33,7 +33,7 @@ final class NoticeModel {
     var uploadDate: String
     
     /// The optional image URL string associated with the notice.
-    var imageUrl: String?
+    var imageURL: String?
     
     /// The identifier of the topic associated with the notice.
     var topicId: Int
@@ -42,20 +42,20 @@ final class NoticeModel {
     init(
         id: Int,
         title: String,
-        contentUrl: URL? = nil,
+        contentURL: URL? = nil,
         isSummarizable: Bool,
         department: String,
         uploadDate: String,
-        imageUrl: String? = nil,
+        imageURL: String? = nil,
         topicId: Int
     ) {
         self.id = id
         self.title = title
-        self.contentUrl = contentUrl
+        self.contentURL = contentURL
         self.isSummarizable = isSummarizable
         self.department = department
         self.uploadDate = uploadDate
-        self.imageUrl = imageUrl
+        self.imageURL = imageURL
         self.topicId = topicId
     }
 }
