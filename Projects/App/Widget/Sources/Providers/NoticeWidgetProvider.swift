@@ -106,7 +106,7 @@ fileprivate extension Notice {
                 department: "소프트웨어학과",
                 uploadDate: "2024-04-09",
                 imageUrl: nil,
-                topic: NoticeCategory.generalNotice.rawValue,
+                topicId: NoticeCategory.generalNotice.id,
             )
         }
     }

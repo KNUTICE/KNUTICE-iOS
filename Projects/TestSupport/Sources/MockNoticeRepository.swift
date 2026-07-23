@@ -13,13 +13,13 @@ public final class MockNoticeRepository: NoticeRepository {
     public init() {}
     
     public func fetchNotices(
-        for category: String? = nil,
+        for category: (any CategoryProtocol)? = nil,
         keyword: String? = nil,
         after nttId: Int? = nil,
         size: Int = 20
     ) -> AnyPublisher<[Notice], Error> {
         return Deferred {
-            if let category, let category = NoticeCategory(rawValue: category) {
+            if let category, let category = NoticeCategory(id: category.id) {
                 if case .generalNotice = category {
                     return Just(Notice.generalNoticesSample)
                 } else if case .academicNotice = category {
@@ -40,7 +40,7 @@ public final class MockNoticeRepository: NoticeRepository {
     }
     
     public func fetchNotices(
-        for category: String? = nil,
+        for category: (any CategoryProtocol)? = nil,
         keyword: String? = nil,
         after nttId: Int? = nil,
         size: Int = 20
