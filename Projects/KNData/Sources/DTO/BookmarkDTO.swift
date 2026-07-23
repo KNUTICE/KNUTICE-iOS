@@ -44,7 +44,7 @@ fileprivate extension Notice {
             isContentSummary: isSummarizable,
             department: department,
             registrationDate: uploadDate,
-            topic: topic
+            topic: "\(topicId)"
         )
     }
 }

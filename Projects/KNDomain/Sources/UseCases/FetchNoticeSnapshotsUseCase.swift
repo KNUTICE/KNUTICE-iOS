@@ -32,7 +32,7 @@ public final class FetchNoticeSnapshotsUseCase: NoticeSnapshotCreatable, Sendabl
         try Task.checkCancellation()
         
         // Fetch notices from the repository.
-        let notices = try await noticeRepository.fetchNotices(for: category.topic, after: nttId, size: size)
+        let notices = try await noticeRepository.fetchNotices(for: category, after: nttId, size: size)
         // Apply business rules and convert notices into snapshots.
         let snapshots = notices.map { createSnapshot(from: $0) }
         
@@ -57,7 +57,7 @@ public final class FetchNoticeSnapshotsUseCase: NoticeSnapshotCreatable, Sendabl
         after nttId: Int? = nil,
         size: Int = 20
     ) -> AnyPublisher<[NoticeSnapshot], any Error> {
-        return noticeRepository.fetchNotices(for: category.topic, after: nttId, size: size)
+        return noticeRepository.fetchNotices(for: category, after: nttId, size: size)
             .map { [weak self] notices in
                 notices.compactMap { self?.createSnapshot(from: $0) }
             }

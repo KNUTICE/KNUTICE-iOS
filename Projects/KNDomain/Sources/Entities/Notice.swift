@@ -7,16 +7,33 @@
 
 import Foundation
 
+/// A domain entity that represents a notice displayed in the app.
 public struct Notice: Sendable, Codable, Equatable, Identifiable {
-    public let id: Int    // nttId
-    public let title: String    // 제목
-    public let contentUrl: URL?    // 화면 전환 시 이동할 사이트 URL
-    public let isSummarizable: Bool    // AI 요약 가능 여부
-    public let department: String    // 부서
-    public let uploadDate: String    // 등록 날짜
-    public let imageUrl: String?    // 썸네일 URL
-    public let topic: String
+    /// The unique notice identifier from the server.
+    public let id: Int
     
+    /// The title displayed for the notice.
+    public let title: String
+    
+    /// The optional URL for the notice content page.
+    public let contentUrl: URL?
+    
+    /// A Boolean value indicating whether the notice content can be summarized.
+    public let isSummarizable: Bool
+    
+    /// The department or organization that published the notice.
+    public let department: String
+    
+    /// The date string when the notice was uploaded.
+    public let uploadDate: String
+    
+    /// The optional image URL string associated with the notice.
+    public let imageUrl: String?
+    
+    /// The identifier of the topic associated with the notice.
+    public let topicId: Int
+    
+    /// Creates a notice entity with the provided notice information.
     public init(
         id: Int,
         title: String,
@@ -25,7 +42,7 @@ public struct Notice: Sendable, Codable, Equatable, Identifiable {
         department: String,
         uploadDate: String,
         imageUrl: String?,
-        topic: String
+        topicId: Int
     ) {
         self.id = id
         self.title = title
@@ -34,9 +51,10 @@ public struct Notice: Sendable, Codable, Equatable, Identifiable {
         self.department = department
         self.uploadDate = uploadDate
         self.imageUrl = imageUrl
-        self.topic = topic
+        self.topicId = topicId
     }
     
+    /// Returns whether two notices have the same unique identifier.
     public static func == (lhs: Notice, rhs: Notice) -> Bool {
         lhs.id == rhs.id
     }
@@ -54,7 +72,7 @@ public extension Notice {
                 department: "학사관리과",
                 uploadDate: "2026-05-11",
                 imageUrl: nil,
-                topic: NoticeCategory.academicNotice.rawValue,
+                topicId: NoticeCategory.academicNotice.id,
             ),
             Notice(
                 id: 1121886,
@@ -64,7 +82,7 @@ public extension Notice {
                 department: "학사관리과",
                 uploadDate: "2026-05-07",
                 imageUrl: nil,
-                topic: NoticeCategory.academicNotice.rawValue,
+                topicId: NoticeCategory.academicNotice.id,
             )
         ]
     }
@@ -79,7 +97,7 @@ public extension Notice {
                 department: "국제교류본부",
                 uploadDate: "2026-05-12",
                 imageUrl: nil,
-                topic: NoticeCategory.generalNotice.rawValue,
+                topicId: NoticeCategory.generalNotice.id,
             ),
             Notice(
                 id: 1121930,
@@ -89,7 +107,7 @@ public extension Notice {
                 department: "IPP사업단",
                 uploadDate: "2026-05-11",
                 imageUrl: "https://www.ut.ac.kr/namo/binary/images/000106/20260511165256844_H46XWBBY.png",
-                topic: NoticeCategory.generalNotice.rawValue,
+                topicId: NoticeCategory.generalNotice.id,
             )
         ]
     }
@@ -104,7 +122,7 @@ public extension Notice {
                 department: "장학팀",
                 uploadDate: "2026-05-12",
                 imageUrl: nil,
-                topic: NoticeCategory.scholarshipNotice.rawValue,
+                topicId: NoticeCategory.scholarshipNotice.id,
             ),
             Notice(
                 id: 1121915,
@@ -114,7 +132,7 @@ public extension Notice {
                 department: "장학팀",
                 uploadDate: "2026-05-11",
                 imageUrl: nil,
-                topic: NoticeCategory.scholarshipNotice.rawValue,
+                topicId: NoticeCategory.scholarshipNotice.id,
             )
         ]
     }
@@ -129,7 +147,7 @@ public extension Notice {
                 department: "학생과",
                 uploadDate: "2026-05-12",
                 imageUrl: nil,
-                topic: NoticeCategory.eventNotice.rawValue,
+                topicId: NoticeCategory.eventNotice.id,
             ),
             Notice(
                 id: 1121960,
@@ -139,7 +157,7 @@ public extension Notice {
                 department: "학생과",
                 uploadDate: "2026-05-12",
                 imageUrl: nil,
-                topic: NoticeCategory.eventNotice.rawValue,
+                topicId: NoticeCategory.eventNotice.id,
             )
         ]
     }
@@ -154,7 +172,7 @@ public extension Notice {
                 department: "대학일자리플러스센터",
                 uploadDate: "2026-05-12",
                 imageUrl: nil,
-                topic: NoticeCategory.employmentNotice.rawValue,
+                topicId: NoticeCategory.employmentNotice.id,
             ),
             Notice(
                 id: 1121929,
@@ -164,7 +182,7 @@ public extension Notice {
                 department: "대학일자리플러스센터",
                 uploadDate: "2026-05-11",
                 imageUrl: nil,
-                topic: NoticeCategory.employmentNotice.rawValue,
+                topicId: NoticeCategory.employmentNotice.id,
             )
         ]
     }

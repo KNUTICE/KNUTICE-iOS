@@ -51,7 +51,7 @@ public enum NoticeCategory: String, CaseIterable {
         NoticeCategory(rawValue: rawValue)?.id
     }
     
-    public static func rawValue(fromID id: Int) -> String? {
+    public static func rawValue(fromId id: Int) -> String? {
         NoticeCategory(id: id)?.rawValue
     }
 }

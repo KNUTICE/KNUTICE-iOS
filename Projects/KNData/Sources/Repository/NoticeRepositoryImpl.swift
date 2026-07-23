@@ -19,7 +19,7 @@ public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
     }
     
     public func fetchNotices(
-        for category: String? = nil,
+        for category: (any CategoryProtocol)? = nil,
         keyword: String? = nil,
         after nttId: Int? = nil,
         size: Int = 20
@@ -34,7 +34,7 @@ public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
         ]
         
         if let category {
-            queryItems.append(URLQueryItem(name: "topic", value: category))
+            queryItems.append(URLQueryItem(name: "topicId", value: String(category.id)))
         }
         
         if let keyword {
@@ -64,7 +64,7 @@ public final class NoticeRepositoryImpl: NoticeRepository, NoticeCreatable {
     }
     
     public func fetchNotices(
-        for category: String? = nil,
+        for category: (any CategoryProtocol)? = nil,
         keyword: String? = nil,
         after nttId: Int? = nil,
         size: Int = 20
