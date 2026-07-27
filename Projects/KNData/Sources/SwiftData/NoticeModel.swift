@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KNDomain
 import SwiftData
 
 /// A SwiftData model that stores a notice item for local persistence.
@@ -26,8 +27,8 @@ final class NoticeModel {
     /// A Boolean value indicating whether the notice content can be summarized.
     var isSummarizable: Bool
     
-    /// The department or organization that published the notice.
-    var department: String
+    /// The optional department or organization that published the notice.
+    var department: String?
     
     /// The date string when the notice was uploaded.
     var uploadDate: String
@@ -44,7 +45,7 @@ final class NoticeModel {
         title: String,
         contentURL: URL? = nil,
         isSummarizable: Bool,
-        department: String,
+        department: String? = nil,
         uploadDate: String,
         imageURL: String? = nil,
         topicId: Int
@@ -57,5 +58,18 @@ final class NoticeModel {
         self.uploadDate = uploadDate
         self.imageURL = imageURL
         self.topicId = topicId
+    }
+    
+    convenience init(notice: Notice) {
+        self.init(
+            id: notice.id,
+            title: notice.title,
+            contentURL: notice.contentURL,
+            isSummarizable: notice.isSummarizable,
+            department: notice.department,
+            uploadDate: notice.uploadDate,
+            imageURL: notice.imageURL,
+            topicId: notice.topicId
+        )
     }
 }

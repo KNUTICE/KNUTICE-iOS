@@ -21,17 +21,17 @@ protocol BookmarkManageable: Actor {
         sortBy option: BookmarkSortOption,
         fetchLimit limit: Int,
         fetchOffset offset: Int
-    ) throws -> [Bookmark]
+    ) throws -> [BookmarkModel]
     
     func fetch(
         keyword: String,
         fetchLimit limit: Int,
         fetchOffset offset: Int
-    ) throws -> [Bookmark]
+    ) throws -> [BookmarkModel]
     
     func fetch(
         id: Int
-    ) throws -> Bookmark?
+    ) throws -> BookmarkModel?
     
     func delete(
         id: Int
@@ -47,7 +47,7 @@ extension BookmarkManageable {
         sortBy option: BookmarkSortOption,
         fetchLimit limit: Int = 20,
         fetchOffset offset: Int = 0
-    ) throws -> [Bookmark] {
+    ) throws -> [BookmarkModel] {
         try self.fetch(sortBy: option, fetchLimit: limit, fetchOffset: offset)
     }
 }
@@ -101,12 +101,12 @@ actor BookmarkDataStore: BookmarkManageable {
         sortBy option: BookmarkSortOption,
         fetchLimit limit: Int = 20,
         fetchOffset offset: Int = 0
-    ) throws -> [Bookmark] {
+    ) throws -> [BookmarkModel] {
         var descriptor = FetchDescriptor<BookmarkModel>(sortBy: [option.sortDescriptor])
         descriptor.fetchLimit = limit
         descriptor.fetchOffset = offset
         
-        return try modelContext.fetch(descriptor).map(\.asEntity)
+        return try modelContext.fetch(descriptor)
     }
     
     /// Fetches bookmarks whose memo or notice title contains the given keyword.
@@ -121,13 +121,13 @@ actor BookmarkDataStore: BookmarkManageable {
         keyword: String,
         fetchLimit limit: Int = 20,
         fetchOffset offset: Int = 0
-    ) throws -> [Bookmark] {
+    ) throws -> [BookmarkModel] {
         let predicate = #Predicate<BookmarkModel> { $0.memo.contains(keyword) || $0.notice.title.contains(keyword) }
         var descriptor = FetchDescriptor(predicate: predicate)
         descriptor.fetchLimit = limit
         descriptor.fetchOffset = offset
         
-        return try modelContext.fetch(descriptor).map(\.asEntity)
+        return try modelContext.fetch(descriptor)
     }
     
     /// Fetches the bookmark that matches the given identifier.
@@ -137,8 +137,8 @@ actor BookmarkDataStore: BookmarkManageable {
     /// - Throws: An error if SwiftData fails to fetch the bookmark.
     func fetch(
         id: Int
-    ) throws -> Bookmark? {
-        try fetchModel(id: id)?.asEntity
+    ) throws -> BookmarkModel? {
+        try fetchModel(id: id)
     }
     
     private func fetchModel(
@@ -192,12 +192,13 @@ actor BookmarkDataStore: BookmarkManageable {
 fileprivate extension Bookmark {
     var asModel: BookmarkModel {
         BookmarkModel(
-            notice: notice,
+            notice: NoticeModel(notice: notice),
             memo: memo,
             alarmDate: alarmDate
         )
     }
 }
+
 
 fileprivate extension BookmarkSortOption {
     /// Converts the bookmark sort option into a SwiftData sort descriptor.

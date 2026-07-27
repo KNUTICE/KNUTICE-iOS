@@ -19,7 +19,7 @@ struct NoticeHeader: View {
                 .font(.subheadline)
             
             HStack {
-                Text(notice.department)
+                Text(notice.department ?? "")
                 
                 Divider()
                 
