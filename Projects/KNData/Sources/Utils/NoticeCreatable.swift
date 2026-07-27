@@ -25,7 +25,7 @@ extension NoticeCreatable {
         return Notice(
             id: item.nttID,
             title: item.title,
-            contentURL: item.contentURL,
+            contentURL: URL(string: item.contentURL),
             isSummarizable: item.isContentSummary,
             department: item.department,
             uploadDate: item.registrationDate,
@@ -40,7 +40,7 @@ extension NoticeCreatable {
         return Notice(
             id: data.nttID,
             title: data.title,
-            contentURL: data.contentURL,
+            contentURL: URL(string: data.contentURL),
             isSummarizable: data.isContentSummary,
             department: data.department,
             uploadDate: data.registrationDate,

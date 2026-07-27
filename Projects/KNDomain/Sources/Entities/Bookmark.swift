@@ -6,31 +6,54 @@
 //
 
 import Foundation
-import RxDataSources
 
-public struct Bookmark: Sendable {
+public struct Bookmark: Identifiable, Sendable {
+    /// The unique identifier of the bookmark, matching the associated notice identifier.
+    public var id: Int { notice.id }
+    
+    /// The notice associated with the bookmark.
     public let notice: Notice
+    
+    /// A user-written memo saved with the bookmark.
     public var memo: String
+    
+    /// The optional date when the bookmark alarm should be triggered.
     public var alarmDate: Date?
     
-    public init(notice: Notice, memo: String, alarmDate: Date? = nil) {
+    /// Creates a bookmark with the provided notice, memo, and optional alarm date.
+    public init(
+        notice: Notice,
+        memo: String,
+        alarmDate: Date? = nil
+    ) {
         self.notice = notice
         self.memo = memo
         self.alarmDate = alarmDate
     }
 }
 
-extension Bookmark: IdentifiableType, Equatable {
-    public typealias Identity = Int
-    
-    public var identity: Int {
-        return notice.id
-    }
-    
-    public static func == (lhs: Bookmark, rhs: Bookmark) -> Bool {
-        lhs.notice == rhs.notice &&
-        lhs.memo == rhs.memo &&
-        lhs.alarmDate == rhs.alarmDate
+public extension Bookmark {
+    /// Returns a bookmark with the provided department when the associated notice does not already have one.
+    ///
+    /// - Parameter department: The department to assign when the associated notice has no department.
+    /// - Returns: A bookmark with the provided department, or the current bookmark when the notice already has one.
+    func withDepartmentIfNeeded(_ department: String) -> Bookmark {
+        guard notice.department == nil else { return self }
+
+        return Bookmark(
+            notice: Notice(
+                id: notice.id,
+                title: notice.title,
+                contentURL: notice.contentURL,
+                isSummarizable: notice.isSummarizable,
+                department: department,
+                uploadDate: notice.uploadDate,
+                imageURL: notice.imageURL,
+                topicId: notice.topicId
+            ),
+            memo: memo,
+            alarmDate: alarmDate
+        )
     }
 }
 

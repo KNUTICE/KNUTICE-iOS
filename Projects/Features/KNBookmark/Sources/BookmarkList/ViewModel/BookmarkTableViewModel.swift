@@ -11,6 +11,7 @@ import Factory
 import Foundation
 import KNDomain
 import KNUtility
+import RxDataSources
 import RxRelay
 import RxSwift
 import os
@@ -120,4 +121,16 @@ extension BookmarkTableViewModel {
         }
     }
     
+}
+
+extension Bookmark: @retroactive IdentifiableType, @retroactive Equatable {
+    public typealias Identity = Int
+    
+    public var identity: Int { return id }
+    
+    public static func == (lhs: Bookmark, rhs: Bookmark) -> Bool {
+        lhs.notice == rhs.notice &&
+        lhs.memo == rhs.memo &&
+        lhs.alarmDate == rhs.alarmDate
+    }
 }

@@ -75,7 +75,7 @@ public actor SwiftDataBookmarkRepository: BookmarkRepository {
             sortBy: option,
             fetchLimit: pageSize,
             fetchOffset: pageNum * pageSize
-        )
+        ).map(\.asEntity)
     }
     
     /// Fetches a single bookmark by its notice ID.
@@ -86,7 +86,7 @@ public actor SwiftDataBookmarkRepository: BookmarkRepository {
     public func fetch(id: Int) async throws -> Bookmark? {
         try Task.checkCancellation()
         
-        return try await dataStore.fetch(id: id)
+        return try await dataStore.fetch(id: id)?.asEntity
     }
     
     // MARK: - Delete
@@ -129,6 +129,31 @@ public actor SwiftDataBookmarkRepository: BookmarkRepository {
             keyword: keyword,
             fetchLimit: 0,
             fetchOffset: 0
+        ).map(\.asEntity)
+    }
+}
+
+fileprivate extension BookmarkModel {
+    var asEntity: Bookmark {
+        Bookmark(
+            notice: notice.asEntity,
+            memo: memo,
+            alarmDate: alarmDate
+        )
+    }
+}
+
+fileprivate extension NoticeModel {
+    var asEntity: Notice {
+        Notice(
+            id: id,
+            title: title,
+            contentURL: contentURL,
+            isSummarizable: isSummarizable,
+            department: department,
+            uploadDate: uploadDate,
+            imageURL: imageURL,
+            topicId: topicId
         )
     }
 }
