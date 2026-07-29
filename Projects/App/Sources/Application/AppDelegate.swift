@@ -189,16 +189,6 @@ extension AppDelegate {
     ///   Feature 모듈 내부에서는 `liveValue`를 직접 구현하지 않고,
     ///   App 시작 시점에 `prepareDependencies`를 통해 실제 구현체를 등록한다.
     private func setDependencies() {
-        prepareDependencies {
-            $0.fetchBookmarkUseCase = Container.shared.fetchBookmarksUseCase()
-            $0.deleteBookmarkUseCase = Container.shared.deleteBookmarkUseCase()
-            $0.updateBookmarkUseCase = Container.shared.updateBookmarkUseCase()
-            $0.saveBookmarkUseCase = Container.shared.saveBookmarkUseCase()
-            $0.submitReportUseCase = Container.shared.submitReportUseCase()
-            $0.fetchTopicSubscriptionUseCase = Container.shared.fetchTopicSubscriptionUseCase()
-            $0.updateTopicSubscriptionUseCase = Container.shared.updateTopicSubscriptionUseCase()
-        }
-        
         Container.shared.fetchNoticeSummaryUseCase.register {
             FetchNoticeSummaryUseCaseImpl(repository: Container.shared.noticeSummaryRepository())
         }
@@ -220,7 +210,10 @@ extension AppDelegate {
         }
         
         Container.shared.fetchBookmarkUseCase.register {
-            FetchBookmarksUseCaseImpl(bookmarkReportory: SwiftDataBookmarkRepository.shared)
+            FetchBookmarksUseCaseImpl(
+                bookmarkReportory: SwiftDataBookmarkRepository.shared,
+                topicRepository: Container.shared.topicRepository()
+            )
         }
         
         Container.shared.provideReloadEventPublisherUseCase.register {
@@ -245,6 +238,16 @@ extension AppDelegate {
         
         Container.shared.deleteMajorUseCase.register {
             DeleteMajorUseCase(repository: Container.shared.topicSubscriptionRepository())
+        }
+        
+        prepareDependencies {
+            $0.fetchBookmarkUseCase = Container.shared.fetchBookmarkUseCase()
+            $0.deleteBookmarkUseCase = Container.shared.deleteBookmarkUseCase()
+            $0.updateBookmarkUseCase = Container.shared.updateBookmarkUseCase()
+            $0.saveBookmarkUseCase = Container.shared.saveBookmarkUseCase()
+            $0.submitReportUseCase = Container.shared.submitReportUseCase()
+            $0.fetchTopicSubscriptionUseCase = Container.shared.fetchTopicSubscriptionUseCase()
+            $0.updateTopicSubscriptionUseCase = Container.shared.updateTopicSubscriptionUseCase()
         }
         
     }
