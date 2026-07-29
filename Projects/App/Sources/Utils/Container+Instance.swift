@@ -46,11 +46,7 @@ extension Container {
         Factory(self) { TopicRepositoryImpl() }
     }
     
-    //MARK: - UseCase
-    var fetchBookmarksUseCase: Factory<FetchBookmarksUseCase> {
-        Factory(self) { FetchBookmarksUseCaseImpl(bookmarkReportory: SwiftDataBookmarkRepository.shared) }
-    }
-    
+    // MARK: - UseCase
     var deleteBookmarkUseCase: Factory<DeleteBookmarkUseCase> {
         Factory(self) { DeleteBookmarkUseCaseImpl(bookmarkRepository: SwiftDataBookmarkRepository.shared) }
     }
