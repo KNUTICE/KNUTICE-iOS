@@ -22,6 +22,10 @@ extension Container {
         Factory(self) { BookmarkRepositoryImpl.shared }
     }
     
+    var swiftDataBookmarkRepository: Factory<BookmarkRepository> {
+        Factory(self) { SwiftDataBookmarkRepository.shared }
+    }
+    
     var reportRepository: Factory<ReportRepository> {
         Factory(self) { ReportRepositoryImpl() }
     }
@@ -44,7 +48,7 @@ extension Container {
     
     var topicRepository: Factory<TopicRepository> {
         Factory(self) { TopicRepositoryImpl() }
-    }
+    } 
     
     // MARK: - UseCase
     var deleteBookmarkUseCase: Factory<DeleteBookmarkUseCase> {
@@ -106,6 +110,16 @@ extension Container {
         Factory(self) { MigrateUserDefaultsMajorsUseCase(repository: self.topicRepository()) }
     }
     
+    var migrateBookmarkTopicsUseCase: Factory<MigrateBookmarkTopicsUseCase> {
+        Factory(self) {
+            MigrateBookmarkTopicsUseCase(
+                bookmarkRepository: self.bookmarkRepository(),
+                noticeRepository: self.noticeRepository(),
+                swiftDataBookmarkRepository: self.swiftDataBookmarkRepository()
+            )
+        }
+    }
+    
     var updateFCMTokenUseCase: Factory<UpdateFCMTokenUseCase> {
         Factory(self) { UpdateFCMTokenUseCase(repository: self.tokenRepository()) }
     }
@@ -113,8 +127,6 @@ extension Container {
     var registerFCMTokenUseCase: Factory<RegisterFCMTokenUseCase> {
         Factory(self) { RegisterFCMTokenUseCase(repository: self.tokenRepository()) }
     }
-    
-    
     
     //MARK: - ViewModel
     

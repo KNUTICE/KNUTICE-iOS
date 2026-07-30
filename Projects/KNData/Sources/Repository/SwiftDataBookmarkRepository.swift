@@ -89,6 +89,15 @@ public actor SwiftDataBookmarkRepository: BookmarkRepository {
         return try await dataStore.fetch(id: id)?.asEntity
     }
     
+    /// Fetches all stored bookmarks using the requested sort option.
+    ///
+    /// - Parameter option: The sort option used by the data store.
+    /// - Returns: A list of all bookmark domain entities sorted by the given option.
+    /// - Throws: An error from the underlying SwiftData store.
+    public func fetchAll(sortBy option: BookmarkSortOption = .createdAtAscending) async throws -> [Bookmark] {
+        return try await fetch(page: 0, pageSize: 0, sortBy: option)
+    }
+    
     // MARK: - Delete
     
     /// Deletes the bookmark associated with the given notice ID.

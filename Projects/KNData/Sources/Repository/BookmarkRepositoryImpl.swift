@@ -85,6 +85,15 @@ public actor BookmarkRepositoryImpl: BookmarkRepository {
         return dto.flatMap { $0.asEntity }
     }
     
+    /// Fetches all stored bookmarks and maps DTOs to domain entities.
+    /// Passing a page size of `0` delegates to the data source's unlimited fetch behavior.
+    ///
+    /// - Parameter option: Sorting option applied to the full result set.
+    /// - Returns: All stored bookmarks sorted by the given option.
+    public func fetchAll(sortBy option: BookmarkSortOption = .createdAtAscending) async throws -> [Bookmark] {
+        return try await fetch(page: 0, pageSize: 0, sortBy: option)
+    }
+    
     // MARK: - Delete
     
     /// Deletes a bookmark by ID.

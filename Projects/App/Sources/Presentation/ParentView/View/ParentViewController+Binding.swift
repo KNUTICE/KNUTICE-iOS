@@ -13,9 +13,10 @@ import UIKit
 extension ParentViewController {
     func bind() {
         viewModel.$shouldNavigateToMain
+            .combineLatest(viewModel.$didCompleteMajorDataMigration)
             .dropFirst()
-            .sink(receiveValue: { [weak self] in
-                if $0 {
+            .sink(receiveValue: { [weak self] shouldNavigateToMain, didCompleteMajorDataMigration in
+                if shouldNavigateToMain && didCompleteMajorDataMigration {
                     self?.switchViewController()
                 }
             })

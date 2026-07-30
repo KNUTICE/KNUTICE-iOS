@@ -46,6 +46,16 @@ public protocol BookmarkRepository: Sendable {
         sortBy option: BookmarkSortOption
     ) async throws -> [Bookmark]
     
+    /// Fetches every stored bookmark using the provided sort option.
+    ///
+    /// Use this when the caller needs to process the complete bookmark set,
+    /// such as during data migration, instead of loading one UI page at a time.
+    ///
+    /// - Parameter option: Sorting option applied to the full result set.
+    /// - Returns: All stored bookmarks sorted by the given option.
+    /// - Throws: Errors from the underlying data source.
+    func fetchAll(sortBy option: BookmarkSortOption) async throws -> [Bookmark]
+    
     /// Fetches a single bookmark by its ID.
     ///
     /// - Parameter id: The identifier of the bookmark.
@@ -77,4 +87,10 @@ public protocol BookmarkRepository: Sendable {
     /// - Returns: A list of bookmarks whose fields match the keyword.
     /// - Throws: Errors if the search operation fails.
     func search(with keyword: String) async throws -> [Bookmark]
+}
+
+public extension BookmarkRepository {
+    func fetchAll(sortBy option: BookmarkSortOption = .createdAtAscending) async throws -> [Bookmark] {
+        return try await fetchAll(sortBy: option)
+    }
 }

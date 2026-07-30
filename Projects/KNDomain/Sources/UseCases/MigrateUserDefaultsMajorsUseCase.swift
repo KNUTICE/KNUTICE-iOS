@@ -17,7 +17,7 @@ public final class MigrateUserDefaultsMajorsUseCase: Sendable {
     }
     
     /// Fetches topic data for saved major names and stores matching major identifiers.
-    func execute() async throws {
+    public func execute() async throws {
         let majorTopics = await MajorManager.shared.majorStrings
         
         try await withThrowingTaskGroup(of: [any CategoryProtocol].self) { group in
@@ -35,5 +35,7 @@ public final class MigrateUserDefaultsMajorsUseCase: Sendable {
                 }
             }
         }
+        
+        UserDefaults.shared?.set(true, forKey: UserDefaultsKeys.hasMigratedUserDefaultsMajors.rawValue)
     }
 }

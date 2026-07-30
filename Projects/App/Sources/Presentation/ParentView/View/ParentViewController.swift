@@ -18,12 +18,13 @@ final class ParentViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         let storyboard = UIStoryboard(name: "LoadingLaunchScreen", bundle: nil)
-        let loadingViewController = storyboard.instantiateViewController(identifier: "VC1")
+        let loadingViewController = storyboard.instantiateViewController(identifier: "LoadingLaunchViewController")
         addChildVC(loadingViewController)
+        bind()
         viewModel.subscribeToFCMToken()
         viewModel.subscribeToNotificationAuthorizationStatus()
         viewModel.prepareAppConfiguration()
-        bind()
+        viewModel.migrateMajorDataIfNeeded()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
