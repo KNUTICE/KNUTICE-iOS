@@ -13,9 +13,7 @@ import SwiftData
 @available(iOS 17.0, *)
 @available(macCatalyst 17.0, *)
 protocol BookmarkManageable: Actor {
-    func save(
-        _ bookmark: Bookmark
-    ) throws
+    func save(_ bookmark: BookmarkModel) throws
     
     func fetch(
         sortBy option: BookmarkSortOption,
@@ -29,17 +27,11 @@ protocol BookmarkManageable: Actor {
         fetchOffset offset: Int
     ) throws -> [BookmarkModel]
     
-    func fetch(
-        id: Int
-    ) throws -> BookmarkModel?
+    func fetch(id: Int) throws -> BookmarkModel?
     
-    func delete(
-        id: Int
-    ) throws
+    func delete(id: Int) throws
     
-    func update(
-        _ bookmark: Bookmark
-    ) throws
+    func update(_ bookmark: BookmarkModel) throws
 }
 
 extension BookmarkManageable {
@@ -76,11 +68,8 @@ actor BookmarkDataStore: BookmarkManageable {
     ///
     /// - Parameter bookmark: The bookmark model to store.
     /// - Throws: An error if SwiftData fails to save the context.
-    func save(
-        _ bookmark: Bookmark
-    ) throws {
-        let bookmarkModel = bookmark.asModel
-        modelContext.insert(bookmarkModel)
+    func save(_ bookmark: BookmarkModel) throws {
+        modelContext.insert(bookmark)
         
         if modelContext.hasChanges {
             try modelContext.save()
@@ -135,15 +124,11 @@ actor BookmarkDataStore: BookmarkManageable {
     /// - Parameter id: The unique identifier of the bookmark to fetch.
     /// - Returns: The matching bookmark, or `nil` if no bookmark exists for the identifier.
     /// - Throws: An error if SwiftData fails to fetch the bookmark.
-    func fetch(
-        id: Int
-    ) throws -> BookmarkModel? {
+    func fetch(id: Int) throws -> BookmarkModel? {
         try fetchModel(id: id)
     }
     
-    private func fetchModel(
-        id: Int
-    ) throws -> BookmarkModel? {
+    private func fetchModel(id: Int) throws -> BookmarkModel? {
         let predicate = #Predicate<BookmarkModel> { $0.id == id }
         let descriptor = FetchDescriptor(predicate: predicate)
         
@@ -156,9 +141,7 @@ actor BookmarkDataStore: BookmarkManageable {
     ///
     /// - Parameter id: The unique identifier of the bookmark to delete.
     /// - Throws: An error if SwiftData fails to fetch or delete the bookmark.
-    func delete(
-        id: Int
-    ) throws {
+    func delete(id: Int) throws {
         guard let bookmark = try fetchModel(id: id) else { return }
         
         modelContext.delete(bookmark)
@@ -172,12 +155,10 @@ actor BookmarkDataStore: BookmarkManageable {
     
     /// Updates the stored bookmark that matches the given bookmark's identifier.
     ///
-    /// - Parameter bookmark: The bookmark containing the latest memo and alarm date values.
+    /// - Parameter bookmark: The bookmark model containing the latest memo and alarm date values.
     /// - Throws: An error if SwiftData fails to fetch or save the bookmark.
-    func update(
-        _ bookmark: Bookmark
-    ) throws {
-        guard let existingBookmark = try fetchModel(id: bookmark.notice.id) else { return }
+    func update(_ bookmark: BookmarkModel) throws {
+        guard let existingBookmark = try fetchModel(id: bookmark.id) else { return }
 
         existingBookmark.memo = bookmark.memo
         existingBookmark.alarmDate = bookmark.alarmDate
@@ -188,17 +169,6 @@ actor BookmarkDataStore: BookmarkManageable {
         }
     }
 }
-
-fileprivate extension Bookmark {
-    var asModel: BookmarkModel {
-        BookmarkModel(
-            notice: NoticeModel(notice: notice),
-            memo: memo,
-            alarmDate: alarmDate
-        )
-    }
-}
-
 
 fileprivate extension BookmarkSortOption {
     /// Converts the bookmark sort option into a SwiftData sort descriptor.
