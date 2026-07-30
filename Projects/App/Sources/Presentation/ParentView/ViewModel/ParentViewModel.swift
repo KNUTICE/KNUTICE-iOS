@@ -18,10 +18,14 @@ final class ParentViewModel {
     /// Indicates whether the view should navigate to the main screen.
     /// Set to `true` to trigger navigation, `false` to remain on the current view.
     @Published var shouldNavigateToMain: Bool = false
+    @Published var isMigratingMajorData: Bool = false
+    @Published var didCompleteMajorDataMigration: Bool = false
     
     /// The injected service responsible for handling FCM token registration and management.
     @Injected(\.registerFCMTokenUseCase) private var registerFCMTokenUseCase
     @Injected(\.fetchSelectedMajorCategoryUseCase) private var fetchMajorCategoryUseCase
+    @Injected(\.migrateUserDefaultsMajorsUseCase) private var migrateUserDefaultsMajorsUseCase
+    @Injected(\.migrateBookmarkTopicsUseCase) private var migrateBookmarkTopicsUseCase
     
     /// A set of Combine cancellables used to store subscriptions for automatic cancellation
     /// when the owning instance is deallocated.
@@ -122,6 +126,31 @@ final class ParentViewModel {
     func prepareAppConfiguration() {
         Task {
             await ABTestManager.shared.fetchConfiguration()
+        }
+    }
+    
+    func migrateMajorDataIfNeeded() {
+        guard !isMigratingMajorData else { return }
+        
+        Task {
+            isMigratingMajorData = true
+            didCompleteMajorDataMigration = false
+            
+            do {
+                if UserDefaults.shared?.bool(forKey: UserDefaultsKeys.hasMigratedUserDefaultsMajors.rawValue) == false {
+                    try await migrateUserDefaultsMajorsUseCase.execute()
+                }
+                
+                if UserDefaults.shared?.bool(forKey: UserDefaultsKeys.hasMigratedBookmarkTopics.rawValue) == false {
+                    try await migrateBookmarkTopicsUseCase.execute()
+                }
+                
+                didCompleteMajorDataMigration = true
+            } catch {
+                print(error)
+            }
+            
+            isMigratingMajorData = false
         }
     }
     
