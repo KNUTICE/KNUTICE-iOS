@@ -50,7 +50,7 @@ public actor SwiftDataBookmarkRepository: BookmarkRepository {
             throw ExistingBookmarkError.alreadyExist(message: "이미 존재하는 북마크에요.")
         }
         
-        try await dataStore.save(bookmark)
+        try await dataStore.save(bookmark.asModel)
         eventTrigger.send(.normal)
     }
     
@@ -120,7 +120,7 @@ public actor SwiftDataBookmarkRepository: BookmarkRepository {
     public func update(_ bookmark: Bookmark) async throws {
         try Task.checkCancellation()
         
-        try await dataStore.update(bookmark)
+        try await dataStore.update(bookmark.asModel)
         eventTrigger.send(.preserveCount)
     }
     
@@ -152,6 +152,25 @@ fileprivate extension BookmarkModel {
     }
 }
 
+fileprivate extension Bookmark {
+    var asModel: BookmarkModel {
+        BookmarkModel(
+            notice: NoticeModel(
+                id: notice.id,
+                title: notice.title,
+                contentURL: notice.contentURL,
+                isSummarizable: notice.isSummarizable,
+                department: notice.bookmarkDepartment,
+                uploadDate: notice.uploadDate,
+                imageURL: notice.imageURL,
+                topicId: notice.topicId
+            ),
+            memo: memo,
+            alarmDate: alarmDate
+        )
+    }
+}
+
 fileprivate extension NoticeModel {
     var asEntity: Notice {
         Notice(
@@ -164,5 +183,15 @@ fileprivate extension NoticeModel {
             imageURL: imageURL,
             topicId: topicId
         )
+    }
+}
+
+fileprivate extension Notice {
+    var bookmarkDepartment: String? {
+        if 1...5 ~= topicId || 900...999 ~= topicId {
+            return department
+        }
+
+        return nil
     }
 }
