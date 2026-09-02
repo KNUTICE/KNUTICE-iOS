@@ -11,18 +11,32 @@ import KNUtility
 import UIKit
 
 extension ParentViewController {
-    func bind() {
+    func bindMainNavigationState() {
         viewModel.$shouldNavigateToMain
             .combineLatest(viewModel.$didCompleteMajorDataMigration)
-            .dropFirst()
+            .dropFirst(2)
             .sink(receiveValue: { [weak self] shouldNavigateToMain, didCompleteMajorDataMigration in
                 if shouldNavigateToMain && didCompleteMajorDataMigration {
+                    //FIXME: OptimizationLoadingView 표시보다 Main 화면 전환이 더 먼저 발생함
                     self?.switchViewController()
                 }
             })
             .store(in: &cancellables)
     }
     
+    func bindMigrationState() {
+        viewModel.$isMigratingMajorData
+            .dropFirst()
+            .delay(for: .seconds(3), scheduler: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] isMigratingMajorData in
+                if isMigratingMajorData {
+                    self?.addOptimizationLoadingView()
+                } else {
+                    self?.removeOptimizationLoadingView()
+                }
+            })
+            .store(in: &cancellables)
+    }
     
     func switchViewController() {
         Task { @MainActor [weak self] in
