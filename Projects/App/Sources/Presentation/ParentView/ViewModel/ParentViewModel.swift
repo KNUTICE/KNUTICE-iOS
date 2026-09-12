@@ -45,6 +45,7 @@ final class ParentViewModel {
     /// - Note: The subscription is stored in the `cancellables` set to manage its lifecycle.
     func subscribeToFCMToken() {
         NotificationCenter.default.publisher(for: .fcmToken)
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] notification in
                 guard let fcmToken = notification.userInfo?[UserInfoKeys.fcmToken.rawValue] as? String else {
                     return
@@ -105,6 +106,7 @@ final class ParentViewModel {
     ///
     func subscribeToNotificationAuthorizationStatus() {
         NotificationAuthorizationObservable.shared.publisher
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] isAuthorized in
                 guard isAuthorized else { return }
                 

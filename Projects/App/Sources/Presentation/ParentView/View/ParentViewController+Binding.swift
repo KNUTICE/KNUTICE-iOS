@@ -13,11 +13,11 @@ import UIKit
 extension ParentViewController {
     func bindMainNavigationState() {
         viewModel.$shouldNavigateToMain
-            .combineLatest(viewModel.$didCompleteMajorDataMigration)
-            .dropFirst(2)
+            .zip(viewModel.$didCompleteMajorDataMigration)
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] shouldNavigateToMain, didCompleteMajorDataMigration in
                 if shouldNavigateToMain && didCompleteMajorDataMigration {
-                    //FIXME: OptimizationLoadingView 표시보다 Main 화면 전환이 더 먼저 발생함
                     self?.switchViewController()
                 }
             })
@@ -27,7 +27,7 @@ extension ParentViewController {
     func bindMigrationState() {
         viewModel.$isMigratingMajorData
             .dropFirst()
-            .delay(for: .seconds(3), scheduler: DispatchQueue.main)
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] isMigratingMajorData in
                 if isMigratingMajorData {
                     self?.addOptimizationLoadingView()
