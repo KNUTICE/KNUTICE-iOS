@@ -88,9 +88,15 @@ public actor TopicRepositoryImpl: TopicRepository {
         return categories
     }
     
-    /// Fetches topics matching the specified legacy topic string.
+    /// Fetches topics matching the specified legacy topic string and topic type.
     ///
-    /// - Parameter topic: The legacy string-based topic identifier.
+    /// Notice and cafeteria categories are resolved locally when the supplied
+    /// `topic` and `type` match known values. Other categories are requested
+    /// from the remote server.
+    ///
+    /// - Parameters:
+    ///   - topic: The legacy string-based topic identifier.
+    ///   - type: The type of topic category to retrieve.
     /// - Returns: An array of categories associated with the specified topic.
     /// - Throws: A `NetworkError` if the request cannot be completed or the request URL is invalid.
     public func getTopics(_ topic: String, type: TopicType) async throws -> [any CategoryProtocol] {
