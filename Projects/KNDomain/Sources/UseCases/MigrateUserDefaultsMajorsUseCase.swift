@@ -23,7 +23,7 @@ public final class MigrateUserDefaultsMajorsUseCase: Sendable {
         try await withThrowingTaskGroup(of: [any CategoryProtocol].self) { group in
             for topic in majorTopics {
                 group.addTask { [self] in
-                    try await repository.getTopics(topic)
+                    try await repository.getTopics(topic, type: .major)
                 }
             }
             
