@@ -6,7 +6,7 @@
 //
 
 import Combine
-import Factory
+import FactoryKit
 import UIKit
 
 final class ParentViewController: UIViewController {

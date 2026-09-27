@@ -5,7 +5,7 @@
 //  Created by 이정훈 on 9/14/25.
 //
 
-import Factory
+import FactoryKit
 import KNDomain
 @testable import KNNotice
 import KNUtility

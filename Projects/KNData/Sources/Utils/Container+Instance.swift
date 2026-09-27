@@ -5,7 +5,7 @@
 //  Created by 이정훈 on 4/28/26.
 //
 
-import Factory
+import FactoryKit
 import KNDomain
 import KNNetwork
 

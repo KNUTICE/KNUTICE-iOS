@@ -5,7 +5,7 @@
 //  Created by 이정훈 on 3/29/26.
 //
 
-import Factory
+import FactoryKit
 import KNNetwork
 @testable import KNDomain
 import Testing

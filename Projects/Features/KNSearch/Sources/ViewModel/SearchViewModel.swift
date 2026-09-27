@@ -6,7 +6,7 @@
 //
 
 import CorePresentation
-import Factory
+import FactoryKit
 import KNDomain
 import RxRelay
 import os

@@ -5,7 +5,7 @@
 //  Created by 이정훈 on 1/16/26.
 //
 
-import Factory
+import FactoryKit
 import KNUtility
 
 public final class UpdateFCMTokenUseCase: Sendable {

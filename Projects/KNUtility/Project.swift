@@ -6,7 +6,7 @@ let project = Project.module(
     dependencies: [
         .external(name: "FirebaseMessaging"),
         .external(name: "FirebaseRemoteConfig"),
-        .external(name: "Factory")
+        .external(name: "FactoryKit")
     ],
     hasTests: false,
     resources: ["Resources/**"],

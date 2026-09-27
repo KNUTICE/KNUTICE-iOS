@@ -13,7 +13,7 @@ let project = Project.module(
         .project(target: "KNData", path: "../../KNData"),
         .project(target: "KNSetting", path: "../KNSetting"),
         .external(name: "ComposableArchitecture"),
-        .external(name: "Factory"),
+        .external(name: "FactoryKit"),
         .external(name: "RxSwift"),
         .external(name: "RxCocoa"),
         .external(name: "RxDataSources"),

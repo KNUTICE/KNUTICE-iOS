@@ -6,7 +6,7 @@
 //
 
 import ComposableArchitecture
-import Factory
+import FactoryKit
 import Foundation
 import KNDomain
 

@@ -7,7 +7,7 @@
 
 import CorePresentation
 import Combine
-import Factory
+import FactoryKit
 import Foundation
 import KNDomain
 import KNUtility

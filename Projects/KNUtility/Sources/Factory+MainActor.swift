@@ -5,7 +5,7 @@
 //  Created by 이정훈 on 1/21/26.
 //
 
-import Factory
+import FactoryKit
 
 public extension Factory {
     @MainActor

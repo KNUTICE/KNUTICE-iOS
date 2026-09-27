@@ -8,7 +8,7 @@ let project = Project.module(
         .project(target: "KNDesignSystem", path: "../../KNDesignSystem"),
         .project(target: "CorePresentation", path: "../CorePresentation"),
         .external(name: "ComposableArchitecture"),
-        .external(name: "Factory")
+        .external(name: "FactoryKit")
     ],
     hasTests: false,
 )
