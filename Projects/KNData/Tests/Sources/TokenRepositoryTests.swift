@@ -6,7 +6,7 @@
 //
 
 import Alamofire
-import Factory
+import FactoryKit
 import Foundation
 import KNNetwork
 @testable import KNData

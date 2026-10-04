@@ -11,7 +11,7 @@ let project = Project.module(
         .project(target: "KNData", path: "../../KNData"),
         .project(target: "KNNotice", path: "../KNNotice"),
         .project(target: "KNBookmark", path: "../KNBookmark"),
-        .external(name: "Factory"),
+        .external(name: "FactoryKit"),
         .external(name: "RxSwift"),
         .external(name: "RxCocoa"),
         .external(name: "RxDataSources"),

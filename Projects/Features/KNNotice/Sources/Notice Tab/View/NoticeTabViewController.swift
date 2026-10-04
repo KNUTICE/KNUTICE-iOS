@@ -127,7 +127,7 @@ public final class NoticeTabViewController: UIViewController, SettingButtonConfi
                 }
                 
                 viewControllers = newCategories.compactMap { category in
-                    existingViewController(for: category) ?? makeViewController(for: category)
+                    self.existingViewController(for: category) ?? self.makeViewController(for: category)
                 }
             }
             .bind(to: collectionView.rx.items) { [weak self] (collectionView, row, element) in

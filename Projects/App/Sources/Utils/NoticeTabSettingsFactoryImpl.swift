@@ -5,7 +5,7 @@
 //  Created by 이정훈 on 5/27/26.
 //
 
-import Factory
+import FactoryKit
 import KNNotice
 import RxRelay
 

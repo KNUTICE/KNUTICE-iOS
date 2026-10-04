@@ -5,7 +5,7 @@
 //  Created by 이정훈 on 1/3/26.
 //
 
-import Factory
+import FactoryKit
 
 public extension Container {
     var remoteDataSource: Factory<RemoteDataSource> {

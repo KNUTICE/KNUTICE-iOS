@@ -7,7 +7,7 @@
 
 import ComposableArchitecture
 import CorePresentation
-import Factory
+import FactoryKit
 import KNBookmark
 import KNDesignSystem
 import KNDomain

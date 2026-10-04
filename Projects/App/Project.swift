@@ -139,7 +139,7 @@ let project = Project(
                 .project(target: "KNData", path: "../KNData"),
                 .project(target: "KNDeepLink", path: "../KNDeepLink"),
                 .project(target: "KNDesignSystem", path: "../KNDesignSystem"),
-                .external(name: "Factory"),
+                .external(name: "FactoryKit"),
             ],
             settings: .settings(
                 base: [

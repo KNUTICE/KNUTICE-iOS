@@ -8,7 +8,7 @@
 import Combine
 import KNData
 import KNDomain
-import Factory
+import FactoryKit
 import Foundation
 import KNUtility
 

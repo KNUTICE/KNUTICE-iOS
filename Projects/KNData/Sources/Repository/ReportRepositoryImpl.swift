@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Factory
+import FactoryKit
 import KNDomain
 import KNNetwork
 import KNUtility

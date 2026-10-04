@@ -10,7 +10,7 @@ let project = Project.module(
         .project(target: "KNMarkdown", path: "../../KNMarkdown"),
         .project(target: "KNDomain", path: "../../KNDomain"),
         .external(name: "ComposableArchitecture"),
-        .external(name: "Factory")
+        .external(name: "FactoryKit")
     ],
     hasTests: false,
     resources: ["Resources/**"],

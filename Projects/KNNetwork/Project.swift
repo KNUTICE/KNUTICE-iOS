@@ -8,7 +8,7 @@ let project = Project.module(
         .project(target: "KNUtility", path: "../KNUtility"),
         .external(name: "Alamofire"),
         .external(name: "RxSwift"),
-        .external(name: "Factory"),
+        .external(name: "FactoryKit"),
         .external(name: "FirebaseMessaging")
     ],
     hasTests: false,

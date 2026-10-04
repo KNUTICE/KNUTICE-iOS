@@ -6,7 +6,7 @@
 //
 
 import Alamofire
-import Factory
+import FactoryKit
 import Foundation
 @testable import KNData
 import KNDomain

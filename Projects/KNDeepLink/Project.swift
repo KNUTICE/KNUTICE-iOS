@@ -7,7 +7,7 @@ let project = Project.module(
     dependencies: [
         .project(target: "KNUtility", path: "../KNUtility"),
         .project(target: "KNDomain", path: "../KNDomain"),
-        .external(name: "Factory")
+        .external(name: "FactoryKit")
     ],
     hasTests: false
 )

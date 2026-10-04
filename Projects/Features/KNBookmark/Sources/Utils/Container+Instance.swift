@@ -5,7 +5,7 @@
 //  Created by 이정훈 on 6/2/26.
 //
 
-import Factory
+import FactoryKit
 import KNDomain
 
 extension Container {
