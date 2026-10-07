@@ -6,7 +6,7 @@
 //
 
 @preconcurrency import Combine
-import Factory
+import FactoryKit
 import Foundation
 import KNDomain
 import KNUtility
