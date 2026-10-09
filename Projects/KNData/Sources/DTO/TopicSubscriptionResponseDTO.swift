@@ -16,5 +16,5 @@ struct TopicSubscriptionResponseDTO: Decodable {
 
 // MARK: - TopicSubscriptionData
 struct TopicSubscriptionData: Decodable {
-    let subscribedTopics: [String]
+    let subscribedTopicIds: [Int]
 }
