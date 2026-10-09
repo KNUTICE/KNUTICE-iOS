@@ -109,7 +109,7 @@ public final class NoticeCollectionViewCell: UICollectionViewCell {
         isShowingThumbnail: Bool
     ) {
         titleLabel.text = item.notice.title
-        subTitleLabel.text = "[\(item.notice.department)]  \(item.notice.uploadDate)"
+        subTitleLabel.text = "[\(item.notice.department ?? "")] \(item.notice.uploadDate)"
 
         // New Badge
         newBadgeLabel.isHidden = !item.isNew
