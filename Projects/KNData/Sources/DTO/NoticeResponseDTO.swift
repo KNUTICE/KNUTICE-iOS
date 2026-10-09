@@ -9,25 +9,25 @@ import Foundation
 import KNUtility
 
 // MARK: - NoticeReponseDTO
-public struct NoticeResponseDTO: Decodable, Sendable {
-    public let metaData: MetaData
-    public let data: [NoticeData]?
+struct NoticeResponseDTO: Decodable, Sendable {
+    let metaData: MetaData
+    let data: [NoticeData]?
 }
 
-public struct SingleNoticeResponseDTO: Decodable, Sendable {
-    public let metaData: MetaData
-    public let data: NoticeData?
+struct SingleNoticeResponseDTO: Decodable, Sendable {
+    let metaData: MetaData
+    let data: NoticeData?
 }
 
 // MARK: - NoticeData
-public struct NoticeData: Decodable, Sendable {
-    public let nttID: Int
-    public let title: String
-    public let contentURL: String
-    public let contentImageURL: String?
-    public let isContentSummary: Bool
-    public let department, registrationDate: String
-    public let topic: String
+struct NoticeData: Decodable, Sendable {
+    let nttID: Int
+    let title: String
+    let contentURL: String
+    let contentImageURL: String?
+    let isContentSummary: Bool
+    let department, registrationDate: String
+    let topic: String
 
     enum CodingKeys: String, CodingKey {
         case nttID = "nttId"
@@ -37,7 +37,7 @@ public struct NoticeData: Decodable, Sendable {
         case isContentSummary, department, registrationDate, topic
     }
     
-    public init(
+    init(
         nttID: Int,
         title: String,
         contentURL: String,
