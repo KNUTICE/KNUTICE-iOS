@@ -88,19 +88,33 @@ public actor TopicRepositoryImpl: TopicRepository {
         return categories
     }
     
-    /// Fetches topics matching the specified legacy topic string.
+    /// Fetches topics matching the specified legacy topic string and topic type.
     ///
-    /// - Parameter topic: The legacy string-based topic identifier.
+    /// Notice and cafeteria categories are resolved locally when the supplied
+    /// `topic` and `type` match known values. Other categories are requested
+    /// from the remote server.
+    ///
+    /// - Parameters:
+    ///   - topic: The legacy string-based topic identifier.
+    ///   - type: The type of topic category to retrieve.
     /// - Returns: An array of categories associated with the specified topic.
     /// - Throws: A `NetworkError` if the request cannot be completed or the request URL is invalid.
-    public func getTopics(_ topic: String) async throws -> [any CategoryProtocol] {
+    public func getTopics(_ topic: String, type: TopicType) async throws -> [any CategoryProtocol] {
         try Task.checkCancellation()
         
-        // TODO: 학교 공지와 식당 카테고리는 네트워크 요청 없이 즉시 반환
+        if let noticeCategory = NoticeCategory(rawValue: topic), type == .notice {
+            return [noticeCategory]
+        }
+        
+        if let cafeteriaCategory = CafeteriaCategory(rawValue: topic), type == .meal {
+            return [cafeteriaCategory]
+        }
+        
         let dto = try await request(
-            baseURL: baseURLV2,
+            baseURL: baseURLV1,
             path: "/types",
             queryItems: [
+                URLQueryItem(name: "type", value: type.rawValue),
                 URLQueryItem(name: "topic", value: topic)
             ]
         )
@@ -138,7 +152,8 @@ public actor TopicRepositoryImpl: TopicRepository {
         return try await dataSource.request(
             endpoint,
             method: .get,
-            decoding: TopicResponseDTO.self
+            decoding: TopicResponseDTO.self,
+            useFCMToken: true
         )
     }
 }

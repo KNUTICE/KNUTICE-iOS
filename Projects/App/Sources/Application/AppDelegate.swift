@@ -202,7 +202,7 @@ extension AppDelegate {
         }
         
         Container.shared.searchBookmarksUseCase.register {
-            SearchBookmarksUseCaseImpl(repository: Container.shared.bookmarkRepository())
+            SearchBookmarksUseCaseImpl(repository: SwiftDataBookmarkRepository.shared)
         }
         
         Container.shared.fetchTipUseCase.register {
@@ -211,17 +211,17 @@ extension AppDelegate {
         
         Container.shared.fetchBookmarkUseCase.register {
             FetchBookmarksUseCaseImpl(
-                bookmarkReportory: Container.shared.bookmarkRepository(),
+                bookmarkReportory: SwiftDataBookmarkRepository.shared,
                 topicRepository: Container.shared.topicRepository()
             )
         }
         
         Container.shared.provideReloadEventPublisherUseCase.register {
-            ProvideReloadEventPublisherUseCaseImpl(repository: Container.shared.bookmarkRepository())
+            ProvideReloadEventPublisherUseCaseImpl(repository: SwiftDataBookmarkRepository.shared)
         }
         
         Container.shared.deleteBookmarkUseCase.register {
-            DeleteBookmarkUseCaseImpl(bookmarkRepository: Container.shared.bookmarkRepository())
+            DeleteBookmarkUseCaseImpl(bookmarkRepository: SwiftDataBookmarkRepository.shared)
         }
         
         Container.shared.fetchMajorCategoryUseCase.register {

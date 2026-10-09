@@ -22,6 +22,10 @@ extension Container {
         Factory(self) { BookmarkRepositoryImpl.shared }
     }
     
+    var swiftDataBookmarkRepository: Factory<BookmarkRepository> {
+        Factory(self) { SwiftDataBookmarkRepository.shared }
+    }
+    
     var reportRepository: Factory<ReportRepository> {
         Factory(self) { ReportRepositoryImpl() }
     }
@@ -44,15 +48,15 @@ extension Container {
     
     var topicRepository: Factory<TopicRepository> {
         Factory(self) { TopicRepositoryImpl() }
-    }
+    } 
     
     // MARK: - UseCase
     var deleteBookmarkUseCase: Factory<DeleteBookmarkUseCase> {
-        Factory(self) { DeleteBookmarkUseCaseImpl(bookmarkRepository: self.bookmarkRepository()) }
+        Factory(self) { DeleteBookmarkUseCaseImpl(bookmarkRepository: SwiftDataBookmarkRepository.shared) }
     }
     
     var saveBookmarkUseCase: Factory<SaveBookmarkUseCase> {
-        Factory(self) { SaveBookmarkUseCaseImpl(bookmarkRepository: self.bookmarkRepository()) }
+        Factory(self) { SaveBookmarkUseCaseImpl(bookmarkRepository: SwiftDataBookmarkRepository.shared) }
     }
     
     var fetchTopThreeNoticesUseCase: Factory<FetchTopThreeNoticesUseCase> {
@@ -68,7 +72,7 @@ extension Container {
     }
     
     var updateBookmarkUseCase: Factory<UpdateBookmarkUseCase> {
-        Factory(self) { UpdateBookmarkUseCaseImpl(bookmarkRepository: self.bookmarkRepository()) }
+        Factory(self) { UpdateBookmarkUseCaseImpl(bookmarkRepository: SwiftDataBookmarkRepository.shared) }
     }
     
     var submitReportUseCase: Factory<SubmitReportUseCase> {
@@ -95,11 +99,25 @@ extension Container {
     }
     
     var searchBookmarksUseCase: Factory<SearchBookmarksUseCase> {
-        Factory(self) { SearchBookmarksUseCaseImpl(repository: self.bookmarkRepository()) }
+        Factory(self) { SearchBookmarksUseCaseImpl(repository: SwiftDataBookmarkRepository.shared) }
     }
     
     var fetchSelectedMajorCategoryUseCase: Factory<FetchSelectedMajorCategoryUseCase> {
         Factory(self) { FetchSelectedMajorCategoryUseCase(repository: self.topicRepository()) }
+    }
+    
+    var migrateUserDefaultsMajorsUseCase: Factory<MigrateUserDefaultsMajorsUseCase> {
+        Factory(self) { MigrateUserDefaultsMajorsUseCase(repository: self.topicRepository()) }
+    }
+    
+    var migrateBookmarkTopicsUseCase: Factory<MigrateBookmarkTopicsUseCase> {
+        Factory(self) {
+            MigrateBookmarkTopicsUseCase(
+                bookmarkRepository: self.bookmarkRepository(),
+                noticeRepository: self.noticeRepository(),
+                swiftDataBookmarkRepository: self.swiftDataBookmarkRepository()
+            )
+        }
     }
     
     var updateFCMTokenUseCase: Factory<UpdateFCMTokenUseCase> {
@@ -109,8 +127,6 @@ extension Container {
     var registerFCMTokenUseCase: Factory<RegisterFCMTokenUseCase> {
         Factory(self) { RegisterFCMTokenUseCase(repository: self.tokenRepository()) }
     }
-    
-    
     
     //MARK: - ViewModel
     
