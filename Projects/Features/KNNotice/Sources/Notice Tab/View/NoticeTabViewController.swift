@@ -90,6 +90,8 @@ public final class NoticeTabViewController: UIViewController, SettingButtonConfi
             setLeftBarButtonItem()
             setSettingBarButtonItem()
         }
+        
+        viewModel.loadCategoryItems()
     }
     
     /// Adds the category collection view to the view hierarchy and applies constraints.
