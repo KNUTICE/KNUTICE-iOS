@@ -64,7 +64,7 @@ fileprivate struct NoticeRowView: View {
                         Text(notice.title)
                         HStack(spacing: 5) {
                             if family != .systemSmall {
-                                Text("[" + notice.department + "]")
+                                Text("[" + (notice.department ?? "") + "]")
                             }
                             
                             Text(notice.uploadDate)
