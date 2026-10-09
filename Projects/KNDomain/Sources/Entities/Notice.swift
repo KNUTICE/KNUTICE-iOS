@@ -1,6 +1,6 @@
 //
 //  Notice.swift
-//  KNNotice
+//  KNDomain
 //
 //  Created by 이정훈 on 1/2/26.
 //
@@ -8,7 +8,7 @@
 import Foundation
 
 /// A domain entity that represents a notice displayed in the app.
-public struct Notice: Sendable, Codable, Equatable, Identifiable {
+public struct Notice: Sendable, Equatable, Identifiable {
     /// The unique notice identifier from the server.
     public let id: Int
     
@@ -22,7 +22,7 @@ public struct Notice: Sendable, Codable, Equatable, Identifiable {
     public let isSummarizable: Bool
     
     /// The department or organization that published the notice.
-    public let department: String
+    public let department: String?
     
     /// The date string when the notice was uploaded.
     public let uploadDate: String
@@ -37,16 +37,16 @@ public struct Notice: Sendable, Codable, Equatable, Identifiable {
     public init(
         id: Int,
         title: String,
-        contentURL: String,
+        contentURL: URL?,
         isSummarizable: Bool,
-        department: String,
+        department: String?,
         uploadDate: String,
         imageURL: String?,
         topicId: Int
     ) {
         self.id = id
         self.title = title
-        self.contentURL = URL(string: contentURL)
+        self.contentURL = contentURL
         self.isSummarizable = isSummarizable
         self.department = department
         self.uploadDate = uploadDate
@@ -67,7 +67,7 @@ public extension Notice {
             Notice(
                 id: 1121917,
                 title: "2026학년도 1학기 3C인재 인증 신청 안내",
-                contentURL: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?nttId=1121917",
+                contentURL: URL(string: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?nttId=1121917"),
                 isSummarizable: true,
                 department: "학사관리과",
                 uploadDate: "2026-05-11",
@@ -77,7 +77,7 @@ public extension Notice {
             Notice(
                 id: 1121886,
                 title: "2026학년도 하계 계절학기 수강신청 및 수강료 납부 안내",
-                contentURL: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?nttId=1121886",
+                contentURL: URL(string: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000055/selectBoardArticle.do?nttId=1121886"),
                 isSummarizable: true,
                 department: "학사관리과",
                 uploadDate: "2026-05-07",
@@ -92,7 +92,7 @@ public extension Notice {
             Notice(
                 id: 1121959,
                 title: "2026학년도 교내 온라인 모의토익/토익스피킹 실시 안내",
-                contentURL: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?nttId=1121959",
+                contentURL: URL(string: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?nttId=1121959"),
                 isSummarizable: true,
                 department: "국제교류본부",
                 uploadDate: "2026-05-12",
@@ -102,7 +102,7 @@ public extension Notice {
             Notice(
                 id: 1121930,
                 title: "📢[IPP사업단] 일학습병행 설명회 개최 안내📢",
-                contentURL: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?nttId=1121930",
+                contentURL: URL(string: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000059/selectBoardArticle.do?nttId=1121930"),
                 isSummarizable: true,
                 department: "IPP사업단",
                 uploadDate: "2026-05-11",
@@ -117,7 +117,7 @@ public extension Notice {
             Notice(
                 id: 1121967,
                 title: "2026학년도 1학기 OCU컨소시엄 장학생 선발 안내",
-                contentURL: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?nttId=1121967",
+                contentURL: URL(string: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?nttId=1121967"),
                 isSummarizable: true,
                 department: "장학팀",
                 uploadDate: "2026-05-12",
@@ -127,7 +127,7 @@ public extension Notice {
             Notice(
                 id: 1121915,
                 title: "[홍보]세종이도인재 장학금 장학생 모집 안내",
-                contentURL: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?nttId=1121915",
+                contentURL: URL(string: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000060/selectBoardArticle.do?nttId=1121915"),
                 isSummarizable: true,
                 department: "장학팀",
                 uploadDate: "2026-05-11",
@@ -142,7 +142,7 @@ public extension Notice {
             Notice(
                 id: 1121966,
                 title: "‘2026 한-프랑스 어학 보조교사 교류사업’ 한국어 보조교사 선발 안내",
-                contentURL: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do?nttId=1121966",
+                contentURL: URL(string: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do?nttId=1121966"),
                 isSummarizable: true,
                 department: "학생과",
                 uploadDate: "2026-05-12",
@@ -152,7 +152,7 @@ public extension Notice {
             Notice(
                 id: 1121960,
                 title: "기술보증기금 「2026년도 대국민 혁신 아이디어 공모전」",
-                contentURL: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do?nttId=1121960",
+                contentURL: URL(string: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000061/selectBoardArticle.do?nttId=1121960"),
                 isSummarizable: true,
                 department: "학생과",
                 uploadDate: "2026-05-12",
@@ -167,7 +167,7 @@ public extension Notice {
             Notice(
                 id: 1121950,
                 title: "[대학일자리플러스센터] 2026학년도 객원상담제 안내(충북지역 취업연계)",
-                contentURL: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do?nttId=1121950",
+                contentURL: URL(string: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do?nttId=1121950"),
                 isSummarizable: true,
                 department: "대학일자리플러스센터",
                 uploadDate: "2026-05-12",
@@ -177,7 +177,7 @@ public extension Notice {
             Notice(
                 id: 1121929,
                 title: "2026 GLOBAL TALENT FAIR(채용박람회)",
-                contentURL: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do?nttId=1121929",
+                contentURL: URL(string: "https://www.ut.ac.kr/cop/bbs/BBSMSTR_000000000179/selectBoardArticle.do?nttId=1121929"),
                 isSummarizable: true,
                 department: "대학일자리플러스센터",
                 uploadDate: "2026-05-11",

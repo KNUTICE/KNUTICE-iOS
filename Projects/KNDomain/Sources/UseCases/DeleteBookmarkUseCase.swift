@@ -32,14 +32,14 @@ public final class DeleteBookmarkUseCaseImpl: DeleteBookmarkUseCase {
         try Task.checkCancellation()
         
         guard let _ = bookmark.alarmDate else {
-            return try await bookmarkRepository.delete(by: bookmark.identity)
+            return try await bookmarkRepository.delete(by: bookmark.id)
         }
         
         // 예약된 알림 스케줄 삭제
-        try await UNUserNotificationCenter.current().removeNotificationRequest(withId: bookmark.identity)
+        try await UNUserNotificationCenter.current().removeNotificationRequest(withId: bookmark.id)
         
         // Bookmark 데이터 삭제
-        try await bookmarkRepository.delete(by: bookmark.notice.id)
+        try await bookmarkRepository.delete(by: bookmark.id)
     }
     
 }

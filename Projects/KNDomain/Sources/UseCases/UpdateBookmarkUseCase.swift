@@ -36,13 +36,13 @@ public final class UpdateBookmarkUseCaseImpl: UpdateBookmarkUseCase {
         try Task.checkCancellation()
         
         // 기존 알림 삭제
-        try await UNUserNotificationCenter.current().removeNotificationRequest(withId: bookmark.identity)
+        try await UNUserNotificationCenter.current().removeNotificationRequest(withId: bookmark.id)
         
         if let alarmDate = bookmark.alarmDate {
             
             // 새로운 알림 등록
             try await UNUserNotificationCenter.current().scheduleBookmarkNotification(
-                id: String(bookmark.identity),
+                id: String(bookmark.id),
                 date: alarmDate,
                 body: bookmark.notice.title
             )
