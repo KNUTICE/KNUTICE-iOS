@@ -15,8 +15,8 @@ public enum DeepLink: Sendable {
     /// Navigates to a specific notice.
     /// - Parameters:
     ///   - nttId: The unique identifier of the notice.
-    ///   - contentUrl: An optional URL for the notice content.
-    case notice(nttId: Int, contentUrl: URL?)
+    ///   - contentURL: An optional URL for the notice content.
+    case notice(nttId: Int, contentURL: URL?)
     
     /// Navigates to a specific cafeteria's meal plan.
     /// - Parameter cafeteria: The category of the cafeteria.

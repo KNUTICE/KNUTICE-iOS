@@ -217,11 +217,9 @@ extension UITabBarViewController {
 #if DEBUG
 struct UITabBarViewControllerPreview: PreviewProvider {
     static var previews: some View {
-        UINavigationController(rootViewController: UITabBarViewController(
-            viewModel: TabBarViewModel(category: .computerScience))
-        )
-        .makePreview()
-        .edgesIgnoringSafeArea(.all)
+        UINavigationController(rootViewController: UITabBarViewController(viewModel: TabBarViewModel(category: nil)))
+            .makePreview()
+            .edgesIgnoringSafeArea(.all)
     }
 }
 #endif
