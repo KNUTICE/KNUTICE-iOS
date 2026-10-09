@@ -7,6 +7,8 @@
 
 import Foundation
 
+@available(iOS, deprecated: 17.0, message: "Use UserDefaultsMajorIDs instead.")
+@available(macCatalyst, deprecated: 17.0, message: "Use UserDefaultsMajorIDs instead.")
 @propertyWrapper
 struct UserDefaultsMajors {
     private let storage = UserDefaults.shared
@@ -37,43 +39,71 @@ struct UserDefaultsMajors {
     
 }
 
+@available(iOS 17.0, *)
+@available(macCatalyst 17.0, *)
+@propertyWrapper
+struct UserDefaultsMajorIDs {
+    private let storage = UserDefaults.shared
+    private let key = UserDefaultsKeys.selectedMajor.rawValue
+    
+    /// The persisted array of subscribed major identifiers.
+    ///
+    /// Updating this value immediately writes the new array to `UserDefaults`.
+    var wrappedValue: [Int] {
+        get {
+            storage?.array(forKey: key) as? [Int] ?? []
+        }
+        
+        set {
+            storage?.set(newValue, forKey: key)
+        }
+    }
+}
+
 /// Manages the user's subscribed majors using persistent storage.
 public actor MajorManager {
     
     /// Shared singleton instance.
     public static let shared = MajorManager()
     
-    /// Persisted list of subscribed majors.
-    @UserDefaultsMajors private var storedMajors: [String]
+    /// The legacy string-based subscribed majors stored in `UserDefaults`.
+    ///
+    /// - Note: Retained for migration purposes. Prefer using `storedMajorIDs`.
+    @UserDefaultsMajors
+    private var storedMajors: [String]
     
-    /// Returns all currently subscribed majors.
+    /// The persisted identifiers of the user's subscribed majors.
+    @UserDefaultsMajorIDs
+    private var storedMajorIDs: [Int]
+    
+    /// Returns the legacy string-based subscribed majors.
+    ///
+    /// - Note: This property is intended for migration only.
     public var majorStrings: [String] { storedMajors }
+    
+    /// Returns the identifiers of all subscribed majors.
+    public var majorIDs: [Int] { storedMajorIDs }
     
     private init() {}
     
-    /// Removes the specified major from the subscription list.
+    /// Adds the specified major identifier to the subscription list if it is not already present.
     ///
-    /// - Parameter major: The major to remove.
-    public func removeMajor(_ major: String) {
-        var current = storedMajors
-        current.removeAll { $0 == major }
-        storedMajors = current
+    /// - Parameter id: The identifier of the major to subscribe to.
+    public func add(id: Int) {
+        var current = storedMajorIDs
+        
+        guard !current.contains(id) else { return }
+        
+        current.append(id)
+        storedMajorIDs = current
     }
     
-    /// Adds a major to the subscription list if it does not already exist.
-    ///
-    /// - Parameter major: The major to add.
-    public func addMajor(_ major: String) {
-        var current = storedMajors
-        
-        guard !current.contains(major) else { return }
-        
-        current.append(major)
-        storedMajors = current
+    public func remove(id: Int) {
+        storedMajorIDs.removeAll { $0 == id }
     }
     
     /// Removes all subscribed majors.
     public func clearAll() {
-        storedMajors = []
+        storedMajorIDs = []
     }
 }
