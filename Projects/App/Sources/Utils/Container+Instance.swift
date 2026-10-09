@@ -46,11 +46,7 @@ extension Container {
         Factory(self) { TopicRepositoryImpl() }
     }
     
-    //MARK: - UseCase
-    var fetchBookmarksUseCase: Factory<FetchBookmarksUseCase> {
-        Factory(self) { FetchBookmarksUseCaseImpl(bookmarkReportory: self.bookmarkRepository()) }
-    }
-    
+    // MARK: - UseCase
     var deleteBookmarkUseCase: Factory<DeleteBookmarkUseCase> {
         Factory(self) { DeleteBookmarkUseCaseImpl(bookmarkRepository: self.bookmarkRepository()) }
     }
@@ -113,6 +109,8 @@ extension Container {
     var registerFCMTokenUseCase: Factory<RegisterFCMTokenUseCase> {
         Factory(self) { RegisterFCMTokenUseCase(repository: self.tokenRepository()) }
     }
+    
+    
     
     //MARK: - ViewModel
     
