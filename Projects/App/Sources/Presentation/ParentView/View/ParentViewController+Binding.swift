@@ -11,10 +11,11 @@ import KNUtility
 import UIKit
 
 extension ParentViewController {
-    func bind() {
+    func bindMainNavigationState() {
         viewModel.$shouldNavigateToMain
-            .combineLatest(viewModel.$didCompleteMajorDataMigration)
+            .zip(viewModel.$didCompleteMajorDataMigration)
             .dropFirst()
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] shouldNavigateToMain, didCompleteMajorDataMigration in
                 if shouldNavigateToMain && didCompleteMajorDataMigration {
                     self?.switchViewController()
@@ -23,6 +24,19 @@ extension ParentViewController {
             .store(in: &cancellables)
     }
     
+    func bindMigrationState() {
+        viewModel.$isMigratingMajorData
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] isMigratingMajorData in
+                if isMigratingMajorData {
+                    self?.addOptimizationLoadingView()
+                } else {
+                    self?.removeOptimizationLoadingView()
+                }
+            })
+            .store(in: &cancellables)
+    }
     
     func switchViewController() {
         Task { @MainActor [weak self] in
