@@ -8,6 +8,6 @@
 import Foundation
 
 public protocol NoticeTabRepresentable: Identifiable {
-    var id: String { get }
+    var id: Int { get }
     var tabTitle: String { get }
 }
