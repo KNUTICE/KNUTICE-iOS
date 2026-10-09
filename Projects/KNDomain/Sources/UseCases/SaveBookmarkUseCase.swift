@@ -35,7 +35,7 @@ public actor SaveBookmarkUseCaseImpl: SaveBookmarkUseCase {
         if let alarmDate = bookmark.alarmDate {
             // 로컬 알림 스케줄 등록
             try await UNUserNotificationCenter.current().scheduleBookmarkNotification(
-                id: String(bookmark.identity),
+                id: String(bookmark.id),
                 date: alarmDate,
                 body: bookmark.notice.title
             )

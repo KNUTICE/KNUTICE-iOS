@@ -42,7 +42,7 @@ fileprivate extension Notice {
             contentURL: contentURL?.absoluteString ?? "",
             contentImageURL: imageURL,
             isContentSummary: isSummarizable,
-            department: department,
+            department: department ?? "",
             registrationDate: uploadDate,
             topic: "\(topicId)"
         )
