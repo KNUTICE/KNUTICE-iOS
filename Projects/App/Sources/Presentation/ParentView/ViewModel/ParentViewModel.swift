@@ -10,6 +10,7 @@ import FactoryKit
 import Foundation
 import KNDomain
 import KNUtility
+import os
 
 @MainActor
 final class ParentViewModel {
@@ -31,6 +32,7 @@ final class ParentViewModel {
     /// when the owning instance is deallocated.
     private var cancellables: Set<AnyCancellable> = []
     private(set) var navigationFallbackTask: Task<Void, Never>?
+    private let majorMigrationLogger = Logger(subsystem: "KNUTICE.ParentViewModel", category: "MajorDataMigration")
     
     //MARK: - Methods
     
@@ -43,6 +45,7 @@ final class ParentViewModel {
     /// - Note: The subscription is stored in the `cancellables` set to manage its lifecycle.
     func subscribeToFCMToken() {
         NotificationCenter.default.publisher(for: .fcmToken)
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] notification in
                 guard let fcmToken = notification.userInfo?[UserInfoKeys.fcmToken.rawValue] as? String else {
                     return
@@ -103,6 +106,7 @@ final class ParentViewModel {
     ///
     func subscribeToNotificationAuthorizationStatus() {
         NotificationAuthorizationObservable.shared.publisher
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] isAuthorized in
                 guard isAuthorized else { return }
                 
@@ -134,22 +138,20 @@ final class ParentViewModel {
         
         Task {
             isMigratingMajorData = true
-            didCompleteMajorDataMigration = false
             
             do {
-                if UserDefaults.shared?.bool(forKey: UserDefaultsKeys.hasMigratedUserDefaultsMajors.rawValue) == false {
-                    try await migrateUserDefaultsMajorsUseCase.execute()
-                }
+                let shouldMigrateUserDefaultsMajors = UserDefaults.shared?.bool(forKey: UserDefaultsKeys.hasMigratedUserDefaultsMajors.rawValue) == false
+                let shouldMigrateBookmarkTopics = UserDefaults.shared?.bool(forKey: UserDefaultsKeys.hasMigratedBookmarkTopics.rawValue) == false
                 
-                if UserDefaults.shared?.bool(forKey: UserDefaultsKeys.hasMigratedBookmarkTopics.rawValue) == false {
-                    try await migrateBookmarkTopicsUseCase.execute()
-                }
+                async let migrateUserDefaultsMajors: Void = shouldMigrateUserDefaultsMajors ? migrateUserDefaultsMajorsUseCase.execute() : ()
+                async let migrateBookmarkTopics: Void = shouldMigrateBookmarkTopics ? migrateBookmarkTopicsUseCase.execute() : ()
                 
-                didCompleteMajorDataMigration = true
+                _ = try await (migrateUserDefaultsMajors, migrateBookmarkTopics)
             } catch {
-                print(error)
+                majorMigrationLogger.error("ParentViewModel.migrateMajorDataIfNeeded() failed: \(error.localizedDescription)")
             }
             
+            didCompleteMajorDataMigration = true
             isMigratingMajorData = false
         }
     }
