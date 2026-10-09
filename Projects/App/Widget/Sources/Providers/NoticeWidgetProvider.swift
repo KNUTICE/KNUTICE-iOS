@@ -101,7 +101,7 @@ fileprivate extension Notice {
             Notice(
                 id: index,
                 title: "여기에 공지사항의 제목이 표시됩니다. 스켈레톤 뷰 렌더링을 위한 텍스트입니다.",
-                contentURL: "",
+                contentURL: nil,
                 isSummarizable: false,
                 department: "소프트웨어학과",
                 uploadDate: "2024-04-09",
