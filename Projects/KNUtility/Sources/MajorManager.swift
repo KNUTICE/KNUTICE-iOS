@@ -69,6 +69,8 @@ public actor MajorManager {
     /// The legacy string-based subscribed majors stored in `UserDefaults`.
     ///
     /// - Note: Retained for migration purposes. Prefer using `storedMajorIDs`.
+    @available(iOS, deprecated: 17.0, message: "Use storedMajorIDs instead.")
+    @available(macCatalyst, deprecated: 17.0, message: "Use storedMajorIDs instead.")
     @UserDefaultsMajors
     private var storedMajors: [String]
     
@@ -79,6 +81,8 @@ public actor MajorManager {
     /// Returns the legacy string-based subscribed majors.
     ///
     /// - Note: This property is intended for migration only.
+    @available(iOS, deprecated: 17.0, message: "Use majorIDs instead.")
+    @available(macCatalyst, deprecated: 17.0, message: "Use majorIDs instead.")
     public var majorStrings: [String] { storedMajors }
     
     /// Returns the identifiers of all subscribed majors.
