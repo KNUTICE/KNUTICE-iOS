@@ -13,4 +13,5 @@ public enum UserDefaultsKeys: String {
     case entryTime
     case selectedMajor
     case isMajorNotificationSubscribed
+    case hasMigratedUserDefaultsMajors
 }
