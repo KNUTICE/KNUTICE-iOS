@@ -229,5 +229,22 @@ extension AppDelegate {
         Container.shared.deleteBookmarkUseCase.register {
             DeleteBookmarkUseCaseImpl(bookmarkRepository: Container.shared.bookmarkRepository())
         }
+        
+        Container.shared.fetchMajorCategoryUseCase.register {
+            FetchSelectedMajorCategoryUseCase(repository: Container.shared.topicRepository())
+        }
+        
+        Container.shared.fetchMajorCategoriesUseCase.register {
+            FetchMajorCategoriesUseCase(repository: Container.shared.topicRepository())
+        }
+        
+        Container.shared.addMajorUseCase.register {
+            AddMajorUseCase(repository: Container.shared.topicSubscriptionRepository())
+        }
+        
+        Container.shared.deleteMajorUseCase.register {
+            DeleteMajorUseCase(repository: Container.shared.topicSubscriptionRepository())
+        }
+        
     }
 }

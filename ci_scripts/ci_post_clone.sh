@@ -35,17 +35,19 @@ cat <<EOF > "$REPORT_DIR/ServiceInfo.plist"
 </plist>
 EOF
 
-# --- KNTopic 모듈 설정 ---
-echo "📍 Generating ServiceInfo.plist for KNTopic..."
-TOPIC_DIR="$PROJECT_ROOT/Projects/KNTopic/Resources"
-mkdir -p "$TOPIC_DIR"
-cat <<EOF > "$TOPIC_DIR/ServiceInfo.plist"
+# --- KNData 모듈 설정 ---
+echo "📍 Generating ServiceInfo.plist for KNData..."
+DATA_DIR="$PROJECT_ROOT/Projects/KNData/Resources"
+mkdir -p "$DATA_DIR"
+cat <<EOF > "$DATA_DIR/ServiceInfo.plist"
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>TopicSubscription_URL</key>
-    <string>${TopicSubscription_URL}</string>
+    <key>Topic_URL_V1</key>
+    <string>${Topic_URL_V1}</string>
+    <key>Topic_URL_V2</key>
+    <string>${Topic_URL_V2}</string>
 </dict>
 </plist>
 EOF

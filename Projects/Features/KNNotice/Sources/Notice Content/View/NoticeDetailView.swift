@@ -68,7 +68,7 @@ public struct NoticeDetailView<Factory: BookmarkFormFactory>: View {
                 }
             }
             .background {
-                if let url = notice.contentUrl {
+                if let url = notice.contentURL {
                     ActivityView(isPresented: $isActivityViewPresented, activityItems: [
                         url
                     ])

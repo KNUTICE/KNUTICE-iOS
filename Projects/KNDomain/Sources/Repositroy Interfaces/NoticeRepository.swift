@@ -15,7 +15,7 @@ public protocol NoticeRepository: Sendable {
     /// and pagination options.
     ///
     /// - Parameters:
-    ///   - category: An optional string representing the notice category (e.g., `"event"`, `"academic"`).
+    ///   - category: An optional category used to filter notices.
     ///   - keyword: An optional search keyword to filter notices.
     ///   - nttId: An optional ID of the last notice fetched, used for pagination.
     ///   - size: The number of notices to fetch per request. Defaults to `20`.
@@ -23,7 +23,7 @@ public protocol NoticeRepository: Sendable {
     /// - Returns: A publisher that emits an array of `Notice` objects on success,
     ///   or an `Error` if the request fails.
     func fetchNotices(
-        for category: String?,
+        for category: (any CategoryProtocol)?,
         keyword: String?,
         after nttId: Int?,
         size: Int
@@ -36,7 +36,7 @@ public protocol NoticeRepository: Sendable {
     /// You can filter the results by category, keyword, and pagination options.
     ///
     /// - Parameters:
-    ///   - category: An optional string representing the notice category (e.g., `"event"`, `"academic"`).
+    ///   - category: An optional category used to filter notices.
     ///   - keyword: An optional search keyword to filter notices.
     ///   - nttId: An optional ID of the last notice fetched, used for pagination.
     ///   - size: The number of notices to fetch per request. Defaults to `20`.
@@ -45,7 +45,7 @@ public protocol NoticeRepository: Sendable {
     ///
     /// - Throws: An error if the request fails or if decoding the response is unsuccessful.
     func fetchNotices(
-        for category: String?,
+        for category: (any CategoryProtocol)?,
         keyword: String?,
         after nttId: Int?,
         size: Int
@@ -102,7 +102,7 @@ public protocol NoticeRepository: Sendable {
 
 public extension NoticeRepository {
     func fetchNotices(
-        for category: String? = nil,
+        for category: (any CategoryProtocol)? = nil,
         keyword: String? = nil,
         after nttId: Int? = nil,
         size: Int = 20
@@ -111,7 +111,7 @@ public extension NoticeRepository {
     }
     
     func fetchNotices(
-        for category: String? = nil,
+        for category: (any CategoryProtocol)? = nil,
         keyword: String? = nil,
         after nttId: Int? = nil,
         size: Int = 20

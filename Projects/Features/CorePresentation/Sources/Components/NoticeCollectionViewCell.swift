@@ -140,7 +140,7 @@ public final class NoticeCollectionViewCell: UICollectionViewCell {
         thumbnailImageView.isHidden = false
         thumbnailImageView.kf.indicatorType = .activity
         thumbnailImageView.kf.setImage(
-            with: URL(string: item.notice.imageUrl ?? CorePresentationResources.bundle.defaultThumbnailURL),
+            with: URL(string: item.notice.imageURL ?? CorePresentationResources.bundle.defaultThumbnailURL),
             options: [
                 .processor(processor)
             ]
