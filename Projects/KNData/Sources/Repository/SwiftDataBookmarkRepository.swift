@@ -95,7 +95,13 @@ public actor SwiftDataBookmarkRepository: BookmarkRepository {
     /// - Returns: A list of all bookmark domain entities sorted by the given option.
     /// - Throws: An error from the underlying SwiftData store.
     public func fetchAll(sortBy option: BookmarkSortOption = .createdAtAscending) async throws -> [Bookmark] {
-        return try await fetch(page: 0, pageSize: 0, sortBy: option)
+        try Task.checkCancellation()
+
+        return try await dataStore.fetch(
+            sortBy: option,
+            fetchLimit: nil,
+            fetchOffset: 0
+        ).map(\.asEntity)
     }
     
     // MARK: - Delete
@@ -136,7 +142,7 @@ public actor SwiftDataBookmarkRepository: BookmarkRepository {
         
         return try await dataStore.fetch(
             keyword: keyword,
-            fetchLimit: 0,
+            fetchLimit: nil,
             fetchOffset: 0
         ).map(\.asEntity)
     }
