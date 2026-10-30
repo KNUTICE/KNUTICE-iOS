@@ -9,7 +9,7 @@ import Foundation
 
 struct TopicResponseDTO: Decodable {
     let metaData: MetaData
-    let data: [TopicData]
+    let data: [TopicData]?
 }
 
 struct TopicData: Decodable {
