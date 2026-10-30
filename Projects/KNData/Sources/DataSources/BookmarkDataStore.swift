@@ -17,13 +17,13 @@ protocol BookmarkManageable: Actor {
     
     func fetch(
         sortBy option: BookmarkSortOption,
-        fetchLimit limit: Int,
+        fetchLimit limit: Int?,
         fetchOffset offset: Int
     ) throws -> [BookmarkModel]
     
     func fetch(
         keyword: String,
-        fetchLimit limit: Int,
+        fetchLimit limit: Int?,
         fetchOffset offset: Int
     ) throws -> [BookmarkModel]
     
@@ -37,7 +37,7 @@ protocol BookmarkManageable: Actor {
 extension BookmarkManageable {
     func fetch(
         sortBy option: BookmarkSortOption,
-        fetchLimit limit: Int = 20,
+        fetchLimit limit: Int? = nil,
         fetchOffset offset: Int = 0
     ) throws -> [BookmarkModel] {
         try self.fetch(sortBy: option, fetchLimit: limit, fetchOffset: offset)
@@ -82,13 +82,13 @@ actor BookmarkDataStore: BookmarkManageable {
     ///
     /// - Parameters:
     ///   - option: The sort option used to order the fetched bookmarks.
-    ///   - limit: The maximum number of bookmarks to fetch.
+    ///   - limit: The maximum number of bookmarks to fetch, or nil for no limit.
     ///   - offset: The number of matching bookmarks to skip before fetching.
     /// - Returns: A list of bookmarks matching the requested sort order.
     /// - Throws: An error if SwiftData fails to fetch the bookmarks.
     func fetch(
         sortBy option: BookmarkSortOption,
-        fetchLimit limit: Int = 20,
+        fetchLimit limit: Int? = nil,
         fetchOffset offset: Int = 0
     ) throws -> [BookmarkModel] {
         var descriptor = FetchDescriptor<BookmarkModel>(sortBy: [option.sortDescriptor])
@@ -102,13 +102,13 @@ actor BookmarkDataStore: BookmarkManageable {
     ///
     /// - Parameters:
     ///   - keyword: The search text used to filter bookmark memos and notice titles.
-    ///   - limit: The maximum number of bookmarks to fetch.
+    ///   - limit: The maximum number of bookmarks to fetch, or nil for no limit.
     ///   - offset: The number of matching bookmarks to skip before fetching.
     /// - Returns: A list of bookmarks matching the keyword.
     /// - Throws: An error if SwiftData fails to fetch the bookmarks.
     func fetch(
         keyword: String,
-        fetchLimit limit: Int = 20,
+        fetchLimit limit: Int? = nil,
         fetchOffset offset: Int = 0
     ) throws -> [BookmarkModel] {
         let predicate = #Predicate<BookmarkModel> { $0.memo.contains(keyword) || $0.notice.title.contains(keyword) }
