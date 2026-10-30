@@ -14,4 +14,5 @@ public enum UserDefaultsKeys: String {
     case selectedMajor
     case isMajorNotificationSubscribed
     case hasMigratedUserDefaultsMajors
+    case hasMigratedBookmarkTopics
 }
