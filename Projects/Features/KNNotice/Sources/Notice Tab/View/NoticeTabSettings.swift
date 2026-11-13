@@ -28,6 +28,19 @@ public struct NoticeTabSettings: View {
                 }
                 
                 List {
+                    if noticeTabItems.hasMajorCategoryLoadError {
+                        Section {
+                            VStack(alignment: .leading, spacing: 12) {
+                                Text("학과 목록을 불러올 수 없습니다.")
+                                Button("다시 시도") {
+                                    Task {
+                                        await noticeTabItems.fetchMajorCategories()
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     Section {
                         ForEach(noticeTabItems.selectedMajors, id: \.id) {
                             Text($0.tabTitle)

@@ -40,6 +40,7 @@ public final class NoticeTabItems {
     }
     
     var isLoading: Bool = false
+    var hasMajorCategoryLoadError: Bool = false
     
     @ObservationIgnored
     private let categoriesRelay: BehaviorRelay<[CategoryItem]>
@@ -59,13 +60,18 @@ public final class NoticeTabItems {
     }
     
     func fetchMajorCategories() async {
+        guard !isLoading else { return }
+        isLoading = true
+        hasMajorCategoryLoadError = false
         defer { isLoading = false }
         
         do {
-            isLoading = true
             majorCategories = try await fetchMajorCategoriesUseCase.execute()
+        } catch is CancellationError {
+            return
         } catch {
             print(error)
+            hasMajorCategoryLoadError = true
         }
     }
     
