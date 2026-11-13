@@ -27,6 +27,7 @@ public actor TopicRepositoryImpl: TopicRepository {
     /// - Returns: An array of categories corresponding to the specified topic type.
     /// - Throws: A `NetworkError` if the request cannot be completed or the URL is invalid.
     public func getAllTopics(for type: TopicType) async throws -> [any CategoryProtocol] {
+        try Task.checkCancellation()
 
         let dto = try await request(
             baseURL: baseURLV1,
@@ -53,7 +54,22 @@ public actor TopicRepositoryImpl: TopicRepository {
     /// - Returns: An array containing the matching category, or an empty array if no match is found.
     /// - Throws: A `NetworkError` if the request cannot be completed or the URL is invalid.
     public func getTopics(id: Int) async throws -> [any CategoryProtocol] {
-        // TODO: 학교 공지와 식당 카테고리는 네트워크 요청 없이 즉시 반환
+        try Task.checkCancellation()
+        
+        if 1...5 ~= id {
+            return [id].compactMap { NoticeCategory(id: $0) }
+        }
+        
+        if 900...999 ~= id {
+            return [id].compactMap { CafeteriaCategory(id: $0) }
+        }
+        
+        // 인메모리 캐시 확인
+        if let cachedTopic = await TopicMemoryCache.shared.topic(for: id) {
+            return [cachedTopic]
+        }
+        
+        // 서버에서 topic 정보 가져오기
         let dto = try await request(
             baseURL: baseURLV2,
             path: "/types",
@@ -62,7 +78,14 @@ public actor TopicRepositoryImpl: TopicRepository {
             ]
         )
 
-        return dto.categories
+        let categories = dto.categories
+        
+        // 메모리에 캐싱
+        if let category = categories.first {
+            await TopicMemoryCache.shared.store(category, for: id)
+        }
+        
+        return categories
     }
     
     /// Fetches topics matching the specified legacy topic string.
@@ -71,6 +94,8 @@ public actor TopicRepositoryImpl: TopicRepository {
     /// - Returns: An array of categories associated with the specified topic.
     /// - Throws: A `NetworkError` if the request cannot be completed or the request URL is invalid.
     public func getTopics(_ topic: String) async throws -> [any CategoryProtocol] {
+        try Task.checkCancellation()
+        
         // TODO: 학교 공지와 식당 카테고리는 네트워크 요청 없이 즉시 반환
         let dto = try await request(
             baseURL: baseURLV2,
@@ -93,6 +118,7 @@ public actor TopicRepositoryImpl: TopicRepository {
         path: String? = nil,
         queryItems: [URLQueryItem]
     ) async throws -> TopicResponseDTO {
+        try Task.checkCancellation()
 
         guard let baseURL,
               var components = URLComponents(string: baseURL) else {
@@ -121,31 +147,31 @@ extension TopicResponseDTO {
     
     /// The notice categories converted from the response.
     var noticeCategories: [NoticeCategory] {
-        data.map { NoticeCategory(id: $0.topicId) ?? .generalNotice }
+        data?.compactMap { NoticeCategory(id: $0.topicId) } ?? []
     }
 
     /// The major categories converted from the response.
     var majorCategories: [MajorCategory] {
-        data.map {
+        data?.map {
             MajorCategory(
                 id: $0.topicId,
                 localizedDescription: $0.name,
                 topic: $0.topic,
                 college: $0.college
             )
-        }
+        } ?? []
     }
 
     /// The cafeteria categories converted from the response.
     var cafeteriaCategories: [CafeteriaCategory] {
-        data.map { CafeteriaCategory(id: $0.topicId) ?? .studentCafeteria }
+        data?.compactMap { CafeteriaCategory(id: $0.topicId) } ?? []
     }
     
     /// All categories converted from the response.
     ///
     /// Each item is mapped to the appropriate domain category type based on its identifier.
     var categories: [any CategoryProtocol] {
-        data.map { $0.category }
+        data?.map { $0.category } ?? []
     }
 }
 

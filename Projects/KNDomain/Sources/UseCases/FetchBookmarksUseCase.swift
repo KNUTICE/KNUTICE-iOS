@@ -45,9 +45,14 @@ public extension FetchBookmarksUseCase {
 
 public final class FetchBookmarksUseCaseImpl: FetchBookmarksUseCase {
     private let bookmarkRepository: BookmarkRepository
+    private let topicRepository: TopicRepository
     
-    public init(bookmarkReportory: BookmarkRepository) {
+    public init(
+        bookmarkReportory: BookmarkRepository,
+        topicRepository: TopicRepository
+    ) {
         self.bookmarkRepository = bookmarkReportory
+        self.topicRepository = topicRepository
     }
     
     /// Fetches bookmarked notices using the specified pagination and sorting options.
@@ -58,10 +63,43 @@ public final class FetchBookmarksUseCaseImpl: FetchBookmarksUseCase {
     ///   - option: The sorting option used to order the bookmarks.
     /// - Returns: A list of bookmarks matching the specified criteria.
     /// - Throws: A `CancellationError` if the task is cancelled, or an error thrown by the repository.
-    public func execute(page: Int, pageSize: Int = 20, sortBy option: BookmarkSortOption) async throws -> [Bookmark] {
+    public func execute(
+        page: Int,
+        pageSize: Int = 20,
+        sortBy option: BookmarkSortOption
+    ) async throws -> [Bookmark] {
         try Task.checkCancellation()
         
-        return try await bookmarkRepository.fetch(page: page, pageSize: pageSize, sortBy: option)
+        // 북마크 목록을 가져온 뒤, department 정보가 없는 항목만 보완
+        let bookmarks = try await bookmarkRepository.fetch(page: page, pageSize: pageSize, sortBy: option)
+        var updatedBookmarks = [Bookmark]()
+        
+        try await withThrowingTaskGroup(of: Bookmark.self) { group in
+            for bookmark in bookmarks {
+                if bookmark.notice.department != nil {
+                    group.addTask {
+                        return bookmark
+                    }
+                } else {
+                    group.addTask {
+                        // topic 조회 결과가 없으면 원본 북마크를 그대로 유지
+                        let topic = try await self.topicRepository.getTopics(id: bookmark.notice.topicId)
+                        
+                        guard let department = topic.first?.localizedDescription else {
+                            return bookmark
+                        }
+                        
+                        return bookmark.withDepartmentIfNeeded(department)
+                    }
+                }
+            }
+            
+            for try await bookmark in group {
+                updatedBookmarks.append(bookmark)
+            }
+        }
+        
+        return updatedBookmarks
     }
     
     /// Fetches a single bookmark using its unique identifier.
@@ -70,16 +108,16 @@ public final class FetchBookmarksUseCaseImpl: FetchBookmarksUseCase {
     /// - Returns: The corresponding bookmark, or `nil` if no match is found.
     /// - Throws: An error if an underlying repository error occurs.
     public func execute(for id: Int) async throws -> Bookmark? {
-        return try await bookmarkRepository.fetch(id: id)
-    }
-}
-
-fileprivate extension String {
-    func toDate() -> Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
+        try Task.checkCancellation()
         
-        return dateFormatter.date(from: self)
+        // 북마크가 없거나 이미 학과 정보가 있으면 그대로 반환
+        guard let bookmark = try await bookmarkRepository.fetch(id: id) else { return nil }
+        guard bookmark.notice.department == nil else { return bookmark }
+        
+        // 학과 정보가 비어 있으면 topic 정보로 보완
+        let topic = try await topicRepository.getTopics(id: bookmark.notice.topicId)
+        guard let department = topic.first?.localizedDescription else { return bookmark }
+        
+        return bookmark.withDepartmentIfNeeded(department)
     }
 }
