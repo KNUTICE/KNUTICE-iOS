@@ -9,25 +9,43 @@ import Foundation
 import KNDomain
 
 protocol NoticeCreatable {
-    func createNotice(_ body: NoticeData) -> Notice
+    @available(iOS, introduced: 15.0, deprecated: 17.0, message: "Use createNotice(_ item: NoticeItem) instead.")
+    @available(macCatalyst, introduced: 15.0, deprecated: 17.0, message: "Use createNotice(_ item: NoticeItem) instead.")
+    func createNotice(_ data: NoticeData) -> Notice
+
+    @available(iOS 17.0, *)
+    @available(macCatalyst 17.0, *)
+    func createNotice(_ item: NoticeItem) -> Notice
 }
 
 extension NoticeCreatable {
+    @available(iOS 17.0, *)
+    @available(macCatalyst 17.0, *)
+    func createNotice(_ item: NoticeItem) -> Notice {
+        return Notice(
+            id: item.nttID,
+            title: item.title,
+            contentURL: item.contentURL,
+            isSummarizable: item.isContentSummary,
+            department: item.department,
+            uploadDate: item.registrationDate,
+            imageURL: item.contentImageURL,
+            topicId: item.topicId
+        )
+    }
+
+    @available(iOS, introduced: 15.0, deprecated: 17.0, message: "Use createNotice(_ item: NoticeItem) instead.")
+    @available(macCatalyst, introduced: 15.0, deprecated: 17.0, message: "Use createNotice(_ item: NoticeItem) instead.")
     func createNotice(_ data: NoticeData) -> Notice {
-        let category: any CategoryProtocol =
-        (NoticeCategory(rawValue: data.topic) as (any CategoryProtocol)?)
-        ?? (MajorCategory(rawValue: data.topic) as (any CategoryProtocol)?)
-        ?? NoticeCategory.generalNotice
-        
         return Notice(
             id: data.nttID,
             title: data.title,
-            contentUrl: data.contentURL,
+            contentURL: data.contentURL,
             isSummarizable: data.isContentSummary,
             department: data.department,
             uploadDate: data.registrationDate,
-            imageUrl: data.contentImageURL,
-            category: category
+            imageURL: data.contentImageURL,
+            topicId: Int(data.topic) ?? NoticeCategory.id(fromRawValue: data.topic) ?? 0
         )
     }
 }

@@ -39,12 +39,12 @@ fileprivate extension Notice {
         NoticeData(
             nttID: id,
             title: title,
-            contentURL: contentUrl?.absoluteString ?? "",
-            contentImageURL: imageUrl,
+            contentURL: contentURL?.absoluteString ?? "",
+            contentImageURL: imageURL,
             isContentSummary: isSummarizable,
             department: department,
             registrationDate: uploadDate,
-            topic: category.rawValue
+            topic: "\(topicId)"
         )
     }
 }
