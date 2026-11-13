@@ -7,23 +7,13 @@
 
 import Combine
 import CorePresentation
-import FactoryKit
 import Foundation
-import KNDeepLink
-import KNDomain
 import KNUtility
-import os
 
 @MainActor
 final class TabBarViewModel: BookmarkSortOptionProvidable {
-    @Published var category: MajorCategory? = nil
     @Published var bookmarkSortOption: BookmarkSortOption = {
         let value = UserDefaults.standard.string(forKey: UserDefaultsKeys.bookmarkSortOption.rawValue) ?? ""
         return BookmarkSortOption(rawValue: value) ?? .createdAtDescending
     }()
-    
-    init(category: MajorCategory?) {
-        self.category = category
-    }
-    
 }
