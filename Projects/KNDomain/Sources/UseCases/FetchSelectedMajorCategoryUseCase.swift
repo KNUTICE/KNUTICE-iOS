@@ -11,9 +11,11 @@ import KNUtility
 /// A use case that retrieves the user's currently selected major category.
 public final class FetchSelectedMajorCategoryUseCase: Sendable {
     private let repository: TopicRepository
+    private let migrateMajorsUseCase: MigrateUserDefaultsMajorsUseCase
     
-    public init(repository: TopicRepository) {
+    public init(repository: TopicRepository, migrateMajorsUseCase: MigrateUserDefaultsMajorsUseCase) {
         self.repository = repository
+        self.migrateMajorsUseCase = migrateMajorsUseCase
     }
     
     /// Retrieves the currently selected major category.
@@ -24,6 +26,7 @@ public final class FetchSelectedMajorCategoryUseCase: Sendable {
     /// - Returns: The selected `MajorCategory` if available; otherwise, `nil`.
     /// - Throws: An error if the repository request fails.
     public func execute() async throws -> MajorCategory? {
+        try await migrateMajorsUseCase.execute()
         guard let majorID = await MajorManager.shared.majorIDs.first else { return nil }
         
         let categories = try await repository.getTopics(id: majorID)

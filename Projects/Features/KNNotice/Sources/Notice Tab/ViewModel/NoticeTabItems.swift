@@ -103,11 +103,13 @@ public final class NoticeTabItems {
     
     /// Activates the FCM topic subscription for the given major
     /// and registers it to `MajorManager`.
-    func add(major: MajorCategory) async {
+    func add(major: MajorCategory) async -> Bool {
         do {
             try await addMajorUseCase.execute(major: major)
+            return true
         } catch {
             print(error)
+            return false
         }
     }
     

@@ -78,6 +78,10 @@ public final class NoticeTabViewController: UIViewController, SettingButtonConfi
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+
+        viewModel.onMajorLoadFailure = { [weak self] in
+            self?.presentMajorLoadFailureIfNeeded()
+        }
         
         view.backgroundColor = KNDesignSystemAsset.primaryBackground.color
         setupCollectionViewLayout()
@@ -92,6 +96,30 @@ public final class NoticeTabViewController: UIViewController, SettingButtonConfi
         }
         
         viewModel.loadCategoryItems()
+    }
+
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        presentMajorLoadFailureIfNeeded()
+    }
+
+    private func presentMajorLoadFailureIfNeeded() {
+        guard viewModel.hasMajorLoadFailure,
+              view.window != nil,
+              presentedViewController == nil else { return }
+
+        let alert = UIAlertController(
+            title: "학과 정보를 불러올 수 없습니다",
+            message: "네트워크 연결을 확인한 뒤 다시 시도해 주세요.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "닫기", style: .cancel))
+        alert.addAction(UIAlertAction(title: "다시 시도", style: .default) { [weak self] _ in
+            self?.dismiss(animated: true) { [weak self] in
+                self?.viewModel.loadCategoryItems()
+            }
+        })
+        present(alert, animated: true)
     }
     
     /// Adds the category collection view to the view hierarchy and applies constraints.

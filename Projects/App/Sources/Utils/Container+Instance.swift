@@ -103,7 +103,12 @@ extension Container {
     }
     
     var fetchSelectedMajorCategoryUseCase: Factory<FetchSelectedMajorCategoryUseCase> {
-        Factory(self) { FetchSelectedMajorCategoryUseCase(repository: self.topicRepository()) }
+        Factory(self) {
+            FetchSelectedMajorCategoryUseCase(
+                repository: self.topicRepository(),
+                migrateMajorsUseCase: self.migrateUserDefaultsMajorsUseCase()
+            )
+        }
     }
     
     var updateFCMTokenUseCase: Factory<UpdateFCMTokenUseCase> {

@@ -56,6 +56,7 @@ public struct TopicSubscriptionListFeature: Sendable {
     // MARK: - Dependency
     @Dependency(\.fetchTopicSubscriptionUseCase) var fetchTopicSubscriptionUseCase
     @Dependency(\.updateTopicSubscriptionUseCase) var updateTopicSubscriptionUseCase
+    @Dependency(\.migrateUserDefaultsMajorsUseCase) var migrateUserDefaultsMajorsUseCase
     @Dependency(\.dismiss) var dismiss
     
     enum CancelID {
@@ -196,6 +197,8 @@ public struct TopicSubscriptionListFeature: Sendable {
                 return .run { send in
                     // 로딩 인디케이터 활성화
                     await send(.setLoading(true))
+
+                    try await migrateUserDefaultsMajorsUseCase.execute()
                     
                     // 학과 구독 상태를 서버에 저장하는 비동기 네트워크 요청 수행
                     if let topicID = await MajorManager.shared.majorIDs.first {

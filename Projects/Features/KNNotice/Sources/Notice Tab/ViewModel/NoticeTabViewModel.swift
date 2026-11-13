@@ -41,6 +41,9 @@ final class NoticeTabViewModel {
     }
     
     @Injected(\.fetchMajorCategoryUseCase) private var fetchMajorCategoryUseCase
+    var onMajorLoadFailure: (() -> Void)?
+    private(set) var hasMajorLoadFailure = false
+    private var isLoadingCategories = false
     
     /// Initializes the view model and asynchronously loads the full category list.
     ///
@@ -49,15 +52,30 @@ final class NoticeTabViewModel {
     /// 2. Major-specific categories fetched from `MajorManager`
     /// 3. The add button appended at the end
     func loadCategoryItems() {
+        guard !isLoadingCategories else { return }
+        isLoadingCategories = true
+
         Task {
+            defer { isLoadingCategories = false }
             var items: [CategoryItem] = NoticeCategory.allCases.map { CategoryItem.category($0) }
-            
-            if let majorCategory = try? await fetchMajorCategoryUseCase.execute() {
-                items.append(.category(majorCategory))
+
+            do {
+                if let majorCategory = try await fetchMajorCategoryUseCase.execute() {
+                    items.append(.category(majorCategory))
+                }
+                hasMajorLoadFailure = false
+            } catch is CancellationError {
+                return
+            } catch {
+                hasMajorLoadFailure = true
             }
-            
+
             items.append(.addButton)
             categories.accept(items)
+
+            if hasMajorLoadFailure {
+                onMajorLoadFailure?()
+            }
         }
     }
 }

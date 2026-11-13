@@ -18,6 +18,11 @@ extension DependencyValues {
         get { self[UpdateTopicSubscriptionUseCaseKey.self] }
         set { self[UpdateTopicSubscriptionUseCaseKey.self] = newValue }
     }
+
+    public var migrateUserDefaultsMajorsUseCase: MigrateUserDefaultsMajorsUseCase {
+        get { self[MigrateUserDefaultsMajorsUseCaseKey.self] }
+        set { self[MigrateUserDefaultsMajorsUseCaseKey.self] = newValue }
+    }
 }
 
 fileprivate enum FetchTopicSubscriptionUseCaseKey: DependencyKey {
@@ -28,6 +33,12 @@ fileprivate enum FetchTopicSubscriptionUseCaseKey: DependencyKey {
 
 fileprivate enum UpdateTopicSubscriptionUseCaseKey: DependencyKey {
     static var liveValue: UpdateTopicSubscriptionUseCase {
+        fatalError("Must override from App")
+    }
+}
+
+fileprivate enum MigrateUserDefaultsMajorsUseCaseKey: DependencyKey {
+    static var liveValue: MigrateUserDefaultsMajorsUseCase {
         fatalError("Must override from App")
     }
 }

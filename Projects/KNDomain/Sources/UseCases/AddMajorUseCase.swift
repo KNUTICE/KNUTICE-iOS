@@ -13,11 +13,13 @@ public actor AddMajorUseCase {
     private typealias WorkItem = (any CategoryProtocol, CheckedContinuation<Void, Error>)
     
     private let repository: TopicSubscriptionRepository
+    private let migrateMajorsUseCase: MigrateUserDefaultsMajorsUseCase
     private var processingTask: Task<Void, Never>?
     private var continuation: AsyncStream<WorkItem>.Continuation?
     
-    public init(repository: TopicSubscriptionRepository) {
+    public init(repository: TopicSubscriptionRepository, migrateMajorsUseCase: MigrateUserDefaultsMajorsUseCase) {
         self.repository = repository
+        self.migrateMajorsUseCase = migrateMajorsUseCase
     }
     
     deinit {
@@ -53,6 +55,7 @@ public actor AddMajorUseCase {
     }
     
     private func performUpdate(major: any CategoryProtocol) async throws {
+        try await migrateMajorsUseCase.execute()
         
         // 학과 구독 여부
         let isSubscribed = await MajorNotificationManager.shared.isSubscribed

@@ -55,7 +55,7 @@ public struct NoticeTabSettings: View {
                             ForEach(noticeTabItems.availableMajors(for: college), id: \.id) { major in
                                 MajorSelectionRow(title: major.localizedDescription) {
                                     Task {
-                                        await noticeTabItems.add(major: major)
+                                        guard await noticeTabItems.add(major: major) else { return }
                                         
                                         withAnimation {
                                             noticeTabItems.insertAfterLastMajorCategory(newItem: CategoryItem.category(major))

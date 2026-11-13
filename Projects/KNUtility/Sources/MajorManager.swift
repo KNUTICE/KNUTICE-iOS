@@ -62,6 +62,10 @@ struct UserDefaultsMajorIDs {
 
 /// Manages the user's subscribed majors using persistent storage.
 public actor MajorManager {
+    public enum MigrationError: Error {
+        case storageUnavailable
+        case legacyValueChanged
+    }
     
     /// Shared singleton instance.
     public static let shared = MajorManager()
@@ -87,6 +91,35 @@ public actor MajorManager {
     
     /// Returns the identifiers of all subscribed majors.
     public var majorIDs: [Int] { storedMajorIDs }
+
+    /// Returns legacy topics only while the selected-major value still uses the string format.
+    public func legacyTopicsForMigration() -> [String]? {
+        guard let storage = UserDefaults.shared,
+              !storage.bool(forKey: UserDefaultsKeys.hasMigratedUserDefaultsMajors.rawValue) else {
+            return nil
+        }
+
+        if let topics = storage.stringArray(forKey: UserDefaultsKeys.selectedMajor.rawValue) {
+            return topics
+        }
+        if let topic = storage.string(forKey: UserDefaultsKeys.selectedMajor.rawValue) {
+            return [topic]
+        }
+        return nil
+    }
+
+    /// Replaces the legacy value only after every topic has been resolved successfully.
+    public func completeLegacyMigration(expectedTopics: [String], ids: [Int]) throws {
+        guard let storage = UserDefaults.shared else {
+            throw MigrationError.storageUnavailable
+        }
+        guard legacyTopicsForMigration() == expectedTopics else {
+            throw MigrationError.legacyValueChanged
+        }
+
+        storage.set(ids, forKey: UserDefaultsKeys.selectedMajor.rawValue)
+        storage.set(true, forKey: UserDefaultsKeys.hasMigratedUserDefaultsMajors.rawValue)
+    }
     
     private init() {}
     

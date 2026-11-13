@@ -9,6 +9,13 @@ import FactoryKit
 import KNDomain
 
 extension Container {
+    public var migrateUserDefaultsMajorsUseCase: Factory<MigrateUserDefaultsMajorsUseCase> {
+        Factory(self) {
+            fatalError("MigrateUserDefaultsMajorsUseCase is not registered. Register it in App's dependency composition root.")
+        }
+        .singleton
+    }
+
     public var fetchNoticeSnapshotsUseCase: Factory<FetchNoticeSnapshotsUseCase> {
         Factory(self) {
             fatalError(
