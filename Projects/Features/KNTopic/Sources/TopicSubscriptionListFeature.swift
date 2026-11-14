@@ -56,6 +56,7 @@ public struct TopicSubscriptionListFeature: Sendable {
     // MARK: - Dependency
     @Dependency(\.fetchTopicSubscriptionUseCase) var fetchTopicSubscriptionUseCase
     @Dependency(\.updateTopicSubscriptionUseCase) var updateTopicSubscriptionUseCase
+    @Dependency(\.migrateUserDefaultsMajorsUseCase) var migrateUserDefaultsMajorsUseCase
     @Dependency(\.dismiss) var dismiss
     
     enum CancelID {
@@ -175,7 +176,7 @@ public struct TopicSubscriptionListFeature: Sendable {
                     
                     try await updateTopicSubscriptionUseCase.execute(
                         of: .notice,
-                        topic: topic,
+                        topicID: topic.id,
                         isEnabled: isEnabled
                     )
                     await send(.toggleNoticeState(topic, isEnabled))
@@ -196,13 +197,14 @@ public struct TopicSubscriptionListFeature: Sendable {
                 return .run { send in
                     // 로딩 인디케이터 활성화
                     await send(.setLoading(true))
+
+                    try await migrateUserDefaultsMajorsUseCase.execute()
                     
                     // 학과 구독 상태를 서버에 저장하는 비동기 네트워크 요청 수행
-                    if let majorStr = await MajorManager.shared.majorStrings.first,
-                       let major = MajorCategory(rawValue: majorStr) {
+                    if let topicID = await MajorManager.shared.majorIDs.first {
                         try await updateTopicSubscriptionUseCase.execute(
                             of: .major,
-                            topic: major,
+                            topicID: topicID,
                             isEnabled: isEnabled
                         )
                     }
@@ -227,7 +229,11 @@ public struct TopicSubscriptionListFeature: Sendable {
                 return .run { send in
                     await send(.setLoading(true))
                     
-                    try await updateTopicSubscriptionUseCase.execute(of: .meal, topic: category, isEnabled: isEnabled)
+                    try await updateTopicSubscriptionUseCase.execute(
+                        of: .meal,
+                        topicID: category.id,
+                        isEnabled: isEnabled
+                    )
                     await send(.toggleCafeteriaState(category, isEnabled))
                     
                     await send(.setLoading(false))

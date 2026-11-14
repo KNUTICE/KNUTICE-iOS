@@ -171,7 +171,7 @@ private extension NoticeContentViewController {
                     self?.aiSummarizationButton.isHidden = true
                 }
                 
-                guard let url = notice.contentUrl else { return }
+                guard let url = notice.contentURL else { return }
                 self?.webView.load(URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad))
             }
             .store(in: &cancellables)
@@ -192,7 +192,7 @@ private extension NoticeContentViewController {
     }
     
     func loadInitialData() {
-        if let url = viewModel.notice?.contentUrl {
+        if let url = viewModel.notice?.contentURL {
             webView.load(URLRequest(url: url))
         } else if viewModel.nttId != nil {
             viewModel.fetchNotice()
@@ -241,7 +241,7 @@ private extension NoticeContentViewController {
     }
     
     private func presentShareSheet() {
-        guard let urlStr = viewModel.notice?.contentUrl else { return }
+        guard let urlStr = viewModel.notice?.contentURL else { return }
         let activityVC = UIActivityViewController(activityItems: [urlStr], applicationActivities: nil)
         activityVC.popoverPresentationController?.sourceView = view
         activityVC.completionWithItemsHandler = { [weak self] _, completed, _, _ in

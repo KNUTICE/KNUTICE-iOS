@@ -188,6 +188,10 @@ extension AppDelegate {
     ///   Feature 모듈 내부에서는 `liveValue`를 직접 구현하지 않고,
     ///   App 시작 시점에 `prepareDependencies`를 통해 실제 구현체를 등록한다.
     private func setDependencies() {
+        Container.shared.migrateUserDefaultsMajorsUseCase.register {
+            MigrateUserDefaultsMajorsUseCase(repository: Container.shared.topicRepository())
+        }
+
         prepareDependencies {
             $0.fetchBookmarkUseCase = Container.shared.fetchBookmarksUseCase()
             $0.deleteBookmarkUseCase = Container.shared.deleteBookmarkUseCase()
@@ -196,6 +200,7 @@ extension AppDelegate {
             $0.submitReportUseCase = Container.shared.submitReportUseCase()
             $0.fetchTopicSubscriptionUseCase = Container.shared.fetchTopicSubscriptionUseCase()
             $0.updateTopicSubscriptionUseCase = Container.shared.updateTopicSubscriptionUseCase()
+            $0.migrateUserDefaultsMajorsUseCase = Container.shared.migrateUserDefaultsMajorsUseCase()
         }
         
         Container.shared.fetchNoticeSummaryUseCase.register {
@@ -229,5 +234,28 @@ extension AppDelegate {
         Container.shared.deleteBookmarkUseCase.register {
             DeleteBookmarkUseCaseImpl(bookmarkRepository: Container.shared.bookmarkRepository())
         }
+        
+        Container.shared.fetchMajorCategoryUseCase.register {
+            FetchSelectedMajorCategoryUseCase(
+                repository: Container.shared.topicRepository(),
+                migrateMajorsUseCase: Container.shared.migrateUserDefaultsMajorsUseCase()
+            )
+        }
+        
+        Container.shared.fetchMajorCategoriesUseCase.register {
+            FetchMajorCategoriesUseCase(repository: Container.shared.topicRepository())
+        }
+        
+        Container.shared.addMajorUseCase.register {
+            AddMajorUseCase(
+                repository: Container.shared.topicSubscriptionRepository(),
+                migrateMajorsUseCase: Container.shared.migrateUserDefaultsMajorsUseCase()
+            )
+        }
+        
+        Container.shared.deleteMajorUseCase.register {
+            DeleteMajorUseCase(repository: Container.shared.topicSubscriptionRepository())
+        }
+        
     }
 }

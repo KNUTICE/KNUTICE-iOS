@@ -5,6 +5,7 @@
 //  Created by 이정훈 on 4/10/26.
 //
 
+import FactoryKit
 import Foundation
 import KNDomain
 import KNUtility
@@ -17,10 +18,10 @@ public enum CategoryItem: Identifiable {
     case addButton
     
     /// A stable identifier used to distinguish items in the collection view.
-    public var id: String {
+    public var id: Int {
         switch self {
         case let .category(noticeTab): return noticeTab.id
-        case .addButton: return "add_button"
+        case .addButton: return Int.min
         }
     }
 }
@@ -39,22 +40,42 @@ final class NoticeTabViewModel {
         return categories.value
     }
     
+    @Injected(\.fetchMajorCategoryUseCase) private var fetchMajorCategoryUseCase
+    var onMajorLoadFailure: (() -> Void)?
+    private(set) var hasMajorLoadFailure = false
+    private var isLoadingCategories = false
+    
     /// Initializes the view model and asynchronously loads the full category list.
     ///
     /// The loading order is:
     /// 1. All default `NoticeCategory` cases
     /// 2. Major-specific categories fetched from `MajorManager`
     /// 3. The add button appended at the end
-    init() {
+    func loadCategoryItems() {
+        guard !isLoadingCategories else { return }
+        isLoadingCategories = true
+
         Task {
-            var value: [CategoryItem] = NoticeCategory.allCases.map { CategoryItem.category($0) }
-            await MajorManager.shared.majorStrings.forEach {
-                if let categoryItem = MajorCategory(rawValue: $0) {
-                    value.append(.category(categoryItem))
+            defer { isLoadingCategories = false }
+            var items: [CategoryItem] = NoticeCategory.allCases.map { CategoryItem.category($0) }
+
+            do {
+                if let majorCategory = try await fetchMajorCategoryUseCase.execute() {
+                    items.append(.category(majorCategory))
                 }
+                hasMajorLoadFailure = false
+            } catch is CancellationError {
+                return
+            } catch {
+                hasMajorLoadFailure = true
             }
-            value.append(.addButton)
-            categories.accept(value)
+
+            items.append(.addButton)
+            categories.accept(items)
+
+            if hasMajorLoadFailure {
+                onMajorLoadFailure?()
+            }
         }
     }
 }

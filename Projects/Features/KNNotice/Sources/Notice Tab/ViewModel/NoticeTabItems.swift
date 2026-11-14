@@ -33,27 +33,53 @@ public final class NoticeTabItems {
         }
     }
     
-    @ObservationIgnored private let categoriesRelay: BehaviorRelay<[CategoryItem]>
-    @ObservationIgnored private let addMajorUseCase: AddMajorUseCase
-    @ObservationIgnored private let deleteMajorUseCase: DeleteMajorUseCase
+    var majorCategories: [String: [MajorCategory]] = [:]
     
-    public init(
-        _ categoriesRelay: BehaviorRelay<[CategoryItem]>,
-        addMajorUseCase: AddMajorUseCase,
-        deleteMajorUseCase: DeleteMajorUseCase
-    ) {
-        self.categoriesRelay = categoriesRelay
-        self.categories = categoriesRelay.value
-        self.addMajorUseCase = addMajorUseCase
-        self.deleteMajorUseCase = deleteMajorUseCase
+    var colleges: [String] {
+        majorCategories.keys.sorted()
     }
     
-    func availableMajors(for college: College) -> [MajorCategory] {
-        college.majors.filter { major in
-            !selectedMajors.contains(where: { $0 == major })
+    var isLoading: Bool = false
+    var hasMajorCategoryLoadError: Bool = false
+    
+    @ObservationIgnored
+    private let categoriesRelay: BehaviorRelay<[CategoryItem]>
+    
+    @ObservationIgnored
+    @Injected(\.addMajorUseCase) private var addMajorUseCase: AddMajorUseCase
+    
+    @ObservationIgnored
+    @Injected(\.deleteMajorUseCase) private var deleteMajorUseCase: DeleteMajorUseCase
+    
+    @ObservationIgnored
+    @Injected(\.fetchMajorCategoriesUseCase) private var fetchMajorCategoriesUseCase
+    
+    public init(_ categoriesRelay: BehaviorRelay<[CategoryItem]>) {
+        self.categoriesRelay = categoriesRelay
+        self.categories = categoriesRelay.value
+    }
+    
+    func fetchMajorCategories() async {
+        guard !isLoading else { return }
+        isLoading = true
+        hasMajorCategoryLoadError = false
+        defer { isLoading = false }
+        
+        do {
+            majorCategories = try await fetchMajorCategoriesUseCase.execute()
+        } catch is CancellationError {
+            return
+        } catch {
+            print(error)
+            hasMajorCategoryLoadError = true
         }
     }
     
+    func availableMajors(for college: String) -> [MajorCategory] {
+        majorCategories[college, default: []].filter { major in
+            !selectedMajors.contains(where: { $0.id == major.id })
+        }
+    }
     
     // MARK: Add Major
     
@@ -83,11 +109,13 @@ public final class NoticeTabItems {
     
     /// Activates the FCM topic subscription for the given major
     /// and registers it to `MajorManager`.
-    func add(major: MajorCategory) async {
+    func add(major: MajorCategory) async -> Bool {
         do {
             try await addMajorUseCase.execute(major: major)
+            return true
         } catch {
             print(error)
+            return false
         }
     }
     

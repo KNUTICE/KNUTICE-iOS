@@ -8,6 +8,7 @@
 import Combine
 import FactoryKit
 import Foundation
+import KNDomain
 import KNUtility
 
 @MainActor
@@ -122,5 +123,4 @@ final class ParentViewModel {
             await ABTestManager.shared.fetchConfiguration()
         }
     }
-    
 }
