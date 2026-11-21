@@ -13,25 +13,25 @@ import SwiftData
 @available(iOS 17.0, *)
 @available(macCatalyst 17.0, *)
 protocol BookmarkManageable: Actor {
-    func save(_ bookmark: BookmarkModel) throws
+    func save(_ bookmark: StoredBookmark) throws
     
     func fetch(
         sortBy option: BookmarkSortOption,
         fetchLimit limit: Int?,
         fetchOffset offset: Int
-    ) throws -> [BookmarkModel]
+    ) throws -> [StoredBookmark]
     
     func fetch(
         keyword: String,
         fetchLimit limit: Int?,
         fetchOffset offset: Int
-    ) throws -> [BookmarkModel]
+    ) throws -> [StoredBookmark]
     
-    func fetch(id: Int) throws -> BookmarkModel?
+    func fetch(id: Int) throws -> StoredBookmark?
     
     func delete(id: Int) throws
     
-    func update(_ bookmark: BookmarkModel) throws
+    func update(id: Int, memo: String, alarmDate: Date?) throws
 }
 
 extension BookmarkManageable {
@@ -39,40 +39,42 @@ extension BookmarkManageable {
         sortBy option: BookmarkSortOption,
         fetchLimit limit: Int? = nil,
         fetchOffset offset: Int = 0
-    ) throws -> [BookmarkModel] {
+    ) throws -> [StoredBookmark] {
         try self.fetch(sortBy: option, fetchLimit: limit, fetchOffset: offset)
     }
 }
 
 @available(iOS 17.0, *)
 @available(macCatalyst 17.0, *)
+@ModelActor
 actor BookmarkDataStore: BookmarkManageable {
     static let shared: BookmarkDataStore = {
         do {
-            return try BookmarkDataStore()
+            let modelContainer = try ModelContainer(for: BookmarkModel.self)
+            return BookmarkDataStore(modelContainer: modelContainer)
         } catch {
             fatalError("Failed to create BookmarkDataStore: \(error)")
         }
     }()
     
-    private let modelContext: ModelContext
-    
-    private init() throws {
-        let modelContainer = try ModelContainer(for: BookmarkModel.self)
-        modelContext = ModelContext(modelContainer)
-    }
-    
     // MARK: - Save
     
     /// Inserts a bookmark into the SwiftData context and persists the pending changes.
     ///
-    /// - Parameter bookmark: The bookmark model to store.
+    /// - Parameter bookmark: A value containing the bookmark and notice data to store.
     /// - Throws: An error if SwiftData fails to save the context.
-    func save(_ bookmark: BookmarkModel) throws {
-        modelContext.insert(bookmark)
+    func save(_ bookmark: StoredBookmark) throws {
+        guard try fetchModel(id: bookmark.notice.id) == nil else {
+            throw ExistingBookmarkError.alreadyExist(message: "이미 존재하는 북마크에요.")
+        }
+
+        modelContext.insert(bookmark.asModel)
         
-        if modelContext.hasChanges {
+        do {
             try modelContext.save()
+        } catch {
+            modelContext.rollback()
+            throw error
         }
     }
     
@@ -84,18 +86,18 @@ actor BookmarkDataStore: BookmarkManageable {
     ///   - option: The sort option used to order the fetched bookmarks.
     ///   - limit: The maximum number of bookmarks to fetch, or nil for no limit.
     ///   - offset: The number of matching bookmarks to skip before fetching.
-    /// - Returns: A list of bookmarks matching the requested sort order.
+    /// - Returns: Sendable snapshots of bookmarks matching the requested sort order.
     /// - Throws: An error if SwiftData fails to fetch the bookmarks.
     func fetch(
         sortBy option: BookmarkSortOption,
         fetchLimit limit: Int? = nil,
         fetchOffset offset: Int = 0
-    ) throws -> [BookmarkModel] {
+    ) throws -> [StoredBookmark] {
         var descriptor = FetchDescriptor<BookmarkModel>(sortBy: [option.sortDescriptor])
         descriptor.fetchLimit = limit
         descriptor.fetchOffset = offset
         
-        return try modelContext.fetch(descriptor)
+        return try modelContext.fetch(descriptor).map(\.asStoredBookmark)
     }
     
     /// Fetches bookmarks whose memo or notice title contains the given keyword.
@@ -104,28 +106,28 @@ actor BookmarkDataStore: BookmarkManageable {
     ///   - keyword: The search text used to filter bookmark memos and notice titles.
     ///   - limit: The maximum number of bookmarks to fetch, or nil for no limit.
     ///   - offset: The number of matching bookmarks to skip before fetching.
-    /// - Returns: A list of bookmarks matching the keyword.
+    /// - Returns: Sendable snapshots of bookmarks matching the keyword.
     /// - Throws: An error if SwiftData fails to fetch the bookmarks.
     func fetch(
         keyword: String,
         fetchLimit limit: Int? = nil,
         fetchOffset offset: Int = 0
-    ) throws -> [BookmarkModel] {
+    ) throws -> [StoredBookmark] {
         let predicate = #Predicate<BookmarkModel> { $0.memo.contains(keyword) || $0.notice.title.contains(keyword) }
         var descriptor = FetchDescriptor(predicate: predicate)
         descriptor.fetchLimit = limit
         descriptor.fetchOffset = offset
         
-        return try modelContext.fetch(descriptor)
+        return try modelContext.fetch(descriptor).map(\.asStoredBookmark)
     }
     
     /// Fetches the bookmark that matches the given identifier.
     ///
     /// - Parameter id: The unique identifier of the bookmark to fetch.
-    /// - Returns: The matching bookmark, or `nil` if no bookmark exists for the identifier.
+    /// - Returns: A snapshot of the matching bookmark, or `nil` if it does not exist.
     /// - Throws: An error if SwiftData fails to fetch the bookmark.
-    func fetch(id: Int) throws -> BookmarkModel? {
-        try fetchModel(id: id)
+    func fetch(id: Int) throws -> StoredBookmark? {
+        try fetchModel(id: id)?.asStoredBookmark
     }
     
     private func fetchModel(id: Int) throws -> BookmarkModel? {
@@ -146,8 +148,11 @@ actor BookmarkDataStore: BookmarkManageable {
         
         modelContext.delete(bookmark)
         
-        if modelContext.hasChanges {
+        do {
             try modelContext.save()
+        } catch {
+            modelContext.rollback()
+            throw error
         }
     }
     
@@ -155,17 +160,23 @@ actor BookmarkDataStore: BookmarkManageable {
     
     /// Updates the stored bookmark that matches the given bookmark's identifier.
     ///
-    /// - Parameter bookmark: The bookmark model containing the latest memo and alarm date values.
+    /// - Parameters:
+    ///   - id: The notice ID of the bookmark to update.
+    ///   - memo: The latest memo.
+    ///   - alarmDate: The latest alarm date.
     /// - Throws: An error if SwiftData fails to fetch or save the bookmark.
-    func update(_ bookmark: BookmarkModel) throws {
-        guard let existingBookmark = try fetchModel(id: bookmark.id) else { return }
+    func update(id: Int, memo: String, alarmDate: Date?) throws {
+        guard let existingBookmark = try fetchModel(id: id) else { return }
 
-        existingBookmark.memo = bookmark.memo
-        existingBookmark.alarmDate = bookmark.alarmDate
+        existingBookmark.memo = memo
+        existingBookmark.alarmDate = alarmDate
         existingBookmark.updatedAt = Date()
         
-        if modelContext.hasChanges {
+        do {
             try modelContext.save()
+        } catch {
+            modelContext.rollback()
+            throw error
         }
     }
 }
@@ -183,5 +194,49 @@ fileprivate extension BookmarkSortOption {
         case .updatedAtDescending:
             return SortDescriptor(\.updatedAt, order: .reverse)
         }
+    }
+}
+
+fileprivate extension BookmarkModel {
+    var asStoredBookmark: StoredBookmark {
+        StoredBookmark(
+            notice: notice.asStoredNotice,
+            memo: memo,
+            alarmDate: alarmDate
+        )
+    }
+}
+
+fileprivate extension NoticeModel {
+    var asStoredNotice: StoredNotice {
+        StoredNotice(
+            id: id,
+            title: title,
+            contentURL: contentURL,
+            isSummarizable: isSummarizable,
+            department: department,
+            uploadDate: uploadDate,
+            imageURL: imageURL,
+            topicId: topicId
+        )
+    }
+}
+
+fileprivate extension StoredBookmark {
+    var asModel: BookmarkModel {
+        BookmarkModel(
+            notice: NoticeModel(
+                id: notice.id,
+                title: notice.title,
+                contentURL: notice.contentURL,
+                isSummarizable: notice.isSummarizable,
+                department: notice.department,
+                uploadDate: notice.uploadDate,
+                imageURL: notice.imageURL,
+                topicId: notice.topicId
+            ),
+            memo: memo,
+            alarmDate: alarmDate
+        )
     }
 }

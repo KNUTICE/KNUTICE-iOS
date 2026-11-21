@@ -50,7 +50,3 @@ final class BookmarkModel {
         self.updatedAt = updatedAt
     }
 }
-
-@available(iOS 17.0, *)
-@available(macCatalyst 17.0, *)
-extension BookmarkModel: @unchecked Sendable {}

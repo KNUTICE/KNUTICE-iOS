@@ -36,7 +36,7 @@ public actor SwiftDataBookmarkRepository: BookmarkRepository {
     
     // MARK: - Create
     
-    /// Saves a new bookmark after checking for an existing bookmark with the same notice ID.
+    /// Saves a new bookmark. The data store checks for duplicates and inserts atomically.
     ///
     /// - Parameter bookmark: The bookmark domain entity to persist.
     /// - Throws: `ExistingBookmarkError.alreadyExist` if the bookmark already exists,
@@ -44,13 +44,7 @@ public actor SwiftDataBookmarkRepository: BookmarkRepository {
     public func save(bookmark: Bookmark) async throws {
         try Task.checkCancellation()
         
-        let existingBookmark = try await dataStore.fetch(id: bookmark.notice.id)
-        
-        guard existingBookmark == nil else {
-            throw ExistingBookmarkError.alreadyExist(message: "이미 존재하는 북마크에요.")
-        }
-        
-        try await dataStore.save(bookmark.asModel)
+        try await dataStore.save(bookmark.asStoredBookmark)
         eventTrigger.send(.normal)
     }
     
@@ -126,7 +120,7 @@ public actor SwiftDataBookmarkRepository: BookmarkRepository {
     public func update(_ bookmark: Bookmark) async throws {
         try Task.checkCancellation()
         
-        try await dataStore.update(bookmark.asModel)
+        try await dataStore.update(id: bookmark.id, memo: bookmark.memo, alarmDate: bookmark.alarmDate)
         eventTrigger.send(.preserveCount)
     }
     
@@ -148,7 +142,7 @@ public actor SwiftDataBookmarkRepository: BookmarkRepository {
     }
 }
 
-fileprivate extension BookmarkModel {
+fileprivate extension StoredBookmark {
     var asEntity: Bookmark {
         Bookmark(
             notice: notice.asEntity,
@@ -159,9 +153,9 @@ fileprivate extension BookmarkModel {
 }
 
 fileprivate extension Bookmark {
-    var asModel: BookmarkModel {
-        BookmarkModel(
-            notice: NoticeModel(
+    var asStoredBookmark: StoredBookmark {
+        StoredBookmark(
+            notice: StoredNotice(
                 id: notice.id,
                 title: notice.title,
                 contentURL: notice.contentURL,
@@ -177,7 +171,7 @@ fileprivate extension Bookmark {
     }
 }
 
-fileprivate extension NoticeModel {
+fileprivate extension StoredNotice {
     var asEntity: Notice {
         Notice(
             id: id,
