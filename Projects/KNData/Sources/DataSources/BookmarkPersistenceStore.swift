@@ -10,7 +10,7 @@ import Foundation
 import KNDomain
 import KNUtility
 
-public protocol BookmarkPersistenceStore: Sendable {
+protocol BookmarkPersistenceStore: Actor {
     /// Saves a `Bookmark` into the persistent store.
     ///
     /// This method creates both a `BookmarkEntity` and its associated `NoticeEntity`
@@ -38,14 +38,6 @@ public protocol BookmarkPersistenceStore: Sendable {
     /// - Throws: An error if the fetch request fails.
     func isDuplication(id: Int) async throws -> Bool
     
-    /// Fetches all bookmarks where either the `createdAt` or `updatedAt` timestamp is `nil`.
-    ///
-    /// This can be used to identify incomplete or partially initialized bookmarks in the persistent store.
-    ///
-    /// - Returns: An array of `BookmarkDTO` representing bookmarks with missing timestamps.
-    /// - Throws: An error if the fetch request fails.
-    func fetchItemsWhereTimestampsAreNil() async throws -> [BookmarkDTO]
-    
     /// Fetches bookmarks where either the notice title or the memo contains the specified keyword.
     ///
     /// - Parameter keyword: The search keyword to filter bookmarks by title or memo content.
@@ -72,8 +64,6 @@ public protocol BookmarkPersistenceStore: Sendable {
     /// - Parameter bookmark: The `Bookmark` containing updated information.
     /// - Throws: An error if fetching the bookmark or saving changes to the context fails.
     func update(bookmark: Bookmark) async throws
-    
-    func updateTimeStamp(_ update: BookmarkUpdate) async throws
 }
 
 extension BookmarkPersistenceStore {
@@ -85,8 +75,10 @@ extension BookmarkPersistenceStore {
     }
 }
 
-public actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
-    public static let shared: BookmarkPersistenceStoreImpl = .init()
+@available(iOS, deprecated: 17.0, message: "Use DeafaultBookmarkDataStore instead.")
+@available(macCatalyst, deprecated: 17.0, message: "Use DeafaultBookmarkDataStore instead.")
+actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
+    static let shared: BookmarkPersistenceStoreImpl = .init()
     
     private var persistentContainer: NSPersistentContainer? = {
         let modelName: String = "Bookmark"
@@ -114,7 +106,7 @@ public actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
     
     // MARK: - Save
     
-    public func save(_ dto: BookmarkDTO) async throws {
+    func save(_ dto: BookmarkDTO) async throws {
         let context = backgroundContext
         
         try Task.checkCancellation()
@@ -149,7 +141,7 @@ public actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
     
     // MARK: - Fetch
     
-    public func fetch(page: Int, pageSize: Int, sortBy option: BookmarkSortOption) async throws -> [BookmarkDTO] {
+    func fetch(page: Int, pageSize: Int, sortBy option: BookmarkSortOption) async throws -> [BookmarkDTO] {
         try Task.checkCancellation()
         
         let entities = try await fetchBookmarkEntities(
@@ -161,7 +153,7 @@ public actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
         return createBookmarkDTOs(from: entities)
     }
     
-    public func isDuplication(id: Int) async throws -> Bool {
+    func isDuplication(id: Int) async throws -> Bool {
         try Task.checkCancellation()
         
         let entities: [BookmarkEntity] = try await fetch(withId: id)
@@ -169,17 +161,7 @@ public actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
         return !entities.isEmpty
     }
     
-    public func fetchItemsWhereTimestampsAreNil() async throws -> [BookmarkDTO] {
-        try Task.checkCancellation()
-        
-        let entities = try await fetchBookmarkEntities(
-            predicate: NSPredicate(format: "createdAt == nil OR updatedAt == nil")
-        )
-        
-        return createBookmarkDTOs(from: entities)
-    }
-    
-    public func fetch(keyword: String) async throws -> [BookmarkDTO] {
+    func fetch(keyword: String) async throws -> [BookmarkDTO] {
         try Task.checkCancellation()
         
         let entities = try await fetchBookmarkEntities(
@@ -189,7 +171,7 @@ public actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
         return createBookmarkDTOs(from: entities)
     }
     
-    public func fetch(withId id: Int) async throws -> BookmarkDTO? {
+    func fetch(withId id: Int) async throws -> BookmarkDTO? {
         try Task.checkCancellation()
         
         let entities: [BookmarkEntity] = try await fetch(withId: id)
@@ -236,7 +218,7 @@ public actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
     
     // MARK: - Delete
     
-    public func delete(by id: Int) async throws {
+    func delete(by id: Int) async throws {
         try Task.checkCancellation()
         
         let entities: [BookmarkEntity] = try await fetch(withId: id)
@@ -258,7 +240,7 @@ public actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
     
     // MARK: - Update
     
-    public func update(bookmark: Bookmark) async throws {
+    func update(bookmark: Bookmark) async throws {
         try Task.checkCancellation()
         
         let entities: [BookmarkEntity] = try await fetch(withId: bookmark.notice.id)
@@ -273,25 +255,6 @@ public actor BookmarkPersistenceStoreImpl: BookmarkPersistenceStore {
             }
             
             if context.hasChanges {
-                try context.save()
-            }
-        }
-    }
-    
-    public func updateTimeStamp(_ update: BookmarkUpdate) async throws {
-        try Task.checkCancellation()
-        
-        let entities: [BookmarkEntity] = try await fetch(withId: update.bookmark.notice.id)
-        
-        guard let context = backgroundContext else { throw BookmarkPersistenceError.contextUnavailable }
-        
-        for entity in entities {
-            entity.createdAt = update.createdAt
-            entity.updatedAt = update.updatedAt
-        }
-        
-        if context.hasChanges {
-            try await context.perform(schedule: .enqueued) {
                 try context.save()
             }
         }
